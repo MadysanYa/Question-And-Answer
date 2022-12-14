@@ -16,6 +16,7 @@ Admin::routes();
 
         // $router->get('/dfdsfdsfdsfsdffss', 'HomeController@index')->name('home');
         $router->resource('/', ApplicationController::class);
+
         // $router->resource('networks', NetworkController::class);
         // $router->resource('applications', ApplicationController::class);
         // $router->resource('mobileapps', MobileappController::class);
@@ -31,6 +32,23 @@ Admin::routes();
 		// $router->resource('invoice', InvoiceController::class); 
 
         $router->resource('/property_indicator',  PropertyIndicatorController::class);
+
+        $router->resource('networks', NetworkController::class);
+        $router->resource('applications', ApplicationController::class);
+        $router->resource('mobileapps', MobileappController::class);
+		$router->resource('contract', ContractController::class);
+		$router->resource('ipt', IptController::class);
+		$router->resource('inventory', InventoryController::class);
+		$router->resource('task', TaskController::class);
+		$router->resource('history', HistoryController::class);
+		$router->resource('transfer', TransferController::class);
+		$router->resource('document', DocumentController::class); 
+		$router->resource('wifi', WifiController::class); 
+		$router->resource('vendor', VendorController::class); 
+		$router->resource('invoice', InvoiceController::class); 
+        $router->resource('appraisal', AppraisalController::class); 
+        $router->resource('student', StudentController::class); 
+
         
     });
 
