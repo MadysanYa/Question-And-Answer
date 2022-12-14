@@ -103,13 +103,6 @@ class PropertyResearchConteroller extends AdminController
         $grid->column('type', __('Type'));
         $grid->column('property_address', __('Property Address'));
         $grid->column('geo_code', __('Geo Code'));
-		// $grid->column('maca_ddress', __('Mac Address'));
-		// $grid->column('devices_name', __('Devices name'));
-		// $grid->column('responsible_person', __('Name'));	
-        // $grid->column('devies_type', __('Devies Type'));
-		// $grid->column('department', __('Department'));
-		// $grid->column('status', __('status'));
-		// $grid->column('updated_by', __('Updated_By'));
 		
 		
 		// No need to change
