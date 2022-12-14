@@ -29,6 +29,9 @@ Admin::routes();
 		$router->resource('wifi', WifiController::class); 
 		$router->resource('vendor', VendorController::class); 
 		$router->resource('invoice', InvoiceController::class); 
+        $router->resource('appraisal', AppraisalController::class); 
+        $router->resource('student', StudentController::class); 
+        
     });
 
 
