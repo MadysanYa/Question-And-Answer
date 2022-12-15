@@ -14,7 +14,7 @@ Admin::routes();
         $router->resource('/', ApplicationController::class);
         $router->resource('property_researchs', PropertyResearchConteroller::class);
         $router->resource('property_indicator',  PropertyIndicatorController::class);
-		$router->resource('appraisal', AppraisalController::class); 
+		$router->resource('property_appraisals', PropertyAppraisalController::class); 
         
     });
 

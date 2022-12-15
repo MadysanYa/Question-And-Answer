@@ -2,16 +2,16 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Appraisal;
-
+use App\Models\PropertyAppraisal;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Encore\Admin\index;
 use Encore\Admin\Layout\Content;
+use Illuminate\Support\Facades\Request;
 
-class AppraisalController extends AdminController
+class PropertyAppraisalController extends AdminController
 {
     /**
      * Title for current resource.
@@ -21,28 +21,115 @@ class AppraisalController extends AdminController
     protected $title = 'Property Appraisal';
 
 
-    // public function index(Content $content){
-
-    //     $content->body($this->dashboard());
-    //     $content->body($this->grid());
-    //     return $content;
-    // }
-
-    public function dashboard(){
-        $button = "<button> A </button>";
-        return $button;
-    }
-
-    /**
+        /**
      * Make a grid builder.
      *
      * @return Grid
      */
+
+ public function index(Content $PropertyAppraisal){
+    $PropertyAppraisal->header($this->title);
+    $PropertyAppraisal->body($this->dashboard());
+    $PropertyAppraisal->body($this->grid());
+  
+   
+   return $PropertyAppraisal;
+}
+
+        protected function dashboard(){
+
+
+if(isset($_REQUEST['status']))
+   $status =  $_REQUEST['status'];
+else 
+   $status = '';
+       
+$Progressing = '';
+$Pending = '';
+$Done = '';
+$ETC = '';
+$Cancelled ='';
+
+$conditions_Progressing = array('status'=> $status, 'status' => 'Progressing');
+$conditions_Pending = array('status'=> $status, 'status' => 'Pending');
+$conditions_Done = array('status'=> $status, 'status' => 'Done');
+$conditions_ETC = array('status'=> $status, 'status' => 'ETC');
+$conditions_Cancelled = array('status'=> $status, 'status' => 'Cancelled');
+
+
+// if($status != ''){
+//     if(isset($_REQUEST['status'])){
+//         $Progressing = Invoice::where($conditions_Progressing)->whereIn('Progressing', $cond_status)->count();
+//         $Pending = Invoice::where($conditions_Pending)->whereIn('Pending', $cond_status)->count();
+//         $Done = Invoice::where($conditions_Done)->whereIn('Done', $cond_status)->count();
+//         $ETC = Invoice::where($conditions_Done)->whereIn('ETC', $cond_status)->count();
+       
+//     }else {
+//         $Progressing = Invoice::where($conditions_Progressing)->count();
+//         $Pending = Invoice::where($conditions_Pending)->count();
+//         $Done = Invoice::where($conditions_Done)->count();
+//         $ETC = Invoice::where($conditions_ETC)->count();
+//     }
+   
+// }
+// else {
+//     $Progressing = Invoice::where(['status' => 'Progressing'])->count();
+//     $Pending = Invoice::where(['status' => 'Pending'])->count();
+//     $Done = Invoice::where(['status' => 'Done'])->count();
+//     $ETC = Invoice::where(['status' => 'ETC'])->count();
+// }
+
+$title1 = "Done";
+$value1 = $Done;
+$title2 = "Pending";
+$value2 = $Pending;
+$title3 = "Progressing";
+$value3 = $Progressing;
+$title4 = "ETC";
+$value4 = $ETC;
+$title5 = "Cancelled";
+$value5 = $Cancelled;
+
+
+
+$html = <<<HTML
+       <section >
+          
+           
+               <button style="margin-left: 10px;display: block;background-color: #7b38d8; border-radius: 5px; border: 4px ;color: #eeeeee;text-align: center; font-size: 20px;" >Property Indication</button>
+               
+       </section>
+       <section style="margin: 10px 10px">
+          
+          <button style=" block;background-color: #7b38d8 ;color: #eeeeee;text-align: center; font-size: 20px">Property Indication</button>
+         
+          <button style="block;background-color: #1affa3 ;color: #eeeeee;text-align: center; font-size: 20px; margin-left:10px">Property Indication</button>
+          <button style="block;background-color: #ff1a8c ;color: #eeeeee;text-align: center; font-size: 20px; margin-left:10px">Property Indication</button>
+          <button style="block;background-color: #7b38d8 ;color: #eeeeee;text-align: center; font-size: 20px; margin-left:10px">Property Indication</button>
+          <button style="block;background-color:  #1affa3 ;color: #eeeeee;text-align: center; font-size: 20px; margin-left:10px">Property Indication</button>
+  </section>
+   
+       
+HTML;
+
+$html = str_replace('{{title1}}',$title1,$html);
+$html = str_replace('{{value1}}',$value1,$html);
+$html = str_replace('{{title2}}',$title2,$html);
+$html = str_replace('{{value2}}',$value2,$html);
+$html = str_replace('{{title3}}',$title3,$html);
+$html = str_replace('{{value3}}',$value3,$html);
+$html = str_replace('{{title4}}',$title4,$html);
+$html = str_replace('{{value4}}',$value4,$html);
+$html = str_replace('{{title5}}',$title5,$html);
+$html = str_replace('{{value5}}',$value5,$html);
+return $html;
+
+}	
+
     protected function grid()
     {
   
-               $grid = new Grid(new Appraisal());
-        
+               $grid = new Grid(new PropertyAppraisal());        
 
                $grid->column('region', __('Region'));
                $grid->column('branch', __('Branch'));
@@ -67,10 +154,9 @@ class AppraisalController extends AdminController
     
 
     {
-        $show = new Show(Appraisal::findOrFail($id));
-    
-    
-      
+        $show = new Show(PropertyAppraisal::findOrFail($id)); 
+     
+
 
         $show->field('id', __('id'))->sortable();
         $show->field('region', __('Region'));
@@ -102,7 +188,7 @@ class AppraisalController extends AdminController
         $show->field('collateral_owner', __('collateral_owner'));
         $show->field('province', __('province'));
         $show->field('village', __('village'));
-        $show->field('photo', __('photo'));
+        $show->avatar()-> file (('photo'));
 
 
         $show->field('information_type', __(' information_type'));
@@ -134,7 +220,7 @@ class AppraisalController extends AdminController
     {
 
         
-        $form = new Form(new Appraisal());
+        $form = new Form(new PropertyAppraisal());
 
         $form->column(1/3,function($form){
 
