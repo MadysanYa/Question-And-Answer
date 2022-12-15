@@ -90,24 +90,47 @@ class PropertyIndicatorController extends AdminController
     
     
     $html = <<<HTML
-            <section >
+           
+            <section class= "btn-das" >
+               <button>PENDING</button>
+               <button>PROCESSING</button>
+               <button>VERIFIED</button>
+               <button>APPROVED</button>
+               <button>CANCELLED</button>
+            </section>
+            <section class="drop-list">
+                <select >
+                    <option value="Province">Province</option>
+                    <option value="Sr">Siem Reap</option>
+                    <option value="pp">Phonm Penh</option>
+                    <option value="tk">Takeo</option>
+                </select>
+                <select>
+                    <option value="District">District</option>
+                    <option value="Sen Sok">Sen Sok</option>
+                    <option value=" Tuol Kouk">Tuol Kouk</option>
+                    <option value=" Russey Keo">Russey Keo</option>
+                </select>
+                <select  >
+                    <option value="Commune">Commune</option>
+                    <option value="Touk Thla">Touk Thla</option>
+                    <option value="Sangkat Chaom Chau">Chaom Chau</option>
+                    <option value="Sangkat Dangkao">Sangkat Dangkao</option> 
+                </select>
+                
                
                 
-                    <button style="margin-left: 10px;display: block;background-color: #7b38d8; border-radius: 5px; border: 4px ;color: #eeeeee;text-align: center; font-size: 20px;" >Property Indication</button>
-                    
+                
             </section>
             <section style="margin: 10px 10px">
-               
-               <button style=" block;background-color: #7b38d8 ;color: #eeeeee;text-align: center; font-size: 20px">Property Indication</button>
-              
-               <button style="block;background-color: #1affa3 ;color: #eeeeee;text-align: center; font-size: 20px; margin-left:10px">Property Indication</button>
-               <button style="block;background-color: #ff1a8c ;color: #eeeeee;text-align: center; font-size: 20px; margin-left:10px">Property Indication</button>
-               <button style="block;background-color: #7b38d8 ;color: #eeeeee;text-align: center; font-size: 20px; margin-left:10px">Property Indication</button>
-               <button style="block;background-color:  #1affa3 ;color: #eeeeee;text-align: center; font-size: 20px; margin-left:10px">Property Indication</button>
-       </section>
-        
+               <button style="display: block;background-color: #7b38d8; color: #eeeeee;text-align: center; font-size: 20px;" >Property Appraisal</button>
+                    
+            </section>
+            
+           
             
     HTML;
+    
     
     $html = str_replace('{{title1}}',$title1,$html);
     $html = str_replace('{{value1}}',$value1,$html);
@@ -134,46 +157,45 @@ class PropertyIndicatorController extends AdminController
         $grid->column('property_address ',__('Property Address '));
         $grid->column('geo_code',__('Geo Code'));
         // 14-12-22  start project
-        $grid->column('region',__('Region'));  
-        $grid->column('branch',__('Branch')); 
-        $grid->column('requested_date',__('Requested Date')); 
-        $grid->column('cif_no',__('CIF No.')); 
-        $grid->column('loan_officer',__('Loan Officer')); 
-        $grid->column('telephone',__('Telephone')); 
-        $grid->column('information_type',__('Information Type')); 
-        $grid->column('location_type',__('Location Type')); 
-        $grid->column('type_ofaccess_road',__('Type of Access Road')); 
-        $grid->column('access_name',__('Access Road Name')); 
-        $grid->column('property_type',__('Property Type')); 
-        $grid->column('building_status',__('Building Status')); 
-        $grid->column('borey',__('Borey')); 
-        $grid->column('no_floor',__('No. of floor')); 
-        $grid->column('land_titletype',__('Land Titil')); 
-        $grid->column('land_titleno',__('Lang Title No')); 
-        $grid->column('land_size',__('Land Size')); 
-        $grid->column('building_size',__('Building Size')); 
-        $grid->column('customer_name',__('Customer Name')); 
-        $grid->column('cliend_contact',__('Cliend Contact')); 
-        $grid->column('province',__('Province')); 
-        $grid->column('district',__('District/Khan')); 
-        $grid->column('commune',__('Commune/Sangkat')); 
-        $grid->column('village',__('Village')); 
-        $grid->column('altitude',__('Altitude')); 
-        $grid->column('latitude',__('Latitude')); 
-        $grid->column('photo',__('Photo')); 
-        $grid->column('remark',__('Remark')); 
-        
-
+        // $grid->column('region',__('Region'));  
+        // $grid->column('branch',__('Branch')); 
+        // $grid->column('requested_date',__('Requested Date')); 
+        // $grid->column('cif_no',__('CIF No.')); 
+        // $grid->column('loan_officer',__('Loan Officer')); 
+        // $grid->column('telephone',__('Telephone')); 
+        // $grid->column('information_type',__('Information Type')); 
+        // $grid->column('location_type',__('Location Type')); 
+        // $grid->column('type_ofaccess_road',__('Type of Access Road')); 
+        // $grid->column('access_name',__('Access Road Name')); 
+        // $grid->column('property_type',__('Property Type')); 
+        // $grid->column('building_status',__('Building Status')); 
+        // $grid->column('borey',__('Borey')); 
+        // $grid->column('no_floor',__('No. of floor')); 
+        // $grid->column('land_titletype',__('Land Titil')); 
+        // $grid->column('land_titleno',__('Lang Title No')); 
+        // $grid->column('land_size',__('Land Size')); 
+        // $grid->column('building_size',__('Building Size')); 
+        // $grid->column('customer_name',__('Customer Name')); 
+        // $grid->column('cliend_contact',__('Cliend Contact')); 
+        // $grid->column('province',__('Province')); 
+        // $grid->column('district',__('District/Khan')); 
+        // $grid->column('commune',__('Commune/Sangkat')); 
+        // $grid->column('village',__('Village')); 
+        // $grid->column('altitude',__('Altitude')); 
+        // $grid->column('latitude',__('Latitude')); 
+        // $grid->column('photo',__('Photo')); 
+        // $grid->column('remark',__('Remark')); 
+      
        /* $grid->column('name', __('Contrac Title'))->sortable()->modal('', function($model){
 			
 			 //$show = new Show(Contract::findOrFail($model['id']));
 			 
 			  return $model['id'];
 		});*/
-        // $grid->column('startdate', __('Start date'))->display(function ($startdate){
+        //  $grid->column('startdate', __('Start date'))->display(function ($startdate){
 			
-		// 	return '<div style="background:#00c0ef;color: white;padding: 2px;width: 100px;text-align: center;border-radius: 15px;">' . $startdate . '</div>';
-		// });
+		//  	return '<div style="background:#00c0ef;color: white;padding: 2px;width: 100px;text-align: center;border-radius: 15px;">' . $startdate . '</div>';
+	    //  });
 		
         // $grid->column('enddate', __('End date'))->display(function ($enddate){
 			
@@ -193,7 +215,7 @@ class PropertyIndicatorController extends AdminController
         // $grid->column('remark', __('Remark'));
 		
         // $grid->disableExport();
-        // $grid->disableFilter();
+        //  $grid->disableFilter();
         $grid->quickSearch('owner' );
 		
 		
@@ -216,14 +238,49 @@ class PropertyIndicatorController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(PropertyIndicator::findOrFail($id));
-        $show->field('owner', __('Owner '));
-        $show->field('startdate', __('Start date'));
-        $show->field('enddate', __('End date'));
-        
-    //    $show->field('updated_at', __('Updated at'));
-    //    $show->field('created_at', __('Created at'));
+        $show = new Show( PropertyIndicator::findOrFail($id));
 
+        // $show->column(1/2, function ($show){
+            $show->field('reference', __('Reference'));
+            $show->field('owner', __('Owner '));
+            // $show->field('startdate', __('Start date'));
+            // $show->field('enddate', __('End date'));
+            $show->field('type',__('Type'));
+            $show->field('property_address ',__('Property Address '));
+            $show->field('geo_code',__('Geo Code'));
+            $show->field('region',__('Region'));
+            $show->field('branch',__('Branch'));
+            $show->field('requested_date',__('Requested Date'));
+            $show->field('cif_no',__('CIF No.'));
+            $show->field('loan_officer',__('Loan Officer'));
+            $show->field('telephone',__('Telephone'));
+            $show->field('information_type',__('Information Type'));
+            $show->field('location_type',__('Location Type'));
+            $show->field('type_ofaccess_road',__('Type of Access Road'));
+            $show->field('access_name',__('Access Road Name'));
+            $show->field('property_type',__('Property Type'));
+            $show->field('building_status',__('Building Status'));
+            $show->field('borey',__('Borey')); 
+            $show->field('no_floor',__('No. of floor'));
+            $show->field('land_titletype',__('Land Titil'));
+            $show->field('land_titleno',__('Lang Title No'));
+            $show->field('land_size',__('Land Size'));
+            $show->field('building_size',__('Building Size'));
+        // });    
+        // $show->column(1/2, function($show){
+            $show->field('customer_name',__('Customer Name'));
+            $show->field('client_contact',__('Cliend Contact'));
+            $show->field('province',__('Province'));
+            $show->field('district',__('District/Khan'));
+            $show->field('commune',__('Commune/Sangkat'));
+            $show->field('village',__('Village'));
+            $show->field('altitude',__('Altitude'));
+            $show->field('latitude',__('Latitude'));
+            $show->field('photo',__('Photo'));
+            $show->field('remark',__('Remark'));
+            //    $show->field('updated_at', __('Updated at'));
+            //    $show->field('created_at', __('Created at'));
+        // });    
 
         return $show;
     }
@@ -236,10 +293,10 @@ class PropertyIndicatorController extends AdminController
     protected function form()
     {
         $form = new Form(new PropertyIndicator());
-        $form->column(1/3, function ($form){
+        $form->column(1/2, function ($form){
 
             
-            $form->select('region',__('Region'))->options(['PP'=>'Phnom Penh', 'SR'=>'Siem Reap']);
+            $form->select('region',__('Region'))->options(['Phnom Penh'=>'Phnom Penh', 'Siem Reap'=>'Siem Reap']);
             $form->select('branch',__('Branch'))->options(['LC'=>'8187(LOAN CENTER)','CC'=>'8186(CARLOAN CENTER)','CLB'=>'8185(COMMERCIAL LENDING BUSINESS)']);
             $form->date('requested_date', __('Requested Date'))->rules('required');
             $form->text('cif_no', __('CIF No.'))->rules('required');
@@ -249,6 +306,16 @@ class PropertyIndicatorController extends AdminController
             $form->text('access_name', __('Access Road Name'))->rules('required');
             $form->text('borey', __('Borey'))->rules('required');
             $form->text('land_titleno', __('Land title No'))->rules('required');
+            $form->text('telephone', __('Telephone'))->rules('required');
+            $form->select('location_type', __('Location Type'))->options(['Residential Area'=>'Residential Area', 'CA'=>'Commercial Area','IA'=>'Industrial Area']);
+            $form->select('property_type', __('Property Type'))->options(['Vacant Land'=>'Vacant Land','FH'=>'Flat House','CD'=>'Cando']);
+            $form->text('no_floor', __('No. of Floor'))->rules('required');
+            $form->text('land_size', __('Land Size'))->rules('required');
+            $form->select('information_type', __('Information Type'))->options(['Indication'=>'Indication']);
+            $form->select('type_ofaccess_road', __('Type of Access Road'))->options(['NR'=>'National Road', 'PR'=>'Paved Road','UR'=>'Unpaved Road']);
+            $form->text('building_status', __('Building Status'))->rules('required');
+            $form->select('land_titletype', __('Land Title Type'))->options(['HT'=>'Hard Title', 'ST'=>'Soft Title']);
+            $form->text('building_size', __('Building Size'))->rules('required');
            
             // $form->text('type', __('Type'))->rules('required');
             // $form->text('property_address', __('Property Address'))->rules('required');
@@ -260,44 +327,24 @@ class PropertyIndicatorController extends AdminController
             // $form->multipleFile('file', __('File'))->removable();
             // $form->textarea('remark', __('Remark'));
         });
-        $form->column(1/3, function ($form){
-            $form->text('telephone', __('Telephone'))->rules('required');
-            $form->select('location_type', __('Location Type'))->options(['Residential Area'=>'Residential Area', 'CA'=>'Commercial Area','IA'=>'Industrial Area']);
-            $form->select('property_type', __('Property Type'))->options(['Vacant Land'=>'Vacant Land','FH'=>'Flat House','CD'=>'Cando']);
-            $form->text('no_floor', __('No. of Floor'))->rules('required');
-            $form->text('land_size', __('Land Size'))->rules('required');
-           
-        });
-        $form->column(1/3, function ($form){
-            $form->select('information_type', __('Information Type'))->options(['Indication'=>'Indication']);
-            $form->select('type_ofaccess_road', __('Type of Access Road'))->options(['NR'=>'National Road', 'PR'=>'Paved Road','UR'=>'Unpaved Road']);
-            $form->text('building_status', __('Building Status'))->rules('required');
-            $form->select('land_titletype', __('Land Title Type'))->options(['HT'=>'Hard Title', 'ST'=>'Soft Title']);
-            $form->text('building_size', __('Building Size'))->rules('required');
-           
-
-        });
        
-        $form->column(1/3, function ($form){
+            
+        $form->column(1/2, function ($form){
             $form->text('owner', __('Collateral Owner'))->rules('required');
             $form->select('province', __('Province'))->options(['Phnom Penh'=>'Phnom Penh', 'Takeo'=>'Takeo','Siem Reap'=>'Siem Reap']);
             $form->text('village', __('Village'))->rules('required');
             $form->multipleFile('photo', __('Photo'))->removable();
-          
-        });
-        $form->column(1/3, function ($form){
             $form->text('customer_name', __('Customer Name '))->rules('required');
             $form->select('district', __('District/Khan'))->options(['Sen Sok'=>'Sen Sok', 'Tuol Kouk'=>'Tuol Kouk']);
             $form->text('altitude', __('Altitude'))->rules('required');
             $form->text('remark', __('Remark'))->rules('required');
-           
-        });
-        $form->column(1/3, function ($form){
             $form->text('client_contact', __('client Contact No. '))->rules('required');
             $form->select('commune', __('Commune/Sangkat'))->options(['Tuek Thla'=>'Tuek Thla', 'PD'=>' Phsar Depou Ti Muoy']);
             $form->text('latitude', __('Latitude'))->rules('required');
-           
+          
         });
+       
+       
         
         $form->footer(function ($footer) {
 
@@ -309,6 +356,7 @@ class PropertyIndicatorController extends AdminController
             $footer->disableEditingCheck();
             // disable `Continue Creating` checkbox
             $footer->disableCreatingCheck();
+            
         
         });
 

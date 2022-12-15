@@ -1,0 +1,54 @@
+
+.input-group {
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+}
+.input-group .form-control {
+    
+    height: 45px !important; 
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+    
+}
+.input-group .input-group-addon {
+    border-top-left-radius: 7px !important;
+    border-bottom-left-radius: 7px !important;
+}
+label {
+    font-weight: 500 !important;
+}
+.select2-container--default .select2-selection--single, .select2-selection .select2-selection--single {
+    border-radius: 7px !important;
+    height: 45px !important; 
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+}
+.btn-file {
+    height: 45px !important;
+}
+/* pro_indicator */
+.btn-das{
+    margin: 10px 10px;
+   font-size: 20px;
+   
+}
+.btn-das button{
+    width: 17%;
+    text-align: center;
+    background-color: hsl(131, 83%, 50%);
+}
+.drop-list{
+    margin: 10px 10px;
+    font-size: 20px;
+}
+.drop-list select{
+     width: 17%;
+     padding: auto;
+     background-color: rgb(29, 162, 224);
+}
+.btn-pro{
+    margin: 10px 10px;
+}
+.btn-pro button{
+   
+    font-size: 20px;
+    background-color: rgb(169, 41, 186);
+}
