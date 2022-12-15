@@ -105,9 +105,10 @@ class PropertyResearchConteroller extends AdminController
         $grid->column('geo_code', __('Geo Code'));
 		
 		
-		// No need to change
-        // $grid->disableExport();
-        // $grid->disableFilter();
+		// No need to change (hided)
+        $grid->disableExport();
+        $grid->disableFilter();
+
         $grid->quickSearch('id','department', 'responsible_person');
 		
 	
@@ -135,11 +136,27 @@ class PropertyResearchConteroller extends AdminController
     protected function form()
     {
         $form = new Form(new PropertyResearch());
-        $form->text('reference', __('Reference'));
-        $form->text('owner', __('Owner'));
-        $form->text('type', __('Type'));
-        $form->text('property_address', __('Property Address'));
-        $form->text('geo_code', __('Geo_Code'));
+
+        $form->column(1/2, function ($form){
+            $form->select('information_type', __('Information Type'))->option(['pp' => 'Phnom Penh', 'sr' => 'Siem Reap']);
+            $form->text('property_reference', __('Property Reference'));
+            $form->text('access_road_name', __('Access Road Name'));
+            $form->text('no_of_floor', __('No of Floor'));
+            $form->text('land_size', __('Land Size'));
+            $form->text('build_value_per_sqm', __('Build Value per Sqm'));
+            $form->select('district', __('District/Khan'))->option(['psc' => 'Pursen Chey', 'ss' => 'Sen Sok']);
+            $form->text('contact_no', __('Contact No.'));
+            $form->text('remark', __('Remark'));
+        });
+
+        $form->column(1/2, function ($form){
+            $form->select('location_type', __('Location Type'))->option(['rsda' => 'Residential Area', 'cmc' => 'Commercial Area']);
+            $form->select('property_type', __('Property Type'))->option(['fh' => 'Flat House', 'lh' => 'Link House']);
+            $form->select('land_title_type', __('Land Title Type'))->option(['ht' => 'Hard Title', 'st' => 'Soft Title']);
+            $form->text('property_value_per_sqm', __('Property per Sqm'));
+            $form->text('property_market_value', __('Property Market Value'));
+            $form->select('commune', __('Commune/Sangkat'))->option(['cc' => '', 'ss' => 'Sen Sok']);
+        });
 
         // $form->text('responsible_person', __('responsible_person'));
 		// $form->text('mac_address', __('mac_address'));
