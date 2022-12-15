@@ -28,3 +28,21 @@ label {
 .btn-file {
     height: 45px !important;
 }
+
+.btn {
+    height: 45px !important;
+    font-size: 14px !important;
+    line-height: 2.428571 !important;
+}
+
+.box-header {
+    height: 60px !important;
+}
+
+.box.box-info {
+    border-radius: 7px;
+}
+
+.box-header>.fa, .box-header>.glyphicon, .box-header>.ion, .box-header .box-title {
+    font-size: 23px !important;
+}
