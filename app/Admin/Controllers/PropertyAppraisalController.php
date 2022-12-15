@@ -56,7 +56,7 @@ $conditions_Done = array('status'=> $status, 'status' => 'Done');
 $conditions_ETC = array('status'=> $status, 'status' => 'ETC');
 $conditions_Cancelled = array('status'=> $status, 'status' => 'Cancelled');
 
-
+/* 
 // if($status != ''){
 //     if(isset($_REQUEST['status'])){
 //         $Progressing = Invoice::where($conditions_Progressing)->whereIn('Progressing', $cond_status)->count();
@@ -77,7 +77,7 @@ $conditions_Cancelled = array('status'=> $status, 'status' => 'Cancelled');
 //     $Pending = Invoice::where(['status' => 'Pending'])->count();
 //     $Done = Invoice::where(['status' => 'Done'])->count();
 //     $ETC = Invoice::where(['status' => 'ETC'])->count();
-// }
+// } */
 
 $title1 = "Done";
 $value1 = $Done;
@@ -96,18 +96,43 @@ $html = <<<HTML
        <section >
           
            
-               <button style="margin-left: 10px;display: block;background-color: #7b38d8; border-radius: 5px; border: 4px ;color: #eeeeee;text-align: center; font-size: 20px;" >Property Indication</button>
+      <button style="margin-left: 10px;display: block;background-color: #B627E7; border-radius: 5px; border: 4px ;color: #000000;text-align: center; font-size: 20px;" >Property Appraisal</button>
                
        </section>
        <section style="margin: 10px 10px">
           
-          <button style=" block;background-color: #7b38d8 ;color: #eeeeee;text-align: center; font-size: 20px">Property Indication</button>
+          <button style=" block;background-color: #FF0303  ;color: #000000;text-align: center; font-size: 20px">PENDING</button>
          
-          <button style="block;background-color: #1affa3 ;color: #eeeeee;text-align: center; font-size: 20px; margin-left:10px">Property Indication</button>
-          <button style="block;background-color: #ff1a8c ;color: #eeeeee;text-align: center; font-size: 20px; margin-left:10px">Property Indication</button>
-          <button style="block;background-color: #7b38d8 ;color: #eeeeee;text-align: center; font-size: 20px; margin-left:10px">Property Indication</button>
-          <button style="block;background-color:  #1affa3 ;color: #eeeeee;text-align: center; font-size: 20px; margin-left:10px">Property Indication</button>
+          <button style="block;background-color: #1affa3 ;color: #000000;text-align: center; font-size: 20px; margin-left:10px">PROCESSING</button>
+          <button style="block;background-color: #F6FA6B ;color: #000000;text-align: center; font-size: 20px; margin-left:10px">VERIFIED</button>
+          <button style="block;background-color: #0E3DFA ;color: #000000;text-align: center; font-size: 20px; margin-left:10px">APPROVED</button>
+          <button style="block;background-color:  #ff1a8c ;color: #000000;text-align: center; font-size: 20px; margin-left:10px">CANCELLED</button>
   </section>
+  <section style="margin: 10px 10px;">
+                <select style="font-size: 20px; width: 17%">
+                    <option value="Province">Province</option>
+                    <option value="Sr">Siem Reap</option>
+                    <option value="pp">Phonm Penh</option>
+                    <option value="tk">Takeo</option>
+                </select>
+                <select style="font-size: 20px; width: 17%; margin-left: 10px; ">
+                    <option value="District">District</option>
+                    <option value="Sen Sok">Sen Sok</option>
+                    <option value=" Tuol Kouk">Tuol Kouk</option>
+                    <option value=" Russey Keo">Russey Keo</option>
+                </select>
+                <select style="font-size: 20px; width: 17%; margin-left: 10px; ">
+                    <option value="Commune">Commune</option>
+                    <option value="Touk Thla">Touk Thla</option>
+                    <option value="Sangkat Chaom Chau"> Chaom Chau</option>
+                    <option value="Sangkat Dangkao">Sangkat Dangkao</option> 
+                </select>
+               
+            </section>
+            <section style="margin: 10px 10px">
+               <button style="display: block;background-color: #7b38d8; color: #eeeeee;text-align: center; font-size: 20px;" >Property Appraisal</button>
+                    
+            </section>
    
        
 HTML;

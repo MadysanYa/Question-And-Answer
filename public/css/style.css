@@ -1,7 +1,7 @@
+
 .input-group {
     box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
 }
-
 .input-group .form-control {
     
     height: 45px !important; 
@@ -9,22 +9,32 @@
     border-bottom-right-radius: 7px;
     
 }
-
 .input-group .input-group-addon {
     border-top-left-radius: 7px !important;
     border-bottom-left-radius: 7px !important;
 }
-
 label {
     font-weight: 500 !important;
 }
-
 .select2-container--default .select2-selection--single, .select2-selection .select2-selection--single {
     border-radius: 7px !important;
     height: 45px !important; 
     box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
 }
-
 .btn-file {
     height: 45px !important;
+}
+.btn {
+    height: 45px !important;
+    font-size: 14px !important;
+    line-height: 2.428571 !important;
+}
+.box-header {
+    height: 60px !important;
+}
+.box.box-info {
+    border-radius: 7px;
+}
+.box-header>.fa, .box-header>.glyphicon, .box-header>.ion, .box-header .box-title {
+    font-size: 23px !important;
 }

@@ -125,7 +125,7 @@ class PropertyIndicatorController extends AdminController
                
             </section>
             <section style="margin: 10px 10px">
-               <button style="display: block;background-color: #7b38d8; color: #eeeeee;text-align: center; font-size: 20px;" >Property Indication</button>
+               <button style="display: block;background-color: #7b38d8; color: #eeeeee;text-align: center; font-size: 20px;" >Property Appraisal</button>
                     
             </section>
            
