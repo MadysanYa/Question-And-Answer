@@ -268,12 +268,13 @@ return $html;
 
         $form->column(1/2,function($form){
        
-<<<<<<< HEAD
+
             $form->text('collateral_owner', __('collateral_owner'));
             $form->select('province', __('province'))->options(function(){
                 return Province::all()->pluck('province_name', 'id');
             })->load('district_id', '../../api/district');
             $form->select('district_id', __('district_khan'));
+           
             $form->text('village', __('village'));
             $form->file('photo', __('photo'));
             $form->text('information_type', __(' information_type'));
@@ -288,7 +289,7 @@ return $html;
             $form->text('swot_analyze', __('swot_analyze'));
             // $form->button('swot_analyze', __('swot_analyze'));
            // $form->link('http://localhost/pms/property-management/public/admin/property_indicator');
-=======
+
             $form->text('collateral_owner', __('Collateral Owner'));
             $form->text('province', __('Province'));
             $form->text('district_id', __('District Khan'));
@@ -304,7 +305,7 @@ return $html;
             $form->text('altitude', __('Altitude'));
             $form->text('swot_analyze', __('Swot Analyze'));
             $form->text ('reference', __('Reference'));          
->>>>>>> a23420c40f15e35b52ea1e5f5ee5aa8799399691
+
 
         });              
 
