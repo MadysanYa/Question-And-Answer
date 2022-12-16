@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DistrictController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransferController;
@@ -24,4 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/transfer', [TransferController::class, 'store']);
 Route::post('/taskdetail', [TaskdetailController::class, 'store']);
 Route::get('/taskdetail/{id}', [TaskdetailController::class, 'delete']);
+
+
+Route::get('/district', [DistrictController::class,'district']);
 //Route::get('/transfer', [TransferController::class, 'store']);

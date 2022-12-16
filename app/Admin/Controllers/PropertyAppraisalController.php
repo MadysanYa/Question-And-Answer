@@ -2,7 +2,9 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\District;
 use App\Models\PropertyAppraisal;
+use App\Models\Province;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -265,10 +267,13 @@ return $html;
 
         });
 
-        $form->column(1/2,function($form){            
+        $form->column(1/2,function($form){
        
             $form->text('collateral_owner', __('collateral_owner'));
-            $form->text('province', __('province'));
+            $form->select('province', __('province'))->options(function(){
+                return Province::all()->pluck('province_name', 'id');
+            })->load('district_id', '../../api/district');
+            $form->select('district_id', __('district_khan'));
             $form->text('village', __('village'));
             $form->file('photo', __('photo'));
             $form->text('information_type', __(' information_type'));
@@ -278,15 +283,11 @@ return $html;
             $form->text('land_size_by_measurement', __('land_size_by_measurement'));
             $form->text('customer_name', __('customer_name'));
             $form->text('building_size_per_sqm', __('building_size_per_sqm'));
-            $form->text('district_khan', __('district_khan'));
+           
             $form->text('altitude', __('altitude'));
             $form->text('swot_analyze', __('swot_analyze'));
-<<<<<<< HEAD
             // $form->button('swot_analyze', __('swot_analyze'));
-            $form->link('http://localhost/pms/property-management/public/admin/property_indicator');
-=======
-            $form->text ('reference', __('reference'));          
->>>>>>> 30374a4873b4360ef0283db00880bafba2e3f540
+           // $form->link('http://localhost/pms/property-management/public/admin/property_indicator');
 
         });              
 
