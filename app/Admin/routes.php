@@ -15,7 +15,6 @@ Admin::routes();
         $router->resource('property_researchs', PropertyResearchConteroller::class);
         $router->resource('property_indicator',  PropertyIndicatorController::class);
         $router->resource('property_appraisals', PropertyAppraisalController::class);
-
         $router->resource('branches', BranchController::class);
         $router->resource('region', RegionController::class);
         $router->resource('provinces', ProvincesController::class);
@@ -27,9 +26,4 @@ Admin::routes();
         
 
     });
-
-
-
-
-
 
