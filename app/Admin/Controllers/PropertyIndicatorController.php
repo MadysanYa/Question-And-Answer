@@ -294,7 +294,6 @@ class PropertyIndicatorController extends AdminController
     {
         $form = new Form(new PropertyIndicator());
         $form->column(1/2, function ($form){
-
             
             $form->select('region',__('Region'))->options(['Phnom Penh'=>'Phnom Penh', 'Siem Reap'=>'Siem Reap']);
             $form->select('branch',__('Branch'))->options(['LC'=>'8187(LOAN CENTER)','CC'=>'8186(CARLOAN CENTER)','CLB'=>'8185(COMMERCIAL LENDING BUSINESS)']);
