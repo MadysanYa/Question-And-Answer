@@ -45,76 +45,72 @@ else
    $status = '';
        
 $Progressing = '';
-$Pending = '';
-$Done = '';
-$ETC = '';
+$Verified = '';
+$Approved = '';
 $Cancelled ='';
 
 $conditions_Progressing = array('status'=> $status, 'status' => 'Progressing');
-$conditions_Pending = array('status'=> $status, 'status' => 'Pending');
-$conditions_Done = array('status'=> $status, 'status' => 'Done');
-$conditions_ETC = array('status'=> $status, 'status' => 'ETC');
+$conditions_Verified = array('status'=> $status, 'status' => 'Verified');
+$conditions_Approved = array('status'=> $status, 'status' => 'Approved');
 $conditions_Cancelled = array('status'=> $status, 'status' => 'Cancelled');
 
 /* 
 // if($status != ''){
 //     if(isset($_REQUEST['status'])){
 //         $Progressing = Invoice::where($conditions_Progressing)->whereIn('Progressing', $cond_status)->count();
-//         $Pending = Invoice::where($conditions_Pending)->whereIn('Pending', $cond_status)->count();
-//         $Done = Invoice::where($conditions_Done)->whereIn('Done', $cond_status)->count();
-//         $ETC = Invoice::where($conditions_Done)->whereIn('ETC', $cond_status)->count();
+//         $Verified = Invoice::where($conditions_Pending)->whereIn('Verified', $cond_status)->count();
+//         $Approved = Invoice::where($conditions_Done)->whereIn('Approved', $cond_status)->count();
+//         
        
 //     }else {
 //         $Progressing = Invoice::where($conditions_Progressing)->count();
-//         $Pending = Invoice::where($conditions_Pending)->count();
-//         $Done = Invoice::where($conditions_Done)->count();
-//         $ETC = Invoice::where($conditions_ETC)->count();
+//         $Verified = Invoice::where($conditions_Pending)->count();
+//         $Approved = Invoice::where($conditions_Done)->count();
+//         
 //     }
    
 // }
 // else {
 //     $Progressing = Invoice::where(['status' => 'Progressing'])->count();
-//     $Pending = Invoice::where(['status' => 'Pending'])->count();
-//     $Done = Invoice::where(['status' => 'Done'])->count();
-//     $ETC = Invoice::where(['status' => 'ETC'])->count();
+//     $Verified = Invoice::where(['status' => 'Verified'])->count();
+//     $Approved = Invoice::where(['status' => 'Approved'])->count();
+//     
 // } */
 
-$title1 = "Done";
-$value1 = $Done;
-$title2 = "Pending";
-$value2 = $Pending;
+$title1 = "Approved";
+$value1 = $Approved;
+$title2 = "Verified";
+$value2 = $Verified;
 $title3 = "Progressing";
 $value3 = $Progressing;
-$title4 = "ETC";
-$value4 = $ETC;
-$title5 = "Cancelled";
-$value5 = $Cancelled;
+$title4 = "Cancelled";
+$value4 = $Cancelled;
 
 
 
 $html = <<<HTML
-       <section >
+     <!--   <section >
           
            
-      <button style="margin-left: 10px;display: block;background-color: #B627E7; border-radius: 5px; border: 4px ;color: #000000;text-align: center; font-size: 18px;" >Property Appraisal</button>
+      <button style="margin-left: 10px;display: block;background-color: #0331FF; border-radius: 5px; border: 4px ;color: #000000;text-align: center; font-size: 18px;" >Property Appraisal</button>
                
-       </section>
-       <section style="margin: 10px 10px">
+       </section> -->
+       <section style="margin: 15px 15px">
           
-          <button style=" block;background-color: #FF0303  ;color: #000000;text-align: center; font-size: 15px">PENDING</button>    
-          <button style="block;background-color: #1affa3 ;color: #000000;text-align: center; font-size: 15px; margin-left:10px">PROCESSING</button>
-          <button style="block;background-color: #F6FA6B ;color: #000000;text-align: center; font-size: 15px; margin-left:10px">VERIFIED</button>
-          <button style="block;background-color: #0E3DFA ;color: #000000;text-align: center; font-size: 15px; margin-left:10px">APPROVED</button>
-          <button style="block;background-color:  #ff1a8c ;color: #000000;text-align: center; font-size: 15Px; margin-left:10px">CANCELLED</button>
+           
+          <button style="block;background-color: #1affa3; color: #000000;text-align: center; font-size: 20px; margin-left:10px">PROCESSING</button>
+          <button style="block;background-color: #F6FA6B;color: #000000;text-align: center; font-size: 20px; margin-left:10px">VERIFIED</button>
+          <button style="block;background-color: #0E3DFA;color: #000000;text-align: center; font-size: 20px; margin-left:10px">APPROVED</button>
+          <button style="block;background-color: #ff1a8c;color: #000000;text-align: center; font-size: 20Px; margin-left:10px">CANCELLED</button>
   </section>
-  <section style="margin: 10px 10px;">
-                <select style="font-size: 15px; width: 17%">
+  <section style="margin: 15px 15px;">
+                <select style="font-size: 15px; width: 15%">
                     <option value="Province">Province</option>
                     <option value="Sr">Siem Reap</option>
                     <option value="pp">Phonm Penh</option>
                  
                 </select>
-                <select style="font-size: 15px; width: 17%; margin-left: 10px; ">
+                <select style="font-size: 15px; width: 15%; margin-left: 10px; ">
                     <option value="District">District</option>
                     <option value="Sen Sok">Sen Sok</option>
                     <option value=" Tuol Kouk">Tuol Kouk</option>
@@ -126,7 +122,7 @@ $html = <<<HTML
                     <option value="Beong Keang Kong">Beong Keang Kong</option>
                     <option value="Stueng Mean Chey">Stueng Mean Chey</option>
                 </select>
-                <select style="font-size: 15px; width: 17%; margin-left: 10px; ">
+                <select style="font-size: 15px; width: 15%; margin-left: 10px; ">
                     <option value="Commune">Commune</option>
                     <option value="Touk Thla">Touk Thla</option>
                     <option value="Sangkat Chaom Chau"> Chaom Chau</option>
@@ -147,8 +143,7 @@ $html = str_replace('{{title3}}',$title3,$html);
 $html = str_replace('{{value3}}',$value3,$html);
 $html = str_replace('{{title4}}',$title4,$html);
 $html = str_replace('{{value4}}',$value4,$html);
-$html = str_replace('{{title5}}',$title5,$html);
-$html = str_replace('{{value5}}',$value5,$html);
+
 return $html;
 
 }	
@@ -158,13 +153,17 @@ return $html;
   
                $grid = new Grid(new PropertyAppraisal());        
 
-               $grid->column('region', __('Region'));
-               $grid->column('branch', __('Branch'));
+               $grid->column('id', __('No.'));              
+               $grid->column('reference', __('reference'));               
+               $grid->column('owner', __('Owner'));
+               $grid->column('type', __('Type'));
+               $grid->column('property_address', __('Property Address'));
+               $grid->column('geo_code', __('Geo Code'));
 
-        $grid->column('Action')->display(function(){
+        /* $grid->column('Action')->display(function(){
         $text = $this->id;
             return "<button style='background: wihte;'> $text</button>";
-        });
+        }); */
 
         $grid->quickSearch('name');
       
@@ -201,10 +200,6 @@ return $html;
         $show->field('latitude', __('Latitude'));
         $show->field('remark', __('Remark'));
 
-
-
-
-
         $show->field('telephone', __('telephone'));
         $show->field('report_date', __('Report Date'));
         $show->field('location_type', __('location_type'));
@@ -217,7 +212,6 @@ return $html;
         $show->field('village', __('village'));
         $show->field('photo')->file();
 
-
         $show->field('information_type', __(' information_type'));
         $show->field('type_of_access_road', __('type_of_access_road'));
         $show->field('building_status', __('building_status'));
@@ -227,21 +221,16 @@ return $html;
         $show->field('building_size_per_sqm', __('building_size_per_sqm'));
         $show->field('district_khan', __('district_khan'));
         $show->field('altitude', __('altitude'));
-       
-       
+        $show->field('reference', __('reference'));  
+
         return $show;
     }
     
-
-
-
     /**
      * Make a form builder.
      *
      * @return Form
      */
-
-
 
     protected function form()
     {
@@ -250,7 +239,6 @@ return $html;
         $form = new Form(new PropertyAppraisal());
 
         $form->column(1/2,function($form){
-
             
             $form->text('region', __('Region'));
             $form->text('branch', __('Branch'));
@@ -277,9 +265,7 @@ return $html;
 
         });
 
-        $form->column(1/2,function($form){
-
-            
+        $form->column(1/2,function($form){            
        
             $form->text('collateral_owner', __('collateral_owner'));
             $form->text('province', __('province'));
@@ -295,12 +281,9 @@ return $html;
             $form->text('district_khan', __('district_khan'));
             $form->text('altitude', __('altitude'));
             $form->text('swot_analyze', __('swot_analyze'));
+            $form->text ('reference', __('reference'));          
 
-        
-
-        });
-
-          
+        });              
 
         $form->footer(function ($footer) {
             // disable reset btn
@@ -316,3 +299,4 @@ return $html;
         return $form;
     }
 }
+
