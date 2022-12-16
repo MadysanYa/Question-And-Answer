@@ -184,7 +184,7 @@ return $html;
      
 
 
-        $show->field('id', __('id'))->sortable();
+        $show->field('id', __('ID'))->sortable();
         $show->field('region', __('Region'));
         $show->field('branch', __('Branch'));
         $show->field('cif', __('CIF No.'));
@@ -196,32 +196,32 @@ return $html;
         $show->field('land_value_persqm', __('Land Value Persqm'));
         $show->field('property_value', __('Property Value'));
         $show->field('clinet_contact_no', __('Clinet Vontact No'));
-        $show->field('commune_sangkat', __('Commune / Sangkat'));
+        $show->field('commune_sangkat', __('Commune Sangkat'));
         $show->field('latitude', __('Latitude'));
         $show->field('remark', __('Remark'));
 
-        $show->field('telephone', __('telephone'));
+        $show->field('telephone', __('Telephone'));
         $show->field('report_date', __('Report Date'));
-        $show->field('location_type', __('location_type'));
-        $show->field('property_type', __('property_type'));
-        $show->field('no_of_floor', __('no_of_floor'));
-        $show->field('land_size', __('land_size'));
-        $show->field('building_size_by_measure', __('building_size_by_measure'));
-        $show->field('collateral_owner', __('collateral_owner'));
-        $show->field('province', __('province'));
-        $show->field('village', __('village'));
+        $show->field('location_type', __('Location Type'));
+        $show->field('property_type', __('Property Type'));
+        $show->field('no_of_floor', __('No Of Floor'));
+        $show->field('land_size', __('Land_size'));
+        $show->field('building_size_by_measure', __('Building Size By Measure'));
+        $show->field('collateral_owner', __('Collateral Owner'));
+        $show->field('province', __('Province'));
+        $show->field('village', __('Village'));
         $show->field('photo')->file();
 
-        $show->field('information_type', __(' information_type'));
-        $show->field('type_of_access_road', __('type_of_access_road'));
-        $show->field('building_status', __('building_status'));
-        $show->field('land_title_type', __(' land_title_type'));
-        $show->field('land_size_by_measurement', __('land_size_by_measurement'));
-        $show->field('customer_name', __('customer_name'));
-        $show->field('building_size_per_sqm', __('building_size_per_sqm'));
-        $show->field('district_khan', __('district_khan'));
-        $show->field('altitude', __('altitude'));
-        $show->field('reference', __('reference'));  
+        $show->field('information_type', __('Information Type'));
+        $show->field('type_of_access_road', __('TypeOf Access Road'));
+        $show->field('building_status', __('Building Status'));
+        $show->field('land_title_type', __('Land Title Type'));
+        $show->field('land_size_by_measurement', __('Land Size By Measurement'));
+        $show->field('customer_name', __('Customer_Name'));
+        $show->field('building_size_per_sqm', __('Building Size Per Sqm'));
+        $show->field('district_khan', __('District Khan'));
+        $show->field('altitude', __('Altitude'));
+        $show->field('reference', __('Reference'));  
 
         return $show;
     }
@@ -235,7 +235,6 @@ return $html;
     protected function form()
     {
 
-        
         $form = new Form(new PropertyAppraisal());
 
         $form->column(1/2,function($form){
@@ -257,31 +256,31 @@ return $html;
             $form->text('remark', __('Remark'));
             $form->text('telephone', __('telephone'));
             $form->date('report_date', __('Report Date'));
-            $form->text('location_type', __('location_type'));
-            $form->text('property_type', __('property_type'));
-            $form->text('no_of_floor', __('no_of_floor'));
-            $form->text('land_size', __('land_size'));
-            $form->text('building_size_by_measure', __('building_size_by_measure'));           
+            $form->text('location_type', __('location Type'));
+            $form->text('property_type', __('Property Type'));
+            $form->text('no_of_floor', __('No Of Floor'));
+            $form->text('land_size', __('Land Size'));
+            $form->text('building_size_by_measure', __('Building Size By Measure'));           
 
         });
 
         $form->column(1/2,function($form){            
        
-            $form->text('collateral_owner', __('collateral_owner'));
-            $form->text('province', __('province'));
-            $form->text('village', __('village'));
-            $form->file('photo', __('photo'));
-            $form->text('information_type', __(' information_type'));
-            $form->text('type_of_access_road', __('type_of_access_road'));
-            $form->text('building_status', __('building_status'));
-            $form->text('land_title_type', __(' land_title_type'));
-            $form->text('land_size_by_measurement', __('land_size_by_measurement'));
-            $form->text('customer_name', __('customer_name'));
-            $form->text('building_size_per_sqm', __('building_size_per_sqm'));
-            $form->text('district_khan', __('district_khan'));
-            $form->text('altitude', __('altitude'));
-            $form->text('swot_analyze', __('swot_analyze'));
-            $form->text ('reference', __('reference'));          
+            $form->text('collateral_owner', __('Collateral Owner'));
+            $form->text('province', __('Province'));
+            $form->text('district_id', __('District Khan'));
+            $form->text('village', __('Village'));
+            $form->file('photo', __('Photo'));
+            $form->text('information_type', __('Information Type'));
+            $form->text('type_of_access_road', __('Type Of Access Road'));
+            $form->text('building_status', __('Building Status'));
+            $form->text('land_title_type', __(' Land Title Type'));
+            $form->text('land_size_by_measurement', __('Land Size By Measurement'));
+            $form->text('customer_name', __('Customer Name'));
+            $form->text('building_size_per_sqm', __('Building Size Per Sqm'));            
+            $form->text('altitude', __('Altitude'));
+            $form->text('swot_analyze', __('Swot Analyze'));
+            $form->text ('reference', __('Reference'));          
 
         });              
 
