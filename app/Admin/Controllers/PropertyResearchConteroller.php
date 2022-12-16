@@ -124,11 +124,11 @@ class PropertyResearchConteroller extends AdminController
      */
     protected function detail($id)
     {
-        // $show = new Show( PropertyResearch::findOrFail($id));
-        // $show->field('reference', __('Reference'));
-        // $show->field('owner', __('Owner '));
-        // $show->field('type',__('Type'));
-        // $show->field('property_address ',__('Property Address '));
+        $show = new Show( PropertyResearch::findOrFail($id));
+        $show->field('reference', __('Reference'));
+        $show->field('owner', __('Owner '));
+        $show->field('type',__('Type'));
+        $show->field('property_address ',__('Property Address '));
         // $show->field('geo_code',__('Geo Code'));
         // $show->field('region',__('Region'));
         // $show->field('branch',__('Branch'));

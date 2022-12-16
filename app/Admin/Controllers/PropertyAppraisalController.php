@@ -295,6 +295,8 @@ return $html;
             $form->text('district_khan', __('district_khan'));
             $form->text('altitude', __('altitude'));
             $form->text('swot_analyze', __('swot_analyze'));
+            // $form->button('swot_analyze', __('swot_analyze'));
+            $form->link('http://localhost/pms/property-management/public/admin/property_indicator');
 
         
 
