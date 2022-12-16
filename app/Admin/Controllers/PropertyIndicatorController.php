@@ -118,15 +118,17 @@ class PropertyIndicatorController extends AdminController
                     <option value="Sangkat Dangkao">Sangkat Dangkao</option> 
                 </select>
                 
-               
-                
-                
             </section>
             <section class="btn-pro">
-               <button  >Add New Property </button>
+                <form>
+                    <input type="Date"><input type="Date">
+                </form> 
+                <form>
                     
+                </form>     
+                <button>Add New Property</button>
             </section>
-            
+           
            
             
     HTML;
@@ -297,7 +299,7 @@ class PropertyIndicatorController extends AdminController
 
             
             $form->select('region',__('Region'))->options(['Phnom Penh'=>'Phnom Penh', 'Siem Reap'=>'Siem Reap']);
-            $form->select('branch',__('Branch'))->options(['LC'=>'8187(LOAN CENTER)','CC'=>'8186(CARLOAN CENTER)','CLB'=>'8185(COMMERCIAL LENDING BUSINESS)']);
+            $form->select('branch',__('Branch'))->options(['8187(LOAN CENTER)'=>'8187(LOAN CENTER)','8186(CARLOAN CENTER)'=>'8186(CARLOAN CENTER)','8185(COMMERCIAL LENDING BUSINESS)'=>'8185(COMMERCIAL LENDING BUSINESS)']);
             $form->date('requested_date', __('Requested Date'))->rules('required');
             $form->text('cif_no', __('CIF No.'))->rules('required');
             $form->text('loan_officer', __('Loan Officer'))->rules('required');
@@ -307,14 +309,14 @@ class PropertyIndicatorController extends AdminController
             $form->text('borey', __('Borey'))->rules('required');
             $form->text('land_titleno', __('Land title No'))->rules('required');
             $form->text('telephone', __('Telephone'))->rules('required');
-            $form->select('location_type', __('Location Type'))->options(['Residential Area'=>'Residential Area', 'CA'=>'Commercial Area','IA'=>'Industrial Area']);
-            $form->select('property_type', __('Property Type'))->options(['Vacant Land'=>'Vacant Land','FH'=>'Flat House','CD'=>'Cando']);
+            $form->select('location_type', __('Location Type'))->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area']);
+            $form->select('property_type', __('Property Type'))->options(['Vacant Land'=>'Vacant Land','Flat House'=>'Flat House','Cando'=>'Cando']);
             $form->text('no_floor', __('No. of Floor'))->rules('required');
             $form->text('land_size', __('Land Size'))->rules('required');
             $form->select('information_type', __('Information Type'))->options(['Indication'=>'Indication']);
-            $form->select('type_ofaccess_road', __('Type of Access Road'))->options(['NR'=>'National Road', 'PR'=>'Paved Road','UR'=>'Unpaved Road']);
+            $form->select('type_ofaccess_road', __('Type of Access Road'))->options(['NR'=>'National Road', 'Paved Road'=>'Paved Road','Paved Road'=>'Paved Road']);
             $form->text('building_status', __('Building Status'))->rules('required');
-            $form->select('land_titletype', __('Land Title Type'))->options(['HT'=>'Hard Title', 'ST'=>'Soft Title']);
+            $form->select('land_titletype', __('Land Title Type'))->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
             $form->text('building_size', __('Building Size'))->rules('required');
            
             // $form->text('type', __('Type'))->rules('required');
