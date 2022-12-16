@@ -17,7 +17,7 @@ class ProvincesController extends AdminController
      *
      * @var string
      */
-    protected $title = 'District Information Management';
+    protected $title = 'Province Information Management';
 
     /**
      * Make a grid builder.
@@ -28,7 +28,7 @@ class ProvincesController extends AdminController
     {
         $grid = new Grid(new Province);
         $grid->column('id', __('ID'));
-        $grid->column('district_name', __('District Name'))->editable()->sortable();
+        $grid->column('province_name', __('Province Name'))->editable()->sortable();
 		
         $grid->disableExport();
         $grid->disableFilter();
@@ -67,7 +67,7 @@ class ProvincesController extends AdminController
     protected function form()
     {
         $form = new Form(new Province());
-        $form->text('district_name', __('District Name'));
+        $form->text('province_name', __('Province Name'));
         
         $form->footer(function ($footer) {
             // disable reset btn
