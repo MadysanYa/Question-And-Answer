@@ -119,13 +119,9 @@ class PropertyIndicatorController extends AdminController
                 </select>
                 
             </section>
+
             <section class="btn-pro">
-                <form>
-                    <input type="Date"><input type="Date">
-                </form> 
-                <form>
-                    
-                </form>     
+              
                 <button>Add New Property</button>
             </section>
            
@@ -296,7 +292,6 @@ class PropertyIndicatorController extends AdminController
     {
         $form = new Form(new PropertyIndicator());
         $form->column(1/2, function ($form){
-
             
             $form->select('region',__('Region'))->options(['Phnom Penh'=>'Phnom Penh', 'Siem Reap'=>'Siem Reap']);
             $form->select('branch',__('Branch'))->options(['8187(LOAN CENTER)'=>'8187(LOAN CENTER)','8186(CARLOAN CENTER)'=>'8186(CARLOAN CENTER)','8185(COMMERCIAL LENDING BUSINESS)'=>'8185(COMMERCIAL LENDING BUSINESS)']);

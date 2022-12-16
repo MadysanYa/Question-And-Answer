@@ -56,7 +56,7 @@ $conditions_Done = array('status'=> $status, 'status' => 'Done');
 $conditions_ETC = array('status'=> $status, 'status' => 'ETC');
 $conditions_Cancelled = array('status'=> $status, 'status' => 'Cancelled');
 
-
+/* 
 // if($status != ''){
 //     if(isset($_REQUEST['status'])){
 //         $Progressing = Invoice::where($conditions_Progressing)->whereIn('Progressing', $cond_status)->count();
@@ -77,7 +77,7 @@ $conditions_Cancelled = array('status'=> $status, 'status' => 'Cancelled');
 //     $Pending = Invoice::where(['status' => 'Pending'])->count();
 //     $Done = Invoice::where(['status' => 'Done'])->count();
 //     $ETC = Invoice::where(['status' => 'ETC'])->count();
-// }
+// } */
 
 $title1 = "Done";
 $value1 = $Done;
@@ -96,18 +96,45 @@ $html = <<<HTML
        <section >
           
            
-               <button style="margin-left: 10px;display: block;background-color: #7b38d8; border-radius: 5px; border: 4px ;color: #eeeeee;text-align: center; font-size: 20px;" >Property Indication</button>
+      <button style="margin-left: 10px;display: block;background-color: #B627E7; border-radius: 5px; border: 4px ;color: #000000;text-align: center; font-size: 18px;" >Property Appraisal</button>
                
        </section>
        <section style="margin: 10px 10px">
           
-          <button style=" block;background-color: #7b38d8 ;color: #eeeeee;text-align: center; font-size: 20px">Property Indication</button>
-         
-          <button style="block;background-color: #1affa3 ;color: #eeeeee;text-align: center; font-size: 20px; margin-left:10px">Property Indication</button>
-          <button style="block;background-color: #ff1a8c ;color: #eeeeee;text-align: center; font-size: 20px; margin-left:10px">Property Indication</button>
-          <button style="block;background-color: #7b38d8 ;color: #eeeeee;text-align: center; font-size: 20px; margin-left:10px">Property Indication</button>
-          <button style="block;background-color:  #1affa3 ;color: #eeeeee;text-align: center; font-size: 20px; margin-left:10px">Property Indication</button>
+          <button style=" block;background-color: #FF0303  ;color: #000000;text-align: center; font-size: 15px">PENDING</button>    
+          <button style="block;background-color: #1affa3 ;color: #000000;text-align: center; font-size: 15px; margin-left:10px">PROCESSING</button>
+          <button style="block;background-color: #F6FA6B ;color: #000000;text-align: center; font-size: 15px; margin-left:10px">VERIFIED</button>
+          <button style="block;background-color: #0E3DFA ;color: #000000;text-align: center; font-size: 15px; margin-left:10px">APPROVED</button>
+          <button style="block;background-color:  #ff1a8c ;color: #000000;text-align: center; font-size: 15Px; margin-left:10px">CANCELLED</button>
   </section>
+  <section style="margin: 10px 10px;">
+                <select style="font-size: 15px; width: 17%">
+                    <option value="Province">Province</option>
+                    <option value="Sr">Siem Reap</option>
+                    <option value="pp">Phonm Penh</option>
+                 
+                </select>
+                <select style="font-size: 15px; width: 17%; margin-left: 10px; ">
+                    <option value="District">District</option>
+                    <option value="Sen Sok">Sen Sok</option>
+                    <option value=" Tuol Kouk">Tuol Kouk</option>
+                    <option value=" Russey Keo">Russey Keo</option>
+                    <option value="Olympic">Olympic</option>
+                    <option value="Takeo">Takeo</option>
+                    <option value="Ta Khmau">Ta Khmau</option>
+                    <option value="Monivong">Monivong</option>
+                    <option value="Beong Keang Kong">Beong Keang Kong</option>
+                    <option value="Stueng Mean Chey">Stueng Mean Chey</option>
+                </select>
+                <select style="font-size: 15px; width: 17%; margin-left: 10px; ">
+                    <option value="Commune">Commune</option>
+                    <option value="Touk Thla">Touk Thla</option>
+                    <option value="Sangkat Chaom Chau"> Chaom Chau</option>
+                    <option value="Sangkat Dangkao">Sangkat Dangkao</option> 
+                </select>
+               
+            </section>
+         
    
        
 HTML;
@@ -188,7 +215,7 @@ return $html;
         $show->field('collateral_owner', __('collateral_owner'));
         $show->field('province', __('province'));
         $show->field('village', __('village'));
-        $show->avatar()-> file (('photo'));
+        $show->field('photo')->file();
 
 
         $show->field('information_type', __(' information_type'));
@@ -222,7 +249,7 @@ return $html;
         
         $form = new Form(new PropertyAppraisal());
 
-        $form->column(1/3,function($form){
+        $form->column(1/2,function($form){
 
             
             $form->text('region', __('Region'));
@@ -239,32 +266,25 @@ return $html;
             $form->text('clinet_contact_no', __('Clinet Vontact No'));
             $form->text('commune_sangkat', __('Commune / Sangkat'));
             $form->text('latitude', __('Latitude'));
-            $form->text('remark', __('Remark'));           
-
-        });
-
-        $form->column(1/3,function($form){
-
-            
+            $form->text('remark', __('Remark'));
             $form->text('telephone', __('telephone'));
             $form->date('report_date', __('Report Date'));
             $form->text('location_type', __('location_type'));
             $form->text('property_type', __('property_type'));
             $form->text('no_of_floor', __('no_of_floor'));
             $form->text('land_size', __('land_size'));
-            $form->text('building_size_by_measure', __('building_size_by_measure'));
+            $form->text('building_size_by_measure', __('building_size_by_measure'));           
+
+        });
+
+        $form->column(1/2,function($form){
+
+            
+       
             $form->text('collateral_owner', __('collateral_owner'));
             $form->text('province', __('province'));
             $form->text('village', __('village'));
             $form->file('photo', __('photo'));
-
-        
-
-        });
-
-        $form->column(1/3,function($form){
-
-            
             $form->text('information_type', __(' information_type'));
             $form->text('type_of_access_road', __('type_of_access_road'));
             $form->text('building_status', __('building_status'));
@@ -275,14 +295,12 @@ return $html;
             $form->text('district_khan', __('district_khan'));
             $form->text('altitude', __('altitude'));
             $form->text('swot_analyze', __('swot_analyze'));
-            
 
         
 
         });
 
-
-     
+          
 
         $form->footer(function ($footer) {
             // disable reset btn
