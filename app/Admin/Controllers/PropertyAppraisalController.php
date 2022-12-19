@@ -201,7 +201,6 @@ return $html;
         $show->field('commune_sangkat', __('Commune Sangkat'));
         $show->field('latitude', __('Latitude'));
         $show->field('remark', __('Remark'));
-
         $show->field('telephone', __('Telephone'));
         $show->field('report_date', __('Report Date'));
         $show->field('location_type', __('Location Type'));
@@ -213,7 +212,6 @@ return $html;
         $show->field('province', __('Province'));
         $show->field('village', __('Village'));
         $show->field('photo')->file();
-
         $show->field('information_type', __('Information Type'));
         $show->field('type_of_access_road', __('TypeOf Access Road'));
         $show->field('building_status', __('Building Status'));
@@ -241,8 +239,10 @@ return $html;
 
         $form->column(1/2,function($form){
             
-            $form->text('region', __('Region'));
-            $form->text('branch', __('Branch'));
+            $form->select('region', __('Province'))->options(function(){
+                return Province::all()->pluck('province_name', 'id');
+            })->load('district_id', '../../api/district');
+            $form->select('branch',__('Branch'))->options(['8187(LOAN CENTER)'=>'8187(LOAN CENTER)','8186(CARLOAN CENTER)'=>'8186(CARLOAN CENTER)','8185(COMMERCIAL LENDING BUSINESS)'=>'8185(COMMERCIAL LENDING BUSINESS)']);
             $form->text('cif', __('CIF No.'));
             $form->text('loan_officer', __('Loan Officer'));
             $form->date('request_date', __('Request Date'));
@@ -256,9 +256,9 @@ return $html;
             $form->text('commune_sangkat', __('Commune / Sangkat'));
             $form->text('latitude', __('Latitude'));
             $form->text('remark', __('Remark'));
-            $form->text('telephone', __('telephone'));
+            $form->text('telephone', __('Telephone'));
             $form->date('report_date', __('Report Date'));
-            $form->text('location_type', __('location Type'));
+            $form->text('location_type', __('Location Type'));
             $form->text('property_type', __('Property Type'));
             $form->text('no_of_floor', __('No Of Floor'));
             $form->text('land_size', __('Land Size'));
@@ -269,42 +269,26 @@ return $html;
         $form->column(1/2,function($form){
        
 
-            $form->text('collateral_owner', __('collateral_owner'));
-            $form->select('province', __('province'))->options(function(){
-                return Province::all()->pluck('province_name', 'id');
-            })->load('district_id', '../../api/district');
-            $form->select('district_id', __('district_khan'));
-           
-            $form->text('village', __('village'));
-            $form->file('photo', __('photo'));
-            $form->text('information_type', __(' information_type'));
-            $form->text('type_of_access_road', __('type_of_access_road'));
-            $form->text('building_status', __('building_status'));
-            $form->text('land_title_type', __(' land_title_type'));
-            $form->text('land_size_by_measurement', __('land_size_by_measurement'));
-            $form->text('customer_name', __('customer_name'));
-            $form->text('building_size_per_sqm', __('building_size_per_sqm'));
-           
-            $form->text('altitude', __('altitude'));
-            $form->text('swot_analyze', __('swot_analyze'));
-            // $form->button('swot_analyze', __('swot_analyze'));
-           // $form->link('http://localhost/pms/property-management/public/admin/property_indicator');
-
-            $form->text('collateral_owner', __('Collateral Owner'));
-            $form->text('province', __('Province'));
-            $form->text('district_id', __('District Khan'));
-            $form->text('village', __('Village'));
+            $form->text('collateral_owner', __('Collateral_owner'));
+            $form->select('province', __('Province'))->options(function(){
+                return Province::all()->pluck('province_name', 'id');})->load('district_id', '../../api/district');
+            $form->select('district_id', __('District'))->load('commune_id', '../../api/commune');
+            $form->select('commune_id', __('Commune'))->load('village_id', '../../api/village');
+            $form->select('village_id', __('village'));
+            
             $form->file('photo', __('Photo'));
             $form->text('information_type', __('Information Type'));
             $form->text('type_of_access_road', __('Type Of Access Road'));
             $form->text('building_status', __('Building Status'));
-            $form->text('land_title_type', __(' Land Title Type'));
+            $form->text('land_title_type', __('Land Title Type'));
             $form->text('land_size_by_measurement', __('Land Size By Measurement'));
             $form->text('customer_name', __('Customer Name'));
-            $form->text('building_size_per_sqm', __('Building Size Per Sqm'));            
+            $form->text('building_size_per_sqm', __('Building Size Per Sqm'));           
             $form->text('altitude', __('Altitude'));
             $form->text('swot_analyze', __('Swot Analyze'));
-            $form->text ('reference', __('Reference'));          
+            $form->text ('reference', __('Reference'));    
+            // $form->button('swot_analyze', __('swot_analyze'));
+           // $form->link('http://localhost/pms/property-management/public/admin/property_indicator');
 
 
         });              

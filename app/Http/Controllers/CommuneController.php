@@ -11,6 +11,7 @@ use App\Models\Transfer;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 
 
 class CommuneController extends Controller
@@ -19,9 +20,9 @@ class CommuneController extends Controller
 	 
     public function commune(Request $request)
     {
-        $districtId = $request->get('q');
+        $districts= $request->get('q');
        
-		$communes = Commune::where('district_id', $districtId)->pluck('commune_name','id');
+		$communeId = Commune::where('district_id', $districts)->get(['id', DB::raw('commune_name as text')]);
 
 		
 		return $communes;
