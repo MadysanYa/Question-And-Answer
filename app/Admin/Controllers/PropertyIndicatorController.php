@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Branch;
 use App\Models\Commune;
 
 use App\Models\District;
@@ -298,8 +299,12 @@ class PropertyIndicatorController extends AdminController
         $form = new Form(new PropertyIndicator());
         $form->column(1/2, function ($form){
             
-            $form->select('region',__('Region'))->options(['Phnom Penh'=>'Phnom Penh', 'Siem Reap'=>'Siem Reap']);
-            $form->select('branch',__('Branch'))->options(['8187(LOAN CENTER)'=>'8187(LOAN CENTER)','8186(CARLOAN CENTER)'=>'8186(CARLOAN CENTER)','8185(COMMERCIAL LENDING BUSINESS)'=>'8185(COMMERCIAL LENDING BUSINESS)']);
+            $form->select('region',__('Region'))->options(function(){
+                return Province::all()->pluck('province_name', 'id');
+            });
+            $form->select('branch',__('Branch'));
+              
+          
             $form->date('requested_date', __('Requested Date'))->rules('required');
             $form->text('cif_no', __('CIF No.'))->rules('required');
             $form->text('loan_officer', __('Loan Officer'))->rules('required');
