@@ -3,7 +3,6 @@
 use App\Admin\Controllers\CommuneController as ControllersCommuneController;
 use App\Http\Controllers\CommuneController;
 use App\Http\Controllers\DistrictController;
-use App\Http\Controllers\CommuneController;
 use App\Http\Controllers\VillageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
