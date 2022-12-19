@@ -1,5 +1,7 @@
 <?php
 
+use App\Admin\Controllers\CommuneController as ControllersCommuneController;
+use App\Http\Controllers\CommuneController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\CommuneController;
 use App\Http\Controllers\VillageController;
@@ -28,8 +30,8 @@ Route::post('/transfer', [TransferController::class, 'store']);
 Route::post('/taskdetail', [TaskdetailController::class, 'store']);
 Route::get('/taskdetail/{id}', [TaskdetailController::class, 'delete']);
 
-
 Route::get('/district', [DistrictController::class,'district']);
 Route::get('/commune', [CommuneController::class,'commune']);
 Route::get('/village', [VillageController::class,'village']);
+
 //Route::get('/transfer', [TransferController::class, 'store']);
