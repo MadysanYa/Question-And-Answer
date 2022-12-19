@@ -18,11 +18,7 @@ class DistrictController extends Controller
     public function district(Request $request)
     {
         $provinceId = $request->get('q');
-       
 		$districts = District::where('province_id', $provinceId)->get(['id',  DB::raw('district_name as text')]);
-
-		
 		return $districts;
-
     }
 }

@@ -12,6 +12,7 @@ use App\Models\Branch;
 use App\Models\contracts;
 use App\Models\District;
 use App\Models\Commune;
+use App\Models\Village;
 use Encore\Admin\Layout\Content;
 
 use Illuminate\Support\Facades\Request;
@@ -164,7 +165,7 @@ class PropertyResearchConteroller extends AdminController
         $form = new Form(new PropertyResearch());
 
         $form->column(1/3, function ($form){
-            $form->select('information_type', __('Information Type'));
+            $form->select('information_type', __('Information Type'))->options(['Indication'=>'Indication','feacbook'=>'Feacbook']);
 
             // Region Testing
             // $form->select('information_type', __('Information Type'))->options(function(){
@@ -184,32 +185,27 @@ class PropertyResearchConteroller extends AdminController
 
             // District select Commune
             $form->select('district_id', __('District'))->options(function(){
-                // return District::all()->pluck('district_name', 'id');
             })->load('commune_id', __('../../api/commune'));
-            // ->load('commune_id', __('../../api/commune'));
-            // $form->select('district_id', __('District/Khan'));
 
             $form->text('contact_no', __('Contact No.'));
             $form->text('remark', __('Remark'));
         });
 
         $form->column(1/3, function ($form){
-            $form->select('location_type', __('Location Type'));
-            $form->select('property_type', __('Property Type'));
-            $form->select('land_title_type', __('Land Title Type'));
+            $form->select('location_type', __('Location Type'))->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area']);
+            $form->select('property_type', __('Property Type'))->options(['Vacant Land'=>'Vacant Land','Flat House'=>'Flat House','Cando'=>'Cando']);
+            $form->select('land_title_type', __('Land Title Type'))->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
             $form->text('property_value_per_sqm', __('Property per Sqm'));
             $form->text('property_market_value', __('Property Market Value'));
 
             $form->select('commune_id', __('Commune'))->options(function(){
                 return Commune::all()->pluck('commune_name', 'id');
             });
-            // ->load('commune_id', __('../../api/commune'));
-            // $form->select('commune', __('Commune/Sangkat'));
             $form->text('altitude', __('Altitude'));
         });		
 
         $form->column(1/3, function ($form){
-            $form->select('type_of_access_road', __('Type of Access Road'));
+            $form->select('type_of_access_road', __('Type of Access Road'))->options(['NR'=>'National Road', 'Paved Road'=>'Paved Road','Paved Road'=>'Paved Road']);
             $form->text('borey', __('Borey'));
             $form->date('information_date', __('Information Date'));
             $form->text('build_size', __('Building Size'));
@@ -220,7 +216,9 @@ class PropertyResearchConteroller extends AdminController
             })->load('district_id', __('../../api/district'));
             // $form->select('province', __('Province'));
 
-            $form->select('village', __('Village'));
+            $form->select('village', __('Village'))->options(function(){
+                return Village::all()->pluck('village_name', 'id');
+            });
             $form->text('laltitude', __('Laltitude'));
         });		
 
