@@ -2,7 +2,9 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Commune;
 use App\Models\PropertyIndicator;
+use App\Models\Province;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Form\Field\Button;
@@ -121,7 +123,8 @@ class PropertyIndicatorController extends AdminController
             </section>
 
             <section class="btn-pro">
-              
+               
+  
                 <button>Add New Property</button>
             </section>
            
@@ -328,15 +331,20 @@ class PropertyIndicatorController extends AdminController
             
         $form->column(1/2, function ($form){
             $form->text('owner', __('Collateral Owner'))->rules('required');
-            $form->select('province', __('Province'))->options(['Phnom Penh'=>'Phnom Penh', 'Takeo'=>'Takeo','Siem Reap'=>'Siem Reap']);
-            $form->text('village', __('Village'))->rules('required');
+            $form->select('province', __('Province'))->options(function(){
+                return Province::all()->pluck('province_name', 'id');
+            })->load('district_id', '../../api/district');
+            $form->select('district_id', __('District/Khan'))->options(function(){
+                return Commune::all()->pluck('district_name', 'id');
+            })->load('commune_id', '../../api/commune');
+            $form->select('commune_id', __('Commune/Sangkat'));
+           
+            $form->select('village', __('Village'))->rules('required');
             $form->multipleFile('photo', __('Photo'))->removable();
             $form->text('customer_name', __('Customer Name '))->rules('required');
-            $form->select('district', __('District/Khan'))->options(['Sen Sok'=>'Sen Sok', 'Tuol Kouk'=>'Tuol Kouk']);
             $form->text('altitude', __('Altitude'))->rules('required');
             $form->text('remark', __('Remark'))->rules('required');
             $form->text('client_contact', __('client Contact No. '))->rules('required');
-            $form->select('commune', __('Commune/Sangkat'))->options(['Tuek Thla'=>'Tuek Thla', 'PD'=>' Phsar Depou Ti Muoy']);
             $form->text('latitude', __('Latitude'))->rules('required');
           
         });
