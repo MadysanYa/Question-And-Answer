@@ -25,7 +25,7 @@ class CommuneController extends Controller
 		$communeId = Commune::where('district_id', $districts)->get(['id', DB::raw('commune_name as text')]);
 
 		
-		return $communes;
+		return $communeId;
 
     }
 }
