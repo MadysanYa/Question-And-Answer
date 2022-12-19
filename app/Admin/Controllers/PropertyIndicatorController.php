@@ -2,7 +2,10 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Branch;
 use App\Models\Commune;
+
+use App\Models\District;
 use App\Models\PropertyIndicator;
 use App\Models\Province;
 use Encore\Admin\Controllers\AdminController;
@@ -296,8 +299,14 @@ class PropertyIndicatorController extends AdminController
         $form = new Form(new PropertyIndicator());
         $form->column(1/2, function ($form){
             
-            $form->select('region',__('Region'))->options(['Phnom Penh'=>'Phnom Penh', 'Siem Reap'=>'Siem Reap']);
-            $form->select('branch',__('Branch'))->options(['8187(LOAN CENTER)'=>'8187(LOAN CENTER)','8186(CARLOAN CENTER)'=>'8186(CARLOAN CENTER)','8185(COMMERCIAL LENDING BUSINESS)'=>'8185(COMMERCIAL LENDING BUSINESS)']);
+            $form->select('region',__('Region'))->options(function(){
+                return Province::all()->pluck('province_name', 'id');
+            });
+            $form->select('branch',__('Branch'))->options(function(){
+                return Branch::all()->pluck('branch_name','id');
+            });
+              
+          
             $form->date('requested_date', __('Requested Date'))->rules('required');
             $form->text('cif_no', __('CIF No.'))->rules('required');
             $form->text('loan_officer', __('Loan Officer'))->rules('required');
@@ -311,7 +320,7 @@ class PropertyIndicatorController extends AdminController
             $form->select('property_type', __('Property Type'))->options(['Vacant Land'=>'Vacant Land','Flat House'=>'Flat House','Cando'=>'Cando']);
             $form->text('no_floor', __('No. of Floor'))->rules('required');
             $form->text('land_size', __('Land Size'))->rules('required');
-            $form->select('information_type', __('Information Type'))->options(['Indication'=>'Indication']);
+            $form->select('information_type', __('Information Type'))->options(['Indication'=>'Indication','feacbook'=>'Feacbook']);
             $form->select('type_ofaccess_road', __('Type of Access Road'))->options(['NR'=>'National Road', 'Paved Road'=>'Paved Road','Paved Road'=>'Paved Road']);
             $form->text('building_status', __('Building Status'))->rules('required');
             $form->select('land_titletype', __('Land Title Type'))->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
@@ -331,15 +340,16 @@ class PropertyIndicatorController extends AdminController
             
         $form->column(1/2, function ($form){
             $form->text('owner', __('Collateral Owner'))->rules('required');
+            //select province 
             $form->select('province', __('Province'))->options(function(){
                 return Province::all()->pluck('province_name', 'id');
             })->load('district_id', '../../api/district');
-            $form->select('district_id', __('District/Khan'))->options(function(){
-                return Commune::all()->pluck('district_name', 'id');
-            })->load('commune_id', '../../api/commune');
-            $form->select('commune_id', __('Commune/Sangkat'));
-           
-            $form->select('village', __('Village'))->rules('required');
+             // select district get data from province
+            $form->select('district_id', __('District/Khan'))->load('commune_id', '../../api/commune');
+            // commune  get data from district
+            $form->select('commune_id', __('Commune/Sangkat'));//->load('village_id', '../../api/village');
+            $form->select('village_id', __('Village'));
+
             $form->multipleFile('photo', __('Photo'))->removable();
             $form->text('customer_name', __('Customer Name '))->rules('required');
             $form->text('altitude', __('Altitude'))->rules('required');

@@ -4,25 +4,25 @@ namespace App\Http\Controllers;
 //use App\Http\Controllers\Transfer;
 use Encore\Admin\Controllers\AdminController;
 use App\Models\Transfer;
-use App\Models\District;
+use App\Models\Village;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 
 
-class DistrictController extends Controller
+class VillageController extends Controller
 {
    
 	 
-    public function district(Request $request)
+    public function village(Request $request)
     {
-        $provinceId = $request->get('q');
+        $communeId = $request->get('q');
        
-		$districts = District::where('province_id', $provinceId)->get(['id',  DB::raw('district_name as text')]);
+		$villages = Village::where('commune_id', $communeId)->get(['id', DB::raw('village_name as text')]);
 
 		
-		return $districts;
+		return $villages;
 
     }
 }
