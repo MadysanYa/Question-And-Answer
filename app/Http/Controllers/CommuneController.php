@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-//use App\Http\Controllers\Transfer;
+// use App\Http\Controllers\DB;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Commune;
 use Encore\Admin\Controllers\AdminController;
@@ -18,12 +19,13 @@ class CommuneController extends Controller
 	 
     public function commune(Request $request)
     {
-        $communeId = $request->get('q');
+        $districts = $request->get('q');
        
-		$communeId = Commune::where('district_id', $communeId)->pluck('commune_name','id');
+		// $communes = Commune::where('district_id', $communeId)->get('commune_name','id');
+        $communes = Commune::where('district_id', $districts)->get(['id', DB::raw('commune_name as text')]);
 
 		
-		return $communeId;
+		return $communes;
 
     }
 }

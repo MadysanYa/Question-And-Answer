@@ -268,10 +268,6 @@ return $html;
 
         $form->column(1/2,function($form){
        
-<<<<<<< HEAD
-=======
-
->>>>>>> 10b6ea4585bd69cbceb5f2e81456f01e5d1d7d65
             $form->text('collateral_owner', __('collateral_owner'));
 
             // Province
@@ -280,13 +276,9 @@ return $html;
             })->load('district_id', '../../api/district');
 
             // District
-            $form->select('district_id', __('district_khan'));
-<<<<<<< HEAD
+            $form->select('district_id', __('district_name'));
 
             // Village
-=======
-           
->>>>>>> 10b6ea4585bd69cbceb5f2e81456f01e5d1d7d65
             $form->text('village', __('village'));
             $form->file('photo', __('photo'));
             $form->text('information_type', __(' information_type'));
@@ -301,26 +293,6 @@ return $html;
             $form->text('swot_analyze', __('swot_analyze'));
             // $form->button('swot_analyze', __('swot_analyze'));
            // $form->link('http://localhost/pms/property-management/public/admin/property_indicator');
-<<<<<<< HEAD
-=======
-
-            $form->text('collateral_owner', __('Collateral Owner'));
-            $form->text('province', __('Province'));
-            $form->text('district_id', __('District Khan'));
-            $form->text('village', __('Village'));
-            $form->file('photo', __('Photo'));
-            $form->text('information_type', __('Information Type'));
-            $form->text('type_of_access_road', __('Type Of Access Road'));
-            $form->text('building_status', __('Building Status'));
-            $form->text('land_title_type', __(' Land Title Type'));
-            $form->text('land_size_by_measurement', __('Land Size By Measurement'));
-            $form->text('customer_name', __('Customer Name'));
-            $form->text('building_size_per_sqm', __('Building Size Per Sqm'));            
-            $form->text('altitude', __('Altitude'));
-            $form->text('swot_analyze', __('Swot Analyze'));
-            $form->text ('reference', __('Reference'));          
-
->>>>>>> 10b6ea4585bd69cbceb5f2e81456f01e5d1d7d65
 
         });              
 
