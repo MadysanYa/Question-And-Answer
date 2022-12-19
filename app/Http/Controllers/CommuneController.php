@@ -22,7 +22,7 @@ class CommuneController extends Controller
     {
         $districts= $request->get('q');
        
-		$communeId = Commune::where('district_id', $districts)->get(['id', DB::raw('commune_name as text')]);
+		$communes = Commune::where('district_id', $districts)->get(['id', DB::raw('commune_name as text')]);
 
 		
 		return $communes;
