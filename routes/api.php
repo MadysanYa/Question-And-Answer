@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransferController;
 use App\Http\Controllers\TaskdetailController;
+use App\Http\Controllers\VillageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +31,5 @@ Route::get('/taskdetail/{id}', [TaskdetailController::class, 'delete']);
 
 Route::get('/district', [DistrictController::class,'district']);
 Route::get('/commune', [CommuneController::class,'commune']);
-
+Route::get('/village',[VillageController::class,'village']);
 //Route::get('/transfer', [TransferController::class, 'store']);
