@@ -43,66 +43,91 @@ class PropertyResearchConteroller extends AdminController
     protected function dashboard(){
 
 
-		$title1 = "Done";
-		// $value1 = $Done;
-		$title2 = "Pending";
-		// $value2 = $Pending;
-		$title3 = "Progressing";
-		// $value3 = $Progressing;
-		$title4 = "ETC";
-		// $value4 = $ETC;
+		// $title1 = "Done";
+		// // $value1 = $Done;
+		// $title2 = "Pending";
+		// // $value2 = $Pending;
+		// $title3 = "Progressing";
+		// // $value3 = $Progressing;
+		// $title4 = "ETC";
+		// // $value4 = $ETC;
 
-            $html = <<<HTML
-            <h1>Dashboard Show Testing</h1>
+        //     $html = <<<HTML
+        //     <h1>Dashboard Show Testing</h1>
             
-            <div class="row">
-                <div class="col-lg-3" style="padding: 0 10px 15px 15px; height: 100px;text-align: center;">
-                        <div style="background-color:#abffbd;height: 100%;width: 100%; font-size: 24px;font-weight: bold;padding: 10px; border-radius: 10px; box-shadow: rgba(50,50,93,0.25) 0px 6px 12px -2px, rgba(0,0,0, 0.3) 0px 3px 7px -3px;">
-                        {{title1}}
-                            <!-- <label style="font-size: 40px; font-weight: bold;margin-left: 20px;">{{value1}}</label> -->
-                        </div>
-                </div>
-                <div class="col-lg-3" style="padding: 0 15px 15px 15px; height: 100px;text-align: center;">
-                        <div style="background-color:#ffc0ab;height: 100%;width: 100%; font-size: 24px;font-weight: bold;padding: 10px; border-radius: 10px; box-shadow: rgba(50,50,93,0.25) 0px 6px 12px -2px, rgba(0,0,0, 0.3) 0px 3px 7px -3px;">
-                        {{title2}}
-                            <!-- <label style="font-size: 40px; font-weight: bold;margin-left: 20px;">{{value2}}</label> -->
-                        </div>
-                </div>
-                <div class="col-lg-3" style="padding: 0 15px 15px 15px; height: 100px;text-align: center;">
-                        <div style="background-color:#f1fa75;height: 100%;width: 100%; font-size: 24px;font-weight: bold;padding: 10px; border-radius: 10px; box-shadow: rgba(50,50,93,0.25) 0px 6px 12px -2px, rgba(0,0,0, 0.3) 0px 3px 7px -3px;">
-                        {{title3}}
-                            <!-- <label style="font-size: 40px; font-weight: bold;margin-left: 20px;">{{value3}}</label> -->
-                        </div>
-                </div>
-                <div class="col-lg-3" style="padding: 0 15px 15px 15px; height: 100px;text-align: center;">
-                        <div style="background-color:red;height: 100%;width: 100%; font-size: 24px;font-weight: bold;padding: 10px; border-radius: 10px; box-shadow: rgba(50,50,93,0.25) 0px 6px 12px -2px, rgba(0,0,0, 0.3) 0px 3px 7px -3px;">
-                        {{title4}}
-                            <!-- <label style="font-size: 40px; font-weight: bold;margin-left: 20px;">{{value4}}</label> -->
-                        </div>
-                </div>
+        //     <div class="row">
+        //         <div class="col-lg-3" style="padding: 0 10px 15px 15px; height: 100px;text-align: center;">
+        //                 <div style="background-color:#abffbd;height: 100%;width: 100%; font-size: 24px;font-weight: bold;padding: 10px; border-radius: 10px; box-shadow: rgba(50,50,93,0.25) 0px 6px 12px -2px, rgba(0,0,0, 0.3) 0px 3px 7px -3px;">
+        //                 {{title1}}
+        //                     <!-- <label style="font-size: 40px; font-weight: bold;margin-left: 20px;">{{value1}}</label> -->
+        //                 </div>
+        //         </div>
+        //         <div class="col-lg-3" style="padding: 0 15px 15px 15px; height: 100px;text-align: center;">
+        //                 <div style="background-color:#ffc0ab;height: 100%;width: 100%; font-size: 24px;font-weight: bold;padding: 10px; border-radius: 10px; box-shadow: rgba(50,50,93,0.25) 0px 6px 12px -2px, rgba(0,0,0, 0.3) 0px 3px 7px -3px;">
+        //                 {{title2}}
+        //                     <!-- <label style="font-size: 40px; font-weight: bold;margin-left: 20px;">{{value2}}</label> -->
+        //                 </div>
+        //         </div>
+        //         <div class="col-lg-3" style="padding: 0 15px 15px 15px; height: 100px;text-align: center;">
+        //                 <div style="background-color:#f1fa75;height: 100%;width: 100%; font-size: 24px;font-weight: bold;padding: 10px; border-radius: 10px; box-shadow: rgba(50,50,93,0.25) 0px 6px 12px -2px, rgba(0,0,0, 0.3) 0px 3px 7px -3px;">
+        //                 {{title3}}
+        //                     <!-- <label style="font-size: 40px; font-weight: bold;margin-left: 20px;">{{value3}}</label> -->
+        //                 </div>
+        //         </div>
+        //         <div class="col-lg-3" style="padding: 0 15px 15px 15px; height: 100px;text-align: center;">
+        //                 <div style="background-color:red;height: 100%;width: 100%; font-size: 24px;font-weight: bold;padding: 10px; border-radius: 10px; box-shadow: rgba(50,50,93,0.25) 0px 6px 12px -2px, rgba(0,0,0, 0.3) 0px 3px 7px -3px;">
+        //                 {{title4}}
+        //                     <!-- <label style="font-size: 40px; font-weight: bold;margin-left: 20px;">{{value4}}</label> -->
+        //                 </div>
+        //         </div>
                 
             
-            </div>
-        HTML;
+        //     </div>
+        // HTML;
 
-        $html = str_replace('{{title1}}',$title1,$html);
-		// $html = str_replace('{{value1}}',$value1,$html);
-		$html = str_replace('{{title2}}',$title2,$html);
-		// $html = str_replace('{{value2}}',$value2,$html);
-		$html = str_replace('{{title3}}',$title3,$html);
-		// $html = str_replace('{{value3}}',$value3,$html);
-		$html = str_replace('{{title4}}',$title4,$html);
-		// $html = str_replace('{{value4}}',$value4,$html);
+        // $html = str_replace('{{title1}}',$title1,$html);
+		// // $html = str_replace('{{value1}}',$value1,$html);
+		// $html = str_replace('{{title2}}',$title2,$html);
+		// // $html = str_replace('{{value2}}',$value2,$html);
+		// $html = str_replace('{{title3}}',$title3,$html);
+		// // $html = str_replace('{{value3}}',$value3,$html);
+		// $html = str_replace('{{title4}}',$title4,$html);
+		// // $html = str_replace('{{value4}}',$value4,$html);
 
-        return $html;
-     }
+        // return $html;
+    }
     
     protected function grid()
     {
         $grid = new Grid(new PropertyResearch);
 		$grid->model()->orderBy('id','desc');
 		$grid->column('id', __('No.'))->desc()->sortable();
-        $grid->column('property_reference', __('Reference'));
+        // $grid->column('village communce_id district_id province', __('Reference'));
+        // $grid->column('property_reference', __('Reference'));
+
+        $grid->column('property_reference')->display(function () {
+            $village_id = $this->village;
+            $village = Province::where('id', $village_id)->first();
+
+            $commune_id = $this->commune;
+            $commune = Province::where('id', $commune_id)->first();
+
+            // $province_id = $this->province;
+            // $province = Province::where('id', $province_id)->first();
+
+            return $village->village_name . ', ' . $this->$commune->commune_name . ', ' . $this->province->province_name;
+        });
+
+        // Testing
+        // $grid->column('province', __('Province'))->as(function($province_id){
+        //     $province = Province::where('id', $province_id)->first();
+        //     return $province->province_name;
+        // });
+        // $grid->column('branch',__('Branch'))->as(function($branch_id){
+        //     $branch = Branch::where('id', $branch_id)->first();
+        //     return $branch->branch_name;
+        // });
+
         $grid->column('access_road_name', __('Owner'));
         $grid->column('information_type', __('Type'));
         $grid->column('location_type', __('Property Address'));
