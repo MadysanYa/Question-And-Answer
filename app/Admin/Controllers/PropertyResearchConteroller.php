@@ -107,15 +107,16 @@ class PropertyResearchConteroller extends AdminController
 
         $grid->column('property_reference')->display(function () {
             $village_id = $this->village;
-            $village = Province::where('id', $village_id)->first();
+            $village = Village::where('id', $village_id)->first();
 
-            $commune_id = $this->commune;
-            $commune = Province::where('id', $commune_id)->first();
+            // $commune_id = $this->commune;
+            // $commune = Commune::where('id', $commune_id)->first();
 
             // $province_id = $this->province;
             // $province = Province::where('id', $province_id)->first();
 
-            return $village->village_name . ', ' . $this->$commune->commune_name . ', ' . $this->province->province_name;
+            return $village->village_name;
+            // return $village->village_name . ', ' . $this->commune->$commune_name . ', ' . $this->$province->province_name;
         });
 
         // Testing

@@ -265,8 +265,8 @@ class PropertyIndicatorController extends AdminController
             $show->field('owner', __('Owner '));
              // $show->field('startdate', __('Start date'));
             // $show->field('enddate', __('End date'));
-            $show->field('type',__('Type'));
-             $show->field('property_address',__('Property Address '));//->display(function(){  // 20-12-22
+            // $show->field('type',__('Type'));
+            $show->field('property_address',__('Property Address '));//->display(function(){  // 20-12-22
             //     $province_id = $this->province;
             //     $province = Province::where('id', $province_id)->first();
             //     $distict_id = $this->district_id;
@@ -282,7 +282,7 @@ class PropertyIndicatorController extends AdminController
                 
             // });
 
-            $show->field('geo_code',__('Geo Code'));
+            // $show->field('geo_code',__('Geo Code'));
             $show->field('region',__('Region'))->as(function($region_id){
                 $region = Region::where('id', $region_id)->first();
                 return $region->region_name;
@@ -361,7 +361,11 @@ class PropertyIndicatorController extends AdminController
             $form->text('cif_no', __('CIF No.'))->rules('required');
             $form->text('loan_officer', __('Loan Officer'))->rules('required');
            
-            $form->text('reference', __('Property Reference '))->rules('required');
+            $form->text('reference',  __('Property Reference '))->value('PR22-00000');
+
+            // test
+            $form->text()->orderBy('id','asc');
+
             $form->text('access_name', __('Access Road Name'))->rules('required');
             $form->text('borey', __('Borey'))->rules('required');
             $form->text('land_titleno', __('Land title No'))->rules('required');
