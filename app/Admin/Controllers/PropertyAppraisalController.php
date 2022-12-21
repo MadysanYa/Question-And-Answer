@@ -239,7 +239,7 @@ return $html;
 
         $form->column(1/2,function($form){
             
-            $form->select('region', __('Province'))->options(function(){
+            $form->select('region', __('Region'))->options(function(){
                 return Province::all()->pluck('province_name', 'id');
             })->load('district_id', '../../api/district');
             $form->select('branch',__('Branch'))->options(['8187(LOAN CENTER)'=>'8187(LOAN CENTER)','8186(CARLOAN CENTER)'=>'8186(CARLOAN CENTER)','8185(COMMERCIAL LENDING BUSINESS)'=>'8185(COMMERCIAL LENDING BUSINESS)']);
