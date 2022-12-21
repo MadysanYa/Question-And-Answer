@@ -266,11 +266,7 @@ class PropertyIndicatorController extends AdminController
              // $show->field('startdate', __('Start date'));
             // $show->field('enddate', __('End date'));
             // $show->field('type',__('Type'));
-<<<<<<< HEAD
             $show->field('property_address',__('Property Address '));//->display(function(){  // 20-12-22
-=======
-            //  $show->field('property_address',__('Property Address '));//->display(function(){  // 20-12-22
->>>>>>> eda1cbe9ca7bdbb58985d40d85bd47160b07d3a0
             //     $province_id = $this->province;
             //     $province = Province::where('id', $province_id)->first();
             //     $distict_id = $this->district_id;
@@ -366,7 +362,7 @@ class PropertyIndicatorController extends AdminController
             $form->text('reference',  __('Property Reference '))->value('PR22-00000');
 
             // test
-            $form->text()->orderBy('id','asc');
+            // $form->text()->orderBy('id','asc');
 
             $form->text('access_name', __('Access Road Name'))->rules('required');
             $form->text('borey', __('Borey'))->rules('required');

@@ -14,8 +14,10 @@ use App\Models\District;
 use App\Models\Commune;
 use App\Models\Village;
 use Encore\Admin\Layout\Content;
+// Use Encore\Admin\Admin;
 
 use Illuminate\Support\Facades\Request;
+use PhpParser\Node\Stmt\InlineHTML;
 
 class PropertyResearchConteroller extends AdminController
 {
@@ -138,7 +140,7 @@ class PropertyResearchConteroller extends AdminController
 		// No need to change (hided)
         $grid->disableExport();
         $grid->disableFilter();
-
+        
         $grid->quickSearch('id','department', 'responsible_person');
 		
 	
@@ -189,21 +191,17 @@ class PropertyResearchConteroller extends AdminController
     protected function form()
     {
         $form = new Form(new PropertyResearch());
-
         $form->column(1/3, function ($form){
+            $form->display('id', 'Identification');
             $form->select('information_type', __('Information Type'))->options(['Indication'=>'Indication','feacbook'=>'Feacbook']);
-
-            // Region Testing
-            // $form->select('information_type', __('Information Type'))->options(function(){
-            //     return Province::all()->pluck('province_name', 'id');
+            // Admin::html('<h1>Testing</h1>');
+            // $form->text('property_reference', __('Property Reference'));
+            // $form->text('property_reference', __('Property Reference'))->display(function($id){
+            //     $id =  PropertyResearch::get('id')->first();
+            //     return $id + 1;
             // });
+            // return Commune::all()->pluck('commune_name', 'id');
 
-            // Branch Testing
-            // $form->select('information_type', __('Information Type'))->options(function(){
-            // return Branch::all()->pluck('branch_name', 'id');
-            // });
-
-            $form->text('property_reference', __('Property Reference'));
             $form->text('access_road_name', __('Access Road Name'));
             $form->text('no_of_floor', __('No of Floor'));
             $form->text('land_size', __('Land Size'));
@@ -215,9 +213,14 @@ class PropertyResearchConteroller extends AdminController
 
             $form->text('contact_no', __('Contact No.'));
             $form->text('remark', __('Remark'));
+
+            // return $html;
         });
 
         $form->column(1/3, function ($form){
+            $form->html('<br>');
+            // $form->divider();
+            $form->html('<br>');
             $form->select('location_type', __('Location Type'))->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area']);
             $form->select('property_type', __('Property Type'))->options(['Vacant Land'=>'Vacant Land','Flat House'=>'Flat House','Cando'=>'Cando']);
             $form->select('land_title_type', __('Land Title Type'))->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
@@ -235,6 +238,9 @@ class PropertyResearchConteroller extends AdminController
             $form->text('borey', __('Borey'));
             $form->date('information_date', __('Information Date'));
             $form->text('build_size', __('Building Size'));
+
+            // $form->divider();
+            // $form->html('<br>');
 
             // Province select District
             $form->select('province', __('Province'))->options(function(){
