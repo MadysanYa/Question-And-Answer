@@ -31,5 +31,5 @@ Route::get('/taskdetail/{id}', [TaskdetailController::class, 'delete']);
 
 Route::get('/district', [DistrictController::class,'district']);
 Route::get('/commune', [CommuneController::class,'commune']);
-Route::get('/village',[VillageController::class,'village']);
+Route::get('/village', [VillageController::class,'village']);
 //Route::get('/transfer', [TransferController::class, 'store']);

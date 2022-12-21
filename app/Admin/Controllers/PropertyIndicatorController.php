@@ -13,6 +13,7 @@ use App\Models\Village;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Form\Field\Button;
+use Encore\Admin\Form\Field\Id;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Illuminate\Support\Facades\Request;
@@ -157,7 +158,12 @@ class PropertyIndicatorController extends AdminController
 		
 		$grid->model()->orderBy('id','asc');
         $grid->column('id', __('No.'))->asc()->sortable();
-		$grid->column('reference', __('Reference'));
+		$grid->column('reference', __('Reference'));//->as(function($id){
+         //  $id = PropertyIndicator::get('id')->first();
+         //  return $id+1;
+        
+
+       // });
         $grid->column('owner',__('Owner'));
         $grid->column('information_type',__('Type'));
         $grid->column('property_address',__('Property Address '))->display(function(){
@@ -344,6 +350,7 @@ class PropertyIndicatorController extends AdminController
      *
      * @return Form
      */
+   
     protected function form()
     {
         $form = new Form(new PropertyIndicator());
@@ -359,50 +366,97 @@ class PropertyIndicatorController extends AdminController
             $form->text('cif_no', __('CIF No.'))->rules('required');
             $form->text('loan_officer', __('Loan Officer'))->rules('required');
            
+<<<<<<< HEAD
             $form->text('reference',  __('Property Reference '))->value('PR22-00000');
 
             // test
             // $form->text()->orderBy('id','asc');
 
+=======
+            $form->text('reference', __('Property Reference '))->value('PR22-00000');//->as(function($id){
+                  //$id = PropertyIndicator::get('id')->first();
+                 //return $id+1;
+               
+       
+              // });
+           
+>>>>>>> d24ffd6d3ac5292a86a934d9f8b720d916f1e43d
             $form->text('access_name', __('Access Road Name'))->rules('required');
             $form->text('borey', __('Borey'))->rules('required');
             $form->text('land_titleno', __('Land title No'))->rules('required');
+            $form->html('<br>');
+           
+
+           
             $form->text('owner', __('Collateral Owner'))->rules('required');
             //select province 
             $form->select('province', __('Province'))->options(function(){
                 return Province::all()->pluck('province_name', 'id');
-            })->load('district_id', '../../api/district');
-            // village get data from commune
-            $form->select('village_id', __('Village'));
-            $form->file('photo', __('Photo'));
-
+                })->load('district_id', '../../api/district');
+                // village get data from commune
+                $form->select('village_id', __('Village'));
+                $form->file('photo', __('Photo'));
+            
+        });    
             $form->column(1/3, function ($form){
+                $form->html('<br>');
+                $form->html('<br>');
+                $form->html('<br>');
+                $form->html('<br>');
+                $form->html('<br>');
+                $form->html('<br>'); 
+                $form->html('<br>');
+                $form->html('<br>');
+                $form->html('<br>');
+              
+              
+                $form->text('telephone', __('Telephone'))->rules('required');
+                $form->select('location_type', __('Location Type'))->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area']);
+                $form->select('property_type', __('Property Type'))->options(['Vacant Land'=>'Vacant Land','Flat House'=>'Flat House','Cando'=>'Cando']);
+                $form->text('no_floor', __('No. of Floor'))->rules('required');
+                $form->text('land_size', __('Land Size'))->rules('required');
+                $form->html('<br>');
+                
+                
+                $form->text('customer_name', __('Customer Name '))->rules('required');
+                // select district get data from province
+                $form->select('district_id', __('District/Khan'))->load('commune_id', '../../api/commune');
+                $form->text('altitude', __('Altitude'))->rules('required');
+                $form->text('remark', __('Remark'))->rules('required');
+                });
+                
+                
+               
+    
+                $form->column(1/3, function ($form){
+                $form->html('<br>');
+                $form->html('<br>');
+                $form->html('<br>');
+                $form->html('<br>');
+                $form->html('<br>');
+                $form->html('<br>'); 
+                $form->html('<br>');
+                $form->html('<br>');
+                $form->html('<br>');
 
-            $form->text('telephone', __('Telephone'))->rules('required');
-            $form->select('location_type', __('Location Type'))->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area']);
-            $form->select('property_type', __('Property Type'))->options(['Vacant Land'=>'Vacant Land','Flat House'=>'Flat House','Cando'=>'Cando']);
-            $form->text('no_floor', __('No. of Floor'))->rules('required');
-            $form->text('land_size', __('Land Size'))->rules('required');
-            $form->text('customer_name', __('Customer Name '))->rules('required');
-            // select district get data from province
-            $form->select('district_id', __('District/Khan'))->load('commune_id', '../../api/commune');
-            $form->text('altitude', __('Altitude'))->rules('required');
-            $form->text('remark', __('Remark'))->rules('required');
-
-            });
-            $form->column(1/3, function ($form){
-
-            $form->select('information_type', __('Information Type'))->options(['Indication'=>'Indication','feacbook'=>'Feacbook']);
-            $form->select('type_ofaccess_road', __('Type of Access Road'))->options(['NR'=>'National Road', 'Paved Road'=>'Paved Road','Paved Road'=>'Paved Road']);
-            $form->text('building_status', __('Building Status'))->rules('required');
-            $form->select('land_titletype', __('Land Title Type'))->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
-            $form->text('building_size', __('Building Size'))->rules('required');
-            // commune  get data from district
-            $form->select('commune_id', __('Commune/Sangkat'))->load('village_id', '../../api/village');
-            $form->text('client_contact', __('client Contact No. '))->rules('required');
-            $form->text('latitude', __('Latitude'))->rules('required');
-          
-            });
+                $form->select('information_type', __('Information Type'))->options(['Indication'=>'Indication','feacbook'=>'Feacbook']);
+                $form->select('type_ofaccess_road', __('Type of Access Road'))->options(['NR'=>'National Road', 'Paved Road'=>'Paved Road','Paved Road'=>'Paved Road']);
+                $form->text('building_status', __('Building Status'))->rules('required');
+                $form->select('land_titletype', __('Land Title Type'))->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
+                $form->text('building_size', __('Building Size'))->rules('required');
+                $form->html('<br>'); 
+              
+                // commune  get data from district
+                $form->text('client_contact', __('client Contact No. '))->rules('required');
+                $form->select('commune_id', __('Commune/Sangkat'))->load('village_id', '../../api/village');
+               
+                $form->text('latitude', __('Latitude'))->rules('required');
+                
+                });
+                
+           
+     
+            
             // $form->text('type', __('Type'))->rules('required');
             // $form->text('property_address', __('Property Address'))->rules('required');
             // $form->text('geo_code', __('Geo Code'))->rules('required');
@@ -412,7 +466,7 @@ class PropertyIndicatorController extends AdminController
             // $form->text('amount','Amount (USD)');
             // $form->multipleFile('file', __('File'))->removable();
             // $form->textarea('remark', __('Remark'));
-        });
+       
        
             
         
@@ -436,4 +490,5 @@ class PropertyIndicatorController extends AdminController
         return $form;
     }
    
+
 }

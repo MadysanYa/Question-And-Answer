@@ -17,11 +17,8 @@ class VillageController extends Controller
 	 
     public function village(Request $request)
     {
-        $communeId = $request->get('q');
-       
+        $communeId = $request->get('q');       
 		$villages = Village::where('commune_id', $communeId)->get(['id', DB::raw('village_name as text')]);
-
-		
 		return $villages;
 
     }

@@ -211,7 +211,7 @@ return $html;
         $show->field('collateral_owner', __('Collateral Owner'));
         $show->field('province', __('Province'));
         $show->field('village', __('Village'));
-        $show->field('photo')->file();
+        $show->field('photo');
         $show->field('information_type', __('Information Type'));
         $show->field('type_of_access_road', __('TypeOf Access Road'));
         $show->field('building_status', __('Building Status'));
@@ -268,18 +268,16 @@ return $html;
 
         $form->column(1/2,function($form){
        
-            $form->text('collateral_owner', __('collateral_owner'));
-
-            // Province
-            $form->select('province', __('province'))->options(function(){
-                return Province::all()->pluck('province_name', 'id');
-            })->load('district_id', '../../api/district');
-
-            // District
-            $form->select('district_id', __('district_name'));
-
+            $form->text('collateral_owner', __('Collateral_owner'));
+              // Province
+            $form->select('province', __('Province'))->options(function(){
+                return Province::all()->pluck('province_name', 'id');})->load('district_id', '../../api/district');
+             // District
+                $form->select('district_id', __('District'))->load('commune_id', '../../api/commune');
+             // commune
+                $form->select('commune_id', __('Commune'))->load('village_id', '../../api/village');
             // Village
-            $form->text('village', __('village'));
+            $form->select('village_id', __('village'));
             $form->file('photo', __('photo'));
             $form->text('information_type', __(' information_type'));
             $form->text('type_of_access_road', __('type_of_access_road'));
@@ -290,9 +288,8 @@ return $html;
             $form->text('building_size_per_sqm', __('building_size_per_sqm'));
            
             $form->text('altitude', __('altitude'));
-            $form->text('swot_analyze', __('swot_analyze'));
-            // $form->button('swot_analyze', __('swot_analyze'));
-           // $form->link('http://localhost/pms/property-management/public/admin/property_indicator');
+            $form->button('swot_analyze', __('swot_analyze'));
+
 
         });              
 
