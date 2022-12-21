@@ -211,7 +211,7 @@ return $html;
         $show->field('collateral_owner', __('Collateral Owner'));
         $show->field('province', __('Province'));
         $show->field('village', __('Village'));
-        $show->field('photo')->file();
+        $show->field('photo');
         $show->field('information_type', __('Information Type'));
         $show->field('type_of_access_road', __('TypeOf Access Road'));
         $show->field('building_status', __('Building Status'));
