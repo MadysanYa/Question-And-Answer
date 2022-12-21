@@ -3,12 +3,16 @@
 namespace App\Admin\Controllers;
 
 use App\Models\PropertyResearch;
+use App\Models\Province;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use App\Models\Branch;
 use App\Models\contracts;
+use App\Models\District;
+use App\Models\Commune;
+use App\Models\Village;
 use Encore\Admin\Layout\Content;
 
 use Illuminate\Support\Facades\Request;
@@ -98,11 +102,11 @@ class PropertyResearchConteroller extends AdminController
         $grid = new Grid(new PropertyResearch);
 		$grid->model()->orderBy('id','desc');
 		$grid->column('id', __('No.'))->desc()->sortable();
-        $grid->column('reference', __('Reference'));
-        $grid->column('owner', __('Owner'));
-        $grid->column('type', __('Type'));
-        $grid->column('property_address', __('Property Address'));
-        $grid->column('geo_code', __('Geo Code'));
+        $grid->column('property_reference', __('Reference'));
+        $grid->column('access_road_name', __('Owner'));
+        $grid->column('information_type', __('Type'));
+        $grid->column('location_type', __('Property Address'));
+        $grid->column('build_size', __('Geo Code'));
 		
 		
 		// No need to change (hided)
@@ -125,39 +129,30 @@ class PropertyResearchConteroller extends AdminController
     protected function detail($id)
     {
         $show = new Show( PropertyResearch::findOrFail($id));
-        $show->field('reference', __('Reference'));
-        $show->field('owner', __('Owner '));
-        $show->field('type',__('Type'));
-        $show->field('property_address ',__('Property Address '));
-        // $show->field('geo_code',__('Geo Code'));
-        // $show->field('region',__('Region'));
-        // $show->field('branch',__('Branch'));
-        // $show->field('requested_date',__('Requested Date'));
-        // $show->field('cif_no',__('CIF No.'));
-        // $show->field('loan_officer',__('Loan Officer'));
-        // $show->field('telephone',__('Telephone'));
-        // $show->field('information_type',__('Information Type'));
-        // $show->field('location_type',__('Location Type'));
-        // $show->field('type_ofaccess_road',__('Type of Access Road'));
-        // $show->field('access_name',__('Access Road Name'));
-        // $show->field('property_type',__('Property Type'));
-        // $show->field('building_status',__('Building Status'));
-        // $show->field('borey',__('Borey')); 
-        // $show->field('no_floor',__('No. of floor'));
-        // $show->field('land_titletype',__('Land Titil'));
-        // $show->field('land_titleno',__('Lang Title No'));
-        // $show->field('land_size',__('Land Size'));
-        // $show->field('building_size',__('Building Size'));
-        // $show->field('customer_name',__('Customer Name'));
-        // $show->field('client_contact',__('Cliend Contact'));
-        // $show->field('province',__('Province'));
-        // $show->field('district',__('District/Khan'));
-        // $show->field('commune',__('Commune/Sangkat'));
-        // $show->field('village',__('Village'));
-        // $show->field('altitude',__('Altitude'));
-        // $show->field('latitude',__('Latitude'));
-        // $show->field('photo',__('Photo'));
-        // $show->field('remark',__('Remark'));
+        $show->field('information_type', __('Information Type'));
+        $show->field('property_reference', __('Property Reference'));
+        $show->field('access_road_name', __('Access Road Name'));
+        $show->field('no_of_floor', __('No of Floor'));
+        $show->field('land_size', __('Land Size'));
+        $show->field('build_value_per_sqm', __('Build Value per Sqm'));
+        $show->field('district', __('District/Khan'));
+        $show->field('contact_no', __('Contact No.'));
+        $show->field('remark', __('Remark'));
+        $show->field('location_type', __('Location Type'));
+        $show->field('property_type', __('Property Type'));
+        $show->field('land_title_type', __('Land Title Type'));
+        $show->field('property_value_per_sqm', __('Property per Sqm'));
+        $show->field('property_market_value', __('Property Market Value'));
+        $show->field('commune', __('Commune/Sangkat'));
+        $show->field('altitude', __('Altitude'));
+        $show->field('type_of_access_road', __('Type of Access Road'));
+        $show->field('borey', __('Borey'));
+        $show->field('information_date', __('Information Date'));
+        $show->field('build_size', __('Building Size'));
+        $show->field('province', __('Province'));
+        $show->field('village', __('Village'));
+        $show->field('laltitude', __('Laltitude'));
+        return $show;
     }
 
     /**
@@ -169,26 +164,62 @@ class PropertyResearchConteroller extends AdminController
     {
         $form = new Form(new PropertyResearch());
 
-        $form->column(1/2, function ($form){
-            $form->select('information_type', __('Information Type'))->option(['pp' => 'Phnom Penh', 'sr' => 'Siem Reap']);
+        $form->column(1/3, function ($form){
+            $form->select('information_type', __('Information Type'))->options(['Indication'=>'Indication','feacbook'=>'Feacbook']);
+
+            // Region Testing
+            // $form->select('information_type', __('Information Type'))->options(function(){
+            //     return Province::all()->pluck('province_name', 'id');
+            // });
+
+            // Branch Testing
+            // $form->select('information_type', __('Information Type'))->options(function(){
+            // return Branch::all()->pluck('branch_name', 'id');
+            // });
+
             $form->text('property_reference', __('Property Reference'));
             $form->text('access_road_name', __('Access Road Name'));
             $form->text('no_of_floor', __('No of Floor'));
             $form->text('land_size', __('Land Size'));
             $form->text('build_value_per_sqm', __('Build Value per Sqm'));
-            $form->select('district', __('District/Khan'))->option(['psc' => 'Pursen Chey', 'ss' => 'Sen Sok']);
+
+            // District select Commune
+            $form->select('district_id', __('District'))->options(function(){
+            })->load('commune_id', __('../../api/commune'));
+
             $form->text('contact_no', __('Contact No.'));
             $form->text('remark', __('Remark'));
         });
 
-        $form->column(1/2, function ($form){
-            $form->select('location_type', __('Location Type'))->option(['rsda' => 'Residential Area', 'cmc' => 'Commercial Area']);
-            $form->select('property_type', __('Property Type'))->option(['fh' => 'Flat House', 'lh' => 'Link House']);
-            $form->select('land_title_type', __('Land Title Type'))->option(['ht' => 'Hard Title', 'st' => 'Soft Title']);
+        $form->column(1/3, function ($form){
+            $form->select('location_type', __('Location Type'))->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area']);
+            $form->select('property_type', __('Property Type'))->options(['Vacant Land'=>'Vacant Land','Flat House'=>'Flat House','Cando'=>'Cando']);
+            $form->select('land_title_type', __('Land Title Type'))->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
             $form->text('property_value_per_sqm', __('Property per Sqm'));
             $form->text('property_market_value', __('Property Market Value'));
-            $form->select('commune', __('Commune/Sangkat'))->option(['cc' => '', 'ss' => 'Sen Sok']);
-            
+
+            $form->select('commune_id', __('Commune'))->options(function(){
+                return Commune::all()->pluck('commune_name', 'id');
+            });
+            $form->text('altitude', __('Altitude'));
+        });		
+
+        $form->column(1/3, function ($form){
+            $form->select('type_of_access_road', __('Type of Access Road'))->options(['NR'=>'National Road', 'Paved Road'=>'Paved Road','Paved Road'=>'Paved Road']);
+            $form->text('borey', __('Borey'));
+            $form->date('information_date', __('Information Date'));
+            $form->text('build_size', __('Building Size'));
+
+            // Province select District
+            $form->select('province', __('Province'))->options(function(){
+                return Province::all()->pluck('province_name', 'id');
+            })->load('district_id', __('../../api/district'));
+            // $form->select('province', __('Province'));
+
+            $form->select('village', __('Village'))->options(function(){
+                return Village::all()->pluck('village_name', 'id');
+            });
+            $form->text('laltitude', __('Laltitude'));
         });		
 
         // Other

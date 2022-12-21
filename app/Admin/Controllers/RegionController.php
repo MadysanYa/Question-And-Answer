@@ -28,7 +28,7 @@ class RegionController extends AdminController
     {
         $grid = new Grid(new Region);
         $grid->column('id', __('ID'));
-        $grid->column('region_code', __('Region code'))->editable()->sortable();
+      //  $grid->column('region_code', __('Region code'))->editable()->sortable();
         $grid->column('region_name', __('Region Name'))->editable()->sortable();
 		
         $grid->disableExport();
@@ -68,7 +68,7 @@ class RegionController extends AdminController
     protected function form()
     {
         $form = new Form(new Region());
-        $form->text('region_code', __('Region Code'))->rules('required');
+    //    $form->text('region_code', __('Region Code'))->rules('required');
         $form->text('region_name', __('Region Name'));
         
         $form->footer(function ($footer) {

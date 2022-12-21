@@ -268,27 +268,27 @@ return $html;
 
         $form->column(1/2,function($form){
        
-
             $form->text('collateral_owner', __('Collateral_owner'));
+              // Province
             $form->select('province', __('Province'))->options(function(){
                 return Province::all()->pluck('province_name', 'id');})->load('district_id', '../../api/district');
-            $form->select('district_id', __('District'))->load('commune_id', '../../api/commune');
-            $form->select('commune_id', __('Commune'))->load('village_id', '../../api/village');
+             // District
+                $form->select('district_id', __('District'))->load('commune_id', '../../api/commune');
+             // commune
+                $form->select('commune_id', __('Commune'))->load('village_id', '../../api/village');
+            // Village
             $form->select('village_id', __('village'));
-            
-            $form->file('photo', __('Photo'));
-            $form->text('information_type', __('Information Type'));
-            $form->text('type_of_access_road', __('Type Of Access Road'));
-            $form->text('building_status', __('Building Status'));
-            $form->text('land_title_type', __('Land Title Type'));
-            $form->text('land_size_by_measurement', __('Land Size By Measurement'));
-            $form->text('customer_name', __('Customer Name'));
-            $form->text('building_size_per_sqm', __('Building Size Per Sqm'));           
-            $form->text('altitude', __('Altitude'));
-            $form->text('swot_analyze', __('Swot Analyze'));
-            $form->text ('reference', __('Reference'));    
-            // $form->button('swot_analyze', __('swot_analyze'));
-           // $form->link('http://localhost/pms/property-management/public/admin/property_indicator');
+            $form->file('photo', __('photo'));
+            $form->text('information_type', __(' information_type'));
+            $form->text('type_of_access_road', __('type_of_access_road'));
+            $form->text('building_status', __('building_status'));
+            $form->text('land_title_type', __(' land_title_type'));
+            $form->text('land_size_by_measurement', __('land_size_by_measurement'));
+            $form->text('customer_name', __('customer_name'));
+            $form->text('building_size_per_sqm', __('building_size_per_sqm'));
+           
+            $form->text('altitude', __('altitude'));
+            $form->button('swot_analyze', __('swot_analyze'));
 
 
         });              
