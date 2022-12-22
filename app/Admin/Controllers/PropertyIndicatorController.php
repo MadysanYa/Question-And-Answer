@@ -377,7 +377,7 @@ class PropertyIndicatorController extends AdminController
             $form->text('cif_no', __('CIF No.'));//->rules('required');
             $form->text('rm_name', __('RM Name'));//->rules('required');
            
-<<<<<<< HEAD
+
             $form->text('reference',  __('Property Reference '))->value('PR22-00000');
 
             // test
@@ -386,7 +386,7 @@ class PropertyIndicatorController extends AdminController
             $form->text('access_name', __('Access Road Name'))->rules('required');
             $form->text('borey', __('Borey'))->rules('required');
             $form->text('land_titleno', __('Land title No'))->rules('required');
-=======
+
             $form->text('property_reference', __('Property Reference '))->value('PR22-00000');//->as(function($id){
                   //$id = PropertyIndicator::get('id')->first();
                  //return $id+1;
@@ -397,7 +397,7 @@ class PropertyIndicatorController extends AdminController
             $form->text('access_road_name', __('Access Road Name'));//->rules('required');
             $form->text('borey', __('Borey'));//->rules('required');
             $form->text('land_titleno', __('Land title No'));//->rules('required');
->>>>>>> 4a46be85c8f5d63e4ca378e953652d86f5b3bfe7
+
             $form->html('<br>');
            
 
@@ -433,18 +433,18 @@ class PropertyIndicatorController extends AdminController
                 
                 $form->text('customer_name', __('Customer Name '));//->rules('required');
                 // select district get data from province
-<<<<<<< HEAD
+
                 $form->select('district_id', __('District/ Khan'))->load('commune_id', env('APP_URL') . '/public/api/commune');
-=======
+
                 $form->select('district_id', __('District/ Khan'))->load('commune_id', '../../api/commune');
-<<<<<<< HEAD
+
                 $form->text('altitude', __('Altitude'))->rules('required');
                 $form->text('remark', __('Remark'))->rules('required');
-=======
->>>>>>> 4add55d5412311d2bfc6f74a5bec00a6582927c0
+
+
                 $form->text('altitude', __('Altitude'));//->rules('required');
                 $form->text('remark', __('Remark'));//->rules('required');
->>>>>>> 4a46be85c8f5d63e4ca378e953652d86f5b3bfe7
+
                 });
                 
                 
@@ -466,16 +466,14 @@ class PropertyIndicatorController extends AdminController
                 $form->html('<br>'); 
               
                 // commune  get data from district
-<<<<<<< HEAD
+
                 $form->text('client_contact', __('client Contact No. '))->rules('required');
-=======
+
                 $form->text('client_contact', __('Client Contact No. '));//->rules('required');
-<<<<<<< HEAD
                 $form->select('commune_id', __('Commune/ Sangkat'))->load('village_id', env('APP_URL') . '/public/api/village');
-=======
->>>>>>> 4a46be85c8f5d63e4ca378e953652d86f5b3bfe7
+
                 $form->select('commune_id', __('Commune/ Sangkat'))->load('village_id', '../../api/village');
->>>>>>> 4add55d5412311d2bfc6f74a5bec00a6582927c0
+
                
                 $form->text('latitude', __('Latitude'));//->rules('required');
                 
