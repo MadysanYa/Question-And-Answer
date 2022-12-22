@@ -18,7 +18,7 @@ use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Illuminate\Support\Facades\Request;
 use Encore\Admin\Layout\Content;
-class PropertyIndicatorController extends AdminController
+class PropertyIndicatorHqController extends AdminController
 {
     /**
      * Title for current resource.
@@ -309,6 +309,7 @@ class PropertyIndicatorController extends AdminController
                 return $branch->branch_name;
             });
             $show->field('requested_date',__('Requested Date'));
+            $show->field('reported_date',__('Reported Date'));
             $show->field('cif_no',__('CIF No.'));
             $show->field('rm_name',__('RM Name'));
             $show->field('telephone',__('Telephone'));
@@ -320,10 +321,13 @@ class PropertyIndicatorController extends AdminController
             $show->field('building_status',__('Building Status'));
             $show->field('borey',__('Borey')); 
             $show->field('no_floor',__('No. of floor'));
-            $show->field('land_titletype',__('Land Titil'));
+            $show->field('land_titletype',__('Land Title Type'));
             $show->field('land_titleno',__('Lang Title No'));
             $show->field('land_size',__('Land Size'));
+            $show->field('land_value_per_sqm',__('Land Value per Sqm'));
             $show->field('building_size',__('Building Size'));
+            $show->field('building_value_per_sqm',__('Building Value per Sqm'));
+            $show->field('property_value',__('Property Value'));
         // });    
         // $show->column(1/2, function($show){
             $show->field('customer_name',__('Customer Name'));
@@ -387,10 +391,7 @@ class PropertyIndicatorController extends AdminController
             $form->text('access_road_name', __('Access Road Name'));//->rules('required');
             $form->text('borey', __('Borey'));//->rules('required');
             $form->text('land_titleno', __('Land title No'));//->rules('required');
-            $form->html('<br>');
-           
-
-           
+            $form->text('building_size', __('Building Size'));//->rules('required');
             $form->text('collateral_owner', __('Collateral Owner'));//->rules('required');
             //select province 
             $form->select('province', __('Province'))->options(function(){
@@ -405,20 +406,17 @@ class PropertyIndicatorController extends AdminController
                 $form->html('<br>');
                 $form->html('<br>');
                 $form->html('<br>');
-                $form->html('<br>');
-                $form->html('<br>');
+              
+                $form->date('reported_date',__('Reported Date'));
                 $form->html('<br>'); 
                 $form->html('<br>');
-                $form->html('<br>');
-              
-              
-              
+             
                 $form->text('telephone', __('Telephone'));//->rules('required');
                 $form->select('location_type', __('Location Type'))->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area']);
                 $form->select('property_type', __('Property Type'))->options(['Vacant Land'=>'Vacant Land','Flat House'=>'Flat House','Cando'=>'Cando']);
                 $form->text('no_floor', __('No. of Floor'));//->rules('required');
                 $form->text('land_size', __('Land Size'));//->rules('required');
-                $form->html('<br>');
+                $form->text('building_value_per_sqm', __('Building Value per Sqm'));
                 
                 $form->text('customer_name', __('Customer Name '));//->rules('required');
                 // select district get data from province
@@ -442,10 +440,8 @@ class PropertyIndicatorController extends AdminController
                 $form->select('type_ofaccess_road', __('Type of Access Road'))->options(['NR'=>'National Road', 'Paved Road'=>'Paved Road','Paved Road'=>'Paved Road']);
                 $form->text('building_status', __('Building Status'));//->rules('required');
                 $form->select('land_titletype', __('Land Title Type'))->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
-                $form->text('building_size', __('Building Size'));//->rules('required');
-                $form->html('<br>'); 
-              
-                // commune  get data from district
+                $form->text('land_value_per_sqm', __('Land Value per Sqm'));
+                $form->text('property_value', __('Property Value'));
                 $form->text('client_contact', __('Client Contact No. '));//->rules('required');
                 $form->select('commune_id', __('Commune/ Sangkat'))->load('village_id', env('APP_URL') . '/public/api/village');
                

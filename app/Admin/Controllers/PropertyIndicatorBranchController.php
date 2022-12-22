@@ -18,7 +18,7 @@ use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Illuminate\Support\Facades\Request;
 use Encore\Admin\Layout\Content;
-class PropertyIndicatorController extends AdminController
+class PropertyIndicatorBranchController extends AdminController 
 {
     /**
      * Title for current resource.
@@ -387,7 +387,7 @@ class PropertyIndicatorController extends AdminController
             $form->text('access_road_name', __('Access Road Name'));//->rules('required');
             $form->text('borey', __('Borey'));//->rules('required');
             $form->text('land_titleno', __('Land title No'));//->rules('required');
-            $form->html('<br>');
+           
            
 
            
@@ -418,8 +418,7 @@ class PropertyIndicatorController extends AdminController
                 $form->select('property_type', __('Property Type'))->options(['Vacant Land'=>'Vacant Land','Flat House'=>'Flat House','Cando'=>'Cando']);
                 $form->text('no_floor', __('No. of Floor'));//->rules('required');
                 $form->text('land_size', __('Land Size'));//->rules('required');
-                $form->html('<br>');
-                
+               
                 $form->text('customer_name', __('Customer Name '));//->rules('required');
                 // select district get data from province
                 $form->select('district_id', __('District/ Khan'))->load('commune_id', env('APP_URL') . '/public/api/commune');
@@ -443,7 +442,7 @@ class PropertyIndicatorController extends AdminController
                 $form->text('building_status', __('Building Status'));//->rules('required');
                 $form->select('land_titletype', __('Land Title Type'))->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
                 $form->text('building_size', __('Building Size'));//->rules('required');
-                $form->html('<br>'); 
+               
               
                 // commune  get data from district
                 $form->text('client_contact', __('Client Contact No. '));//->rules('required');
