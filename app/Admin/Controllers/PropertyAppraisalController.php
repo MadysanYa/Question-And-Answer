@@ -173,8 +173,8 @@ class PropertyAppraisalController extends AdminController
             
             $form->text('telephone', __('Telephone'));
             $form->date('report_date', __('Report Date'));
-            $form->text('location_type', __('Location Type'));
-            $form->text('property_type', __('Property Type'));
+            $form->select('location_type', __('Location Type'))->options(['Residential Area'=>'Residential Area']);
+            $form->select('property_type', __('Property Type'))->options(['Vacant Land'=>'Vacant Land', 'Flat House'=>'Flat House', 'Link House'=>'Link House', 'Villa'=>'Villa']);
             $form->text('no_of_floor', __('No Of Floor'));
             $form->text('land_size', __('Land Size'));
             $form->text('building_size_by_measure', __('Building Size By Measure'));  
@@ -193,10 +193,10 @@ class PropertyAppraisalController extends AdminController
                 $form->html('<br>');
                 
             
-            $form->text('information_type', __('Information Type'));
-            $form->text('type_of_access_road', __('Type Of Access Road'));
+            $form->select('information_type', __('Information Type'))->options(['Indication'=>'Indication', ]);
+            $form->select('type_of_access_road', __('Type Of Access Road'))->options(['Boulevard'=>'Boulevard','National Road'=>'National Road' ]);
             $form->text('building_status', __('Building Status'));
-            $form->text('land_title_type', __('Land Title Type'));
+            $form->select('land_title_type', __('Land Title Type'))->options(['Hard Title'=>'Hard Title','Soft Title'=>'Soft Title']);
             $form->text('land_size_by_measurement', __('Land Size by Measurement'));
             $form->text('customer_name', __('Customer Name'));
                // District  
