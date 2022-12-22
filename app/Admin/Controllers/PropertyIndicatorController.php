@@ -366,21 +366,11 @@ class PropertyIndicatorController extends AdminController
             $form->text('cif_no', __('CIF No.'))->rules('required');
             $form->text('loan_officer', __('Loan Officer'))->rules('required');
            
-<<<<<<< HEAD
             $form->text('reference',  __('Property Reference '))->value('PR22-00000');
 
             // test
             // $form->text()->orderBy('id','asc');
 
-=======
-            $form->text('reference', __('Property Reference '))->value('PR22-00000');//->as(function($id){
-                  //$id = PropertyIndicator::get('id')->first();
-                 //return $id+1;
-               
-       
-              // });
-           
->>>>>>> d24ffd6d3ac5292a86a934d9f8b720d916f1e43d
             $form->text('access_name', __('Access Road Name'))->rules('required');
             $form->text('borey', __('Borey'))->rules('required');
             $form->text('land_titleno', __('Land title No'))->rules('required');
@@ -420,7 +410,7 @@ class PropertyIndicatorController extends AdminController
                 
                 $form->text('customer_name', __('Customer Name '))->rules('required');
                 // select district get data from province
-                $form->select('district_id', __('District/Khan'))->load('commune_id', '../../api/commune');
+                $form->select('district_id', __('District/ Khan'))->load('commune_id', '../../api/commune');
                 $form->text('altitude', __('Altitude'))->rules('required');
                 $form->text('remark', __('Remark'))->rules('required');
                 });
@@ -448,7 +438,7 @@ class PropertyIndicatorController extends AdminController
               
                 // commune  get data from district
                 $form->text('client_contact', __('client Contact No. '))->rules('required');
-                $form->select('commune_id', __('Commune/Sangkat'))->load('village_id', '../../api/village');
+                $form->select('commune_id', __('Commune/ Sangkat'))->load('village_id', '../../api/village');
                
                 $form->text('latitude', __('Latitude'))->rules('required');
                 

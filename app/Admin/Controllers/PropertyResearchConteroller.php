@@ -192,7 +192,10 @@ class PropertyResearchConteroller extends AdminController
     {
         $form = new Form(new PropertyResearch());
         $form->column(1/3, function ($form){
-            $form->display('id', 'Identification');
+            $form->text('property_reference', 'Reference')->value(function(){
+                $id = PropertyResearch::all()->pluck('id')->first();
+                return $id + 1;
+            });
             $form->select('information_type', __('Information Type'))->options(['Indication'=>'Indication','feacbook'=>'Feacbook']);
             // Admin::html('<h1>Testing</h1>');
             // $form->text('property_reference', __('Property Reference'));

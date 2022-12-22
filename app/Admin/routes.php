@@ -16,14 +16,13 @@ Admin::routes();
         $router->resource('property_indicator',  PropertyIndicatorController::class);
         $router->resource('property_appraisals', PropertyAppraisalController::class);
         $router->resource('branches', BranchController::class);
-        $router->resource('region', RegionController::class);
+        $router->resource('regions', RegionController::class);
         $router->resource('provinces', ProvincesController::class);
         $router->resource('districts', DistrictController::class);
         $router->resource('communes', CommuneController::class);
         $router->resource('villages', VillageController::class);
-
- 
+        $router->resource('information_types', InformationTypeController::class);
+        $router->resource('property_types', PropertyTypeController::class);
         
-
     });
 
