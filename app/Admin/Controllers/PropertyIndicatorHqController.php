@@ -6,7 +6,9 @@ use App\Models\Branch;
 use App\Models\Commune;
 
 use App\Models\District;
+use App\Models\InformationType;
 use App\Models\PropertyIndicator;
+use App\Models\PropertyType;
 use App\Models\Province;
 use App\Models\Region;
 use App\Models\Village;
@@ -165,7 +167,15 @@ class PropertyIndicatorHqController extends AdminController
 
        // });
         $grid->column('collateral_owner',__('Owner'));
-        $grid->column('information_type',__('Type'));
+        $grid->column('information_type',__('Type'))->display(function(){
+            $id = $this->information_type;
+            $information_type= InformationType::where('id', $id)->first();
+            if($information_type == null) $informationname= '';
+            else
+            $informationname = $information_type->information_type_name;
+            return $informationname;
+        });
+      
         $grid->column('property_address',__('Property Address '))->display(function(){
             $province_id = $this->province;
             $province = Province::where('id', $province_id)->first();
@@ -313,11 +323,17 @@ class PropertyIndicatorHqController extends AdminController
             $show->field('cif_no',__('CIF No.'));
             $show->field('rm_name',__('RM Name'));
             $show->field('telephone',__('Telephone'));
-            $show->field('information_type',__('Information Type'));
+            $show->field('information_type',__('Information Type'))->as(function($id){
+                $informationtype = InformationType::where('id', $id)->first();
+                return  $informationtype->information_type_name;
+            });
             $show->field('location_type',__('Location Type'));
             $show->field('type_ofaccess_road',__('Type of Access Road'));
             $show->field('access_road_name',__('Access Road Name'));
-            $show->field('property_type',__('Property Type'));
+            $show->field('property_type',__('Property Type'))->as(function($id){
+                $propertytype = PropertyType::where('id', $id)->first();
+                return  $propertytype->property_type_name;
+            });
             $show->field('building_status',__('Building Status'));
             $show->field('borey',__('Borey')); 
             $show->field('no_floor',__('No. of floor'));
@@ -412,8 +428,10 @@ class PropertyIndicatorHqController extends AdminController
                 $form->html('<br>');
              
                 $form->text('telephone', __('Telephone'));//->rules('required');
-                $form->select('location_type', __('Location Type'))->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area']);
-                $form->select('property_type', __('Property Type'))->options(['Vacant Land'=>'Vacant Land','Flat House'=>'Flat House','Cando'=>'Cando']);
+                $form->select('location_type', __('Location Type'))->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area','Agricultural Area'=>'Agricultural Area']);
+                $form->select('property_type', __('Property Type'))->options(function(){
+                    return PropertyType::all()->pluck('property_type_name','id');
+                });
                 $form->text('no_floor', __('No. of Floor'));//->rules('required');
                 $form->text('land_size', __('Land Size'));//->rules('required');
                 $form->text('building_value_per_sqm', __('Building Value per Sqm'));
@@ -436,7 +454,9 @@ class PropertyIndicatorHqController extends AdminController
                 $form->html('<br>');
                 $form->html('<br>'); 
               
-                $form->select('information_type', __('Information Type'))->options(['Indication'=>'Indication','feacbook'=>'Feacbook']);
+                $form->select('information_type', __('Information Type'))->options(function(){
+                    return InformationType::all()->pluck('information_type_name','id');
+                });
                 $form->select('type_ofaccess_road', __('Type of Access Road'))->options(['NR'=>'National Road', 'Paved Road'=>'Paved Road','Paved Road'=>'Paved Road']);
                 $form->text('building_status', __('Building Status'));//->rules('required');
                 $form->select('land_titletype', __('Land Title Type'))->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
