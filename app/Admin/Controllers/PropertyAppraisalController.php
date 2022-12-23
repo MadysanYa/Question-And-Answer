@@ -79,7 +79,11 @@ class PropertyAppraisalController extends AdminController
 
         $show->field('id', __('ID'))->sortable();
         $show->field('region', __('Region'));
-        $show->field('branch',__('Branch'));
+        $show->field('branch',__('Branch'))->as(function($branch_code){
+            $branch = Branch::where('branch_code', $branch_code)->first();
+            if($branch == null) return '';
+            return '(' . $branch->branch_code . ') ' . $branch->branch_name;
+        });
         $show->field('cif', __('CIF No'));
         $show->field('loan_officer', __('Loan Officer'));
         $show->field('request_date', __('Request Date'));
@@ -168,8 +172,7 @@ class PropertyAppraisalController extends AdminController
             $form->html('<br>');
             $form->html('<br>');
             $form->html('<br>');
-            $form->html('<br>');
-       
+        
             
             $form->text('telephone', __('Telephone'));
             $form->date('report_date', __('Report Date'));
@@ -186,12 +189,16 @@ class PropertyAppraisalController extends AdminController
         });
 
             $form->column(1/3,function($form){
+
+                $form->button('SEARCH', __('SEARCH'));
                 $form->html('<br>');
                 $form->html('<br>');
                 $form->html('<br>');
                 $form->html('<br>');
                 $form->html('<br>');
-                
+                $form->html('<br>');
+                $form->html('<br>');
+             
             
             $form->select('information_type', __('Information Type'))->options(['Indication'=>'Indication', ]);
             $form->select('type_of_access_road', __('Type Of Access Road'))->options(['Boulevard'=>'Boulevard','National Road'=>'National Road','Paved Road'=>'Paved Road', 'Unpaved Road'=>'Unpaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road' ]);
@@ -201,8 +208,7 @@ class PropertyAppraisalController extends AdminController
             $form->text('customer_name', __('Customer Name'));
                // District  
                $form->select('district_id', __('District'))->load('commune_id', '../../api/commune');
-               // commune
-                  $form->select('commune_id', __('Commune'))->load('village_id', '../../api/village');
+         
             $form->text('building_size_per_sqm', __('Building Size Per Sqm'));          
             $form->text('altitude', __('Altitude'));
             $form->button('swot_analyze', __('Swot Analyze'));
