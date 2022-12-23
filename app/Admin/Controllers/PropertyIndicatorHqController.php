@@ -8,6 +8,7 @@ use App\Models\Commune;
 use App\Models\District;
 use App\Models\InformationType;
 use App\Models\PropertyIndicator;
+use App\Models\PropertyIndicatorHq;
 use App\Models\PropertyType;
 use App\Models\Province;
 use App\Models\Region;
@@ -20,6 +21,7 @@ use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Illuminate\Support\Facades\Request;
 use Encore\Admin\Layout\Content;
+
 class PropertyIndicatorHqController extends AdminController
 {
     /**
@@ -177,7 +179,7 @@ class PropertyIndicatorHqController extends AdminController
         });
       
         $grid->column('property_address',__('Property Address '))->display(function(){
-            $province_id = $this->province;
+            $province_id = $this->province_id;
             $province = Province::where('id', $province_id)->first();
             $distict_id = $this->district_id;
             $district = District::where('id', $distict_id)->first();
@@ -310,13 +312,15 @@ class PropertyIndicatorHqController extends AdminController
             // });
 
             // $show->field('geo_code',__('Geo Code'));
-            $show->field('region',__('Region'))->as(function($region_id){
-                $region = Region::where('id', $region_id)->first();
-                return $region->region_name;
+            $show->field('region',__('Region'))->as(function($province_id){
+                $province = Region::where('id', $province_id)->first();
+                return $province->province_name;
             });
-            $show->field('branch',__('Branch'))->as(function($branch_id){
-                $branch = Branch::where('id', $branch_id)->first();
-                return $branch->branch_name;
+            $show->field('branch',__('Branch'))->as(function($branch_code,){
+                $branch = Branch::where('branch_code', $branch_code )->first();
+                if($branch == null) return '';
+                return '('. $branch->branch_code .')'. $branch->branch_name;
+              
             });
             $show->field('requested_date',__('Requested Date'));
             $show->field('reported_date',__('Reported Date'));
@@ -328,7 +332,7 @@ class PropertyIndicatorHqController extends AdminController
                 return  $informationtype->information_type_name;
             });
             $show->field('location_type',__('Location Type'));
-            $show->field('type_ofaccess_road',__('Type of Access Road'));
+            $show->field('type_of_access_road',__('Type of Access Road'));
             $show->field('access_road_name',__('Access Road Name'));
             $show->field('property_type',__('Property Type'))->as(function($id){
                 $propertytype = PropertyType::where('id', $id)->first();
@@ -336,9 +340,9 @@ class PropertyIndicatorHqController extends AdminController
             });
             $show->field('building_status',__('Building Status'));
             $show->field('borey',__('Borey')); 
-            $show->field('no_floor',__('No. of floor'));
-            $show->field('land_titletype',__('Land Title Type'));
-            $show->field('land_titleno',__('Lang Title No'));
+            $show->field('no_of_floor',__('No. of floor'));
+            $show->field('land_title_type',__('Land Title Type'));
+            $show->field('land_title_no',__('Lang Title No'));
             $show->field('land_size',__('Land Size'));
             $show->field('land_value_per_sqm',__('Land Value per Sqm'));
             $show->field('building_size',__('Building Size'));
@@ -347,8 +351,8 @@ class PropertyIndicatorHqController extends AdminController
         // });    
         // $show->column(1/2, function($show){
             $show->field('customer_name',__('Customer Name'));
-            $show->field('client_contact',__('Cliend Contact'));
-            $show->field('province',__('Province'))->as(function($province_id){
+            $show->field('client_contact_no',__('Cliend Contact No.'));
+            $show->field('province_id',__('Province'))->as(function($province_id){
                 $province = Province::where('id', $province_id)->first();
                 return $province->province_name;
             });
@@ -391,26 +395,24 @@ class PropertyIndicatorHqController extends AdminController
                 return Province::all()->pluck('province_name','id');
             });
             $form->select('branch',__('Branch'))->options(function(){
-                return Branch::all()->pluck('branch_name','id');
+                return Branch::all()->pluck('branch_name','branch_code');
             });
             $form->date('requested_date', __('Requested Date'));//->rules('required');
             $form->text('cif_no', __('CIF No.'));//->rules('required');
             $form->text('rm_name', __('RM Name'));//->rules('required');
            
-            $form->text('property_reference', __('Property Reference '))->value('PR22-00000');//->as(function($id){
-                  //$id = PropertyIndicator::get('id')->first();
-                 //return $id+1;
-               
-       
-              // });
+            $form->text('property_reference', __('Property Reference '));//->value(function($id){
+            //     $id = PropertyIndicatorHq::all()->pluck('id')->first();
+            //     return $id;
+            // });
            
             $form->text('access_road_name', __('Access Road Name'));//->rules('required');
             $form->text('borey', __('Borey'));//->rules('required');
-            $form->text('land_titleno', __('Land title No'));//->rules('required');
+            $form->text('land_title_no', __('Land title No'));//->rules('required');
             $form->text('building_size', __('Building Size'));//->rules('required');
             $form->text('collateral_owner', __('Collateral Owner'));//->rules('required');
             //select province 
-            $form->select('province', __('Province'))->options(function(){
+            $form->select('province_id', __('Province'))->options(function(){
                 return Province::all()->pluck('province_name', 'id');
                 })->load('district_id', env('APP_URL') . '/public/api/district');
                 // village get data from commune
@@ -422,7 +424,6 @@ class PropertyIndicatorHqController extends AdminController
                 $form->html('<br>');
                 $form->html('<br>');
                 $form->html('<br>');
-              
                 $form->date('reported_date',__('Reported Date'));
                 $form->html('<br>'); 
                 $form->html('<br>');
@@ -432,7 +433,7 @@ class PropertyIndicatorHqController extends AdminController
                 $form->select('property_type', __('Property Type'))->options(function(){
                     return PropertyType::all()->pluck('property_type_name','id');
                 });
-                $form->text('no_floor', __('No. of Floor'));//->rules('required');
+                $form->text('no_of_floor', __('No. of Floor'));//->rules('required');
                 $form->text('land_size', __('Land Size'));//->rules('required');
                 $form->text('building_value_per_sqm', __('Building Value per Sqm'));
                 
@@ -457,12 +458,12 @@ class PropertyIndicatorHqController extends AdminController
                 $form->select('information_type', __('Information Type'))->options(function(){
                     return InformationType::all()->pluck('information_type_name','id');
                 });
-                $form->select('type_ofaccess_road', __('Type of Access Road'))->options(['NR'=>'National Road', 'Paved Road'=>'Paved Road','Paved Road'=>'Paved Road']);
+                $form->select('type_of_access_road', __('Type of Access Road'))->options(['NR'=>'National Road', 'Paved Road'=>'Paved Road','Paved Road'=>'Paved Road']);
                 $form->text('building_status', __('Building Status'));//->rules('required');
-                $form->select('land_titletype', __('Land Title Type'))->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
+                $form->select('land_title_type', __('Land Title Type'))->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
                 $form->text('land_value_per_sqm', __('Land Value per Sqm'));
                 $form->text('property_value', __('Property Value'));
-                $form->text('client_contact', __('Client Contact No. '));//->rules('required');
+                $form->text('client_contact_no', __('Client Contact No. '));//->rules('required');
                 $form->select('commune_id', __('Commune/ Sangkat'))->load('village_id', env('APP_URL') . '/public/api/village');
                
                 $form->text('latitude', __('Latitude'));//->rules('required');
