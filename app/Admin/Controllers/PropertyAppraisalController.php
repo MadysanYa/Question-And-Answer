@@ -182,8 +182,10 @@ class PropertyAppraisalController extends AdminController
             $form->text('land_size', __('Land Size'));
             $form->text('building_size_by_measure', __('Building Size By Measure'));  
             $form->text('collateral_owner', __('Collateral Owner'));  
+          
             $form->select('province', __('Province'))->options(function(){
                 return Province::all()->pluck('province_name','id');})->load('district_id', '../../api/district');
+
             $form->select('village_id', __('Village'));
             $form->file('photo', __('Photo'));   
         });
