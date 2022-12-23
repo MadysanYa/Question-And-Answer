@@ -61,7 +61,7 @@ class PropertyAppraisalController extends AdminController
     /**
      * Make a show builder.
      *
-     * @param mixed $id\
+     * @param mixed $id
      * @return Show
      */
     protected function detail($id)
@@ -145,7 +145,7 @@ class PropertyAppraisalController extends AdminController
 
                 $form->select('branch_id',__('Branch'))->options(function(){
                     return Branch::all()->pluck('branch_name','branch_code');});
-                                        
+
             $form->text('cif', __('CIF No.'));
             $form->text('loan_officer', __('Loan Officer'));
             $form->date('request_date', __('Request Date'));
