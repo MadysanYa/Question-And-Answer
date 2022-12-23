@@ -13,9 +13,9 @@ Admin::routes();
 
         $router->resource('/', ApplicationController::class);
         $router->resource('property_researchs', PropertyResearchConteroller::class);
-       // $router->resource('property_indicator',  PropertyIndicatorController::class);
-        $router->resource('property_indicator_hqs',  PropertyIndicatorHqController::class);
-        $router->resource('property_indicator_branchs',  PropertyIndicatorBranchController::class);
+        $router->resource('property_indicator',  PropertyIndicatorController::class);
+       //$router->resource('property_indicator_hqs',  PropertyIndicatorHqController::class);
+       
         $router->resource('property_appraisals', PropertyAppraisalController::class);
         $router->resource('branches', BranchController::class);
         $router->resource('regions', RegionController::class);
