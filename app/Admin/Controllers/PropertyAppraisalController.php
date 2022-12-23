@@ -143,7 +143,7 @@ class PropertyAppraisalController extends AdminController
                 return Province::all()->pluck('province_name', 'id');})->load('district_id', '../../api/district');
 
                 $form->select('branch',__('Branch'))->options(function(){
-                    return Branch::all()->pluck('branch_name','id');});
+                    return Branch::all()->pluck('branch_name','branch_code');});
                     
             $form->text('cif', __('CIF No.'));
             $form->text('loan_officer', __('Loan Officer'));
@@ -173,8 +173,8 @@ class PropertyAppraisalController extends AdminController
             
             $form->text('telephone', __('Telephone'));
             $form->date('report_date', __('Report Date'));
-            $form->select('location_type', __('Location Type'))->options(['Residential Area'=>'Residential Area']);
-            $form->select('property_type', __('Property Type'))->options(['Vacant Land'=>'Vacant Land', 'Flat House'=>'Flat House', 'Link House'=>'Link House', 'Villa'=>'Villa']);
+            $form->select('location_type', __('Location Type'))->options(['Residential Area'=>'Residential Area','Commercial Area'=>'Commercial Area', 'Industrial Area'=>'Industrial Area', 'Agricultural Area'=>'Agricultural Area']);
+            $form->select('property_type', __('Property Type'))->options(['Vacant Land'=>'Vacant Land', 'Flat House'=>'Flat House', 'Link House'=>'Link House', 'Villa'=>'Villa', 'Flay house from 1st floor up'=>'Flay house from 1st floor up', 'Twin Villa'=>'Twin Villa','Commercial Bulding'=>'Commercial Bulding', 'Hotel'=>'Hotel','Guesthouse'=>'Guesthouse', 'Warehouse'=>'Warehouse', 'Factory'=>'Factory', 'Condo'=>'Condo', 'Apartment'=>'Apartment','Shop'=>'Shop', 'Gas Station'=>'Gas Station', 'Wooden House'=>'Wooden House','Building'=>'Building','Shop House'=>'Shop House' ]);
             $form->text('no_of_floor', __('No Of Floor'));
             $form->text('land_size', __('Land Size'));
             $form->text('building_size_by_measure', __('Building Size By Measure'));  
@@ -194,7 +194,7 @@ class PropertyAppraisalController extends AdminController
                 
             
             $form->select('information_type', __('Information Type'))->options(['Indication'=>'Indication', ]);
-            $form->select('type_of_access_road', __('Type Of Access Road'))->options(['Boulevard'=>'Boulevard','National Road'=>'National Road' ]);
+            $form->select('type_of_access_road', __('Type Of Access Road'))->options(['Boulevard'=>'Boulevard','National Road'=>'National Road','Paved Road'=>'Paved Road', 'Unpaved Road'=>'Unpaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road' ]);
             $form->text('building_status', __('Building Status'));
             $form->select('land_title_type', __('Land Title Type'))->options(['Hard Title'=>'Hard Title','Soft Title'=>'Soft Title']);
             $form->text('land_size_by_measurement', __('Land Size by Measurement'));
