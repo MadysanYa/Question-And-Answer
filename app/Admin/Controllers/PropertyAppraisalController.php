@@ -148,6 +148,8 @@ class PropertyAppraisalController extends AdminController
 
                 $form->select('branch',__('Branch'))->options(function(){
                     return Branch::all()->pluck('branch_name','branch_code');});
+
+                    
                     
             $form->text('cif', __('CIF No.'));
             $form->text('loan_officer', __('Loan Officer'));
@@ -159,7 +161,7 @@ class PropertyAppraisalController extends AdminController
             $form->text('land_value_persqm', __('Land Value Persqm'));
             $form->text('property_value', __('Property Value'));
             $form->text('clinet_contact_no', __('Clinet Contact No'));
-            $form->select('commune_id', __('Commune'))->load('village_id', '../../api/village');
+            $form->select('commune_id', __('Commune / Sangkat'))->load('village_id', '../../api/village');
             $form->text('latitude', __('Latitude'));
             $form->text('remark', __('Remark'));     
         });
