@@ -46,7 +46,7 @@ class PropertyAppraisalController extends AdminController
                $grid = new Grid(new PropertyAppraisal());        
 
                $grid->column('id', __('ID'));               
-               $grid->column('reference', __('reference'));               
+               $grid->column('reference_id', __('reference_id'));               
                $grid->column('collateral_owner', __('Owner'));
                $grid->column('type', __('Type'));
                $grid->column('property_address', __('Property Address'));
@@ -89,7 +89,7 @@ class PropertyAppraisalController extends AdminController
             return '(' . $branch->branch_code . ') ' . $branch->branch_name;
         });
 
-        $show->field('reference', __('reference'));
+        $show->field('reference_id', __('reference_id'));
         $show->field('cif', __('CIF No'));
         $show->field('loan_officer', __('Loan Officer'));
         $show->field('request_date', __('Request Date'));
@@ -124,7 +124,7 @@ class PropertyAppraisalController extends AdminController
         $show->field('building_size_per_sqm', __('Building Size Per Sqm'));
         $show->field('district_khan', __('District Khan'));
         $show->field('altitude', __('Altitude'));
-        $show->field('reference', __('Reference'));  
+        $show->field('reference_id', __('Reference'));  
 
         return $show;
     }
@@ -148,7 +148,7 @@ class PropertyAppraisalController extends AdminController
             $form->select('branch_code',__('Branch'))->options(function(){
                  return Branch::all()->pluck('branch_name','branch_code');});
 
-            $form->text('reference', __('Reference'));
+            $form->text('reference_id', __('Reference'));
             $form->text('cif', __('CIF No'));
             $form->text('loan_officer', __('Loan Officer'));
             $form->date('request_date', __('Request Date'));

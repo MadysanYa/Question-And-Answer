@@ -18,6 +18,7 @@ Admin::routes();
        
         $router->resource('property_appraisals', PropertyAppraisalController::class);
         $router->resource('branches', BranchController::class);
+        $router->resource('reference_id', ReferenceController::class);
         $router->resource('regions', RegionController::class);
         $router->resource('provinces', ProvincesController::class);
         $router->resource('districts', DistrictController::class);
