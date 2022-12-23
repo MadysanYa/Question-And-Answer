@@ -230,7 +230,7 @@ class PropertyIndicatorController extends AdminController
         $grid->column('client_contact_no',__('Cliend Contact No.')); 
         $grid->column('province_id',__('Province'))->display(function($province_id){
             $province = Province::where('id', $province_id)->first();
-            return $province->province_name;
+            return $province->province_name;     
         }); 
         $grid->column('district_id',__('District/Khan'))->display(function($district_id){
             $district = District::where('id', $district_id)->first();
