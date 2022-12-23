@@ -70,6 +70,7 @@ class RegionController extends AdminController
         $form = new Form(new Region());
     //    $form->text('region_code', __('Region Code'))->rules('required');
         $form->text('region_name', __('Region Name'));
+       
         
         $form->footer(function ($footer) {
             // disable reset btn
