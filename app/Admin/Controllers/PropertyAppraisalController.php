@@ -45,7 +45,7 @@ class PropertyAppraisalController extends AdminController
 
                $grid = new Grid(new PropertyAppraisal());        
 
-               $grid->column('id', __('id'));              
+               $grid->column('id', __('ID'));              
                $grid->column('reference', __('reference'));               
                $grid->column('collateral_owner', __('Owner'));
                $grid->column('type', __('Type'));
@@ -78,7 +78,11 @@ class PropertyAppraisalController extends AdminController
         // $show->field('created_at', __('Created at'));  
 
         $show->field('id', __('ID'))->sortable();
-        $show->field('region', __('Region'));
+        $show->field('region', __('Region'))->as(function($region){
+            $province = Province::where('id', $region)->first();
+            if($province == null) return '';
+            return $province->province_name ;
+        });
         $show->field('branch',__('Branch'))->as(function($branch_code){
             $branch = Branch::where('branch_code', $branch_code)->first();
             if($branch == null) return '';
@@ -144,7 +148,7 @@ class PropertyAppraisalController extends AdminController
         $form->column(1/3,function($form){
             
             $form->select('region', __('Region'))->options(function(){
-                return Province::all()->pluck('province_name', 'id');})->load('district_id', '../../api/district');
+                return Province::all()->pluck('province_name', 'id');})->load('district_id', env('APP_URL') . '/public/api/district');
 
                 $form->select('branch',__('Branch'))->options(function(){
                     return Branch::all()->pluck('branch_name','branch_code');});
@@ -161,7 +165,7 @@ class PropertyAppraisalController extends AdminController
             $form->text('land_value_persqm', __('Land Value Persqm'));
             $form->text('property_value', __('Property Value'));
             $form->text('clinet_contact_no', __('Clinet Contact No'));
-            $form->select('commune_id', __('Commune / Sangkat'))->load('village_id', '../../api/village');
+            $form->select('commune_id', __('Commune / Sangkat'))->load('village_id', env('APP_URL') . '/public/api/village');
             $form->text('latitude', __('Latitude'));
             $form->text('remark', __('Remark'));     
         });
@@ -170,11 +174,7 @@ class PropertyAppraisalController extends AdminController
 
 
         $form->column(1/3,function($form){
-            $form->html('<br>');
-            $form->html('<br>');
-            $form->html('<br>');
-            $form->html('<br>');
-        
+      
             
             $form->text('telephone', __('Telephone'));
             $form->date('report_date', __('Report Date'));
@@ -186,7 +186,7 @@ class PropertyAppraisalController extends AdminController
             $form->text('collateral_owner', __('Collateral Owner'));  
           
             $form->select('province', __('Province'))->options(function(){
-                return Province::all()->pluck('province_name','id');})->load('district_id', '../../api/district');
+                return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
 
             $form->select('village_id', __('Village'));
             $form->file('photo', __('Photo'));   
@@ -194,16 +194,7 @@ class PropertyAppraisalController extends AdminController
 
             $form->column(1/3,function($form){
 
-                $form->button('SEARCH', __('SEARCH'));
-                $form->html('<br>');
-                $form->html('<br>');
-                $form->html('<br>');
-                $form->html('<br>');
-                $form->html('<br>');
-                $form->html('<br>');
-                $form->html('<br>');
              
-            
             $form->select('information_type', __('Information Type'))->options(['Indication'=>'Indication', ]);
             $form->select('type_of_access_road', __('Type Of Access Road'))->options(['Boulevard'=>'Boulevard','National Road'=>'National Road','Paved Road'=>'Paved Road', 'Unpaved Road'=>'Unpaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road' ]);
             $form->text('building_status', __('Building Status'));
@@ -211,7 +202,8 @@ class PropertyAppraisalController extends AdminController
             $form->text('land_size_by_measurement', __('Land Size by Measurement'));
             $form->text('customer_name', __('Customer Name'));
                // District  
-               $form->select('district_id', __('District'))->load('commune_id', '../../api/commune');
+               $form->select('district_id', __('District'))->load('commune_id', env('APP_URL') . '/public/api/commune');
+
          
             $form->text('building_size_per_sqm', __('Building Size Per Sqm'));          
             $form->text('altitude', __('Altitude'));
