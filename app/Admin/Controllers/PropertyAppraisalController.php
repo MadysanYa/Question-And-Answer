@@ -8,6 +8,7 @@ use App\Models\Commune;
 use App\Models\District;
 use App\Models\Region;
 use App\Models\Village;
+use App\Models\File;
 use App\Models\PropertyAppraisal;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -180,7 +181,7 @@ class PropertyAppraisalController extends AdminController
                 return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
 
             $form->select('village_id', __('Village'));
-            $form->file('photo', __('Photo'));   
+            $form->multipleFile('photo', __('Photo'));   
         });
 
             $form->column(1/3,function($form){
