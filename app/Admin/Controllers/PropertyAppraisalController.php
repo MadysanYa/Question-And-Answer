@@ -144,17 +144,17 @@ class PropertyAppraisalController extends AdminController
         $form->column(1/3,function($form){
             
             $form->select('region', __('Region'))->options(function(){
-                return Province::all()->pluck('province_name', 'id');})->load('branch_code', env('APP_URL') . '/public/api/branch');
+                return Province::all()->pluck('province_name','id');})->load('branch_code', env('APP_URL') . '/public/api/branch');
 
-            $form->select('branch_code',__('Branch'))->options(function(){
-                 return Branch::all()->pluck('branch_name','branch_code');});
+            $form->select('branch_code',__('Branch')) ->options(function(){
+               return Branch::all()->pluck('branch_name','branch_code');});
 
          
 
             //Sum id
             $form->text('reference_id', __('Property Reference'))->value(function(){
                 $id = PropertyAppraisal::all()->last();
-                return $id->id + 1 ;
+                return $id-> id+1 ;
             });
 
 
