@@ -2,7 +2,6 @@
 
 namespace App\Admin\Controllers;
 
-
 use App\Models\Province;
 use App\Models\Branch;
 use App\Models\Commune;
