@@ -84,7 +84,7 @@ class PropertyAppraisalController extends AdminController
             if($province == null) return '';
             return $province->province_name ;
         });
-        $show->field('branch',__('Branch'))->as(function($branch_code){
+        $show->field('branch_code',__('Branch'))->as(function($branch_code){
             $branch = Branch::where('branch_code', $branch_code)->first();
             if($branch == null) return '';
             return '(' . $branch->branch_code . ') ' . $branch->branch_name;
@@ -151,13 +151,13 @@ class PropertyAppraisalController extends AdminController
 
             $form->text('reference_id', __('Reference'));
             $form->text('cif', __('CIF No'));
-            $form->text('loan_officer', __('Loan Officer'));
+            $form->text('loan_officer', __('RM Name'));
             $form->date('request_date', __('Request Date'));
             $form->text('property_reference', __('Property Reference'));
             $form->text('access_road_name', __('Access Road Name'));
             $form->text('borey', __('Borey'));
-            $form->text('land_title_no', __('Land title no'));
-            $form->text('land_value_persqm', __('Land Value Persqm'));
+            $form->text('land_title_no', __('Land Title No'));
+            $form->text('land_value_persqm', __('Land Value per Sqm'));
             $form->text('property_value', __('Property Value'));
             $form->text('clinet_contact_no', __('Clinet Contact No'));
             $form->select('commune_id', __('Commune / Sangkat'))->load('village_id', env('APP_URL') . '/public/api/village');
@@ -172,7 +172,7 @@ class PropertyAppraisalController extends AdminController
             $form->date('report_date', __('Report Date'));
             $form->select('location_type', __('Location Type'))->options(['Residential Area'=>'Residential Area','Commercial Area'=>'Commercial Area', 'Industrial Area'=>'Industrial Area', 'Agricultural Area'=>'Agricultural Area']);
             $form->select('property_type', __('Property Type'))->options(['Vacant Land'=>'Vacant Land', 'Flat House'=>'Flat House', 'Link House'=>'Link House', 'Villa'=>'Villa', 'Flay house from 1st floor up'=>'Flay house from 1st floor up', 'Twin Villa'=>'Twin Villa','Commercial Bulding'=>'Commercial Bulding', 'Hotel'=>'Hotel','Guesthouse'=>'Guesthouse', 'Warehouse'=>'Warehouse', 'Factory'=>'Factory', 'Condo'=>'Condo', 'Apartment'=>'Apartment','Shop'=>'Shop', 'Gas Station'=>'Gas Station', 'Wooden House'=>'Wooden House','Building'=>'Building','Shop House'=>'Shop House' ]);
-            $form->text('no_of_floor', __('No Of Floor'));
+            $form->text('no_of_floor', __('No Oof Floor'));
             $form->text('land_size', __('Land Size'));
             $form->text('building_size_by_measure', __('Building Size By Measure'));  
             $form->text('collateral_owner', __('Collateral Owner'));  
@@ -186,16 +186,16 @@ class PropertyAppraisalController extends AdminController
 
             $form->column(1/3,function($form){
              
-            $form->select('information_type', __('Information Type'))->options(['Indication'=>'Indication', ]);
+            $form->select('information_type', __('Information Type'))->options(['Indication'=>'Indication', 'Asking'=>'Asking','Website'=>'Website','Social Media'=>'Social Media','Government'=>'Government','Real Estate Agent'=>'Real Estate Agent','Property Owner'=>'Property Owner','Others'=>'Others' ]);
             $form->select('type_of_access_road', __('Type Of Access Road'))->options(['Boulevard'=>'Boulevard','National Road'=>'National Road','Paved Road'=>'Paved Road', 'Unpaved Road'=>'Unpaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road' ]);
             $form->text('building_status', __('Building Status'));
             $form->select('land_title_type', __('Land Title Type'))->options(['Hard Title'=>'Hard Title','Soft Title'=>'Soft Title']);
             $form->text('land_size_by_measurement', __('Land Size by Measurement'));
+            $form->text('building_size_per_sqm', __('Building Size per Sqm'));  
             $form->text('customer_name', __('Customer Name'));
                // District  
                $form->select('district_id', __('District'))->load('commune_id', env('APP_URL') . '/public/api/commune');
-         
-            $form->text('building_size_per_sqm', __('Building Size Per Sqm'));          
+                             
             $form->text('altitude', __('Altitude'));
             $form->button('swot_analyze', __('Swot Analyze'));
 
