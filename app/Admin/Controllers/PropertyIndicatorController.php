@@ -2,17 +2,17 @@
 
 namespace App\Admin\Controllers;
 
+
+use App\Models\Province;
 use App\Models\Branch;
 use App\Models\Commune;
-
 use App\Models\District;
-use App\Models\InformationType;
-use App\Models\PropertyIndicator;
-use App\Models\PropertyIndicatorBranch;
-use App\Models\PropertyType;
-use App\Models\Province;
 use App\Models\Region;
 use App\Models\Village;
+use App\Models\File;
+use App\Models\InformationType;
+use App\Models\PropertyIndicator;
+use App\Models\PropertyType;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Form\Field\Button;
@@ -161,9 +161,7 @@ class PropertyIndicatorController extends AdminController
 		
 		$grid->model()->orderBy('id','asc');
         $grid->column('id', __('No.'))->asc()->sortable();
-		$grid->column('property_reference', __('Reference'));//->as(function($id){
-         //  $id = PropertyIndicator::get('id')->first();
-         //  return $id+1;
+		$grid->column('property_reference', __('Reference'));
         
 
        // });
@@ -204,8 +202,17 @@ class PropertyIndicatorController extends AdminController
         });
         $grid->column('cif_no',__('Geo Code'));
         // 14-12-22  start project
-        $grid->column('region',__('Region'));  
-        $grid->column('branch',__('Branch')); 
+        $grid->column('region',__('Region'))->Display(function($province_id){
+            $province = Province::where('id', $province_id)->first();
+            return $province->province_name;     
+        }); 
+        $grid->column('branch_id',__('Branch'))->Display(function($branch_id){
+            $branch = Branch::where('id', $branch_id)->first();
+            if($branch == null) $branch_name='';
+            else
+            $branch_name= $branch->branch_name;
+            return $branch_name;      
+        });  
         $grid->column('requested_date',__('Requested Date')); 
         $grid->column('reported_date',__('Reported Date'));
         $grid->column('cif_no',__('CIF No.')); 
@@ -228,11 +235,11 @@ class PropertyIndicatorController extends AdminController
         $grid->column('property_value',__('Property Value'));
         $grid->column('customer_name',__('Customer Name')); 
         $grid->column('client_contact_no',__('Cliend Contact No.')); 
-        $grid->column('province_id',__('Province'))->display(function($province_id){
+        $grid->column('province_id',__('Province'))->Display(function($province_id){
             $province = Province::where('id', $province_id)->first();
             return $province->province_name;     
         }); 
-        $grid->column('district_id',__('District/Khan'))->display(function($district_id){
+        $grid->column('district_id',__('District/Khan'))->Display(function($district_id){
             $district = District::where('id', $district_id)->first();
             return $district->district_name;
         }); 
@@ -326,9 +333,10 @@ class PropertyIndicatorController extends AdminController
             // });
 
             // $show->field('geo_code',__('Geo Code'));
-            $show->field('region',__('Region'))->as(function($region_id){
-                $region = Region::where('id', $region_id)->first();
-                return $region->region_name;
+            $show->field('region',__('Region'))->as(function($region){
+                $province = Province::where('id', $region)->first();
+                if($province == null) return '';
+                return $province->province_name ;
             });
             $show->field('branch',__('Branch'))->as(function($branch_code,){
                 $branch = Branch::where('branch_code', $branch_code )->first();
@@ -400,18 +408,19 @@ class PropertyIndicatorController extends AdminController
         $form = new Form(new PropertyIndicator());
         $form->column(1/3, function ($form){
             
-            $form->select('region',__('Region'))->options(function(){
-                return Province::all()->pluck('province_name','id');
-            });
-            $form->select('branch',__('Branch'))->options(function(){
-                return Branch::all()->pluck('branch_name','branch_code');
-            });
+            $form->select('region', __('Region'))->options(function(){
+                return Province::all()->pluck('province_name', 'id');})->load('branch_code', env('APP_URL') . '/public/api/branch');
+
+            $form->select('branch_code',__('Branch'))->options(function(){
+                 return Branch::all()->pluck('branch_name','branch_code');});
+
             
             $form->date('requested_date', __('Requested Date'));//->rules('required');
             $form->text('cif_no', __('CIF No.'));//->rules('required');
             $form->text('rm_name', __('RM Name'));//->rules('required');
-           
-            $form->text('property_reference', __('Property Reference '))->value(function(){
+           //Sum id
+            $form->text('property_reference', __('Property Reference '))
+            ->value(function(){
                 $id = PropertyIndicator::all()->last();
                 return $id->id + 1 ;
             });
@@ -420,11 +429,7 @@ class PropertyIndicatorController extends AdminController
             $form->text('access_road_name', __('Access Road Name'));//->rules('required');
             $form->text('borey', __('Borey'));//->rules('required');
             $form->text('land_title_no', __('Land title No'));//->rules('required');
-           
-           
-
-           
-            $form->text('collateral_owner', __('Collateral Owner'));//->rules('required');
+           $form->text('collateral_owner', __('Collateral Owner'));//->rules('required');
             //select province 
             $form->select('province_id', __('Province'))->options(function(){
                 return Province::all()->pluck('province_name', 'id');
