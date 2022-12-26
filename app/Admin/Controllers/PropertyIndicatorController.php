@@ -206,7 +206,7 @@ class PropertyIndicatorController extends AdminController
             $province = Province::where('id', $province_id)->first();
             return $province->province_name;     
         }); 
-        $grid->column('branch_code',__('Branch'))->Display(function($branch_id){
+        $grid->column('branch',__('Branch'))->Display(function($branch_id){
             $branch = Branch::where('id', $branch_id)->first();
             if($branch == null) $branch_name='';
             else
