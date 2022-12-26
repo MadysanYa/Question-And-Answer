@@ -206,55 +206,55 @@ class PropertyIndicatorController extends AdminController
             $province = Province::where('id', $province_id)->first();
             return $province->province_name;     
         }); 
-        $grid->column('branch_id',__('Branch'))->Display(function($branch_id){
+        $grid->column('branch_code',__('Branch'))->Display(function($branch_id){
             $branch = Branch::where('id', $branch_id)->first();
             if($branch == null) $branch_name='';
             else
             $branch_name= $branch->branch_name;
             return $branch_name;      
         });  
-        $grid->column('requested_date',__('Requested Date')); 
-        $grid->column('reported_date',__('Reported Date'));
-        $grid->column('cif_no',__('CIF No.')); 
-        $grid->column('rm_name',__('RM Name')); 
-        $grid->column('telephone',__('Telephone')); 
-        $grid->column('information_type',__('Information Type')); 
-        $grid->column('location_type',__('Location Type')); 
-        $grid->column('type_of_access_road',__('Type of Access Road')); 
-        $grid->column('access_name',__('Access Road Name')); 
-        $grid->column('property_type',__('Property Type')); 
-        $grid->column('building_status',__('Building Status')); 
-        $grid->column('borey',__('Borey')); 
-        $grid->column('no_of_floor',__('No. of floor')); 
-        $grid->column('land_title_type',__('Land Titil')); 
-        $grid->column('land_title_no',__('Lang Title No')); 
-        $grid->column('land_size',__('Land Size')); 
-        $grid->column('land_value_per_sqm',__('Land Value per Sqm'));
-        $grid->column('building_size',__('Building Size')); 
-        $grid->column('building_value_per_sqm',__('Building Value per Sqm'));
-        $grid->column('property_value',__('Property Value'));
-        $grid->column('customer_name',__('Customer Name')); 
-        $grid->column('client_contact_no',__('Cliend Contact No.')); 
-        $grid->column('province_id',__('Province'))->Display(function($province_id){
-            $province = Province::where('id', $province_id)->first();
-            return $province->province_name;     
-        }); 
-        $grid->column('district_id',__('District/Khan'))->Display(function($district_id){
-            $district = District::where('id', $district_id)->first();
-            return $district->district_name;
-        }); 
-        $grid->column('commune_id',__('Commune/Sangkat'))->Display(function($comune_id){
-            $commune = Commune::where('id', $comune_id)->first();
-            return $commune->commune_name;
-        }); 
-        $grid->column('village_id',__('Village'))->Display(function($village_id){
-            $village = Village::where('id', $village_id)->first();
-            return $village->village_name   ;
-        });
-        $grid->column('altitude',__('Altitude')); 
-        $grid->column('latitude',__('Latitude')); 
-        $grid->column('photo',__('Photo')); 
-        $grid->column('remark',__('Remark')); 
+        // $grid->column('requested_date',__('Requested Date')); 
+        // $grid->column('reported_date',__('Reported Date'));
+        // $grid->column('cif_no',__('CIF No.')); 
+        // $grid->column('rm_name',__('RM Name')); 
+        // $grid->column('telephone',__('Telephone')); 
+        // $grid->column('information_type',__('Information Type')); 
+        // $grid->column('location_type',__('Location Type')); 
+        // $grid->column('type_of_access_road',__('Type of Access Road')); 
+        // $grid->column('access_name',__('Access Road Name')); 
+        // $grid->column('property_type',__('Property Type')); 
+        // $grid->column('building_status',__('Building Status')); 
+        // $grid->column('borey',__('Borey')); 
+        // $grid->column('no_of_floor',__('No. of floor')); 
+        // $grid->column('land_title_type',__('Land Titil')); 
+        // $grid->column('land_title_no',__('Lang Title No')); 
+        // $grid->column('land_size',__('Land Size')); 
+        // $grid->column('land_value_per_sqm',__('Land Value per Sqm'));
+        // $grid->column('building_size',__('Building Size')); 
+        // $grid->column('building_value_per_sqm',__('Building Value per Sqm'));
+        // $grid->column('property_value',__('Property Value'));
+        // $grid->column('customer_name',__('Customer Name')); 
+        // $grid->column('client_contact_no',__('Cliend Contact No.')); 
+        // $grid->column('province_id',__('Province'))->Display(function($province_id){
+        //     $province = Province::where('id', $province_id)->first();
+        //     return $province->province_name;     
+        // }); 
+        // $grid->column('district_id',__('District/Khan'))->Display(function($district_id){
+        //     $district = District::where('id', $district_id)->first();
+        //     return $district->district_name;
+        // }); 
+        // $grid->column('commune_id',__('Commune/Sangkat'))->Display(function($comune_id){
+        //     $commune = Commune::where('id', $comune_id)->first();
+        //     return $commune->commune_name;
+        // }); 
+        // $grid->column('village_id',__('Village'))->Display(function($village_id){
+        //     $village = Village::where('id', $village_id)->first();
+        //     return $village->village_name   ;
+        // });
+        // $grid->column('altitude',__('Altitude')); 
+        // $grid->column('latitude',__('Latitude')); 
+        // $grid->column('photo',__('Photo')); 
+        // $grid->column('remark',__('Remark')); 
       
        /* $grid->column('name', __('Contrac Title'))->sortable()->modal('', function($model){
 			
