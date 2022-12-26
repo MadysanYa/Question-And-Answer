@@ -84,7 +84,7 @@ class PropertyAppraisalController extends AdminController
             if($province == null) return '';
             return $province->province_name ;
         });
-        $show->field('branch',__('Branch'))->as(function($branch_code){
+        $show->field('branch_code',__('Branch'))->as(function($branch_code){
             $branch = Branch::where('branch_code', $branch_code)->first();
             if($branch == null) return '';
             return '(' . $branch->branch_code . ') ' . $branch->branch_name;
