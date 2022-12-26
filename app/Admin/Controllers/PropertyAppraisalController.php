@@ -149,7 +149,15 @@ class PropertyAppraisalController extends AdminController
             $form->select('branch_code',__('Branch'))->options(function(){
                  return Branch::all()->pluck('branch_name','branch_code');});
 
-            $form->text('reference_id', __('Reference'));
+         
+
+            //Sum id
+            $form->text('reference_id', __('Property Reference'))->value(function(){
+                $id = PropertyAppraisal::all()->last();
+                return $id->id + 1 ;
+            });
+
+
             $form->text('cif', __('CIF No'));
             $form->text('loan_officer', __('RM Name'));
             $form->date('request_date', __('Request Date'));
