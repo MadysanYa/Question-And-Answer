@@ -5,16 +5,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class PropertyAppraisal extends Model
 {
-    public function setphotoAttribute($pictures)
+    public function setPhotosAttribute($photos)
     {
-        if (is_string($pictures)) {
-            $this->attributes['photo'] = json_encode($pictures);
+        if (is_array($photos)) {
+            $this->attributes['photos'] = json_encode($photos);
         }
     }
 
-    public function getphotoAttribute($pictures)
+    public function getPhotosAttribute($photos)
     {
-        return json_decode($pictures, true);
+        return json_decode($photos, true);
     }
 
 }

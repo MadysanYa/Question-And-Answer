@@ -189,7 +189,7 @@ class PropertyAppraisalController extends AdminController
                 return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
 
             $form->select('village_id', __('Village'));
-            $form->multipleFile('photo', __('Photo'));   
+            $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
         });
 
             $form->column(1/3,function($form){
