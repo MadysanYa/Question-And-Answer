@@ -333,16 +333,17 @@ class PropertyIndicatorController extends AdminController
             // });
 
             // $show->field('geo_code',__('Geo Code'));
-            $show->field('region',__('Region'))->as(function($region){
+            $show->field('region', __('Region'))->as(function($region){
                 $province = Province::where('id', $region)->first();
                 if($province == null) return '';
                 return $province->province_name ;
             });
-            $show->field('branch',__('Branch'))->as(function($branch_code,){
-                $branch = Branch::where('branch_code', $branch_code )->first();
+            $show->field('branch_code',__('Branch'))->as(function($branch_code){
+                $branch = Branch::where('branch_code', $branch_code)->first();
                 if($branch == null) return '';
-                return '('. $branch->branch_code .') '. $branch->branch_name;
+                return '(' . $branch->branch_code . ') ' . $branch->branch_name;
             });
+    
             $show->field('requested_date',__('Requested Date'));
             $show->field('cif_no',__('CIF No.'));
             $show->field('rm_name',__('RM Name'));
