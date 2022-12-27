@@ -14,7 +14,7 @@ class PropertyAppraisal extends Model
 
     public function getPhotosAttribute($photos)
     {
-        return json_decode($photos, true);
+        return json_encode($photos, true);
     }
 
 }
