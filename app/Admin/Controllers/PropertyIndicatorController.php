@@ -205,12 +205,12 @@ class PropertyIndicatorController extends AdminController
             $province = Province::where('id', $province_id)->first();
             return $province->province_name;     
         }); 
-        $grid->column('branch',__('Branch'))->Display(function($branch_id){
-            $branch = Branch::where('id', $branch_id)->first();
-            if($branch == null) $branch_name='';
-            else
-            $branch_name= $branch->branch_name;
-            return $branch_name;      
+        $grid->column('branch_code',__('Branch'))->Display(function($branch_code){
+            $branch = Branch::where('branch_code', $branch_code)->first();
+            if($branch == null) return '';
+            // else
+            // $branch_name= $branch->branch_name;
+            return $branch->branch_name;      
         });  
         // $grid->column('requested_date',__('Requested Date')); 
         // $grid->column('reported_date',__('Reported Date'));
@@ -421,7 +421,8 @@ class PropertyIndicatorController extends AdminController
            //Sum id
             $form->text('property_reference', __('Property Reference '))->value(function(){
                 $id = PropertyIndicator::all()->last();
-                return $id == null? 1 : $id->id + 1 ;
+               return  $id->id + 1 ;//$id == null? 1 :
+               
             });
                  
            
@@ -475,7 +476,6 @@ class PropertyIndicatorController extends AdminController
                 $form->select('commune_id', __('Commune/ Sangkat'))->load('village_id', env('APP_URL') . '/public/api/village');
                
                 $form->text('latitude', __('Latitude'));//->rules('required');
-                $form->button('add_property',__('Add Property'));
                 
                 });
                 
@@ -506,7 +506,7 @@ class PropertyIndicatorController extends AdminController
             // disable `Continue editing` checkbox
             $footer->disableEditingCheck();
             // disable `Continue Creating` checkbox
-            $footer->disableCreatingCheck();
+            //$footer->disableCreatingCheck();
         
             
         

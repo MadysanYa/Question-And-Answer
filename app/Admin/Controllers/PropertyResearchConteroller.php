@@ -110,14 +110,16 @@ class PropertyResearchConteroller extends AdminController
         $grid->column('property_reference')->display(function () {
             $village_id = $this->village;
             $village = Village::where('id', $village_id)->first();
-
+            if($village == null) $villageName = '';
+            else 
+            $villageName = $village->village_name ;
             // $commune_id = $this->commune;
             // $commune = Commune::where('id', $commune_id)->first();
 
             // $province_id = $this->province;
             // $province = Province::where('id', $province_id)->first();
 
-            return $village->village_name;
+            return $villageName;
             // return $village->village_name . ', ' . $this->commune->$commune_name . ', ' . $this->$province->province_name;
         });
 
@@ -193,8 +195,9 @@ class PropertyResearchConteroller extends AdminController
         $form = new Form(new PropertyResearch());
         $form->column(1/3, function ($form){
             $form->text('property_reference', 'Reference')->value(function(){
-                $id = PropertyResearch::all()->pluck('id')->first();
-                return $id + 1;
+                $id = PropertyResearch::all()->last();
+                return $id->id + 1;
+              
             });
             $form->select('information_type', __('Information Type'))->options(['Indication'=>'Indication','feacbook'=>'Feacbook']);
             // Admin::html('<h1>Testing</h1>');
