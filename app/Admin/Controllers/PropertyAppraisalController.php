@@ -114,7 +114,7 @@ class PropertyAppraisalController extends AdminController
         $show->field('collateral_owner', __('Owner'));
         $show->field('provinces', __('Province'));
         $show->field('village', __('Village'));
-        $show->field('photo',__('Photo'));
+        $show->field('photos',__('Photo'));
         $show->field('information_type', __('Information Type'));
         $show->field('type_of_access_road', __('Type Of Access Road'));
         $show->field('building_status', __('Building Status'));
@@ -166,7 +166,7 @@ class PropertyAppraisalController extends AdminController
             $form->text('clinet_contact_no', __('Clinet Contact No'));
 
             $form->select('commune_id', __('Commune / Sangkat'))->options(function(){
-                return Commune::all()->pluck('commune_name');})->load('village_id', env('APP_URL') . '/public/api/village');
+                return Commune::all()->pluck('commune_name','id');})->load('village_id', env('APP_URL') . '/public/api/village');
 
                         
            
@@ -190,10 +190,12 @@ class PropertyAppraisalController extends AdminController
                 return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
 
             $form->select('village_id', __('Village'))->options(function(){
-                return Village::all()->pluck('village_name');});
+                return Village::all()->pluck('village_name','id');});
 
-
+            $form->file('photo', __('Front Photo'))->removable()->uniqueName();
             $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
+            
+
         });
 
             $form->column(1/3,function($form){
@@ -211,7 +213,7 @@ class PropertyAppraisalController extends AdminController
 
             // District  
                $form->select('district_id', __('District'))->options(function(){
-               return District::all()->pluck('district_name');})->load('commune_id', env('APP_URL') . '/public/api/commune');
+               return District::all()->pluck('district_name','id');})->load('commune_id', env('APP_URL') . '/public/api/commune');
                              
             $form->text('altitude', __('Altitude'));
             $form->button('swot_analyze', __('Swot Analyze'));
