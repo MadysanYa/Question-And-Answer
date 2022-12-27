@@ -5,17 +5,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class PropertyIndicator extends Model
 {
-	public function getPhotoAttribute($file){
-		//if(is_string($file)){
-			return json_decode($file,true);
-		//}
-		//return $file;
-	}
-	
-	public function setPhotoAttribute($file){
-		if(is_array($file)){
-			$this->attributes['file'] = json_encode($file);
-		}
-	}
+	public function setPhotosAttribute($photos)
+    {
+        if (is_array($photos)) {
+            $this->attributes['photos'] = json_encode($photos);
+        }
+    }
+
+    public function getPhotosAttribute($photos)
+    {
+        return json_decode($photos, true);
+    }
 }
 
