@@ -419,10 +419,9 @@ class PropertyIndicatorController extends AdminController
             $form->text('cif_no', __('CIF No.'));//->rules('required');
             $form->text('rm_name', __('RM Name'));//->rules('required');
            //Sum id
-            $form->text('property_reference', __('Property Reference '))
-            ->value(function(){
+            $form->text('property_reference', __('Property Reference '))->value(function(){
                 $id = PropertyIndicator::all()->last();
-                return $id->id + 1 ;
+                return $id == null? 1 : $id->id + 1 ;
             });
                  
            
@@ -440,14 +439,7 @@ class PropertyIndicatorController extends AdminController
             
         });    
             $form->column(1/3, function ($form){
-                $form->html('<br>');
-                $form->html('<br>');
-                $form->html('<br>');
-                $form->html('<br>');
-                $form->html('<br>');
-                $form->html('<br>'); 
-                $form->html('<br>');
-                $form->html('<br>');
+              
               
               
               
@@ -467,12 +459,7 @@ class PropertyIndicatorController extends AdminController
                 });
                 
                 $form->column(1/3, function ($form){
-                $form->html('<br>');
-                $form->html('<br>');
-                $form->html('<br>');
-                $form->html('<br>');
-                $form->html('<br>');
-                $form->html('<br>'); 
+               
               
                 $form->select('information_type', __('Information Type'))->options(function(){
                     return InformationType::all()->pluck('information_type_name','id');
