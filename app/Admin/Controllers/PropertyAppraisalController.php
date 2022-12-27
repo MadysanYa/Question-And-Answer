@@ -52,6 +52,7 @@ class PropertyAppraisalController extends AdminController
                $grid->column('type', __('Type'));
                $grid->column('property_address', __('Property Address'));
                $grid->column('geo_code', __('Geo Code'));
+               $grid->column('report_date', __('Report Date'));
 
              
         $grid->quickSearch('cif','region','province','remark');
@@ -104,7 +105,6 @@ class PropertyAppraisalController extends AdminController
         $show->field('latitude', __('Latitude'));
         $show->field('remark', __('Remark'));
         $show->field('telephone', __('Telephone'));
-        $show->field('report_date', __('Report Date'));
         $show->field('report_date', __('Report Date'));
         $show->field('location_type', __('Location Type'));
         $show->field('property_type', __('Property Type'));
