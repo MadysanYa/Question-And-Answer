@@ -94,7 +94,6 @@ class PropertyAppraisalController extends AdminController
         $show->field('cif', __('CIF No'));
         $show->field('loan_officer', __('Loan Officer'));
         $show->field('request_date', __('Request Date'));
-        $show->field('property_reference', __('Property Reference'));
         $show->field('access_road_name', __('Access Road Name'));
         $show->field('borey', __('Borey'));
         $show->field('land_title_no', __('Land title no'));
@@ -125,7 +124,7 @@ class PropertyAppraisalController extends AdminController
         $show->field('building_size_per_sqm', __('Building Size Per Sqm'));
         $show->field('district_khan', __('District Khan'));
         $show->field('altitude', __('Altitude'));
-        $show->field('reference_id', __('Reference'));  
+     
 
         return $show;
     }
@@ -146,29 +145,31 @@ class PropertyAppraisalController extends AdminController
             $form->select('region', __('Region'))->options(function(){
                 return Province::all()->pluck('province_name','id');})->load('branch_code', env('APP_URL') . '/public/api/branch');
 
-            $form->select('branch_code',__('Branch')) ->options(function(){
+            $form->select('branch_code',__('Branch'))->options(function(){
                return Branch::all()->pluck('branch_name','branch_code');});
-
-         
 
             //Sum id
             $form->text('reference_id', __('Property Reference'))->value(function(){
                 $id = PropertyAppraisal::all()->last();
-                return $id-> id+1 ;
+                return 'PL22-00' . $id-> id+1 ;
             });
 
 
             $form->text('cif', __('CIF No'));
             $form->text('loan_officer', __('RM Name'));
             $form->date('request_date', __('Request Date'));
-            $form->text('property_reference', __('Property Reference'));
             $form->text('access_road_name', __('Access Road Name'));
             $form->text('borey', __('Borey'));
             $form->text('land_title_no', __('Land Title No'));
             $form->text('land_value_persqm', __('Land Value per Sqm'));
             $form->text('property_value', __('Property Value'));
             $form->text('clinet_contact_no', __('Clinet Contact No'));
-            $form->select('commune_id', __('Commune / Sangkat'))->load('village_id', env('APP_URL') . '/public/api/village');
+
+            $form->select('commune_id', __('Commune / Sangkat'))->options(function(){
+                return Commune::all()->pluck('commune_name');})->load('village_id', env('APP_URL') . '/public/api/village');
+
+                        
+           
             $form->text('latitude', __('Latitude'));
             $form->text('remark', __('Remark'));     
         });
@@ -188,7 +189,10 @@ class PropertyAppraisalController extends AdminController
             $form->select('province', __('Province'))->options(function(){
                 return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
 
-            $form->select('village_id', __('Village'));
+            $form->select('village_id', __('Village'))->options(function(){
+                return Village::all()->pluck('village_name');});
+
+
             $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
         });
 
@@ -201,8 +205,13 @@ class PropertyAppraisalController extends AdminController
             $form->text('land_size_by_measurement', __('Land Size by Measurement'));
             $form->text('building_size_per_sqm', __('Building Size per Sqm'));  
             $form->text('customer_name', __('Customer Name'));
-               // District  
-               $form->select('district_id', __('District'))->load('commune_id', env('APP_URL') . '/public/api/commune');
+              
+            
+        
+
+            // District  
+               $form->select('district_id', __('District'))->options(function(){
+               return District::all()->pluck('district_name');})->load('commune_id', env('APP_URL') . '/public/api/commune');
                              
             $form->text('altitude', __('Altitude'));
             $form->button('swot_analyze', __('Swot Analyze'));
