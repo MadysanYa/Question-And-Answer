@@ -14,7 +14,7 @@ class PropertyIndicator extends Model
 
     public function getPhotosAttribute($photos)
     {
-        return json_encode($photos, true);  
+        return json_decode($photos, true);  
     }
 }
 

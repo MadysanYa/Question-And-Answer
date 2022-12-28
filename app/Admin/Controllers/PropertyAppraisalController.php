@@ -9,6 +9,7 @@ use App\Models\District;
 use App\Models\Region;
 use App\Models\Village;
 use App\Models\File;
+use App\Models\Borey;
 use App\Models\PropertyAppraisal;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
