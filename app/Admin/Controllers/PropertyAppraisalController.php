@@ -43,7 +43,7 @@ class PropertyAppraisalController extends AdminController
      
     protected function grid()   
     {
-  
+        
 
                $grid = new Grid(new PropertyAppraisal());        
 
@@ -51,7 +51,7 @@ class PropertyAppraisalController extends AdminController
                $grid->column('reference_id', __('Reference ID'));        
                $grid->column('collateral_owner', __('Owner'))->sortable();
                $grid->column('type', __('Type'));
-               $grid->column('province', __('province'))->filter($this->convertToArray(Province::all(['id', 'province_name'])));
+               $grid->column('region', __('Region'))->filter($this->convertToArray(Province::all(['id', 'province_name'])));
                $grid->column('property_address', __('Property Address'));
                $grid->column('geo_code', __('Geo Code'));
                $grid->column('report_date', __('Report Date'));
