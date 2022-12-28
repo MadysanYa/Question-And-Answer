@@ -51,7 +51,14 @@ class PropertyAppraisalController extends AdminController
                $grid->column('reference_id', __('Reference ID'));        
                $grid->column('collateral_owner', __('Owner'))->sortable();
                $grid->column('type', __('Type'));
-               $grid->column('region', __('Region'))->filter($this->convertToArray(Province::all(['id', 'province_name'])));
+               $grid->column('region', __('Region'))->filter($this->convertToArray(Province::all(['id', 'province_name'])))->Display(function($province_name){
+                $province = Province::where('id', $province_name)->first();
+                if($province == null) return '';
+               return $province->province_name;}); 
+             /*   $grid->column('province',__('Province'))->Display(function($province_name){
+                     $province = Province::where('id', $province_name)->first();
+                     if($province == null) return '';
+                    return $province->province_name;});  */
                $grid->column('property_address', __('Property Address'));
                $grid->column('geo_code', __('Geo Code'));
                $grid->column('report_date', __('Report Date'));
