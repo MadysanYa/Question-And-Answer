@@ -160,7 +160,9 @@ class PropertyAppraisalController extends AdminController
             $form->text('loan_officer', __('RM Name'));
             $form->date('request_date', __('Request Date'));
             $form->text('access_road_name', __('Access Road Name'));
-            $form->text('borey', __('Borey'));
+            $form->select('borey', __('Borey'))->options(function(){
+                return Borey::all()->pluck('borey_name', 'id');
+            });//->rules('required');
             $form->text('land_title_no', __('Land Title No'));
             $form->text('land_value_persqm', __('Land Value per Sqm ($)'));
             $form->text('property_value', __('Property Value ($)'));
@@ -185,19 +187,6 @@ class PropertyAppraisalController extends AdminController
             $form->text('building_size_by_measure', __('Building Size By Measure (Sqm)'));  
             $form->text('collateral_owner', __('Collateral Owner'));  
           
-            $form->select('province', __('Province'))->options(function(){
-                return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
-                $form->select('district_id', __('District'))->options(function(){
-                    return District::all()->pluck('district_name','id');})->load('commune_id', env('APP_URL') . '/public/api/commune');
-            
-                $form->select('commune_id', __('Commune / Sangkat'))->options(function(){
-             return Commune::all()->pluck('commune_name','id');})->load('village_id', env('APP_URL') . '/public/api/village');
-    
-            
-
-            $form->select('village_id', __('Village'))->options(function(){
-                return Village::all()->pluck('village_name','id');});
-
             $form->image('frontphoto', __('Front Photo'))->removable()->uniqueName();
             $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
             
@@ -205,7 +194,19 @@ class PropertyAppraisalController extends AdminController
         });
 
             $form->column(1/3,function($form){
-             
+
+            $form->select('province', __('Province'))->options(function(){
+                return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
+            
+                $form->select('district_id', __('District'))->options(function(){
+                return District::all()->pluck('district_name','id');})->load('commune_id', env('APP_URL') . '/public/api/commune');
+            
+            $form->select('commune_id', __('Commune / Sangkat'))->options(function(){
+                return Commune::all()->pluck('commune_name','id');})->load('village_id', env('APP_URL') . '/public/api/village');         
+
+            $form->select('village_id', __('Village'))->options(function(){
+                return Village::all()->pluck('village_name','id');});
+ 
             $form->select('information_type', __('Information Type'))->options(['Indication'=>'Indication', 'Asking'=>'Asking','Website'=>'Website','Social Media'=>'Social Media','Government'=>'Government','Real Estate Agent'=>'Real Estate Agent','Property Owner'=>'Property Owner','Others'=>'Others' ]);
             $form->select('type_of_access_road', __('Type Of Access Road'))->options(['Boulevard'=>'Boulevard','National Road'=>'National Road','Paved Road'=>'Paved Road', 'Unpaved Road'=>'Unpaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road' ]);
             $form->text('building_status', __('Building Status (%)'));
