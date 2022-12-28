@@ -11,6 +11,7 @@ use App\Models\Village;
 use App\Models\File;
 use App\Models\Borey;
 use App\Models\PropertyAppraisal;
+use App\Models\InformationType;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -47,24 +48,61 @@ class PropertyAppraisalController extends AdminController
 
                $grid = new Grid(new PropertyAppraisal());        
 
-               $grid->column('id', __('ID'));                     //filter(['1' => 'PP', '2' => 'SR' ]);
+               $grid->model()->orderBy('id','asc');
+               $grid->column('id', __('No.'))->asc()->sortable();                   
                $grid->column('reference_id', __('Reference ID'));        
                $grid->column('collateral_owner', __('Owner'))->sortable();
-               $grid->column('type', __('Type'));
+               $grid->column('information_type',__('Type'))->display(function(){
+                $id = $this->information_type;
+                $information_type= InformationType::where('id', $id)->first();
+                if($information_type == null) $informationname= '';
+                else
+                $informationname = $information_type->information_type_name;
+                return $informationname;
+            });
+            $grid->column('property_address',__('Property Address '))->display(function(){
+                $province_id = $this->province_id;
+                $province = Province::where('id', $province_id)->first();
+                $distict_id = $this->district_id;
+                $district = District::where('id', $distict_id)->first();
+                $commune_id = $this->commune_id;
+                $commune = Commune::where('id', $commune_id)->first();
+                $village_id = $this->village_id;
+                $village = Village::where('id', $village_id)->first();
+    
+               // $distict = District::where('id', $distict_id)->first();
+                if($village == null) $villageName = '';
+                else 
+                $villageName = $village->village_name ;
+                if($commune == null) $communeName = '';
+                else 
+                $communeName = $commune->commune_name ;
+                if($district == null) $districtName = '';
+                else 
+                $districtName = $district->district_name ;
+                if($province == null) $provinceName = '';
+                else 
+                $provinceName= $province->province_name ;
+                return  $villageName . ' , ' . $communeName . ' , ' . $districtName . ' , ' .  $provinceName  ;
+               
+            });                                      //filter(['1' => 'PP', '2' => 'SR' ]);   
                $grid->column('region', __('Region'))->filter($this->convertToArray(Province::all(['id', 'province_name'])))->Display(function($province_name){
                 $province = Province::where('id', $province_name)->first();
                 if($province == null) return '';
-               return $province->province_name;}); 
-             /*   $grid->column('province',__('Province'))->Display(function($province_name){
-                     $province = Province::where('id', $province_name)->first();
-                     if($province == null) return '';
-                    return $province->province_name;});  */
+               return $province->province_name;  
+            }); 
+               
+               $grid->column('branch_code',__('Branch'))->filter($this->convertToArray(Branch::all(['id', 'branch_code'])))->Display(function($branch_code){
+                $branch = Branch::where('branch_code', $branch_code)->first();
+                if($branch == null) return '';
+                return $branch->branch_name;       
+            });
                $grid->column('property_address', __('Property Address'));
                $grid->column('geo_code', __('Geo Code'));
-               $grid->column('report_date', __('Report Date'));
+              // $grid->column('report_date', __('Report Date'));
 
              
-        $grid->quickSearch('telephone',);
+        $grid->quickSearch('id','telephone',);
       
         return $grid;
     }
@@ -76,12 +114,13 @@ class PropertyAppraisalController extends AdminController
         foreach($data as $item){
             //$provinceArray = array_merge($provinceArray, array($item->id => $item->province_name));
             $provinceArray[$item->id] = $item->province_name;
-        }
-
-        
+        }        
 
        return $provinceArray;
+       
     }
+
+    
 
     /**
      * Make a show builder.
