@@ -34,7 +34,7 @@ class BoreyController extends AdminController
 		
         $grid->disableExport();
         $grid->disableFilter();
-        $grid->quickSearch('id' , 'borey_name','pickup_number', 'remark','ext');
+        $grid->quickSearch('id','borey_name');
 
         return $grid;
     }
