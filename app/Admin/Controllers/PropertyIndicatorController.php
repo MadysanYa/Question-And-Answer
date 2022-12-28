@@ -235,22 +235,22 @@ class PropertyIndicatorController extends AdminController
         // $grid->column('property_value',__('Property Value ($)'));
         // $grid->column('customer_name',__('Customer Name')); 
         // $grid->column('client_contact_no',__('Cliend Contact No.')); 
-        // $grid->column('province_id',__('Province'))->Display(function($province_id){
-        //     $province = Province::where('id', $province_id)->first();
-        //     return $province->province_name;     
-        // }); 
-        // $grid->column('district_id',__('District/Khan'))->Display(function($district_id){
-        //     $district = District::where('id', $district_id)->first();
-        //     return $district->district_name;
-        // }); 
-        // $grid->column('commune_id',__('Commune/Sangkat'))->Display(function($comune_id){
-        //     $commune = Commune::where('id', $comune_id)->first();
-        //     return $commune->commune_name;
-        // }); 
-        // $grid->column('village_id',__('Village'))->Display(function($village_id){
-        //     $village = Village::where('id', $village_id)->first();
-        //     return $village->village_name   ;
-        // });
+        $grid->column('province_id',__('Province'))->Display(function($province_id){
+            $province = Province::where('id', $province_id)->first();
+            return $province->province_name;     
+        }); 
+        $grid->column('district_id',__('District/Khan'))->Display(function($district_id){
+            $district = District::where('id', $district_id)->first();
+            return $district->district_name;
+        }); 
+        $grid->column('commune_id',__('Commune/Sangkat'))->Display(function($comune_id){
+            $commune = Commune::where('id', $comune_id)->first();
+            return $commune->commune_name;
+        }); 
+        $grid->column('village_id',__('Village'))->Display(function($village_id){
+            $village = Village::where('id', $village_id)->first();
+            return $village->village_name   ;
+        });
         // $grid->column('longtitude',__('Longtitude')); 
         // $grid->column('latitude',__('Latitude')); 
         // $grid->column('front_photo',__('Fornt Photo'));
@@ -452,8 +452,7 @@ class PropertyIndicatorController extends AdminController
             // village get data from commune
             $form->select('village_id', __('Village'))->options(function(){
                     return Village::all()->pluck('villlage_name','id');});
-            $form->image('front_photo',__('Front Photo'));
-            $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
+            
             
         });    
             $form->column(1/3, function ($form){
@@ -474,6 +473,8 @@ class PropertyIndicatorController extends AdminController
                 // select district get data from province
                
                 $form->text('remark', __('Remark'));//->rules('required');
+                $form->image('front_photo',__('Front Photo'));
+            $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
                 });
                 
                 $form->column(1/3, function ($form){
