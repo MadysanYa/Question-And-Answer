@@ -9,5 +9,5 @@ class File extends Model
 }
 
 // To access thumbnail
-$photo->files('photos','photo');
-$photos->files('photo','Front photo');
+$photos->files('photos','photo');
+$frontphoto->files('frontphoto');
