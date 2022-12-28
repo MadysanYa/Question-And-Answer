@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Borey;
 use App\Models\Province;
 use App\Models\Branch;
 use App\Models\Commune;
@@ -20,6 +21,8 @@ use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Illuminate\Support\Facades\Request;
 use Encore\Admin\Layout\Content;
+
+
 class PropertyIndicatorController extends AdminController 
 {
     /**
@@ -208,8 +211,6 @@ class PropertyIndicatorController extends AdminController
         $grid->column('branch_code',__('Branch'))->Display(function($branch_code){
             $branch = Branch::where('branch_code', $branch_code)->first();
             if($branch == null) return '';
-            // else
-            // $branch_name= $branch->branch_name;
             return $branch->branch_name;      
         });  
         // $grid->column('requested_date',__('Requested Date')); 
@@ -252,7 +253,7 @@ class PropertyIndicatorController extends AdminController
         // });
         // $grid->column('longtitude',__('Longtitude')); 
         // $grid->column('latitude',__('Latitude')); 
-        // $grid->column('front_of_photo',__('Fornt of Photo'));
+        // $grid->column('front_photo',__('Fornt Photo'));
         // $grid->column('photo',__('Photo')); 
         // $grid->column('remark',__('Remark')); 
       
@@ -392,9 +393,9 @@ class PropertyIndicatorController extends AdminController
             });
             $show->field('longtitude',__('Altitude'));
             $show->field('latitude',__('Latitude'));
-            $show->field('front_of_photo',__('Front of Photo'));
-            $show->field('photos',__('Photo'));
-          
+            $show->field('front_photo',__('Front Photo'));
+           // $show->field('photos',__('Photo'));
+            $show->avatar('photos',__('Photo'))->file();
             $show->field('remark',__('Remark'));
             //    $show->field('updated_at', __('Updated at'));
             //    $show->field('created_at', __('Created at'));
@@ -422,19 +423,20 @@ class PropertyIndicatorController extends AdminController
                  return Branch::all()->pluck('branch_name','branch_code');});
 
             
-            $form->date('requested_date', __('Requested Date'));//->rules('required');
-            $form->text('cif_no', __('CIF No.'));//->rules('required');
+             $form->text('cif_no', __('CIF No.'));//->rules('required');
             $form->text('rm_name', __('RM Name'));//->rules('required');
            //Sum id
             $form->text('property_reference', __('Property Reference '))->value(function(){
                 $id = PropertyIndicator::all()->last();
-               return $id == null? 1 : 'PL22-00'. $id->id + 1 ;
+               return  'PL22-00'. $id->id + 1 ;//$id == null? 1 :
                
             });
                  
            
             $form->text('access_road_name', __('Access Road Name'));//->rules('required');
-            $form->text('borey', __('Borey'));//->rules('required');
+            $form->select('borey', __('Borey'))->options(function(){
+                return Borey::all()->pluck('borey_name', 'id');
+            });//->rules('required');
             $form->text('land_title_no', __('Land title No'));//->rules('required');
             $form->text('building_size', __('Building Size(​$)'));//->rules('required');
            $form->text('collateral_owner', __('Collateral Owner'));//->rules('required');
@@ -442,17 +444,23 @@ class PropertyIndicatorController extends AdminController
             $form->select('province_id', __('Province'))->options(function(){
                 return Province::all()->pluck('province_name', 'id');
                 })->load('district_id', env('APP_URL') . '/public/api/district');
-                // village get data from commune
-                $form->select('village_id', __('Village'))->options(function(){
+            $form->select('district_id', __('District/ Khan'))->options(function(){
+                    return District::all()->pluck('district_name','id');})->load('commune_id', env('APP_URL') . '/public/api/commune');
+            $form->select('commune_id', __('Commune/ Sangkat'))->options(function(){
+                        return Commune::all()->pluck('commune_name','id');})->load('village_id', env('APP_URL') . '/public/api/village');
+                      
+            // village get data from commune
+            $form->select('village_id', __('Village'))->options(function(){
                     return Village::all()->pluck('villlage_name','id');});
-                $form->file('front_of_photo',__('Front of Photo'));
-                $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
+            $form->image('front_photo',__('Front Photo'));
+            $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
             
         });    
             $form->column(1/3, function ($form){
               
               
-              
+                $form->date('requested_date', __('Requested Date'));//->rules('required');
+          
                 $form->date('reported_date',__('Reported Date'));
                 $form->text('telephone', __('Telephone'));//->rules('required');
                 $form->select('location_type', __('Location Type'))->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area','Agricultural Area'=>'Agricultural Area']);
@@ -464,9 +472,7 @@ class PropertyIndicatorController extends AdminController
                 $form->text('building_value_per_sqm', __('Building Value per Sqm ($)'));
                 $form->text('customer_name', __('Customer Name '));//->rules('required');
                 // select district get data from province
-                $form->select('district_id', __('District/ Khan'))->options(function(){
-                    return District::all()->pluck('district_name','id');})->load('commune_id', env('APP_URL') . '/public/api/commune');
-              
+               
                 $form->text('remark', __('Remark'));//->rules('required');
                 });
                 
@@ -487,9 +493,7 @@ class PropertyIndicatorController extends AdminController
               
                 // commune  get data from district
                 $form->text('client_contact_no', __('Client Contact No. '));//->rules('required');
-                $form->select('commune_id', __('Commune/ Sangkat'))->options(function(){
-                    return Commune::all()->pluck('commune_name','id');})->load('village_id', env('APP_URL') . '/public/api/village');
-                $form->text('longtitude', __('Longtitude'));//->rules('required');
+                  $form->text('longtitude', __('Longtitude'));//->rules('required');
                 $form->text('latitude', __('Latitude'));//->rules('required');
                 
                 });

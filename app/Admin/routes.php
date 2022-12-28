@@ -1,5 +1,6 @@
 <?php
 
+use App\Admin\Controllers\BoreyController;
 use Illuminate\Routing\Router;
 
 Admin::routes();
@@ -26,6 +27,7 @@ Admin::routes();
         $router->resource('villages', VillageController::class);
         $router->resource('information_types', InformationTypeController::class);
         $router->resource('property_types', PropertyTypeController::class);
+        $router->resource('boreys', BoreyController::class);
         
         
     });
