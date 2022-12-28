@@ -47,18 +47,33 @@ class PropertyAppraisalController extends AdminController
 
                $grid = new Grid(new PropertyAppraisal());        
 
-               $grid->column('id', __('ID'));               
-               $grid->column('reference_id', __('Reference ID'));               
-               $grid->column('collateral_owner', __('Owner'));
+               $grid->column('id', __('ID'));                     //filter(['1' => 'PP', '2' => 'SR' ]);
+               $grid->column('reference_id', __('Reference ID'));        
+               $grid->column('collateral_owner', __('Owner'))->sortable();
                $grid->column('type', __('Type'));
+               $grid->column('province', __('province'))->filter($this->convertToArray(Province::all(['id', 'province_name'])));
                $grid->column('property_address', __('Property Address'));
                $grid->column('geo_code', __('Geo Code'));
                $grid->column('report_date', __('Report Date'));
 
              
-        $grid->quickSearch('cif','region','province','remark');
+        $grid->quickSearch('telephone',);
       
         return $grid;
+    }
+
+    function convertToArray($data){
+
+        $provinceArray = array();
+
+        foreach($data as $item){
+            //$provinceArray = array_merge($provinceArray, array($item->id => $item->province_name));
+            $provinceArray[$item->id] = $item->province_name;
+        }
+
+        
+
+       return $provinceArray;
     }
 
     /**
