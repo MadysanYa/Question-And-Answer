@@ -34,7 +34,7 @@ class BoreyController extends AdminController
 		
         $grid->disableExport();
         $grid->disableFilter();
-        $grid->quickSearch('id' , 'borey_name','pickup_number', 'remark','ext');
+        $grid->quickSearch('id','borey_name');
 
         return $grid;
     }
@@ -74,7 +74,7 @@ class BoreyController extends AdminController
         
         $form->footer(function ($footer) {
             // disable reset btn
-            $footer->disableReset();
+            //$footer->disableReset();
             // disable `View` checkbox
             $footer->disableViewCheck();
             // disable `Continue editing` checkbox
