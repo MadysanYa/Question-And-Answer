@@ -136,13 +136,7 @@ class PropertyAppraisalController extends AdminController
 
     {
         $show = new Show(PropertyAppraisal::findOrFail($id)); 
-        // $show->field('id', __('Id'));
-        // $show->field('name', __('Name'));
-        // $show->field('username', __('Username'));
-        // $show->field('password', __('Password'));
-        // $show->field('remark', __('Remark'));
-        // $show->field('updated_at', __('Updated at'));
-        // $show->field('created_at', __('Created at'));  
+    
 
         $show->field('id', __('ID'))->sortable();
         $show->field('region', __('Region'))->as(function($region){
@@ -156,39 +150,56 @@ class PropertyAppraisalController extends AdminController
             return '(' . $branch->branch_code . ') ' . $branch->branch_name;
         });
 
-        $show->field('reference_id', __('reference_id'));
-        $show->field('cif', __('CIF No'));
-        $show->field('loan_officer', __('Loan Officer'));
-        $show->field('request_date', __('Request Date'));
-        $show->field('access_road_name', __('Access Road Name'));
-        $show->field('borey', __('Borey'));
-        $show->field('land_title_no', __('Land title no'));
-        $show->field('land_value_persqm', __('Land Value Persqm'));
-        $show->field('property_value', __('Property Value'));
-        $show->field('clinet_contact_no', __('Clinet Contact No'));
-        $show->field('commune_sangkat', __('Commune Sangkat'));
-        $show->field('latitude', __('Latitude'));
-        $show->field('remark', __('Remark'));
-        $show->field('telephone', __('Telephone'));
-        $show->field('report_date', __('Report Date'));
-        $show->field('location_type', __('Location Type'));
-        $show->field('property_type', __('Property Type'));
-        $show->field('no_of_floor', __('No Of Floor'));
-        $show->field('land_size', __('Land_size'));
-        $show->field('building_size_by_measure', __('Building Size By Measure'));
-        $show->field('collateral_owner', __('Owner'));
-        $show->field('provinces', __('Province'));
-        $show->field('village', __('Village'));
-        $show->field('photos',__('Photo'));
-        $show->field('information_type', __('Information Type'));
-        $show->field('type_of_access_road', __('Type Of Access Road'));
-        $show->field('building_status', __('Building Status'));
-        $show->field('land_title_type', __('Land Title Type'));
-        $show->field('land_size_by_measurement', __('Land Size By Measurement'));
-        $show->field('customer_name', __('Customer_Name'));
-        $show->field('building_size_per_sqm', __('Building Size Per Sqm'));
-        $show->field('district_khan', __('District Khan'));
-        $show->field('altitude', __('Altitude'));
+        $show->field('reference_id', __('reference_id'))->sortable(); 
+        $show->field('cif', __('CIF No'))->sortable(); 
+        $show->field('loan_officer', __('Loan Officer'))->sortable(); 
+        $show->field('request_date', __('Request Date'))->sortable(); 
+        $show->field('access_road_name', __('Access Road Name'))->sortable(); 
+        $show->field('borey', __('Borey'))->sortable(); 
+        $show->field('land_title_no', __('Land title no'))->sortable(); 
+        $show->field('land_value_persqm', __('Land Value Persqm'))->sortable(); 
+        $show->field('property_value', __('Property Value'))->sortable(); 
+        $show->field('clinet_contact_no', __('Clinet Contact No'))->sortable(); 
+        $show->field('commune_sangkat', __('Commune Sangkat'))->sortable(); 
+        $show->field('latitude', __('Latitude'))->sortable(); 
+        $show->field('remark', __('Remark'))->sortable(); 
+        $show->field('telephone', __('Telephone'))->sortable(); 
+        $show->field('report_date', __('Report Date'))->sortable(); 
+        $show->field('location_type', __('Location Type'))->sortable(); 
+        $show->field('property_type', __('Property Type'))->sortable(); 
+        $show->field('no_of_floor', __('No Of Floor'))->sortable(); 
+        $show->field('land_size', __('Land_size'))->sortable(); 
+        $show->field('building_size_by_measure', __('Building Size By Measure'))->sortable(); 
+        $show->field('collateral_owner', __('Owner'))->sortable(); 
+        $show->field('provinces', __('Province'))->sortable(); 
+        $show->field('village', __('Village'))->sortable(); 
+        $show->field('photos',__('Photo'))->sortable(); 
+        $show->field('information_type', __('Information Type'))->sortable(); 
+        $show->field('type_of_access_road', __('Type Of Access Road'))->sortable(); 
+        $show->field('building_status', __('Building Status'))->sortable(); 
+        $show->field('land_title_type', __('Land Title Type'))->sortable(); 
+        $show->field('land_size_by_measurement', __('Land Size By Measurement'))->sortable(); 
+        $show->field('customer_name', __('Customer_Name'))->sortable(); 
+        $show->field('building_size_per_sqm', __('Building Size Per Sqm'))->sortable(); 
+        $show->field('district_khan', __('District Khan'))->sortable(); 
+        $show->field('altitude', __('Altitude'))->sortable();
+        $grid->column('province_id',__('Province'))->filter($this->convertToArray(Province::all(['id', 'province_name'])))->Display(function($province_id){
+        
+        $province = Province::where('id', $province_id)->first();
+            return $province->province_name;     
+        }); 
+        $grid->column('district_id',__('District/Khan'))->filter($this->convertToArrays(District::all(['id', 'district_name'])))->Display(function($district_id){
+            $district = District::where('id', $district_id)->first();
+            return $district->district_name;
+        }); 
+        $grid->column('commune_id',__('Commune/Sangkat'))->Display(function($comune_id){
+            $commune = Commune::where('id', $comune_id)->first();
+            return $commune->commune_name;
+        }); 
+        $grid->column('village_id',__('Village'))->filter($this->convertToArrayv(Village::all(['id', 'village_name'])))->Display(function($village_id){
+            $village = Village::where('id', $village_id)->first();
+            return $village->village_name ;
+        }); 
      
 
         return $show;
@@ -207,10 +218,10 @@ class PropertyAppraisalController extends AdminController
 
         $form->column(1/3,function($form){
             
-            $form->select('region', __('Region'))->options(function(){
+            $form->select('region', __('Region'))->rules('required')->options(function(){
                 return Province::all()->pluck('province_name','id');})->load('branch_code', env('APP_URL') . '/public/api/branch');
 
-            $form->select('branch_code',__('Branch'))->options(function(){
+            $form->select('branch_code',__('Branch'))->rules('required')->options(function(){
                return Branch::all()->pluck('branch_name','branch_code');});
 
             //Sum id
@@ -221,36 +232,32 @@ class PropertyAppraisalController extends AdminController
 
 
             $form->text('cif', __('CIF No'));
-            $form->text('loan_officer', __('RM Name'));
-            $form->date('request_date', __('Request Date'));
-            $form->text('access_road_name', __('Access Road Name'));
-            $form->select('borey', __('Borey'))->options(function(){
+            $form->text('loan_officer', __('RM Name'))->rules('required');
+            $form->date('request_date', __('Request Date'))->rules('required');
+            $form->text('access_road_name', __('Access Road Name'))->rules('required');
+            $form->select('borey', __('Borey'))->rules('required')->options(function(){
                 return Borey::all()->pluck('borey_name', 'id');
             });//->rules('required');
-            $form->text('land_title_no', __('Land Title No'));
-            $form->text('land_value_persqm', __('Land Value per Sqm ($)'));
-            $form->text('property_value', __('Property Value ($)'));
-            $form->text('clinet_contact_no', __('Clinet Contact No'));
-
-           
-                        
-           
-            $form->text('latitude', __('Latitude'));
-            $form->text('remark', __('Remark'));     
+            $form->text('land_title_no', __('Land Title No'))->rules('required');
+            $form->text('land_value_persqm', __('Land Value per Sqm ($)'))->rules('required');
+            $form->text('property_value', __('Property Value ($)'))->rules('required');
+            $form->text('clinet_contact_no', __('Clinet Contact No'))->rules('required');
+            $form->text('latitude', __('Latitude'))->rules('required');
+                 
         });
 
            
         $form->column(1/3,function($form){
                   
-            $form->text('telephone', __('Telephone'));
-            $form->date('report_date', __('Report Date'));
-            $form->select('location_type', __('Location Type'))->options(['Residential Area'=>'Residential Area','Commercial Area'=>'Commercial Area', 'Industrial Area'=>'Industrial Area', 'Agricultural Area'=>'Agricultural Area']);
-            $form->select('property_type', __('Property Type'))->options(['Vacant Land'=>'Vacant Land', 'Flat House'=>'Flat House', 'Link House'=>'Link House', 'Villa'=>'Villa', 'Flay house from 1st floor up'=>'Flay house from 1st floor up', 'Twin Villa'=>'Twin Villa','Commercial Bulding'=>'Commercial Bulding', 'Hotel'=>'Hotel','Guesthouse'=>'Guesthouse', 'Warehouse'=>'Warehouse', 'Factory'=>'Factory', 'Condo'=>'Condo', 'Apartment'=>'Apartment','Shop'=>'Shop', 'Gas Station'=>'Gas Station', 'Wooden House'=>'Wooden House','Building'=>'Building','Shop House'=>'Shop House' ]);
-            $form->text('no_of_floor', __('No Oof Floor'));
-            $form->text('land_size', __('Land Size (Sqm)'));
-            $form->text('building_size_by_measure', __('Building Size By Measure (Sqm)'));  
-            $form->text('collateral_owner', __('Collateral Owner'));  
-          
+            $form->text('telephone', __('Telephone'))->rules('required|max:10');
+            $form->date('report_date', __('Report Date'))->rules('required');
+            $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area','Commercial Area'=>'Commercial Area', 'Industrial Area'=>'Industrial Area', 'Agricultural Area'=>'Agricultural Area']);
+            $form->select('property_type', __('Property Type'))->rules('required')->options(['Vacant Land'=>'Vacant Land', 'Flat House'=>'Flat House', 'Link House'=>'Link House', 'Villa'=>'Villa', 'Flay house from 1st floor up'=>'Flay house from 1st floor up', 'Twin Villa'=>'Twin Villa','Commercial Bulding'=>'Commercial Bulding', 'Hotel'=>'Hotel','Guesthouse'=>'Guesthouse', 'Warehouse'=>'Warehouse', 'Factory'=>'Factory', 'Condo'=>'Condo', 'Apartment'=>'Apartment','Shop'=>'Shop', 'Gas Station'=>'Gas Station', 'Wooden House'=>'Wooden House','Building'=>'Building','Shop House'=>'Shop House' ]);
+            $form->text('no_of_floor', __('No Of Floor'))->rules('required');
+            $form->text('land_size', __('Land Size (Sqm)'))->rules('required');
+            $form->text('building_size_by_measure', __('Building Size By Measure (Sqm)'))->rules('required');
+            $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
+            $form->text('remark', __('Remark'));
             $form->image('frontphoto', __('Front Photo'))->removable()->uniqueName();
             $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
             
@@ -259,33 +266,26 @@ class PropertyAppraisalController extends AdminController
 
             $form->column(1/3,function($form){
 
-            $form->select('province', __('Province'))->options(function(){
+            $form->select('province', __('Province'))->rules('required')->options(function(){
                 return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
             
-                $form->select('district_id', __('District'))->options(function(){
+                $form->select('district_id', __('District'))->rules('required')->options(function(){
                 return District::all()->pluck('district_name','id');})->load('commune_id', env('APP_URL') . '/public/api/commune');
             
-            $form->select('commune_id', __('Commune / Sangkat'))->options(function(){
+            $form->select('commune_id', __('Commune / Sangkat'))->rules('required')->options(function(){
                 return Commune::all()->pluck('commune_name','id');})->load('village_id', env('APP_URL') . '/public/api/village');         
 
-            $form->select('village_id', __('Village'))->options(function(){
+            $form->select('village_id', __('Village'))->rules('required')->options(function(){
                 return Village::all()->pluck('village_name','id');});
  
-            $form->select('information_type', __('Information Type'))->options(['Indication'=>'Indication', 'Asking'=>'Asking','Website'=>'Website','Social Media'=>'Social Media','Government'=>'Government','Real Estate Agent'=>'Real Estate Agent','Property Owner'=>'Property Owner','Others'=>'Others' ]);
-            $form->select('type_of_access_road', __('Type Of Access Road'))->options(['Boulevard'=>'Boulevard','National Road'=>'National Road','Paved Road'=>'Paved Road', 'Unpaved Road'=>'Unpaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road' ]);
-            $form->text('building_status', __('Building Status (%)'));
-            $form->select('land_title_type', __('Land Title Type'))->options(['Hard Title'=>'Hard Title','Soft Title'=>'Soft Title']);
-            $form->text('land_size_by_measurement', __('Land Size by Measurement (Sqm)'));
-            $form->text('building_size_per_sqm', __('Building Size per (Sqm)'));  
-            $form->text('customer_name', __('Customer Name'));
-              
-            
-        
-
-            // District  
-               
-                             
-            $form->text('altitude', __('Altitude'));
+            $form->select('information_type', __('Information Type'))->rules('required')->options(['Indication'=>'Indication', 'Asking'=>'Asking','Website'=>'Website','Social Media'=>'Social Media','Government'=>'Government','Real Estate Agent'=>'Real Estate Agent','Property Owner'=>'Property Owner','Others'=>'Others' ]);
+            $form->select('type_of_access_road', __('Type Of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road','Paved Road'=>'Paved Road', 'Unpaved Road'=>'Unpaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road' ]);
+            $form->text('building_status', __('Building Status (%)'))->rules('required');
+            $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title','Soft Title'=>'Soft Title']);
+            $form->text('land_size_by_measurement', __('Land Size by Measurement (Sqm)'))->rules('required');
+            $form->text('building_size_per_sqm', __('Building Size per (Sqm)'))->rules('required');  
+            $form->text('customer_name', __('Customer Name'))->rules('required');                        
+            $form->text('altitude', __('Altitude'))->rules('required');
             $form->button('swot_analyze', __('Swot Analyze'));
 
         });              
