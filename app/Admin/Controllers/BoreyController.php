@@ -74,7 +74,7 @@ class BoreyController extends AdminController
         
         $form->footer(function ($footer) {
             // disable reset btn
-            $footer->disableReset();
+            //$footer->disableReset();
             // disable `View` checkbox
             $footer->disableViewCheck();
             // disable `Continue editing` checkbox

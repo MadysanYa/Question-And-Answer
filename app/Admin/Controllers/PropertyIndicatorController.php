@@ -38,125 +38,7 @@ class PropertyIndicatorController extends AdminController
      * @return Grid
      */
    
-    //  public function index(Content $PropertyIndicator){
-    //      $PropertyIndicator->header($this->title);
-    //      $PropertyIndicator->body($this->dashboard());
-    //      $PropertyIndicator->body($this->grid());
-       
-        
-    //     return $PropertyIndicator;
-    // }
-    // protected function dashboard(){
     
-    
-    // if(isset($_REQUEST['status']))
-    //     $status =  $_REQUEST['status'];
-    // else 
-    //     $status = '';
-            
-    // $Progressing = '';
-    // $Pending = '';
-    // $Done = '';
-    // $ETC = '';
-    // $Cancelled ='';
-    
-    // $conditions_Progressing = array('status'=> $status, 'status' => 'Progressing');
-    // $conditions_Pending = array('status'=> $status, 'status' => 'Pending');
-    // $conditions_Done = array('status'=> $status, 'status' => 'Done');
-    // $conditions_ETC = array('status'=> $status, 'status' => 'ETC');
-    // $conditions_Cancelled = array('status'=> $status, 'status' => 'Cancelled');
-
-
-    // if($status != ''){
-    //     if(isset($_REQUEST['status'])){
-    //         $Progressing = Invoice::where($conditions_Progressing)->whereIn('Progressing', $cond_status)->count();
-    //         $Pending = Invoice::where($conditions_Pending)->whereIn('Pending', $cond_status)->count();
-    //         $Done = Invoice::where($conditions_Done)->whereIn('Done', $cond_status)->count();
-    //         $ETC = Invoice::where($conditions_Done)->whereIn('ETC', $cond_status)->count();
-            
-    //     }else {
-    //         $Progressing = Invoice::where($conditions_Progressing)->count();
-    //         $Pending = Invoice::where($conditions_Pending)->count();
-    //         $Done = Invoice::where($conditions_Done)->count();
-    //         $ETC = Invoice::where($conditions_ETC)->count();
-    //     }
-        
-    // }
-    // else {
-    //     $Progressing = Invoice::where(['status' => 'Progressing'])->count();
-    //     $Pending = Invoice::where(['status' => 'Pending'])->count();
-    //     $Done = Invoice::where(['status' => 'Done'])->count();
-    //     $ETC = Invoice::where(['status' => 'ETC'])->count();
-    // }
-    
-    // $title1 = "Done";
-    // $value1 = $Done;
-    // $title2 = "Pending";
-    // $value2 = $Pending;
-    // $title3 = "Progressing";
-    // $value3 = $Progressing;
-    // $title4 = "ETC";
-    // $value4 = $ETC;
-    // $title5 = "Cancelled";
-    // $value5 = $Cancelled;
-    
-    
-    
-    // $html = <<<HTML
-           
-    //         <section class= "btn-das" >
-    //            <button>PENDING</button>
-    //            <button>PROCESSING</button>
-    //            <button>VERIFIED</button>
-    //            <button>APPROVED</button>
-    //            <button>CANCELLED</button>
-    //         </section>
-    //         <section class="drop-list">
-    //             <select >
-    //                 <option value="Province">Province</option>
-    //                 <option value="Sr">Siem Reap</option>
-    //                 <option value="pp">Phonm Penh</option>
-    //                 <option value="tk">Takeo</option>
-    //             </select>
-    //             <select>
-    //                 <option value="District">District</option>
-    //                 <option value="Sen Sok">Sen Sok</option>
-    //                 <option value=" Tuol Kouk">Tuol Kouk</option>
-    //                 <option value=" Russey Keo">Russey Keo</option>
-    //             </select>
-    //             <select  >
-    //                 <option value="Commune">Commune</option>
-    //                 <option value="Touk Thla">Touk Thla</option>
-    //                 <option value="Sangkat Chaom Chau">Chaom Chau</option>
-    //                 <option value="Sangkat Dangkao">Sangkat Dangkao</option> 
-    //             </select>
-                
-    //         </section>
-
-    //         <section class="btn-pro">
-               
-  
-    //             <button>Add New Property</button>
-    //         </section>
-           
-           
-            
-    // HTML;
-    
-    
-    // $html = str_replace('{{title1}}',$title1,$html);
-    // $html = str_replace('{{value1}}',$value1,$html);
-    // $html = str_replace('{{title2}}',$title2,$html);
-    // $html = str_replace('{{value2}}',$value2,$html);
-    // $html = str_replace('{{title3}}',$title3,$html);
-    // $html = str_replace('{{value3}}',$value3,$html);
-    // $html = str_replace('{{title4}}',$title4,$html);
-    // $html = str_replace('{{value4}}',$value4,$html);
-    // $html = str_replace('{{title5}}',$title5,$html);
-    // $html = str_replace('{{value5}}',$value5,$html);
-    // return $html;
-    // }	
-     
     protected function grid()
     {
         $grid = new Grid(new PropertyIndicator);
@@ -208,7 +90,7 @@ class PropertyIndicatorController extends AdminController
             $province = Province::where('id', $province_id)->first();
             return $province->province_name;     
         }); 
-        $grid->column('branch_code',__('Branch'))->filter($this->convertToArray(Branch::all(['id', 'branch_code'])))->Display(function($branch_code){
+        $grid->column('branch_code',__('Branch'))->filter($this->convertToArrayv(Branch::all(['id', 'branch_name'])))->Display(function($branch_code){
             $branch = Branch::where('branch_code', $branch_code)->first();
             if($branch == null) return '';
             return $branch->branch_name;      
@@ -217,11 +99,11 @@ class PropertyIndicatorController extends AdminController
         $grid->column('reported_date',__('Reported Date'))->sortable();
         $grid->column('cif_no',__('CIF No.'))->sortable(); 
         $grid->column('rm_name',__('RM Name'))->sortable(); 
-        $grid->column('telephone1',__('Telephone'))->sortable(); 
-        $grid->column('information_type',__('Information Type')); 
+        $grid->column('telephone',__('Telephone'))->sortable(); 
+        $grid->column('information_type',__('Information Type'));//->filter($this->convertToArray(InformationType::all(['id'])));
         $grid->column('location_type',__('Location Type')); 
         $grid->column('type_of_access_road',__('Type of Access Road'))->sortable(); 
-        $grid->column('access_name',__('Access Road Name'))->sortable(); 
+        $grid->column('access_road_name',__('Access Road Name'))->sortable(); 
         $grid->column('property_type',__('Property Type')); 
         $grid->column('building_status',__('Building Status (%)'))->sortable(); 
         $grid->column('borey',__('Borey')); 
@@ -239,7 +121,7 @@ class PropertyIndicatorController extends AdminController
             $province = Province::where('id', $province_id)->first();
             return $province->province_name;     
         }); 
-        $grid->column('district_id',__('District/Khan'))->filter($this->convertToArray(District::all(['id', 'district_name'])))->Display(function($district_id){
+        $grid->column('district_id',__('District/Khan'))->filter($this->convertToArrays(District::all(['id', 'district_name'])))->Display(function($district_id){
             $district = District::where('id', $district_id)->first();
             return $district->district_name;
         }); 
@@ -247,7 +129,7 @@ class PropertyIndicatorController extends AdminController
             $commune = Commune::where('id', $comune_id)->first();
             return $commune->commune_name;
         }); 
-        $grid->column('village_id',__('Village'))->Display(function($village_id){
+        $grid->column('village_id',__('Village'))->filter($this->convertToArrayv(Village::all(['id', 'village_name'])))->Display(function($village_id){
             $village = Village::where('id', $village_id)->first();
             return $village->village_name ;
         });
@@ -309,20 +191,34 @@ class PropertyIndicatorController extends AdminController
             $provinceArray[$item->id] = $item->province_name;
         }
         return $provinceArray;
+       
+      
+        // $informationtypeArray = array();
+        // foreach($data as $item){
+        //     $informationtypeArray[$item->id] = $item->information_type;
+        // }
+        // return $informationtypeArray;
+       
+    }
+    function convertToArrays($data){
         $districtArray = array();
         foreach($data as $item){
             $districtArray[$item->id] = $item->district_name;
         }
-        
-         return $districtArray;
+        return $districtArray;
+    }   
+    function convertToArrayv($data){
+        // $villageArray = array();
+        // foreach($data as $item){
+        //     $villageArray[$item->id] = $item->village_name;
+        // }
+        // return $villageArray;
         $branchArray = array();
         foreach($data as $item){
-            $branchArray[$item->id] = $item->branch_code;
+            $branchArray[$item->id] = $item->branch_name;
         }
         return $branchArray;
-       
     }
-   
 
 
     /**
@@ -366,14 +262,14 @@ class PropertyIndicatorController extends AdminController
             $show->field('branch_code',__('Branch'))->as(function($branch_code){
                 $branch = Branch::where('branch_code', $branch_code)->first();
                 if($branch == null) return '';
-                return '(' . $branch->branch_code . ') ' . $branch->branch_name;
+                return '(' . $branch->branch_code . ')' . $branch->branch_name;
             });
     
             $show->field('requested_date',__('Requested Date'));
             $show->field('reported_date',__('Reported Date'));
             $show->field('cif_no',__('CIF No.'));
             $show->field('rm_name',__('RM Name'));
-            $show->field('telephone1',__('Telephone'));
+            $show->field('telephone',__('Telephone'));
             $show->field('information_type',__('Information Type'))->as(function($id){
                 $informationtype = InformationType::where('id', $id)->first();
                 return  $informationtype->information_type_name;
@@ -418,8 +314,8 @@ class PropertyIndicatorController extends AdminController
             $show->field('longtitude',__('Altitude'));
             $show->field('latitude',__('Latitude'));
             $show->field('front_photo',__('Front Photo'));
-           // $show->field('photos',__('Photo'));
-            $show->avatar('photos',__('Photo'))->file();
+            $show->field('photos',__('Photo'));
+            //$show->avatar('photos',__('Photo'))->file();
             $show->field('remark',__('Remark'));
             //    $show->field('updated_at', __('Updated at'));
             //    $show->field('created_at', __('Created at'));
@@ -452,9 +348,10 @@ class PropertyIndicatorController extends AdminController
            //Sum id
             $form->text('property_reference', __('Property Reference '))->value(function(){
                 $id = PropertyIndicator::all()->last();
-               return  'PL-00'. $id->id + 1 ;//$id == null? 1 :
-           // $p = 1234567;
-           // $p = sprintf("%08d",$p); 
+               return 'PL-00'. $id->id + 1 ;//$id == null? 1 :
+            $p = 1234567;
+            $p = sprintf("%08d",$p); 
+             return $p;
                
             });
                  
@@ -497,7 +394,7 @@ class PropertyIndicatorController extends AdminController
               
                
                 $form->text('remark', __('Remark'));//->rules('required');
-                $form->image('front_photo',__('Front Photo'))->rules('required');
+                $form->image('front_photo',__('Front Photo'))->removable()->uniqueName();
                 $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
                 });
                 
@@ -513,7 +410,7 @@ class PropertyIndicatorController extends AdminController
                 $form->text('land_value_per_sqm', __('Land Value per Sqm ($)'))->rules('required');
                 $form->text('property_value', __('Property Value ($)'))->rules('required');
              
-                $form->text('client_contact_no', __('Client Contact No. '))->rules('required');
+                $form->text('client_contact_no', __('Client Contact No. '))->rules('required|max:10');
                 $form->text('longtitude', __('Longtitude'))->rules('required');
                 $form->text('latitude', __('Latitude'))->rules('required');
                 
@@ -527,7 +424,7 @@ class PropertyIndicatorController extends AdminController
         $form->footer(function ($footer) {
 
             // disable reset btn
-            //$footer->disableReset();
+            $footer->disableReset();
             // disable `View` checkbox
             $footer->disableViewCheck();
             // disable `Continue editing` checkbox

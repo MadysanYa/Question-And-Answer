@@ -16,5 +16,16 @@ class PropertyIndicator extends Model
     {
         return json_decode($photos, true);  
     }
+    // public function setFrontphotosAttribute($frontphoto)
+    // {
+    //     if (is_array($frontphoto)) {
+    //         $this->attributes['front_photo'] = json_encode($frontphoto);
+    //     }
+    // }
+
+    // public function getFrontphotosAttribute($frontphoto)
+    // {
+    //     return json_decode($frontphoto, true);
+    // }
 }
 
