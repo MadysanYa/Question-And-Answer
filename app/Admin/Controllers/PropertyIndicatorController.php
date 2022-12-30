@@ -84,13 +84,13 @@ class PropertyIndicatorController extends AdminController
             return  $villageName . ' , ' . $communeName . ' , ' . $districtName . ' , ' .  $provinceName  ;
            
         });
-        $grid->column('cif_no',__('Geo Code'))->sortable();
+        $grid->column('longtitude',__('Geo Code'))->sortable();
         // 14-12-22  start project
         $grid->column('region',__('Region'))->filter($this->convertToArray(Province::all(['id', 'province_name'])))->Display(function($province_id){
             $province = Province::where('id', $province_id)->first();
             return $province->province_name;     
         }); 
-        $grid->column('branch_code',__('Branch'))->filter($this->convertToArrayv(Branch::all(['id', 'branch_name'])))->Display(function($branch_code){
+        $grid->column('branch_code',__('Branch'))->Display(function($branch_code){
             $branch = Branch::where('branch_code', $branch_code)->first();
             if($branch == null) return '';
             return $branch->branch_name;      
@@ -121,55 +121,51 @@ class PropertyIndicatorController extends AdminController
             $province = Province::where('id', $province_id)->first();
             return $province->province_name;     
         }); 
-        $grid->column('district_id',__('District/Khan'))->filter($this->convertToArrays(District::all(['id', 'district_name'])))->Display(function($district_id){
+        $grid->column('district_id',__('District/Khan'))->filter($this-> convertToArrayDistrict(District::all(['id', 'district_name'])))->Display(function($district_id){
             $district = District::where('id', $district_id)->first();
             return $district->district_name;
         }); 
-        $grid->column('commune_id',__('Commune/Sangkat'))->Display(function($comune_id){
+        $grid->column('commune_id',__('Commune/Sangkat'))->filter($this->convertToArrayCommune(Commune::all(['id','commune_name'])))->Display(function($comune_id){
             $commune = Commune::where('id', $comune_id)->first();
             return $commune->commune_name;
         }); 
-        $grid->column('village_id',__('Village'))->filter($this->convertToArrayv(Village::all(['id', 'village_name'])))->Display(function($village_id){
+        $grid->column('village_id',__('Village'))->Display(function($village_id){
             $village = Village::where('id', $village_id)->first();
             return $village->village_name ;
         });
         $grid->column('longtitude',__('Longtitude'))->sortable(); 
         $grid->column('latitude',__('Latitude'))->sortable(); 
-        // $grid->column('front_photo',__('Fornt Photo'))->sortable();
-        // $grid->column('photos',__('Photo'))->sortable(); 
+        
         $grid->column('remark',__('Remark'))->sortable(); 
+        //add new 
+      $grid->column('is_verified',__('Verified'))->display(function($is_verify){
+        if($is_verify == null) {
+            return '<button class=" btn-primary">Verify</botton><button class=" btn-danger">Reject</botton>';
+        }
+
+        else if($is_verify == 1) {
+            return 'Verified' . $is_verify;
+           
+        }
+
+        else {
+           return 'Rejected';
+        }
+
+        return '';
+        
+      });
+      $grid->column('is_approved',__('Approved'))->display(function($is_approved){
+        if($is_approved == null) {
+            return '<button class=" btn-primary">Approved</botton><button class="btn-danger">Reject</botton>';
+        }
+        });
       
-       /* $grid->column('name', __('Contrac Title'))->sortable()->modal('', function($model){
-			
-			 //$show = new Show(Contract::findOrFail($model['id']));
-			 
-			  return $model['id'];
-		});*/
-        //  $grid->column('startdate', __('Start date'))->display(function ($startdate){
-			
-		//  	return '<div style="background:#00c0ef;color: white;padding: 2px;width: 100px;text-align: center;border-radius: 15px;">' . $startdate . '</div>';
-	    //  });
-		
-        // $grid->column('enddate', __('End date'))->display(function ($enddate){
-			
-		// 	if($enddate == '') return '';
-		// 	return '<div style="background:#ff6600;color: white;padding: 2px;width: 100px;text-align: center;border-radius: 15px;">' . $enddate . '</div>';
-		// });
-		// $grid->column('file', __('Attachment(s)'))->downloadable('../upload');
-		// $grid->column('company', __('Company'));
-		// $grid->column('amount', __('Amount (USD)'));
-		// $grid->column('Status', __('Status'))->display(function ($title){
-		// 	$date_now = date("Y-m-d");
-		// 	if($this->enddate < $date_now && $this->enddate != NULL)
-		// 		return '<div style="background:red;color: white;padding: 3px;width: 70px;text-align: center;border-radius: 4px;">Expired</div>';
-		// 	else 
-		// 		return '<div style="background: #03fc66;padding: 3px;width: 70px; text-align: center;border-radius: 4px;">Valid</div>';
-		// });
-        // $grid->column('remark', __('Remark'));
-		
+       
         // $grid->disableExport();
         //  $grid->disableFilter();
         $grid->quickSearch('collateral_owner');
+       
 		
 		
 		// $grid->filter(function($filter){
@@ -182,42 +178,40 @@ class PropertyIndicatorController extends AdminController
 
         return $grid;
     }
+
     function convertToArray($data){
 
         $provinceArray = array();
 
-        foreach($data as $item){
+        foreach($data as $item){      
             //$provinceArray = array_merge($provinceArray, array($item->id => $item->province_name));
             $provinceArray[$item->id] = $item->province_name;
         }
         return $provinceArray;
        
-      
-        // $informationtypeArray = array();
-        // foreach($data as $item){
-        //     $informationtypeArray[$item->id] = $item->information_type;
-        // }
-        // return $informationtypeArray;
-       
-    }
-    function convertToArrays($data){
+       }
+
+    function convertToArrayDistrict($data){
+
         $districtArray = array();
-        foreach($data as $item){
+
+        foreach($data as $item){      
+           
             $districtArray[$item->id] = $item->district_name;
         }
         return $districtArray;
-    }   
-    function convertToArrayv($data){
-        // $villageArray = array();
-        // foreach($data as $item){
-        //     $villageArray[$item->id] = $item->village_name;
-        // }
-        // return $villageArray;
-        $branchArray = array();
-        foreach($data as $item){
-            $branchArray[$item->id] = $item->branch_name;
+
+    }
+    function convertToArrayCommune($data){
+
+        $communeArray = array();
+
+        foreach($data as $item){      
+           
+            $communeArray[$item->id] = $item->commune_name;
         }
-        return $branchArray;
+        return $communeArray;
+
     }
 
 
@@ -231,7 +225,7 @@ class PropertyIndicatorController extends AdminController
     {
         $show = new Show( PropertyIndicator::findOrFail($id));
 
-        // $show->column(1/2, function ($show){
+       
             $show->field('property_reference',__('Reference'));
             $show->field('collateral_owner',__('Collateral Owner '));
              // $show->field('startdate', __('Start date'));
@@ -291,8 +285,7 @@ class PropertyIndicatorController extends AdminController
             $show->field('building_size',__('Building Size ($)'));
             $show->field('building_value_per_sqm',__('Building Value per Sqm ($)'));
             $show->field('property_value',__('Property Value ($)'));
-        // });    
-        // $show->column(1/2, function($show){
+   
             $show->field('customer_name',__('Customer Name'));
             $show->field('client_contact_no',__('Cliend Contact No'));
             $show->field('province_id',__('Province'))->as(function($province_id){
@@ -317,11 +310,7 @@ class PropertyIndicatorController extends AdminController
             $show->field('photos',__('Photo'));
             //$show->avatar('photos',__('Photo'))->file();
             $show->field('remark',__('Remark'));
-            //    $show->field('updated_at', __('Updated at'));
-            //    $show->field('created_at', __('Created at'));
-           
-        // });    
-
+            
         return $show;
     }
 
@@ -348,7 +337,7 @@ class PropertyIndicatorController extends AdminController
            //Sum id
             $form->text('property_reference', __('Property Reference '))->value(function(){
                 $id = PropertyIndicator::all()->last();
-               return 'PL-00'. $id->id + 1 ;//$id == null? 1 :
+               return 'PL-'. sprintf('%010d', $id->id + 1);//$id == null? 1 :
             // $p = 1234567;
             // $p = sprintf("%08d",$p); 
             
@@ -398,9 +387,8 @@ class PropertyIndicatorController extends AdminController
                 $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
                 });
                 
-                $form->column(1/3, function ($form){
+            $form->column(1/3, function ($form){
                
-              
                 $form->select('information_type', __('Information Type'))->rules('required')->options(function(){
                     return InformationType::all()->pluck('information_type_name','id');
                 });
@@ -414,7 +402,7 @@ class PropertyIndicatorController extends AdminController
                 $form->text('longtitude', __('Longtitude'))->rules('required');
                 $form->text('latitude', __('Latitude'))->rules('required');
                 
-                });
+            });
             
        
             

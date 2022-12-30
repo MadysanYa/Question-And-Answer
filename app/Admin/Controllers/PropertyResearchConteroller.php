@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Borey;
 use App\Models\PropertyResearch;
 use App\Models\Province;
 use Encore\Admin\Controllers\AdminController;
@@ -12,6 +13,8 @@ use App\Models\Branch;
 use App\Models\contracts;
 use App\Models\District;
 use App\Models\Commune;
+use App\Models\InformationType;
+use App\Models\PropertyType;
 use App\Models\Village;
 use Encore\Admin\Layout\Content;
 // Use Encore\Admin\Admin;
@@ -104,25 +107,9 @@ class PropertyResearchConteroller extends AdminController
         $grid = new Grid(new PropertyResearch);
 		$grid->model()->orderBy('id','desc');
 		$grid->column('id', __('No.'))->desc()->sortable();
-        // $grid->column('village communce_id district_id province', __('Reference'));
-        // $grid->column('property_reference', __('Reference'));
-
-        $grid->column('property_reference')->display(function () {
-            $village_id = $this->village;
-            $village = Village::where('id', $village_id)->first();
-            if($village == null) $villageName = '';
-            else 
-            $villageName = $village->village_name ;
-            // $commune_id = $this->commune;
-            // $commune = Commune::where('id', $commune_id)->first();
-
-            // $province_id = $this->province;
-            // $province = Province::where('id', $province_id)->first();
-
-            return $villageName;
-            // return $village->village_name . ', ' . $this->commune->$commune_name . ', ' . $this->$province->province_name;
-        });
-
+       
+        $grid->column('property_reference',__('Reference'));
+            
         // Testing
         // $grid->column('province', __('Province'))->as(function($province_id){
         //     $province = Province::where('id', $province_id)->first();
@@ -199,7 +186,9 @@ class PropertyResearchConteroller extends AdminController
                 return $id->id + 1;
               
             });
-            $form->select('information_type', __('Information Type'))->options(['Indication'=>'Indication','feacbook'=>'Feacbook']);
+            $form->select('information_type', __('Information Type'))->options(function(){
+                return InformationType::all()->pluck('information_type_name','id');
+            });
             // Admin::html('<h1>Testing</h1>');
             // $form->text('property_reference', __('Property Reference'));
             // $form->text('property_reference', __('Property Reference'))->display(function($id){
@@ -227,8 +216,8 @@ class PropertyResearchConteroller extends AdminController
             $form->html('<br>');
             // $form->divider();
             $form->html('<br>');
-            $form->select('location_type', __('Location Type'))->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area']);
-            $form->select('property_type', __('Property Type'))->options(['Vacant Land'=>'Vacant Land','Flat House'=>'Flat House','Cando'=>'Cando']);
+            $form->select('location_type', __('Location Type'))->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area','Agricultural Area'=>'Agricultural Area']);
+            $form->select('property_type', __('Property Type'))->options(function(){ return PropertyType::all()->pluck('property_type_name','id');});
             $form->select('land_title_type', __('Land Title Type'))->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
             $form->text('property_value_per_sqm', __('Property per Sqm'));
             $form->text('property_market_value', __('Property Market Value'));
@@ -241,7 +230,7 @@ class PropertyResearchConteroller extends AdminController
 
         $form->column(1/3, function ($form){
             $form->select('type_of_access_road', __('Type of Access Road'))->options(['NR'=>'National Road', 'Paved Road'=>'Paved Road','Paved Road'=>'Paved Road']);
-            $form->text('borey', __('Borey'));
+            $form->select('borey', __('Borey'))->options(function(){ return Borey::all()->pluck('borey_name','id');});
             $form->date('information_date', __('Information Date'));
             $form->text('build_size', __('Building Size'));
 
