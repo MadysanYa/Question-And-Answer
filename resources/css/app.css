@@ -1,2 +1,11 @@
 
-
+.button .btn-verapp{
+    text-align: center !important;
+    color: white;
+    background-color: rgb(27, 27, 214);
+}
+.btn-reject{
+    text-align: center !important;
+    color: white;
+    background-color: rgb(239, 24, 24);
+}

@@ -67,7 +67,7 @@ class PropertyIndicatorController extends AdminController
             $commune = Commune::where('id', $commune_id)->first();
             $village_id = $this->village_id;
             $village = Village::where('id', $village_id)->first();
-
+            
            // $distict = District::where('id', $distict_id)->first();
             if($village == null) $villageName = '';
             else 
@@ -84,7 +84,7 @@ class PropertyIndicatorController extends AdminController
             return  $villageName . ' , ' . $communeName . ' , ' . $districtName . ' , ' .  $provinceName  ;
            
         });
-        $grid->column('longtitude',__('Geo Code'))->sortable();
+        $grid->column('longtitude',__('Geo Code'))->sortable();// longtitude just example for show Geo Code on grid!
         // 14-12-22  start project
         $grid->column('region',__('Region'))->filter($this->convertToArray(Province::all(['id', 'province_name'])))->Display(function($province_id){
             $province = Province::where('id', $province_id)->first();
@@ -140,7 +140,7 @@ class PropertyIndicatorController extends AdminController
         //add new 
       $grid->column('is_verified',__('Verified'))->display(function($is_verify){
         if($is_verify == null) {
-            return '<button class=" btn-primary">Verify</botton><button class=" btn-danger">Reject</botton>';
+            return '<button class=" btn-primary">Verify</botton> <button class="btn-danger">Reject</botton>';
         }
 
         else if($is_verify == 1) {
@@ -159,6 +159,12 @@ class PropertyIndicatorController extends AdminController
         if($is_approved == null) {
             return '<button class=" btn-primary">Approved</botton><button class="btn-danger">Reject</botton>';
         }
+        // else if($is_approved ==1){
+        //     return 'Approved' . $is_approved;
+        // }
+        // else{
+        //     return 'Rejected';
+        // }
         });
       
        
@@ -276,7 +282,10 @@ class PropertyIndicatorController extends AdminController
                 return  $propertytype->property_type_name;
             });
             $show->field('building_status',__('Building Status (%)'));
-            $show->field('borey',__('Borey')); 
+            $show->field('borey',__('Borey'))->as(function($id){
+                $borey = Borey::where('id', $id)->first();
+                return $borey->borey_name;
+            }) ;
             $show->field('no_of_floor',__('No. of floor'));
             $show->field('land_title_type',__('Land Titil'));
             $show->field('land_title_no',__('Lang Title No'));
@@ -307,7 +316,7 @@ class PropertyIndicatorController extends AdminController
             $show->field('longtitude',__('Altitude'));
             $show->field('latitude',__('Latitude'));
             $show->field('front_photo',__('Front Photo'));
-            $show->field('photos',__('Photo'));
+            // $show->field('photos',__('Photo'));
             //$show->avatar('photos',__('Photo'))->file();
             $show->field('remark',__('Remark'));
             
@@ -332,7 +341,7 @@ class PropertyIndicatorController extends AdminController
                  return Branch::all()->pluck('branch_name','branch_code');});
 
             
-             $form->text('cif_no', __('CIF No.'));
+            $form->text('cif_no', __('CIF No.'));
             $form->text('rm_name', __('RM Name'))->rules('required');
            //Sum id
             $form->text('property_reference', __('Property Reference '))->value(function(){
@@ -351,7 +360,7 @@ class PropertyIndicatorController extends AdminController
             });//->rules('required');
             $form->text('land_title_no', __('Land title No'))->rules('required');
             $form->text('building_size', __('Building Size(​$)'))->rules('required');
-           $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
+            $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
             
             $form->select('province_id', __('Province'))->rules('required')->options(function(){
                 return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
