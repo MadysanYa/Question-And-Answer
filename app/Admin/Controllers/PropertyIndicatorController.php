@@ -138,23 +138,28 @@ class PropertyIndicatorController extends AdminController
         
         $grid->column('remark',__('Remark'))->sortable(); 
         //add new 
-      $grid->column('is_verified',__('Verified'))->display(function($is_verify){
-        if($is_verify == null) {
-            return '<button class=" btn-primary">Verify</botton> <button class="btn-danger">Reject</botton>';
+       $grid->column('is_verified',__('Verified'))->display(function($is_verified){
+        if($is_verified == null) {
+            $id = $this->id;
+          
+            return ' <a href="'. env('APP_URL') . '/public/api/verify/' . $id . '" class="btn btn-success" style="width: 70px; border-radius: 10px;" >Verified</a>
+            <a href="'. env('APP_URL') . '/public/api/reject/' . $id . '" class="btn btn-danger" style="width: 70px; border-radius: 10px;">Reject</a>';
         }
-        else if($is_verify == 1) {
-            return 'Verified' . $is_verify;
-           
+        else if($is_verified ==1 ){
+            return 'Verified' . $is_verified;
         }
-        else {
-           return 'Rejected';
+        else{
+            return 'Rejected';
         }
-         return '';
+        });
+       
         
-      });
+    //  });
+
       $grid->column('is_approved',__('Approved'))->display(function($is_approved){
         if($is_approved == null) {
-            return '<button class=" btn-info">Approved</botton><button class="btn-danger">Reject</botton>';
+            return '<button class="btn-success" style="width: 70px">Approved</botton><button class="btn-danger" style="width: 70px">Reject</botton>';
+           
         }
         // else if($is_approved ==1){
         //     return 'Approved' . $is_approved;
@@ -344,10 +349,6 @@ class PropertyIndicatorController extends AdminController
             $form->text('property_reference', __('Property Reference '))->value(function(){
                 $id = PropertyIndicator::all()->last();
                return 'PL-'. sprintf('%010d', $id->id + 1);//$id == null? 1 :
-            // $p = 1234567;
-            // $p = sprintf("%08d",$p); 
-            
-               
             });
                  
            

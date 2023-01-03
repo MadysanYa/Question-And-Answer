@@ -16,6 +16,13 @@ class PropertyIndicator extends Model
     {
         return json_decode($photos, true);  
     }
+
+    public function verified(){
+
+    }
+    public function rejected(){
+
+    }
     // public function setFrontphotosAttribute($frontphoto)
     // {
     //     if (is_array($frontphoto)) {

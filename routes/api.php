@@ -9,6 +9,7 @@ use App\Http\Controllers\TransferController;
 use App\Http\Controllers\TaskdetailController;
 use App\Http\Controllers\VillageController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\PropertyIndicatorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +35,6 @@ Route::get('/district', [DistrictController::class,'district']);
 Route::get('/commune', [CommuneController::class,'commune']);
 Route::get('/village', [VillageController::class,'village']);
 Route::get('/branch', [BranchController::class,'branch']);
+Route::get('/verify/{id}', [PropertyIndicatorController::class,'verified']);
+Route::get('/reject/{id}', [PropertyIndicatorController::class,'rejected']);
 //Route::get('/transfer', [TransferController::class, 'store']);
