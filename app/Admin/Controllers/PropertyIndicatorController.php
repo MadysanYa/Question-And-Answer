@@ -100,7 +100,7 @@ class PropertyIndicatorController extends AdminController
         $grid->column('cif_no',__('CIF No.'))->sortable(); 
         $grid->column('rm_name',__('RM Name'))->sortable(); 
         $grid->column('telephone',__('Telephone'))->sortable(); 
-        $grid->column('information_type',__('Information Type'));//->filter($this->convertToArray(InformationType::all(['id'])));
+        $grid->column('information_type',__('Information Type'));
         $grid->column('location_type',__('Location Type')); 
         $grid->column('type_of_access_road',__('Type of Access Road'))->sortable(); 
         $grid->column('access_road_name',__('Access Road Name'))->sortable(); 
@@ -142,22 +142,19 @@ class PropertyIndicatorController extends AdminController
         if($is_verify == null) {
             return '<button class=" btn-primary">Verify</botton> <button class="btn-danger">Reject</botton>';
         }
-
         else if($is_verify == 1) {
             return 'Verified' . $is_verify;
            
         }
-
         else {
            return 'Rejected';
         }
-
-        return '';
+         return '';
         
       });
       $grid->column('is_approved',__('Approved'))->display(function($is_approved){
         if($is_approved == null) {
-            return '<button class=" btn-primary">Approved</botton><button class="btn-danger">Reject</botton>';
+            return '<button class=" btn-info">Approved</botton><button class="btn-danger">Reject</botton>';
         }
         // else if($is_approved ==1){
         //     return 'Approved' . $is_approved;
