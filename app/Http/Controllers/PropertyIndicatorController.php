@@ -20,20 +20,23 @@ class PropertyIndicatorController extends Controller
         
         //echo $request->id;
         $propertyIndicator = PropertyIndicator::findOrFail($request->id);
-        $propertyIndicator->is_verified = 1;
+        $propertyIndicator->is_verified = $request->value;
         $propertyIndicator->save();
+        return Redirect::to(url()->previous());
         // $verifieds = $request->get('q');
         // $verified = PropertyIndicator::where('id', $verifieds)->get(['id', DB::raw('verified as text')]);
 		// return $verified;
 
     }
-    public function rejected(Request $request)
+    
+    public function approved(Request $request)
     {
         
         //echo $request->id;
         $propertyIndicator = PropertyIndicator::findOrFail($request->id);
-        $propertyIndicator->is_verified = 2;
+        $propertyIndicator->is_approved = $request->value;
         $propertyIndicator->save();
+        return Redirect::to(url()->previous());
         // $verifieds = $request->get('q');
         // $verified = PropertyIndicator::where('id', $verifieds)->get(['id', DB::raw('verified as text')]);
 		// return $verified;

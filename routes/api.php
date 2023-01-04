@@ -35,6 +35,8 @@ Route::get('/district', [DistrictController::class,'district']);
 Route::get('/commune', [CommuneController::class,'commune']);
 Route::get('/village', [VillageController::class,'village']);
 Route::get('/branch', [BranchController::class,'branch']);
-Route::get('/verify/{id}', [PropertyIndicatorController::class,'verified']);
-Route::get('/reject/{id}', [PropertyIndicatorController::class,'rejected']);
+
+Route::get('/verify/{id}/{value}', [PropertyIndicatorController::class,'verified']);
+
+Route::get('/approve/{id}/{value}', [PropertyIndicatorController::class,'approved']);
 //Route::get('/transfer', [TransferController::class, 'store']);

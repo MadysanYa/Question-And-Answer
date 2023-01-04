@@ -20,9 +20,11 @@ class PropertyIndicator extends Model
     public function verified(){
 
     }
-    public function rejected(){
+    
+    public function approved(){
 
     }
+    
     // public function setFrontphotosAttribute($frontphoto)
     // {
     //     if (is_array($frontphoto)) {

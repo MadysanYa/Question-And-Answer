@@ -50,13 +50,15 @@ class PropertyIndicatorController extends AdminController
 
        // });
         $grid->column('collateral_owner',__('Owner'))->sortable();
-        $grid->column('information_type',__('Type'))->display(function(){
-            $id = $this->information_type;
-            $information_type= InformationType::where('id', $id)->first();
-            if($information_type == null) $informationname= '';
-            else
-            $informationname = $information_type->information_type_name;
-            return $informationname;
+        $grid->column('information_type',__('Type'))->display(function($id){
+            $informationtype = InformationType::where('id', $id)->first();
+            return  $informationtype->information_type_name;//Display(function(){
+            // $id = $this->information_type;
+            // $information_type= InformationType::where('id', $id)->first();
+            // if($information_type == null) $informationname= '';
+            // else
+            // $informationname = $information_type->information_type_name;
+            // return $informationname;
         });
         $grid->column('property_address',__('Property Address '))->display(function(){
             $province_id = $this->province_id;
@@ -67,9 +69,7 @@ class PropertyIndicatorController extends AdminController
             $commune = Commune::where('id', $commune_id)->first();
             $village_id = $this->village_id;
             $village = Village::where('id', $village_id)->first();
-            
-           // $distict = District::where('id', $distict_id)->first();
-            if($village == null) $villageName = '';
+             if($village == null) $villageName = '';
             else 
             $villageName = $village->village_name ;
             if($commune == null) $communeName = '';
@@ -86,9 +86,9 @@ class PropertyIndicatorController extends AdminController
         });
         $grid->column('longtitude',__('Geo Code'))->sortable();// longtitude just example for show Geo Code on grid!
         // 14-12-22  start project
-        $grid->column('region',__('Region'))->filter($this->convertToArray(Province::all(['id', 'province_name'])))->Display(function($province_id){
-            $province = Province::where('id', $province_id)->first();
-            return $province->province_name;     
+        $grid->column('region',__('Region'))->Display(function($province_id){
+            $region = Region::where('id', $province_id)->first();
+            return $region->region_name;     
         }); 
         $grid->column('branch_code',__('Branch'))->Display(function($branch_code){
             $branch = Branch::where('branch_code', $branch_code)->first();
@@ -104,9 +104,15 @@ class PropertyIndicatorController extends AdminController
         $grid->column('location_type',__('Location Type')); 
         $grid->column('type_of_access_road',__('Type of Access Road'))->sortable(); 
         $grid->column('access_road_name',__('Access Road Name'))->sortable(); 
-        $grid->column('property_type',__('Property Type')); 
+        $grid->column('property_type',__('Property Type'))->Display(function($id){
+            $propertytype = PropertyType::where('id',$id)->first();
+            return $propertytype->property_type_name;
+        }); 
         $grid->column('building_status',__('Building Status (%)'))->sortable(); 
-        $grid->column('borey',__('Borey')); 
+        $grid->column('borey',__('Borey'))->display(function($id){
+            $borey = Borey::where('id',$id)->first();
+            return $borey->borey_name;
+        }); 
         $grid->column('no_of_floor',__('No. of floor'))->sortable(); 
         $grid->column('land_title_type',__('Land Titil Type'))->sortable(); 
         $grid->column('land_title_no',__('Lang Title No'))->sortable(); 
@@ -142,31 +148,30 @@ class PropertyIndicatorController extends AdminController
         if($is_verified == null) {
             $id = $this->id;
           
-            return ' <a href="'. env('APP_URL') . '/public/api/verify/' . $id . '" class="btn btn-success" style="width: 70px; border-radius: 10px;" >Verified</a>
-            <a href="'. env('APP_URL') . '/public/api/reject/' . $id . '" class="btn btn-danger" style="width: 70px; border-radius: 10px;">Reject</a>';
+            return ' <a href="'. env('APP_URL') . '/public/api/verify/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Verified</a>
+            <a href="'. env('APP_URL') . '/public/api/verify/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
         }
-        else if($is_verified ==1 ){
-            return 'Verified' . $is_verified;
+        else if($is_verified ==1){
+            return'<p style="color: #00ff00">Verified</p>';//. $is_verified;
         }
         else{
-            return 'Rejected';
+            return '<p style="color: #ff0000">Rejected</p>';
         }
         });
        
-        
-    //  });
-
-      $grid->column('is_approved',__('Approved'))->display(function($is_approved){
+        $grid->column('is_approved',__('Approved'))->display(function($is_approved){
         if($is_approved == null) {
-            return '<button class="btn-success" style="width: 70px">Approved</botton><button class="btn-danger" style="width: 70px">Reject</botton>';
-           
+            $id = $this->id;
+            return ' <a href="'. env('APP_URL') . '/public/api/approve/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Approved</a>
+            <a href="'. env('APP_URL') . '/public/api/approve/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
+            
         }
-        // else if($is_approved ==1){
-        //     return 'Approved' . $is_approved;
-        // }
-        // else{
-        //     return 'Rejected';
-        // }
+        else if($is_approved ==1){
+            return '<p style="color: #00ff00">Approved</p>'; 
+        }
+        else{
+            return '<p style="color: #ff0000">Rejected</p>';
+        }
         });
       
        
@@ -337,7 +342,7 @@ class PropertyIndicatorController extends AdminController
         $form->column(1/3, function ($form){
             
             $form->select('region', __('Region'))->rules('required')->options(function(){
-                return Province::all()->pluck('province_name', 'id');})->load('branch_code', env('APP_URL') . '/public/api/branch');
+                return Region::all()->pluck('region_name', 'id');})->load('branch_code', env('APP_URL') . '/public/api/branch');
 
             $form->select('branch_code',__('Branch'))->rules('required')->options(function(){
                  return Branch::all()->pluck('branch_name','branch_code');});
