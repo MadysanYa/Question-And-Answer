@@ -105,8 +105,8 @@ class PropertyResearchConteroller extends AdminController
     protected function grid()
     {
         $grid = new Grid(new PropertyResearch);
-		$grid->model()->orderBy('id','desc');
-		$grid->column('id', __('No.'))->desc()->sortable();
+		$grid->model()->orderBy('id','asc');
+		$grid->column('id', __('No.'))->asc()->sortable();
        
         $grid->column('property_reference',__('Reference'));
             
@@ -119,7 +119,7 @@ class PropertyResearchConteroller extends AdminController
         //     $branch = Branch::where('id', $branch_id)->first();
         //     return $branch->branch_name;
         // });
-
+       
         $grid->column('access_road_name', __('Owner'));
         $grid->column('information_type', __('Type'));
         $grid->column('location_type', __('Property Address'));
@@ -184,6 +184,7 @@ class PropertyResearchConteroller extends AdminController
             $form->text('property_reference', 'Reference')->value(function(){
                 $id = PropertyResearch::all()->last();
                 return $id->id + 1;
+               
               
             });
             $form->select('information_type', __('Information Type'))->options(function(){

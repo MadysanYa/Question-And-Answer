@@ -53,12 +53,7 @@ class PropertyIndicatorController extends AdminController
         $grid->column('information_type',__('Type'))->display(function($id){
             $informationtype = InformationType::where('id', $id)->first();
             return  $informationtype->information_type_name;//Display(function(){
-            // $id = $this->information_type;
-            // $information_type= InformationType::where('id', $id)->first();
-            // if($information_type == null) $informationname= '';
-            // else
-            // $informationname = $information_type->information_type_name;
-            // return $informationname;
+            
         });
         $grid->column('property_address',__('Property Address '))->display(function(){
             $province_id = $this->province_id;
@@ -177,14 +172,14 @@ class PropertyIndicatorController extends AdminController
        
         // $grid->disableExport();
         //  $grid->disableFilter();
-        $grid->quickSearch('collateral_owner');
+        $grid->quickSearch(['collateral_owner','telephone']);
        
 		
 		
-		// $grid->filter(function($filter){
-		// 	$filter->disableIdFilter();
-		// 	$filter->equal('company');
-		// });
+		$grid->filter(function($filter){
+			$filter->disableIdFilter();
+		//	$filter->equal('company');
+		});
 
 		
 		//print_r(Request::route('company'));
@@ -241,30 +236,13 @@ class PropertyIndicatorController extends AdminController
        
             $show->field('property_reference',__('Reference'));
             $show->field('collateral_owner',__('Collateral Owner '));
-             // $show->field('startdate', __('Start date'));
-            // $show->field('enddate', __('End date'));
-            // $show->field('type',__('Type'));
-            //  $show->field('property_address',__('Property Address '));//->display(function(){  // 20-12-22
-            //     $province_id = $this->province;
-            //     $province = Province::where('id', $province_id)->first();
-            //     $distict_id = $this->district_id;
-            //     $district = District::where('id', $distict_id)->first();
-            //     $commune_id = $this->commune_id;
-            //     $commune = Commune::where('id', $commune_id)->first();
-            //     $village_id = $this->village_id;
-            //     $village = Village::where('id', $village_id)->first();
-    
-            //    // $distict = District::where('id', $distict_id)->first();
-            //     //if($village == null) return $village_id;
-            //     return $village->village_name . ' , ' . $commune->commune_name . ' , ' . $district->district_name . ' , ' .  $province->province_name  ;
-                
-            // });
+             
 
-            // $show->field('geo_code',__('Geo Code'));
+            
             $show->field('region', __('Region'))->as(function($region){
-                $province = Province::where('id', $region)->first();
-                if($province == null) return '';
-                return $province->province_name ;
+                $region = Region::where('id', $region)->first();
+                if($region == null) return '';
+                return $region->region_name ;
             });
             $show->field('branch_code',__('Branch'))->as(function($branch_code){
                 $branch = Branch::where('branch_code', $branch_code)->first();
@@ -383,7 +361,7 @@ class PropertyIndicatorController extends AdminController
               
                 $form->date('requested_date', __('Requested Date'))->rules('required');
                 $form->date('reported_date',__('Reported Date'))->rules('required');
-                $form->text('telephone', __('Telephone'))->rules('required|max:10');//number <=10
+                $form->number('telephone', __('Telephone'))->rules('required|max:10');//number <=10
                 $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area','Agricultural Area'=>'Agricultural Area']);
                 $form->select('property_type', __('Property Type'))->rules('required')->options(function(){
                     return PropertyType::all()->pluck('property_type_name','id');
@@ -405,7 +383,7 @@ class PropertyIndicatorController extends AdminController
                     return InformationType::all()->pluck('information_type_name','id');
                 });
                 $form->select('type_of_access_road', __('Type of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road', 'Paved Road'=>'Paved Road','Upaved Road'=>'Upaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road']);
-                $form->text('building_status', __('Building Status (%)'))->rules('required')->rules('required');
+                $form->number('building_status', __('Building Status (%)'))->min(0)->max(100)->rules('required');
                 $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
                 $form->text('land_value_per_sqm', __('Land Value per Sqm ($)'))->rules('required');
                 $form->text('property_value', __('Property Value ($)'))->rules('required');
