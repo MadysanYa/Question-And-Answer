@@ -46,13 +46,10 @@ class PropertyIndicatorController extends AdminController
 		$grid->model()->orderBy('id','asc');
         $grid->column('id', __('No.'))->asc()->sortable();
 		$grid->column('property_reference', __('Reference'))->sortable();
-        
-
-       // });
         $grid->column('collateral_owner',__('Owner'))->sortable();
         $grid->column('information_type',__('Type'))->display(function($id){
             $informationtype = InformationType::where('id', $id)->first();
-            return  $informationtype->information_type_name;//Display(function(){
+            return  $informationtype->information_type_name;
             
         });
         $grid->column('property_address',__('Property Address '))->display(function(){
@@ -119,10 +116,11 @@ class PropertyIndicatorController extends AdminController
         $grid->column('customer_name',__('Customer Name'))->sortable(); 
         $grid->column('client_contact_no',__('Cliend Contact No.'))->sortable(); 
         $grid->column('province_id',__('Province'))->filter($this->convertToArray(Province::all(['id', 'province_name'])))->Display(function($province_id){
+           
             $province = Province::where('id', $province_id)->first();
             return $province->province_name;     
-        }); 
-        $grid->column('district_id',__('District/Khan'))->filter($this-> convertToArrayDistrict(District::all(['id', 'district_name'])))->Display(function($district_id){
+        });
+        $grid->column('district_id',__('District/Khan'))->filter($this->convertToArrayDistrict(District::all(['id', 'district_name'])))->Display(function($district_id){
             $district = District::where('id', $district_id)->first();
             return $district->district_name;
         }); 
@@ -328,7 +326,7 @@ class PropertyIndicatorController extends AdminController
             
             $form->text('cif_no', __('CIF No.'));
             $form->text('rm_name', __('RM Name'))->rules('required');
-           //Sum id
+          
             $form->text('property_reference', __('Property Reference '))->value(function(){
                 $id = PropertyIndicator::all()->last();
                return 'PL-'. sprintf('%010d', $id->id + 1);//$id == null? 1 :
@@ -357,11 +355,9 @@ class PropertyIndicatorController extends AdminController
             
         });    
             $form->column(1/3, function ($form){            
-              
-              
                 $form->date('requested_date', __('Requested Date'))->rules('required');
                 $form->date('reported_date',__('Reported Date'))->rules('required');
-                $form->number('telephone', __('Telephone'))->rules('required|max:10');//number <=10
+                $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 99 99999']);//->rules('required|numeric|min:8|max:11');//number <=10'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10'
                 $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area','Agricultural Area'=>'Agricultural Area']);
                 $form->select('property_type', __('Property Type'))->rules('required')->options(function(){
                     return PropertyType::all()->pluck('property_type_name','id');
@@ -375,7 +371,7 @@ class PropertyIndicatorController extends AdminController
                 $form->text('remark', __('Remark'));//->rules('required');
                 $form->image('front_photo',__('Front Photo'))->removable()->uniqueName();
                 $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
-                });
+            });
                 
             $form->column(1/3, function ($form){
                
@@ -388,9 +384,10 @@ class PropertyIndicatorController extends AdminController
                 $form->text('land_value_per_sqm', __('Land Value per Sqm ($)'))->rules('required');
                 $form->text('property_value', __('Property Value ($)'))->rules('required');
              
-                $form->text('client_contact_no', __('Client Contact No. '))->rules('required|max:10');
+                $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 99 99999']);
                 $form->text('longtitude', __('Longtitude'))->rules('required');
                 $form->text('latitude', __('Latitude'))->rules('required');
+                
                 
             });
             
