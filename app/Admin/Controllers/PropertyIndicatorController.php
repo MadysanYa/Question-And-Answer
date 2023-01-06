@@ -43,7 +43,12 @@ class PropertyIndicatorController extends AdminController
     protected function grid()
     {
 
-        
+        //filter
+        $filterRegionID = isset($_REQUEST['region'])? $_REQUEST['region'] : [];
+        $filterProvinceId = isset($_REQUEST['province_id'])? $_REQUEST['province_id'] : [];
+        $filterDistrictId = isset($_REQUEST['district_id'])? $_REQUEST['district_id'] : [];
+
+        //print_r($filterProvinceId);
 
         $grid = new Grid(new PropertyIndicator);
 		
@@ -51,11 +56,11 @@ class PropertyIndicatorController extends AdminController
         $grid->column('id', __('No.'))->asc()->sortable();
 		$grid->column('property_reference', __('Reference'))->sortable();
         $grid->column('collateral_owner',__('Owner'))->sortable();
-        $grid->column('information_type',__('Type'))->display(function($id){
-            $informationtype = InformationType::where('id', $id)->first();
-            return  $informationtype->information_type_name;
+        $grid->column('type',__('Type'))->filter(['A'=>'Asking', 'w'=>'Website','S'=>'Social Meadia']);//->display(function($id){
+        //     $informationtype = InformationType::where('id', $id)->first();
+        //     return  $informationtype->information_type_name;
             
-        });
+        // });
         $grid->column('property_address',__('Property Address '))->display(function(){
             $province_id = $this->province_id;
             $province = Province::where('id', $province_id)->first();
@@ -82,11 +87,11 @@ class PropertyIndicatorController extends AdminController
         });
         $grid->column('longtitude',__('Geo Code'))->sortable();// longtitude just example for show Geo Code on grid!
         // 14-12-22  start project
-        $grid->column('region',__('Region'))->Display(function($province_id){
-            $region = Region::where('id', $province_id)->first();
+        $grid->column('region',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){
+            $region = Region::where('id', $id)->first();
             return $region->region_name;     
         }); 
-        $grid->column('branch_code',__('Branch'))->Display(function($branch_code){
+        $grid->column('branch_code',__('Branch'))->filter($this->convertToArrayBranch(Branch::whereIn('region_id', $filterRegionID)->get(['id', 'branch_name'])))->Display(function($branch_code){
             $branch = Branch::where('branch_code', $branch_code)->first();
             if($branch == null) return '';
             return $branch->branch_name;      
@@ -120,15 +125,14 @@ class PropertyIndicatorController extends AdminController
         $grid->column('customer_name',__('Customer Name'))->sortable(); 
         $grid->column('client_contact_no',__('Cliend Contact No.'))->sortable(); 
         $grid->column('province_id',__('Province'))->filter($this->convertToArray(Province::all(['id', 'province_name'])))->Display(function($province_id){
-           
-            $province = Province::where('id', $province_id)->first();
+           $province = Province::where('id', $province_id)->first();
             return $province->province_name;     
         });
-        $grid->column('district_id',__('District/Khan'))->filter($this->convertToArrayDistrict(District::all(['id', 'district_name'])))->Display(function($district_id){
+        $grid->column('district_id',__('District/Khan'))->filter($this->convertToArrayDistrict(District::whereIn('province_id', $filterProvinceId)->get(['id', 'district_name'])))->Display(function($district_id){
             $district = District::where('id', $district_id)->first();
             return $district->district_name;
         }); 
-        $grid->column('commune_id',__('Commune/Sangkat'))->filter($this->convertToArrayCommune(Commune::all(['id','commune_name'])))->Display(function($comune_id){
+        $grid->column('commune_id',__('Commune/Sangkat'))->filter($this->convertToArrayCommune(Commune::whereIn('district_id', $filterDistrictId)->get(['id','commune_name'])))->Display(function($comune_id){
             $commune = Commune::where('id', $comune_id)->first();
             return $commune->commune_name;
         }); 
@@ -148,7 +152,7 @@ class PropertyIndicatorController extends AdminController
 
                     if(User::isVerifierRole()){
                         $id = $this->id;
-                        return ' <a href="'. env('APP_URL') . '/public/api/verify/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Verified</a>
+                        return ' <a href="'. env('APP_URL') . '/public/api/verify/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Verify</a>
                         <a href="'. env('APP_URL') . '/public/api/verify/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
                     }
                     else {
@@ -171,7 +175,7 @@ class PropertyIndicatorController extends AdminController
                     if($is_approved == null) {
                         if(User::isApproverRole()){
                             $id = $this->id;
-                            return ' <a href="'. env('APP_URL') . '/public/api/approve/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Approved</a>
+                            return ' <a href="'. env('APP_URL') . '/public/api/approve/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Approv</a>
                             <a href="'. env('APP_URL') . '/public/api/approve/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
                         }
                         else {
@@ -243,6 +247,29 @@ class PropertyIndicatorController extends AdminController
         return $communeArray;
 
     }
+    function convertToArrayBranch($data){
+
+        $branchArray = array();
+
+        foreach($data as $item){      
+           
+            $branchArray[$item->id] = $item->branch_name;
+        }
+        return $branchArray;
+
+    }
+    function convertToArrayRegion($data){
+
+        $RegionArray = array();
+
+        foreach($data as $item){      
+           
+            $RegionArray[$item->id] = $item->region_name;
+        }
+        return  $RegionArray;
+
+    }
+
 
 
     /**
