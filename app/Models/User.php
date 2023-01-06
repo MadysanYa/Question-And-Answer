@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Auth;
 
 class User extends Authenticatable
 {
@@ -41,4 +42,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    static function isVerifierRole(){
+        $roles = Auth()->user()->roles()->get();
+        
+        foreach($roles as $role){ 
+            if(strtoupper($role['name']) == 'VERIFIER') return true;
+        }
+
+        return false;
+    }
+
+    static function isApproverRole(){
+        $roles = Auth()->user()->roles()->get();
+        
+        foreach($roles as $role){ 
+            if(strtoupper($role['name']) == 'APPROVER') return true;
+        }
+
+        return false;
+    }
 }

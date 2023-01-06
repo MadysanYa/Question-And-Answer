@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Admin\Controllers;
-
+use Auth;
 use App\Models\Application;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -24,6 +24,7 @@ class ApplicationController extends AdminController
      */
     protected function grid()
     {
+
         $grid = new Grid(new Application());
         $grid->column('id', __('ID'));
         $grid->column('name', __('Software Application Name'))->sortable()->modal('', function($model){
