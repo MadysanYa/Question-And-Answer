@@ -43,7 +43,7 @@ class PropertyIndicatorController extends AdminController
     protected function grid()
     {
 
-        //filter
+        //filter  
         $filterRegionID = isset($_REQUEST['region'])? $_REQUEST['region'] : [];
         $filterProvinceId = isset($_REQUEST['province_id'])? $_REQUEST['province_id'] : [];
         $filterDistrictId = isset($_REQUEST['district_id'])? $_REQUEST['district_id'] : [];
@@ -56,11 +56,8 @@ class PropertyIndicatorController extends AdminController
         $grid->column('id', __('No.'))->asc()->sortable();
 		$grid->column('property_reference', __('Reference'))->sortable();
         $grid->column('collateral_owner',__('Owner'))->sortable();
-        $grid->column('type',__('Type'))->filter(['A'=>'Asking', 'w'=>'Website','S'=>'Social Meadia']);//->display(function($id){
-        //     $informationtype = InformationType::where('id', $id)->first();
-        //     return  $informationtype->information_type_name;
-            
-        // });
+        $grid->column('information_type',__('Type'))->sortable();
+       
         $grid->column('property_address',__('Property Address '))->display(function(){
             $province_id = $this->province_id;
             $province = Province::where('id', $province_id)->first();
@@ -82,16 +79,17 @@ class PropertyIndicatorController extends AdminController
             if($province == null) $provinceName = '';
             else 
             $provinceName= $province->province_name ;
-            return  $villageName . ' , ' . $communeName . ' , ' . $districtName . ' , ' .  $provinceName  ;
+            return  $villageName . ' , ' . $communeName . ' , ' . $districtName . ' , ' .  $provinceName ;
            
         });
         $grid->column('longtitude',__('Geo Code'))->sortable();// longtitude just example for show Geo Code on grid!
-        // 14-12-22  start project
-        $grid->column('region',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){
+
+        $grid->column('region',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){// add filter
             $region = Region::where('id', $id)->first();
             return $region->region_name;     
         }); 
         $grid->column('branch_code',__('Branch'))->filter($this->convertToArrayBranch(Branch::whereIn('region_id', $filterRegionID)->get(['id', 'branch_name'])))->Display(function($branch_code){
+            
             $branch = Branch::where('branch_code', $branch_code)->first();
             if($branch == null) return '';
             return $branch->branch_name;      
@@ -101,7 +99,10 @@ class PropertyIndicatorController extends AdminController
         $grid->column('cif_no',__('CIF No.'))->sortable(); 
         $grid->column('rm_name',__('RM Name'))->sortable(); 
         $grid->column('telephone',__('Telephone'))->sortable(); 
-        $grid->column('information_type',__('Information Type'));
+        $grid->column('information_type',__('Information Type'))->Display(function($id){
+            $informationtype = InformationType::where('id',$id)->first();
+            return $informationtype->information_type_name;
+        });
         $grid->column('location_type',__('Location Type')); 
         $grid->column('type_of_access_road',__('Type of Access Road'))->sortable(); 
         $grid->column('access_road_name',__('Access Road Name'))->sortable(); 
@@ -128,7 +129,7 @@ class PropertyIndicatorController extends AdminController
            $province = Province::where('id', $province_id)->first();
             return $province->province_name;     
         });
-        $grid->column('district_id',__('District/Khan'))->filter($this->convertToArrayDistrict(District::whereIn('province_id', $filterProvinceId)->get(['id', 'district_name'])))->Display(function($district_id){
+        $grid->column('district_id',__('District/Khan'))->filter($this->convertToArrayDistrict(District::whereIn('province_id', $filterProvinceId)->get(['id', 'district_name'])))->Display(function($district_id){ //Add filter when click ex:province->distict..
             $district = District::where('id', $district_id)->first();
             return $district->district_name;
         }); 
@@ -144,13 +145,13 @@ class PropertyIndicatorController extends AdminController
         $grid->column('latitude',__('Latitude'))->sortable(); 
         
         $grid->column('remark',__('Remark'))->sortable(); 
-        //add new 
 
-      
+
+      // create btn with api
         $grid->column('is_verified',__('Verified'))->display(function($is_verified){
             if($is_verified == null) {
 
-                    if(User::isVerifierRole()){
+                    if(User::isVerifierRole()){ // user login
                         $id = $this->id;
                         return ' <a href="'. env('APP_URL') . '/public/api/verify/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Verify</a>
                         <a href="'. env('APP_URL') . '/public/api/verify/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
@@ -166,9 +167,7 @@ class PropertyIndicatorController extends AdminController
                     return '<p style="color: #ff0000;border: 1px solid #ff0000;padding: 5px;text-align:center;">Rejected</p>';
                 }
             });
-        
 
-       
         $grid->column('is_approved',__('Approved'))->display(function($is_approved){
 
                 if($this->is_verified == 1){
@@ -212,7 +211,7 @@ class PropertyIndicatorController extends AdminController
 
         return $grid;
     }
-
+    // filter 
     function convertToArray($data){
 
         $provinceArray = array();
@@ -347,11 +346,10 @@ class PropertyIndicatorController extends AdminController
                 $village = Village::where('id', $village_id)->first();
                 return $village->village_name   ;
             });
-            $show->field('longtitude',__('Altitude'));
+            $show->field('longtitude',__('Longtitude'));
             $show->field('latitude',__('Latitude'));
             $show->field('front_photo',__('Front Photo'));
-            // $show->field('photos',__('Photo'));
-            //$show->avatar('photos',__('Photo'))->file();
+           
             $show->field('remark',__('Remark'));
             
         return $show;
@@ -377,21 +375,21 @@ class PropertyIndicatorController extends AdminController
             
             $form->text('cif_no', __('CIF No.'));
             $form->text('rm_name', __('RM Name'))->rules('required');
-          
+            //zero loading 
             $form->text('property_reference', __('Property Reference '))->value(function(){
                 $id = PropertyIndicator::all()->last();
-               return 'PL-'. sprintf('%010d', $id->id + 1);//$id == null? 1 :
+               return 'PL-'. sprintf('%010d', $id->id + 1);//$id == null? 1 :  
             });
                  
            
             $form->text('access_road_name', __('Access Road Name'))->rules('required');
             $form->select('borey', __('Borey'))->rules('required')->options(function(){
                 return Borey::all()->pluck('borey_name', 'id');
-            });//->rules('required');
+            });
             $form->text('land_title_no', __('Land title No'))->rules('required');
             $form->text('building_size', __('Building Size(​$)'))->rules('required');
             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
-            
+            // api
             $form->select('province_id', __('Province'))->rules('required')->options(function(){
                 return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
             
@@ -408,7 +406,7 @@ class PropertyIndicatorController extends AdminController
             $form->column(1/3, function ($form){            
                 $form->date('requested_date', __('Requested Date'))->rules('required');
                 $form->date('reported_date',__('Reported Date'))->rules('required');
-                $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 99 99999']);//->rules('required|numeric|min:8|max:11');//number <=10'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10'
+                $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 99 99999']); // add number 
                 $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area','Agricultural Area'=>'Agricultural Area']);
                 $form->select('property_type', __('Property Type'))->rules('required')->options(function(){
                     return PropertyType::all()->pluck('property_type_name','id');
@@ -419,7 +417,7 @@ class PropertyIndicatorController extends AdminController
                 $form->text('customer_name', __('Customer Name '))->rules('required');
               
                
-                $form->text('remark', __('Remark'));//->rules('required');
+                $form->text('remark', __('Remark'));
                 $form->image('front_photo',__('Front Photo'))->removable()->uniqueName();
                 $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
             });
