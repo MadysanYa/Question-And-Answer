@@ -65,6 +65,7 @@ class PropertyIndicatorController extends AdminController
             $district = District::where('id', $distict_id)->first();
             $commune_id = $this->commune_id;
             $commune = Commune::where('id', $commune_id)->first();
+
             $village_id = $this->village_id;
             $village = Village::where('id', $village_id)->first();
              if($village == null) $villageName = '';
@@ -386,8 +387,8 @@ class PropertyIndicatorController extends AdminController
             $form->select('borey', __('Borey'))->rules('required')->options(function(){
                 return Borey::all()->pluck('borey_name', 'id');
             });
-            $form->text('land_title_no', __('Land title No'))->rules('required');
-            $form->text('building_size', __('Building Size(​$)'))->rules('required');
+            $form->text('land_title_no', __('Land title No.'))->rules('required');
+            $form->currency('building_size', __('Building Size'))->rules('required');
             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
             // api
             $form->select('province_id', __('Province'))->rules('required')->options(function(){
@@ -412,8 +413,8 @@ class PropertyIndicatorController extends AdminController
                     return PropertyType::all()->pluck('property_type_name','id');
                 });
                 $form->text('no_of_floor', __('No. of Floor'))->rules('required');
-                $form->text('land_size', __('Land Size'))->rules('required');
-                $form->text('building_value_per_sqm', __('Building Value per Sqm ($)'))->rules('required');
+                $form->text('land_size', __('Land Size (sqm)'))->rules('required');
+                $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->rules('required');
                 $form->text('customer_name', __('Customer Name '))->rules('required');
               
                
@@ -424,18 +425,18 @@ class PropertyIndicatorController extends AdminController
                 
             $form->column(1/3, function ($form){
                
-                $form->select('information_type', __('Information Type'))->rules('required')->options(function(){
+                $form->select('information_type',__('Information Type'))->rules('required')->options(function(){
                     return InformationType::all()->pluck('information_type_name','id');
                 });
                 $form->select('type_of_access_road', __('Type of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road', 'Paved Road'=>'Paved Road','Upaved Road'=>'Upaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road']);
-                $form->number('building_status', __('Building Status (%)'))->min(0)->max(100)->rules('required');
+                $form->rate('building_status', __('Building Status '));//->min(0)->max(100);//->rules('required');
                 $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
-                $form->text('land_value_per_sqm', __('Land Value per Sqm ($)'))->rules('required');
-                $form->text('property_value', __('Property Value ($)'))->rules('required');
+                $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
+                $form->currency('property_value', __('Property Value '))->rules('required');
              
                 $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 99 99999']);
-                $form->text('longtitude', __('Longtitude'))->rules('required');
-                $form->text('latitude', __('Latitude'))->rules('required');
+                $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '99.999999'])->rules('required');
+                $form->text('latitude', __('Latitude'))->inputmask(['mask' => '999.999999'])->rules('required');
                 
                 
             });
