@@ -85,15 +85,24 @@ class PropertyIndicatorController extends AdminController
         });
         $grid->column('longtitude',__('Geo Code'))->sortable();// longtitude just example for show Geo Code on grid!
 
-        $grid->column('region',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){// add filter
+        $grid->column('region_id',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){// add filter
             $region = Region::where('id', $id)->first();
             return $region->region_name;     
         }); 
-        $grid->column('branch_code',__('Branch'))->Display(function($branch_code){//->filter($this->convertToArrayBranch(Branch::whereIn('region_id', $filterRegionID)->get(['id', 'branch_name'])))
+        $grid->column('branch_id',__('Branch'))->filter($this->convertToArrayBranch(Branch::all(['id', 'branch_name'])))->Display(function($id){// add filter
+            $branch = Branch::where('id', $id)->first();
+            // return $branch->branch_name;
+            if($branch == null)
+                return '';
+            else
+                return $branch->branch_name;  
+
+        // ->Display(function($branch_code){
+        // ->filter($this->convertToArrayBranch(Branch::whereIn('region_id', $filterRegionID)->get(['id', 'branch_name'])))
             
-            $branch = Branch::where('id', $branch_code)->first();
-            if($branch == null) return '';
-            return $branch->branch_name;      
+            // $branch = Branch::where('branch_code', $branch_code)->first();
+            // if($branch == null) return '';
+            // return $branch->branch_name;      
         });  
         $grid->column('requested_date',__('Requested Date'))->sortable(); 
         $grid->column('reported_date',__('Reported Date'))->sortable();
@@ -247,17 +256,19 @@ class PropertyIndicatorController extends AdminController
         return $communeArray;
 
     }
-    // function convertToArrayBranch($data){
 
-    //     $branchArray = array();
+    function convertToArrayBranch($data){
 
-    //     foreach($data as $item){      
+        $branchArray = array();
+
+        foreach($data as $item){      
            
-    //         $branchArray[$item->id] = $item->branch_name;
-    //     }
-    //     return $branchArray;
+            $branchArray[$item->id] = $item->branch_name;
+        }
+        return $branchArray;
 
-    // }
+    }
+
     function convertToArrayRegion($data){
 
         $RegionArray = array();
