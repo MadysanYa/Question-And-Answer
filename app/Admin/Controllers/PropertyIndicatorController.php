@@ -44,7 +44,7 @@ class PropertyIndicatorController extends AdminController
     {
 
         //filter  
-        $filterRegionID = isset($_REQUEST['region'])? $_REQUEST['region'] : [];
+        //$filterRegionID = isset($_REQUEST['region'])? $_REQUEST['region'] : [];
         $filterProvinceId = isset($_REQUEST['province_id'])? $_REQUEST['province_id'] : [];
         $filterDistrictId = isset($_REQUEST['district_id'])? $_REQUEST['district_id'] : [];
 
@@ -89,7 +89,7 @@ class PropertyIndicatorController extends AdminController
             $region = Region::where('id', $id)->first();
             return $region->region_name;     
         }); 
-        $grid->column('branch_code',__('Branch'))->filter($this->convertToArrayBranch(Branch::whereIn('region_id', $filterRegionID)->get(['id', 'branch_name'])))->Display(function($branch_code){
+        $grid->column('branch_code',__('Branch'))->Display(function($branch_code){//->filter($this->convertToArrayBranch(Branch::whereIn('region_id', $filterRegionID)->get(['id', 'branch_name'])))
             
             $branch = Branch::where('id', $branch_code)->first();
             if($branch == null) return '';
@@ -247,17 +247,17 @@ class PropertyIndicatorController extends AdminController
         return $communeArray;
 
     }
-    function convertToArrayBranch($data){
+    // function convertToArrayBranch($data){
 
-        $branchArray = array();
+    //     $branchArray = array();
 
-        foreach($data as $item){      
+    //     foreach($data as $item){      
            
-            $branchArray[$item->id] = $item->branch_name;
-        }
-        return $branchArray;
+    //         $branchArray[$item->id] = $item->branch_name;
+    //     }
+    //     return $branchArray;
 
-    }
+    // }
     function convertToArrayRegion($data){
 
         $RegionArray = array();
@@ -429,7 +429,7 @@ class PropertyIndicatorController extends AdminController
                     return InformationType::all()->pluck('information_type_name','id');
                 });
                 $form->select('type_of_access_road', __('Type of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road', 'Paved Road'=>'Paved Road','Upaved Road'=>'Upaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road']);
-                $form->number('building_status', __('Building Status '))->min(0)->max(100);//->rules('required');
+                $form->number('building_status', __('Building Status (%) '))->min(0)->max(100);//->rules('required');
                 $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
                 $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
                 $form->currency('property_value', __('Property Value '))->rules('required');
