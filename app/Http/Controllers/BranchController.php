@@ -18,7 +18,7 @@ class BranchController extends Controller
     public function branch (Request $request)
     {
         $regionId = $request->get('q');
-		$regions = Branch::where('region_id', $regionId)->get([DB::raw('branch_code as id'),  DB::raw('branch_name as text')]);
+		$regions = Branch::where('region_id', $regionId)->get(['id', DB::raw('branch_name as text')]);//DB::raw('branch_code as id')
 		return $regions;
     }
 }
