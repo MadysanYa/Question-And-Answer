@@ -90,11 +90,20 @@ class PropertyIndicatorController extends AdminController
             return $region->region_name;     
         }); 
 
-        $grid->column('branch_id',__('Branch'))->filter($this->convertToArrayBranch(Branch::whereIn('region_id', $filterRegionID)->get(['id', 'branch_name'])))->Display(function($id){
-             $branch = Branch::where('id', $id)->first();
-            if($branch == null) return '';
-            return $branch->branch_name;  
-            });  
+        $grid->column('branch_code',__('Branch'))->filter($this->convertToArrayBranch(Branch::all(['branch_code', 'branch_name'])))->Display(function($branch_code){// add filter
+            $branch = Branch::where('branch_code', $branch_code)->first();
+            // return $branch->branch_name;
+            if($branch == null)
+                return '';
+            else
+                return $branch->branch_name;  
+
+            });
+        // $grid->column('branch_code',__('Branch'))->filter($this->convertToArrayBranch(Branch::whereIn('region_id', $filterRegionID)->get(['id', 'branch_name'])))->Display(function($branch_code){
+        //      $branch = Branch::where('branch_code', $branch_code)->first();
+        //     if($branch == null) return '';
+        //     return $branch->branch_name;  
+        //    });  
         $grid->column('requested_date',__('Requested Date'))->sortable(); 
         $grid->column('reported_date',__('Reported Date'))->sortable();
         $grid->column('cif_no',__('CIF No.'))->sortable(); 
@@ -212,6 +221,7 @@ class PropertyIndicatorController extends AdminController
 
         return $grid;
     }
+
     // filter 
     function convertToArray($data){
 
@@ -223,7 +233,7 @@ class PropertyIndicatorController extends AdminController
         }
         return $provinceArray;
        
-       }
+    }
 
     function convertToArrayDistrict($data){
 
@@ -253,7 +263,7 @@ class PropertyIndicatorController extends AdminController
         $branchArray = array();
         foreach($data as $item){      
            
-            $branchArray[$item->id] = $item->branch_name;
+            $branchArray[$item->branch_code] = $item->branch_name;
         }
         return $branchArray;
    }
@@ -380,7 +390,7 @@ class PropertyIndicatorController extends AdminController
             //zero loading 
             $form->text('property_reference', __('Property Reference '))->value(function(){
                 $id = PropertyIndicator::all()->last();
-               return 'PL-'. sprintf('%010d', $id->id + 1);//$id == null? 1 :  
+               return 'PL-'. sprintf('%010d',$id == null? 1 : $id->id + 1);//$id == null? 1 :  
             });
                  
            
@@ -413,7 +423,7 @@ class PropertyIndicatorController extends AdminController
                 $form->select('property_type', __('Property Type'))->rules('required')->options(function(){
                     return PropertyType::all()->pluck('property_type_name','id');
                 });
-                $form->text('no_of_floor', __('No. of Floor'))->rules('required');
+                $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1); // all number 
                 $form->text('land_size', __('Land Size (sqm)'))->rules('required');
                 $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->rules('required');
                 $form->text('customer_name', __('Customer Name '))->rules('required');
