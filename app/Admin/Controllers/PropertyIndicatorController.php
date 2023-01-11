@@ -429,12 +429,7 @@ class PropertyIndicatorController extends AdminController
                     return InformationType::all()->pluck('information_type_name','id');
                 });
                 $form->select('type_of_access_road', __('Type of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road', 'Paved Road'=>'Paved Road','Upaved Road'=>'Upaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road']);
-<<<<<<< HEAD
-                $form->rate('building_status', __('Building Status '))->min(0)->max(100);//->rules('required');
-=======
-                //$form->rate('building_status',__('Building Status'));
-                $form->number('building_status', __('Building Status (%)'))->min(0)->max(100)->rules('required');
->>>>>>> 812d183bb5f35507ee42c594fd293f9a42562776
+                $form->number('building_status', __('Building Status '))->min(0)->max(100);//->rules('required');
                 $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
                 $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
                 $form->currency('property_value', __('Property Value '))->rules('required');
