@@ -395,6 +395,7 @@ class PropertyIndicatorController extends AdminController
             //zero loading 
             $form->text('property_reference', __('Property Reference '))->value(function(){
                 $id = PropertyIndicator::all()->last();
+
                return 'PL-'. sprintf('%010d', $id == null? 1 : $id->id + 1);//$id == null? 1 :  
             }); //9
             $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area','Agricultural Area'=>'Agricultural Area']);//10     
@@ -402,6 +403,9 @@ class PropertyIndicatorController extends AdminController
             $form->text('access_road_name', __('Access Road Name'))->rules('required');//12
               $form->select('property_type', __('Property Type'))->rules('required')->options(function(){//13
                 return PropertyType::all()->pluck('property_type_name','id');
+
+                return 'PL-'. sprintf('%010d',$id == null? 1 : $id->id + 1);
+
             });
         });
         $form->column(1/3, function ($form){
