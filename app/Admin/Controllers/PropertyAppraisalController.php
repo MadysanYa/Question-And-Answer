@@ -309,7 +309,8 @@ class PropertyAppraisalController extends AdminController
         $show->field('latitude', __('Latitude'))->sortable(); 
         $show->field('remark', __('Remark'))->sortable(); 
         $show->field('telephone', __('Telephone'))->sortable(); 
-        $show->field('report_date', __('Report Date'))->sortable(); 
+        $show->field('reported_date', __('Report Date'))->sortable(); 
+        $show->field('requested_date',__('Requested Date'));
         $show->field('location_type', __('Location Type'))->sortable(); 
         $show->field('property_type', __('Property Type'))->sortable(); 
         $show->field('no_of_floor', __('No Of Floor'))->sortable(); 
@@ -381,7 +382,7 @@ class PropertyAppraisalController extends AdminController
 
             $form->text('cif', __('CIF No'));
             $form->text('rm_name', __('RM Name'))->rules('required');
-            $form->date('request_date', __('Request Date'))->rules('required');
+            $form->date('requested_date', __('Request Date'))->rules('required');
             $form->text('access_road_name', __('Access Road Name'))->rules('required');
             $form->select('borey', __('Borey'))->rules('required')->options(function(){
                 return Borey::all()->pluck('borey_name', 'id');
@@ -398,7 +399,7 @@ class PropertyAppraisalController extends AdminController
         $form->column(1/3,function($form){
                   
             $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 999 9999']); // add number 
-            $form->date('report_date', __('Report Date'))->rules('required');
+            $form->date('reported_date', __('Report Date'))->rules('required');
             $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area','Commercial Area'=>'Commercial Area', 'Industrial Area'=>'Industrial Area', 'Agricultural Area'=>'Agricultural Area']);
             $form->select('property_type', __('Property Type'))->rules('required')->options(['Vacant Land'=>'Vacant Land', 'Flat House'=>'Flat House', 'Link House'=>'Link House', 'Villa'=>'Villa', 'Flay house from 1st floor up'=>'Flay house from 1st floor up', 'Twin Villa'=>'Twin Villa','Commercial Bulding'=>'Commercial Bulding', 'Hotel'=>'Hotel','Guesthouse'=>'Guesthouse', 'Warehouse'=>'Warehouse', 'Factory'=>'Factory', 'Condo'=>'Condo', 'Apartment'=>'Apartment','Shop'=>'Shop', 'Gas Station'=>'Gas Station', 'Wooden House'=>'Wooden House','Building'=>'Building','Shop House'=>'Shop House' ]);
             $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1);
