@@ -89,30 +89,30 @@ class PropertyIndicatorController extends AdminController
             $region = Region::where('id', $id)->first();
             return $region->region_name;     
         }); 
-        $grid->column('branch_id',__('Branch'))->filter($this->convertToArrayBranch(Branch::whereIn('region_id', $filterRegionID)->get(['id', 'branch_name'])))->Display(function($branch_code){
-            
-            $branch = Branch::where('id', $branch_code)->first();
+
+        $grid->column('branch_id',__('Branch'))->filter($this->convertToArrayBranch(Branch::whereIn('region_id', $filterRegionID)->get(['id', 'branch_name'])))->Display(function($id){
+             $branch = Branch::where('id', $id)->first();
             if($branch == null) return '';
-            return $branch->branch_name;      
-        });  
+            return $branch->branch_name;  
+            });  
         $grid->column('requested_date',__('Requested Date'))->sortable(); 
         $grid->column('reported_date',__('Reported Date'))->sortable();
         $grid->column('cif_no',__('CIF No.'))->sortable(); 
         $grid->column('rm_name',__('RM Name'))->sortable(); 
         $grid->column('telephone',__('Telephone'))->sortable(); 
-        $grid->column('information_type',__('Information Type'))->Display(function($id){
+        $grid->column('information_type',__('Information Type'))->sortable()->Display(function($id){
             $informationtype = InformationType::where('id',$id)->first();
             return $informationtype->information_type_name;
         });
-        $grid->column('location_type',__('Location Type')); 
+        $grid->column('location_type',__('Location Type'))->sortable(); 
         $grid->column('type_of_access_road',__('Type of Access Road'))->sortable(); 
         $grid->column('access_road_name',__('Access Road Name'))->sortable(); 
-        $grid->column('property_type',__('Property Type'))->Display(function($id){
+        $grid->column('property_type',__('Property Type'))->sortable()->Display(function($id){
             $propertytype = PropertyType::where('id',$id)->first();
             return $propertytype->property_type_name;
         }); 
         $grid->column('building_status',__('Building Status (%)'))->sortable(); 
-        $grid->column('borey',__('Borey'))->display(function($id){
+        $grid->column('borey',__('Borey'))->sortable()->display(function($id){
             $borey = Borey::where('id',$id)->first();
             return $borey->borey_name;
         }); 
@@ -138,7 +138,7 @@ class PropertyIndicatorController extends AdminController
             $commune = Commune::where('id', $comune_id)->first();
             return $commune->commune_name;
         }); 
-        $grid->column('village_id',__('Village'))->Display(function($village_id){
+        $grid->column('village_id',__('Village'))->sortable()->Display(function($village_id){
             $village = Village::where('id', $village_id)->first();
             return $village->village_name ;
         });
@@ -247,17 +247,17 @@ class PropertyIndicatorController extends AdminController
         return $communeArray;
 
     }
+
     function convertToArrayBranch($data){
 
         $branchArray = array();
-
         foreach($data as $item){      
            
             $branchArray[$item->id] = $item->branch_name;
         }
         return $branchArray;
+   }
 
-    }
     function convertToArrayRegion($data){
 
         $RegionArray = array();
@@ -269,6 +269,7 @@ class PropertyIndicatorController extends AdminController
         return  $RegionArray;
 
     }
+
 
 
 
@@ -288,7 +289,7 @@ class PropertyIndicatorController extends AdminController
              
 
             
-            $show->field('region', __('Region'))->as(function($region){
+            $show->field('region_id', __('Region'))->as(function($region){
                 $region = Region::where('id', $region)->first();
                 if($region == null) return '';
                 return $region->region_name ;
@@ -367,7 +368,7 @@ class PropertyIndicatorController extends AdminController
         $form = new Form(new PropertyIndicator());
         $form->column(1/3, function ($form){
             
-            $form->select('region', __('Region'))->rules('required')->options(function(){
+            $form->select('region_id', __('Region'))->rules('required')->options(function(){
                 return Region::all()->pluck('region_name', 'id');})->load('branch_code', env('APP_URL') . '/public/api/branch');
 
             $form->select('branch_code',__('Branch'))->rules('required')->options(function(){
