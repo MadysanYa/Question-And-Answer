@@ -385,7 +385,8 @@ class PropertyIndicatorController extends AdminController
                  return Branch::all()->pluck('branch_name','branch_code');});
 
             
-            $form->text('cif_no', __('CIF No.'));
+            // $form->text('cif_no', __('CIF No.'));
+            $form->text('cif_no', __('CIF No.'))->inputmask(['mask' => '9999999999'])->rules('required');
             $form->text('rm_name', __('RM Name'))->rules('required');
             //zero loading 
             $form->text('property_reference', __('Property Reference '))->value(function(){
