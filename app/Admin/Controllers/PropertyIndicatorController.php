@@ -390,7 +390,7 @@ class PropertyIndicatorController extends AdminController
             //zero loading 
             $form->text('property_reference', __('Property Reference '))->value(function(){
                 $id = PropertyIndicator::all()->last();
-               return 'PL-'. sprintf('%010d', $id->id + 1);//$id == null? 1 :  
+                return 'PL-'. sprintf('%010d',$id == null? 1 : $id->id + 1);
             });
                  
            
