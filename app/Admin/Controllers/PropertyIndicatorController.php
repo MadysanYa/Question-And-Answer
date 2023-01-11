@@ -44,7 +44,7 @@ class PropertyIndicatorController extends AdminController
     {
 
         //filter  
-        $filterRegionID = isset($_REQUEST['region'])? $_REQUEST['region'] : [];
+        //$filterRegionID = isset($_REQUEST['region'])? $_REQUEST['region'] : [];
         $filterProvinceId = isset($_REQUEST['province_id'])? $_REQUEST['province_id'] : [];
         $filterDistrictId = isset($_REQUEST['district_id'])? $_REQUEST['district_id'] : [];
 
@@ -89,7 +89,7 @@ class PropertyIndicatorController extends AdminController
             $region = Region::where('id', $id)->first();
             return $region->region_name;     
         }); 
-        $grid->column('branch_code',__('Branch'))->filter($this->convertToArrayBranch(Branch::whereIn('region_id', $filterRegionID)->get(['id', 'branch_name'])))->Display(function($branch_code){
+        $grid->column('branch_code',__('Branch'))->Display(function($branch_code){//->filter($this->convertToArrayBranch(Branch::whereIn('region_id', $filterRegionID)->get(['id', 'branch_name'])))
             
             $branch = Branch::where('branch_code', $branch_code)->first();
             if($branch == null) return '';
@@ -247,17 +247,17 @@ class PropertyIndicatorController extends AdminController
         return $communeArray;
 
     }
-    function convertToArrayBranch($data){
+    // function convertToArrayBranch($data){
 
-        $branchArray = array();
+    //     $branchArray = array();
 
-        foreach($data as $item){      
+    //     foreach($data as $item){      
            
-            $branchArray[$item->id] = $item->branch_name;
-        }
-        return $branchArray;
+    //         $branchArray[$item->id] = $item->branch_name;
+    //     }
+    //     return $branchArray;
 
-    }
+    // }
     function convertToArrayRegion($data){
 
         $RegionArray = array();
@@ -350,7 +350,7 @@ class PropertyIndicatorController extends AdminController
             $show->field('longtitude',__('Longtitude'));
             $show->field('latitude',__('Latitude'));
             $show->field('front_photo',__('Front Photo'));
-           
+            
             $show->field('remark',__('Remark'));
             
         return $show;
@@ -407,7 +407,7 @@ class PropertyIndicatorController extends AdminController
             $form->column(1/3, function ($form){            
                 $form->date('requested_date', __('Requested Date'))->rules('required');
                 $form->date('reported_date',__('Reported Date'))->rules('required');
-                $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 99 99999']); // add number 
+                $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 999 9999']); // add number 
                 $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area','Agricultural Area'=>'Agricultural Area']);
                 $form->select('property_type', __('Property Type'))->rules('required')->options(function(){
                     return PropertyType::all()->pluck('property_type_name','id');
@@ -429,15 +429,15 @@ class PropertyIndicatorController extends AdminController
                     return InformationType::all()->pluck('information_type_name','id');
                 });
                 $form->select('type_of_access_road', __('Type of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road', 'Paved Road'=>'Paved Road','Upaved Road'=>'Upaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road']);
-                $form->rate('building_status', __('Building Status '));//->min(0)->max(100);//->rules('required');
+                //$form->rate('building_status',__('Building Status'));
+                $form->number('building_status', __('Building Status (%)'))->min(0)->max(100)->rules('required');
                 $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
                 $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
                 $form->currency('property_value', __('Property Value '))->rules('required');
              
-                $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 99 99999']);
+                $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 999 9999']);
                 $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '99.999999'])->rules('required');
                 $form->text('latitude', __('Latitude'))->inputmask(['mask' => '999.999999'])->rules('required');
-                
                 
             });
             
