@@ -170,7 +170,7 @@ class PropertyIndicatorController extends AdminController
                         return '<p style="color: #172191; border: 1px solid #172191;padding: 5px;text-align:center;">Processing</p>'; 
                     }
                 }
-                else if($is_verified ==1){
+                else if($is_verified == 1){
                     return '<p style="color: #0c871f; border: 1px solid #0c871f;padding: 5px;text-align:center;">Verified</p>'; 
                 }
                 else{

@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+
 use App\Models\Province;
 use App\Models\Branch;
 use App\Models\Commune;
@@ -22,6 +23,7 @@ use Encore\Admin\Form\Field\Button;
 use Encore\Admin\Layout\Content;
 use Illuminate\Support\Facades\Request;
 Use Encore\Admin\Widgets\Table;
+use App\Models\User;
 
 class PropertyAppraisalController extends AdminController
 {
@@ -169,7 +171,7 @@ class PropertyAppraisalController extends AdminController
         $show->field('property_type', __('Property Type'))->sortable(); 
         $show->field('no_of_floor', __('No Of Floor'))->sortable(); 
         $show->field('land_size', __('Land_size'))->sortable(); 
-        $show->field('building_size_by_measure', __('Building Size By Measure'))->sortable(); 
+        $show->field('building_size_by_measure', ____('Building measure ($)'))->sortable(); 
         $show->field('collateral_owner', __('Owner'))->sortable(); 
         $show->field('provinces', __('Province'))->sortable(); 
         $show->field('village', __('Village'))->sortable(); 
@@ -180,7 +182,7 @@ class PropertyAppraisalController extends AdminController
         $show->field('land_title_type', __('Land Title Type'))->sortable(); 
         $show->field('land_size_by_measurement', __('Land Size By Measurement'))->sortable(); 
         $show->field('customer_name', __('Customer_Name'))->sortable(); 
-        $show->field('building_size_per_sqm', __('Building Size Per Sqm'))->sortable(); 
+        $show->field('building_size_per_sqm', ____('Building Size ($)'))->sortable();
         $show->field('district_khan', __('District Khan'))->sortable(); 
         $show->field('altitude', __('Altitude'))->sortable();
         $grid->column('province_id',__('Province'))->filter($this->convertToArray(Province::all(['id', 'province_name'])))->Display(function($province_id){
@@ -225,9 +227,9 @@ class PropertyAppraisalController extends AdminController
                return Branch::all()->pluck('branch_name','branch_code');});
 
             //Sum id
-            $form->text('reference_id', __('Property Reference'))->value(function(){
+            $form->text('property_reference', __('Property Reference '))->value(function(){
                 $id = PropertyAppraisal::all()->last();
-                return 'PL-00' . $id-> id+1 ;
+               return 'PL-'. sprintf('%010d', $id->id + 1);//$id == null? 1 :  
             });
 
 
@@ -239,8 +241,8 @@ class PropertyAppraisalController extends AdminController
                 return Borey::all()->pluck('borey_name', 'id');
             });//->rules('required');
             $form->text('land_title_no', __('Land Title No'))->rules('required');
-            $form->text('land_value_persqm', __('Land Value per Sqm ($)'))->rules('required');
-            $form->text('property_value', __('Property Value ($)'))->rules('required');
+            $form->text('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
+            $form->currency('property_value', __('Property Value '))->rules('required');
             $form->text('clinet_contact_no', __('Clinet Contact No'))->rules('required');
             $form->text('latitude', __('Latitude'))->rules('required');
                  
@@ -249,13 +251,13 @@ class PropertyAppraisalController extends AdminController
            
         $form->column(1/3,function($form){
                   
-            $form->text('telephone', __('Telephone'))->rules('required|max:10');
+            $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 999 9999']); // add number 
             $form->date('report_date', __('Report Date'))->rules('required');
             $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area','Commercial Area'=>'Commercial Area', 'Industrial Area'=>'Industrial Area', 'Agricultural Area'=>'Agricultural Area']);
             $form->select('property_type', __('Property Type'))->rules('required')->options(['Vacant Land'=>'Vacant Land', 'Flat House'=>'Flat House', 'Link House'=>'Link House', 'Villa'=>'Villa', 'Flay house from 1st floor up'=>'Flay house from 1st floor up', 'Twin Villa'=>'Twin Villa','Commercial Bulding'=>'Commercial Bulding', 'Hotel'=>'Hotel','Guesthouse'=>'Guesthouse', 'Warehouse'=>'Warehouse', 'Factory'=>'Factory', 'Condo'=>'Condo', 'Apartment'=>'Apartment','Shop'=>'Shop', 'Gas Station'=>'Gas Station', 'Wooden House'=>'Wooden House','Building'=>'Building','Shop House'=>'Shop House' ]);
-            $form->text('no_of_floor', __('No Of Floor'))->rules('required');
+            $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1);
             $form->text('land_size', __('Land Size (Sqm)'))->rules('required');
-            $form->text('building_size_by_measure', __('Building Size By Measure (Sqm)'))->rules('required');
+            $form->currency('building_size_by_measure', __('Building Size'))->rules('required');
             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
             $form->text('remark', __('Remark'));
             $form->image('frontphoto', __('Front Photo'))->removable()->uniqueName();
@@ -280,7 +282,7 @@ class PropertyAppraisalController extends AdminController
  
             $form->select('information_type', __('Information Type'))->rules('required')->options(['Indication'=>'Indication', 'Asking'=>'Asking','Website'=>'Website','Social Media'=>'Social Media','Government'=>'Government','Real Estate Agent'=>'Real Estate Agent','Property Owner'=>'Property Owner','Others'=>'Others' ]);
             $form->select('type_of_access_road', __('Type Of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road','Paved Road'=>'Paved Road', 'Unpaved Road'=>'Unpaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road' ]);
-            $form->text('building_status', __('Building Status (%)'))->rules('required');
+            $form->number('building_status', __('Building Status (%) '))->min(0)->max(100);//->rules('required');
             $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title','Soft Title'=>'Soft Title']);
             $form->text('land_size_by_measurement', __('Land Size by Measurement (Sqm)'))->rules('required');
             $form->text('building_size_per_sqm', __('Building Size per (Sqm)'))->rules('required');  
