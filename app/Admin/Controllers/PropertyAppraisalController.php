@@ -86,10 +86,15 @@ class PropertyAppraisalController extends AdminController
                
             }); 
             $grid->column('longtitude',__('Geo Code'))->sortable(); 
+
             $grid->column('region_id',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){// add filter
                 $region = Region::where('id', $id)->first();
+                if ($region == null)
+                return '';
+                else
                 return $region->region_name;     
             }); 
+    
             $grid->column('branch_code',__('Branch'))->filter($this->convertToArrayBranch(Branch::all(['branch_code', 'branch_name'])))->Display(function($branch_code){// add filter
                 $branch = Branch::where('branch_code', $branch_code)->first();
                 // return $branch->branch_name;
@@ -97,6 +102,7 @@ class PropertyAppraisalController extends AdminController
                     return '';
                 else
                     return $branch->branch_name;  
+    
                 });
                 //////////////////////////
                 $grid->column('requested_date',__('Requested Date'))->sortable(); 
@@ -106,6 +112,7 @@ class PropertyAppraisalController extends AdminController
                 $grid->column('telephone',__('Telephone'))->sortable(); 
                 $grid->column('information_type',__('Information Type'))->Display(function($id){
                     $informationtype = InformationType::where('id',$id)->first();
+                    if($informationtype == Null ) return '';
                     return $informationtype->information_type_name;
                 });
                 $grid->column('location_type',__('Location Type')); 
@@ -119,6 +126,7 @@ class PropertyAppraisalController extends AdminController
                 $grid->column('building_status',__('Building Status (%)'))->sortable(); 
                 $grid->column('borey',__('Borey'))->display(function($id){
                     $borey = Borey::where('id',$id)->first();
+                    if($borey == null) return '';
                     return $borey->borey_name;
                 }); 
                 $grid->column('no_of_floor',__('No. of floor'))->sortable(); 
@@ -133,19 +141,22 @@ class PropertyAppraisalController extends AdminController
                 $grid->column('client_contact_no',__('Cliend Contact No.'))->sortable(); 
                 $grid->column('province_id',__('Province'))->filter($this->convertToArray(Province::all(['id', 'province_name'])))->Display(function($province_id){
                    $province = Province::where('id', $province_id)->first();
-                   if($province == Null) return '';
+                   if ($province == null) return '';
                     return $province->province_name;     
                 });
                 $grid->column('district_id',__('District/Khan'))->filter($this->convertToArrayDistrict(District::whereIn('province_id', $filterProvinceId)->get(['id', 'district_name'])))->Display(function($district_id){ //Add filter when click ex:province->distict..
                     $district = District::where('id', $district_id)->first();
+                    if ($district == null)  return '';
                     return $district->district_name;
                 }); 
                 $grid->column('commune_id',__('Commune/Sangkat'))->filter($this->convertToArrayCommune(Commune::whereIn('district_id', $filterDistrictId)->get(['id','commune_name'])))->Display(function($comune_id){
                     $commune = Commune::where('id', $comune_id)->first();
+                    if ($commune == null) return '';
                     return $commune->commune_name;
                 }); 
                 $grid->column('village_id',__('Village'))->Display(function($village_id){
                     $village = Village::where('id', $village_id)->first();
+                    if ($village == null) return '';
                     return $village->village_name ;
                 });
                 $grid->column('longtitude',__('Longtitude'))->sortable(); 
@@ -285,14 +296,14 @@ class PropertyAppraisalController extends AdminController
 
         $show->field('id', __('ID'))->sortable();
         $show->field('region_id', __('Region'))->as(function($region){
-            $province = Province::where('id', $region)->first();
-            if($province == null) return '';
-            return $province->province_name ;
+            $region = Region::where('id', $region)->first();
+            if($region == null) return '';
+            return $region->region_name ;
         });
         $show->field('branch_code',__('Branch'))->as(function($branch_code){
-            $branch = Branch::where('branch_code',$branch_code)->first();
+            $branch = Branch::where('branch_code', $branch_code)->first();
             if($branch == null) return '';
-            return '(' . $branch->branch_code . ') ' . $branch->branch_name;
+            return '(' . $branch->branch_code . ')' . $branch->branch_name;
         });
 
         $show->field('reference_id', __('reference_id'))->sortable(); 
@@ -308,7 +319,7 @@ class PropertyAppraisalController extends AdminController
         $show->field('commune_sangkat', __('Commune Sangkat'))->sortable(); 
         $show->field('latitude', __('Latitude'))->sortable(); 
         $show->field('remark', __('Remark'))->sortable(); 
-        $show->field('telephone', __('Telephone'))->sortable(); 
+        $show->field('client_contact_no',__('Cliend Contact No'));
         $show->field('reported_date', __('Report Date'))->sortable(); 
         $show->field('requested_date',__('Requested Date'));
         $show->field('location_type', __('Location Type'))->sortable(); 
@@ -322,10 +333,11 @@ class PropertyAppraisalController extends AdminController
         $show->field('photos',__('Photo'))->sortable(); 
         $show->field('information_type',__('Information Type'))->as(function($id){
             $informationtype = InformationType::where('id', $id)->first();
+            if($informationtype == Null ) return '';  
             return  $informationtype->information_type_name;
         });
         $show->field('type_of_access_road', __('Type Of Access Road'))->sortable(); 
-        $show->field('building_status', __('Building Status'))->sortable(); 
+        $show->field('building_status',__('Building Status (%)'));
         $show->field('land_title_type', __('Land Title Type'))->sortable(); 
         $show->field('land_size_by_measurement', __('Land Size By Measurement'))->sortable(); 
         $show->field('customer_name', __('Customer_Name'))->sortable(); 
@@ -369,8 +381,9 @@ class PropertyAppraisalController extends AdminController
             $form->select('region_id', __('Region'))->rules('required')->options(function(){
                 return Region::all()->pluck('region_name', 'id');})->load('branch_code', env('APP_URL') . '/public/api/branch');
 
-                $form->select('branch_code',__('Branch'))->rules('required')->options(function(){
-                    return Branch::all()->pluck('branch_name','branch_code');});
+            $form->select('branch_code',__('Branch'))->rules('required')->options(function(){
+                 return Branch::all()->pluck('branch_name','branch_code');});
+
    
 
             //Sum id
@@ -433,9 +446,11 @@ class PropertyAppraisalController extends AdminController
             $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title','Soft Title'=>'Soft Title']);
             $form->text('land_size_by_measurement', __('Land Size by Measurement (Sqm)'))->rules('required');
             $form->text('building_size_per_sqm', __('Building Size per (Sqm)'))->rules('required');  
-            $form->text('customer_name', __('Customer Name'))->rules('required');                        
+            $form->text('customer_name', __('Customer Name'))->rules('required');
+            $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 999 9999']);                        
             $form->text('altitude', __('Altitude'))->rules('required');
             $form->button('swot_analyze', __('Swot Analyze'));
+            
 
         });              
 
