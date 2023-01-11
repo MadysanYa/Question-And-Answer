@@ -89,8 +89,8 @@ class PropertyIndicatorController extends AdminController
             $region = Region::where('id', $id)->first();
             return $region->region_name;     
         }); 
-        $grid->column('branch_id',__('Branch'))->filter($this->convertToArrayBranch(Branch::all(['id', 'branch_name'])))->Display(function($id){// add filter
-            $branch = Branch::where('id', $id)->first();
+        $grid->column('branch_code',__('Branch'))->filter($this->convertToArrayBranch(Branch::all(['branch_code', 'branch_name'])))->Display(function($branch_code){// add filter
+            $branch = Branch::where('branch_code', $branch_code)->first();
             // return $branch->branch_name;
             if($branch == null)
                 return '';
@@ -263,7 +263,7 @@ class PropertyIndicatorController extends AdminController
 
         foreach($data as $item){      
            
-            $branchArray[$item->id] = $item->branch_name;
+            $branchArray[$item->branch_code] = $item->branch_name;
         }
         return $branchArray;
 
@@ -299,7 +299,7 @@ class PropertyIndicatorController extends AdminController
              
 
             
-            $show->field('region', __('Region'))->as(function($region){
+            $show->field('region_id', __('Region'))->as(function($region){
                 $region = Region::where('id', $region)->first();
                 if($region == null) return '';
                 return $region->region_name ;
@@ -378,7 +378,7 @@ class PropertyIndicatorController extends AdminController
         $form = new Form(new PropertyIndicator());
         $form->column(1/3, function ($form){
             
-            $form->select('region', __('Region'))->rules('required')->options(function(){
+            $form->select('region_id', __('Region'))->rules('required')->options(function(){
                 return Region::all()->pluck('region_name', 'id');})->load('branch_code', env('APP_URL') . '/public/api/branch');
 
             $form->select('branch_code',__('Branch'))->rules('required')->options(function(){
@@ -423,7 +423,7 @@ class PropertyIndicatorController extends AdminController
                 $form->select('property_type', __('Property Type'))->rules('required')->options(function(){
                     return PropertyType::all()->pluck('property_type_name','id');
                 });
-                $form->text('no_of_floor', __('No. of Floor'))->rules('required');
+                $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1);
                 $form->text('land_size', __('Land Size (sqm)'))->rules('required');
                 $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->rules('required');
                 $form->text('customer_name', __('Customer Name '))->rules('required');
