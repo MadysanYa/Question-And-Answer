@@ -44,7 +44,7 @@ class PropertyIndicatorController extends AdminController
     {
 
         //filter  
-        //$filterRegionID = isset($_REQUEST['region'])? $_REQUEST['region'] : [];
+        $filterRegionID = isset($_REQUEST['region_id'])? $_REQUEST['region_id'] : [];
         $filterProvinceId = isset($_REQUEST['province_id'])? $_REQUEST['province_id'] : [];
         $filterDistrictId = isset($_REQUEST['district_id'])? $_REQUEST['district_id'] : [];
 
@@ -89,6 +89,7 @@ class PropertyIndicatorController extends AdminController
             $region = Region::where('id', $id)->first();
             return $region->region_name;     
         }); 
+
         $grid->column('branch_code',__('Branch'))->filter($this->convertToArrayBranch(Branch::all(['branch_code', 'branch_name'])))->Display(function($branch_code){// add filter
             $branch = Branch::where('branch_code', $branch_code)->first();
             // return $branch->branch_name;
@@ -97,31 +98,30 @@ class PropertyIndicatorController extends AdminController
             else
                 return $branch->branch_name;  
 
-        // ->Display(function($branch_code){
-        // ->filter($this->convertToArrayBranch(Branch::whereIn('region_id', $filterRegionID)->get(['id', 'branch_name'])))
-            
-            // $branch = Branch::where('branch_code', $branch_code)->first();
-            // if($branch == null) return '';
-            // return $branch->branch_name;      
-        });  
+            });
+        // $grid->column('branch_code',__('Branch'))->filter($this->convertToArrayBranch(Branch::whereIn('region_id', $filterRegionID)->get(['id', 'branch_name'])))->Display(function($branch_code){
+        //      $branch = Branch::where('branch_code', $branch_code)->first();
+        //     if($branch == null) return '';
+        //     return $branch->branch_name;  
+        //    });  
         $grid->column('requested_date',__('Requested Date'))->sortable(); 
         $grid->column('reported_date',__('Reported Date'))->sortable();
         $grid->column('cif_no',__('CIF No.'))->sortable(); 
         $grid->column('rm_name',__('RM Name'))->sortable(); 
         $grid->column('telephone',__('Telephone'))->sortable(); 
-        $grid->column('information_type',__('Information Type'))->Display(function($id){
+        $grid->column('information_type',__('Information Type'))->sortable()->Display(function($id){
             $informationtype = InformationType::where('id',$id)->first();
             return $informationtype->information_type_name;
         });
-        $grid->column('location_type',__('Location Type')); 
+        $grid->column('location_type',__('Location Type'))->sortable(); 
         $grid->column('type_of_access_road',__('Type of Access Road'))->sortable(); 
         $grid->column('access_road_name',__('Access Road Name'))->sortable(); 
-        $grid->column('property_type',__('Property Type'))->Display(function($id){
+        $grid->column('property_type',__('Property Type'))->sortable()->Display(function($id){
             $propertytype = PropertyType::where('id',$id)->first();
             return $propertytype->property_type_name;
         }); 
         $grid->column('building_status',__('Building Status (%)'))->sortable(); 
-        $grid->column('borey',__('Borey'))->display(function($id){
+        $grid->column('borey',__('Borey'))->sortable()->display(function($id){
             $borey = Borey::where('id',$id)->first();
             return $borey->borey_name;
         }); 
@@ -147,7 +147,7 @@ class PropertyIndicatorController extends AdminController
             $commune = Commune::where('id', $comune_id)->first();
             return $commune->commune_name;
         }); 
-        $grid->column('village_id',__('Village'))->Display(function($village_id){
+        $grid->column('village_id',__('Village'))->sortable()->Display(function($village_id){
             $village = Village::where('id', $village_id)->first();
             return $village->village_name ;
         });
@@ -170,7 +170,7 @@ class PropertyIndicatorController extends AdminController
                         return '<p style="color: #172191; border: 1px solid #172191;padding: 5px;text-align:center;">Processing</p>'; 
                     }
                 }
-                else if($is_verified ==1){
+                else if($is_verified == 1){
                     return '<p style="color: #0c871f; border: 1px solid #0c871f;padding: 5px;text-align:center;">Verified</p>'; 
                 }
                 else{
@@ -221,6 +221,7 @@ class PropertyIndicatorController extends AdminController
 
         return $grid;
     }
+
     // filter 
     function convertToArray($data){
 
@@ -232,7 +233,7 @@ class PropertyIndicatorController extends AdminController
         }
         return $provinceArray;
        
-       }
+    }
 
     function convertToArrayDistrict($data){
 
@@ -260,14 +261,12 @@ class PropertyIndicatorController extends AdminController
     function convertToArrayBranch($data){
 
         $branchArray = array();
-
         foreach($data as $item){      
            
             $branchArray[$item->branch_code] = $item->branch_name;
         }
         return $branchArray;
-
-    }
+   }
 
     function convertToArrayRegion($data){
 
@@ -280,6 +279,7 @@ class PropertyIndicatorController extends AdminController
         return  $RegionArray;
 
     }
+
 
 
 
@@ -390,7 +390,7 @@ class PropertyIndicatorController extends AdminController
             //zero loading 
             $form->text('property_reference', __('Property Reference '))->value(function(){
                 $id = PropertyIndicator::all()->last();
-               return 'PL-'. sprintf('%010d', $id->id + 1);//$id == null? 1 :  
+                return 'PL-'. sprintf('%010d',$id == null? 1 : $id->id + 1);
             });
                  
            
@@ -423,7 +423,7 @@ class PropertyIndicatorController extends AdminController
                 $form->select('property_type', __('Property Type'))->rules('required')->options(function(){
                     return PropertyType::all()->pluck('property_type_name','id');
                 });
-                $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1);
+                $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1); // all number 
                 $form->text('land_size', __('Land Size (sqm)'))->rules('required');
                 $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->rules('required');
                 $form->text('customer_name', __('Customer Name '))->rules('required');
