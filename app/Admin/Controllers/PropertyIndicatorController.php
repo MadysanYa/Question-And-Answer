@@ -384,8 +384,9 @@ class PropertyIndicatorController extends AdminController
             $form->select('branch_code',__('Branch'))->rules('required')->options(function(){
                  return Branch::all()->pluck('branch_name','branch_code');});
             $form->date('requested_date', __('Requested Date'))->rules('required');
+            if (User::isVerifierRole() || User::isApproverRole()){
             $form->date('reported_date',__('Reported Date'))->rules('required');    
-            
+            }
             $form->text('cif_no', __('CIF No.'))->inputmask(['mask' => '9999999999']);
             $form->text('rm_name', __('RM Name'))->rules('required');
             $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 999 9999']); // add number 
@@ -393,7 +394,7 @@ class PropertyIndicatorController extends AdminController
                 return InformationType::all()->pluck('information_type_name','id');
                });
             //zero loading 
-            $form->text('property_reference', __('Property Reference '))->value(function(){
+            $form->text('property_reference', __('Property Reference '))->readonly()->value(function(){
                 $id = PropertyIndicator::all()->last();
 
                return 'PL-'. sprintf('%010d', $id == null? 1 : $id->id + 1);//$id == null? 1 :  
@@ -403,9 +404,6 @@ class PropertyIndicatorController extends AdminController
             $form->text('access_road_name', __('Access Road Name'))->rules('required');
             $form->select('property_type', __('Property Type'))->rules('required')->options(function(){
                 return PropertyType::all()->pluck('property_type_name','id');
-
-               
-
             });
         });
         $form->column(1/3, function ($form){
