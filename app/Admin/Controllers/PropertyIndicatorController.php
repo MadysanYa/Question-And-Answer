@@ -377,13 +377,9 @@ class PropertyIndicatorController extends AdminController
     {
         $form = new Form(new PropertyIndicator());
         $form->column(1/3, function ($form){
-            
+           
             $form->select('region_id', __('Region'))->rules('required')->options(function(){
-                return Region::all()->pluck('region_name', 'id');})->load('branch_code', env('APP_URL') . '/public/api/branch');
-
-            $form->select('branch_code',__('Branch'))->rules('required')->options(function(){
-                 return Branch::all()->pluck('branch_name','branch_code');});
-
+                return Region::all()->pluck('region_name', 'id');})->load('branch_code', env('APP_URL') . '/public/api/branch');//1
             
             // $form->text('cif_no', __('CIF No.'));
             $form->text('cif_no', __('CIF No.'))->inputmask(['mask' => '9999999999'])->rules('required');
@@ -391,18 +387,47 @@ class PropertyIndicatorController extends AdminController
             //zero loading 
             $form->text('property_reference', __('Property Reference '))->value(function(){
                 $id = PropertyIndicator::all()->last();
+
+               return 'PL-'. sprintf('%010d', $id == null? 1 : $id->id + 1);//$id == null? 1 :  
+            }); //9
+            $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area','Agricultural Area'=>'Agricultural Area']);//10     
+            $form->select('type_of_access_road', __('Type of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road', 'Paved Road'=>'Paved Road','Upaved Road'=>'Upaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road']);//11
+            $form->text('access_road_name', __('Access Road Name'))->rules('required');//12
+              $form->select('property_type', __('Property Type'))->rules('required')->options(function(){//13
+                return PropertyType::all()->pluck('property_type_name','id');
+
                 return 'PL-'. sprintf('%010d',$id == null? 1 : $id->id + 1);
+
             });
-                 
-           
-            $form->text('access_road_name', __('Access Road Name'))->rules('required');
-            $form->select('borey', __('Borey'))->rules('required')->options(function(){
+        });
+        $form->column(1/3, function ($form){
+            $form->html('<br>');
+            $form->html('<br>');
+            $form->html('<br>');
+          
+            $form->number('building_status', __('Building Status (%) '))->min(0)->max(100);//->rules('required');//14
+            $form->select('borey', __('Borey'))->rules('required')->options(function(){ //15
                 return Borey::all()->pluck('borey_name', 'id');
             });
-            $form->text('land_title_no', __('Land title No.'))->rules('required');
-            $form->currency('building_size', __('Building Size'))->rules('required');
-            $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
+            $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1); // all number //16
+                   
+            $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);//17
+            $form->text('land_title_no', __('Land title No.'))->rules('required');//18
+            $form->text('land_size', __('Land Size (sqm)'))->rules('required');//19
+            $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');//20
+            $form->currency('building_size', __('Building Size'))->rules('required');//21
+            $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->rules('required');//22
+            $form->currency('property_value', __('Property Value '))->rules('required');//23
+            $form->text('collateral_owner', __('Collateral Owner'))->rules('required');//24
+        });
+        $form->column(1/3, function ($form){   
+            $form->html('<br>');
+            $form->html('<br>'); 
+            $form->html('<br>');
+            $form->text('customer_name', __('Customer Name '))->rules('required');//25
+            $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 999 9999']);//26
             // api
+            //27
             $form->select('province_id', __('Province'))->rules('required')->options(function(){
                 return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
             
@@ -414,44 +439,13 @@ class PropertyIndicatorController extends AdminController
 
             $form->select('village_id', __('Village'))->rules('required')->options(function(){
                 return Village::all()->pluck('village_name','id');});
-            
-        });    
-            $form->column(1/3, function ($form){            
-                $form->date('requested_date', __('Requested Date'))->rules('required');
-                $form->date('reported_date',__('Reported Date'))->rules('required');
-                $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 999 9999']); // add number 
-                $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area','Agricultural Area'=>'Agricultural Area']);
-                $form->select('property_type', __('Property Type'))->rules('required')->options(function(){
-                    return PropertyType::all()->pluck('property_type_name','id');
-                });
-                $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1); // all number 
-                $form->text('land_size', __('Land Size (sqm)'))->rules('required');
-                $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->rules('required');
-                $form->text('customer_name', __('Customer Name '))->rules('required');
-              
-               
-                $form->text('remark', __('Remark'));
-                $form->image('front_photo',__('Front Photo'))->removable()->uniqueName();
-                $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
-            });
-                
-            $form->column(1/3, function ($form){
-               
-                $form->select('information_type',__('Information Type'))->rules('required')->options(function(){
-                    return InformationType::all()->pluck('information_type_name','id');
-                });
-                $form->select('type_of_access_road', __('Type of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road', 'Paved Road'=>'Paved Road','Upaved Road'=>'Upaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road']);
-                $form->number('building_status', __('Building Status (%) '))->min(0)->max(100);//->rules('required');
-                $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
-                $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
-                $form->currency('property_value', __('Property Value '))->rules('required');
-             
-                $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 999 9999']);
-                $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '99.999999'])->rules('required');
-                $form->text('latitude', __('Latitude'))->inputmask(['mask' => '999.999999'])->rules('required');
-                
-            });
-            
+            $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '99.999999'])->rules('required');//31
+            $form->text('latitude', __('Latitude'))->inputmask(['mask' => '999.999999'])->rules('required');//32
+            $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();//33
+            $form->image('front_photo',__('Front Photo'))->removable()->uniqueName();
+            $form->text('remark', __('Remark'));//34
+
+          });
        
             
         
