@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Commune;
+//use App\Http\Controllers\Transfer;
 use Encore\Admin\Controllers\AdminController;
 use App\Models\Transfer;
+use App\Models\Commune;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
