@@ -381,9 +381,17 @@ class PropertyIndicatorController extends AdminController
             $form->select('region_id', __('Region'))->rules('required')->options(function(){
                 return Region::all()->pluck('region_name', 'id');})->load('branch_code', env('APP_URL') . '/public/api/branch');//1
             
-            // $form->text('cif_no', __('CIF No.'));
-            $form->text('cif_no', __('CIF No.'))->inputmask(['mask' => '9999999999'])->rules('required');
-            $form->text('rm_name', __('RM Name'))->rules('required');
+            $form->select('branch_code',__('Branch'))->rules('required')->options(function(){
+                 return Branch::all()->pluck('branch_name','branch_code');});//2
+            $form->date('requested_date', __('Requested Date'))->rules('required');//3
+            $form->date('reported_date',__('Reported Date'))->rules('required');   //4 
+            
+            $form->text('cif_no', __('CIF No.'))->inputmask(['mask' => '9999999999']);//5
+            $form->text('rm_name', __('RM Name'))->rules('required');//6
+            $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 999 9999']); // add number //7
+            $form->select('information_type',__('Information Type'))->rules('required')->options(function(){ //8
+                return InformationType::all()->pluck('information_type_name','id');
+               });
             //zero loading 
             $form->text('property_reference', __('Property Reference '))->value(function(){
                 $id = PropertyIndicator::all()->last();
