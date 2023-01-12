@@ -105,7 +105,9 @@ class PropertyIndicatorController extends AdminController
         //     return $branch->branch_name;  
         //    });  
         $grid->column('requested_date',__('Requested Date'))->sortable(); 
+        if (User::isVerifierRole() || User::isApproverRole()){
         $grid->column('reported_date',__('Reported Date'))->sortable();
+        }
         $grid->column('cif_no',__('CIF No.'))->sortable(); 
         $grid->column('rm_name',__('RM Name'))->sortable(); 
         $grid->column('telephone',__('Telephone'))->sortable(); 
@@ -311,7 +313,9 @@ class PropertyIndicatorController extends AdminController
             });
     
             $show->field('requested_date',__('Requested Date'));
+            if (User::isVerifierRole() || User::isApproverRole()){
             $show->field('reported_date',__('Reported Date'));
+            }
             $show->field('cif_no',__('CIF No.'));
             $show->field('rm_name',__('RM Name'));
             $show->field('telephone',__('Telephone'));
