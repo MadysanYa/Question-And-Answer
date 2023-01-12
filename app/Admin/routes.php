@@ -14,9 +14,11 @@ Admin::routes();
 
         $router->resource('/', ApplicationController::class);
         $router->resource('property_researchs', PropertyResearchConteroller::class);
-        $router->resource('property_indicator',  PropertyIndicatorController::class);
+        $router->resource('property_indicators',  PropertyIndicatorController::class);
         $router->resource('property_appraisals', PropertyAppraisalController::class);
-       //$router->resource('property_indicator_hqs',  PropertyIndicatorHqController::class);   
+        $router->resource('map_price_indicators',  MapPriceIndicatorController::class);  
+        $router->resource('title_indicators',  TitleIndicatorController::class); 
+        $router->resource('risk_indicators',  RiskIndicatorController::class);  
         $router->resource('branches', BranchController::class);
         $router->resource('reference_id', ReferenceController::class);
         $router->resource('regions', RegionController::class);
