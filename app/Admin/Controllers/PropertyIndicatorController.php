@@ -411,9 +411,7 @@ class PropertyIndicatorController extends AdminController
             });
         });
         $form->column(1/3, function ($form){
-            $form->html('<br>');
-            $form->html('<br>');
-            $form->html('<br>');
+            $form->html('<div style="height:110px"></div>');
           
             $form->number('building_status', __('Building Status (%) '))->min(0)->max(100);//->rules('required');
             $form->select('borey', __('Borey'))->rules('required')->options(function(){ 
@@ -431,9 +429,7 @@ class PropertyIndicatorController extends AdminController
             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
         });
         $form->column(1/3, function ($form){   
-            $form->html('<br>');
-            $form->html('<br>'); 
-            $form->html('<br>');
+            $form->html('<div style="height:110px"></div>');
             $form->text('customer_name', __('Customer Name '))->rules('required');
             $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 999 9999']);
             // api
