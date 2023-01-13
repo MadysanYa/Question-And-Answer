@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 use App\Admin\Actions\Post\Replicate;
+use App\Models\District;
 use App\Models\Commune;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -67,8 +68,11 @@ class CommuneController extends AdminController
     protected function form()
     {
         $form = new Form(new Commune());
+        $form->select('district_id', __('District'))->rules('required')->options(function(){
+            return District::all()->pluck('district_name','id');
+        });
         $form->text('commune_name', __('Commune Name'));
-        
+
         $form->footer(function ($footer) {
             // disable reset btn
             $footer->disableReset();
