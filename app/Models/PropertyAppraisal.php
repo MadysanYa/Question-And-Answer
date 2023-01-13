@@ -28,4 +28,12 @@ public function getFrontphotosAttribute($frontphoto)
     return json_decode($frontphoto, true);
 }
 
+
+public function verified(){
+
+}
+
+public function approved(){
+
+}
 }
