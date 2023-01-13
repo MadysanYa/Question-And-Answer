@@ -110,9 +110,9 @@ class PropertyAppraisalController extends AdminController
                 $grid->column('cif_no',__('CIF No.'))->sortable(); 
                 $grid->column('rm_name',__('RM Name'))->sortable(); 
                 $grid->column('telephone',__('Telephone'))->sortable(); 
-                $grid->column('information_type',__('Information Type'))->Display(function($id){
+                $grid->column('information_type',__('Information Type'))->sortable()->Display(function($id){
                     $informationtype = InformationType::where('id',$id)->first();
-                    if($informationtype == Null ) return '';
+                    if($informationtype == NULL) return '';
                     return $informationtype->information_type_name;
                 });
                 $grid->column('location_type',__('Location Type')); 
@@ -211,7 +211,7 @@ class PropertyAppraisalController extends AdminController
                 });
                 
                $grid->column('property_address', __('Property Address'));
-               $grid->column('geo_code', __('Geo Code'));
+              
               // $grid->column('report_date', __('Report Date'));
 
              
@@ -333,7 +333,6 @@ class PropertyAppraisalController extends AdminController
         $show->field('photos',__('Photo'))->sortable(); 
         $show->field('information_type',__('Information Type'))->as(function($id){
             $informationtype = InformationType::where('id', $id)->first();
-            if($informationtype == Null ) return '';  
             return  $informationtype->information_type_name;
         });
         $show->field('type_of_access_road', __('Type Of Access Road'))->sortable(); 
