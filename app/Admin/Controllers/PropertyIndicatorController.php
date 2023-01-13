@@ -433,7 +433,6 @@ class PropertyIndicatorController extends AdminController
             $form->text('customer_name', __('Customer Name '))->rules('required');
             $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 999 9999']);
             // api
-        
             $form->select('province_id', __('Province'))->rules('required')->options(function(){
                 return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
             
