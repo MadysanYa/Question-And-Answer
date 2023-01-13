@@ -449,8 +449,8 @@ class PropertyIndicatorController extends AdminController
             $form->text('latitude', __('Latitude'))->inputmask(['mask' => '999.999999'])->rules('required');
             $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
             $form->image('front_photo',__('Front Photo'))->removable()->uniqueName();
-            $form->text('remark', __('Remark'));//34
-
+            $form->text('remark', __('Remark'));
+            
           });
        
             
