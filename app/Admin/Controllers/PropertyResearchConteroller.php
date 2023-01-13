@@ -149,7 +149,7 @@ class PropertyResearchConteroller extends AdminController
         $grid->column('land_value_per_sqm',__('Land Value per Sqm ($)'))->sortable();
         $grid->column('building_size',__('Building Size ($)'))->sortable(); 
         $grid->column('building_value_per_sqm',__('Building Value per Sqm ($)'))->sortable();
-        //$grid->column('property_value',__('Property Value ($)'))->sortable();
+        $grid->column('property_market_value',__('Property Market Value ($)'))->sortable();
         $grid->column('province_id',__('Province'))->filter($this->convertToArray(Province::all(['id', 'province_name'])))->Display(function($province_id){
            $province = Province::where('id', $province_id)->first();
             return $province->province_name;     
@@ -226,39 +226,6 @@ class PropertyResearchConteroller extends AdminController
 		//print_r(Request::route('company'));
         return $grid;
     }
-    // {
-    //     $grid = new Grid(new PropertyResearch);
-	// 	$grid->model()->orderBy('id','asc');
-	// 	$grid->column('id', __('No.'))->asc()->sortable();
-       
-    //     $grid->column('property_reference',__('Reference'));
-            
-    //     // Testing
-    //     // $grid->column('province', __('Province'))->as(function($province_id){
-    //     //     $province = Province::where('id', $province_id)->first();
-    //     //     return $province->province_name;
-    //     // });
-    //     // $grid->column('branch',__('Branch'))->as(function($branch_id){
-    //     //     $branch = Branch::where('id', $branch_id)->first();
-    //     //     return $branch->branch_name;
-    //     // });
-       
-    //     $grid->column('access_road_name', __('Owner'));
-    //     $grid->column('information_type', __('Type'));
-    //     $grid->column('location_type', __('Property Address'));
-    //     $grid->column('build_size', __('Geo Code'));
-		
-		
-	// 	// No need to change (hided)
-    //     $grid->disableExport();
-    //     $grid->disableFilter();
-        
-    //     $grid->quickSearch('id','department', 'responsible_person');
-		
-	
-
-    //     return $grid;
-    // }
 
         // filter 
         function convertToArray($data){
@@ -325,109 +292,75 @@ class PropertyResearchConteroller extends AdminController
      * @return Show
      */
     protected function detail($id)
-    // {
-    //     $show = new Show( PropertyResearch::findOrFail($id));
-    //     $show->field('information_type', __('Information Type'));
-    //     $show->field('property_reference', __('Property Reference'));
-    //     $show->field('access_road_name', __('Access Road Name'));
-    //     $show->field('no_of_floor', __('No of Floor'));
-    //     $show->field('land_size', __('Land Size'));
-    //     $show->field('build_value_per_sqm', __('Build Value per Sqm'));
-    //     $show->field('district', __('District/Khan'));
-    //     $show->field('contact_no', __('Contact No.'));
-    //     $show->field('remark', __('Remark'));
-    //     $show->field('location_type', __('Location Type'));
-    //     $show->field('property_type', __('Property Type'));
-    //     $show->field('land_title_type', __('Land Title Type'));
-    //     $show->field('property_value_per_sqm', __('Property per Sqm'));
-    //     $show->field('property_market_value', __('Property Market Value'));
-    //     $show->field('commune', __('Commune/Sangkat'));
-    //     $show->field('altitude', __('Altitude'));
-    //     $show->field('type_of_access_road', __('Type of Access Road'));
-    //     $show->field('borey', __('Borey'));
-    //     $show->field('information_date', __('Information Date'));
-    //     $show->field('build_size', __('Building Size'));
-    //     $show->field('province', __('Province'));
-    //     $show->field('village', __('Village'));
-    //     $show->field('laltitude', __('Laltitude'));
-    //     return $show;
-    // }
     {
-        $show = new Show( PropertyIndicator::findOrFail($id));
-
-       
-            $show->field('property_reference',__('Reference'));
-            $show->field('collateral_owner',__('Collateral Owner '));
-             
-
-            
-            $show->field('region_id', __('Region'))->as(function($region){
-                $region = Region::where('id', $region)->first();
-                if($region == null) return '';
-                return $region->region_name ;
-            });
-            $show->field('branch_code',__('Branch'))->as(function($branch_code){
-                $branch = Branch::where('branch_code', $branch_code)->first();
-                if($branch == null) return '';
-                return '(' . $branch->branch_code . ')' . $branch->branch_name;
-            });
-    
-            $show->field('requested_date',__('Requested Date'));
-            if (User::isVerifierRole() || User::isApproverRole()){
-            $show->field('reported_date',__('Reported Date'));
-            }
-            $show->field('cif_no',__('CIF No.'));
-            $show->field('rm_name',__('RM Name'));
-            $show->field('telephone',__('Telephone'));
+        $show = new Show( PropertyResearch::findOrFail($id));
+            //1
             $show->field('information_type',__('Information Type'))->as(function($id){
                 $informationtype = InformationType::where('id', $id)->first();
                 return  $informationtype->information_type_name;
             });
-            $show->field('location_type',__('Location Type'));
-            $show->field('type_of_access_road',__('Type of Access Road'));
+            //2
+            $show->field('property_reference',__('Reference'));
+            //3
             $show->field('access_road_name',__('Access Road Name'));
-            $show->field('property_type',__('Property Type'))->as(function($id){
-                $propertytype = PropertyType::where('id', $id)->first();
-                return  $propertytype->property_type_name;
-            });
-            $show->field('building_status',__('Building Status (%)'));
-            $show->field('borey',__('Borey'))->as(function($id){
-                $borey = Borey::where('id', $id)->first();
-                return $borey->borey_name;
-            }) ;
+            //4
             $show->field('no_of_floor',__('No. of floor'));
-            $show->field('land_title_type',__('Land Titil'));
-            $show->field('land_title_no',__('Lang Title No'));
+            //5
             $show->field('land_size',__('Land Size'));
-            $show->field('land_value_per_sqm',__('Land Value per Sqm ($)'));
-            $show->field('building_size',__('Building Size ($)'));
+            //6
             $show->field('building_value_per_sqm',__('Building Value per Sqm ($)'));
-            $show->field('property_value',__('Property Value ($)'));
-   
-            $show->field('customer_name',__('Customer Name'));
-            $show->field('client_contact_no',__('Cliend Contact No'));
-            $show->field('province_id',__('Province'))->as(function($province_id){
-                $province = Province::where('id', $province_id)->first();
-                return $province->province_name;
-            });
+            //7
             $show->field('district_id',__('District/ Khan'))->as(function($district_id){
                 $district = District::where('id', $district_id)->first();
                 return $district->district_name;
             });
+            //8
+            $show->field('contact_no',__('Contact No'));
+            //9
+            $show->field('remark',__('Remark'));
+            //10
+            $show->field('location_type',__('Location Type'));
+            //11
+            $show->field('property_type',__('Property Type'))->as(function($id){
+                $propertytype = PropertyType::where('id', $id)->first();
+                return  $propertytype->property_type_name;
+            });
+            //12
+            $show->field('land_title_type',__('Land Titil'));
+            //13
+            $show->field('land_value_per_sqm',__('Land Value per Sqm ($)'));
+            //14
+            $show->field('property_market_value',__('Property Market Value ($)'));
+            //15
             $show->field('commune_id',__('Commune / Sangkat'))->as(function($comune_id){
                 $commune = Commune::where('id', $comune_id)->first();
                 return $commune->commune_name;
             });
+            //16
+            $show->field('longtitude',__('Longtitude'));
+            //17
+            $show->field('type_of_access_road',__('Type of Access Road'));
+            //18
+            $show->field('borey',__('Borey'))->as(function($id){
+                $borey = Borey::where('id', $id)->first();
+                return $borey->borey_name;
+            });
+            //19
+            $show->field('information_date',__('Information Date'));
+            //20
+            $show->field('building_size',__('Building Size ($)'));
+            //21
+            $show->field('province_id',__('Province'))->as(function($province_id){
+                $province = Province::where('id', $province_id)->first();
+                return $province->province_name;
+            });
+            //22
             $show->field('village_id',__('Village'))->as(function($village_id){
                 $village = Village::where('id', $village_id)->first();
                 return $village->village_name   ;
             });
-            $show->field('longtitude',__('Longtitude'));
+            //23
             $show->field('latitude',__('Latitude'));
-            $show->field('front_photo',__('Front Photo'));
-            
-            $show->field('remark',__('Remark'));
-            
         return $show;
     }
 
@@ -471,8 +404,7 @@ class PropertyResearchConteroller extends AdminController
         });
         //max 7 part 2
         $form->column(1/3, function ($form){
-            $form->html('<br>');
-            $form->html('<br>');
+            $form->html('<div style="height:52px"></div>');
             //10
             $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area','Agricultural Area'=>'Agricultural Area']);
             //11
@@ -495,8 +427,7 @@ class PropertyResearchConteroller extends AdminController
         });
         //max 7 part 3
         $form->column(1/3, function ($form){   
-            $form->html('<br>');
-            $form->html('<br>');
+            $form->html('<div style="height:52px"></div>');
             //17
             $form->select('type_of_access_road', __('Type of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road', 'Paved Road'=>'Paved Road','Upaved Road'=>'Upaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road']);
             //18
@@ -510,6 +441,7 @@ class PropertyResearchConteroller extends AdminController
             //21
             $form->select('province_id', __('Province'))->rules('required')->options(function(){
                 return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
+                
             //22
             $form->select('village_id', __('Village'))->rules('required')->options(function(){
                 return Village::all()->pluck('village_name','id');});
