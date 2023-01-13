@@ -29,6 +29,7 @@ class DistrictController extends AdminController
         $grid = new Grid(new District);
         $grid->column('id', __('ID'));
         $grid->column('district_name', __('District Name'))->editable()->sortable();
+
 		
         $grid->disableExport();
         $grid->disableFilter();
@@ -68,6 +69,7 @@ class DistrictController extends AdminController
     {
         $form = new Form(new District());
         $form->text('district_name', __('District Name'));
+       
         
         $form->footer(function ($footer) {
             // disable reset btn
