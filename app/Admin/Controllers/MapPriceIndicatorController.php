@@ -30,8 +30,44 @@ class MapPriceIndicatorController extends AdminController
     
      protected function grid()
      {
+        $grid = new Grid(new MapPriceIndicator);
+
+
+        return $grid;
+        
 
      }
+
+     /**
+     * Make a form builder.
+     *
+     * @return Form
+     */
+   
+    protected function form()
+    {
+        $form = new Form(new MapPriceIndicator());
+        $form->map('longtitude','latitude',__('Map'))->useGoogleMap();
+       
+
+        $form->footer(function ($footer) {
+
+            // disable reset btn
+            $footer->disableReset();
+            // disable `View` checkbox
+            $footer->disableViewCheck();
+            // disable `Continue editing` checkbox
+            $footer->disableEditingCheck();
+            // disable `Continue Creating` checkbox
+            //$footer->disableCreatingCheck();
+        
+            
+        
+        });
+
+
+        return $form;
+    }
   
 
 
