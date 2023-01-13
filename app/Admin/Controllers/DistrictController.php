@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 use App\Admin\Actions\Post\Replicate;
 use App\Models\District;
+use App\Models\Province;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -68,6 +69,9 @@ class DistrictController extends AdminController
     protected function form()
     {
         $form = new Form(new District());
+        $form->select('province_id', __('Province'))->rules('required')->options(function(){
+            return Province::all()->pluck('province_name','id');
+        });
         $form->text('district_name', __('District Name'));
        
         

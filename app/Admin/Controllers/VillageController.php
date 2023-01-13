@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 use App\Admin\Actions\Post\Replicate;
+use App\Models\Commune;
 use App\Models\Village;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -67,6 +68,9 @@ class VillageController extends AdminController
     protected function form()
     {
         $form = new Form(new Village());
+        $form->select('commune_id', __('Commune / Sangkat'))->rules('required')->options(function(){
+            return Commune::all()->pluck('commune_name','id');
+        });
         $form->text('village_name', __('Village Name'));
         
         $form->footer(function ($footer) {
