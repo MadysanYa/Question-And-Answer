@@ -465,6 +465,7 @@ class PropertyIndicatorController extends AdminController
             // disable `Continue editing` checkbox
             $footer->disableEditingCheck();
             // disable `Continue Creating` checkbox
+            
             //$footer->disableCreatingCheck();
         
             

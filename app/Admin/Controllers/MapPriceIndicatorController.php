@@ -5,7 +5,7 @@ namespace App\Admin\Controllers;
 
 
 use Encore\Admin\Controllers\AdminController;
-use App\Models\PropertyIndicator;
+use App\Models\MapPriceIndicator;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Illuminate\Support\Facades\Request;
@@ -22,12 +22,7 @@ class MapPriceIndicatorController extends AdminController
      */
     protected $title = 'Map price Indicator';
      
-    protected function dashboard(){
-    
-        
-        
-           
-    }
+
         /**
      * Make a grid builder.
      *
@@ -36,7 +31,7 @@ class MapPriceIndicatorController extends AdminController
     
      protected function grid()
      {
-         $grid = new Grid(new PropertyIndicator);
+         $grid = new Grid(new MapPriceIndicator);
 
 
          return $grid;
@@ -53,26 +48,26 @@ class MapPriceIndicatorController extends AdminController
     // protected function form()
     // {
     //     $form = new Form(new MapPriceIndicator());
-    //     //$form->map('longtitude','latitude',__('Map'))->useGoogleMap();
+    //     // $form->map('longtitude','latitude',__('Map'))->useGoogleMap();
        
 
-    //     $form->footer(function ($footer) {
+    //     // $form->footer(function ($footer) {
 
-    //         // disable reset btn
-    //         $footer->disableReset();
-    //         // disable `View` checkbox
-    //         $footer->disableViewCheck();
-    //         // disable `Continue editing` checkbox
-    //         $footer->disableEditingCheck();
-    //         // disable `Continue Creating` checkbox
-    //         //$footer->disableCreatingCheck();
+    //     //     // disable reset btn
+    //     //     $footer->disableReset();
+    //     //     // disable `View` checkbox
+    //     //     $footer->disableViewCheck();
+    //     //     // disable `Continue editing` checkbox
+    //     //     $footer->disableEditingCheck();
+    //     //     // disable `Continue Creating` checkbox
+    //     //     //$footer->disableCreatingCheck();
         
             
         
-    //     });
+    //     // });
 
 
-    //     return $form;
+    //     // return $form;
     // }
 }
   
