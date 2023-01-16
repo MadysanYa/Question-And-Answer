@@ -10,6 +10,8 @@ use App\Http\Controllers\TaskdetailController;
 use App\Http\Controllers\VillageController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\PropertyIndicatorController;
+use App\Http\Controllers\PropertyAppraisalController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -38,4 +40,8 @@ Route::get('/branch', [BranchController::class,'branch']);
 
 Route::get('/verify/{id}/{value}', [PropertyIndicatorController::class,'verified']);
 Route::get('/approve/{id}/{value}', [PropertyIndicatorController::class,'approved']);
+
+Route::get('/verify/{id}/{value}', [PropertyAppraisalController::class,'verified']);
+Route::get('/approve/{id}/{value}', [PropertyAppraisalController::class,'approved']);
+
 //Route::get('/transfer', [TransferController::class, 'store']);

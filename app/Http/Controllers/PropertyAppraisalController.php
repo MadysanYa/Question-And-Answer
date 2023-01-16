@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Commune;
-use App\Models\PropertyIndicator;
+use App\Models\PropertyAppraisal;
 use Encore\Admin\Controllers\AdminController;
 use App\Models\Transfer;
 use Auth;
@@ -19,9 +19,9 @@ class PropertyAppraisalController extends Controller
     {
         
       
-        $propertyIndicator = PropertyAppraisal::findOrFail($request->id);
-        $propertyIndicator->is_verified = $request->value;
-        $propertyIndicator->save();
+        $Propertyappraisal = PropertyAppraisal::findOrFail($request->id);
+        $Propertyappraisal->is_verified = $request->value;
+        $Propertyappraisal->save();
         return Redirect::to(url()->previous());
         
     }
@@ -30,9 +30,9 @@ class PropertyAppraisalController extends Controller
     {
         
         //echo $request->id;
-        $propertyIndicator = PropertyAppraisal::findOrFail($request->id);
-        $propertyIndicator->is_approved = $request->value;
-        $propertyIndicator->save();
+        $Propertyappraisal = PropertyAppraisal::findOrFail($request->id);
+        $Propertyappraisal->is_approved = $request->value;
+        $Propertyappraisal->save();
         return Redirect::to(url()->previous());
         // $verifieds = $request->get('q');
         // $verified = PropertyIndicator::where('id', $verifieds)->get(['id', DB::raw('verified as text')]);
