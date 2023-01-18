@@ -24,6 +24,7 @@ use Encore\Admin\Layout\Content;
 use Illuminate\Support\Facades\Request;
 Use Encore\Admin\Widgets\Table;
 use App\Models\User;
+use Encore\Admin\Widgets\Collapse;
 
 class PropertyAppraisalController extends AdminController
 {
@@ -39,11 +40,7 @@ class PropertyAppraisalController extends AdminController
      * Make a grid builder.
      *
      * @return Grid
-     */
-
-
-
-     
+     */     
     protected function grid()   
     {
         
@@ -158,8 +155,9 @@ class PropertyAppraisalController extends AdminController
                     if ($village == null) return '';
                     return $village->village_name ;
                 });
-                $grid->column('longtitude',__('Longtitude'))->sortable(); 
                 $grid->column('latitude',__('Latitude'))->sortable(); 
+                $grid->column('longtitude',__('Longtitude'))->sortable(); 
+                
                 
                 $grid->column('remark',__('Remark'))->sortable(); 
         
@@ -214,7 +212,6 @@ class PropertyAppraisalController extends AdminController
               
               // $grid->column('report_date', __('Report Date'));
 
-             
               $grid->quickSearch(['collateral_owner','telephone']);
       
         return $grid;
@@ -277,10 +274,7 @@ class PropertyAppraisalController extends AdminController
         return  $RegionArray;
 
     }
-
-
     
-
     /**
      * Make a show builder.
      *
@@ -293,7 +287,6 @@ class PropertyAppraisalController extends AdminController
     {
         $show = new Show(PropertyAppraisal::findOrFail($id)); 
     
-
         $show->field('property_reference',__('Reference'));
         $show->field('collateral_owner',__('Collateral Owner '));
          
@@ -308,7 +301,6 @@ class PropertyAppraisalController extends AdminController
             if($branch == null) return '';
             return '(' . $branch->branch_code . ')' . $branch->branch_name;
         });
-
         
         $show->field('cif', __('CIF No'))->sortable(); 
         $show->field('rm_name', __('Loan Officer'))->sortable(); 
@@ -320,7 +312,8 @@ class PropertyAppraisalController extends AdminController
         $show->field('property_value', __('Property Value'))->sortable(); 
         $show->field('clinet_contact_no', __('Clinet Contact No'))->sortable(); 
         $show->field('commune_id', __('Commune Sangkat'))->sortable(); 
-        $show->field('latitude', __('Latitude'))->sortable(); 
+        $show->field('latitude', __('Latitude'))->sortable();
+        $show->field('longtitude', __('longtitude'))->sortable(); 
         $show->field('remark', __('Remark'))->sortable(); 
         $show->field('client_contact_no',__('Cliend Contact No'));
         $show->field('reported_date', __('Report Date'))->sortable(); 
@@ -347,7 +340,7 @@ class PropertyAppraisalController extends AdminController
         $show->field('land_size_by_measurement', __('Land Size By Measurement'))->sortable(); 
         $show->field('customer_name', __('Customer_Name'))->sortable(); 
         $show->field('building_size_per_sqm', __('Building Size '))->sortable();
-        $show->field('longtitude', __('longtitude'))->sortable();
+        
         $show->field('province_id',__('Province'))->as(function($province_id){
             $province = Province::where('id', $province_id)->first();
             return $province->province_name;
@@ -391,13 +384,12 @@ class PropertyAppraisalController extends AdminController
    
 
             //Sum id
-            $form->text('property_reference', __('Property Reference '))->value(function(){
+            $form->text('property_reference', __('Property Reference '))->readonly()->value(function(){
                 $id = PropertyAppraisal::all()->last();
-               return 'PL-'. sprintf('%010d', $id->id + 1);//$id == null? 1 :  
-            });
+               return 'PL-'. sprintf('%010d', $id == null? 1 : $id->id + 1);//$id == null? 1 :  
+            }); 
 
-
-            $form->text('cif', __('CIF No'));
+            $form->text('cif', __('CIF No'))->inputmask(['mask' => '9999999999']);
             $form->text('rm_name', __('RM Name'))->rules('required');
             $form->date('requested_date', __('Request Date'))->rules('required');
             $form->text('access_road_name', __('Access Road Name'))->rules('required');
@@ -405,10 +397,10 @@ class PropertyAppraisalController extends AdminController
                 return Borey::all()->pluck('borey_name', 'id');
             });
             $form->text('land_title_no', __('Land Title No'))->rules('required');
-            $form->text('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
+            $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
             $form->currency('property_value', __('Property Value '))->rules('required');
             $form->text('clinet_contact_no', __('Clinet Contact No'))->rules('required');
-            $form->text('latitude', __('Latitude'))->rules('required');
+          
                  
         });
 
@@ -416,7 +408,7 @@ class PropertyAppraisalController extends AdminController
         $form->column(1/3,function($form){
 
             $form->html('<div style="height:105px"></div>');
-                  
+    
             $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 999 9999']); // add number 
             $form->select('information_type',__('Information Type'))->rules('required')->options(function(){
                  
@@ -428,14 +420,14 @@ class PropertyAppraisalController extends AdminController
                 return PropertyType::all()->pluck('property_type_name','id');
             });
              $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1);
-            $form->text('land_size', __('Land Size (Sqm)'))->rules('required');
-            $form->currency('building_size_by_measure', __('building_size_by_measure'))->rules('required');
+            $form->text('land_size', __('Land Size '))->rules('required');
+            $form->text('building_size_by_measure', __('Building_Size_By_Measure'))->rules('required');
             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
             $form->text('remark', __('Remark'));
+           // $form->map('longtitude', 'latitude');
             $form->image('frontphoto', __('Front Photo'))->removable()->uniqueName();
             $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
             
-
         });
 
             $form->column(1/3,function($form){
@@ -452,17 +444,17 @@ class PropertyAppraisalController extends AdminController
     
                 $form->select('village_id', __('Village'))->rules('required')->options(function(){
                     return Village::all()->pluck('village_name','id');});
-                
             
             $form->select('type_of_access_road', __('Type Of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road','Paved Road'=>'Paved Road', 'Unpaved Road'=>'Unpaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road' ]);
             $form->number('building_status', __('Building Status (%) '))->min(0)->max(100);//->rules('required');
             $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title','Soft Title'=>'Soft Title']);
             $form->text('land_size_by_measurement', __('Land Size by Measurement (Sqm)'))->rules('required');
-            $form->text('building_size_per_sqm', __('Building Size per (Sqm)'))->rules('required');  
+            $form->text('building_size_per_sqm', __('Building Size per'))->rules('required');  
             $form->text('customer_name', __('Customer Name'))->rules('required');
             $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 999 9999']);                        
             $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '99.999999'])->rules('required');
             $form->text('latitude', __('Latitude'))->inputmask(['mask' => '999.999999'])->rules('required');
+
             $form->button('swot_analyze', __('Swot Analyze'));
             
 

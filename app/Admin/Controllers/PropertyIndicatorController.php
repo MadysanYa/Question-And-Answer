@@ -15,8 +15,8 @@ use App\Models\PropertyIndicator;
 use App\Models\PropertyType;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
-use Encore\Admin\Form\Field\Id;
 use Encore\Admin\Form\Field\Button;
+use Encore\Admin\Form\Field\Id;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Illuminate\Support\Facades\Request;
@@ -465,11 +465,7 @@ class PropertyIndicatorController extends AdminController
             // disable `Continue editing` checkbox
             $footer->disableEditingCheck();
             // disable `Continue Creating` checkbox
-
-            
             //$footer->disableCreatingCheck();
-            // $footer->disableCreatingCheck();
-
         
             
         
