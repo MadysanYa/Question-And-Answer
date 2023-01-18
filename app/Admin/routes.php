@@ -31,5 +31,6 @@ Admin::routes();
         $router->resource('boreys', BoreyController::class);
         
         
+        
     });
 
