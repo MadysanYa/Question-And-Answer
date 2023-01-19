@@ -7,10 +7,22 @@ namespace App\Admin\Controllers;
 use Encore\Admin\Controllers\AdminController;
 use App\Models\MapPriceIndicator;
 use Encore\Admin\Grid;
+use App\Model\Invoice;
 use Encore\Admin\Show;
 use Illuminate\Support\Facades\Request;
 use Encore\Admin\Layout\Content;
 use App\Models\User;
+use Encore\Admin\Form\Field\Button;
+use Auth;
+use Encore\Admin\Admin;
+use Encore\Admin\Widgets\Table;
+use Encore\Admin\Form;
+
+
+
+
+
+
 
 
 class MapPriceIndicatorController extends AdminController 
@@ -20,56 +32,46 @@ class MapPriceIndicatorController extends AdminController
      *
      * @var string
      */
-    protected $title = 'Map price Indicator';
-     
-
-        /**
+    protected $title = 'Map Price Indicator';
+     /**
      * Make a grid builder.
      *
      * @return Grid
      */
+     public function index(Content $MapPriceIndicator){
+        $MapPriceIndicator->header($this->title);
+        $MapPriceIndicator->body($this->dashboard());
+        $MapPriceIndicator->body($this->grid());
+       
+        
+        return$MapPriceIndicator;
+    }
+    protected function dashboard(){
+    
+    
+ 
+    
+    
+    
+    $html = <<<HTML
+     
+    HTML;
+    
+    
+   
+    return $html;
+    }	
+      
     
      protected function grid()
      {
-         $grid = new Grid(new MapPriceIndicator);
+        
 
-
-         return $grid;
-       
      }
      
 
-    //  /**
-    //  * Make a form builder.
-    //  *
-    //  * @return Form
-    //  */
-   
-    // protected function form()
-    // {
-    //     $form = new Form(new MapPriceIndicator());
-    //     // $form->map('longtitude','latitude',__('Map'))->useGoogleMap();
-       
-
-    //     // $form->footer(function ($footer) {
-
-    //     //     // disable reset btn
-    //     //     $footer->disableReset();
-    //     //     // disable `View` checkbox
-    //     //     $footer->disableViewCheck();
-    //     //     // disable `Continue editing` checkbox
-    //     //     $footer->disableEditingCheck();
-    //     //     // disable `Continue Creating` checkbox
-    //     //     //$footer->disableCreatingCheck();
-        
-            
-        
-    //     // });
 
 
-    //     // return $form;
-    // }
-}
   
 
 
@@ -88,4 +90,4 @@ class MapPriceIndicatorController extends AdminController
         
    
 
-
+}
