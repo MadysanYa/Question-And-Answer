@@ -180,14 +180,14 @@ class PropertyResearchConteroller extends AdminController
                         <a href="'. env('APP_URL') . '/public/api/verify_research/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
                     }
                     else {
-                        return '<p style="color: #172191; border: 1px solid #172191;padding: 5px;text-align:center;">Processing</p>'; 
+                        return '<p style="color: #fff; background: #172191;padding: 0px 5px 0px 5px;text-align:center;">Processing</p>'; 
                     }
                 }
                 else if($is_verified == 1){
-                    return '<p style="color: #0c871f; border: 1px solid #0c871f;padding: 5px;text-align:center;">Verified</p>'; 
+                    return '<p style="color: #fff; background: #0c871f;padding: 0px 5px 0px 5px;text-align:center;">Verified</p>'; 
                 }
                 else{
-                    return '<p style="color: #ff0000;border: 1px solid #ff0000;padding: 5px;text-align:center;">Rejected</p>';
+                    return '<p style="color: #fff;background:#ff0000;padding: 0px 5px 0px 5px;text-align:center;">Rejected</p>';
                 }
             });
 
@@ -201,15 +201,15 @@ class PropertyResearchConteroller extends AdminController
                             <a href="'. env('APP_URL') . '/public/api/approve_research/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
                         }
                         else {
-                            return '<p style="color: #172191; border: 1px solid #172191;padding: 5px;text-align:center;">Processing</p>'; 
+                            return '<p style="color: #fff; background:#172191;padding: 0px 5px 0px 5px;text-align:center;">Processing</p>'; 
                         }
                         
                     }
                     else if($is_approved ==1){
-                        return '<p style="color: #0c871f; border: 1px solid #0c871f;padding: 5px;text-align:center;">Approved</p>'; 
+                        return '<p style="color: #fff; background: #0c871f;padding: 0px 5px 0px 5px;text-align:center;">Approved</p>'; 
                     }
                     else{
-                        return '<p style="color: #ff0000;border: 1px solid #ff0000;padding: 5px;text-align:center;">Rejected</p>';
+                        return '<p style="color: #fff;background:#ff0000;padding: 0px 5px 0px 5px;text-align:center;">Rejected</p>';
                     }
                 }
             
@@ -220,7 +220,7 @@ class PropertyResearchConteroller extends AdminController
         //     return '<a href="'. env('APP_URL') . '/public/api/print/'.'" >Print</a>';
         
         // });
-        $grid->html('<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdf">Export to PDF</a>');
+        // $grid->html('<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdf">Export to PDF</a>');
         // <a href="'. env('APP_URL') . '/public/api/verify/'
         // $grid->disableExport();
         //  $grid->disableFilter();
