@@ -13,6 +13,7 @@ use App\Models\File;
 use App\Models\InformationType;
 use App\Models\PropertyResearch;
 use App\Models\PropertyType;
+use App\Models\Pdf;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Form\Field\Button;
@@ -175,8 +176,8 @@ class PropertyResearchConteroller extends AdminController
             if($is_verified == null) {
                     if(User::isVerifierRole()){ // user login
                         $id = $this->id;
-                        return ' <a href="'. env('APP_URL') . '/public/api/verify/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Verify</a>
-                        <a href="'. env('APP_URL') . '/public/api/verify/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
+                        return ' <a href="'. env('APP_URL') . '/public/api/verify_research/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Verify</a>
+                        <a href="'. env('APP_URL') . '/public/api/verify_research/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
                     }
                     else {
                         return '<p style="color: #172191; border: 1px solid #172191;padding: 5px;text-align:center;">Processing</p>'; 
@@ -196,8 +197,8 @@ class PropertyResearchConteroller extends AdminController
                     if($is_approved == null) {
                         if(User::isApproverRole()){
                             $id = $this->id;
-                            return ' <a href="'. env('APP_URL') . '/public/api/approve/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Approv</a>
-                            <a href="'. env('APP_URL') . '/public/api/approve/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
+                            return ' <a href="'. env('APP_URL') . '/public/api/approve_research/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Approv</a>
+                            <a href="'. env('APP_URL') . '/public/api/approve_research/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
                         }
                         else {
                             return '<p style="color: #172191; border: 1px solid #172191;padding: 5px;text-align:center;">Processing</p>'; 
@@ -213,7 +214,14 @@ class PropertyResearchConteroller extends AdminController
                 }
             
         });
-       
+
+        // $grid->column('title')->display(function ($title) {
+
+        //     return '<a href="'. env('APP_URL') . '/public/api/print/'.'" >Print</a>';
+        
+        // });
+        // $grid->html('<a class="btn btn-primary" href="' .env('APP_URL') . '/public/api/print">Export to PDF</a>');
+        // <a href="'. env('APP_URL') . '/public/api/verify/'
         // $grid->disableExport();
         //  $grid->disableFilter();
         $grid->quickSearch(['collateral_owner','telephone']);
@@ -222,6 +230,7 @@ class PropertyResearchConteroller extends AdminController
 			$filter->disableIdFilter();
 		//	$filter->equal('company');
 		});
+
 
 		//print_r(Request::route('company'));
         return $grid;
@@ -294,72 +303,49 @@ class PropertyResearchConteroller extends AdminController
     protected function detail($id)
     {
         $show = new Show( PropertyResearch::findOrFail($id));
-            //1
             $show->field('information_type',__('Information Type'))->as(function($id){
                 $informationtype = InformationType::where('id', $id)->first();
                 return  $informationtype->information_type_name;
             });
-            //2
             $show->field('property_reference',__('Reference'));
-            //3
             $show->field('access_road_name',__('Access Road Name'));
-            //4
             $show->field('no_of_floor',__('No. of floor'));
-            //5
             $show->field('land_size',__('Land Size'));
-            //6
             $show->field('building_value_per_sqm',__('Building Value per Sqm ($)'));
-            //7
             $show->field('district_id',__('District/ Khan'))->as(function($district_id){
                 $district = District::where('id', $district_id)->first();
                 return $district->district_name;
             });
-            //8
             $show->field('contact_no',__('Contact No'));
-            //9
             $show->field('remark',__('Remark'));
-            //10
             $show->field('location_type',__('Location Type'));
-            //11
             $show->field('property_type',__('Property Type'))->as(function($id){
                 $propertytype = PropertyType::where('id', $id)->first();
                 return  $propertytype->property_type_name;
             });
-            //12
             $show->field('land_title_type',__('Land Titil'));
-            //13
             $show->field('land_value_per_sqm',__('Land Value per Sqm ($)'));
-            //14
             $show->field('property_market_value',__('Property Market Value ($)'));
-            //15
             $show->field('commune_id',__('Commune / Sangkat'))->as(function($comune_id){
                 $commune = Commune::where('id', $comune_id)->first();
                 return $commune->commune_name;
             });
-            //16
             $show->field('longtitude',__('Longtitude'));
-            //17
             $show->field('type_of_access_road',__('Type of Access Road'));
-            //18
             $show->field('borey',__('Borey'))->as(function($id){
                 $borey = Borey::where('id', $id)->first();
                 return $borey->borey_name;
             });
-            //19
             $show->field('information_date',__('Information Date'));
-            //20
             $show->field('building_size',__('Building Size ($)'));
-            //21
             $show->field('province_id',__('Province'))->as(function($province_id){
                 $province = Province::where('id', $province_id)->first();
                 return $province->province_name;
             });
-            //22
             $show->field('village_id',__('Village'))->as(function($village_id){
                 $village = Village::where('id', $village_id)->first();
                 return $village->village_name   ;
             });
-            //23
             $show->field('latitude',__('Latitude'));
         return $show;
     }
@@ -373,7 +359,6 @@ class PropertyResearchConteroller extends AdminController
 
     {
         $form = new Form(new PropertyResearch());
-        // max 9 part 1
         $form->column(1/3, function ($form){
             //1
             $form->select('information_type',__('Information Type'))->rules('required')->options(function(){

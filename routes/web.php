@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -19,3 +20,7 @@ Route::get('/', function () {
     return redirect('/admin');
 });
 
+<<<<<<< HEAD
+=======
+// Route::get('/print',    [PdfController::class, 'print']);
+>>>>>>> 6422f4358c6e9edf988d5ee4ab7d1b208384ef91
