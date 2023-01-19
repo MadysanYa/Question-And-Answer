@@ -133,7 +133,7 @@ class PropertyAppraisalController extends AdminController
                 $grid->column('building_size_by_measure',__('Building Size '))->sortable(); 
                 $grid->column('property_value',__('Property Value ($)'))->sortable();
                 $grid->column('customer_name',__('Customer Name'))->sortable(); 
-                $grid->column('client_contact_no',__('Cliend Contact No.'))->sortable(); 
+                $grid->column('client_contact_no',__('Client Contact No.'))->sortable(); 
                 $grid->column('province_id',__('Province'))->filter($this->convertToArray(Province::all(['id', 'province_name'])))->Display(function($province_id){
                    $province = Province::where('id', $province_id)->first();
                    if ($province == null) return '';
@@ -167,8 +167,8 @@ class PropertyAppraisalController extends AdminController
     
                         if(User::isVerifierRole()){ // user login
                             $id = $this->id;
-                            return ' <a href="'. env('APP_URL') . '/public/api/verify/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Verify</a>
-                            <a href="'. env('APP_URL') . '/public/api/verify/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
+                            return ' <a href="'. env('APP_URL') . '/public/api/verify_appraisal/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Verify</a>
+                            <a href="'. env('APP_URL') . '/public/api/verify_appraisal/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
                         }
                         else {
                             return '<p style="color: #172191; border: 1px solid #172191;padding: 5px;text-align:center;">Processing</p>'; 
@@ -188,8 +188,8 @@ class PropertyAppraisalController extends AdminController
                         if($is_approved == null) {
                             if(User::isApproverRole()){
                                 $id = $this->id;
-                                return ' <a href="'. env('APP_URL') . '/public/api/approve/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Approv</a>
-                                <a href="'. env('APP_URL') . '/public/api/approve/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
+                                return ' <a href="'. env('APP_URL') . '/public/api/approve_appraisal/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Approv</a>
+                                <a href="'. env('APP_URL') . '/public/api/approve_appraisal/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
                             }
                             else {
                                 return '<p style="color: #172191; border: 1px solid #172191;padding: 5px;text-align:center;">Processing</p>'; 
@@ -309,12 +309,12 @@ class PropertyAppraisalController extends AdminController
         $show->field('land_title_no', __('Land title no'))->sortable(); 
         $show->field('land_value_per_sqm', __('Land Value Persqm'))->sortable(); 
         $show->field('property_value', __('Property Value'))->sortable(); 
-        $show->field('clinet_contact_no', __('Clinet Contact No'))->sortable(); 
+        $show->field('client_contact_no', __('Clinet Contact No'))->sortable(); 
         $show->field('commune_id', __('Commune Sangkat'))->sortable(); 
         $show->field('latitude', __('Latitude'))->sortable();
         $show->field('longtitude', __('longtitude'))->sortable(); 
         $show->field('remark', __('Remark'))->sortable(); 
-        $show->field('client_contact_no',__('Cliend Contact No'));
+        $show->field('client_contact_no',__('Client Contact No'));
         $show->field('reported_date', __('Report Date'))->sortable(); 
         $show->field('requested_date',__('Requested Date'));
         $show->field('location_type', __('Location Type'))->sortable(); 
@@ -398,7 +398,8 @@ class PropertyAppraisalController extends AdminController
             $form->text('land_title_no', __('Land Title No'))->rules('required');
             $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
             $form->currency('property_value', __('Property Value '))->rules('required');
-            $form->text('clinet_contact_no', __('Clinet Contact No'))->rules('required');
+            $form->text('customer_name', __('Customer Name'))->rules('required');
+            $form->mobile('client_contact_no', __('Clinet Contact No'))->rules('required')->options(['mask' => '099 999 9999']);
           
                  
         });
@@ -419,8 +420,8 @@ class PropertyAppraisalController extends AdminController
                 return PropertyType::all()->pluck('property_type_name','id');
             });
              $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1);
-            $form->text('land_size', __('Land Size '))->rules('required');
-            $form->text('building_size_by_measure', __('Building_Size_By_Measure'))->rules('required');
+            $form->text('land_size', __('Land Size (Sqm) '))->inputmask(['mask' => '9999999.99'])->rules('required');
+            $form->text('building_size_by_measure', __('Building_Size_By_Measure'))->inputmask(['mask' => '9999999.99'])->rules('required');
             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
             $form->text('remark', __('Remark'));
            // $form->map('longtitude', 'latitude');
@@ -447,10 +448,8 @@ class PropertyAppraisalController extends AdminController
             $form->select('type_of_access_road', __('Type Of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road','Paved Road'=>'Paved Road', 'Unpaved Road'=>'Unpaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road' ]);
             $form->number('building_status', __('Building Status (%) '))->min(0)->max(100);//->rules('required');
             $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title','Soft Title'=>'Soft Title']);
-            $form->text('land_size_by_measurement', __('Land Size by Measurement (Sqm)'))->rules('required');
-            $form->text('building_size_per_sqm', __('Building Size per'))->rules('required');  
-            $form->text('customer_name', __('Customer Name'))->rules('required');
-            $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 999 9999']);                        
+            $form->text('land_size_by_measurement', __('Land Size by Measurement'))->inputmask(['mask' => '9999999.99'])->rules('required');
+            $form->text('building_size_per_sqm', __('Building Size per (Sqm)'))->inputmask(['mask' => '9999999.99'])->rules('required');                       
             $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '99.999999'])->rules('required');
             $form->text('latitude', __('Latitude'))->inputmask(['mask' => '999.999999'])->rules('required');
 
