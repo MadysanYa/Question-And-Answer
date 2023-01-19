@@ -395,7 +395,7 @@ class PropertyAppraisalController extends AdminController
             $form->select('borey', __('Borey'))->rules('required')->options(function(){
                 return Borey::all()->pluck('borey_name', 'id');
             });
-            $form->text('land_title_no', __('Land Title No'))->rules('required');
+            $form->text('land_title_no', __('Land Title No'))->rules('required')->inputmask(['mask' => '999999999-9999']);
             $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
             $form->currency('property_value', __('Property Value '))->rules('required');
             $form->text('customer_name', __('Customer Name'))->rules('required');
@@ -420,7 +420,7 @@ class PropertyAppraisalController extends AdminController
                 return PropertyType::all()->pluck('property_type_name','id');
             });
              $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1);
-            $form->text('land_size', __('Land Size (Sqm) '))->inputmask(['mask' => '9999999.99'])->rules('required');
+            $form->text('land_size', __('Land Size  '))->inputmask(['mask' => '9999999.99'])->rules('required');
             $form->text('building_size_by_measure', __('Building_Size_By_Measure'))->inputmask(['mask' => '9999999.99'])->rules('required');
             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
             $form->text('remark', __('Remark'));
