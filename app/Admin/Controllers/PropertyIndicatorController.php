@@ -176,10 +176,10 @@ class PropertyIndicatorController extends AdminController
                     }
                 }
                 else if($is_verified == 1){
-                    return '<p style="color: #0c871f; border: 1px solid #0c871f;padding: 5px;text-align:center;">Verified</p>'; 
+                    return '<p style="color: #fff; background: #0c871f;padding: 0px 5px 0px 5px;text-align:center;">Verified</p>'; 
                 }
                 else{
-                    return '<p style="color: #ff0000;border: 1px solid #ff0000;padding: 5px;text-align:center;">Rejected</p>';
+                    return '<p style="color: #fff;background:#ff0000;padding: 0px 5px 0px 5px;text-align:center;">Rejected</p>';
                 }
             });
 
@@ -198,10 +198,10 @@ class PropertyIndicatorController extends AdminController
                         
                     }
                     else if($is_approved ==1){
-                        return '<p style="color: #0c871f; border: 1px solid #0c871f;padding: 5px;text-align:center;">Approved</p>'; 
+                        return '<p style="color: #fff; background: #0c871f;padding: 0px 5px 0px 5px;text-align:center;">Approved</p>'; 
                     }
                     else{
-                        return '<p style="color: #ff0000;border: 1px solid #ff0000;padding: 5px;text-align:center;">Rejected</p>';
+                        return '<p style="color: #fff;background:#ff0000;padding: 0px 5px 0px 5px;text-align:center;">Rejected</p>';
                     }
                 }
             
