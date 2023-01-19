@@ -133,7 +133,7 @@ class PropertyAppraisalController extends AdminController
                 $grid->column('building_size_by_measure',__('Building Size '))->sortable(); 
                 $grid->column('property_value',__('Property Value ($)'))->sortable();
                 $grid->column('customer_name',__('Customer Name'))->sortable(); 
-                $grid->column('client_contact_no',__('Cliend Contact No.'))->sortable(); 
+                $grid->column('client_contact_no',__('Client Contact No.'))->sortable(); 
                 $grid->column('province_id',__('Province'))->filter($this->convertToArray(Province::all(['id', 'province_name'])))->Display(function($province_id){
                    $province = Province::where('id', $province_id)->first();
                    if ($province == null) return '';
@@ -309,12 +309,12 @@ class PropertyAppraisalController extends AdminController
         $show->field('land_title_no', __('Land title no'))->sortable(); 
         $show->field('land_value_per_sqm', __('Land Value Persqm'))->sortable(); 
         $show->field('property_value', __('Property Value'))->sortable(); 
-        $show->field('clinet_contact_no', __('Clinet Contact No'))->sortable(); 
+        $show->field('client_contact_no', __('Clinet Contact No'))->sortable(); 
         $show->field('commune_id', __('Commune Sangkat'))->sortable(); 
         $show->field('latitude', __('Latitude'))->sortable();
         $show->field('longtitude', __('longtitude'))->sortable(); 
         $show->field('remark', __('Remark'))->sortable(); 
-        $show->field('client_contact_no',__('Cliend Contact No'));
+        $show->field('client_contact_no',__('Client Contact No'));
         $show->field('reported_date', __('Report Date'))->sortable(); 
         $show->field('requested_date',__('Requested Date'));
         $show->field('location_type', __('Location Type'))->sortable(); 
@@ -399,7 +399,7 @@ class PropertyAppraisalController extends AdminController
             $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
             $form->currency('property_value', __('Property Value '))->rules('required');
             $form->text('customer_name', __('Customer Name'))->rules('required');
-            $form->mobile('clinet_contact_no', __('Clinet Contact No'))->rules('required')->options(['mask' => '099 999 9999']);
+            $form->mobile('client_contact_no', __('Clinet Contact No'))->rules('required')->options(['mask' => '099 999 9999']);
           
                  
         });
