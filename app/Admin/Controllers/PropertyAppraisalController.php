@@ -43,7 +43,6 @@ class PropertyAppraisalController extends AdminController
      */     
     protected function grid()   
     {
-        
 
         $filterProvinceId = isset($_REQUEST['province_id'])? $_REQUEST['province_id'] : [];
         $filterDistrictId = isset($_REQUEST['district_id'])? $_REQUEST['district_id'] : [];

@@ -11,6 +11,7 @@ use App\Http\Controllers\VillageController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\PropertyIndicatorController;
 use App\Http\Controllers\PropertyAppraisalController;
+use App\Http\Controllers\PdfController;
 
 
 /*
@@ -45,3 +46,6 @@ Route::get('/verify/{id}/{value}', [PropertyAppraisalController::class,'verified
 Route::get('/approve/{id}/{value}', [PropertyAppraisalController::class,'approved']);
 
 //Route::get('/transfer', [TransferController::class, 'store']);
+
+// API for PDF Generation
+Route::get('pdf', [PdfController::class, 'index']);
