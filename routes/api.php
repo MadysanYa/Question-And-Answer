@@ -15,6 +15,7 @@ use App\Http\Controllers\PropertyAppraisalController;
 use App\Http\Controllers\PropertyResearchController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -46,7 +47,12 @@ Route::get('/approve_research/{id}/{value}', [PropertyResearchController::class,
 Route::get('/verify_indicator/{id}/{value}', [PropertyIndicatorController::class,'verified']);
 Route::get('/approve_indicator/{id}/{value}', [PropertyIndicatorController::class,'approved']);
 
+//Route::get('/transfer', [TransferController::class, 'store']);
+
 Route::get('/verify_appraisal/{id}/{value}', [PropertyAppraisalController::class,'verified']);
 Route::get('/approve_appraisal/{id}/{value}', [PropertyAppraisalController::class,'approved']);
-
 // Route::get('/print', [PdfController::class, 'print']);
+
+
+// API for PDF Generation
+Route::get('pdf', [PdfController::class, 'index']);
