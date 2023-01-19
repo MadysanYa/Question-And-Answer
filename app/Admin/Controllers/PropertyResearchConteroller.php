@@ -220,7 +220,7 @@ class PropertyResearchConteroller extends AdminController
         //     return '<a href="'. env('APP_URL') . '/public/api/print/'.'" >Print</a>';
         
         // });
-        $grid->html('<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdf">Export to PDF</a>');
+        // $grid->html('<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdf">Export to PDF</a>');
         // <a href="'. env('APP_URL') . '/public/api/verify/'
         // $grid->disableExport();
         //  $grid->disableFilter();
