@@ -3,6 +3,7 @@
 use App\Admin\Controllers\CommuneController as ControllersCommuneController;
 use App\Http\Controllers\CommuneController;
 use App\Http\Controllers\DistrictController;
+use App\Http\Controllers\PdfController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransferController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\VillageController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\PropertyIndicatorController;
 use App\Http\Controllers\PropertyAppraisalController;
+use App\Http\Controllers\PropertyResearchController;
 
 
 /*
@@ -38,10 +40,13 @@ Route::get('/commune', [CommuneController::class,'commune']);
 Route::get('/village', [VillageController::class,'village']);
 Route::get('/branch', [BranchController::class,'branch']);
 
-Route::get('/verify/{id}/{value}', [PropertyIndicatorController::class,'verified']);
-Route::get('/approve/{id}/{value}', [PropertyIndicatorController::class,'approved']);
+Route::get('/verify_research/{id}/{value}', [PropertyResearchController::class,'verified']);
+Route::get('/approve_research/{id}/{value}', [PropertyResearchController::class,'approved']);
 
-Route::get('/verify/{id}/{value}', [PropertyAppraisalController::class,'verified']);
-Route::get('/approve/{id}/{value}', [PropertyAppraisalController::class,'approved']);
+Route::get('/verify_indicator/{id}/{value}', [PropertyIndicatorController::class,'verified']);
+Route::get('/approve_indicator/{id}/{value}', [PropertyIndicatorController::class,'approved']);
 
-//Route::get('/transfer', [TransferController::class, 'store']);
+Route::get('/verify_appraisal/{id}/{value}', [PropertyAppraisalController::class,'verified']);
+Route::get('/approve_appraisal/{id}/{value}', [PropertyAppraisalController::class,'approved']);
+
+// Route::get('/print', [PdfController::class, 'print']);
