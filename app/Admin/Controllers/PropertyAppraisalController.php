@@ -461,10 +461,13 @@ class PropertyAppraisalController extends AdminController
         $form->footer(function ($footer) {
             // disable reset btn
             $footer->disableReset();
+
             // disable `View` checkbox
             $footer->disableViewCheck();
+
             // disable `Continue editing` checkbox
-            // $footer->disableEditingCheck();
+             $footer->disableEditingCheck();
+             
             // disable `Continue Creating` checkbox
             //$footer->disableCreatingCheck();
         
