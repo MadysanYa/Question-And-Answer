@@ -464,7 +464,7 @@ class PropertyAppraisalController extends AdminController
             // disable `View` checkbox
             $footer->disableViewCheck();
             // disable `Continue editing` checkbox
-            // $footer->disableEditingCheck();
+            $footer->disableEditingCheck();
             // disable `Continue Creating` checkbox
             //$footer->disableCreatingCheck();
         
