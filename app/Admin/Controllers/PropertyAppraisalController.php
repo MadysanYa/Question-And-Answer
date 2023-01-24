@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Request;
 Use Encore\Admin\Widgets\Table;
 use App\Models\User;
 use Encore\Admin\Widgets\Collapse;
+use Auth;
+
 
 
 
@@ -46,19 +48,50 @@ class PropertyAppraisalController extends AdminController
      *
      * @return Grid
      */     
+
     protected function grid()   
     {
 
         $filterProvinceId = isset($_REQUEST['province_id'])? $_REQUEST['province_id'] : [];
         $filterDistrictId = isset($_REQUEST['district_id'])? $_REQUEST['district_id'] : [];
 
-               $grid = new Grid(new PropertyAppraisal());        
 
-               $grid->model()->orderBy('id','asc');
-               $grid->column('id', __('No.'))->asc()->sortable();                   
+
+                $grid = new Grid(new PropertyAppraisal());        
+        
+                $grid->model()->orderBy('id','asc');
+                $grid->column('id', __('No.'))->asc()->sortable();  
+                $grid->column('swot_analyze', __("swot_analyze"))->display(function(){ return 'Swot Analyze';})->modal('Swot Analyze', function($model){
+
+                $form = new Form(new PropertyAppraisal());
+                
+                $form->column(1/2,function($form){      
+                $form->text('strength', __('Strength'))->rules('required');
+                $form->text('weakness', __('Weakness'))->rules('required');
+            });
+                $form->column(1/2,function($form){      
+                $form->text('opportunity', __('Opportunity'))->rules('required');
+                $form->text('threat', __('Threat'))->rules('required');
+               // $form->text('	updated_at',__ ('	updated_at'));
+               // $form->text('	created_at',__ ('	created_at'));
+
+            });
+               
+              //  $form->select('return', __('Return'))->options(['Yes'=>'Yes']);
+              // $form->radio('return', __('Return'))->options([''=>'No','Return'=>'Yes'])->default('No');
+             //   $form->textarea('remark', __('Remark'));
+
+              $form->setAction('../../api/PropertyAppraisal');
+                
+
+                
+                return $form;
+			
+	    	}); 
+                
                $grid->column('property_reference', __('Reference'))->sortable();   
                $grid->column('collateral_owner', __('Owner'))->sortable();
-               $grid->column('information_type',__('Type'))->sortable();
+              
 
                 $grid->column('property_address',__('Property Address '))->display(function(){
                 $province_id = $this->province_id;
@@ -219,6 +252,9 @@ class PropertyAppraisalController extends AdminController
 
               $grid->quickSearch(['collateral_owner','telephone']);
       
+
+
+              
         return $grid;
     }
 
@@ -308,6 +344,7 @@ class PropertyAppraisalController extends AdminController
         });
         
         $show->field('cif', __('CIF No'))->sortable(); 
+        $show->field('swot_analyze', __('swot_analyze'))->sortable(); 
         $show->field('rm_name', __('Loan Officer'))->sortable(); 
         $show->field('requested_date', __('Request Date'))->sortable(); 
         $show->field('access_road_name', __('Access Road Name'))->sortable(); 
@@ -418,7 +455,7 @@ class PropertyAppraisalController extends AdminController
         });
 
            
-        $form->column(1/3,function($form){
+        $form->column(1/3,function($form){     
 
             $form->html('<div style="height:105px"></div>');
     
@@ -473,14 +510,13 @@ class PropertyAppraisalController extends AdminController
              $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
              
              
-             
-           
-             
-
             $form->button('swot_analyze', __('Swot Analyze'));
-            
+
 
         });              
+
+
+        
 
         $form->footer(function ($footer) {
             // disable reset btn

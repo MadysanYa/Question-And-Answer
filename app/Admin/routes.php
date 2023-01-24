@@ -29,7 +29,7 @@ Admin::routes();
         $router->resource('information_types', InformationTypeController::class);
         $router->resource('property_types', PropertyTypeController::class);
         $router->resource('boreys', BoreyController::class);
-       
+      
         
         
         
