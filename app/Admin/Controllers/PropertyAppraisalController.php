@@ -62,7 +62,8 @@ class PropertyAppraisalController extends AdminController
         
                 $grid->model()->orderBy('id','asc');
                 $grid->column('id', __('No.'))->asc()->sortable();  
-                $grid->column('swot_analyze', __("swot_analyze"))->display(function(){ return 'Swot Analyze';})->modal('Swot Analyze', function($model){
+                
+                /* $grid->column('swot_analyze', __("swot_analyze"))->display(function(){ return 'Swot Analyze';})->modal('Swot Analyze', function($model){
 
                 $form = new Form(new PropertyAppraisal());
                 
@@ -85,11 +86,9 @@ class PropertyAppraisalController extends AdminController
 
               $form->setAction('../../api/PropertyAppraisal');
                 
-
-                
                 return $form;
 			
-	    	}); 
+	    	});  */
                 
                $grid->column('property_reference', __('Reference'))->sortable();   
                $grid->column('collateral_owner', __('Owner'))->sortable();
