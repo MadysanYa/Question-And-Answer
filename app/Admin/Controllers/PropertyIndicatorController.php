@@ -83,7 +83,7 @@ class PropertyIndicatorController extends AdminController
             if($province == null) $provinceName = '';
             else 
             $provinceName= $province->province_name ;
-            return  $villageName . ' , ' . $communeName . ' , ' . $districtName . ' , ' .  $provinceName ;
+            return $villageName . ' , ' . $communeName . ' , ' . $districtName . ' , ' .  $provinceName ;
            
         });
         $grid->column('longtitude',__('Geo Code'))->sortable();// longtitude just example for show Geo Code on grid!
@@ -212,7 +212,8 @@ class PropertyIndicatorController extends AdminController
        
         // $grid->disableExport();
         //  $grid->disableFilter();
-        $grid->quickSearch(['collateral_owner','telephone']);
+        
+        $grid->quickSearch(['collateral_owner','telephone','id']);
        
 		
 		
