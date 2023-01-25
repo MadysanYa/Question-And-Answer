@@ -430,34 +430,59 @@ class PropertyAppraisalController extends AdminController
               <h4 style="color:red;"><span class="glyphicon glyphicon"></span> Swot Analyze</h4>
             </div>
             <div class="modal-body">
-              <form role="form">
+              
                 <div class="form-group">
                   <label for="strength"><span class="glyphicon glyphicon"></span> Strength</label>
-                  <input type="text" class="form-control" id="strength" placeholder="Enter Strength">
+                  <input type="text" class="form-control" id="input_strength" placeholder="Enter Strength">
                 </div>
                 <div class="form-group">
                   <label for="weakness"><span class="glyphicon glyphicon"></span> Weakness</label>
-                  <input type="text" class="form-control" id="weakness" placeholder="Enter Weakness">
+                  <input type="text" class="form-control" id="input_weakness" placeholder="Enter Weakness">
                 </div>
                 <div class="form-group">
                   <label for="opportunity"><span class="glyphicon glyphicon"></span> Opportunity</label>
-                  <input type="text" class="form-control" id="opportunity" placeholder="Enter Opportunity">
+                  <input type="text" class="form-control" id="input_opportunity" placeholder="Enter Opportunity">
                 </div>
                 <div class="form-group">
                   <label for="threat"><span class="glyphicon glyphicon"></span> Threat</label>
-                  <input type="text" class="form-control" id="threat" placeholder="Enter Threat">
+                  <input type="text" class="form-control" id="input_threat" placeholder="Enter Threat">
                 </div>
-               
-                <button type="submit" class="btn btn-default btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Submit </button>
-              </form>
+                  <button id="btnInputSWOT"  class="btn btn-default btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Submit </button>
             </div>
+
             <div class="modal-footer">
-              <button type="submit" class="btn btn-default btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-              
+             
             </div>
           </div>
         </div>
-      </div>');
+      </div>
+      <script>
+      $("#btnInputSWOT").click(function(){
+        $("#strength").val($("#input_strength").val());
+      });
+        
+      </script>
+      <script>
+      $("#btnInputSWOT").click(function(){
+        $("#weakness").val($("#input_weakness").val());
+      });
+        
+      </script>
+      <script>
+      $("#btnInputSWOT").click(function(){
+        $("#opportunity").val($("#input_opportunity").val());
+      });
+        
+      </script>
+      <script>
+      $("#btnInputSWOT").click(function(){
+        $("#threat").val($("#input_threat").val());
+      });
+        
+      </script>
+
+      
+      ');
                             //     <p>Not a member? <a href="#">Sign Up</a></p>
                             //     <p>Forgot <a href="#">Password?</a></p>
                             //  <div class="checkbox">
@@ -556,8 +581,13 @@ class PropertyAppraisalController extends AdminController
             // $form->map('longtitude', 'latitude');
              $form->image('front_photo', __('Front Photo'))->removable()->uniqueName();
              $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
-             
-             
+                    
+             $form->text('strength',__('Strength'));
+             $form->text('weakness',__('weakness'));
+             $form->text('opportunity',__('opportunity'));
+             $form->text('threat',__('threat'));
+
+            
             $form->button('swot_analyze', __('Swot Analyze'))->on('click', '$("#myModal").modal();');
 
 
