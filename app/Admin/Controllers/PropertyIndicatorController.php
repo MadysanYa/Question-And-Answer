@@ -368,7 +368,8 @@ class PropertyIndicatorController extends AdminController
             });
             $show->field('longtitude',__('Longtitude'));
             $show->field('latitude',__('Latitude'));
-            $show->field('front_photo',__('Front Photo'));
+           // $show->field('front_photo',__('Front Photo'));
+            //$show->field('photos',__('Photo'));
             
             $show->field('remark',__('Remark'));
             
