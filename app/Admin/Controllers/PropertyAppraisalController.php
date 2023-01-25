@@ -72,6 +72,7 @@ class PropertyAppraisalController extends AdminController
                 $form->column(1/2,function($form){      
                 $form->text('opportunity', __('Opportunity'))->rules('required');
                 $form->text('threat', __('Threat'))->rules('required');
+                
                // $form->text('	updated_at',__ ('	updated_at'));
                // $form->text('	created_at',__ ('	created_at'));
 
