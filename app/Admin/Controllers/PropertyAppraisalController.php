@@ -427,33 +427,42 @@ class PropertyAppraisalController extends AdminController
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 style="color:red;"><span class="glyphicon glyphicon-lock"></span> Login</h4>
+              <h4 style="color:red;"><span class="glyphicon glyphicon"></span> Swot Analyze</h4>
             </div>
             <div class="modal-body">
               <form role="form">
                 <div class="form-group">
-                  <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
-                  <input type="text" class="form-control" id="usrname" placeholder="Enter email">
+                  <label for="strength"><span class="glyphicon glyphicon"></span> Strength</label>
+                  <input type="text" class="form-control" id="strength" placeholder="Enter Strength">
                 </div>
                 <div class="form-group">
-                  <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-                  <input type="text" class="form-control" id="psw" placeholder="Enter password">
+                  <label for="weakness"><span class="glyphicon glyphicon"></span> Weakness</label>
+                  <input type="text" class="form-control" id="weakness" placeholder="Enter Weakness">
                 </div>
-                <div class="checkbox">
-                  <label><input type="checkbox" value="" checked>Remember me</label>
+                <div class="form-group">
+                  <label for="opportunity"><span class="glyphicon glyphicon"></span> Opportunity</label>
+                  <input type="text" class="form-control" id="opportunity" placeholder="Enter Opportunity">
                 </div>
-                <button type="submit" class="btn btn-default btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+                <div class="form-group">
+                  <label for="threat"><span class="glyphicon glyphicon"></span> Threat</label>
+                  <input type="text" class="form-control" id="threat" placeholder="Enter Threat">
+                </div>
+               
+                <button type="submit" class="btn btn-default btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Submit </button>
               </form>
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn btn-default btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-              <p>Not a member? <a href="#">Sign Up</a></p>
-              <p>Forgot <a href="#">Password?</a></p>
+              
             </div>
           </div>
         </div>
       </div>');
-
+                            //     <p>Not a member? <a href="#">Sign Up</a></p>
+                            //     <p>Forgot <a href="#">Password?</a></p>
+                            //  <div class="checkbox">
+                            //  <label><input type="checkbox" value="" checked> Remember me</label>
+                            //    </div>
       //End Dialog
 
         $form = new Form(new PropertyAppraisal());
