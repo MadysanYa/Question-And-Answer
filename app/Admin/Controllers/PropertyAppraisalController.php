@@ -92,9 +92,15 @@ class PropertyAppraisalController extends AdminController
                 
                $grid->column('property_reference', __('Reference'))->sortable();   
                $grid->column('collateral_owner', __('Owner'))->sortable();
+               $grid->column('information_type',__(' Type'))->sortable()->Display(function($id){
+                $informationtype = InformationType::where('id',$id)->first();
+                if ($informationtype == null ) return '';
+                return $informationtype->information_type_name;
+            });
+               
               
 
-                $grid->column('property_address',__('Property Address '))->display(function(){
+               $grid->column('property_address',__('Property Address '))->display(function(){
                 $province_id = $this->province_id;
                 $province = Province::where('id', $province_id)->first();
                 $distict_id = $this->district_id;
@@ -140,16 +146,12 @@ class PropertyAppraisalController extends AdminController
     
                 });
                 //////////////////////////
-                $grid->column('requested_date',__('Requested Date'))->sortable(); 
-                $grid->column('reported_date',__('Reported Date'))->sortable();
+                $grid->column('requested_date',__('Requested Date'))->filter('range', 'date');
+                $grid->column('reported_date',__('Reported Date'))->filter('range', 'date');
                 $grid->column('cif_no',__('CIF No.'))->sortable(); 
                 $grid->column('rm_name',__('RM Name'))->sortable(); 
                 $grid->column('telephone',__('Telephone'))->sortable(); 
-                $grid->column('information_type',__('Information Type'))->sortable()->Display(function($id){
-                    $informationtype = InformationType::where('id',$id)->first();
-                    if ($informationtype == null ) return '';
-                    return $informationtype->information_type_name;
-                });
+                
                 $grid->column('location_type',__('Location Type')); 
                 $grid->column('type_of_access_road',__('Type of Access Road'))->sortable(); 
                 $grid->column('access_road_name',__('Access Road Name'))->sortable(); 
@@ -331,6 +333,7 @@ class PropertyAppraisalController extends AdminController
     
         $show->field('property_reference',__('Reference'));
         $show->field('collateral_owner',__('Collateral Owner '));
+        $show->field('property_address',__('Property_address '));
          
 
         $show->field('region_id', __('Region'))->as(function($region){
@@ -344,7 +347,7 @@ class PropertyAppraisalController extends AdminController
             return '(' . $branch->branch_code . ')' . $branch->branch_name;
         });
         
-        $show->field('cif', __('CIF No'))->sortable(); 
+        $show->field('cif_no', __('CIF No'))->sortable(); 
         $show->field('swot_analyze', __('swot_analyze'))->sortable(); 
         $show->field('rm_name', __('Loan Officer'))->sortable(); 
         $show->field('requested_date', __('Request Date'))->sortable(); 
@@ -423,6 +426,7 @@ class PropertyAppraisalController extends AdminController
         <div class="modal-dialog">
     
           <!-- Modal content-->
+                
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -431,23 +435,33 @@ class PropertyAppraisalController extends AdminController
             <div class="modal-body">
               
                 <div class="form-group">
+                <table style="width:100%">
+                <tr style="height:100px">
+                <th>
                   <label for="strength"><span class="glyphicon glyphicon"></span> Strength</label>
-                  <input type="text" class="form-control" id="input_strength" placeholder="Enter Strength">
-                </div>
+                  <input type="text" class="form-control" id="input_strength" placeholder=" Strength">
+                </div> </th>
+
                 <div class="form-group">
+                 <th>
                   <label for="weakness"><span class="glyphicon glyphicon"></span> Weakness</label>
-                  <input type="text" class="form-control" id="input_weakness" placeholder="Enter Weakness">
-                </div>
+                  <input type="text" class="form-control" id="input_weakness" placeholder=" Weakness">
+                </div> </tr> </th>
+                <tr style="height:100px">
+                <th>
                 <div class="form-group">
                   <label for="opportunity"><span class="glyphicon glyphicon"></span> Opportunity</label>
-                  <input type="text" class="form-control" id="input_opportunity" placeholder="Enter Opportunity">
-                </div>
+                  <input type="text" class="form-control" id="input_opportunity" placeholder=" Opportunity">
+                </div> </th>
+                <th>
                 <div class="form-group">
                   <label for="threat"><span class="glyphicon glyphicon"></span> Threat</label>
-                  <input type="text" class="form-control" id="input_threat" placeholder="Enter Threat">
-                </div>
+                  <input type="text" class="form-control" id="input_threat" placeholder="Threat">
+                </div> </tr> </th>  </table>
+
                   <button id="btnInputSWOT"  class="btn btn-default btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Submit </button>
             </div>
+          
 
             <div class="modal-footer">
              
@@ -503,7 +517,7 @@ class PropertyAppraisalController extends AdminController
             //Sum id
            
 
-            $form->text('cif', __('CIF No'))->inputmask(['mask' => '9999999999']);
+            $form->text('cif_no', __('CIF No'))->inputmask(['mask' => '9999999999']);
             $form->text('rm_name', __('RM Name'))->rules('required');
             $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 999 9999']); // add number
             $form->select('information_type',__('Information Type'))->rules('required')->options(function(){
