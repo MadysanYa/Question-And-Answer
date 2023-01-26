@@ -120,7 +120,7 @@ class PropertyResearchConteroller extends AdminController
         $grid->column('id', __('No.'))->asc()->sortable();
         $grid->column('information_type',__('Information Type'))->sortable();
 		$grid->column('property_reference', __('Reference'))->sortable();
-        $grid->column('information_date',__('Information Date'))->sortable();
+        $grid->column('information_date',__('Information Date'))->filter('range', 'date');
         $grid->column('branch_code',__('Branch'))->filter($this->convertToArrayBranch(Branch::all(['branch_code', 'branch_name'])))->Display(function($branch_code){// add filter
             $branch = Branch::where('branch_code', $branch_code)->first();
             // return $branch->branch_name;
@@ -220,10 +220,12 @@ class PropertyResearchConteroller extends AdminController
         //     return '<a href="'. env('APP_URL') . '/public/api/print/'.'" >Print</a>';
         
         // });
-        // $grid->html('<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdf">Export to PDF</a>');
+        $grid->html('<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdf">Export to PDF</a>');
         // <a href="'. env('APP_URL') . '/public/api/verify/'
         // $grid->disableExport();
         //  $grid->disableFilter();
+        // set datetime field type
+
         $grid->quickSearch(['collateral_owner','telephone']);
 		
 		$grid->filter(function($filter){
