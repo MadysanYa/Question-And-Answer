@@ -83,7 +83,7 @@ class PropertyIndicatorController extends AdminController
             if($province == null) $provinceName = '';
             else 
             $provinceName= $province->province_name ;
-            return  $villageName . ' , ' . $communeName . ' , ' . $districtName . ' , ' .  $provinceName ;
+            return $villageName . ' , ' . $communeName . ' , ' . $districtName . ' , ' .  $provinceName ;
            
         });
         $grid->column('longtitude',__('Geo Code'))->sortable();// longtitude just example for show Geo Code on grid!
@@ -107,9 +107,9 @@ class PropertyIndicatorController extends AdminController
         //     if($branch == null) return '';
         //     return $branch->branch_name;  
         //    });  
-        $grid->column('requested_date',__('Requested Date'))->sortable(); 
+        $grid->column('requested_date',__('Requested Date'))->filter('range', 'date'); 
         if (User::isVerifierRole() || User::isApproverRole()){
-        $grid->column('reported_date',__('Reported Date'))->sortable();
+        $grid->column('reported_date',__('Reported Date'))->filter('range', 'date');
         }
         $grid->column('cif_no',__('CIF No.'))->sortable(); 
         $grid->column('rm_name',__('RM Name'))->sortable(); 
@@ -156,10 +156,10 @@ class PropertyIndicatorController extends AdminController
             $village = Village::where('id', $village_id)->first();
             return $village->village_name ;
         });
-        $grid->column('longtitude',__('Longtitude'))->sortable(); 
         $grid->column('latitude',__('Latitude'))->sortable(); 
+        $grid->column('longtitude',__('Longtitude'))->sortable(); 
         
-        $grid->column('remark',__('Remark'))->sortable(); 
+        $grid->column('remark',__('Remark'))->sortable();  
 
 
       // create btn with api
@@ -212,13 +212,14 @@ class PropertyIndicatorController extends AdminController
        
         // $grid->disableExport();
         //  $grid->disableFilter();
-        $grid->quickSearch(['collateral_owner','telephone']);
+        
+        $grid->quickSearch(['collateral_owner','telephone','id']);
        
 		
 		
 		$grid->filter(function($filter){
 			$filter->disableIdFilter();
-		//	$filter->equal('company');
+			//$filter->equal('company');
 		});
 
 		
@@ -367,7 +368,8 @@ class PropertyIndicatorController extends AdminController
             });
             $show->field('longtitude',__('Longtitude'));
             $show->field('latitude',__('Latitude'));
-            $show->field('front_photo',__('Front Photo'));
+           // $show->field('front_photo',__('Front Photo'));
+            //$show->field('photos',__('Photo'));
             
             $show->field('remark',__('Remark'));
             
@@ -447,8 +449,8 @@ class PropertyIndicatorController extends AdminController
 
             $form->select('village_id', __('Village'))->rules('required')->options(function(){
                 return Village::all()->pluck('village_name','id');});
-            $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '99.999999'])->rules('required');
-            $form->text('latitude', __('Latitude'))->inputmask(['mask' => '999.999999'])->rules('required');
+            $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.9999999'])->rules('required');
+            $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.9999999'])->rules('required');
             $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
             $form->image('front_photo',__('Front Photo'))->removable()->uniqueName();
             $form->text('remark', __('Remark'));

@@ -6,6 +6,7 @@ namespace App\Admin\Controllers;
 
 use Encore\Admin\Controllers\AdminController;
 use App\Models\TitleIndicator;
+use App\Models\PropertyIndicator;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Illuminate\Support\Facades\Request;
@@ -31,7 +32,10 @@ class TitleIndicatorController extends AdminController
      protected function grid()
      {
         
-
+       
+        $grid = new Grid(new PropertyIndicator);
+        
+        return $grid;
      }
      
 
