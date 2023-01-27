@@ -1,7 +1,8 @@
 <?php
 
-use App\Admin\Controllers\BoreyController;
 use Illuminate\Routing\Router;
+use App\Admin\Controllers\BoreyController;
+use App\Admin\Controllers\MapPriceIndicatorController;
 
 Admin::routes();
 
@@ -29,7 +30,6 @@ Admin::routes();
         $router->resource('information_types', InformationTypeController::class);
         $router->resource('property_types', PropertyTypeController::class);
         $router->resource('boreys', BoreyController::class);
-      
         
         
         

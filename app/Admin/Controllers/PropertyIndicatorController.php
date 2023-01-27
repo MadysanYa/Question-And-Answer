@@ -156,8 +156,8 @@ class PropertyIndicatorController extends AdminController
             $village = Village::where('id', $village_id)->first();
             return $village->village_name ;
         });
-        $grid->column('longtitude',__('Longtitude'))->sortable(); 
         $grid->column('latitude',__('Latitude'))->sortable(); 
+        $grid->column('longtitude',__('Longtitude'))->sortable(); 
         
         $grid->column('remark',__('Remark'))->sortable(); 
 
@@ -448,8 +448,8 @@ class PropertyIndicatorController extends AdminController
 
             $form->select('village_id', __('Village'))->rules('required')->options(function(){
                 return Village::all()->pluck('village_name','id');});
-            $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '99.999999'])->rules('required');
-            $form->text('latitude', __('Latitude'))->inputmask(['mask' => '999.999999'])->rules('required');
+            $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.999999'])->rules('required');
+            $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.999999'])->rules('required');
             $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
             $form->image('front_photo',__('Front Photo'))->removable()->uniqueName();
             $form->text('remark', __('Remark'));
