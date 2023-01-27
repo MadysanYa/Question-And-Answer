@@ -26,6 +26,7 @@ Use Encore\Admin\Widgets\Table;
 use App\Models\User;
 use Encore\Admin\Widgets\Collapse;
 use Auth;
+use Encore\Admin\Admin;
 
 
 
@@ -61,7 +62,8 @@ class PropertyAppraisalController extends AdminController
         
                 $grid->model()->orderBy('id','asc');
                 $grid->column('id', __('No.'))->asc()->sortable();  
-                $grid->column('swot_analyze', __("swot_analyze"))->display(function(){ return 'Swot Analyze';})->modal('Swot Analyze', function($model){
+                
+                /* $grid->column('swot_analyze', __("swot_analyze"))->display(function(){ return 'Swot Analyze';})->modal('Swot Analyze', function($model){
 
                 $form = new Form(new PropertyAppraisal());
                 
@@ -72,6 +74,7 @@ class PropertyAppraisalController extends AdminController
                 $form->column(1/2,function($form){      
                 $form->text('opportunity', __('Opportunity'))->rules('required');
                 $form->text('threat', __('Threat'))->rules('required');
+                
                // $form->text('	updated_at',__ ('	updated_at'));
                // $form->text('	created_at',__ ('	created_at'));
 
@@ -83,17 +86,21 @@ class PropertyAppraisalController extends AdminController
 
               $form->setAction('../../api/PropertyAppraisal');
                 
-
-                
                 return $form;
 			
-	    	}); 
+	    	});  */
                 
                $grid->column('property_reference', __('Reference'))->sortable();   
                $grid->column('collateral_owner', __('Owner'))->sortable();
+               $grid->column('information_type',__(' Type'))->sortable()->Display(function($id){
+                $informationtype = InformationType::where('id',$id)->first();
+                if ($informationtype == null ) return '';
+                return $informationtype->information_type_name;
+            });
+               
               
 
-                $grid->column('property_address',__('Property Address '))->display(function(){
+               $grid->column('property_address',__('Property Address '))->display(function(){
                 $province_id = $this->province_id;
                 $province = Province::where('id', $province_id)->first();
                 $distict_id = $this->district_id;
@@ -139,16 +146,12 @@ class PropertyAppraisalController extends AdminController
     
                 });
                 //////////////////////////
-                $grid->column('requested_date',__('Requested Date'))->sortable(); 
-                $grid->column('reported_date',__('Reported Date'))->sortable();
+                $grid->column('requested_date',__('Requested Date'))->filter('range', 'date');
+                $grid->column('reported_date',__('Reported Date'))->filter('range', 'date');
                 $grid->column('cif_no',__('CIF No.'))->sortable(); 
                 $grid->column('rm_name',__('RM Name'))->sortable(); 
                 $grid->column('telephone',__('Telephone'))->sortable(); 
-                $grid->column('information_type',__('Information Type'))->sortable()->Display(function($id){
-                    $informationtype = InformationType::where('id',$id)->first();
-                    if ($informationtype == null ) return '';
-                    return $informationtype->information_type_name;
-                });
+                
                 $grid->column('location_type',__('Location Type')); 
                 $grid->column('type_of_access_road',__('Type of Access Road'))->sortable(); 
                 $grid->column('access_road_name',__('Access Road Name'))->sortable(); 
@@ -330,6 +333,7 @@ class PropertyAppraisalController extends AdminController
     
         $show->field('property_reference',__('Reference'));
         $show->field('collateral_owner',__('Collateral Owner '));
+        $show->field('property_address',__('Property_address '));
          
 
         $show->field('region_id', __('Region'))->as(function($region){
@@ -343,7 +347,7 @@ class PropertyAppraisalController extends AdminController
             return '(' . $branch->branch_code . ')' . $branch->branch_name;
         });
         
-        $show->field('cif', __('CIF No'))->sortable(); 
+        $show->field('cif_no', __('CIF No'))->sortable(); 
         $show->field('swot_analyze', __('swot_analyze'))->sortable(); 
         $show->field('rm_name', __('Loan Officer'))->sortable(); 
         $show->field('requested_date', __('Request Date'))->sortable(); 
@@ -417,6 +421,88 @@ class PropertyAppraisalController extends AdminController
     protected function form()
     {
 
+        // Add dialog form
+        Admin::html(' <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+    
+          <!-- Modal content-->
+                
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 style="color:red;"><span class="glyphicon glyphicon"></span> Swot Analyze</h4>
+            </div>
+            <div class="modal-body">
+              
+                <div class="form-group">
+                <table style="width:100%">
+                <tr style="height:100px">
+                <th>
+                  <label for="strength"><span class="glyphicon glyphicon"></span> Strength</label>
+                  <input type="text" class="form-control" id="input_strength" placeholder=" Strength">
+                </div> </th>
+
+                <div class="form-group">
+                 <th>
+                  <label for="weakness"><span class="glyphicon glyphicon"></span> Weakness</label>
+                  <input type="text" class="form-control" id="input_weakness" placeholder=" Weakness">
+                </div> </tr> </th>
+                <tr style="height:100px">
+                <th>
+                <div class="form-group">
+                  <label for="opportunity"><span class="glyphicon glyphicon"></span> Opportunity</label>
+                  <input type="text" class="form-control" id="input_opportunity" placeholder=" Opportunity">
+                </div> </th>
+                <th>
+                <div class="form-group">
+                  <label for="threat"><span class="glyphicon glyphicon"></span> Threat</label>
+                  <input type="text" class="form-control" id="input_threat" placeholder="Threat">
+                </div> </tr> </th>  </table>
+
+                  <button id="btnInputSWOT"  class="btn btn-default btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Submit </button>
+            </div>
+          
+
+            <div class="modal-footer">
+             
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+      $("#btnInputSWOT").click(function(){
+        $("#strength").val($("#input_strength").val());
+      });
+        
+      </script>
+      <script>
+      $("#btnInputSWOT").click(function(){
+        $("#weakness").val($("#input_weakness").val());
+      });
+        
+      </script>
+      <script>
+      $("#btnInputSWOT").click(function(){
+        $("#opportunity").val($("#input_opportunity").val());
+      });
+        
+      </script>
+      <script>
+      $("#btnInputSWOT").click(function(){
+        $("#threat").val($("#input_threat").val());
+      });
+        
+      </script>
+
+      
+      ');
+                            //     <p>Not a member? <a href="#">Sign Up</a></p>
+                            //     <p>Forgot <a href="#">Password?</a></p>
+                            //  <div class="checkbox">
+                            //  <label><input type="checkbox" value="" checked> Remember me</label>
+                            //    </div>
+      //End Dialog
+
         $form = new Form(new PropertyAppraisal());
 
         $form->column(1/3,function($form){
@@ -431,7 +517,7 @@ class PropertyAppraisalController extends AdminController
             //Sum id
            
 
-            $form->text('cif', __('CIF No'))->inputmask(['mask' => '9999999999']);
+            $form->text('cif_no', __('CIF No'))->inputmask(['mask' => '9999999999']);
             $form->text('rm_name', __('RM Name'))->rules('required');
             $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 999 9999']); // add number
             $form->select('information_type',__('Information Type'))->rules('required')->options(function(){
@@ -508,9 +594,14 @@ class PropertyAppraisalController extends AdminController
             // $form->map('longtitude', 'latitude');
              $form->image('front_photo', __('Front Photo'))->removable()->uniqueName();
              $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
-             
-             
-            $form->button('swot_analyze', __('Swot Analyze'));
+                    
+             $form->text('strength',__('Strength'));
+             $form->text('weakness',__('Weakness'));
+             $form->text('opportunity',__('Opportunity'));
+             $form->text('threat',__('Threat'));
+
+            
+            $form->button('swot_analyze', __('Swot Analyze'))->on('click', '$("#myModal").modal();');
 
 
         });              
