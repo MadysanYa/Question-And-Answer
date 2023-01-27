@@ -100,7 +100,7 @@ class PropertyAppraisalController extends AdminController
                
               
 
-               $grid->column('property_address',__('Property Address '))->display(function(){
+             /*   $grid->column('property_address',__('Property Address '))->display(function(){
                 $province_id = $this->province_id;
                 $province = Province::where('id', $province_id)->first();
                 $distict_id = $this->district_id;
@@ -125,7 +125,7 @@ class PropertyAppraisalController extends AdminController
                 $provinceName= $province->province_name ;
                 return  $villageName . ' , ' . $communeName . ' , ' . $districtName . ' , ' .  $provinceName  ;
                
-            }); 
+            });  */
             $grid->column('longtitude',__('Geo Code'))->sortable(); 
 
             $grid->column('region_id',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){// add filter
