@@ -148,7 +148,7 @@ class MapPriceIndicatorController extends AdminController
                                 return false;}  
                         }  
                         </script>
-                  <div id="map"></div>
+                  <div id="map"> Map Testing</div>
               </div>
               
               <script type="text/javascript">

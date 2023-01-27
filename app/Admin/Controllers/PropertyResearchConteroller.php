@@ -215,18 +215,19 @@ class PropertyResearchConteroller extends AdminController
             
         });
 
-        // $grid->column('title')->display(function ($title) {
-
-        //     return '<a href="'. env('APP_URL') . '/public/api/print/'.'" >Print</a>';
-        
-        // });
         $grid->html('<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdf">Export to PDF</a>');
-        // <a href="'. env('APP_URL') . '/public/api/verify/'
+        // http://localhost/pms/property-management/public/api/pdf
+
         // $grid->disableExport();
         //  $grid->disableFilter();
-        // set datetime field type
+        // $user = User::where('id',)->first();
+        // return $user->username;
 
-        $grid->quickSearch(['collateral_owner','telephone']);
+        // return User::all()->pluck('username','id');
+        $grid->quickSearch([
+            // (User::all()->pluck('username','id')),
+            'id',
+            'admin_user_id']);
 		
 		$grid->filter(function($filter){
 			$filter->disableIdFilter();

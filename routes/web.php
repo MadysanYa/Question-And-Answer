@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\GoogleController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -21,3 +22,4 @@ Route::get('/', function () {
     return redirect('/admin');
 });
 
+Route::get('google-autocomplete', [GoogleController::class, 'index']);
