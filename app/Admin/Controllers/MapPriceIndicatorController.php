@@ -2,8 +2,6 @@
 
 namespace App\Admin\Controllers;
 
-
-
 use Auth;
 use App\Models\User;
 use App\Model\Invoice;
@@ -20,12 +18,6 @@ use App\Models\PropertyIndicator;
 use Encore\Admin\Form\Field\Button;
 use Illuminate\Support\Facades\Request;
 use Encore\Admin\Controllers\AdminController;
-
-
-
-
-
-
 
 
 class MapPriceIndicatorController extends AdminController 
@@ -130,12 +122,5 @@ class MapPriceIndicatorController extends AdminController
     {
 
     }
-
-   
-       
-
-
-        
-   
 
 }
