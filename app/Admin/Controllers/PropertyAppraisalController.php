@@ -439,24 +439,24 @@ class PropertyAppraisalController extends AdminController
                 <tr style="height:100px">
                 <th>
                   <label for="strength"><span class="glyphicon glyphicon"></span> Strength</label>
-                  <input type="text" class="form-control" id="input_strength" placeholder=" Strength">
+                  <textarea type="text" class="form-control" id="input_strength" placeholder=" Strength"> </textarea>
                 </div> </th>
 
                 <div class="form-group">
                  <th>
                   <label for="weakness"><span class="glyphicon glyphicon"></span> Weakness</label>
-                  <input type="text" class="form-control" id="input_weakness" placeholder=" Weakness">
+                  <textarea  type="text" class="form-control" id="input_weakness" placeholder=" Weakness"> </textarea>
                 </div> </tr> </th>
                 <tr style="height:100px">
                 <th>
                 <div class="form-group">
                   <label for="opportunity"><span class="glyphicon glyphicon"></span> Opportunity</label>
-                  <input type="text" class="form-control" id="input_opportunity" placeholder=" Opportunity">
+                  <textarea type="text" class="form-control" id="input_opportunity" placeholder=" Opportunity"> </textarea>
                 </div> </th>
                 <th>
                 <div class="form-group">
                   <label for="threat"><span class="glyphicon glyphicon"></span> Threat</label>
-                  <input type="text" class="form-control" id="input_threat" placeholder="Threat">
+                  <textarea type="text" class="form-control" id="input_threat" placeholder="Threat"> </textarea>
                 </div> </tr> </th>  </table>
 
                   <button id="btnInputSWOT"  class="btn btn-default btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Submit </button>
