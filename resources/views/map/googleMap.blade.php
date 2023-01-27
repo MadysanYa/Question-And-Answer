@@ -8,76 +8,59 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <style type="text/css">
         #map {
-          height: 400px;
+          height: 550px;
+        }
+        .gm-style .gm-style-iw-d::-webkit-scrollbar-track, 
+        .gm-style .gm-style-iw-d::-webkit-scrollbar-track-piece,
+        .gm-style .gm-style-iw-c,
+        .gm-style .gm-style-iw-t::after { 
+        background: red;
+        }
+        .gm-style .gm-style-iw-tc::after {   background: red; }
+        form {
+            border: 2px solid red;
+            border-radius: 4px;
+            font-size:25px;
+        }
+        input  {
+            width: 25px;
+            height: 25px;
+        }
+        label {
+            font-size: 30px;
+            color: #0066cc;
         }
     </style>
 </head>
-<body>
-    <div class="row">
-        <div class="container">
-            <div class="col-12">
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <select class="form-control">
-                            <option value="0">Please select</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                <div class="form-group">
-                        <select class="form-control">
-                            <option value="0">Please select</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <select class="form-control">
-                            <option value="0">Please select</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <select class="form-control">
-                            <option value="0">Please select</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <select class="form-control">
-                            <option value="0">Please select</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="btn-group" style="margin-right: 3px" data-toggle="buttons">
-                    <button type="submit" class="btn btn-primary m-3" id="save" class="fa fa-filter">Filter</button>
-                </div>
-            </div>
-        </div>
-    </div>   
+    
     <div class="container mt-5">
+        <form >
+            <fieldset>
+                <legend style="font-size:30px">Select Property :</legend>
+                <input type="checkbox" name="box" id="veg1" value="tomato" onclick="return ValidateSelection();">
+                <label for="veg1">Property Research</label>
+                <input form="myForm" type="checkbox" name="box" id="veg2"  value="onion" onclick="return ValidateSelection();"> 
+                <label for="veg2">Property Indication</label>
+                <input form="myForm" type="checkbox" name="box" id="veg3"  value="lettuce" onclick="return ValidateSelection();"> 
+                <label for="veg3">Property Appraisal</label>
+            </fieldset>
+        </form>
+
+        <script type="text/javascript">  
+            function ValidateSelection()  
+            {  
+                var check_box = document.getElementsByName("box");  
+                var CheckedItems = 0; 
+                for(var i = 0; i < check_box.length; i++)  
+                {  
+                if(check_box[i].checked)  
+                    CheckedItems++;  
+                }  
+                if(CheckedItems > 1){  
+                alert(" select only!");  
+                    return false;}  
+                }  
+        </script>
         <div id="map"></div>
     </div>
     <script type="text/javascript">
@@ -121,16 +104,16 @@
                         "<b>Type Access Road Name " + propertyIndicator[i][11] + "<br>" +
                         "<b>Access Road Name: " + propertyIndicator[i][12] + "<br>" +
                         "<b>Property Type: " + propertyIndicator[i][13] + "<br>" +
-                        "<b>Building Status: " + propertyIndicator[i][14] + "<br>" +
+                        "<b>Building Status (%): " + propertyIndicator[i][14] + "<br>" +
                         "<b>Borey: " + propertyIndicator[i][15] + "<br>" +
                         "<b>No. of Floor: " + propertyIndicator[i][16] + "<br>" +
                         "<b>Land Title Type: " + propertyIndicator[i][17] + "<br>" +
                         "<b>Information Date: " + propertyIndicator[i][18] + "<br>" +
                         "<b>Land Size: " + propertyIndicator[i][19] + "<br>" +
-                        "<b>Land Value per Sqm: " + propertyIndicator[i][20] + "<br>" +
+                        "<b>Land Value per Sqm($): "+ propertyIndicator[i][20] + "<br>" +
                         "<b>Building Size: " + propertyIndicator[i][21] + "<br>" +
-                        "<b>Building Value per Sqm: " + propertyIndicator[i][22] + "<br>" +
-                        "<b>Property Value: " + propertyIndicator[i][23] + "<br>" +
+                        "<b>Building Value per Sqm($): " + propertyIndicator[i][22] + "<br>" +
+                        "<b>Property Value($): " + propertyIndicator[i][23] + "<br>" +
                         "<b>Contact No. : " + propertyIndicator[i][24]
                     );
                     infowindow.open(map, marker);
@@ -142,11 +125,6 @@
     </script>
 
     <script type="text/javascript"src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initMap" ></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <style type="text/css">
-        #map {
-        height: 500px;
-        }
-    </style>
+   
 </body>
 </html>
