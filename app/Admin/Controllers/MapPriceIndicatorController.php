@@ -87,7 +87,7 @@ class MapPriceIndicatorController extends AdminController
               <style >
                   #map {
                     height: 550px;
-                    width: 100%;
+                   
                   }
     
                   .gm-style .gm-style-iw-d::-webkit-scrollbar-track, 
@@ -124,9 +124,9 @@ class MapPriceIndicatorController extends AdminController
                         <legend>Select Property :</legend>
                         <input type="checkbox" name="veggies" id="veg1" value="tomato" onclick="return ValidateSelection();">
                         <label for="veg1">Property Research</label>
-                        <input form="myForm" type="checkbox" name="veggies" id="veg2"  value="onion" onclick="return ValidateSelection();"> 
+                        <input form="myForm" type="checkbox" name="box" id="veg2"  value="onion" onclick="return ValidateSelection();"> 
                         <label for="veg2">Property Indication</label>
-                        <input form="myForm" type="checkbox" name="veggies" id="veg3"  value="lettuce" onclick="return ValidateSelection();"> 
+                        <input form="myForm" type="checkbox" name="box" id="veg3"  value="lettuce" onclick="return ValidateSelection();"> 
                         <label for="veg3">Property Appraisal</label>
                       </fieldset>
                      </form>
@@ -136,7 +136,7 @@ class MapPriceIndicatorController extends AdminController
                         <script type="text/javascript">  
                         function ValidateSelection()  
                         {  
-                            var check_box = document.getElementsByName("veggies");  
+                            var check_box = document.getElementsByName("box");  
                             var CheckedItems = 0; 
                             for(var i = 0; i < check_box.length; i++)  
                             {  
@@ -144,7 +144,7 @@ class MapPriceIndicatorController extends AdminController
                                     CheckedItems++;  
                             }  
                             if(CheckedItems > 1){  
-                                alert("You can't select more than three veggies!");  
+                                alert("select only");  
                                 return false;}  
                         }  
                         </script>
@@ -172,7 +172,7 @@ class MapPriceIndicatorController extends AdminController
                                 position: new google.maps.LatLng(locations[i][1], locations[i][2]),
                                 label:labels[i],
                                 map: map, 
-                                // icon: {path: google.maps.SymbolPath.CIRCLE, scale: 0}
+                                //icon: {path: google.maps.SymbolPath.CIRCLE, scale: 0}
                             });
                                 
                             google.maps.event.addListener(marker, 'click', (function(marker, i) {
