@@ -121,16 +121,16 @@
                         "<b>Type Access Road Name " + propertyIndicator[i][11] + "<br>" +
                         "<b>Access Road Name: " + propertyIndicator[i][12] + "<br>" +
                         "<b>Property Type: " + propertyIndicator[i][13] + "<br>" +
-                        "<b>Building Status: " + propertyIndicator[i][14] + "<br>" +
+                        "<b>Building Status: " + propertyIndicator[i][14] + "%<br>" +
                         "<b>Borey: " + propertyIndicator[i][15] + "<br>" +
                         "<b>No. of Floor: " + propertyIndicator[i][16] + "<br>" +
                         "<b>Land Title Type: " + propertyIndicator[i][17] + "<br>" +
                         "<b>Information Date: " + propertyIndicator[i][18] + "<br>" +
                         "<b>Land Size: " + propertyIndicator[i][19] + "<br>" +
-                        "<b>Land Value per Sqm: " + propertyIndicator[i][20] + "<br>" +
+                        "<b>Land Value per Sqm: $" + propertyIndicator[i][20] + "<br>" +
                         "<b>Building Size: " + propertyIndicator[i][21] + "<br>" +
-                        "<b>Building Value per Sqm: " + propertyIndicator[i][22] + "<br>" +
-                        "<b>Property Value: " + propertyIndicator[i][23] + "<br>" +
+                        "<b>Building Value per Sqm: $" + propertyIndicator[i][22] + "<br>" +
+                        "<b>Property Value: $" + propertyIndicator[i][23] + "<br>" +
                         "<b>Contact No. : " + propertyIndicator[i][24]
                     );
                     infowindow.open(map, marker);
