@@ -596,9 +596,9 @@ class PropertyAppraisalController extends AdminController
              $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
                     
              $form->text('strength',__('Strength'));
-             $form->text('weakness',__('weakness'));
-             $form->text('opportunity',__('opportunity'));
-             $form->text('threat',__('threat'));
+             $form->text('weakness',__('Weakness'));
+             $form->text('opportunity',__('Opportunity'));
+             $form->text('threat',__('Threat'));
 
             
             $form->button('swot_analyze', __('Swot Analyze'))->on('click', '$("#myModal").modal();');
