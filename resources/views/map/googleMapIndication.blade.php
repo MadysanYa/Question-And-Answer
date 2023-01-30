@@ -13,72 +13,9 @@
     </style>
 </head>
 <body>
-    <div class="row">
-        <div class="container">
-            <div class="col-12">
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <select class="form-control">
-                            <option value="0">Please select</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                <div class="form-group">
-                        <select class="form-control">
-                            <option value="0">Please select</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <select class="form-control">
-                            <option value="0">Please select</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <select class="form-control">
-                            <option value="0">Please select</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <select class="form-control">
-                            <option value="0">Please select</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="btn-group" style="margin-right: 3px" data-toggle="buttons">
-                    <button type="submit" class="btn btn-primary m-3" id="save" class="fa fa-filter">Filter</button>
-                </div>
-            </div>
-        </div>
-    </div>   
     <div class="container mt-5">
-        <div id="map"></div>
+        @include('map.filterMap')
+        {{-- <div id="map"></div> --}}
     </div>
     <script type="text/javascript">
         function initMap() {

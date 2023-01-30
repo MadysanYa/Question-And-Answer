@@ -588,8 +588,8 @@ class PropertyAppraisalController extends AdminController
             
           
                                
-            $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '99.999999'])->rules('required');
-            $form->text('latitude', __('Latitude'))->inputmask(['mask' => '999.999999'])->rules('required');
+            $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.9999999'])->rules('required');
+            $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.9999999'])->rules('required');
             $form->text('remark', __('Remark'));
             // $form->map('longtitude', 'latitude');
              $form->image('front_photo', __('Front Photo'))->removable()->uniqueName();
