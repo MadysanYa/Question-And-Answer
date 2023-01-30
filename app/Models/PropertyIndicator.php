@@ -36,5 +36,12 @@ class PropertyIndicator extends Model
     // {
     //     return json_decode($frontphoto, true);
     // }
+
+    /**
+     * Scope Query
+     */
+    public function scopeGetWithCount($query){
+        return $query->get()->count();
+    }
 }
 
