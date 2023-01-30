@@ -10,26 +10,6 @@
         #map {
           height: 550px;
         }
-        .gm-style .gm-style-iw-d::-webkit-scrollbar-track, 
-        .gm-style .gm-style-iw-d::-webkit-scrollbar-track-piece,
-        .gm-style .gm-style-iw-c,
-        .gm-style .gm-style-iw-t::after { 
-        background: red;
-        }
-        .gm-style .gm-style-iw-tc::after {   background: red; }
-        form {
-            border: 2px solid red;
-            border-radius: 4px;
-            font-size:25px;
-        }
-        input  {
-            width: 25px;
-            height: 25px;
-        }
-        label {
-            font-size: 30px;
-            color: #0066cc;
-        }
     </style>
 </head>
 <body>

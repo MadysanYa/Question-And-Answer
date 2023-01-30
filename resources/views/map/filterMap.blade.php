@@ -38,7 +38,8 @@
     <div class="col-md-12">
         <div class="box grid-box">
             <div class="input-group input-group-sm">
-                <form action="http://localhost/pms/property-management/public/admin/map_price_indicators">
+                {{-- <form action="http://localhost/pms/property-management/public/admin/map_price_indicators"> --}}
+                <form action="{{ route('map_price_indicators') }}">
                     <div class="form-check col-md-4">
                         <input type="checkbox" name="check_list" value="research" class="checkbox-size">
                         <label class="labal-size">
@@ -61,7 +62,7 @@
                     </div>
                 </form>
             </div>
-            {{-- <div id="map"></div> --}}
+            <div id="map"></div>
         </div>
     </div>
 </div>
