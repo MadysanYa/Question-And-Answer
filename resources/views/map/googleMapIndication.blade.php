@@ -8,7 +8,27 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <style type="text/css">
         #map {
-          height: 400px;
+          height: 550px;
+        }
+        .gm-style .gm-style-iw-d::-webkit-scrollbar-track, 
+        .gm-style .gm-style-iw-d::-webkit-scrollbar-track-piece,
+        .gm-style .gm-style-iw-c,
+        .gm-style .gm-style-iw-t::after { 
+        background: red;
+        }
+        .gm-style .gm-style-iw-tc::after {   background: red; }
+        form {
+            border: 2px solid red;
+            border-radius: 4px;
+            font-size:25px;
+        }
+        input  {
+            width: 25px;
+            height: 25px;
+        }
+        label {
+            font-size: 30px;
+            color: #0066cc;
         }
     </style>
 </head>
@@ -79,11 +99,6 @@
     </script>
 
     <script type="text/javascript"src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initMap" ></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <style type="text/css">
-        #map {
-        height: 500px;
-        }
-    </style>
+   
 </body>
 </html>
