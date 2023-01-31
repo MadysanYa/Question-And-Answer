@@ -21,7 +21,7 @@
                                     <span class="icheck">
                                         <label style="margin-right: 10px;margin-bottom: 0px;display: flex;">
                                             <div class="" aria-checked="false" aria-disabled="false">
-                                                <input type="radio" class="released" name="check_list" value="indication" {{request()->check_list == "indicator" ? 'checked' : "false" }}  style="margin-right: 10px;">
+                                                <input type="radio" class="released" name="check_list" value="indication" {{request()->check_list == "indication" ? 'checked' : "false" }}  style="margin-right: 10px;">
                                             </div>Properties Indication
                                         </label>
                                     </span>
