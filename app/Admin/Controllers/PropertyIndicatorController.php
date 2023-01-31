@@ -61,31 +61,31 @@ class PropertyIndicatorController extends AdminController
         $grid->column('collateral_owner',__('Owner'))->sortable();
         $grid->column('information_type',__('Type'))->sortable();
        
-        $grid->column('property_address',__('Property Address '))->display(function(){
-            $province_id = $this->province_id;
-            $province = Province::where('id', $province_id)->first();
-            $distict_id = $this->district_id;
-            $district = District::where('id', $distict_id)->first();
-            $commune_id = $this->commune_id;
-            $commune = Commune::where('id', $commune_id)->first();
+        // $grid->column('property_address',__('Property Address '))->display(function(){
+        //     $province_id = $this->province_id;
+        //     $province = Province::where('id', $province_id)->first();
+        //     $distict_id = $this->district_id;
+        //     $district = District::where('id', $distict_id)->first();
+        //     $commune_id = $this->commune_id;
+        //     $commune = Commune::where('id', $commune_id)->first();
 
-            $village_id = $this->village_id;
-            $village = Village::where('id', $village_id)->first();
-             if($village == null) $villageName = '';
-            else 
-            $villageName = $village->village_name ;
-            if($commune == null) $communeName = '';
-            else 
-            $communeName = $commune->commune_name ;
-            if($district == null) $districtName = '';
-            else 
-            $districtName = $district->district_name ;
-            if($province == null) $provinceName = '';
-            else 
-            $provinceName= $province->province_name ;
-            return $villageName . ' , ' . $communeName . ' , ' . $districtName . ' , ' .  $provinceName ;
+        //     $village_id = $this->village_id;
+        //     $village = Village::where('id', $village_id)->first();
+        //      if($village == null) $villageName = '';
+        //     else 
+        //     $villageName = $village->village_name ;
+        //     if($commune == null) $communeName = '';
+        //     else 
+        //     $communeName = $commune->commune_name ;
+        //     if($district == null) $districtName = '';
+        //     else 
+        //     $districtName = $district->district_name ;
+        //     if($province == null) $provinceName = '';
+        //     else 
+        //     $provinceName= $province->province_name ;
+        //     return $villageName . ' , ' . $communeName . ' , ' . $districtName . ' , ' .  $provinceName ;
            
-        });
+        // });
         $grid->column('longtitude',__('Geo Code'))->sortable();// longtitude just example for show Geo Code on grid!
 
         $grid->column('region_id',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){// add filter
@@ -449,8 +449,8 @@ class PropertyIndicatorController extends AdminController
 
             $form->select('village_id', __('Village'))->rules('required')->options(function(){
                 return Village::all()->pluck('village_name','id');});
-            $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.9999999'])->rules('required');
-            $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.9999999'])->rules('required');
+            $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.999999'])->rules('required');
+            $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.999999'])->rules('required');
             $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
             $form->image('front_photo',__('Front Photo'))->removable()->uniqueName();
             $form->text('remark', __('Remark'));

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 
-<html lang="el">
+<!-- <html lang="el"> -->
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Internal Indication Report</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
     <style>
         /* Font Definitions */
@@ -146,10 +148,11 @@
 <body style="height: 100%; width: 100%;">
 <div class="WordSection1" style=" height: 850px;">
     <!-- width: 50%; margin-left: 25%; -->
+    <!-- <span style='position:relative;z-index:251660288'>
+            <img width=296 height=72 src="{{ storage_path('app/public/images/sbc_test1.png') }}">
+    </span> -->
+
     <p class=MsoNormal align = center style='text-align:center'>
-        <!-- <span style='position:relative;z-index:251660288'><span style='left:0px;position: absolute;left:419px;top:-80px;width:370px;height:90px'>
-            <img width=296 height=72 src="Internal%20Indication%20Report%20test2_files/image001.png">
-        </span> -->
         <u>
             <span style='font-size:14.0pt;line-height:107%;font-family:"OneShinhan Bold",sans-serif'>INTERNAL INDICATION REPORT</span>
         </u>
@@ -207,7 +210,7 @@
                 </td>
                 <td colspan=6 style='width:140pt; border:solid windowtext 1.0pt; border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpLast style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Test</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'></span>
                     </p>
                 </td>
             </tr>
@@ -230,7 +233,7 @@
                 </td>
                 <td colspan=6 style='width:180pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpLast style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>&nbsp;</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'></span>
                     </p>
                 </td>
             </tr>
@@ -238,22 +241,22 @@
             <tr style='height:13.35pt'>
                 <td valign=top style='width:100pt;border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Property Type :</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Land Area :</span>
                     </p>
                 </td>
                 <td valign=top style='width:100pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2-Stories Villa</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>120 sq.m</span>
                     </p>
                 </td>
                 <td valign=top style='width:100pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Collateral Owner :</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Building Status :</span>
                     </p>
                 </td>
                 <td colspan=6 style='width:180pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpLast style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>&nbsp;</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>100% Completed</span>
                     </p>
                 </td>
             </tr>
@@ -261,22 +264,22 @@
             <tr style='height:13.35pt'>
                 <td valign=top style='width:100pt;border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Property Type :</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Estimate Build Up Area :</span>
                     </p>
                 </td>
                 <td valign=top style='width:100pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2-Stories Villa</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>8m x 10m x 2F = 160 sq.m</span>
                     </p>
                 </td>
                 <td valign=top style='width:100pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Collateral Owner :</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Geo Code :</span>
                     </p>
                 </td>
                 <td colspan=6 style='width:180pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpLast style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>&nbsp;</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>11.6447715,104.7594764</span>
                     </p>
                 </td>
             </tr>
@@ -288,39 +291,12 @@
                     <!-- <img width=296 height=72 src="Internal%20Indication%20Report%20test2_files/image001.png"> -->
                     <img src="{{ storage_path('app/public/images/cambodia.png') }}" style="height: 260px; width: 200pt;">
                     <!-- <img src="{{ storage_path('app/public/images/cambodia.png') }}" style="height: 300px; width: 250px;"> -->
-
                 </td>
-                <td position: absolute;>
+                <td>
+                <!-- position: absolute; -->
                     <!-- <img src="{{ storage_path('app/public/images/cambodia.png') }}" style="height: 260px; width: 325pt;">-->
-
-                    <!-- <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyAMUcSJr7R-FTwCXyKXLKGYc-vwQsu1l5A&callback=initMap" ></script> -->
-                    
-                    <script type="text/javascript"src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initMap" ></script>
-                    <!-- <script type="text/javascript">  
-                        function ValidateSelection()  
-                        {  
-                            var check_box = document.getElementsByName("veggies");  
-                            var CheckedItems = 0; 
-                            for(var i = 0; i < check_box.length; i++)  
-                            {  
-                                if(check_box[i].checked)  
-                                    CheckedItems++;  
-                            }  
-                            if(CheckedItems > 1){  
-                                alert("You can't select more than three veggies!");  
-                                return false;}  
-                        }  
-                    </script> -->
-                    <h1>Map Testing</h1>
-                    <div id="map"></div>
+                    <div id="map" style="height: 266px; width: 435px;"></div>
                 </td>
-
-                <td width=151 colspan=5 style='width:113.4pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <!-- <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>Value per Sqm</span> -->
-                    </p>
-                </td>
-
             </tr>
         </table>
 
@@ -335,38 +311,38 @@
             <!-- Row 1 -->
             <tr style='height:13.35pt'>
                 <td valign=top style='width:10pt; border:solid windowtext 1.0pt; border-top:none; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2</span>
+                    <p class=MsoListParagraphCxSpFirst style='margin:0in; text-align: center; line-height:normal'>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'><b>No</b></span>
                     </p>
                 </td>
                 <td valign=top style='width:70pt; border-top:none; border-left:none; border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2010543335</span>
+                    <p class=MsoListParagraphCxSpMiddle style='margin:0in; text-align: center; line-height:normal'>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'><b>Subject Property</b></span>
+                    </p>
+                </td>
+                <td valign=top style='width:61pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
+                    <p class=MsoListParagraphCxSpMiddle style='margin:0in; text-align: center; line-height:normal'>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'><b>Title Deed</b></span>
                     </p>
                 </td>
                 <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>11.6448, 104.76</span>
+                    <p class=MsoListParagraphCxSpMiddle style='margin:0in; text-align: center; line-height:normal'>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'><b>Building Cost</b></span>
                     </p>
                 </td>
-                <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>137.00</span>
+                <td valign=top style='width:61pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
+                    <p class=MsoListParagraphCxSpMiddle style='margin:0in;text-align: center; line-height:normal'>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'><b>Size per sqm</b></span>
                     </p>
                 </td>
-                <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$260.00</span>
+                <td valign=top style='width:81pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
+                    <p class=MsoListParagraphCxSpLast style='margin:0in;text-align: center; line-height:normal'>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'><b>Property Value/sqm</b></span>
                     </p>
                 </td>
-                <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 72,420.00</span>
-                    </p>
-                </td>
-                <td colspan=6 style='width:81pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 72,420.00</span>
+                <td colspan=top style='width:91pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
+                    <p class=MsoListParagraphCxSpLast style='margin:0in;text-align: center; line-height:normal'>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'><b>Total Property Value</b></span>
                     </p>
                 </td>
             </tr>
@@ -382,12 +358,17 @@
             <tr style='height:13.05pt'>
                 <td colspan=2 valign=top style='width:60pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpFirst align=center style='margin:0in;text-align: center;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>CIF No./Name</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>Description</span>
                     </p>
                 </td>
                 <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>Geo Code</span></p>
+                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>Title No.</span></p>
+                </td>
+                <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
+                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>Building New Cost</span>
+                    </p>
                 </td>
                 <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
@@ -395,13 +376,8 @@
                     </p>
                 </td>
                 <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>Value per Sqm</span>
-                    </p>
-                </td>
-                <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>Total Value</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>Value per Sqm</span>
                     </p>
                 </td>
                 <td colspan=6 style='width:70pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
@@ -414,37 +390,37 @@
             <tr style='height:13.35pt'>
                 <td valign=top style='width:10pt; border:solid windowtext 1.0pt; border-top:none; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>1</span>
                     </p>
                 </td>
                 <td valign=top style='width:70pt; border-top:none; border-left:none; border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2010543335</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Land</span>
                     </p>
                 </td>
                 <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>11.6448, 104.76</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>12120403-0010</span>
                     </p>
                 </td>
                 <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>137.00</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'></span>
                     </p>
                 </td>
                 <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$260.00</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>120.00</span>
                     </p>
                 </td>
                 <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 72,420.00</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 250.00</span>
                     </p>
                 </td>
                 <td colspan=6 style='width:81pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 72,420.00</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 30,000.00</span>
                     </p>
                 </td>
             </tr>
@@ -453,31 +429,31 @@
             <tr style='height:13.05pt'>
                 <td colspan=2 valign=top style='width:60pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpFirst align=center style='margin:0in;text-align: center;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>CIF No./Name</span>
+                        <span style='color: red; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>Sub-total</span>
                     </p>
                 </td>
                 <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>Geo Code</span></p>
+                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:left; line-height:normal'>
+                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>12120403-0010</span></p>
                 </td>
                 <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>Size</span>
+                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'></span>
                     </p>
                 </td>
                 <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>Value per Sqm</span>
+                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:right; line-height:normal'>
+                        <span style='color: red; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>120.00</span>
                     </p>
                 </td>
                 <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>Total Value</span>
+                    <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: right; line-height:normal'>
+                        <span style='color: red; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>$ 250.00</span>
                     </p>
                 </td>
                 <td colspan=6 style='width:70pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>Total Value</span>
+                    <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: right; line-height:normal'>
+                        <span style='color: red; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>$ 30,000.00</span>
                     </p>
                 </td>
             </tr>
@@ -486,7 +462,7 @@
             <tr style='height:13.35pt'>
                 <td colspan=8 style='width:527.25pt; border:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt; background:#2196f3a1' >
                     <p class=MsoListParagraphCxSpFirst style='margin-left:0in' align=center>
-                        <span style='font-size:8.0pt;line-height:107%;font-family:"OneShinhan Light",sans-serif'>Land</span>
+                        <span style='font-size:8.0pt;line-height:107%;font-family:"OneShinhan Light",sans-serif'>Building</span>
                     </p>
                 </td>
             </tr>
@@ -494,37 +470,37 @@
             <tr style='height:13.35pt'>
                 <td valign=top style='width:10pt; border:solid windowtext 1.0pt; border-top:none; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>1</span>
                     </p>
                 </td>
                 <td valign=top style='width:70pt; border-top:none; border-left:none; border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2010543335</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Villa (L)</span>
                     </p>
                 </td>
                 <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>11.6448, 104.76</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Year(s)</span>
                     </p>
                 </td>
                 <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>137.00</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>250</span>
                     </p>
                 </td>
                 <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$260.00</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>160.00</span>
                     </p>
                 </td>
                 <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 72,420.00</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 250.00</span>
                     </p>
                 </td>
                 <td colspan=6 style='width:81pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 72,420.00</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 40,000.00</span>
                     </p>
                 </td>
             </tr>
@@ -532,37 +508,37 @@
             <tr style='height:13.35pt'>
                 <td valign=top style='width:10pt; border:solid windowtext 1.0pt; border-top:none; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'></span>
                     </p>
                 </td>
                 <td valign=top style='width:70pt; border-top:none; border-left:none; border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2010543335</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'></span>
                     </p>
                 </td>
                 <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>11.6448, 104.76</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'></span>
                     </p>
                 </td>
                 <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>137.00</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'></span>
                     </p>
                 </td>
                 <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$260.00</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'></span>
                     </p>
                 </td>
                 <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 72,420.00</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'></span>
                     </p>
                 </td>
                 <td colspan=6 style='width:81pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 72,420.00</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'></span>
                     </p>
                 </td>
             </tr>
@@ -571,31 +547,32 @@
             <tr style='height:13.05pt'>
                 <td colspan=2 valign=top style='width:60pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpFirst align=center style='margin:0in;text-align: center;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>CIF No./Name</span>
+                        <span style='color: red; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>Sub-total</span>
                     </p>
                 </td>
                 <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>Geo Code</span></p>
-                </td>
-                <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>Size</span>
+                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'></span>
                     </p>
                 </td>
                 <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>Value per Sqm</span>
+                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'></span>
                     </p>
                 </td>
                 <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>Total Value</span>
+                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
+                        <span style='color: red; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>160.00</span>
+                    </p>
+                </td>
+                <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: right; line-height:normal'>
+                        <span style='color: red; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>$ 250.00</span>
                     </p>
                 </td>
                 <td colspan=6 style='width:70pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>Total Value</span>
+                    <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: right; line-height:normal'>
+                        <span style='color: red; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>$ 40,000.00</span>
                     </p>
                 </td>
             </tr>
@@ -604,17 +581,17 @@
             <tr style='height:13.05pt'>
                 <td colspan=3 valign=top style='width:150pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpFirst align=center style='margin:0in;text-align: center;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>CIF No./Name</span>
+                        <span style='color: red; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>Grand Total</span>
                     </p>
                 </td>
                 <td valign=top style='width:50pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>Size</span>
+                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'></span>
                     </p>
                 </td>
                 <td colspan=6 style='width:200pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>Value per Sqm</span>
+                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align: right; line-height:normal'>
+                        <span style='color: red; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>$ 70,000.00</span>
                     </p>
                 </td>
 
@@ -941,32 +918,32 @@
             <tr style='height:13.35pt'>
                 <td valign=top style='width:10pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>1</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2</span>
                     </p>
                 </td>
                 <td valign=top style='width:40pt; border-top:none;border-left:none; border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2010486885</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2010543335</span>
                     </p>
                 </td>
                 <td valign=top style='width:40pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>11.6447, 104.759</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>11.6448, 104.76</span>
                     </p>
                 </td>
                 <td valign=top style='width:40pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>120.00</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>137.00</span>
                     </p>
                 </td>
                 <td valign=top style='width:40pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$300.00</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$260.00</span>
                     </p>
                 </td>
                 <td valign=top style='width:40pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$70,000.00</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$72,420.00</span>
                     </p>
                 </td>
             </tr>
@@ -1033,9 +1010,29 @@
     </div>
 </div>
 
-
-
 <script type="text/javascript">
+
+    function initMap() {
+
+        const myLatLng = { lat: 11.5691468, lng: 104.9146152 };
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 5,
+            center: myLatLng,
+        });
+  
+        new google.maps.Marker({
+            position: myLatLng,
+            map,
+            title: "Hello Rajkot!",
+        });
+    }
+  
+        window.initMap = initMap;
+</script>
+
+
+
+<!-- <script type="text/javascript">
     function initMap() {
         const myLatLng = { lat: 11.5764211, lng: 104.923754 };
         const map = new google.maps.Map(document.getElementById("map"),
@@ -1068,8 +1065,10 @@
         }
         window.initMap = initMap;
     }
-</script>
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+</script> -->
+
+<!-- <script type="text/javascript" src="https://maps.google.com/maps/api/js?key={{env('GOOGLE_MAP_KEY')}}&callback=initMap" ></script> -->
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyAMUcSJr7R-FTwCXyKXLKGYc-vwQsu1l5A&callback=initMap" ></script>
 
 <!-- <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyAMUcSJr7R-FTwCXyKXLKGYc-vwQsu1l5A&callback=initMap" ></script> -->
 

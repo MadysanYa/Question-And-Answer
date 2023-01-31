@@ -100,7 +100,7 @@ class PropertyAppraisalController extends AdminController
                
               
 
-               $grid->column('property_address',__('Property Address '))->display(function(){
+             /*   $grid->column('property_address',__('Property Address '))->display(function(){
                 $province_id = $this->province_id;
                 $province = Province::where('id', $province_id)->first();
                 $distict_id = $this->district_id;
@@ -125,7 +125,7 @@ class PropertyAppraisalController extends AdminController
                 $provinceName= $province->province_name ;
                 return  $villageName . ' , ' . $communeName . ' , ' . $districtName . ' , ' .  $provinceName  ;
                
-            }); 
+            });  */
             $grid->column('longtitude',__('Geo Code'))->sortable(); 
 
             $grid->column('region_id',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){// add filter
@@ -439,24 +439,24 @@ class PropertyAppraisalController extends AdminController
                 <tr style="height:100px">
                 <th>
                   <label for="strength"><span class="glyphicon glyphicon"></span> Strength</label>
-                  <input type="text" class="form-control" id="input_strength" placeholder=" Strength">
+                  <textarea type="text" class="form-control" id="input_strength" placeholder=" Strength"> </textarea>
                 </div> </th>
 
                 <div class="form-group">
                  <th>
                   <label for="weakness"><span class="glyphicon glyphicon"></span> Weakness</label>
-                  <input type="text" class="form-control" id="input_weakness" placeholder=" Weakness">
+                  <textarea  type="text" class="form-control" id="input_weakness" placeholder=" Weakness"> </textarea>
                 </div> </tr> </th>
                 <tr style="height:100px">
                 <th>
                 <div class="form-group">
                   <label for="opportunity"><span class="glyphicon glyphicon"></span> Opportunity</label>
-                  <input type="text" class="form-control" id="input_opportunity" placeholder=" Opportunity">
+                  <textarea type="text" class="form-control" id="input_opportunity" placeholder=" Opportunity"> </textarea>
                 </div> </th>
                 <th>
                 <div class="form-group">
                   <label for="threat"><span class="glyphicon glyphicon"></span> Threat</label>
-                  <input type="text" class="form-control" id="input_threat" placeholder="Threat">
+                  <textarea type="text" class="form-control" id="input_threat" placeholder="Threat"> </textarea>
                 </div> </tr> </th>  </table>
 
                   <button id="btnInputSWOT"  class="btn btn-default btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Submit </button>
@@ -596,9 +596,9 @@ class PropertyAppraisalController extends AdminController
              $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
                     
              $form->text('strength',__('Strength'));
-             $form->text('weakness',__('weakness'));
-             $form->text('opportunity',__('opportunity'));
-             $form->text('threat',__('threat'));
+             $form->text('weakness',__('Weakness'));
+             $form->text('opportunity',__('Opportunity'));
+             $form->text('threat',__('Threat'));
 
             
             $form->button('swot_analyze', __('Swot Analyze'))->on('click', '$("#myModal").modal();');
