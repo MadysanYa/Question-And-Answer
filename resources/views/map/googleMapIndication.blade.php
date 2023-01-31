@@ -13,10 +13,7 @@
     </style>
 </head>
 <body>
-    <div class="container mt-5">
-        @include('map.filterMap')
-        {{-- <div id="map"></div> --}}
-    </div>
+    @include('map.filterMap')
     <script type="text/javascript">
         function initMap() {
             const myLatLng = { lat: 11.5764211, lng: 104.923754 };
