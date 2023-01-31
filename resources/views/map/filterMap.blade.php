@@ -3,11 +3,12 @@
         <div class="box grid-box">
             <div class="box-header with-border" style="padding: 10px;display: flex;align-items: center;">
                 <form action="http://localhost/pms/property-management/public/admin/map_price_indicators">
+                    {{-- <form action="{{route('public.admin.map_price_indicators')}}"> --}}
                     <div class="pull-left">
                         <div class="" style="display: flex;align-items: center;">
                             <button type="submit" class="btn btn-sm btn-dropbox" value="Filter" style="margin-right: 10px;">
                                 <i class="fa fa-filter"></i>
-                                Filter
+                                Apply
                             </button>
                             <div class="">
                                 <div class="input-group input-group-sm" style="display: flex; box-shadow: none;">
