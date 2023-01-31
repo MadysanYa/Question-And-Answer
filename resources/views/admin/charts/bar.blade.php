@@ -48,7 +48,7 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ asset('/vendor/chartjs/dist/Chart.min.js') }}"></script>
 <script>
     const khanSenSok = <?php echo json_encode($khanSenSok); ?>;
     const Khan7Makara = <?php echo json_encode($Khan7Makara); ?>;
