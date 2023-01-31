@@ -10,59 +10,10 @@
         #map {
           height: 550px;
         }
-        .gm-style .gm-style-iw-d::-webkit-scrollbar-track, 
-        .gm-style .gm-style-iw-d::-webkit-scrollbar-track-piece,
-        .gm-style .gm-style-iw-c,
-        .gm-style .gm-style-iw-t::after { 
-        background: red;
-        }
-        .gm-style .gm-style-iw-tc::after {   background: red; }
-        form {
-            border: 2px solid red;
-            border-radius: 4px;
-            font-size:25px;
-        }
-        input  {
-            width: 25px;
-            height: 25px;
-        }
-        label {
-            font-size: 30px;
-            color: #0066cc;
-        }
     </style>
 </head>
-    
-    <div class="container mt-5">
-        <form >
-            <fieldset>
-                <legend style="font-size:30px">Select Property :</legend>
-                <input type="checkbox" name="box" id="veg1" value="tomato" onclick="return ValidateSelection();">
-                <label for="veg1">Property Research</label>
-                <input form="myForm" type="checkbox" name="box" id="veg2"  value="onion" onclick="return ValidateSelection();"> 
-                <label for="veg2">Property Indication</label>
-                <input form="myForm" type="checkbox" name="box" id="veg3"  value="lettuce" onclick="return ValidateSelection();"> 
-                <label for="veg3">Property Appraisal</label>
-            </fieldset>
-        </form>
-
-        <script type="text/javascript">  
-            function ValidateSelection()  
-            {  
-                var check_box = document.getElementsByName("box");  
-                var CheckedItems = 0; 
-                for(var i = 0; i < check_box.length; i++)  
-                {  
-                if(check_box[i].checked)  
-                    CheckedItems++;  
-                }  
-                if(CheckedItems > 1){  
-                alert(" select only!");  
-                    return false;}  
-                }  
-        </script>
-        <div id="map"></div>
-    </div>
+<body>
+    @include('map.filterMap')
     <script type="text/javascript">
         function initMap() {
             const myLatLng = { lat: 11.5764211, lng: 104.923754 };

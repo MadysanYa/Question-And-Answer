@@ -418,7 +418,7 @@ class PropertyIndicatorController extends AdminController
         $form->column(1/3, function ($form){
             $form->html('<div style="height:105px"></div>');
           
-            $form->number('building_status', __('Building Status (%) '))->min(0)->max(100);//->rules('required');
+            $form->number('building_status', __('Building Status (%) '))->min(0)->max(100)->rules('required');
             $form->select('borey', __('Borey'))->rules('required')->options(function(){ 
                 return Borey::all()->pluck('borey_name', 'id');
             });
@@ -436,7 +436,7 @@ class PropertyIndicatorController extends AdminController
         $form->column(1/3, function ($form){   
             $form->html('<div style="height:105px"></div>');
             $form->text('customer_name', __('Customer Name '))->rules('required');
-            $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 999 9999']);
+            $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 999 9999'])->rules('required');
             // api
             $form->select('province_id', __('Province'))->rules('required')->options(function(){
                 return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
@@ -451,8 +451,8 @@ class PropertyIndicatorController extends AdminController
                 return Village::all()->pluck('village_name','id');});
             $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.999999'])->rules('required');
             $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.999999'])->rules('required');
-            $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
-            $form->image('front_photo',__('Front Photo'))->removable()->uniqueName();
+            $form->multipleImage('photos', __('Photo'))->removable()->uniqueName()->rules('required');
+            $form->image('front_photo',__('Front Photo'))->removable()->uniqueName()->rules('required');
             $form->text('remark', __('Remark'));
             
           });

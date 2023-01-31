@@ -410,7 +410,7 @@ class PropertyResearchConteroller extends AdminController
             $form->select('commune_id', __('Commune / Sangkat'))->rules('required')->options(function(){
                 return Commune::all()->pluck('commune_name','id');})->load('village_id', env('APP_URL') . '/public/api/village');
             //16
-            $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '99.999999'])->rules('required');
+            $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.9999999'])->rules('required');
             
         });
         //max 7 part 3
@@ -434,7 +434,7 @@ class PropertyResearchConteroller extends AdminController
             $form->select('village_id', __('Village'))->rules('required')->options(function(){
                 return Village::all()->pluck('village_name','id');});
             //23
-            $form->text('latitude', __('Latitude'))->inputmask(['mask' => '999.999999'])->rules('required');
+            $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.9999999'])->rules('required');
 
           });
         $form->footer(function ($footer) {

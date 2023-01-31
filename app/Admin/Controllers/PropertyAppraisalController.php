@@ -18,6 +18,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Encore\Admin\index;
+use Encore\Admin\hiden;
 use Encore\Admin\Form\Field\Id;
 use Encore\Admin\Form\Field\Button;
 use Encore\Admin\Layout\Content;
@@ -588,17 +589,17 @@ class PropertyAppraisalController extends AdminController
             
           
                                
-            $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '99.999999'])->rules('required');
-            $form->text('latitude', __('Latitude'))->inputmask(['mask' => '999.999999'])->rules('required');
+            $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.9999999'])->rules('required');
+            $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.9999999'])->rules('required');
             $form->text('remark', __('Remark'));
             // $form->map('longtitude', 'latitude');
              $form->image('front_photo', __('Front Photo'))->removable()->uniqueName();
              $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
                     
-             $form->text('strength',__('Strength'));
-             $form->text('weakness',__('Weakness'));
-             $form->text('opportunity',__('Opportunity'));
-             $form->text('threat',__('Threat'));
+             $form->hidden('strength',__('Strength'));
+             $form->hidden('weakness',__('Weakness'));
+             $form->hidden('opportunity',__('Opportunity'));
+             $form->hidden('threat',__('Threat'));
 
             
             $form->button('swot_analyze', __('Swot Analyze'))->on('click', '$("#myModal").modal();');
