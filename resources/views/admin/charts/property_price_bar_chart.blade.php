@@ -1,49 +1,46 @@
 <div class="row">
-    <div class="col-md-12">
-        <div class="box grid-box">
-            <div style="padding: 10px;">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="box box-info" style="padding: 10px; border: 2px solid #dd4b39;">
-                            <div class="text-center">
-                                <h4 class="box-title">Research Properties</h4>
-                                <h2 class="box-title text-red" style="margin-top: 0px;">{{ $countProReseach }}</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="box box-info" style="padding: 10px; border: 2px solid #00a65a">
-                            <div class="text-center">
-                                <h4 class="box-title">Indication Properties</h4>
-                                <h2 class="box-title text-red" style="margin-top: 0px;">{{ $countProIndicator }}</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="box box-info" style="padding: 10px; border: 2px solid #1087dd;">
-                            <div class="text-center">
-                                <h4 class="box-title">Appraisal Properties</h4>
-                                <h2 class="box-title text-red" style="margin-top: 0px;">{{ $countProAppraisal }}</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Card Count Properties -->
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <h4 class="box-title">Property Market Price</h4>
-                    </div>
-                    @foreach($allDistrictName as $district)
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <canvas id="chart-bar-khan-{{ $district }}"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
+    <div class="col-md-4">
+        <div class="box box-primary" style="padding: 10px;">
+            <div class="text-center">
+                <h4 class="box-title">Properties Research</h4>
+                <h2 class="box-title text-red" style="margin-top: 0px;">{{ $countProReseach }}</h2>
             </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="box box-warning" style="padding: 10px;">
+            <div class="text-center">
+                <h4 class="box-title">Properties Indication</h4>
+                <h2 class="box-title text-red" style="margin-top: 0px;">{{ $countProIndicator }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="box box-success" style="padding: 10px;">
+            <div class="text-center">
+                <h4 class="box-title">Properties Appraisal</h4>
+                <h2 class="box-title text-red" style="margin-top: 0px;">{{ $countProAppraisal }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Card Count Properties -->
+<div class="box grid-box" style="border-top: 0px; margin-top: 7px;">
+    <div style="padding: 10px;">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h4 class="box-title">Property Market Price</h4>
+            </div>
+            @foreach($allDistrictName as $district)
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body" style="margin-bottom: 20px;">
+                            <canvas id="chart-bar-khan-{{ $district }}"></canvas>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 </div>
@@ -119,6 +116,16 @@
                 scales: {
                     y: {
                         beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 15
+                            },
+                            color: '#333'
+                        }
                     }
                 }
             }
