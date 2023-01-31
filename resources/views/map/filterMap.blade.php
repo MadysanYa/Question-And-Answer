@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="box grid-box">
             <div class="box-header with-border" style="padding: 10px;display: flex;align-items: center;">
-                <form action="{{ URL::urrent() }}">
+                <form action="{{ URL::current() }}">
                     <div class="pull-left">
                         <div class="" style="display: flex;align-items: center;">
                             <button type="submit" class="btn btn-sm btn-dropbox" value="Filter" style="margin-right: 10px;">
