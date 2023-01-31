@@ -26,16 +26,16 @@
             var infowindow = new google.maps.InfoWindow();
 
             const locations = {{ Js::from($latLongProResearch) }};
-            console.log(locations);
             const labels = {{ Js::from($labelProResearch) }};
             const propertyResearch = {{ Js::from($infoProResearch)}};
-
+            const icons = {url: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png" };
             // var icons = '../imges/home2.png'
 
             for (i = 0; i < locations.length; i++) {  
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                    label:labels[i],
+                    label:{text: labels[i], color: "white"},
+                    icon:icons,
                     map: map, 
                 });
                     

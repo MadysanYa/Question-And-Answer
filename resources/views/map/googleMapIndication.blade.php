@@ -34,7 +34,7 @@
             for (i = 0; i < locations.length; i++) {  
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                    label:labels[i],
+                    label:{text: labels[i], color: "white"},
                     map: map, 
                 });
                     

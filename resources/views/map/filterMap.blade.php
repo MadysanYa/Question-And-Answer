@@ -1,38 +1,51 @@
-<style>
-    .labal-size{
-        font-size: 15px;
-    }
-    .checkbox-size{
-        width: 20px;
-        height: 20px;
-        margin-bottom: 25px !important;
-    }
-</style>
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-12">
-            <form action="http://localhost/pms/property-management/public/admin/map_price_indicators">
-                <div class="form-check col-md-2">
-                    <input type="checkbox" name="check_list" value="research" class="checkbox-size">
-                    <label class="labal-size">
-                        Property Research
-                    </label>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box grid-box">
+            <div class="box-header with-border" style="padding: 10px;display: flex;align-items: center;">
+                <form action="http://localhost/pms/property-management/public/admin/map_price_indicators">
+                    <div class="pull-left">
+                        <div class="" style="display: flex;align-items: center;">
+                            <button type="submit" class="btn btn-sm btn-dropbox" value="Filter" style="margin-right: 10px;">
+                                <i class="fa fa-filter"></i>
+                                Filter
+                            </button>
+                            <div class="">
+                                <div class="input-group input-group-sm" style="display: flex; box-shadow: none;">
+                                    <span class="icheck">
+                                        <label style="margin-right: 10px;margin-bottom: 0px;display: flex;">
+                                            <div class="" aria-checked="false" aria-disabled="false">
+                                                <input type="radio" class="released" name="check_list" value="research" {{request()->check_list == "research" ? 'checked' : "false" }} style="margin-right: 10px;">
+                                            </div>Properties Research
+                                        </label>
+                                    </span>
+                                    <span class="icheck">
+                                        <label style="margin-right: 10px;margin-bottom: 0px;display: flex;">
+                                            <div class="" aria-checked="false" aria-disabled="false">
+                                                <input type="radio" class="released" name="check_list" value="indication" {{request()->check_list == "indicator" ? 'checked' : "false" }}  style="margin-right: 10px;">
+                                            </div>Properties Indication
+                                        </label>
+                                    </span>
+                                    <span class="icheck">
+                                        <label style="margin-right: 10px;margin-bottom: 0px;display: flex;">
+                                            <div class="" aria-checked="false" aria-disabled="false">
+                                                <input type="radio" class="released" name="check_list" value="appraisal" {{request()->check_list == "appraisal" ? 'checked' : "false" }}  style="margin-right: 10px;">
+                                            </div>Properties Appraisal
+                                        </label>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div style="padding: 10px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="map"></div>
+                    </div>
                 </div>
-                <div class="form-check col-md-2">
-                    <input type="checkbox" name="check_list" value="indication" class="checkbox-size">
-                    <label class="labal-size">
-                        Property Indication
-                    </label>
-                </div>
-                <div class="form-check col-md-2">
-                    <input type="checkbox" name="check_list" value="appraisal" class="checkbox-size">
-                    <label class="labal-size">
-                        Property Apprasal
-                    </label>
-                </div>
-                <input type="submit" class="btn btn-primary" value="Filter">
-            </form>
+            </div>
         </div>
     </div>
-    <div id="map"></div>
 </div>
