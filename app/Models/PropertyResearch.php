@@ -24,4 +24,11 @@ class PropertyResearch extends Model
     public function approved(){
 
     }
+    
+    /**
+     * Scope Query
+     */
+    public function scopeGetWithCount($query){
+        return $query->get()->count();
+    }
 }
