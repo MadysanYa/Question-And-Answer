@@ -2,7 +2,7 @@
     <div class="col-md-4">
         <div class="box box-primary" style="padding: 10px;">
             <div class="text-center">
-                <h4 class="box-title">Research Properties</h4>
+                <h4 class="box-title">Properties Research</h4>
                 <h2 class="box-title text-red" style="margin-top: 0px;">{{ $countProReseach }}</h2>
             </div>
         </div>
@@ -10,7 +10,7 @@
     <div class="col-md-4">
         <div class="box box-warning" style="padding: 10px;">
             <div class="text-center">
-                <h4 class="box-title">Indication Properties</h4>
+                <h4 class="box-title">Properties Indication</h4>
                 <h2 class="box-title text-red" style="margin-top: 0px;">{{ $countProIndicator }}</h2>
             </div>
         </div>
@@ -18,7 +18,7 @@
     <div class="col-md-4">
         <div class="box box-success" style="padding: 10px;">
             <div class="text-center">
-                <h4 class="box-title">Appraisal Properties</h4>
+                <h4 class="box-title">Properties Appraisal</h4>
                 <h2 class="box-title text-red" style="margin-top: 0px;">{{ $countProAppraisal }}</h2>
             </div>
         </div>

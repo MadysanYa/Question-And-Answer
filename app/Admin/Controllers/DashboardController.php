@@ -40,7 +40,7 @@ class DashboardController extends AdminController
         $KhanToulKork = $this->formatDistrictCommune(14);
 
         $content->header('Dashboard');
-        $content->body(view('admin.charts.bar', [
+        $content->body(view('admin.charts.property_price_bar_chart', [
             'countProReseach' => $countProReseach,
             'countProIndicator' => $countProIndicator,
             'countProAppraisal' => $countProAppraisal,
