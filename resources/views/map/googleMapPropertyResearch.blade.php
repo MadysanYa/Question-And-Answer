@@ -8,7 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <style type="text/css">
         #map {
-          height: 600px;
+          height: 550px;
         }
     </style>
 </head>
@@ -70,10 +70,5 @@
 
     <script type="text/javascript"src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initMap" ></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <style type="text/css">
-        #map {
-        height: 500px;
-        }
-    </style>
 </body>
 </html>
