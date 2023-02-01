@@ -2,27 +2,28 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Borey;
-use App\Models\Province;
-use App\Models\Branch;
-use App\Models\Commune;
-use App\Models\District;
-use App\Models\Region;
-use App\Models\Village;
 use App\Models\File;
-use App\Models\InformationType;
-use App\Models\PropertyIndicator;
-use App\Models\PropertyType;
-use Encore\Admin\Controllers\AdminController;
+use App\Models\User;
+use App\Models\Borey;
+use App\Models\Branch;
+use App\Models\Region;
 use Encore\Admin\Form;
-use Encore\Admin\Form\Field\Id;
-use Encore\Admin\Form\Field\Button;
-
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
-use Illuminate\Support\Facades\Request;
+use App\Models\Commune;
+use App\Models\Village;
+use App\Models\District;
+use App\Models\Province;
+use App\Models\PropertyType;
+use App\Models\InformationType;
+
+use Encore\Admin\Form\Field\Id;
 use Encore\Admin\Layout\Content;
-use App\Models\User;
+use App\Models\PropertyIndicator;
+use Encore\Admin\Form\Field\Button;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
+use Encore\Admin\Controllers\AdminController;
 
 
 
@@ -386,7 +387,7 @@ class PropertyIndicatorController extends AdminController
     {
         $form = new Form(new PropertyIndicator());
         $form->column(1/3, function ($form){
-           
+            $form->hidden('user_id')->value(Auth::user()->id);
             $form->select('region_id', __('Region'))->rules('required')->options(function(){
                 return Region::all()->pluck('region_name', 'id');})->load('branch_code', env('APP_URL') . '/public/api/branch');
             
@@ -415,6 +416,7 @@ class PropertyIndicatorController extends AdminController
                 return PropertyType::all()->pluck('property_type_name','id');
             });
         });
+
         $form->column(1/3, function ($form){
             $form->html('<div style="height:105px"></div>');
           
@@ -433,6 +435,7 @@ class PropertyIndicatorController extends AdminController
             $form->currency('property_value', __('Property Value '))->rules('required');
             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
         });
+
         $form->column(1/3, function ($form){   
             $form->html('<div style="height:105px"></div>');
             $form->text('customer_name', __('Customer Name '))->rules('required');
@@ -454,13 +457,8 @@ class PropertyIndicatorController extends AdminController
             $form->multipleImage('photos', __('Photo'))->removable()->uniqueName()->rules('required');
             $form->image('front_photo',__('Front Photo'))->removable()->uniqueName()->rules('required');
             $form->text('remark', __('Remark'));
-            
-          });
+        });
        
-            
-        
-       
-        
         $form->footer(function ($footer) {
 
             // disable reset btn
