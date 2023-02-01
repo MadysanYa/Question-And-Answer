@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "config.json": "^0.0.4",
-        "gmaps": "^0.4.25"
+        "gmaps": "^0.4.25",
+        "html2canvas": "^1.4.1"
     }
 }
