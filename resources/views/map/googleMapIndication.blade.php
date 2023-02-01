@@ -18,7 +18,7 @@
         function initMap() {
             const myLatLng = { lat: 11.5764211, lng: 104.923754 };
             const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 5,
+                zoom: 7,
                 center: myLatLng,
             });
 
@@ -34,7 +34,7 @@
             for (i = 0; i < locations.length; i++) {  
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                    label:labels[i],
+                    label:{text: labels[i], color: "white"},
                     map: map, 
                 });
                     

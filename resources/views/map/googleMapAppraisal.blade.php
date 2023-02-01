@@ -8,7 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <style type="text/css">
         #map {
-          height: 400px;
+          height: 550px;
         }
     </style>
 </head>
@@ -18,7 +18,7 @@
         function initMap() {
             const myLatLng = { lat: 11.5764211, lng: 104.923754 };
             const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 5,
+                zoom: 7,
                 center: myLatLng,
             });
 
@@ -29,13 +29,15 @@
             console.log(locations);
             const labels = {{ Js::from($labelProAppraisal) }};
             const propertyAppraisal = {{ Js::from($infoProAppraisal)}};
+            const icons = {url: "http://maps.google.com/mapfiles/ms/icons/pink-dot.png" };
 
             // var icons = '../imges/home2.png'
 
             for (i = 0; i < locations.length; i++) {  
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                    label:labels[i],
+                    icon:icons,
+                    label:{text: labels[i], color: "white"},
                     map: map, 
                 });
                     
@@ -79,10 +81,5 @@
 
     <script type="text/javascript"src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initMap" ></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <style type="text/css">
-        #map {
-        height: 500px;
-        }
-    </style>
 </body>
 </html>
