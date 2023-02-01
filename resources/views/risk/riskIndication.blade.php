@@ -18,9 +18,9 @@
                 <div class="box-header with-border">
                     <div class="pull-right">
                         <div class="" style="display: flex;align-items: center;">
-                            <div class="btn-group pull-right grid-create-btn" style="margin-right: 10px">
+                            <div class="btn-group pull-right grid-create-btn">
                                 <a href="../../public/admin/risk_indicators/create" class="btn btn-sm btn-success" title="New">
-                                    <i class="fa fa-plus"></i><span class="hidden-xs">&nbsp;&nbsp;Add New Risk</span>
+                                    <i class="fa fa-plus"></i><span class="hidden-xs">&nbsp;&nbsp;New</span>
                                 </a>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
 
             const locations = {{ Js::from($arryRiskProperty) }};
             const labels = {{ Js::from($arrayLabel) }};
-            const propertyIndicator = {{ Js::from($infoProperty)}};
+            const riskProperty = {{ Js::from($infoProperty)}};
 
             for (i = 0; i < locations.length; i++) {  
                 marker = new google.maps.Marker({
@@ -64,9 +64,10 @@
                 google.maps.event.addListener(marker, 'click', (function(marker, i) {
                     return function() {
                     infowindow.setContent(
-                        "<b>Latitude: " + propertyIndicator[i][0] + "<br>" +
-                        "<b>Longitude: " + propertyIndicator[i][1] + "<br>" +
-                        "<b>Risk Description:" + propertyIndicator[i][2]
+                        "<b>Latitude: " + riskProperty[i][0] + "<br>" +
+                        "<b>Longitude: " + riskProperty[i][1] + "<br>" +
+                        "<b>Risk Description:" + riskProperty[i][2]+ "<br>" +
+                        "<b>"+"<a href="+"../../public/admin/risk_indicators/"+riskProperty[i][3]+"/edit>"+"Edit"+"</a>"
                     );
                     infowindow.open(map, marker);
                     }

@@ -59,7 +59,8 @@ class RiskIndicatorController extends AdminController
             $info = [
                 $value->latitude.','.
                 $value->longtitude.','.
-                $value->description
+                $value->description.','.
+                $value->id
             ];
             $arrInfo = explode(",", implode(" ", $info));
             $infoArray[] = $arrInfo;
@@ -97,7 +98,9 @@ class RiskIndicatorController extends AdminController
             $form->text('title', __('Title'))->rules('required');
             $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.999999'])->rules('required');
             $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.999999'])->rules('required');
-            $form->textarea('description', __('Description'));
+            // $form->textarea('description', __('Description'));
+            $form->textarea('description', __('Description'))->rows(10);
+
         });
 
         $form->footer(function ($footer) {
