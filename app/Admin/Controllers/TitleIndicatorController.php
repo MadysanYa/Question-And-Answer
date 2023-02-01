@@ -56,7 +56,7 @@ class TitleIndicatorController extends AdminController
         
         //Labels on marker
         foreach($propertys as $value){
-            $label = "$".$value->land_title_type;
+            $label = $value->land_title_type;
             $labelArray[] = $label;
         }
         $arrayLabel = $labelArray;
