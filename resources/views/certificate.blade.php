@@ -7,8 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Internal Indication Report</title>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script src="http://localhost/pms/property-management/resources/js/html2canvas.js"></script>
-    <script src="http://localhost/pms/property-management/resources/js/html2canvas.min.js"></script>
+    <!-- <script src="http://localhost/pms/property-management/resources/js/html2canvas.js"></script>-->
+    <script src="../../resources/js/html2canvas.js"></script>
+    <!-- <script src="http://localhost/pms/property-management/resources/js/html2canvas.min.js"></script> -->
+    <script src="../../resources/js/html2canvas.min.js"></script>
+    <script src="../../resources/js/jspdf.js"></script>
     
 
     <style>
@@ -155,6 +158,8 @@
             <img width=296 height=72 src="{{ storage_path('app/public/images/sbc_test1.png') }}">
     </span> -->
 
+    <!-- <h1> testing </h1> -->
+
     <p class=MsoNormal align = center style='text-align:center'>
         <u>
             <span style='font-size:14.0pt;line-height:107%;font-family:"OneShinhan Bold",sans-serif'>INTERNAL INDICATION REPORT</span>
@@ -295,7 +300,12 @@
                     <img src="{{ storage_path('app/public/images/cambodia.png') }}" style="height: 260px; width: 200pt;">
                     <!-- <img src="{{ storage_path('app/public/images/cambodia.png') }}" style="height: 300px; width: 250px;"> -->
                 </td>
-                <td id="map_img">
+
+                <td id="map_img">   
+                    <!-- <h1>{{$name}}</h1>  -->
+                    <!-- <img src="{{$imagePath}}" style="width:200px;"> -->
+                    <img src="{{'data:image/png;base64,'.base64_encode(file_get_contents(storage_path('app/public/images/cambodia.png')))}}" style="width:200px;">
+
                 <!-- style="height: 266px; width: 435px;"
                 height: 261px; width: 435px; -->
                 <!-- position: absolute; -->
@@ -989,7 +999,7 @@
     </div>  
 
 <div id="map" style="height: 231px; width: 386px;"></div>
-<!-- <button onclick="myCanvas()">Try it</button> -->
+<button onclick="myCanvas()">Try it</button>
 <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdf">Export to PDF</a>
 
 <script type="text/javascript">
@@ -1002,22 +1012,84 @@
     //     });
     // });
 
-    //   function myCanvas() {
-      html2canvas(document.getElementById("capture"),
+      function myCanvas() {
+
+    //     const domElement = document.getElementById('map')
+    //         html2canvas(domElement, { onclone: (document) => {
+    //         document.getElementById('map_img').style.visibility = 'hidden'
+    //     }})
+    //     .then((canvas) => {
+    //         const img = canvas.toDataURL('image/png')
+    //         const pdf = new jsPdf()
+    //         pdf.addImage(imgData, 'JPEG', 0, 0, width, height)
+    //         pdf.save('map.pdf')
+    // })
+
+        // html2canvas(document.querySelector("#capture")).then(canvas => {
+        //     canvas.toBlob(function(blob) {
+        //         window.saveAs(blob, "map_indication.png");
+        //     });
+        // });
+
+      html2canvas(document.getElementById("map"),
        {useCORS: true,})
           .then(function(canvas) {
-            var img = canvas.toDataURL("image/jpeg");
+            var img = canvas.toDataURL("image/png");
+            // data:image/png;base64,
+            // ,'.base64_encode(file_get_contents(storage_path('app/public/images/cambodia.png')))
+
+            // var img = canvas.Storage::put('public/folder/'.'somename'.png', $image);
+            // Storage::put('public/folder/'.'somename'.png', $image);
             var image = new Image();
+
+            img.src = 'assets/sample.png';
+            pdf.addImage(img, 'png', 10, 78, 12, 15);
+
             image.src = img;
           document.getElementById("map_img").appendChild(image);
       });
+
+
+        // var map_image = document.getElementById('map_img');
+        // map_image.onload = function(){
+            
+        //     // popup.document.getElementById('image').src = document.getElementById('image').src;
+
+        //     var url = 'savemap.blade.php';
+        //     // var service = $('input[name="service"]:checked').val();
+            
+        //     var data = {
+        //         'img':document.getElementById('map_img').src,
+        //         // 'amount': $('#amount').val(), 
+        //         // 'billnumber' : $('#billNumber').val().toUpperCase(), 
+        //         // Add terminalLabel
+        //         // 'terminalLabel' : $('#terminalLabel').val(),
+
+        //         // 'service': service
+        //     };
+            
+        //     $.ajax({
+        //         url: url, 
+        //         type:'post',
+        //         data: data,
+        //         success: function(result){
+        //             if(result == 'success'){
+        //                 // alert("KHQR have been generated successfully");
+        //                 swal("KHQR has been generated successfully", "Please inform your customer to touch on tablet to reload QR Payment", "success");
+        //             }
+        //             else {
+        //                 swal("KHQR generated failed. \n Please retry", "", "error");
+        //             }
+                    
+        //     }});
+        // }
 
     //   html2canvas(document.querySelector("#capture"),{useCORS: true,}).then(canvas => {
     //     // document.body.appendChild(canvas)
     //     document.getElementById("map_img").appendChild(canvas);
     // });
     
-    // }
+    }
     </script>
 
 <script type="text/javascript">
