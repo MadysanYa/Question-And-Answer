@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Request;
 Use Encore\Admin\Widgets\Table;
 use App\Models\User;
 use Encore\Admin\Widgets\Collapse;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Encore\Admin\Admin;
 
 
@@ -507,7 +507,7 @@ class PropertyAppraisalController extends AdminController
         $form = new Form(new PropertyAppraisal());
 
         $form->column(1/3,function($form){
-            
+            $form->hidden('user_id')->value(Auth::user()->id);
             $form->select('region_id', __('Region'))->rules('required')->options(function(){
                 return Region::all()->pluck('region_name', 'id');})->load('branch_code', env('APP_URL') . '/public/api/branch');
 

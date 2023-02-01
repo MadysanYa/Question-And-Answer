@@ -21,6 +21,7 @@ use Encore\Admin\Form\Field\Id;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Auth;
 use Encore\Admin\Layout\Content;
 use App\Models\User;
 
@@ -363,7 +364,7 @@ class PropertyResearchConteroller extends AdminController
     {
         $form = new Form(new PropertyResearch());
         $form->column(1/3, function ($form){
-            //1
+            $form->hidden('user_id')->value(Auth::user()->id);
             $form->select('information_type',__('Information Type'))->rules('required')->options(function(){
                 return InformationType::all()->pluck('information_type_name','id');
                });
