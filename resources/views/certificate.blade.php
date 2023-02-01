@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Internal Indication Report</title>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="http://localhost/pms/property-management/resources/js/html2canvas.js"></script>
+    <script src="http://localhost/pms/property-management/resources/js/html2canvas.min.js"></script>
+    
 
     <style>
         /* Font Definitions */
@@ -292,10 +295,14 @@
                     <img src="{{ storage_path('app/public/images/cambodia.png') }}" style="height: 260px; width: 200pt;">
                     <!-- <img src="{{ storage_path('app/public/images/cambodia.png') }}" style="height: 300px; width: 250px;"> -->
                 </td>
-                <td>
+                <td id="map_img">
+                <!-- style="height: 266px; width: 435px;"
+                height: 261px; width: 435px; -->
                 <!-- position: absolute; -->
                     <!-- <img src="{{ storage_path('app/public/images/cambodia.png') }}" style="height: 260px; width: 325pt;">-->
-                    <div id="map" style="height: 266px; width: 435px;"></div>
+                    <!-- <div id="map_img" style="height: 266px; width: 435px;"></div> -->
+                    <!-- <p id="map_img"></p> -->
+                    <!-- <img id="map_img" style="height: 266px; width: 435px;"> -->
                 </td>
             </tr>
         </table>
@@ -947,39 +954,6 @@
                     </p>
                 </td>
             </tr>
-            <!-- Row 3 -->
-            <!-- <tr style='height:13.35pt'>
-                <td width=26 valign=top style='width:19.6pt;border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2</span>
-                    </p>
-                </td>
-                <td width=87 valign=top style='width:65.2pt;border-top:none;border-left:none; border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2010543335</span>
-                    </p>
-                </td>
-                <td width=161 valign=top style='width:120.5pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>11.6448, 104.76</span>
-                    </p>
-                </td>
-                <td width=104 valign=top style='width:77.95pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>137.00</span>
-                    </p>
-                </td>
-                <td width=151 valign=top style='width:113.4pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$260.00</span>
-                    </p>
-                </td>
-                <td width=160 valign=top style='width:120.15pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 72,420.00</span>
-                    </p>
-                </td>
-            </tr> -->
 
         </table>
 
@@ -1010,13 +984,49 @@
     </div>
 </div>
 
+    <div id="capture" style="padding: 10px; background: #f5da55; margin-top: 10px; width: 200px;">
+      <h4 style="color: #000; ">Hello world!</h4>
+    </div>  
+
+<div id="map" style="height: 231px; width: 386px;"></div>
+<!-- <button onclick="myCanvas()">Try it</button> -->
+<a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdf">Export to PDF</a>
+
+<script type="text/javascript">
+    
+    // $('#download').on('click', () => {
+    //     html2canvas(document.querySelector("#gen1")).then(canvas => {
+    //         canvas.toBlob(function(blob) {
+    //             window.saveAs(blob, "KHQR.png");
+    //         });
+    //     });
+    // });
+
+    //   function myCanvas() {
+      html2canvas(document.getElementById("capture"),
+       {useCORS: true,})
+          .then(function(canvas) {
+            var img = canvas.toDataURL("image/jpeg");
+            var image = new Image();
+            image.src = img;
+          document.getElementById("map_img").appendChild(image);
+      });
+
+    //   html2canvas(document.querySelector("#capture"),{useCORS: true,}).then(canvas => {
+    //     // document.body.appendChild(canvas)
+    //     document.getElementById("map_img").appendChild(canvas);
+    // });
+    
+    // }
+    </script>
+
 <script type="text/javascript">
 
     function initMap() {
 
         const myLatLng = { lat: 11.5691468, lng: 104.9146152 };
         const map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 5,
+            zoom: 13,
             center: myLatLng,
         });
   

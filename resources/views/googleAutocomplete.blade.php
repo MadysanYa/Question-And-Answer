@@ -8,6 +8,9 @@
     <script src="http://localhost/pms/property-management/resources/js/html2canvas.js"></script>
     <script src="http://localhost/pms/property-management/resources/js/html2canvas.min.js"></script>
     
+    <!-- <script src="{{ asset('/vendor/chartjs/dist/Chart.min.js') }}"></script>
+    <script src="{{ asset('/vendor/chartjs/dist/html2canvas.min.js') }}"></script> -->
+
     <!--?php
     Use Encore\Admin\Admin;
         Admin::js('./js/app.js');
@@ -22,25 +25,35 @@
 </head>
     
 <body>
+    <div id="capture" style="padding: 10px; background: #f5da55; margin-top: 10px; width: 200px;">
+      <h4 style="color: #000; ">Hello world!</h4>
+    </div>
+
     <div id="snap" class="container mt-5">
         <h2>Google Map Show Testing One</h2>
         <div id="map"></div>
     </div>
 
-    <div id="capture" style="padding: 10px; background: #f5da55; margin-top: 10px; width: 200px;">
-      <h4 style="color: #000; ">Hello world!</h4>
-    </div>
+      <p id="here"></p>
 
-    <p><button onclick="myCanvas()">Try it</button></p>
+    <button onclick="myCanvas()">Try it</button>
   
     <script type="text/javascript">
       function myCanvas() {
-
-        // alert("Testing");
-        html2canvas(document.querySelector("#map")).then(canvas => {
-          document.body.appendChild(canvas)
-          // print_r(canvas);
+        html2canvas(document.querySelector("#snap"),{useCORS: true,}).then(canvas => {
+          // document.body.appendChild(canvas);
+        document.getElementById("here").appendChild(canvas);
       });
+
+      // html2canvas(document.getElementById("map"),
+      //  {useCORS: true,})
+      //     .then(function(canvas) {
+      //       var img = canvas.toDataURL("image/jpeg");
+      //       var image = new Image();
+      //       image.src = img;
+      //     document.getElementById("here").appendChild(image);
+      //     // document.body.appendChild(image);
+      // });
     }
     </script>
 
@@ -48,7 +61,7 @@
         function initMap() {
           const myLatLng = { lat: 11.5972878, lng: 104.8253013 };
           const map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 12,
+            zoom: 13,
             center: myLatLng,
           });
   
