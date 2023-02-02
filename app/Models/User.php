@@ -62,4 +62,14 @@ class User extends Authenticatable
 
         return false;
     }
+
+    static function isRmRole(){
+        $roles = Auth()->user()->roles()->get();
+        
+        foreach($roles as $role){ 
+            if(strtoupper($role['name']) == 'RM') return true;
+        }
+
+        return false;
+    }
 }

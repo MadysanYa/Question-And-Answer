@@ -7,9 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Internal Indication Report</title>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <!-- <script src="http://localhost/pms/property-management/resources/js/html2canvas.js"></script>-->
     <script src="../../resources/js/html2canvas.js"></script>
-    <!-- <script src="http://localhost/pms/property-management/resources/js/html2canvas.min.js"></script> -->
     <script src="../../resources/js/html2canvas.min.js"></script>
     <script src="../../resources/js/jspdf.js"></script>
     
@@ -1042,8 +1040,8 @@
             // Storage::put('public/folder/'.'somename'.png', $image);
             var image = new Image();
 
-            img.src = 'assets/sample.png';
-            pdf.addImage(img, 'png', 10, 78, 12, 15);
+            // img.src = 'assets/sample.png';
+            // pdf.addImage(img, 'png', 10, 78, 12, 15);
 
             image.src = img;
           document.getElementById("map_img").appendChild(image);

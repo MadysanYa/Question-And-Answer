@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
 use Encore\Admin\Layout\Content;
 use App\Models\User;
+use App\Models\UserAdmin;
 
 class PropertyResearchConteroller extends AdminController
 {
@@ -62,7 +63,7 @@ class PropertyResearchConteroller extends AdminController
 
         //     $html = <<<HTML
         //     <h1>Dashboard Show Testing</h1>
-            
+
         //     <div class="row">
         //         <div class="col-lg-3" style="padding: 0 10px 15px 15px; height: 100px;text-align: center;">
         //                 <div style="background-color:#abffbd;height: 100%;width: 100%; font-size: 24px;font-weight: bold;padding: 10px; border-radius: 10px; box-shadow: rgba(50,50,93,0.25) 0px 6px 12px -2px, rgba(0,0,0, 0.3) 0px 3px 7px -3px;">
@@ -88,8 +89,8 @@ class PropertyResearchConteroller extends AdminController
         //                     <!-- <label style="font-size: 40px; font-weight: bold;margin-left: 20px;">{{value4}}</label> -->
         //                 </div>
         //         </div>
-                
-            
+
+
         //     </div>
         // HTML;
 
@@ -104,11 +105,11 @@ class PropertyResearchConteroller extends AdminController
 
         // return $html;
     }
-    
+
     protected function grid()
     {
 
-        //filter  
+        //filter
         $filterRegionID = isset($_REQUEST['region_id'])? $_REQUEST['region_id'] : [];
         $filterProvinceId = isset($_REQUEST['province_id'])? $_REQUEST['province_id'] : [];
         $filterDistrictId = isset($_REQUEST['district_id'])? $_REQUEST['district_id'] : [];
@@ -116,10 +117,13 @@ class PropertyResearchConteroller extends AdminController
         //print_r($filterProvinceId);
 
         $grid = new Grid(new PropertyResearch);
-		
+
 		$grid->model()->orderBy('id','asc');
         $grid->column('id', __('No.'))->asc()->sortable();
-        $grid->column('information_type',__('Information Type'))->sortable();
+        $grid->column('information_type',__('Information Type'))->sortable()->Display(function($id){
+            $informationtype = InformationType::where('id',$id)->first();
+            return $informationtype->information_type_name;
+        });
 		$grid->column('property_reference', __('Reference'))->sortable();
         $grid->column('information_date',__('Information Date'))->filter('range', 'date');
         $grid->column('branch_code',__('Branch'))->filter($this->convertToArrayBranch(Branch::all(['branch_code', 'branch_name'])))->Display(function($branch_code){// add filter
@@ -128,49 +132,54 @@ class PropertyResearchConteroller extends AdminController
             if($branch == null)
                 return '';
             else
-                return $branch->branch_name;  
+                return $branch->branch_name;
 
             });
-  
-        //$grid->column('requested_date',__('Requested Date'))->sortable(); 
-        $grid->column('contact_no',__('Contact No'))->sortable(); 
-        $grid->column('location_type',__('Location Type'))->sortable(); 
-        $grid->column('type_of_access_road',__('Type of Access Road'))->sortable(); 
-        $grid->column('access_road_name',__('Access Road Name'))->sortable(); 
+
+        //$grid->column('requested_date',__('Requested Date'))->sortable();
+        $grid->column('contact_no',__('Contact No'))->sortable();
+        $grid->column('location_type',__('Location Type'))->sortable();
+        $grid->column('type_of_access_road',__('Type of Access Road'))->sortable();
+        $grid->column('access_road_name',__('Access Road Name'))->sortable();
         $grid->column('property_type',__('Property Type'))->sortable()->Display(function($id){
             $propertytype = PropertyType::where('id',$id)->first();
             return $propertytype->property_type_name;
-        }); 
+        });
         $grid->column('borey',__('Borey'))->sortable()->display(function($id){
             $borey = Borey::where('id',$id)->first();
             return $borey->borey_name;
-        }); 
-        $grid->column('no_of_floor',__('No. of floor'))->sortable(); 
-        $grid->column('land_title_type',__('Land Titil Type'))->sortable(); 
-        $grid->column('land_size',__('Land Size'))->sortable(); 
+        });
+        $grid->column('no_of_floor',__('No. of floor'))->sortable();
+        $grid->column('land_title_type',__('Land Titil Type'))->sortable();
+        $grid->column('land_size',__('Land Size'))->sortable();
         $grid->column('land_value_per_sqm',__('Land Value per Sqm ($)'))->sortable();
-        $grid->column('building_size',__('Building Size ($)'))->sortable(); 
+        $grid->column('building_size',__('Building Size ($)'))->sortable();
         $grid->column('building_value_per_sqm',__('Building Value per Sqm ($)'))->sortable();
         $grid->column('property_market_value',__('Property Market Value ($)'))->sortable();
         $grid->column('province_id',__('Province'))->filter($this->convertToArray(Province::all(['id', 'province_name'])))->Display(function($province_id){
            $province = Province::where('id', $province_id)->first();
-            return $province->province_name;     
+            return $province->province_name;
         });
         $grid->column('district_id',__('District/Khan'))->filter($this->convertToArrayDistrict(District::whereIn('province_id', $filterProvinceId)->get(['id', 'district_name'])))->Display(function($district_id){ //Add filter when click ex:province->distict..
             $district = District::where('id', $district_id)->first();
             return $district->district_name;
-        }); 
+        });
         $grid->column('commune_id',__('Commune/Sangkat'))->filter($this->convertToArrayCommune(Commune::whereIn('district_id', $filterDistrictId)->get(['id','commune_name'])))->Display(function($comune_id){
             $commune = Commune::where('id', $comune_id)->first();
             return $commune->commune_name;
-        }); 
+        });
         $grid->column('village_id',__('Village'))->sortable()->Display(function($village_id){
             $village = Village::where('id', $village_id)->first();
             return $village->village_name ;
         });
-        $grid->column('longtitude',__('Longtitude'))->sortable(); 
-        //$grid->column('latitude',__('Latitude'))->sortable(); 
-        //$grid->column('remark',__('Remark'))->sortable(); 
+        $grid->column('latitude',__('Latitude'))->sortable();
+        $grid->column('longtitude',__('Longtitude'))->sortable();
+      //$grid->column('remark',__('Remark'))->sortable();
+
+        $grid->column('user_id',__('Created By'))->sortable()->display(function($id){
+            $userName = UserAdmin::where('id', $id)->first();
+            return $userName->name ?? null;
+        });
 
       // create btn with api
         $grid->column('is_verified',__('Verified'))->display(function($is_verified){
@@ -233,68 +242,73 @@ class PropertyResearchConteroller extends AdminController
 		
 		$grid->filter(function($filter){
 			$filter->disableIdFilter();
-		//	$filter->equal('company');
+            $filter->where(function ($query) {
+                $query->whereHas('user', function($q) {
+                    $q->where('name', 'like', "%{$this->input}%");
+                    $q->orWhere('id', 'like', "%{$this->input}%");
+                });
+            }, 'Created By');
 		});
 
         return $grid;
     }
 
-        // filter 
+        // filter
         function convertToArray($data){
 
             $provinceArray = array();
-    
-            foreach($data as $item){      
+
+            foreach($data as $item){
                 //$provinceArray = array_merge($provinceArray, array($item->id => $item->province_name));
                 $provinceArray[$item->id] = $item->province_name;
             }
             return $provinceArray;
-           
+
         }
-    
+
         function convertToArrayDistrict($data){
-    
+
             $districtArray = array();
-    
-            foreach($data as $item){      
-               
+
+            foreach($data as $item){
+
                 $districtArray[$item->id] = $item->district_name;
             }
             return $districtArray;
-    
+
         }
         function convertToArrayCommune($data){
-    
+
             $communeArray = array();
-    
-            foreach($data as $item){      
-               
+
+            foreach($data as $item){
+
                 $communeArray[$item->id] = $item->commune_name;
             }
             return $communeArray;
-    
+
         }
-    
+
         function convertToArrayBranch($data){
-    
+
             $branchArray = array();
-            foreach($data as $item){      
-               
+            foreach($data as $item){
+
                 $branchArray[$item->branch_code] = $item->branch_name;
             }
             return $branchArray;
        }
-    
+
         function convertToArrayRegion($data){
-    
+
             $RegionArray = array();
-    
-            foreach($data as $item){      
-               
+
+            foreach($data as $item){
+
                 $RegionArray[$item->id] = $item->region_name;
             }
             return  $RegionArray;
-    
+
         }
 
     /**
@@ -350,6 +364,12 @@ class PropertyResearchConteroller extends AdminController
                 return $village->village_name   ;
             });
             $show->field('latitude',__('Latitude'));
+            $show->field('longtitude',__('Longtitude'));
+
+            $show->field('user_id', __('Created By'))->as(function ($userId){
+                $userName = UserAdmin::where('id', $userId)->first();
+                return $userName->name ?? null;
+            });
         return $show;
     }
 
@@ -367,7 +387,7 @@ class PropertyResearchConteroller extends AdminController
                 return InformationType::all()->pluck('information_type_name','id');
                });
             //2
-            //zero loading 
+            //zero loading
             $form->text('property_reference', __('Property Reference '))->readonly()->value(function(){
                 $id = PropertyResearch::all()->last();
                 return 'PL-'. sprintf('%010d', $id == null? 1 : $id->id + 1);
@@ -409,11 +429,12 @@ class PropertyResearchConteroller extends AdminController
             $form->select('commune_id', __('Commune / Sangkat'))->rules('required')->options(function(){
                 return Commune::all()->pluck('commune_name','id');})->load('village_id', env('APP_URL') . '/public/api/village');
             //16
-            $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.9999999'])->rules('required');
-            
+            $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.9999999'])->rules('required');
+
+
         });
         //max 7 part 3
-        $form->column(1/3, function ($form){   
+        $form->column(1/3, function ($form){
             $form->html('<div style="height:52px"></div>');
             //17
             $form->select('type_of_access_road', __('Type of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road', 'Paved Road'=>'Paved Road','Upaved Road'=>'Upaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road']);
@@ -428,12 +449,12 @@ class PropertyResearchConteroller extends AdminController
             //21
             $form->select('province_id', __('Province'))->rules('required')->options(function(){
                 return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
-                
+
             //22
             $form->select('village_id', __('Village'))->rules('required')->options(function(){
                 return Village::all()->pluck('village_name','id');});
             //23
-            $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.9999999'])->rules('required');
+            $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.9999999'])->rules('required');
 
           });
         $form->footer(function ($footer) {
