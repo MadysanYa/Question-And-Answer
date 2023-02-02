@@ -16,17 +16,19 @@
         <div class="col-md-12">
             <div class="box grid-box">
                 <div class="box-header with-border">
-                    <div class="pull-right">
-                        <div class="" style="display: flex;align-items: center;">
-                            <div class="btn-group pull-right grid-create-btn">
-                                <a href="../../public/admin/risk_indicators/create" class="btn btn-sm btn-success" title="New">
-                                    <i class="fa fa-plus"></i><span class="hidden-xs">&nbsp;&nbsp;New</span>
-                                </a>
+                    @if(!$userIsVerifierRoleApproverRole)
+                        <div class="pull-right">
+                            <div class="" style="display: flex;align-items: center;">
+                                <div class="btn-group pull-right grid-create-btn">
+                                    <a href="../../public/admin/risk_indicators/create" class="btn btn-sm btn-success" title="New">
+                                        <i class="fa fa-plus"></i><span class="hidden-xs">&nbsp;&nbsp;New</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
-    
+                
                 <div style="padding: 10px;">
                     <div class="row">
                         <div class="col-md-12">
@@ -53,6 +55,7 @@
             const locations = {{ Js::from($arryRiskProperty) }};
             const labels = {{ Js::from($arrayLabel) }};
             const riskProperty = {{ Js::from($infoProperty)}};
+            const userIsVerifierRoleApproverRole = {{ Js::from($userIsVerifierRoleApproverRole)}};
 
             for (i = 0; i < locations.length; i++) {  
                 marker = new google.maps.Marker({
@@ -60,18 +63,30 @@
                     label:{text: labels[i], color: "white"},
                     map: map, 
                 });
-                    
-                google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                    return function() {
-                    infowindow.setContent(
-                        "<b>Latitude: " + riskProperty[i][0] + "<br>" +
-                        "<b>Longitude: " + riskProperty[i][1] + "<br>" +
-                        "<b>Risk Description:" + riskProperty[i][2]+ "<br>" +
-                        "<b>"+"<a href="+"../../public/admin/risk_indicators/"+riskProperty[i][3]+"/edit>"+"Edit"+"</a>"
-                    );
-                    infowindow.open(map, marker);
-                    }
-                })(marker, i));
+                if(userIsVerifierRoleApproverRole){  
+                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                        return function() {
+                        infowindow.setContent(
+                            "<b>Latitude: " + riskProperty[i][0] + "<br>" +
+                            "<b>Longitude: " + riskProperty[i][1] + "<br>" +
+                            "<b>Risk Description:" + riskProperty[i][2]
+                        );
+                        infowindow.open(map, marker);
+                        }
+                    })(marker, i));
+                }else{
+                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                        return function() {
+                        infowindow.setContent(
+                            "<b>Latitude: " + riskProperty[i][0] + "<br>" +
+                            "<b>Longitude: " + riskProperty[i][1] + "<br>" +
+                            "<b>Risk Description:" + riskProperty[i][2]+ "<br>" +
+                            "<b>"+"<a href="+"../../public/admin/risk_indicators/"+riskProperty[i][3]+"/edit>"+"Edit"+"</a>"
+                        );
+                        infowindow.open(map, marker);
+                        }
+                    })(marker, i));
+                }
             }
             window.initMap = initMap;
         }
