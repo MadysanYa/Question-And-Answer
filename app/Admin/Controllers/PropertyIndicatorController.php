@@ -167,12 +167,12 @@ class PropertyIndicatorController extends AdminController
             if($is_verified == null) {
                 if(User::isVerifierRole()){ // user login
                     $id = $this->id;
-                    return '<a href="'. env('APP_URL') . '/public/api/verify_indicator/' . $id . '/1" class="btn btn-sm btn-success" >
-                                <i class="fa fa-check" aria-hidden="true"></i> 
+                    return '<a href="'. env('APP_URL') . '/public/api/verify_indicator/' . $id . '/1" class="btn btn-sm btn-success">
+                                <i class="fa fa-check"></i> 
                                 <span>&nbsp;&nbsp;Verify</span>
                             </a>
-                            <a href="'. env('APP_URL') . '/public/api/verify_indicator/' . $id . '/2" class="btn btn-sm btn-danger" >
-                                <i class="fa fa-times" aria-hidden="true"></i> 
+                            <a href="'. env('APP_URL') . '/public/api/verify_indicator/' . $id . '/2" class="btn btn-sm btn-danger">
+                                <i class="fa fa-times"></i> 
                                 <span>&nbsp;&nbsp;Reject</span>
                             </a>';
                 }
@@ -192,11 +192,11 @@ class PropertyIndicatorController extends AdminController
                     if(User::isApproverRole()){
                         $id = $this->id;
                         return '<a href="'. env('APP_URL') . '/public/api/approve_indicator/' . $id . '/1" class="btn btn-sm btn-success">
-                                    <i class="fa fa-check" aria-hidden="true"></i> 
+                                    <i class="fa fa-check"></i> 
                                     <span>&nbsp;&nbsp;Approv</span>
                                 </a>
                                 <a href="'. env('APP_URL') . '/public/api/approve_indicator/' . $id . '/2" class="btn btn-sm btn-danger">                                 
-                                    <i class="fa fa-times" aria-hidden="true"></i> 
+                                    <i class="fa fa-times"></i> 
                                     <span>&nbsp;&nbsp;Reject</span>
                                 </a>';
                     }
