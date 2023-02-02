@@ -16,7 +16,7 @@
         <div class="col-md-12">
             <div class="box grid-box">
                 <div class="box-header with-border">
-                    @if(!$userIsVerifierRoleApproverRole)
+                    @if(!$userIsRmRole)
                         <div class="pull-right">
                             <div class="" style="display: flex;align-items: center;">
                                 <div class="btn-group pull-right grid-create-btn">
@@ -55,7 +55,7 @@
             const locations = {{ Js::from($arryRiskProperty) }};
             const labels = {{ Js::from($arrayLabel) }};
             const riskProperty = {{ Js::from($infoProperty)}};
-            const userIsVerifierRoleApproverRole = {{ Js::from($userIsVerifierRoleApproverRole)}};
+            const userIsRmRole = {{ Js::from($userIsRmRole)}};
 
             for (i = 0; i < locations.length; i++) {  
                 marker = new google.maps.Marker({
@@ -63,7 +63,7 @@
                     label:{text: labels[i], color: "white"},
                     map: map, 
                 });
-                if(userIsVerifierRoleApproverRole){  
+                if(userIsRmRole){  
                     google.maps.event.addListener(marker, 'click', (function(marker, i) {
                         return function() {
                         infowindow.setContent(
