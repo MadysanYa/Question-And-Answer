@@ -198,63 +198,66 @@ class PropertyAppraisalController extends AdminController
                 });
                 $grid->column('latitude',__('Latitude'))->sortable(); 
                 $grid->column('longtitude',__('Longtitude'))->sortable(); 
-                
-                
-                
+                $grid->column('property_address', __('Property Address'));
                 $grid->column('remark',__('Remark'))->sortable(); 
         
         
-              // create btn with api
-              $grid->column('is_verified',__('Verified'))->display(function($is_verified){
+            // create btn with api
+            $grid->column('is_verified',__('Verified'))->display(function($is_verified){
                 if($is_verified == null) {
-    
-                        if(User::isVerifierRole()){ // user login
-                            $id = $this->id;
-                            return ' <a href="'. env('APP_URL') . '/public/api/verify_appraisal/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Verify</a>
-                            <a href="'. env('APP_URL') . '/public/api/verify_appraisal/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
-                        }
-                        else {
-                            return '<p style="color: #fff; background: #172191;padding: 0px 5px 0px 5px;text-align:center;">Processing</p>'; 
-                        }
+                    if(User::isVerifierRole()){ // user login
+                        $id = $this->id;
+                        return '<a href="'. env('APP_URL') . '/public/api/verify_appraisal/' . $id . '/1" class="btn btn-sm btn-success">
+                                    <i class="fa fa-check"></i> 
+                                    <span>&nbsp;&nbsp;Verify</span>
+                                </a>
+                                <a href="'. env('APP_URL') . '/public/api/verify_appraisal/' . $id . '/2" class="btn btn-sm btn-danger">
+                                    <i class="fa fa-times"></i> 
+                                    <span>&nbsp;&nbsp;Reject</span>
+                                </a>';
                     }
-                    else if($is_verified == 1){
-                        return '<p style="color: #fff; background: #0c871f;padding: 0px 5px 0px 5px;text-align:center;">Verified</p>'; 
+                    else {
+                        return '<p style="color: #172191;border: 1px solid #172191;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Processing</p>'; 
                     }
-                    else{
-                        return '<p style="color: #fff;background:#ff0000;padding: 0px 5px 0px 5px;text-align:center;">Rejected</p>';
-                    }
-                });
+                }
+                else if($is_verified == 1){
+                    return '<p style="color: #00a65a;border: 1px solid #00a65a;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Verified</p>'; 
+                }
+                else{
+                    return '<p style="color: #dd4b39;border: 1px solid #dd4b39;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Rejected</p>';
+                }
+            });
     
             $grid->column('is_approved',__('Approved'))->display(function($is_approved){
-    
-                    if($this->is_verified == 1){
-                        if($is_approved == null) {
-                            if(User::isApproverRole()){
-                                $id = $this->id;
-                                return ' <a href="'. env('APP_URL') . '/public/api/approve_appraisal/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Approv</a>
-                                <a href="'. env('APP_URL') . '/public/api/approve_appraisal/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
-                            }
-                            else {
-                                return '<p style="color: #fff; background: #172191;padding: 0px 5px 0px 5px;text-align:center;">Processing</p>'; 
-                            }
-                            
+                if($this->is_verified == 1){
+                    if($is_approved == null) {
+                        if(User::isApproverRole()){
+                            $id = $this->id;
+                            return '<a href="'. env('APP_URL') . '/public/api/approve_appraisal/' . $id . '/1" class="btn btn-sm btn-success">
+                                        <i class="fa fa-check"></i> 
+                                        <span>&nbsp;&nbsp;Approv</span>
+                                    </a>
+                                    <a href="'. env('APP_URL') . '/public/api/approve_appraisal/' . $id . '/2" class="btn btn-sm btn-danger">
+                                        <i class="fa fa-times"></i> 
+                                        <span>&nbsp;&nbsp;Reject</span>
+                                    </a>';
                         }
-                        else if($is_approved ==1){
-                            return '<p style="color: #fff; background: #0c871f;padding: 0px 5px 0px 5px;text-align:center;">Approved</p>'; 
-                        }
-                        else{
-                            return '<p style="color: #fff;background:#ff0000;padding: 0px 5px 0px 5px;text-align:center;">Rejected</p>';
+                        else {
+                            return '<p style="color: #172191;border: 1px solid #172191;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Processing</p>'; 
                         }
                     }
-                
+                    else if($is_approved ==1){
+                        return '<p style="color: #00a65a;border: 1px solid #00a65a;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Approved</p>'; 
+                    }
+                    else{
+                        return '<p style="color: #dd4b39;border: 1px solid #dd4b39;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Rejected</p>';
+                    }
+                }
             });
-                
-                
-               $grid->column('property_address', __('Property Address'));
-              
-              // $grid->column('report_date', __('Report Date'));
-
-              $grid->quickSearch(['collateral_owner','telephone']);
+                              
+            // $grid->column('report_date', __('Report Date'));
+            $grid->fixColumns(0, -3);
+            $grid->quickSearch(['collateral_owner','telephone']);
       
 
 
