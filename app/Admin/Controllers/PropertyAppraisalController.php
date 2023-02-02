@@ -201,7 +201,7 @@ class PropertyAppraisalController extends AdminController
                 
                 
                 
-                $grid->column('remark',__('Remark'))->sortable(); 
+                $grid->column('remark',__('Remark'))->sortable();
         
         
               // create btn with api
@@ -593,13 +593,13 @@ class PropertyAppraisalController extends AdminController
             $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.9999999'])->rules('required');
             $form->text('remark', __('Remark'));
             // $form->map('longtitude', 'latitude');
-             $form->image('front_photo', __('Front Photo'))->removable()->uniqueName();
-             $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
-                    
-             $form->hidden('strength',__('Strength'));
-             $form->hidden('weakness',__('Weakness'));
-             $form->hidden('opportunity',__('Opportunity'));
-             $form->hidden('threat',__('Threat'));
+            $form->image('front_photo', __('Front Photo'))->removable()->uniqueName();
+            $form->multipleImage('photos', __('Photo'))->removable()->uniqueName();
+            
+            $form->hidden('strength',__('Strength'));
+            $form->hidden('weakness',__('Weakness'));
+            $form->hidden('opportunity',__('Opportunity'));
+            $form->hidden('threat',__('Threat'));
 
             
             $form->button('swot_analyze', __('Swot Analyze'))->on('click', '$("#myModal").modal();');

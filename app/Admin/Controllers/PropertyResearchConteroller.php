@@ -129,7 +129,6 @@ class PropertyResearchConteroller extends AdminController
                 return '';
             else
                 return $branch->branch_name;  
-
             });
   
         //$grid->column('requested_date',__('Requested Date'))->sortable(); 
@@ -231,8 +230,9 @@ class PropertyResearchConteroller extends AdminController
             'admin_user_id']);
 		
 		$grid->filter(function($filter){
-			$filter->disableIdFilter();
-		//	$filter->equal('company');
+			// $filter->disableIdFilter();
+			$filter->like('branch_code');
+            // $filter->like('name', 'name');
 		});
 
 

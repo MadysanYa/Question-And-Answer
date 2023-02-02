@@ -5,8 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>How to Add Google Map in Laravel? - ItSolutionStuff.com</title>
-    <script src="http://localhost/pms/property-management/resources/js/html2canvas.js"></script>
-    <script src="http://localhost/pms/property-management/resources/js/html2canvas.min.js"></script>
+    <!-- <script src="http://localhost/pms/property-management/resources/js/html2canvas.js"></script>
+    <script src="http://localhost/pms/property-management/resources/js/html2canvas.min.js"></script> -->
+
+    <script src="../../resources/js/html2canvas.js"></script>
+    <script src="../../resources/js/html2canvas.min.js"></script>
     
     <!-- <script src="{{ asset('/vendor/chartjs/dist/Chart.min.js') }}"></script>
     <script src="{{ asset('/vendor/chartjs/dist/html2canvas.min.js') }}"></script> -->
