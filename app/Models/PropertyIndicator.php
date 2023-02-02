@@ -6,6 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class PropertyIndicator extends Model
 {
+    /**
+     * Relationship
+     */
+    public function user()
+    {
+        return $this->belongsTo(UserAdmin::class);
+    }
+
+    /**
+     * Scope Query
+     */
+    public function scopeGetWithCount($query){
+        return $query->get()->count();
+    }
+
 	public function setPhotosAttribute($photos)
     {
         if (is_array($photos)) {
@@ -37,20 +52,5 @@ class PropertyIndicator extends Model
     // {
     //     return json_decode($frontphoto, true);
     // }
-
-    /**
-     * Scope Query
-     */
-    public function scopeGetWithCount($query){
-        return $query->get()->count();
-    }
-
-    /**
-     * Relationship
-     */
-    public function user()
-    {
-        return $this->belongsTo(UserAdmin::class);
-    }
 }
 

@@ -181,7 +181,6 @@ class PropertyResearchConteroller extends AdminController
             return $userName->name ?? null;
         });
 
-      // create btn with api
         $grid->column('is_verified',__('Verified'))->display(function($is_verified){
             if($is_verified == null) {
                 if(User::isVerifierRole()){ // user login
@@ -238,8 +237,15 @@ class PropertyResearchConteroller extends AdminController
         // $grid->disableFilter();
         
         $grid->fixColumns(0, -3);
-        $grid->quickSearch(['id','admin_user_id']);
-		
+
+        $grid->quickSearch(function ($model, $query) {
+            $model->where('id', $query);
+            $model->orWhereHas('user', function($q) use($query) {
+                $q->where('name', 'like', "%{$query}%")
+                ->orWhere('id', 'like', "%{$query}%");
+            });
+        });
+
 		$grid->filter(function($filter){
 			$filter->disableIdFilter();
             $filter->where(function ($query) {

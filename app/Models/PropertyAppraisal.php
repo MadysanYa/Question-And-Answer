@@ -5,6 +5,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class PropertyAppraisal extends Model
 { 
+    /**
+     * Relationship
+     */
+    public function user()
+    {
+        return $this->belongsTo(UserAdmin::class);
+    }
+
+    /**
+     * Scope Query
+     */
+    public function scopeGetWithCount($query){
+        return $query->get()->count();
+    }
     public function setPhotosAttribute($photos)
     {
         if (is_array($photos)) {
@@ -36,12 +50,5 @@ class PropertyAppraisal extends Model
 
     public function approved(){
 
-    }
-
-    /**
-     * Scope Query
-     */
-    public function scopeGetWithCount($query){
-        return $query->get()->count();
     }
 }

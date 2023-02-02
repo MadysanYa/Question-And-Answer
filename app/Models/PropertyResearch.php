@@ -1,10 +1,26 @@
 <?php
 
 namespace App\Models;
+use App\Models\UserAdmin;
 use Illuminate\Database\Eloquent\Model;
 
 class PropertyResearch extends Model
 {
+    /**
+     * Relationship
+     */
+    public function user()
+    {
+        return $this->belongsTo(UserAdmin::class);
+    }
+
+    /**
+     * Scope Query
+     */
+    public function scopeGetWithCount($query){
+        return $query->get()->count();
+    }
+
     // public function setPhotosAttribute($photos)
     // {
     //     if (is_array($photos)) {
@@ -23,12 +39,5 @@ class PropertyResearch extends Model
     
     public function approved(){
 
-    }
-    
-    /**
-     * Scope Query
-     */
-    public function scopeGetWithCount($query){
-        return $query->get()->count();
     }
 }

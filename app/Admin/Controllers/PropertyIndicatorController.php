@@ -226,7 +226,7 @@ class PropertyIndicatorController extends AdminController
         });
 
 		$grid->filter(function($filter){
-			// $filter->disableIdFilter();
+			$filter->disableIdFilter();
             $filter->where(function ($query) {
                 $query->whereHas('user', function($q) {
                     $q->where('name', 'like', "%{$this->input}%");
