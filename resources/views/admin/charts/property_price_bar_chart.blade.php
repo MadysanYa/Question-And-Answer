@@ -124,7 +124,8 @@
                             font: {
                                 size: 15
                             },
-                            color: '#333'
+                            color: '#333',
+                            boxWidth: 0,
                         }
                     }
                 }
