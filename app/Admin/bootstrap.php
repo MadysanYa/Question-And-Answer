@@ -20,3 +20,4 @@
 
 Encore\Admin\Form::forget(['map', 'editor']);
 Admin::css('/css/style.css');
+Admin::css('/css/skin-red.min.css');
