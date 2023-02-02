@@ -267,6 +267,7 @@ class PropertyAppraisalController extends AdminController
             });
         });
 
+        $grid->disableFilter();
         $grid->filter(function($filter){
             $filter->disableIdFilter();
             $filter->where(function ($query) {
