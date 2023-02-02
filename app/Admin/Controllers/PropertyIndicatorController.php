@@ -14,12 +14,14 @@ use App\Models\Commune;
 use App\Models\Village;
 use App\Models\District;
 use App\Models\Province;
+use App\Models\UserAdmin;
 use App\Models\PropertyType;
-use App\Models\InformationType;
 
+use App\Models\InformationType;
 use Encore\Admin\Form\Field\Id;
 use Encore\Admin\Layout\Content;
 use App\Models\PropertyIndicator;
+use Illuminate\Support\Facades\DB;
 use Encore\Admin\Form\Field\Button;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
@@ -46,13 +48,10 @@ class PropertyIndicatorController extends AdminController
     
     protected function grid()
     {
-
         //filter  
         $filterRegionID = isset($_REQUEST['region_id'])? $_REQUEST['region_id'] : [];
         $filterProvinceId = isset($_REQUEST['province_id'])? $_REQUEST['province_id'] : [];
         $filterDistrictId = isset($_REQUEST['district_id'])? $_REQUEST['district_id'] : [];
-
-        //print_r($filterProvinceId);
 
         $grid = new Grid(new PropertyIndicator);
 		
@@ -88,7 +87,6 @@ class PropertyIndicatorController extends AdminController
            
         // });
         $grid->column('longtitude',__('Geo Code'))->sortable();// longtitude just example for show Geo Code on grid!
-
         $grid->column('region_id',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){// add filter
             $region = Region::where('id', $id)->first();
             return $region->region_name;     
@@ -110,7 +108,7 @@ class PropertyIndicatorController extends AdminController
         //    });  
         $grid->column('requested_date',__('Requested Date'))->filter('range', 'date'); 
         if (User::isVerifierRole() || User::isApproverRole()){
-        $grid->column('reported_date',__('Reported Date'))->filter('range', 'date');
+            $grid->column('reported_date',__('Reported Date'))->filter('range', 'date');
         }
         $grid->column('cif_no',__('CIF No.'))->sortable(); 
         $grid->column('rm_name',__('RM Name'))->sortable(); 
@@ -159,72 +157,69 @@ class PropertyIndicatorController extends AdminController
         });
         $grid->column('latitude',__('Latitude'))->sortable(); 
         $grid->column('longtitude',__('Longtitude'))->sortable(); 
-        
         $grid->column('remark',__('Remark'))->sortable();  
-
-
-      // create btn with api
+        $grid->column('user_id',__('Created By'))->sortable()->display(function($id){
+            $userName = UserAdmin::where('id', $id)->first();
+            return $userName->name ?? null;
+        }); 
+        // create btn with api
         $grid->column('is_verified',__('Verified'))->display(function($is_verified){
             if($is_verified == null) {
+                if(User::isVerifierRole()){ // user login
+                    $id = $this->id;
+                    return ' <a href="'. env('APP_URL') . '/public/api/verify_indicator/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Verify</a>
+                    <a href="'. env('APP_URL') . '/public/api/verify_indicator/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
+                }
+                else {
+                    return '<p style="color: #172191; border: 1px solid #172191;padding: 5px;text-align:center;">Processing</p>'; 
+                }
+            } else if($is_verified == 1){
+                return '<p style="color: #fff; background: #0c871f;padding: 0px 5px 0px 5px;text-align:center;">Verified</p>'; 
+            } else{
+                return '<p style="color: #fff;background:#ff0000;padding: 0px 5px 0px 5px;text-align:center;">Rejected</p>';
+            }
+        });
 
-                    if(User::isVerifierRole()){ // user login
+        $grid->column('is_approved',__('Approved'))->display(function($is_approved){
+            if($this->is_verified == 1){
+                if($is_approved == null) {
+                    if(User::isApproverRole()){
                         $id = $this->id;
-                        return ' <a href="'. env('APP_URL') . '/public/api/verify_indicator/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Verify</a>
-                        <a href="'. env('APP_URL') . '/public/api/verify_indicator/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
+                        return ' <a href="'. env('APP_URL') . '/public/api/approve_indicator/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Approv</a>
+                        <a href="'. env('APP_URL') . '/public/api/approve_indicator/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
                     }
                     else {
                         return '<p style="color: #172191; border: 1px solid #172191;padding: 5px;text-align:center;">Processing</p>'; 
                     }
                 }
-                else if($is_verified == 1){
-                    return '<p style="color: #fff; background: #0c871f;padding: 0px 5px 0px 5px;text-align:center;">Verified</p>'; 
+                else if($is_approved ==1){
+                    return '<p style="color: #fff; background: #0c871f;padding: 0px 5px 0px 5px;text-align:center;">Approved</p>'; 
                 }
                 else{
                     return '<p style="color: #fff;background:#ff0000;padding: 0px 5px 0px 5px;text-align:center;">Rejected</p>';
                 }
-            });
-
-        $grid->column('is_approved',__('Approved'))->display(function($is_approved){
-
-                if($this->is_verified == 1){
-                    if($is_approved == null) {
-                        if(User::isApproverRole()){
-                            $id = $this->id;
-                            return ' <a href="'. env('APP_URL') . '/public/api/approve_indicator/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Approv</a>
-                            <a href="'. env('APP_URL') . '/public/api/approve_indicator/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
-                        }
-                        else {
-                            return '<p style="color: #172191; border: 1px solid #172191;padding: 5px;text-align:center;">Processing</p>'; 
-                        }
-                        
-                    }
-                    else if($is_approved ==1){
-                        return '<p style="color: #fff; background: #0c871f;padding: 0px 5px 0px 5px;text-align:center;">Approved</p>'; 
-                    }
-                    else{
-                        return '<p style="color: #fff;background:#ff0000;padding: 0px 5px 0px 5px;text-align:center;">Rejected</p>';
-                    }
-                }
-            
+            }
         });
-        
 
-      
-       
-        // $grid->disableExport();
-        //  $grid->disableFilter();
-        
-        $grid->quickSearch(['collateral_owner','telephone','id']);
-       
-		
-		
+        $grid->quickSearch(function ($model, $query) {
+            $model->where('id', $query);
+            $model->orWhere('collateral_owner', $query);
+            $model->orWhere('telephone', 'like', "%{$query}%");
+            $model->orWhereHas('user', function($q) use($query) {
+                $q->where('name', 'like', "%{$query}%")
+                ->orWhere('id', 'like', "%{$query}%");
+            });
+        });
+
 		$grid->filter(function($filter){
 			$filter->disableIdFilter();
-			//$filter->equal('company');
+            $filter->where(function ($query) {
+                $query->whereHas('user', function($q) {
+                    $q->where('name', 'like', "%{$this->input}%");
+                    $q->orWhere('id', 'like', "%{$this->input}%");
+                });
+            }, 'Created By');
 		});
-
-		
-		//print_r(Request::route('company'));
 
         return $grid;
     }
@@ -298,81 +293,80 @@ class PropertyIndicatorController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show( PropertyIndicator::findOrFail($id));
+        $propertyIndicator = PropertyIndicator::findOrFail($id);   
+        $show = new Show($propertyIndicator);
 
-       
-            $show->field('property_reference',__('Reference'));
-            $show->field('collateral_owner',__('Collateral Owner '));
-             
+        $show->field('property_reference',__('Reference'));
+        $show->field('collateral_owner',__('Collateral Owner '));
+        $show->field('region_id', __('Region'))->as(function($region){
+            $region = Region::where('id', $region)->first();
+            if($region == null) return '';
+            return $region->region_name ;
+        });
+        $show->field('branch_code',__('Branch'))->as(function($branch_code){
+            $branch = Branch::where('branch_code', $branch_code)->first();
+            if($branch == null) return '';
+            return '(' . $branch->branch_code . ')' . $branch->branch_name;
+        });
 
-            
-            $show->field('region_id', __('Region'))->as(function($region){
-                $region = Region::where('id', $region)->first();
-                if($region == null) return '';
-                return $region->region_name ;
-            });
-            $show->field('branch_code',__('Branch'))->as(function($branch_code){
-                $branch = Branch::where('branch_code', $branch_code)->first();
-                if($branch == null) return '';
-                return '(' . $branch->branch_code . ')' . $branch->branch_name;
-            });
-    
-            $show->field('requested_date',__('Requested Date'));
-            if (User::isVerifierRole() || User::isApproverRole()){
-            $show->field('reported_date',__('Reported Date'));
-            }
-            $show->field('cif_no',__('CIF No.'));
-            $show->field('rm_name',__('RM Name'));
-            $show->field('telephone',__('Telephone'));
-            $show->field('information_type',__('Information Type'))->as(function($id){
-                $informationtype = InformationType::where('id', $id)->first();
-                return  $informationtype->information_type_name;
-            });
-            $show->field('location_type',__('Location Type'));
-            $show->field('type_of_access_road',__('Type of Access Road'));
-            $show->field('access_road_name',__('Access Road Name'));
-            $show->field('property_type',__('Property Type'))->as(function($id){
-                $propertytype = PropertyType::where('id', $id)->first();
-                return  $propertytype->property_type_name;
-            });
-            $show->field('building_status',__('Building Status (%)'));
-            $show->field('borey',__('Borey'))->as(function($id){
-                $borey = Borey::where('id', $id)->first();
-                return $borey->borey_name;
-            }) ;
-            $show->field('no_of_floor',__('No. of floor'));
-            $show->field('land_title_type',__('Land Titil'));
-            $show->field('land_title_no',__('Lang Title No'));
-            $show->field('land_size',__('Land Size'));
-            $show->field('land_value_per_sqm',__('Land Value per Sqm ($)'));
-            $show->field('building_size',__('Building Size ($)'));
-            $show->field('building_value_per_sqm',__('Building Value per Sqm ($)'));
-            $show->field('property_value',__('Property Value ($)'));
-   
-            $show->field('customer_name',__('Customer Name'));
-            $show->field('client_contact_no',__('Cliend Contact No'));
-            $show->field('province_id',__('Province'))->as(function($province_id){
-                $province = Province::where('id', $province_id)->first();
-                return $province->province_name;
-            });
-            $show->field('district_id',__('District/ Khan'))->as(function($district_id){
-                $district = District::where('id', $district_id)->first();
-                return $district->district_name;
-            });
-            $show->field('commune_id',__('Commune / Sangkat'))->as(function($comune_id){
-                $commune = Commune::where('id', $comune_id)->first();
-                return $commune->commune_name;
-            });
-            $show->field('village_id',__('Village'))->as(function($village_id){
-                $village = Village::where('id', $village_id)->first();
-                return $village->village_name   ;
-            });
-            $show->field('longtitude',__('Longtitude'));
-            $show->field('latitude',__('Latitude'));
-           // $show->field('front_photo',__('Front Photo'));
-            //$show->field('photos',__('Photo'));
-            
-            $show->field('remark',__('Remark'));
+        $show->field('requested_date',__('Requested Date'));
+        if (User::isVerifierRole() || User::isApproverRole()){
+        $show->field('reported_date',__('Reported Date'));
+        }
+        $show->field('cif_no',__('CIF No.'));
+        $show->field('rm_name',__('RM Name'));
+        $show->field('telephone',__('Telephone'));
+        $show->field('information_type',__('Information Type'))->as(function($id){
+            $informationtype = InformationType::where('id', $id)->first();
+            return  $informationtype->information_type_name;
+        });
+        $show->field('location_type',__('Location Type'));
+        $show->field('type_of_access_road',__('Type of Access Road'));
+        $show->field('access_road_name',__('Access Road Name'));
+        $show->field('property_type',__('Property Type'))->as(function($id){
+            $propertytype = PropertyType::where('id', $id)->first();
+            return  $propertytype->property_type_name;
+        });
+        $show->field('building_status',__('Building Status (%)'));
+        $show->field('borey',__('Borey'))->as(function($id){
+            $borey = Borey::where('id', $id)->first();
+            return $borey->borey_name;
+        }) ;
+        $show->field('no_of_floor',__('No. of floor'));
+        $show->field('land_title_type',__('Land Titil'));
+        $show->field('land_title_no',__('Lang Title No'));
+        $show->field('land_size',__('Land Size'));
+        $show->field('land_value_per_sqm',__('Land Value per Sqm ($)'));
+        $show->field('building_size',__('Building Size ($)'));
+        $show->field('building_value_per_sqm',__('Building Value per Sqm ($)'));
+        $show->field('property_value',__('Property Value ($)'));
+        $show->field('customer_name',__('Customer Name'));
+        $show->field('client_contact_no',__('Cliend Contact No'));
+        $show->field('province_id',__('Province'))->as(function($province_id){
+            $province = Province::where('id', $province_id)->first();
+            return $province->province_name;
+        });
+        $show->field('district_id',__('District/ Khan'))->as(function($district_id){
+            $district = District::where('id', $district_id)->first();
+            return $district->district_name;
+        });
+        $show->field('commune_id',__('Commune / Sangkat'))->as(function($comune_id){
+            $commune = Commune::where('id', $comune_id)->first();
+            return $commune->commune_name;
+        });
+        $show->field('village_id',__('Village'))->as(function($village_id){
+            $village = Village::where('id', $village_id)->first();
+            return $village->village_name   ;
+        });
+        $show->field('longtitude',__('Longtitude'));
+        $show->field('latitude',__('Latitude'));
+        // $show->field('front_photo',__('Front Photo'));
+        //$show->field('photos',__('Photo'));
+        $show->field('remark',__('Remark'));
+        $show->field('user_id', __('Created By'))->as(function ($userId){
+            $userName = UserAdmin::where('id', $userId)->first();
+            return $userName->name ?? null;
+        });
             
         return $show;
     }
@@ -425,7 +419,6 @@ class PropertyIndicatorController extends AdminController
                 return Borey::all()->pluck('borey_name', 'id');
             });
             $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1)->max(50); // all number 
-                   
             $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
             $form->text('land_title_no', __('Land title No.'))->rules('required');
             $form->text('land_size', __('Land Size (sqm)'))->rules('required');
@@ -460,7 +453,6 @@ class PropertyIndicatorController extends AdminController
         });
        
         $form->footer(function ($footer) {
-
             // disable reset btn
             $footer->disableReset();
             // disable `View` checkbox
@@ -468,19 +460,10 @@ class PropertyIndicatorController extends AdminController
             // disable `Continue editing` checkbox
             $footer->disableEditingCheck();
             // disable `Continue Creating` checkbox
-
-            
             //$footer->disableCreatingCheck();
             // $footer->disableCreatingCheck();
-
-        
-            
-        
         });
-
 
         return $form;
     }
-   
-
 }

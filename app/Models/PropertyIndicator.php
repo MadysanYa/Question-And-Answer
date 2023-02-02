@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Models\UserAdmin;
 use Illuminate\Database\Eloquent\Model;
 
 class PropertyIndicator extends Model
@@ -42,6 +43,14 @@ class PropertyIndicator extends Model
      */
     public function scopeGetWithCount($query){
         return $query->get()->count();
+    }
+
+    /**
+     * Relationship
+     */
+    public function user()
+    {
+        return $this->belongsTo(UserAdmin::class);
     }
 }
 
