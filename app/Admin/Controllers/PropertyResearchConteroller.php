@@ -470,6 +470,8 @@ class PropertyResearchConteroller extends AdminController
             $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.9999999'])->rules('required');
 
           });
+        
+        
         $form->footer(function ($footer) {
 
             // disable reset btn
