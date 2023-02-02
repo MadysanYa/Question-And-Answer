@@ -13,7 +13,7 @@ Admin::routes();
         'as'            => config('admin.route.prefix') . '.',
     ], function (Router $router) {
 
-        $router->resource('/', ApplicationController::class);
+        $router->resource('/', DashboardController::class);
         $router->resource('property_researchs', PropertyResearchConteroller::class);
         $router->resource('property_indicators',  PropertyIndicatorController::class);
         $router->resource('property_appraisals', PropertyAppraisalController::class);

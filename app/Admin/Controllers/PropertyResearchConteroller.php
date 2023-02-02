@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
 use Encore\Admin\Layout\Content;
 use App\Models\User;
+use App\Models\UserAdmin;
 
 class PropertyResearchConteroller extends AdminController
 {
@@ -175,6 +176,11 @@ class PropertyResearchConteroller extends AdminController
         $grid->column('longtitude',__('Longtitude'))->sortable();
       //$grid->column('remark',__('Remark'))->sortable();
 
+        $grid->column('user_id',__('Created By'))->sortable()->display(function($id){
+            $userName = UserAdmin::where('id', $id)->first();
+            return $userName->name ?? null;
+        });
+
       // create btn with api
         $grid->column('is_verified',__('Verified'))->display(function($is_verified){
             if($is_verified == null) {
@@ -228,15 +234,37 @@ class PropertyResearchConteroller extends AdminController
         // return $user->username;
 
         // return User::all()->pluck('username','id');
-        $grid->quickSearch([
-            // (User::all()->pluck('username','id')),
-            'id',
-            'admin_user_id']);
+
+        $grid->quickSearch(function ($model, $query) {
+            $model->where('id', $query);
+            $model->orWhere('collateral_owner', $query);
+            $model->orWhere('telephone', 'like', "%{$query}%");
+            $model->orWhereHas('user', function($q) use($query) {
+                $q->where('name', 'like', "%{$query}%")
+                ->orWhere('id', 'like', "%{$query}%");
+            });
+        });
 
 		$grid->filter(function($filter){
 			$filter->disableIdFilter();
-		//	$filter->equal('company');
+            $filter->where(function ($query) {
+                $query->whereHas('user', function($q) {
+                    $q->where('name', 'like', "%{$this->input}%");
+                    $q->orWhere('id', 'like', "%{$this->input}%");
+                });
+            }, 'Created By');
 		});
+
+        // $grid->quickSearch([
+        //     // (User::all()->pluck('username','id')),
+        //     'id',
+        //     'admin_user_id']);
+
+		// $grid->filter(function($filter){
+		// 	// $filter->disableIdFilter();
+		// 	$filter->like('branch_code');
+        //     // $filter->like('name', 'name');
+		// });
 
 
 		//print_r(Request::route('company'));
@@ -355,6 +383,11 @@ class PropertyResearchConteroller extends AdminController
             });
             $show->field('latitude',__('Latitude'));
             $show->field('longtitude',__('Longtitude'));
+
+            $show->field('user_id', __('Created By'))->as(function ($userId){
+                $userName = UserAdmin::where('id', $userId)->first();
+                return $userName->name ?? null;
+            });
         return $show;
     }
 
