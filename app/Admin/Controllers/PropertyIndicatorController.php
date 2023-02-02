@@ -171,12 +171,12 @@ class PropertyIndicatorController extends AdminController
                     <a href="'. env('APP_URL') . '/public/api/verify_indicator/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
                 }
                 else {
-                    return '<p style="color: #172191; border: 1px solid #172191;padding: 5px;text-align:center;">Processing</p>'; 
+                    return '<p style="color: #172191; border: 1px solid #172191; padding: 5px; text-align:center; margin-bottom: 0px;">Processing</p>'; 
                 }
             } else if($is_verified == 1){
-                return '<p style="color: #fff; background: #0c871f;padding: 0px 5px 0px 5px;text-align:center;">Verified</p>'; 
+                return '<p style="color: #0c871f; border: 1px solid #0c871f; padding: 5px; text-align:center ;margin-bottom: 0px;">Verified</p>'; 
             } else{
-                return '<p style="color: #fff;background:#ff0000;padding: 0px 5px 0px 5px;text-align:center;">Rejected</p>';
+                return '<p style="color: #ff0000; border: 1px solid #ff0000; padding: 5px; text-align:center; margin-bottom: 0px;">Rejected</p>';
             }
         });
 
@@ -201,6 +201,8 @@ class PropertyIndicatorController extends AdminController
             }
         });
 
+        $grid->fixColumns(0, -3);
+        
         $grid->quickSearch(function ($model, $query) {
             $model->where('id', $query);
             $model->orWhere('collateral_owner', $query);
@@ -212,7 +214,7 @@ class PropertyIndicatorController extends AdminController
         });
 
 		$grid->filter(function($filter){
-			$filter->disableIdFilter();
+			// $filter->disableIdFilter();
             $filter->where(function ($query) {
                 $query->whereHas('user', function($q) {
                     $q->where('name', 'like', "%{$this->input}%");
