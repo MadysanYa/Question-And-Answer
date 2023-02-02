@@ -175,68 +175,67 @@ class PropertyResearchConteroller extends AdminController
       // create btn with api
         $grid->column('is_verified',__('Verified'))->display(function($is_verified){
             if($is_verified == null) {
-                    if(User::isVerifierRole()){ // user login
-                        $id = $this->id;
-                        return ' <a href="'. env('APP_URL') . '/public/api/verify_research/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Verify</a>
-                        <a href="'. env('APP_URL') . '/public/api/verify_research/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
-                    }
-                    else {
-                        return '<p style="color: #fff; background: #172191;padding: 0px 5px 0px 5px;text-align:center;">Processing</p>'; 
-                    }
+                if(User::isVerifierRole()){ // user login
+                    $id = $this->id;
+                    return '<a href="'. env('APP_URL') . '/public/api/verify_research/' . $id . '/1" class="btn btn-sm btn-success">                               
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                                <span>&nbsp;&nbsp;Verify</span>
+                            </a>
+                            <a href="'. env('APP_URL') . '/public/api/verify_research/' . $id . '/2" class="btn btn-sm btn-danger">
+                                <i class="fa fa-times" aria-hidden="true"></i> 
+                                <span>&nbsp;&nbsp;Reject</span>
+                            </a>';
+                } else {
+                    return '<p style="color: #172191;border: 1px solid #172191;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Processing</p>'; 
                 }
-                else if($is_verified == 1){
-                    return '<p style="color: #fff; background: #0c871f;padding: 0px 5px 0px 5px;text-align:center;">Verified</p>'; 
-                }
-                else{
-                    return '<p style="color: #fff;background:#ff0000;padding: 0px 5px 0px 5px;text-align:center;">Rejected</p>';
-                }
-            });
-
-        $grid->column('is_approved',__('Approved'))->display(function($is_approved){
-
-                if($this->is_verified == 1){
-                    if($is_approved == null) {
-                        if(User::isApproverRole()){
-                            $id = $this->id;
-                            return ' <a href="'. env('APP_URL') . '/public/api/approve_research/' . $id . '/1" class="btn btn-success" style="width: 80px; border-radius: 10px;margin: 3px;" >Approv</a>
-                            <a href="'. env('APP_URL') . '/public/api/approve_research/' . $id . '/2" class="btn btn-danger" style="width: 80px; border-radius: 10px;margin: 3px;">Reject</a>';
-                        }
-                        else {
-                            return '<p style="color: #fff; background:#172191;padding: 0px 5px 0px 5px;text-align:center;">Processing</p>'; 
-                        }
-                        
-                    }
-                    else if($is_approved ==1){
-                        return '<p style="color: #fff; background: #0c871f;padding: 0px 5px 0px 5px;text-align:center;">Approved</p>'; 
-                    }
-                    else{
-                        return '<p style="color: #fff;background:#ff0000;padding: 0px 5px 0px 5px;text-align:center;">Rejected</p>';
-                    }
-                }
-            
+            }
+            else if($is_verified == 1){
+                return '<p style="color: #00a65a;border: 1px solid #00a65a;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Verified</p>'; 
+            }
+            else{
+                return '<p style="color: #dd4b39;border: 1px solid #dd4b39;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Rejected</p>';
+            }
         });
 
-        $grid->html('<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdf">Export to PDF</a>');
-        // http://localhost/pms/property-management/public/api/pdf
+        $grid->column('is_approved',__('Approved'))->display(function($is_approved){
+            if($this->is_verified == 1){
+                if($is_approved == null) {
+                    if(User::isApproverRole()){
+                        $id = $this->id;
+                        return '<a href="'. env('APP_URL') . '/public/api/approve_research/' . $id . '/1" class="btn btn-sm btn-success">                        
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                    <span>&nbsp;&nbsp;Approv</span>
+                                </a>
+                                <a href="'. env('APP_URL') . '/public/api/approve_research/' . $id . '/2" class="btn btn-sm btn-danger">
+                                    <i class="fa fa-times" aria-hidden="true"></i> 
+                                    <span>&nbsp;&nbsp;Reject</span>
+                                </a>';
+                    }
+                    else {
+                        return '<p style="color: #172191;border: 1px solid #172191;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Processing</p>'; 
+                    }
+                }
+                else if($is_approved ==1){
+                    return '<p style="color: #00a65a;border: 1px solid #00a65a;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Approved</p>'; 
+                }
+                else{
+                    return '<p style="color: #dd4b39;border: 1px solid #dd4b39;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Rejected</p>';
+                }
+            }
+        });
 
+        // $grid->html('<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdf">Export to PDF</a>');
         // $grid->disableExport();
-        //  $grid->disableFilter();
-        // $user = User::where('id',)->first();
-        // return $user->username;
-
-        // return User::all()->pluck('username','id');
-        $grid->quickSearch([
-            // (User::all()->pluck('username','id')),
-            'id',
-            'admin_user_id']);
+        // $grid->disableFilter();
+        
+        $grid->fixColumns(0, -3);
+        $grid->quickSearch(['id','admin_user_id']);
 		
 		$grid->filter(function($filter){
 			$filter->disableIdFilter();
 		//	$filter->equal('company');
 		});
 
-
-		//print_r(Request::route('company'));
         return $grid;
     }
 
@@ -360,7 +359,6 @@ class PropertyResearchConteroller extends AdminController
      * @return Form
      */
     protected function form()
-
     {
         $form = new Form(new PropertyResearch());
         $form->column(1/3, function ($form){
