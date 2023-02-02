@@ -29,9 +29,8 @@
             console.log(locations);
             const labels = {{ Js::from($labelProAppraisal) }};
             const propertyAppraisal = {{ Js::from($infoProAppraisal)}};
-            const icons = {url: "http://maps.google.com/mapfiles/ms/icons/pink-dot.png" };
 
-            // var icons = '../imges/home2.png'
+            var icons = '../imges/blue_marker.png'
 
             for (i = 0; i < locations.length; i++) {  
                 marker = new google.maps.Marker({

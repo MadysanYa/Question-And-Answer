@@ -28,8 +28,7 @@
             const locations = {{ Js::from($latLongProResearch) }};
             const labels = {{ Js::from($labelProResearch) }};
             const propertyResearch = {{ Js::from($infoProResearch)}};
-            const icons = {url: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png" };
-            // var icons = '../imges/home2.png'
+            var icons = '../imges/orange_marker.png'
 
             for (i = 0; i < locations.length; i++) {  
                 marker = new google.maps.Marker({
