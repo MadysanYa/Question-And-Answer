@@ -14,9 +14,10 @@ use App\Models\Commune;
 use App\Models\Village;
 use App\Models\District;
 use App\Models\Province;
+use App\Models\UserAdmin;
 use App\Models\PropertyType;
-use App\Models\InformationType;
 
+use App\Models\InformationType;
 use Encore\Admin\Form\Field\Id;
 use Encore\Admin\Layout\Content;
 use App\Models\PropertyIndicator;
@@ -158,8 +159,8 @@ class PropertyIndicatorController extends AdminController
         $grid->column('longtitude',__('Longtitude'))->sortable(); 
         $grid->column('remark',__('Remark'))->sortable();  
         $grid->column('user_id',__('Created By'))->sortable()->display(function($id){
-            $userName = DB::table('admin_users')->where('id', $id)->first();
-            return $userName->username ?? null;
+            $userName = UserAdmin::where('id', $id)->first();
+            return $userName->name ?? null;
         }); 
         // create btn with api
         $grid->column('is_verified',__('Verified'))->display(function($is_verified){
@@ -198,13 +199,26 @@ class PropertyIndicatorController extends AdminController
                     return '<p style="color: #fff;background:#ff0000;padding: 0px 5px 0px 5px;text-align:center;">Rejected</p>';
                 }
             }
-
         });
 
-        $grid->quickSearch(['collateral_owner','telephone','id']);
+        $grid->quickSearch(function ($model, $query) {
+            $model->where('id', $query);
+            $model->orWhere('collateral_owner', $query);
+            $model->orWhere('telephone', 'like', "%{$query}%");
+            $model->orWhereHas('user', function($q) use($query) {
+                $q->where('name', 'like', "%{$query}%")
+                ->orWhere('id', 'like', "%{$query}%");
+            });
+        });
+
 		$grid->filter(function($filter){
 			$filter->disableIdFilter();
-			//$filter->equal('company');
+            $filter->where(function ($query) {
+                $query->whereHas('user', function($q) {
+                    $q->where('name', 'like', "%{$this->input}%");
+                    $q->orWhere('id', 'like', "%{$this->input}%");
+                });
+            }, 'Created By');
 		});
 
         return $grid;
@@ -279,7 +293,7 @@ class PropertyIndicatorController extends AdminController
      */
     protected function detail($id)
     {
-        $propertyIndicator = PropertyIndicator::findOrFail($id);
+        $propertyIndicator = PropertyIndicator::findOrFail($id);   
         $show = new Show($propertyIndicator);
 
         $show->field('property_reference',__('Reference'));
@@ -350,8 +364,8 @@ class PropertyIndicatorController extends AdminController
         //$show->field('photos',__('Photo'));
         $show->field('remark',__('Remark'));
         $show->field('user_id', __('Created By'))->as(function ($userId){
-            $userName = DB::table('admin_users')->where('id', $userId)->first();
-            return $userName->username ?? null;
+            $userName = UserAdmin::where('id', $userId)->first();
+            return $userName->name ?? null;
         });
             
         return $show;
