@@ -308,7 +308,7 @@ class PropertyIndicatorController extends AdminController
      */
     protected function detail($id)
     {
-        $propertyIndicator = PropertyIndicator::findOrFail($id);   
+        $propertyIndicator = PropertyIndicator::findOrFail($id);
         $show = new Show($propertyIndicator);
 
         $show->field('property_reference',__('Reference'));
@@ -413,10 +413,9 @@ class PropertyIndicatorController extends AdminController
                 return InformationType::all()->pluck('information_type_name','id');
                });
             //zero loading 
-            $form->text('property_reference', __('Property Reference '))->readonly()->value(function(){
+            $form->text('property_reference', __('Property Reference '))->disable()->value(function(){
                 $id = PropertyIndicator::all()->last();
-
-               return 'PL-'. sprintf('%010d', $id == null? 1 : $id->id + 1);//$id == null? 1 :  
+               return 'PL-'. sprintf('%010d', $id == null ? 1 : $id->id + 1);
             }); 
             $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area','Agricultural Area'=>'Agricultural Area']);     
             $form->select('type_of_access_road', __('Type of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road', 'Paved Road'=>'Paved Road','Upaved Road'=>'Upaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road']);

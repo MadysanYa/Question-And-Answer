@@ -393,11 +393,10 @@ class PropertyResearchConteroller extends AdminController
             $form->select('information_type',__('Information Type'))->rules('required')->options(function(){
                 return InformationType::all()->pluck('information_type_name','id');
                });
-            //2
             //zero loading
-            $form->text('property_reference', __('Property Reference '))->readonly()->value(function(){
+            $form->text('property_reference', __('Property Reference '))->disable()->value(function(){
                 $id = PropertyResearch::all()->last();
-                return 'PL-'. sprintf('%010d', $id == null? 1 : $id->id + 1);
+                return 'PL-'. sprintf('%010d', $id == null ? 1 : $id->id + 1);
             });
             //3
             $form->text('access_road_name', __('Access Road Name'))->rules('required');

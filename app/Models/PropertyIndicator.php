@@ -21,6 +21,9 @@ class PropertyIndicator extends Model
         return $query->get()->count();
     }
 
+    /**
+     * Mutator
+     */
 	public function setPhotosAttribute($photos)
     {
         if (is_array($photos)) {
@@ -28,6 +31,9 @@ class PropertyIndicator extends Model
         }
     }
 
+    /**
+     * Accessor
+     */
     public function getPhotosAttribute($photos)
     {
         return json_decode($photos, true);  
