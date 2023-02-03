@@ -118,7 +118,7 @@ class PropertyResearchConteroller extends AdminController
 
         $grid = new Grid(new PropertyResearch);
 
-		$grid->model()->orderBy('id','asc');
+		$grid->model()->orderBy('id','desc');
         $grid->column('id', __('No.'))->asc()->sortable();
         $grid->column('information_type',__('Information Type'))->sortable()->Display(function($id){
             $informationtype = InformationType::where('id',$id)->first();
