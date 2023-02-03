@@ -60,7 +60,7 @@ class PropertyAppraisalController extends AdminController
 
         $grid = new Grid(new PropertyAppraisal());
 
-        $grid->model()->orderBy('id','asc');
+        $grid->model()->orderBy('id','desc');
         $grid->column('id', __('No.'))->asc()->sortable();
 
             /* $grid->column('swot_analyze', __("swot_analyze"))->display(function(){ return 'Swot Analyze';})->modal('Swot Analyze', function($model){

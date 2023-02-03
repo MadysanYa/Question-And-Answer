@@ -55,7 +55,7 @@ class PropertyIndicatorController extends AdminController
 
         $grid = new Grid(new PropertyIndicator);
 
-		$grid->model()->orderBy('id','asc');
+		$grid->model()->orderBy('id','desc');
         $grid->column('id', __('No.'))->asc()->sortable();
 		$grid->column('property_reference', __('Reference'))->sortable();
         $grid->column('collateral_owner',__('Owner'))->sortable();
