@@ -52,14 +52,14 @@ class TitleIndicatorController extends AdminController
             $arr = explode(",", implode(" ", $location));
             $locationArray[] = $arr;
         }
-        $arryProperty = $locationArray;
+        $arryProperty = $locationArray ?? null;;
         
         //Labels on marker
         foreach($propertys as $value){
             $label = $value->land_title_type;
             $labelArray[] = $label;
         }
-        $arrayLabel = $labelArray;
+        $arrayLabel = $labelArray ?? null;
 
         //Information property indicator
         foreach($propertys as $value){
@@ -93,7 +93,7 @@ class TitleIndicatorController extends AdminController
             $arrInfo = explode(",", implode(" ", $info));
             $infoArray[] = $arrInfo;
         }
-        $infoProperty = $infoArray;
+        $infoProperty = $infoArray ?? null;
 
         //Property Research
         $propertyResearch = PropertyResearch::get();
@@ -149,7 +149,7 @@ class TitleIndicatorController extends AdminController
             $propertySearch = explode(",", implode(" ", $proResearchs));
             $proResearchArray[] = $propertySearch;
         }
-        return $arrayProResearch = $proResearchArray;
+        return $arrayProResearch = $proResearchArray ?? null;
     }
 
     public function labelProResearch($propertyResearch)
@@ -158,7 +158,7 @@ class TitleIndicatorController extends AdminController
             $labelProResearch = $value->land_title_type;
             $arrayLabelProResearch[] = $labelProResearch;
         }
-        return $arrayLabelProResearch = $arrayLabelProResearch;
+        return $arrayLabelProResearch = $arrayLabelProResearch ?? null;
     }
 
     public function infoProResearch($propertyResearch)
@@ -186,7 +186,7 @@ class TitleIndicatorController extends AdminController
             $arrInfoProResearch = explode(",", implode(" ", $info));
             $arrayInfor[] = $arrInfoProResearch;
         }
-        return $infoPropertyResearch = $arrayInfor;
+        return $infoPropertyResearch = $arrayInfor ?? null;
     }
 
     public function latLongProAppraisal($propertyAppraisal)
@@ -196,7 +196,7 @@ class TitleIndicatorController extends AdminController
             $properAppraisal = explode(",", implode(" ", $proAppraisal));
             $proAppraisalArray[] = $properAppraisal;
         }
-        return $arrayAppraisal = $proAppraisalArray;
+        return $arrayAppraisal = $proAppraisalArray ?? null;
     }
 
     public function labelProAppraisal($propertyAppraisal)
@@ -205,7 +205,7 @@ class TitleIndicatorController extends AdminController
             $labelProAppraisal = $value->land_title_type;
             $arrayLabelProAppraisal[] = $labelProAppraisal;
         }
-        return $arrayLabelProAppraisal = $arrayLabelProAppraisal;
+        return $arrayLabelProAppraisal = $arrayLabelProAppraisal ?? null;
     }
 
     public function infoProAppraisal($propertyAppraisal)
@@ -243,7 +243,7 @@ class TitleIndicatorController extends AdminController
             $arrInfoProAppraisal = explode(",", implode(" ", $info));
             $arrayInfor[] = $arrInfoProAppraisal;
         }
-        return $infoPropertyAppraisal = $arrayInfor;
+        return $infoPropertyAppraisal = $arrayInfor ?? null;
     }
     
     protected function grid()

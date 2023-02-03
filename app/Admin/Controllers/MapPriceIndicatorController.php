@@ -52,14 +52,14 @@ class MapPriceIndicatorController extends AdminController
             $arr = explode(",", implode(" ", $location));
             $locationArray[] = $arr;
         }
-        $arryProperty = $locationArray;
+        $arryProperty = $locationArray ?? null;
         
         //Labels on marker
         foreach($propertys as $value){
             $label = "$".$value->land_value_per_sqm;
             $labelArray[] = $label;
         }
-        $arrayLabel = $labelArray;
+        $arrayLabel = $labelArray ?? null;
 
         //Information property indicator
         foreach($propertys as $value){
@@ -93,7 +93,7 @@ class MapPriceIndicatorController extends AdminController
             $arrInfo = explode(",", implode(" ", $info));
             $infoArray[] = $arrInfo;
         }
-        $infoProperty = $infoArray;
+        $infoProperty = $infoArray ?? null;
 
         //Property Research
         $propertyResearch = PropertyResearch::get();
@@ -149,7 +149,7 @@ class MapPriceIndicatorController extends AdminController
             $propertySearch = explode(",", implode(" ", $proResearchs));
             $proResearchArray[] = $propertySearch;
         }
-        return $arrayProResearch = $proResearchArray;
+        return $arrayProResearch = $proResearchArray ?? null;
     }
 
     public function labelProResearch($propertyResearch)
@@ -158,7 +158,7 @@ class MapPriceIndicatorController extends AdminController
             $labelProResearch = "$".$value->land_value_per_sqm;
             $arrayLabelProResearch[] = $labelProResearch;
         }
-        return $arrayLabelProResearch = $arrayLabelProResearch;
+        return $arrayLabelProResearch = $arrayLabelProResearch ?? null;
     }
 
     public function infoProResearch($propertyResearch)
@@ -186,7 +186,7 @@ class MapPriceIndicatorController extends AdminController
             $arrInfoProResearch = explode(",", implode(" ", $info));
             $arrayInfor[] = $arrInfoProResearch;
         }
-        return $infoPropertyResearch = $arrayInfor;
+        return $infoPropertyResearch = $arrayInfor ?? null;
     }
 
     public function latLongProAppraisal($propertyAppraisal)
@@ -196,7 +196,7 @@ class MapPriceIndicatorController extends AdminController
             $properAppraisal = explode(",", implode(" ", $proAppraisal));
             $proAppraisalArray[] = $properAppraisal;
         }
-        return $arrayAppraisal = $proAppraisalArray;
+        return $arrayAppraisal = $proAppraisalArray ?? null;
     }
 
     public function labelProAppraisal($propertyAppraisal)
@@ -205,7 +205,7 @@ class MapPriceIndicatorController extends AdminController
             $labelProAppraisal = "$".$value->land_value_per_sqm;
             $arrayLabelProAppraisal[] = $labelProAppraisal;
         }
-        return $arrayLabelProAppraisal = $arrayLabelProAppraisal;
+        return $arrayLabelProAppraisal = $arrayLabelProAppraisal ?? null;
     }
 
     public function infoProAppraisal($propertyAppraisal)
@@ -243,134 +243,9 @@ class MapPriceIndicatorController extends AdminController
             $arrInfoProAppraisal = explode(",", implode(" ", $info));
             $arrayInfor[] = $arrInfoProAppraisal;
         }
-        return $infoPropertyAppraisal = $arrayInfor;
+        return $infoPropertyAppraisal = $arrayInfor ?? null;
     }
 
-    protected function dashboard(){
-        
-        
-    
-        $html = <<<HTML
-    
-        <!DOCTYPE html>
-          <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-              
-          <head>
-              <meta charset="utf-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1">
-              <title>Laravel Google Maps Multiple Markers Example</title>
-              <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-              <!-- <script src="https://code.jquery.com/jquery-3.4.1.js"></script> -->
-              <style >
-                  #map {
-                    height: 550px;
-                    width: 100%;
-                  }
-    
-                  .gm-style .gm-style-iw-d::-webkit-scrollbar-track, 
-                  .gm-style .gm-style-iw-d::-webkit-scrollbar-track-piece,
-                  .gm-style .gm-style-iw-c,
-                  .gm-style .gm-style-iw-t::after { 
-                    background: red;
-                  }
-                  .gm-style .gm-style-iw-tc::after {   background: red; }
-                 .form-group {
-                    width: 100%;
-                    padding: 0px 2px;
-                    margin: 2px 0;
-                    box-sizing: border-box;
-                    border: 2px solid green;
-                    border-radius: 4px;
-                 }
-                 input  {
-                   width: 20px;
-                   height: 20px;
-                }
-                label {
-                    font-size: 20px;    
-                    color: blue;
-                }
-              </style>
-          </head>
-              
-          <body>
-              <div class="container mt-5">
-                  
-                     <form class="form-group">
-                      <fieldset>
-                        <legend>Select Property :</legend>
-                        <input type="checkbox" name="veggies" id="veg1" value="tomato" onclick="return ValidateSelection();">
-                        <label for="veg1">Property Research</label>
-                        <input form="myForm" type="checkbox" name="veggies" id="veg2"  value="onion" onclick="return ValidateSelection();"> 
-                        <label for="veg2">Property Indication</label>
-                        <input form="myForm" type="checkbox" name="veggies" id="veg3"  value="lettuce" onclick="return ValidateSelection();"> 
-                        <label for="veg3">Property Appraisal</label>
-                      </fieldset>
-                     </form>
-
-                        <!-- <p><input type="submit" value="Submit"></p> -->
-                            
-                        <script type="text/javascript">  
-                        function ValidateSelection()  
-                        {  
-                            var check_box = document.getElementsByName("veggies");  
-                            var CheckedItems = 0; 
-                            for(var i = 0; i < check_box.length; i++)  
-                            {  
-                                if(check_box[i].checked)  
-                                    CheckedItems++;  
-                            }  
-                            if(CheckedItems > 1){  
-                                alert("You can't select more than three veggies!");  
-                                return false;}  
-                        }  
-                        </script>
-                  <div id="map"> Map Testing</div>
-              </div>
-              
-              <script type="text/javascript">
-                    function initMap() {
-                        const myLatLng = { lat: 11.5764211, lng: 104.923754 };
-                        const map = new google.maps.Map(document.getElementById("map"), {
-                            zoom: 10,
-                            center: myLatLng,
-                        });
-
-                        var marker, i
-                        var infowindow = new google.maps.InfoWindow();
-                        //Latitude, Longtitude
-                        var locations = $arryProperty;
-                        //Labels on marker
-                        const labels = $arrayLabel;
-                       
-
-                        for (i = 0; i < locations.length; i++) {  
-                            marker = new google.maps.Marker({
-                                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                                label:labels[i],
-                                map: map, 
-                                // icon: {path: google.maps.SymbolPath.CIRCLE, scale: 0}
-                            });
-                                
-                            google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                                return function() {
-                                infowindow.setContent(locations[i][0]);
-                                infowindow.open(map, marker);
-                                }
-                            })(marker, i));
-                        }
-                        window.initMap = initMap;
-                    }
-                </script>
-            
-        HTML;
-    
-    
-   
-        return $html;
-    }	
-      
-    
     protected function grid()
     {
 
