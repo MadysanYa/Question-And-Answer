@@ -1,25 +1,25 @@
 <div class="row">
     <div class="col-md-4">
-        <div class="box box-primary" style="padding: 10px;">
+        <div class="box box-primary" style="padding: 10px;background: #3c8dbc;color: #ffff;">
             <div class="text-center">
-                <h4 class="box-title">Properties Research</h4>
-                <h2 class="box-title text-red" style="margin-top: 0px;">{{ $countProReseach }}</h2>
+                <h3 class="box-title" style="font-weight: 600;">Properties Research</h3>
+                <h2 class="box-title text-white" style="margin-top: 0px;">{{ $countProReseach }}</h2>
             </div>
         </div>
     </div>
     <div class="col-md-4">
-        <div class="box box-warning" style="padding: 10px;">
+        <div class="box box-warning" style="padding: 10px;background: #f39c12;color: #ffff;">
             <div class="text-center">
-                <h4 class="box-title">Properties Indication</h4>
-                <h2 class="box-title text-red" style="margin-top: 0px;">{{ $countProIndicator }}</h2>
+                <h3 class="box-title" style="font-weight: 600;">Properties Indication</h3>
+                <h2 class="box-title text-white" style="margin-top: 0px;">{{ $countProIndicator }}</h2>
             </div>
         </div>
     </div>
     <div class="col-md-4">
-        <div class="box box-success" style="padding: 10px;">
+        <div class="box box-success" style="padding: 10px;background: #00a65a;color: #ffff;">
             <div class="text-center">
-                <h4 class="box-title">Properties Appraisal</h4>
-                <h2 class="box-title text-red" style="margin-top: 0px;">{{ $countProAppraisal }}</h2>
+                <h3 class="box-title" style="font-weight: 600;">Properties Appraisal</h3>
+                <h2 class="box-title text-white" style="margin-top: 0px;">{{ $countProAppraisal }}</h2>
             </div>
         </div>
     </div>
