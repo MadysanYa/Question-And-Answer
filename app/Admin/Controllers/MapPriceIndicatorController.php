@@ -48,11 +48,17 @@ class MapPriceIndicatorController extends AdminController
 
         // Latitude, Longtitude
         foreach($propertys as $property){
-            $location = [$property->land_value_per_sqm.'$'.','.$property->latitude.','.$property->longtitude];
-            $arr = explode(",", implode(" ", $location));
-            $locationArray[] = $arr;
+            // $location = [$property->land_value_per_sqm.'$'.','.$property->latitude.','.$property->longtitude];
+            // $location = ['{'.'lat:'.' '.$property->latitude.', '."lng:".' '.$property->longtitude.'}'];
+            // $location = '{ lat: '.$property->latitude.', '.'lng: '.$property->longtitude.' }';
+            // $arr = explode(",", implode(" ", $location));
+            // $arr = implode("", $location);
+            // dd($arr);
+            // dd(json_decode($arr));
+            $locationArray[] = $location;
         }
         $arryProperty = $locationArray ?? null;
+        
         
         //Labels on marker
         foreach($propertys as $value){
