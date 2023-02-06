@@ -537,11 +537,11 @@ class PropertyAppraisalController extends AdminController
             $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 999 9999']); // add number
             $form->select('information_type',__('Information Type'))->rules('required')->options(function(){
                 return InformationType::all()->pluck('information_type_name','id');
-            }); 
+            });
             $form->text('property_reference', __('Property Reference '))->disable()->value(function(){
                 $id = PropertyAppraisal::all()->last();
                 return 'PL-'. sprintf('%010d', $id == null ? 1 : $id->id + 1);
-            }); 
+            });
             $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area','Commercial Area'=>'Commercial Area', 'Industrial Area'=>'Industrial Area', 'Agricultural Area'=>'Agricultural Area']);
             $form->select('type_of_access_road', __('Type of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road', 'Paved Road'=>'Paved Road','Upaved Road'=>'Upaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road']);
             $form->text('access_road_name', __('Access Road Name'))->rules('required');
@@ -589,8 +589,8 @@ class PropertyAppraisalController extends AdminController
             $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.9999999'])->rules('required');
             $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.9999999'])->rules('required');
             $form->text('remark', __('Remark'));
-            $form->image('front_photo', __('Front Photo'))->removable()->uniqueName();
-            $form->multipleImage('photos', __('Photos'))->removable()->uniqueName();
+            $form->image('front_photo', __('Front Photo'))->removable()->uniqueName()->rules('required');
+            $form->multipleImage('photos', __('Photos'))->removable()->uniqueName()->rules('required');
             $form->hidden('strength',__('Strength'));
             $form->hidden('weakness',__('Weakness'));
             $form->hidden('opportunity',__('Opportunity'));
