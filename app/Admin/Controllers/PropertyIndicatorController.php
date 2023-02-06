@@ -402,7 +402,7 @@ class PropertyIndicatorController extends AdminController
 
             $form->select('branch_code',__('Branch'))->rules('required')->options(function(){
                  return Branch::all()->pluck('branch_name','branch_code');});
-            $form->date('requested_date', __('Requested Date'))->rules('required');
+            $form->date('requested_date', __('Requested Date'))->format('DD-MM-YYYY')->rules('required');
             if (User::isVerifierRole() || User::isApproverRole()){
             $form->date('reported_date',__('Reported Date'))->rules('required');
             }
@@ -412,12 +412,12 @@ class PropertyIndicatorController extends AdminController
             $form->select('information_type',__('Information Type'))->rules('required')->options(function(){
                 return InformationType::all()->pluck('information_type_name','id');
                });
-            //zero loading 
+            //zero loading
             $form->text('property_reference', __('Property Reference '))->disable()->value(function(){
                 $id = PropertyIndicator::all()->last();
                return 'PL-'. sprintf('%010d', $id == null ? 1 : $id->id + 1);
-            }); 
-            $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area','Agricultural Area'=>'Agricultural Area']);     
+            });
+            $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area','Agricultural Area'=>'Agricultural Area']);
             $form->select('type_of_access_road', __('Type of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road', 'Paved Road'=>'Paved Road','Upaved Road'=>'Upaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road']);
             $form->text('access_road_name', __('Access Road Name'))->rules('required');
             $form->select('property_type', __('Property Type'))->rules('required')->options(function(){
@@ -428,14 +428,14 @@ class PropertyIndicatorController extends AdminController
         $form->column(1/3, function ($form){
             $form->html('<div style="height:105px"></div>');
 
-            $form->number('building_status', __('Building Status (%) '))->min(0)->max(100)->rules('required');
+            $form->number('building_status', __('Building Status (%) '))->default(0)->min(0)->max(100)->rules('required');
             $form->select('borey', __('Borey'))->rules('required')->options(function(){
                 return Borey::all()->pluck('borey_name', 'id');
             });
             $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1)->max(50); // all number
             $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
             $form->text('land_title_no', __('Land title No.'))->rules('required');
-            $form->text('land_size', __('Land Size (sqm)'))->rules('required');
+            $form->text('land_size', __('Land Size (sqm)'))->default(0)->rules('required');
             $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
             $form->currency('building_size', __('Building Size'))->rules('required');
             $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->rules('required');
