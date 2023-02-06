@@ -375,8 +375,6 @@ class PropertyIndicatorController extends AdminController
         });
         $show->field('longtitude',__('Longtitude'));
         $show->field('latitude',__('Latitude'));
-        // $show->field('front_photo',__('Front Photo'));
-        //$show->field('photos',__('Photo'));
         $show->field('remark',__('Remark'));
         $show->field('user_id', __('Created By'))->as(function ($userId){
             $userName = UserAdmin::where('id', $userId)->first();
@@ -402,7 +400,7 @@ class PropertyIndicatorController extends AdminController
 
             $form->select('branch_code',__('Branch'))->rules('required')->options(function(){
                  return Branch::all()->pluck('branch_name','branch_code');});
-            $form->date('requested_date', __('Requested Date'))->format('DD-MM-YYYY')->rules('required');
+            $form->date('requested_date', __('Requested Date'))->rules('required');
             if (User::isVerifierRole() || User::isApproverRole()){
             $form->date('reported_date',__('Reported Date'))->rules('required');
             }
