@@ -28,7 +28,7 @@
             const locations = {{ Js::from($latLongProResearch) }};
             const labels = {{ Js::from($labelProResearch) }};
             const propertyResearch = {{ Js::from($infoProResearch)}};
-            var icons = '../imges/orange_marker.png'
+            var icons = '../imges/properties_research.png'
 
             for (i = 0; i < locations.length; i++) {  
                 marker = new google.maps.Marker({

@@ -30,7 +30,7 @@
             const labels = {{ Js::from($labelProAppraisal) }};
             const propertyAppraisal = {{ Js::from($infoProAppraisal)}};
 
-            var icons = '../imges/blue_marker.png'
+            var icons = '../imges/properties_appraisal.png'
 
             for (i = 0; i < locations.length; i++) {  
                 marker = new google.maps.Marker({
