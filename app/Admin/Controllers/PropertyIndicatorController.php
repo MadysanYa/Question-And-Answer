@@ -436,7 +436,7 @@ class PropertyIndicatorController extends AdminController
             $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1)->max(50); // all number
             $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
             $form->text('land_title_no', __('Land title No.'))->rules('required');
-            $form->text('land_size', __('Land Size (sqm)'))->rules('required');
+            $form->text('land_size', __('Land Size (sqm)'))->inputmask(['mask' => '99999999.99'])->rules('required');
             $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
             $form->currency('building_size', __('Building Size'))->rules('required');
             $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->rules('required');

@@ -185,20 +185,20 @@ class PropertyResearchConteroller extends AdminController
             if($is_verified == null) {
                 if(User::isVerifierRole()){ // user login
                     $id = $this->id;
-                    return '<a href="'. env('APP_URL') . '/public/api/verify_research/' . $id . '/1" class="btn btn-sm btn-success">                               
+                    return '<a href="'. env('APP_URL') . '/public/api/verify_research/' . $id . '/1" class="btn btn-sm btn-success">
                                 <i class="fa fa-check"></i>
                                 <span>&nbsp;&nbsp;Verify</span>
                             </a>
                             <a href="'. env('APP_URL') . '/public/api/verify_research/' . $id . '/2" class="btn btn-sm btn-danger">
-                                <i class="fa fa-times"></i> 
+                                <i class="fa fa-times"></i>
                                 <span>&nbsp;&nbsp;Reject</span>
                             </a>';
                 } else {
-                    return '<p style="color: #172191;border: 1px solid #172191;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Processing</p>'; 
+                    return '<p style="color: #172191;border: 1px solid #172191;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Processing</p>';
                 }
             }
             else if($is_verified == 1){
-                return '<p style="color: #00a65a;border: 1px solid #00a65a;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Verified</p>'; 
+                return '<p style="color: #00a65a;border: 1px solid #00a65a;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Verified</p>';
             }
             else{
                 return '<p style="color: #dd4b39;border: 1px solid #dd4b39;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Rejected</p>';
@@ -210,21 +210,21 @@ class PropertyResearchConteroller extends AdminController
                 if($is_approved == null) {
                     if(User::isApproverRole()){
                         $id = $this->id;
-                        return '<a href="'. env('APP_URL') . '/public/api/approve_research/' . $id . '/1" class="btn btn-sm btn-success">                        
+                        return '<a href="'. env('APP_URL') . '/public/api/approve_research/' . $id . '/1" class="btn btn-sm btn-success">
                                     <i class="fa fa-check"></i>
                                     <span>&nbsp;&nbsp;Approv</span>
                                 </a>
                                 <a href="'. env('APP_URL') . '/public/api/approve_research/' . $id . '/2" class="btn btn-sm btn-danger">
-                                    <i class="fa fa-times"></i> 
+                                    <i class="fa fa-times"></i>
                                     <span>&nbsp;&nbsp;Reject</span>
                                 </a>';
                     }
                     else {
-                        return '<p style="color: #172191;border: 1px solid #172191;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Processing</p>'; 
+                        return '<p style="color: #172191;border: 1px solid #172191;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Processing</p>';
                     }
                 }
                 else if($is_approved ==1){
-                    return '<p style="color: #00a65a;border: 1px solid #00a65a;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Approved</p>'; 
+                    return '<p style="color: #00a65a;border: 1px solid #00a65a;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Approved</p>';
                 }
                 else{
                     return '<p style="color: #dd4b39;border: 1px solid #dd4b39;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Rejected</p>';
@@ -235,7 +235,7 @@ class PropertyResearchConteroller extends AdminController
         // $grid->html('<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdf">Export to PDF</a>');
         // $grid->disableExport();
         // $grid->disableFilter();
-        
+
         $grid->fixColumns(0, -3);
 
         $grid->quickSearch(function ($model, $query) {
@@ -404,7 +404,7 @@ class PropertyResearchConteroller extends AdminController
             //4
             $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1);
             //5
-            $form->text('land_size', __('Land Size (sqm)'))->rules('required');
+            $form->text('land_size', __('Land Size (sqm)'))->inputmark(['mask' => '9999999.99'])->rules('required');
             //6
             $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->rules('required');
             //7
@@ -464,8 +464,8 @@ class PropertyResearchConteroller extends AdminController
             $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.9999999'])->rules('required');
 
           });
-        
-        
+
+
         $form->footer(function ($footer) {
 
             // disable reset btn

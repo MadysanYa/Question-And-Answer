@@ -168,7 +168,8 @@ class PropertyAppraisalController extends AdminController
         $grid->column('land_title_no',__('Lang Title No'))->sortable();
         $grid->column('land_size',__('Land Size'))->sortable();
         $grid->column('land_value_per_sqm',__('Land Value per Sqm ($)'))->sortable();
-        $grid->column('building_size_by_measure',__('Building Size by Measure '))->sortable();
+        $grid->column('building_size_by_measure',__('Building Value per sqm '))->sortable();
+        $grid->column('building_size_per_sqm', __('Building Size by measurement'))->sortable();
         $grid->column('property_value',__('Property Value ($)'))->sortable();
         $grid->column('customer_name',__('Customer Name'))->sortable();
         $grid->column('client_contact_no',__('Client Contact No.'))->sortable();
@@ -194,7 +195,7 @@ class PropertyAppraisalController extends AdminController
         });
         $grid->column('latitude',__('Latitude'))->sortable();
         $grid->column('longtitude',__('Longtitude'))->sortable();
-        $grid->column('property_address', __('Property Address'));
+        //$grid->column('property_address', __('Property Address'));
         $grid->column('remark',__('Remark'))->sortable();
         $grid->column('user_id',__('Created By'))->sortable()->display(function($id){
             $userName = UserAdmin::where('id', $id)->first();
@@ -390,7 +391,7 @@ class PropertyAppraisalController extends AdminController
         });
         $show->field('no_of_floor', __('No Of Floor'))->sortable();
         $show->field('land_size', __('Land_size'))->sortable();
-        $show->field('building_size_by_measure', __('Building measure ($)'))->sortable();
+        $show->field('building_size_by_measure', __('Building Value per Sqm'))->sortable();
         $show->field('collateral_owner', __('Owner'))->sortable();
 
        // $show->field('photos',__('Photo'))->sortable();
@@ -407,7 +408,7 @@ class PropertyAppraisalController extends AdminController
         $show->field('land_title_type', __('Land Title Type'))->sortable();
         $show->field('land_size_by_measurement', __('Land Size By Measurement'))->sortable();
         $show->field('customer_name', __('Customer_Name'))->sortable();
-        $show->field('building_size_per_sqm', __('Building Size '))->sortable();
+        $show->field('building_size_per_sqm', __('Building Size by measurement '))->sortable();
 
         $show->field('province_id',__('Province'))->as(function($province_id){
             $province = Province::where('id', $province_id)->first();
@@ -561,11 +562,11 @@ class PropertyAppraisalController extends AdminController
             $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title','Soft Title'=>'Soft Title']);
             $form->text('land_title_no', __('Land Title No'))->rules('required')->inputmask(['mask' => '999999999-9999']);
             $form->text('land_size', __('Land Size(Sqm)'))->inputmask(['mask' => '9999999.99'])->rules('required');
-            $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
-            $form->currency('property_value', __('Property Value '))->rules('required');
             $form->text('land_size_by_measurement', __('Land Size by Measurement'))->inputmask(['mask' => '9999999.99'])->rules('required');
-            $form->text('building_size_per_sqm', __('Building Size per (Sqm)'))->inputmask(['mask' => '9999999.99'])->rules('required');
-            $form->text('building_size_by_measure', __('Building_Size_By_Measure'))->inputmask(['mask' => '9999999.99'])->rules('required');
+            $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
+            $form->text('building_size_per_sqm', __('Building Size by measurement'))->inputmask(['mask' => '9999999.99'])->rules('required');
+            $form->text('building_size_by_measure', __('Building Value per Sqm'))->inputmask(['mask' => '9999999.99'])->rules('required');
+            $form->currency('property_value', __('Property Value '))->rules('required');
             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
         });
 
