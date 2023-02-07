@@ -403,7 +403,7 @@ class PropertyResearchConteroller extends AdminController
             //4
             $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1);
             //5
-            $form->text('land_size', __('Land Size (sqm)'))->inputmask(['mask' => '9999999.99'])->rules('required');
+            $form->text('land_size', __('Land Size (sqm)'))->rules('required');
             //6
             $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->rules('required');
             //7

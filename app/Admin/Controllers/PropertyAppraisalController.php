@@ -561,7 +561,7 @@ class PropertyAppraisalController extends AdminController
             $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1);
             $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title','Soft Title'=>'Soft Title']);
             $form->text('land_title_no', __('Land Title No'))->rules('required')->inputmask(['mask' => '999999999-9999']);
-            $form->text('land_size', __('Land Size(Sqm)'))->inputmask(['mask' => '9999999.99'])->rules('required');
+            $form->text('land_size', __('Land Size(Sqm)'))->rules('required');
             $form->text('land_size_by_measurement', __('Land Size by Measurement'))->inputmask(['mask' => '9999999.99'])->rules('required');
             $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
             $form->text('building_size_per_sqm', __('Building Size by measurement'))->inputmask(['mask' => '9999999.99'])->rules('required');
@@ -589,7 +589,7 @@ class PropertyAppraisalController extends AdminController
             $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.9999999'])->rules('required');
             $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.9999999'])->rules('required');
             $form->text('remark', __('Remark'));
-            $form->image('front_photo', __('Front Photo'))->removable()->uniqueName()->rules('required');
+            $form->image('front_photo', __('Front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
             $form->multipleImage('photos', __('Photos'))->removable()->uniqueName()->rules('required');
             $form->text('strength',__('Strength'));
             $form->text('weakness',__('Weakness'));
