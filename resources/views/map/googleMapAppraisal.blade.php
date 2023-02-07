@@ -48,32 +48,32 @@
                 //Content
                 marker.addListener("click", () => {
                     infoWindow.setContent(
-                        "<b>Latitude: " + propertyAppraisal[i][0] + "<br>" +
-                        "<b>Longitude: " + propertyAppraisal[i][1] + "<br>" +
-                        "<b>Branch: " + propertyAppraisal[i][2] + "<br>" + 
-                        "<b>Property Reference: " + propertyAppraisal[i][3] + "<br>" +
-                        "<b>CIF No.: " + propertyAppraisal[i][4] + "<br>" +
-                        "<b>RM Name: " + propertyAppraisal[i][5] + "<br>" +
-                        "<b>Telephone: " + propertyAppraisal[i][6] + "<br>" +
-                        "<b>Request Date: " + propertyAppraisal[i][7] + "<br>" +
-                        "<b>Report Date: " + propertyAppraisal[i][8] + "<br>" +
-                        "<b>Information Type: " + propertyAppraisal[i][9] + "<br>" +
-                        "<b>Location Type: " + propertyAppraisal[i][10] + "<br>" +
-                        "<b>Type Access Road Name " + propertyAppraisal[i][11] + "<br>" +
-                        "<b>Access Road Name: " + propertyAppraisal[i][12] + "<br>" +
-                        "<b>Land Title Type: " + propertyAppraisal[i][13] + "<br>" +
-                        "<b>Property Type: " + propertyAppraisal[i][14] + "<br>" +
-                        "<b>Building Status: " + propertyAppraisal[i][15] + "%<br>" +
-                        "<b>Borey: " + propertyAppraisal[i][16] + "<br>" +
-                        "<b>No. of Floor: " + propertyAppraisal[i][17] + "<br>" +
-                        "<b>Information Date: " + propertyAppraisal[i][18] + "<br>" +
-                        "<b>Land Size: " + propertyAppraisal[i][19] + "<br>" +
-                        "<b>Land Value per Sqm: $" + propertyAppraisal[i][20] + "<br>" +
-                        "<b>Building Size by measure: " + propertyAppraisal[i][21] + "<br>" +
-                        "<b>Building Value per Sqm: $" + propertyAppraisal[i][22] + "<br>" +
-                        "<b>Property Value: $" + propertyAppraisal[i][23] + "<br>" +
-                        "<b>Customer Name: $" + propertyAppraisal[i][24] + "<br>" +
-                        "<b>Contact No. : " + propertyAppraisal[i][25]
+                        "<p style='margin-bottom: 3px;'>Latitude: " + propertyAppraisal[i][0] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Longitude: " + propertyAppraisal[i][1] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Branch: " + propertyAppraisal[i][2] + "</p>" + 
+                        "<p style='margin-bottom: 3px;'>Property Reference: " + propertyAppraisal[i][3] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>CIF No.: " + propertyAppraisal[i][4] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>RM Name: " + propertyAppraisal[i][5] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Telephone: " + propertyAppraisal[i][6] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Request Date: " + propertyAppraisal[i][7] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Report Date: " + propertyAppraisal[i][8] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Information Type: " + propertyAppraisal[i][9] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Location Type: " + propertyAppraisal[i][10] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Type Access Road Name " + propertyAppraisal[i][11] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Access Road Name: " + propertyAppraisal[i][12] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Land Title Type: " + propertyAppraisal[i][13] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Property Type: " + propertyAppraisal[i][14] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Building Status: " + propertyAppraisal[i][15] + "%</p>" +
+                        "<p style='margin-bottom: 3px;'>Borey: " + propertyAppraisal[i][16] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>No. of Floor: " + propertyAppraisal[i][17] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Information Date: " + propertyAppraisal[i][18] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Land Size: " + propertyAppraisal[i][19] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Land Value per Sqm: $" + propertyAppraisal[i][20] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Building Size by measure: " + propertyAppraisal[i][21] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Building Value per Sqm: $" + propertyAppraisal[i][22] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Property Value: $" + propertyAppraisal[i][23] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Customer Name: $" + propertyAppraisal[i][24] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Contact No. : " + propertyAppraisal[i][25] + "</p>"
                     );
 				    infoWindow.open(map, marker);
 				});

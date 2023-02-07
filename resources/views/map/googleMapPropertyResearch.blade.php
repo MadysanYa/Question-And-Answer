@@ -48,23 +48,23 @@
 				//Content
                 marker.addListener("click", () => {
                     infoWindow.setContent(
-                        "<b>Latitude: " + propertyResearch[i][0] + "<br>" +
-                        "<b>Longitude: " + propertyResearch[i][1] + "<br>" +
-                        "<b>Information Type: " + propertyResearch[i][2] + "<br>" + 
-                        "<b>Property Reference: " + propertyResearch[i][3] + "<br>" +
-                        "<b>Location Type: " + propertyResearch[i][4] + "<br>" +
-                        "<b>Property Type: " + propertyResearch[i][5] + "<br>" +
-                        "<b>Type Access Road: " + propertyResearch[i][6] + "<br>" +
-                        "<b>Access Road Name: " + propertyResearch[i][7] + "<br>" +
-                        "<b>Borey: " + propertyResearch[i][8] + "<br>" +
-                        "<b>No. of Floor: " + propertyResearch[i][9] + "<br>" +
-                        "<b>Land Title Type: " + propertyResearch[i][10] + "<br>" +
-                        "<b>Information Date: " + propertyResearch[i][11] + "<br>" +
-                        "<b>Land Size: " + propertyResearch[i][12] + "<br>" +
-                        "<b>Land Value per Sqm: $" + propertyResearch[i][13] + "<br>" +
-                        "<b>Building Size: " + propertyResearch[i][14] + "<br>" +
-                        "<b>Building Value per Sqm: $" + propertyResearch[i][15] + "<br>" +
-                        "<b>Property Market Value: $" + propertyResearch[i][16]
+                        "<p style='margin-bottom: 3px;'>Latitude: " + propertyResearch[i][0] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Longitude: " + propertyResearch[i][1] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Information Type: " + propertyResearch[i][2] + "</p>" + 
+                        "<p style='margin-bottom: 3px;'>Property Reference: " + propertyResearch[i][3] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Location Type: " + propertyResearch[i][4] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Property Type: " + propertyResearch[i][5] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Type Access Road: " + propertyResearch[i][6] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Access Road Name: " + propertyResearch[i][7] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Borey: " + propertyResearch[i][8] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>No. of Floor: " + propertyResearch[i][9] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Land Title Type: " + propertyResearch[i][10] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Information Date: " + propertyResearch[i][11] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Land Size: " + propertyResearch[i][12] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Land Value per Sqm: $" + propertyResearch[i][13] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Building Size: " + propertyResearch[i][14] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Building Value per Sqm: $" + propertyResearch[i][15] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Property Market Value: $" + propertyResearch[i][16] + "</p>"
                     );
                     infoWindow.open(map, marker);
                 });
