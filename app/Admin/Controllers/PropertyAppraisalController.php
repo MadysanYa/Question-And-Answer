@@ -591,10 +591,10 @@ class PropertyAppraisalController extends AdminController
             $form->text('remark', __('Remark'));
             $form->image('front_photo', __('Front Photo'))->removable()->uniqueName()->rules('required');
             $form->multipleImage('photos', __('Photos'))->removable()->uniqueName()->rules('required');
-            $form->hidden('strength',__('Strength'));
-            $form->hidden('weakness',__('Weakness'));
-            $form->hidden('opportunity',__('Opportunity'));
-            $form->hidden('threat',__('Threat'));
+            $form->text('strength',__('Strength'));
+            $form->text('weakness',__('Weakness'));
+            $form->text('opportunity',__('Opportunity'));
+            $form->text('threat',__('Threat'));
             $form->button('swot_analyze', __('Swot Analyze'))->on('click', '$("#myModal").modal();');
         });
 
