@@ -458,7 +458,7 @@ class PropertyIndicatorController extends AdminController
                 return Village::all()->pluck('village_name','id');});
             $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.999999'])->rules('required');
             $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.999999'])->rules('required');
-            $form->multipleImage('photos', __('Photos'))->removable()->uniqueName()->rules('required');
+            $form->multipleImage('photos', __('Photos'))->removable()->uniqueName();//->rules('required');
             $form->image('front_photo',__('Front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
             $form->text('remark', __('Remark'));
         });

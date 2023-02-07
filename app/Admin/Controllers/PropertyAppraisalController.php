@@ -168,8 +168,8 @@ class PropertyAppraisalController extends AdminController
         $grid->column('land_title_no',__('Lang Title No'))->sortable();
         $grid->column('land_size',__('Land Size'))->sortable();
         $grid->column('land_value_per_sqm',__('Land Value per Sqm ($)'))->sortable();
-        $grid->column('building_size_by_measure',__('Building Value per sqm '))->sortable();
-        $grid->column('building_size_per_sqm', __('Building Size by measurement'))->sortable();
+        $grid->column('building_value_per_sqm',__('Building Value per sqm '))->sortable();
+        $grid->column('building_size_by_measurement', __('Building Size by measurement'))->sortable();
         $grid->column('property_value',__('Property Value ($)'))->sortable();
         $grid->column('customer_name',__('Customer Name'))->sortable();
         $grid->column('client_contact_no',__('Client Contact No.'))->sortable();
@@ -391,7 +391,7 @@ class PropertyAppraisalController extends AdminController
         });
         $show->field('no_of_floor', __('No Of Floor'))->sortable();
         $show->field('land_size', __('Land_size'))->sortable();
-        $show->field('building_size_by_measure', __('Building Value per Sqm'))->sortable();
+        $show->field('building_value_per_sqm', __('Building Value per Sqm'))->sortable();
         $show->field('collateral_owner', __('Owner'))->sortable();
 
        // $show->field('photos',__('Photo'))->sortable();
@@ -408,7 +408,7 @@ class PropertyAppraisalController extends AdminController
         $show->field('land_title_type', __('Land Title Type'))->sortable();
         $show->field('land_size_by_measurement', __('Land Size By Measurement'))->sortable();
         $show->field('customer_name', __('Customer_Name'))->sortable();
-        $show->field('building_size_per_sqm', __('Building Size by measurement '))->sortable();
+        $show->field('building_size_by_measurement', __('Building Size by measurement '))->sortable();
 
         $show->field('province_id',__('Province'))->as(function($province_id){
             $province = Province::where('id', $province_id)->first();
@@ -444,70 +444,71 @@ class PropertyAppraisalController extends AdminController
     protected function form()
     {
         // Add dialog form
-        Admin::html('<div class="modal fade" id="myModal" role="dialog">
-                        <div class="modal-dialog">
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 style="color:red;">
-                                        <span class="glyphicon glyphicon"></span> Swot Analyze
-                                    </h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <table style="width:100%">
-                                                <tr style="height:100px">
-                                                    <th>
-                                                    <label for="strength">
-                                                        <span class="glyphicon glyphicon"></span> Strength </label>
-                                                    <textarea type="text" class="form-control" id="input_strength" placeholder=" Strength"></textarea>
-                                            </div>
-                                            </th>
-                                            <div class="form-group">
-                                                <th>
-                                                <label for="weakness">
-                                                    <span class="glyphicon glyphicon"></span> Weakness </label>
-                                                <textarea type="text" class="form-control" id="input_weakness" placeholder=" Weakness"></textarea>
-                                            </div>
-                                            </tr>
-                                            </th>
-                                            <tr style="height:100px">
-                                                <th>
-                                                <div class="form-group">
-                                                    <label for="opportunity">
-                                                    <span class="glyphicon glyphicon"></span> Opportunity </label>
-                                                    <textarea type="text" class="form-control" id="input_opportunity" placeholder=" Opportunity"></textarea>
-                                                </div>
-                                                </th>
-                                                <th>
-                                                <div class="form-group">
-                                                    <label for="threat">
-                                                    <span class="glyphicon glyphicon"></span> Threat </label>
-                                                    <textarea type="text" class="form-control" id="input_threat" placeholder="Threat"></textarea>
-                                                </div>
-                                            </tr>
-                                            </th>
-                                        </table>
-                                        <button id="btnInputSWOT" class="btn btn-default btn-success btn-block">
-                                        <span class="glyphicon glyphicon-off"></span> Submit </button>
-                                    </div>
-                                <div class="modal-footer"></div>
-                            </div>
+        Admin::html('
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 style="color:red;">
+                                <span class="glyphicon glyphicon"></span> Swot Analyze
+                            </h4>
                         </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="strength">
+                                    <span class="glyphicon glyphicon">Strength</span>
+                                </label>
+                                <textarea type="text" class="form-control" id="input_strength"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="weakness">
+                                    <span class="glyphicon glyphicon">Weakness</span>
+                                </label>
+                                <textarea type="text" class="form-control" id="input_weakness"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="opportunity">
+                                    <span class="glyphicon glyphicon">Opportunity</span>
+                                </label>
+                                <textarea type="text" class="form-control" id="input_opportunity"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="threat">
+                                    <span class="glyphicon glyphicon">Threat</span>
+                                </label>
+                                <textarea type="text" class="form-control" id="input_threat"></textarea>
+                            </div>
+                            <button id="btnInputSWOT" class="btn btn-default btn-success btn-block">
+                                <span class="glyphicon glyphicon-off">Submit</span>
+                            </button>
+                        </div>
+                        <div class="modal-footer"></div>
                     </div>
-      <script>
-      $("#btnInputSWOT").click(function(){
-        $("#strength").val($("#input_strength").val());
-        $("#weakness").val($("#input_weakness").val());
-        $("#opportunity").val($("#input_opportunity").val());
-        $("#threat").val($("#input_threat").val());
-      });
+                </div>
+            </div>
 
-      </script>
+            <script>
+                $("#btnInputSWOT").click(function() {
+                    // Push Value From Modal To Input
+                    $("#strength").val($("#input_strength").val());
+                    $("#weakness").val($("#input_weakness").val());
+                    $("#opportunity").val($("#input_opportunity").val());
+                    $("#threat").val($("#input_threat").val());
 
+                    // Close Modal When User Click Submit
+                    $("#myModal").modal("hide");
+                });
 
-      ');
+                // Push Value From Input To Modal
+                $("#show-swot-modal").click(function() {
+                    $("#input_strength").val($("#strength").val());
+                    $("#input_weakness").val($("#weakness").val());
+                    $("#input_opportunity").val($("#opportunity").val());
+                    $("#input_threat").val($("#threat").val());
+                });
+            </script>
+        ');
 
         $form = new Form(new PropertyAppraisal());
 
@@ -538,7 +539,6 @@ class PropertyAppraisalController extends AdminController
             });
         });
 
-
         $form->column(1/3,function($form){
             $form->html('<div style="height:105px"></div>');
             $form->number('building_status', __('Building Status (%) '))->min(0)->max(100);//->rules('required');
@@ -552,8 +552,8 @@ class PropertyAppraisalController extends AdminController
             $form->text('land_size', __('Land Size(Sqm)'))->rules('required');
             $form->text('land_size_by_measurement', __('Land Size by Measurement'))->inputmask(['mask' => '9999999.99'])->rules('required');
             $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
-            $form->text('building_size_per_sqm', __('Building Size by measurement'))->inputmask(['mask' => '9999999.99'])->rules('required');
-            $form->text('building_size_by_measure', __('Building Value per Sqm'))->inputmask(['mask' => '9999999.99'])->rules('required');
+            $form->text('building_size_by_measurement', __('Building Size by measurement'))->inputmask(['mask' => '9999999.99'])->rules('required');
+            $form->text('building_value_per_sqm', __('Building Value per Sqm'))->inputmask(['mask' => '9999999.99'])->rules('required');
             $form->currency('property_value', __('Property Value '))->rules('required');
             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
         });
@@ -578,12 +578,12 @@ class PropertyAppraisalController extends AdminController
             $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.9999999'])->rules('required');
             $form->text('remark', __('Remark'));
             $form->image('front_photo', __('Front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
-            $form->multipleImage('photos', __('Photos'))->removable()->uniqueName()->rules('required');
+            $form->multipleImage('photos', __('Photos'))->removable()->uniqueName();//->rules('required');
             $form->text('strength',__('Strength'));
             $form->text('weakness',__('Weakness'));
             $form->text('opportunity',__('Opportunity'));
             $form->text('threat',__('Threat'));
-            $form->button('swot_analyze', __('Swot Analyze'))->on('click', '$("#myModal").modal();');
+            $form->button('swot_analyze', __('Swot Analyze'))->attribute('id', 'show-swot-modal')->on('click', '$("#myModal").modal();');
             $form->html(view('admin.propertyAppraisal.property_appraisal_script'));
         });
 
