@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laravel Google Maps Multiple Markers Example - ItSolutionStuff.com</title>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
+    <script src="../../resources/js/markerclusterer.min.js"></script>
     <style type="text/css">
         #map {
           height: 550px;
