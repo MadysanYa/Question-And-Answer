@@ -95,6 +95,17 @@
 
     function generateNewChart(chartBarID, khan) 
     {
+        // const legendLabelMargin = {
+        //     id: 'legendLabelMargin',
+        //     beforeInit(chart, legend, options) {
+        //         const fitValue = chart.legend.fit;
+        //         chart.legend.fit = function fit() {
+        //             fitValue.bind(chart.legend)();
+        //             return this.height += 15;
+        //         }
+        //     }
+        // };
+
         // Chart.register(ChartDataLabels);
         new Chart(chartBarID, {
             // plugins: [ChartDataLabels],
@@ -134,10 +145,12 @@
                     // datalabels: {
                     //     anchor: 'end',
                     //     align: 'top',
-                    //     formatter: Math.round,
                     //     font: {
                     //         weight: 'bold',
-                    //         size: 16
+                    //         size: 12
+                    //     },
+                    //     formatter: function(value, context) {
+                    //         return value.toLocaleString()
                     //     }
                     // },
                 }
