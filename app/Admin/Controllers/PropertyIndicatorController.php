@@ -375,8 +375,6 @@ class PropertyIndicatorController extends AdminController
         });
         $show->field('longtitude',__('Longtitude'));
         $show->field('latitude',__('Latitude'));
-        // $show->field('front_photo',__('Front Photo'));
-        //$show->field('photos',__('Photo'));
         $show->field('remark',__('Remark'));
         $show->field('user_id', __('Created By'))->as(function ($userId){
             $userName = UserAdmin::where('id', $userId)->first();
@@ -412,12 +410,11 @@ class PropertyIndicatorController extends AdminController
             $form->select('information_type',__('Information Type'))->rules('required')->options(function(){
                 return InformationType::all()->pluck('information_type_name','id');
                });
-            //zero loading 
-            $form->text('property_reference', __('Property Reference '))->disable()->value(function(){
-                $id = PropertyIndicator::all()->last();
-               return 'PL-'. sprintf('%010d', $id == null ? 1 : $id->id + 1);
-            }); 
-            $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area','Agricultural Area'=>'Agricultural Area']);     
+            //zero loading
+            $form->text('property_reference', __('Property Reference'))->disable()->value(function(){
+                return null;
+            })->placeholder('Property Reference');
+            $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area','Agricultural Area'=>'Agricultural Area']);
             $form->select('type_of_access_road', __('Type of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road', 'Paved Road'=>'Paved Road','Upaved Road'=>'Upaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road']);
             $form->text('access_road_name', __('Access Road Name'))->rules('required');
             $form->select('property_type', __('Property Type'))->rules('required')->options(function(){
@@ -428,14 +425,14 @@ class PropertyIndicatorController extends AdminController
         $form->column(1/3, function ($form){
             $form->html('<div style="height:105px"></div>');
 
-            $form->number('building_status', __('Building Status (%) '))->min(0)->max(100)->rules('required');
+            $form->number('building_status', __('Building Status (%) '))->default(0)->min(0)->max(100)->rules('required');
             $form->select('borey', __('Borey'))->rules('required')->options(function(){
                 return Borey::all()->pluck('borey_name', 'id');
             });
             $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1)->max(50); // all number
             $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
             $form->text('land_title_no', __('Land title No.'))->rules('required');
-            $form->text('land_size', __('Land Size (sqm)'))->rules('required');
+            $form->text('land_size', __('Land Size (sqm)'))->default(0)->rules('required');
             $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
             $form->currency('building_size', __('Building Size'))->rules('required');
             $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->rules('required');
@@ -461,8 +458,8 @@ class PropertyIndicatorController extends AdminController
                 return Village::all()->pluck('village_name','id');});
             $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.999999'])->rules('required');
             $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.999999'])->rules('required');
-            $form->multipleImage('photos', __('Photos'))->removable()->uniqueName()->rules('required');
-            $form->image('front_photo',__('Front Photo'))->removable()->uniqueName()->rules('required');
+            $form->multipleImage('photos', __('Photos'))->removable()->uniqueName();//->rules('required');
+            $form->image('front_photo',__('Front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
             $form->text('remark', __('Remark'));
         });
 
