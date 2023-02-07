@@ -447,7 +447,6 @@ class PropertyAppraisalController extends AdminController
         Admin::html('
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">
-                    <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -457,46 +456,38 @@ class PropertyAppraisalController extends AdminController
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <table style="width:100%">
-                                        <tr style="height:100px">
-                                            <th>
-                                            <label for="strength">
-                                                <span class="glyphicon glyphicon"></span> Strength </label>
-                                            <textarea type="text" class="form-control" id="input_strength" placeholder=" Strength"></textarea>
-                                    </div>
-                                    </th>
-                                    <div class="form-group">
-                                        <th>
-                                        <label for="weakness">
-                                            <span class="glyphicon glyphicon"></span> Weakness </label>
-                                        <textarea type="text" class="form-control" id="input_weakness" placeholder=" Weakness"></textarea>
-                                    </div>
-                                    </tr>
-                                    </th>
-                                    <tr style="height:100px">
-                                        <th>
-                                        <div class="form-group">
-                                            <label for="opportunity">
-                                            <span class="glyphicon glyphicon"></span> Opportunity </label>
-                                            <textarea type="text" class="form-control" id="input_opportunity" placeholder=" Opportunity"></textarea>
-                                        </div>
-                                        </th>
-                                        <th>
-                                        <div class="form-group">
-                                            <label for="threat">
-                                            <span class="glyphicon glyphicon"></span> Threat </label>
-                                            <textarea type="text" class="form-control" id="input_threat" placeholder="Threat"></textarea>
-                                        </div>
-                                    </tr>
-                                    </th>
-                                </table>
-                                <button id="btnInputSWOT" class="btn btn-default btn-success btn-block">
-                                <span class="glyphicon glyphicon-off"></span> Submit </button>
+                                <label for="strength">
+                                    <span class="glyphicon glyphicon">Strength</span>
+                                </label>
+                                <textarea type="text" class="form-control" id="input_strength"></textarea>
                             </div>
+                            <div class="form-group">
+                                <label for="weakness">
+                                    <span class="glyphicon glyphicon">Weakness</span>
+                                </label>
+                                <textarea type="text" class="form-control" id="input_weakness"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="opportunity">
+                                    <span class="glyphicon glyphicon">Opportunity</span>
+                                </label>
+                                <textarea type="text" class="form-control" id="input_opportunity"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="threat">
+                                    <span class="glyphicon glyphicon">Threat</span>
+                                </label>
+                                <textarea type="text" class="form-control" id="input_threat"></textarea>
+                            </div>
+                            <button id="btnInputSWOT" class="btn btn-default btn-success btn-block">
+                                <span class="glyphicon glyphicon-off">Submit</span>
+                            </button>
+                        </div>
                         <div class="modal-footer"></div>
                     </div>
                 </div>
             </div>
+
             <script>
                 $("#btnInputSWOT").click(function() {
                     // Push Value From Modal To Input
@@ -508,8 +499,16 @@ class PropertyAppraisalController extends AdminController
                     // Close Modal When User Click Submit
                     $("#myModal").modal("hide");
                 });
+
+                // Push Value From Input To Modal
+                $("#show-swot-modal").click(function() {
+                    $("#input_strength").val($("#strength").val());
+                    $("#input_weakness").val($("#weakness").val());
+                    $("#input_opportunity").val($("#opportunity").val());
+                    $("#input_threat").val($("#threat").val());
+                });
             </script>
-      ');
+        ');
 
         $form = new Form(new PropertyAppraisal());
 
@@ -539,7 +538,6 @@ class PropertyAppraisalController extends AdminController
                 return PropertyType::all()->pluck('property_type_name','id');
             });
         });
-
 
         $form->column(1/3,function($form){
             $form->html('<div style="height:105px"></div>');
@@ -585,7 +583,7 @@ class PropertyAppraisalController extends AdminController
             $form->text('weakness',__('Weakness'));
             $form->text('opportunity',__('Opportunity'));
             $form->text('threat',__('Threat'));
-            $form->button('swot_analyze', __('Swot Analyze'))->on('click', '$("#myModal").modal();');
+            $form->button('swot_analyze', __('Swot Analyze'))->attribute('id', 'show-swot-modal')->on('click', '$("#myModal").modal();');
             $form->html(view('admin.propertyAppraisal.property_appraisal_script'));
         });
 
