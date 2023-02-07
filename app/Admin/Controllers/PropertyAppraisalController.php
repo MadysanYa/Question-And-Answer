@@ -444,45 +444,45 @@ class PropertyAppraisalController extends AdminController
         Admin::html(' <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
 
-          <!-- Modal content-->
+        <!-- Modal content-->
 
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 style="color:red;"><span class="glyphicon glyphicon"></span> Swot Analyze</h4>
-            </div>
-            <div class="modal-body">
+        <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 style="color:red;"><span class="glyphicon glyphicon"></span> Swot Analyze</h4>
+        </div>
+        <div class="modal-body">
 
-                <div class="form-group">
-                <table style="width:100%">
-                <tr style="height:100px">
-                <th>
-                  <label for="strength"><span class="glyphicon glyphicon"></span> Strength</label>
-                  <textarea type="text" class="form-control" id="input_strength" placeholder=" Strength"> </textarea>
-                </div> </th>
+        <div class="form-group">
+        <table style="width:100%">
+        <tr style="height:100px">
+        <th>
+        <label for="strength"><span class="glyphicon glyphicon"></span> Strength</label>
+        <textarea type="text" class="form-control" id="input_strength" placeholder=" Strength"> </textarea>
+        </div> </th>
 
-                <div class="form-group">
-                 <th>
-                  <label for="weakness"><span class="glyphicon glyphicon"></span> Weakness</label>
-                  <textarea  type="text" class="form-control" id="input_weakness" placeholder=" Weakness"> </textarea>
-                </div> </tr> </th>
-                <tr style="height:100px">
-                <th>
-                <div class="form-group">
-                  <label for="opportunity"><span class="glyphicon glyphicon"></span> Opportunity</label>
-                  <textarea type="text" class="form-control" id="input_opportunity" placeholder=" Opportunity"> </textarea>
-                </div> </th>
-                <th>
-                <div class="form-group">
-                  <label for="threat"><span class="glyphicon glyphicon"></span> Threat</label>
-                  <textarea type="text" class="form-control" id="input_threat" placeholder="Threat"> </textarea>
-                </div> </tr> </th>  </table>
+        <div class="form-group">
+        <th>
+        <label for="weakness"><span class="glyphicon glyphicon"></span> Weakness</label>
+        <textarea  type="text" class="form-control" id="input_weakness" placeholder=" Weakness"> </textarea>
+        </div> </tr> </th>
+        <tr style="height:100px">
+        <th>
+        <div class="form-group">
+        <label for="opportunity"><span class="glyphicon glyphicon"></span> Opportunity</label>
+        <textarea type="text" class="form-control" id="input_opportunity" placeholder=" Opportunity"> </textarea>
+        </div> </th>
+        <th>
+        <div class="form-group">
+        <label for="threat"><span class="glyphicon glyphicon"></span> Threat</label>
+        <textarea type="text" class="form-control" id="input_threat" placeholder="Threat"> </textarea>
+        </div> </tr> </th>  </table>
 
-                  <button id="btnInputSWOT"  class="btn btn-default btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Submit </button>
-            </div>
+        <button id="btnInputSWOT"  class="btn btn-default btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Submit </button>
+        </div>
 
 
-            <div class="modal-footer">
+        <div class="modal-footer">
 
             </div>
           </div>
