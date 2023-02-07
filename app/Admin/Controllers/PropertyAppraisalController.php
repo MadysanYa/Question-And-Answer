@@ -580,7 +580,7 @@ class PropertyAppraisalController extends AdminController
             $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.9999999'])->rules('required');
             $form->text('remark', __('Remark'));
             $form->image('front_photo', __('Front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
-            $form->multipleImage('photos', __('Photos'))->removable()->uniqueName()->rules('required');
+            $form->multipleImage('photos', __('Photos'))->removable()->uniqueName();//->rules('required');
             $form->text('strength',__('Strength'));
             $form->text('weakness',__('Weakness'));
             $form->text('opportunity',__('Opportunity'));
