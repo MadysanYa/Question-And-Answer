@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laravel Google Maps Multiple Markers Example - ItSolutionStuff.com</title>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
     <style type="text/css">
         #map {
           height: 550px;
@@ -22,25 +23,31 @@
                 center: myLatLng,
             });
 
-            var marker, i
-            var infowindow = new google.maps.InfoWindow();
+            const infoWindow = new google.maps.InfoWindow({
+				// content: "",
+				disableAutoPan: true,
+			});
+
+            var marker, i 
 
             const locations = {{ Js::from($latLongProResearch) }};
             const labels = {{ Js::from($labelProResearch) }};
             const propertyResearch = {{ Js::from($infoProResearch)}};
+            console.log(propertyResearch);
+
             var icons = '../imges/properties_research.png'
 
-            for (i = 0; i < locations.length; i++) {  
-                marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                    label:{text: labels[i], color: "white"},
+            const markers = locations.map((position, i) => {
+				const label = {text: labels[i % labels.length], color: "white", fontSize: "16px", fontWeight: "bold"};
+				const marker = new google.maps.Marker({
                     icon:icons,
-                    map: map, 
-                });
-                    
-                google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                    return function() {
-                    infowindow.setContent(
+                    position,
+                    label,
+				});
+
+				//Content
+                marker.addListener("click", () => {
+                    infoWindow.setContent(
                         "<b>Latitude: " + propertyResearch[i][0] + "<br>" +
                         "<b>Longitude: " + propertyResearch[i][1] + "<br>" +
                         "<b>Information Type: " + propertyResearch[i][2] + "<br>" + 
@@ -59,15 +66,16 @@
                         "<b>Building Value per Sqm: $" + propertyResearch[i][15] + "<br>" +
                         "<b>Property Market Value: $" + propertyResearch[i][16]
                     );
-                    infowindow.open(map, marker);
-                    }
-                })(marker, i));
-            }
-            window.initMap = initMap;
+                    infoWindow.open(map, marker);
+                });
+                return marker;
+            });
+            new markerClusterer.MarkerClusterer({ markers, map });
         }
+        window.initMap = initMap;
     </script>
 
     <script type="text/javascript"src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initMap" ></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+   
 </body>
 </html>
