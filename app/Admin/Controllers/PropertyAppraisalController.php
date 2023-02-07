@@ -164,7 +164,7 @@ class PropertyAppraisalController extends AdminController
             return $borey->borey_name;
         });
         $grid->column('no_of_floor',__('No. of floor'))->sortable();
-        $grid->column('land_title_type',__('Land Titil Type'))->sortable(); 
+        $grid->column('land_title_type',__('Land Titil Type'))->sortable();
         $grid->column('land_title_no',__('Lang Title No'))->sortable();
         $grid->column('land_size',__('Land Size'))->sortable();
         $grid->column('land_value_per_sqm',__('Land Value per Sqm ($)'))->sortable();
@@ -391,7 +391,7 @@ class PropertyAppraisalController extends AdminController
         });
         $show->field('no_of_floor', __('No Of Floor'))->sortable();
         $show->field('land_size', __('Land_size'))->sortable();
-        $show->field('buildingbuilding_value_per_sqm_size_by_measure', __('Building Value per Sqm'))->sortable();
+        $show->field('building_value_per_sqm', __('Building Value per Sqm'))->sortable();
         $show->field('collateral_owner', __('Owner'))->sortable();
 
        // $show->field('photos',__('Photo'))->sortable();
