@@ -428,6 +428,7 @@ class PropertyIndicatorController extends AdminController
             $form->select('property_type', __('Property Type'))->rules('required')->options(function(){
                 return PropertyType::all()->pluck('property_type_name','id');
             });
+            $form->text('customer_name', __('Customer Name '))->rules('required');
         });
 
         $form->column(1/3, function ($form){
@@ -446,28 +447,30 @@ class PropertyIndicatorController extends AdminController
             $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->rules('required');
             $form->currency('property_value', __('Property Value '))->rules('required');
             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
+            $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 999 9999'])->rules('required');
         });
 
         $form->column(1/3, function ($form){
             $form->html('<div style="height:105px"></div>');
-            $form->text('customer_name', __('Customer Name '))->rules('required');
-            $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 999 9999'])->rules('required');
-            // api
             $form->select('province_id', __('Province'))->rules('required')->options(function(){
                 return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
 
             $form->select('district_id', __('District'))->rules('required')->options(function(){
                 return District::all()->pluck('district_name','id');})->load('commune_id', env('APP_URL') . '/public/api/commune');
 
-            $form->select('commune_id', __('Commune / Sangkat'))->rules('required')->options(function(){
+            $form->select('commune_id', __('Commune / Sangkat'))->options(function(){
                 return Commune::all()->pluck('commune_name','id');})->load('village_id', env('APP_URL') . '/public/api/village');
 
-            $form->select('village_id', __('Village'))->rules('required')->options(function(){
+            $form->select('village_id', __('Village'))->options(function(){
                 return Village::all()->pluck('village_name','id');});
             $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.999999'])->rules('required');
             $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.999999'])->rules('required');
-            $form->multipleImage('photos', __('Photos'))->removable()->uniqueName();//->rules('required');
             $form->image('front_photo',__('Front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
+            $form->image('back_photo',__('Back Photo'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
+            $form->image('left_photo',__('Left Photo'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
+            $form->image('right_photo',__('Right Photo'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
+            $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
+            $form->multipleImage('photos', __('Gallery'))->removable()->uniqueName();
             $form->text('remark', __('Remark'));
         });
 
