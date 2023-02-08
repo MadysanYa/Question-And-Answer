@@ -326,7 +326,7 @@ class PropertyIndicatorController extends AdminController
 
         $show->field('requested_date',__('Requested Date'));
         if (User::isVerifierRole() || User::isApproverRole()){
-        $show->field('reported_date',__('Reported Date'));
+            $show->field('reported_date',__('Reported Date'));
         }
         $show->field('cif_no',__('CIF No.'));
         $show->field('rm_name',__('RM Name'));
@@ -457,10 +457,10 @@ class PropertyIndicatorController extends AdminController
             $form->select('district_id', __('District'))->rules('required')->options(function(){
                 return District::all()->pluck('district_name','id');})->load('commune_id', env('APP_URL') . '/public/api/commune');
 
-            $form->select('commune_id', __('Commune / Sangkat'))->options(function(){
+            $form->select('commune_id', __('Commune / Sangkat'))->rules('required')->options(function(){
                 return Commune::all()->pluck('commune_name','id');})->load('village_id', env('APP_URL') . '/public/api/village');
 
-            $form->select('village_id', __('Village'))->options(function(){
+            $form->select('village_id', __('Village'))->rules('required')->options(function(){
                 return Village::all()->pluck('village_name','id');});
             $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.999999'])->rules('required');
             $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.999999'])->rules('required');

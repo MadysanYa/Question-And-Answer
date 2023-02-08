@@ -381,7 +381,7 @@ class PropertyAppraisalController extends AdminController
         $show->field('longtitude', __('longtitude'))->sortable();
         $show->field('remark', __('Remark'))->sortable();
         $show->field('client_contact_no',__('Client Contact No'));
-        $show->field('reported_date', __('Report Date'))->sortable();
+        $show->field('reported_date',__('Reported Date'));
         $show->field('requested_date',__('Requested Date'));
         $show->field('location_type', __('Location Type'))->sortable();
         $show->field('property_type',__('Property Type'))->as(function($id){
@@ -520,8 +520,18 @@ class PropertyAppraisalController extends AdminController
                  return Branch::all()->pluck('branch_name','branch_code');
             });
             $form->date('requested_date', __('Requested Date'))->rules('required');
+            if (User::isVerifierRole() || User::isApproverRole()){
+                $form->date('reported_date',__('Reported Date'))->rules('required');
+            } else {
+                $form->date('reported_date',__('Reported Date'))->disable();
+            };
+
             $form->text('cif_no', __('CIF No'))->inputmask(['mask' => '9999999999']);
-            $form->text('rm_name', __('RM Name'))->rules('required');
+            if (User::isVerifierRole() || User::isApproverRole()){
+                $form->text('rm_name', __('RM Name'))->rules('required');
+            } else{
+                $form->text('rm_name', __('RM Name'))->disable();
+            }
             $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 999 9999']); // add number
             $form->select('information_type',__('Information Type'))->rules('required')->options(function(){
                 return InformationType::all()->pluck('information_type_name','id');
@@ -537,6 +547,8 @@ class PropertyAppraisalController extends AdminController
             $form->select('property_type', __('Property Type'))->rules('required')->options(function(){
                 return PropertyType::all()->pluck('property_type_name','id');
             });
+            $form->text('customer_name', __('Customer Name'))->rules('required');
+            $form->mobile('client_contact_no', __('Client Contact No'))->rules('required')->options(['mask' => '099 999 9999']);
         });
 
         $form->column(1/3,function($form){
@@ -555,12 +567,11 @@ class PropertyAppraisalController extends AdminController
             $form->text('building_value_per_sqm', __('Building Value per Sqm'))->inputmask(['mask' => '9999999.99'])->rules('required');
             $form->currency('property_value', __('Property Value '))->rules('required');
             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
+            $form->text('remark', __('Remark'));
         });
 
         $form->column(1/3,function($form){
             $form->html('<div style="height:105px"></div>');
-            $form->text('customer_name', __('Customer Name'))->rules('required');
-            $form->mobile('client_contact_no', __('Client Contact No'))->rules('required')->options(['mask' => '099 999 9999']);
             $form->select('province_id', __('Province'))->rules('required')->options(function(){
                 return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
 
@@ -575,9 +586,14 @@ class PropertyAppraisalController extends AdminController
 
             $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.9999999'])->rules('required');
             $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.9999999'])->rules('required');
-            $form->text('remark', __('Remark'));
+
             $form->image('front_photo', __('Front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
-            $form->multipleImage('photos', __('Photos'))->removable()->uniqueName();//->rules('required');
+            $form->image('back_photo',__('Back Photo'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
+            $form->image('left_photo',__('Left Photo'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
+            $form->image('right_photo',__('Right Photo'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
+            $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
+            $form->multipleImage('photos', __('Gallery'))->removable()->uniqueName();
+
             $form->text('strength',__('Strength'));
             $form->text('weakness',__('Weakness'));
             $form->text('opportunity',__('Opportunity'));
