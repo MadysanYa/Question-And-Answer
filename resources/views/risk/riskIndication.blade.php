@@ -67,9 +67,9 @@
                     google.maps.event.addListener(marker, 'click', (function(marker, i) {
                         return function() {
                         infowindow.setContent(
-                            "<b>Latitude: " + riskProperty[i][0] + "<br>" +
-                            "<b>Longitude: " + riskProperty[i][1] + "<br>" +
-                            "<b>Risk Description:" + riskProperty[i][2]
+                            "<p style='margin-bottom: 3px;'>Latitude: " + riskProperty[i][0] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Longitude: " + riskProperty[i][1] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Risk Description:" + riskProperty[i][2] + "</p>"
                         );
                         infowindow.open(map, marker);
                         }
@@ -78,9 +78,9 @@
                     google.maps.event.addListener(marker, 'click', (function(marker, i) {
                         return function() {
                         infowindow.setContent(
-                            "<b>Latitude: " + riskProperty[i][0] + "<br>" +
-                            "<b>Longitude: " + riskProperty[i][1] + "<br>" +
-                            "<b>Risk Description:" + riskProperty[i][2]+ "<br>" +
+                            "<p style='margin-bottom: 3px;'>Latitude: " + riskProperty[i][0] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Longitude: " + riskProperty[i][1] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Risk Description:" + riskProperty[i][2]+ "</p>" +
                             "<b>"+"<a href="+"../../public/admin/risk_indicators/"+riskProperty[i][3]+"/edit>"+"Edit"+"</a>"
                         );
                         infowindow.open(map, marker);

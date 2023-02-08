@@ -17,6 +17,7 @@ use Encore\Admin\Layout\Content;
 use App\Models\MapPriceIndicator;
 use App\Models\PropertyAppraisal;
 use App\Models\PropertyIndicator;
+use Illuminate\Support\Facades\DB;
 use Encore\Admin\Form\Field\Button;
 use Illuminate\Support\Facades\Request;
 use Encore\Admin\Controllers\AdminController;
@@ -38,21 +39,102 @@ class MapPriceIndicatorController extends AdminController
     public function index(Content $MapPriceIndicator){
 
         $MapPriceIndicator->header($this->title);
-        // $MapPriceIndicator->body($this->dashboard());
         $MapPriceIndicator->body($this->grid());
+        //LatLong
+        $latLong = [
+            'latitude As lat',
+            'longtitude As lng',
+        ];
+        // Property Indication 
+        $fieldProIndication = [
+            'id',
+            'latitude',
+            'longtitude',
+            'land_value_per_sqm',
+            'branch_code',
+            'property_reference',
+            'cif_no',
+            'rm_name',
+            'telephone',
+            'requested_date',
+            'reported_date',
+            'information_type',
+            'location_type',
+            'type_of_access_road',
+            'access_road_name',
+            'property_type',
+            'building_status',
+            'borey',
+            'no_of_floor',
+            'land_title_type',
+            'created_at',
+            'land_size',
+            'land_value_per_sqm',
+            'building_size',
+            'building_value_per_sqm',
+            'property_value',
+            'client_contact_no',
+            'customer_name',
+        ];
+        // Property Research 
+        $fieldProResearch = [
+            'id',
+            'latitude',
+            'longtitude',
+            'information_type',
+            'property_reference',
+            'location_type',
+            'property_type',
+            'type_of_access_road',
+            'access_road_name',
+            'borey',
+            'no_of_floor',
+            'land_title_type',
+            'created_at',
+            'land_size',
+            'land_value_per_sqm',
+            'building_size',
+            'building_value_per_sqm',
+            'property_market_value'
+        ];
+        // Property Appraisal
+        $fieldProAppraisal = [
+            'id',
+            'latitude',
+            'longtitude',
+            'branch_code',
+            'property_reference',
+            'cif_no',
+            'rm_name',
+            'telephone',
+            'requested_date',
+            'reported_date',
+            'information_type',
+            'location_type',
+            'type_of_access_road',
+            'access_road_name',
+            'land_title_type',
+            'property_type',
+            'building_status',
+            'borey',
+            'no_of_floor',
+            'created_at',
+            'land_size',
+            'land_value_per_sqm',
+            'building_value_per_sqm',
+            'land_size_by_measurement',
+            'property_value',
+            'customer_name',
+            'client_contact_no',
+        ];
 
-        //Map 
         //Property Indication
-        $propertys = PropertyIndicator::get();
+        $propertys = PropertyIndicator::select($fieldProIndication)->get();
+        // dd($propertys->type);
         $locationArray = [];
 
-        // Latitude, Longtitude
-        foreach($propertys as $property){
-            $location = [$property->land_value_per_sqm.'$'.','.$property->latitude.','.$property->longtitude];
-            $arr = explode(",", implode(" ", $location));
-            $locationArray[] = $arr;
-        }
-        $arryProperty = $locationArray ?? null;
+        //LatLong Property Indication
+        $arryProperty = PropertyIndicator::select($latLong)->get()->toArray() ?? null;
         
         //Labels on marker
         foreach($propertys as $value){
@@ -66,20 +148,20 @@ class MapPriceIndicatorController extends AdminController
             $info = [
                 $value->latitude.','.
                 $value->longtitude.','.
-                $value->branch_code.','.
+                optional($value->branchCode)->branch_name.','.
                 $value->property_reference.','.
                 $value->cif_no.','.
                 $value->rm_name.','.
                 $value->telephone.','.
                 $value->requested_date.','.
                 $value->reported_date.','.
-                $value->information_type.','.
+                optional($value->infoType)->information_type_name.','.
                 $value->location_type.','.
                 $value->type_of_access_road.','.
                 $value->access_road_name.','.
-                $value->property_type.','.
+                optional($value->propertyType)->property_type_name.','.
                 $value->building_status.','.
-                $value->borey.','.
+                optional($value->boreyType)->borey_name.','.
                 $value->no_of_floor.','.
                 $value->land_title_type.','.
                 $value->created_at->format('d-m-Y').','.
@@ -96,18 +178,18 @@ class MapPriceIndicatorController extends AdminController
         $infoProperty = $infoArray ?? null;
 
         //Property Research
-        $propertyResearch = PropertyResearch::get();
+        $propertyResearch = PropertyResearch::select($fieldProResearch)->get();
         $proResearch = [];
 
-        $latLongProResearch = $this->latLongProResearch($propertyResearch);
+        $latLongProResearch = PropertyResearch::select($latLong)->get()->toArray() ?? null;
         $labelProResearch = $this->labelProResearch($propertyResearch);
         $infoProResearch = $this->infoProResearch($propertyResearch);
 
         //Property Appraisal
-        $propertyAppraisal = PropertyAppraisal::get();
+        $propertyAppraisal = PropertyAppraisal::select($fieldProAppraisal)->get();;
         $proResearch = [];
 
-        $latLongProAppraisal = $this->latLongProAppraisal($propertyAppraisal);
+        $latLongProAppraisal = PropertyAppraisal::select($latLong)->get()->toArray() ?? null;
         $labelProAppraisal = $this->labelProAppraisal($propertyAppraisal);
         $infoProAppraisal = $this->infoProAppraisal($propertyAppraisal);
 
@@ -117,6 +199,7 @@ class MapPriceIndicatorController extends AdminController
                 'arryProperty' => $arryProperty,
                 'arrayLabel' => $arrayLabel,
                 'infoProperty' => $infoProperty,
+                'propertys' => $propertys,
             ]));
         }elseif (request()->check_list == 'research') {
             $MapPriceIndicator->body(view('map.googleMapPropertyResearch', [
@@ -141,18 +224,8 @@ class MapPriceIndicatorController extends AdminController
 
         return $MapPriceIndicator;
     }
-    
-    public function latLongProResearch($propertyResearch)
-    {
-        foreach ($propertyResearch as $value) {
-            $proResearchs = [$value->land_value_per_sqm.'$'.','.$value->latitude.','.$value->longtitude];
-            $propertySearch = explode(",", implode(" ", $proResearchs));
-            $proResearchArray[] = $propertySearch;
-        }
-        return $arrayProResearch = $proResearchArray ?? null;
-    }
 
-    public function labelProResearch($propertyResearch)
+    private function labelProResearch($propertyResearch)
     {
         foreach($propertyResearch as $value){
             $labelProResearch = "$".$value->land_value_per_sqm;
@@ -161,19 +234,19 @@ class MapPriceIndicatorController extends AdminController
         return $arrayLabelProResearch = $arrayLabelProResearch ?? null;
     }
 
-    public function infoProResearch($propertyResearch)
+    private function infoProResearch($propertyResearch)
     {
         foreach($propertyResearch as $value){
             $info = [
                 $value->latitude.','.
                 $value->longtitude.','.
-                $value->information_type.','.
+                optional($value->infoType)->information_type_name.','.
                 $value->property_reference.','.
                 $value->location_type.','.
-                $value->property_type.','.
+                optional($value->propertyType)->property_type_name.','.
                 $value->type_of_access_road.','.
                 $value->access_road_name.','.
-                $value->borey.','.
+                optional($value->boreyType)->borey_name.','.
                 $value->no_of_floor.','.
                 $value->land_title_type.','.
                 $value->created_at->format('d-m-Y').','.
@@ -189,17 +262,7 @@ class MapPriceIndicatorController extends AdminController
         return $infoPropertyResearch = $arrayInfor ?? null;
     }
 
-    public function latLongProAppraisal($propertyAppraisal)
-    {
-        foreach ($propertyAppraisal as $value) {
-            $proAppraisal = [$value->land_value_per_sqm.'$'.','.$value->latitude.','.$value->longtitude];
-            $properAppraisal = explode(",", implode(" ", $proAppraisal));
-            $proAppraisalArray[] = $properAppraisal;
-        }
-        return $arrayAppraisal = $proAppraisalArray ?? null;
-    }
-
-    public function labelProAppraisal($propertyAppraisal)
+    private function labelProAppraisal($propertyAppraisal)
     {
         foreach($propertyAppraisal as $value){
             $labelProAppraisal = "$".$value->land_value_per_sqm;
@@ -208,33 +271,32 @@ class MapPriceIndicatorController extends AdminController
         return $arrayLabelProAppraisal = $arrayLabelProAppraisal ?? null;
     }
 
-    public function infoProAppraisal($propertyAppraisal)
+    private function infoProAppraisal($propertyAppraisal)
     {
         foreach($propertyAppraisal as $value){
-            
             $info = [
                 $value->latitude.','.
                 $value->longtitude.','.
-                $value->branch_code.','.
+                optional($value->branchCode)->branch_name.','.
                 $value->property_reference.','.
                 $value->cif_no.','.
                 $value->rm_name.','.
                 $value->telephone.','.
                 $value->requested_date.','.
                 $value->reported_date.','.
-                $value->information_type.','.
+                optional($value->infoType)->information_type_name.','.
                 $value->location_type.','.
                 $value->type_of_access_road.','.
                 $value->access_road_name.','.
                 $value->land_title_type.','.
                 $value->property_type.','.
                 $value->building_status.','.
-                $value->borey.','.
+                optional($value->boreyType)->borey_name.','.
                 $value->no_of_floor.','.
                 $value->created_at->format('d-m-Y').','.
                 $value->land_size.','.
                 $value->land_value_per_sqm.','.
-                $value->building_size.','.
+                $value->land_size_by_measurement.','.
                 $value->building_value_per_sqm.','.
                 $value->property_value.','.
                 $value->customer_name.','.
