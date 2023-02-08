@@ -471,7 +471,7 @@ class PropertyIndicatorController extends AdminController
             $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
             $form->multipleImage('photos', __('Gallery'))->removable()->uniqueName();
             $form->text('remark', __('Remark'));
-            $form->html(view('admin.propertyAppraisal.property_appraisal_script'));
+            $form->html(view('admin.propertyAppraisal.property_appraisal_script')); // From view 
         });
 
         $form->footer(function ($footer) {
