@@ -224,7 +224,7 @@ class TitleIndicatorController extends AdminController
         return $TitleIndicator;
     }
 
-    public function labelProResearch($propertyResearch)
+    private function labelProResearch($propertyResearch)
     {
         foreach($propertyResearch as $value){
             $labelProResearch = $value->land_title_type;
@@ -233,7 +233,7 @@ class TitleIndicatorController extends AdminController
         return $arrayLabelProResearch = $arrayLabelProResearch ?? null;
     }
 
-    public function infoProResearch($propertyResearch)
+    private function infoProResearch($propertyResearch)
     {
         foreach($propertyResearch as $value){
             $info = [
@@ -261,7 +261,7 @@ class TitleIndicatorController extends AdminController
         return $infoPropertyResearch = $arrayInfor ?? null;
     }
 
-    public function labelProAppraisal($propertyAppraisal)
+    private function labelProAppraisal($propertyAppraisal)
     {
         foreach($propertyAppraisal as $value){
             $labelProAppraisal =$value->land_title_type;
@@ -270,7 +270,7 @@ class TitleIndicatorController extends AdminController
         return $arrayLabelProAppraisal = $arrayLabelProAppraisal ?? null;
     }
 
-    public function infoProAppraisal($propertyAppraisal)
+    private function infoProAppraisal($propertyAppraisal)
     {
         foreach($propertyAppraisal as $value){
             $info = [
