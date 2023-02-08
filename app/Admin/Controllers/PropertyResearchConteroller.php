@@ -392,7 +392,7 @@ class PropertyResearchConteroller extends AdminController
                 return null;
             })->placeholder('Property Reference');
             $form->text('access_road_name', __('Access Road Name'))->rules('required');
-            $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1);
+            $form->text('no_of_floor', __('No. of Floor'))->rules('required')->attribute('maxlength', '3');
             $form->text('land_size', __('Land Size (sqm)'))->rules('required');
             $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->rules('required');
             $form->select('district_id', __('District / Khan'))->rules('required')->options(function(){
@@ -432,9 +432,8 @@ class PropertyResearchConteroller extends AdminController
             $form->select('village_id', __('Village'))->rules('required')->options(function(){
                 return Village::all()->pluck('village_name','id');});
             $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.9999999'])->rules('required');
-
-          });
-
+            $form->html(view('admin.propertyAppraisal.property_appraisal_script'));
+        });
 
         $form->footer(function ($footer) {
 
