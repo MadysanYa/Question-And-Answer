@@ -394,10 +394,10 @@ class PropertyResearchConteroller extends AdminController
             $form->text('access_road_name', __('Access Road Name'))->rules('required');
             $form->text('no_of_floor', __('No. of Floor'))->rules('required')->attribute('maxlength', '3');
             $form->text('land_size', __('Land Size (sqm)'))->rules('required');
-            $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->rules('required');
+            $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->select('district_id', __('District / Khan'))->rules('required')->options(function(){
                 return District::all()->pluck('district_name','id');})->load('commune_id', env('APP_URL') . '/public/api/commune');
-            $form->mobile('contact_no', __('Contact No'))->rules('required')->options(['mask' => '099 999 9999']);
+            $form->mobile('contact_no', __('Contact No'))->rules('required')->options(['mask' => '099 999 9999'])->attribute(['style' => 'width: 100%;']);
             $form->text('remark', __('Remark'));
 
         });
@@ -410,8 +410,8 @@ class PropertyResearchConteroller extends AdminController
 
             });
             $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
-            $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
-            $form->currency('property_market_value', __('Property Market Value '))->rules('required');
+            $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required')->attribute(['style' => 'width: 100%;']);
+            $form->currency('property_market_value', __('Property Market Value '))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->select('commune_id', __('Commune / Sangkat'))->rules('required')->options(function(){
                 return Commune::all()->pluck('commune_name','id');})->load('village_id', env('APP_URL') . '/public/api/village');
             $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.9999999'])->rules('required');
@@ -425,8 +425,8 @@ class PropertyResearchConteroller extends AdminController
             $form->select('borey', __('Borey'))->rules('required')->options(function(){
                 return Borey::all()->pluck('borey_name', 'id');
             });
-             $form->date('information_date', __('Information Date'))->rules('required');
-            $form->currency('building_size', __('Building Size'))->rules('required');
+             $form->date('information_date', __('Information Date'))->rules('required')->attribute(['style' => 'width: 100%;']);
+            $form->currency('building_size', __('Building Size'))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->select('province_id', __('Province'))->rules('required')->options(function(){
                 return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
             $form->select('village_id', __('Village'))->rules('required')->options(function(){

@@ -519,11 +519,11 @@ class PropertyAppraisalController extends AdminController
             $form->select('branch_code',__('Branch'))->rules('required')->options(function(){
                  return Branch::all()->pluck('branch_name','branch_code');
             });
-            $form->date('requested_date', __('Requested Date'))->rules('required');
+            $form->date('requested_date', __('Requested Date'))->rules('required')->attribute(['style' => 'width: 100%;']);
             if (User::isVerifierRole() || User::isApproverRole()){
-                $form->date('reported_date',__('Reported Date'))->rules('required');
+                $form->date('reported_date',__('Reported Date'))->rules('required')->attribute(['style' => 'width: 100%;']);
             } else {
-                $form->date('reported_date',__('Reported Date'))->disable();
+                $form->date('reported_date',__('Reported Date'))->disable()->attribute(['style' => 'width: 100%;']);
             };
 
             $form->text('cif_no', __('CIF No'))->inputmask(['mask' => '9999999999']);
@@ -532,7 +532,7 @@ class PropertyAppraisalController extends AdminController
             } else{
                 $form->text('rm_name', __('RM Name'))->disable();
             }
-            $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 999 9999']); // add number
+            $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 999 9999'])->attribute(['style' => 'width: 100%;']); // add number
             $form->select('information_type',__('Information Type'))->rules('required')->options(function(){
                 return InformationType::all()->pluck('information_type_name','id');
             });
@@ -548,7 +548,7 @@ class PropertyAppraisalController extends AdminController
                 return PropertyType::all()->pluck('property_type_name','id');
             });
             $form->text('customer_name', __('Customer Name'))->rules('required');
-            $form->mobile('client_contact_no', __('Client Contact No'))->rules('required')->options(['mask' => '099 999 9999']);
+            $form->mobile('client_contact_no', __('Client Contact No'))->rules('required')->options(['mask' => '099 999 9999'])->attribute(['style' => 'width: 100%;']);
         });
 
         $form->column(1/3,function($form){
@@ -562,10 +562,10 @@ class PropertyAppraisalController extends AdminController
             $form->text('land_title_no', __('Land Title No'))->rules('required')->inputmask(['mask' => '999999999-9999']);
             $form->text('land_size', __('Land Size(Sqm)'))->rules('required');
             $form->text('land_size_by_measurement', __('Land Size by Measurement'))->inputmask(['mask' => '9999999.99'])->rules('required');
-            $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
+            $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->text('building_size_by_measurement', __('Building Size by measurement'))->inputmask(['mask' => '9999999.99'])->rules('required');
             $form->text('building_value_per_sqm', __('Building Value per Sqm'))->inputmask(['mask' => '9999999.99'])->rules('required');
-            $form->currency('property_value', __('Property Value '))->rules('required');
+            $form->currency('property_value', __('Property Value '))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
             $form->text('remark', __('Remark'));
         });
