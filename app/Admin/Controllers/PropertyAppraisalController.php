@@ -381,7 +381,7 @@ class PropertyAppraisalController extends AdminController
         $show->field('longtitude', __('longtitude'))->sortable();
         $show->field('remark', __('Remark'))->sortable();
         $show->field('client_contact_no',__('Client Contact No'));
-        $show->field('reported_date', __('Report Date'))->sortable();
+        $show->field('reported_date',__('Reported Date'));
         $show->field('requested_date',__('Requested Date'));
         $show->field('location_type', __('Location Type'))->sortable();
         $show->field('property_type',__('Property Type'))->as(function($id){
@@ -520,6 +520,12 @@ class PropertyAppraisalController extends AdminController
                  return Branch::all()->pluck('branch_name','branch_code');
             });
             $form->date('requested_date', __('Requested Date'))->rules('required');
+            if (User::isVerifierRole() || User::isApproverRole()){
+                $form->date('reported_date',__('Reported Date'))->rules('required');
+            } else {
+                $form->date('reported_date',__('Reported Date'))->disable();
+            };
+
             $form->text('cif_no', __('CIF No'))->inputmask(['mask' => '9999999999']);
             $form->text('rm_name', __('RM Name'))->rules('required');
             $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 999 9999']); // add number
@@ -545,7 +551,7 @@ class PropertyAppraisalController extends AdminController
             $form->select('borey', __('Borey'))->rules('required')->options(function(){
                 return Borey::all()->pluck('borey_name', 'id');
             });
-            // $form->date('reported_date', __('Report Date'))->rules('required');
+
             $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1);
             $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title','Soft Title'=>'Soft Title']);
             $form->text('land_title_no', __('Land Title No'))->rules('required')->inputmask(['mask' => '999999999-9999']);

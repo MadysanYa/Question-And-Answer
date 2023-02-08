@@ -326,7 +326,7 @@ class PropertyIndicatorController extends AdminController
 
         $show->field('requested_date',__('Requested Date'));
         if (User::isVerifierRole() || User::isApproverRole()){
-        $show->field('reported_date',__('Reported Date'));
+            $show->field('reported_date',__('Reported Date'));
         }
         $show->field('cif_no',__('CIF No.'));
         $show->field('rm_name',__('RM Name'));
