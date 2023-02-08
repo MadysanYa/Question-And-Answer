@@ -225,7 +225,7 @@ class MapPriceIndicatorController extends AdminController
         return $MapPriceIndicator;
     }
 
-    public function labelProResearch($propertyResearch)
+    private function labelProResearch($propertyResearch)
     {
         foreach($propertyResearch as $value){
             $labelProResearch = "$".$value->land_value_per_sqm;
@@ -234,7 +234,7 @@ class MapPriceIndicatorController extends AdminController
         return $arrayLabelProResearch = $arrayLabelProResearch ?? null;
     }
 
-    public function infoProResearch($propertyResearch)
+    private function infoProResearch($propertyResearch)
     {
         foreach($propertyResearch as $value){
             $info = [
@@ -262,7 +262,7 @@ class MapPriceIndicatorController extends AdminController
         return $infoPropertyResearch = $arrayInfor ?? null;
     }
 
-    public function labelProAppraisal($propertyAppraisal)
+    private function labelProAppraisal($propertyAppraisal)
     {
         foreach($propertyAppraisal as $value){
             $labelProAppraisal = "$".$value->land_value_per_sqm;
@@ -271,7 +271,7 @@ class MapPriceIndicatorController extends AdminController
         return $arrayLabelProAppraisal = $arrayLabelProAppraisal ?? null;
     }
 
-    public function infoProAppraisal($propertyAppraisal)
+    private function infoProAppraisal($propertyAppraisal)
     {
         foreach($propertyAppraisal as $value){
             $info = [

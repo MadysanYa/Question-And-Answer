@@ -45,6 +45,8 @@
     </div>
 </div>
 
+<!-- <script src="../../resources/js/html2canvas.min.js"></script>
+<script src="../../dist/chart.min.js"></script> -->
 <script src="{{ asset('/vendor/chartjs/dist/chart.min.js') }}"></script>
 <!-- <script src="{{ asset('/vendor/chartjs/dist/chartjs-datalabels.min.js') }}"></script> -->
 <script>

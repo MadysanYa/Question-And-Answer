@@ -26,6 +26,8 @@ use Encore\Admin\Layout\Content;
 use App\Models\User;
 use App\Models\UserAdmin;
 
+Use Encore\Admin\Grid\Displayers\ContextMenuActions;
+
 class PropertyResearchConteroller extends AdminController
 {
     /**
@@ -256,6 +258,8 @@ class PropertyResearchConteroller extends AdminController
                 });
             }, 'Created By');
 		});
+
+        // $grid->setActionClass(ContextMenuActions::class);
 
         return $grid;
     }

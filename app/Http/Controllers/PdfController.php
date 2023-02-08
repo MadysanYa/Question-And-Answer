@@ -7,12 +7,8 @@ use Illuminate\Http\Request;
 
 class PdfController extends Controller
 {
-    public function index() 
+    public function index()
     {
-		// $path = base_path('cambodia.png');
-		// $type = pathinfo($path, PATHINFO_EXTENSION);
-		// $data = file_get_contents($path);
-		// $pic = 'data:image/' . $type . ';base64' . base64_encode($data);
 
 		// $data = [
         //     'imagePath'    => public_path('images/cambodia.png'),
@@ -21,9 +17,7 @@ class PdfController extends Controller
         //     'mobileNumber' => '000000000',
         //     'email'        => 'john.doe@email.com'
         // ];
-
-		// app/public/images/cambodia.png
-
+		//PDF::setOption([ 'isRemoteEnabled' => true]);
     	$pdf = PDF::loadView('certificate',
 		[
     		// 'title' => 'CodeAndDeploy.com Laravel Pdf Tutorial',

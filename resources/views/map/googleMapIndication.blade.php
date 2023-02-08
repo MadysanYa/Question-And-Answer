@@ -37,7 +37,7 @@
             var icons = '../imges/properties_indication.png'
 
             const markers = locations.map((position, i) => {
-				const label = {text: labels[i % labels.length], color: "white", fontSize: "16px", fontWeight: "bold"};
+				const label = {text: labels[i % labels.length], color: "white", fontSize: "13px"};
 				const marker = new google.maps.Marker({
                     icon:icons,
                     position,
