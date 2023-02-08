@@ -141,19 +141,19 @@ class PropertyIndicatorController extends AdminController
         $grid->column('client_contact_no',__('Cliend Contact No.'))->sortable();
         $grid->column('province_id',__('Province'))->filter($this->convertToArray(Province::all(['id', 'province_name'])))->Display(function($province_id){
            $province = Province::where('id', $province_id)->first();
-            return $province->province_name;
+            return $province->province_name ?? '';
         });
         $grid->column('district_id',__('District/Khan'))->filter($this->convertToArrayDistrict(District::whereIn('province_id', $filterProvinceId)->get(['id', 'district_name'])))->Display(function($district_id){ //Add filter when click ex:province->distict..
             $district = District::where('id', $district_id)->first();
-            return $district->district_name;
+            return $district->district_name ?? '';
         });
         $grid->column('commune_id',__('Commune/Sangkat'))->filter($this->convertToArrayCommune(Commune::whereIn('district_id', $filterDistrictId)->get(['id','commune_name'])))->Display(function($comune_id){
             $commune = Commune::where('id', $comune_id)->first();
-            return $commune->commune_name;
+            return $commune->commune_name ?? '';
         });
         $grid->column('village_id',__('Village'))->sortable()->Display(function($village_id){
             $village = Village::where('id', $village_id)->first();
-            return $village->village_name ;
+            return $village->village_name ?? '';
         });
         $grid->column('latitude',__('Latitude'))->sortable();
         $grid->column('longtitude',__('Longtitude'))->sortable();
@@ -359,19 +359,19 @@ class PropertyIndicatorController extends AdminController
         $show->field('client_contact_no',__('Cliend Contact No'));
         $show->field('province_id',__('Province'))->as(function($province_id){
             $province = Province::where('id', $province_id)->first();
-            return $province->province_name;
+            return $province->province_name ?? ''; 
         });
         $show->field('district_id',__('District/ Khan'))->as(function($district_id){
             $district = District::where('id', $district_id)->first();
-            return $district->district_name;
+            return $district->district_name ?? ''; 
         });
         $show->field('commune_id',__('Commune / Sangkat'))->as(function($comune_id){
             $commune = Commune::where('id', $comune_id)->first();
-            return $commune->commune_name;
+            return $commune->commune_name ?? ''; 
         });
         $show->field('village_id',__('Village'))->as(function($village_id){
             $village = Village::where('id', $village_id)->first();
-            return $village->village_name   ;
+            return $village->village_name ?? ''; 
         });
         $show->field('longtitude',__('Longtitude'));
         $show->field('latitude',__('Latitude'));
