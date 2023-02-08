@@ -1,13 +1,18 @@
+<?php include('php-includes/certificate.blade.php'); ?>
+
 <?php
     // session_start();
     //qrimage = $_REQUEST['qrimage'];
 
     // $terminal = $_SESSION['terminal'];
-    $img = $_POST['img'];
     // $amount = $_POST['amount'];
     // $billnumber = $_POST['billnumber'];
     // $service = $_POST['service'];
     // $terminalLabel = $_POST['terminalLabel'];
+
+    // $img = $_POST['map_img'];
+    $img = $_REQUEST['img'];
+    
 
     try{
 
