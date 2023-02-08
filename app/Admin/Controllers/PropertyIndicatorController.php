@@ -433,12 +433,11 @@ class PropertyIndicatorController extends AdminController
 
         $form->column(1/3, function ($form){
             $form->html('<div style="height:105px"></div>');
-
-            $form->number('building_status', __('Building Status (%) '))->default(0)->min(0)->max(100)->rules('required');
+            $form->text('building_status', __('Building Status (%)'))->rules('required')->attribute('maxlength', '3');
             $form->select('borey', __('Borey'))->rules('required')->options(function(){
                 return Borey::all()->pluck('borey_name', 'id');
             });
-            $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1)->max(50); // all number
+            $form->text('no_of_floor', __('No. of Floor'))->rules('required')->attribute('maxlength', '3');
             $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
             $form->text('land_title_no', __('Land title No.'))->rules('required');
             $form->text('land_size', __('Land Size (sqm)'))->default(0)->rules('required');
@@ -472,6 +471,7 @@ class PropertyIndicatorController extends AdminController
             $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
             $form->multipleImage('photos', __('Gallery'))->removable()->uniqueName();
             $form->text('remark', __('Remark'));
+            $form->html(view('admin.propertyAppraisal.property_appraisal_script'));
         });
 
         $form->footer(function ($footer) {

@@ -541,12 +541,11 @@ class PropertyAppraisalController extends AdminController
 
         $form->column(1/3,function($form){
             $form->html('<div style="height:105px"></div>');
-            $form->number('building_status', __('Building Status (%) '))->min(0)->max(100);//->rules('required');
+            $form->text('building_status', __('Building Status (%)'))->rules('required')->attribute('maxlength', '3');
             $form->select('borey', __('Borey'))->rules('required')->options(function(){
                 return Borey::all()->pluck('borey_name', 'id');
             });
-            // $form->date('reported_date', __('Report Date'))->rules('required');
-            $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1);
+            $form->text('no_of_floor', __('No. of Floor'))->rules('required')->attribute('maxlength', '3');
             $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title','Soft Title'=>'Soft Title']);
             $form->text('land_title_no', __('Land Title No'))->rules('required')->inputmask(['mask' => '999999999-9999']);
             $form->text('land_size', __('Land Size(Sqm)'))->rules('required');
