@@ -359,19 +359,19 @@ class PropertyIndicatorController extends AdminController
         $show->field('client_contact_no',__('Cliend Contact No'));
         $show->field('province_id',__('Province'))->as(function($province_id){
             $province = Province::where('id', $province_id)->first();
-            return $province->province_name ?? ''; 
+            return $province->province_name ?? '';
         });
         $show->field('district_id',__('District/ Khan'))->as(function($district_id){
             $district = District::where('id', $district_id)->first();
-            return $district->district_name ?? ''; 
+            return $district->district_name ?? '';
         });
         $show->field('commune_id',__('Commune / Sangkat'))->as(function($comune_id){
             $commune = Commune::where('id', $comune_id)->first();
-            return $commune->commune_name ?? ''; 
+            return $commune->commune_name ?? '';
         });
         $show->field('village_id',__('Village'))->as(function($village_id){
             $village = Village::where('id', $village_id)->first();
-            return $village->village_name ?? ''; 
+            return $village->village_name ?? '';
         });
         $show->field('longtitude',__('Longtitude'));
         $show->field('latitude',__('Latitude'));
@@ -401,11 +401,19 @@ class PropertyIndicatorController extends AdminController
             $form->select('branch_code',__('Branch'))->rules('required')->options(function(){
                  return Branch::all()->pluck('branch_name','branch_code');});
             $form->date('requested_date', __('Requested Date'))->rules('required');
+
             if (User::isVerifierRole() || User::isApproverRole()){
-            $form->date('reported_date',__('Reported Date'))->rules('required');
-            }
+                $form->date('reported_date',__('Reported Date'))->rules('required');
+            } else {
+                $form->date('reported_date',__('Reported Date'))->disable();
+            };
+
             $form->text('cif_no', __('CIF No.'))->inputmask(['mask' => '9999999999']);
-            $form->text('rm_name', __('RM Name'))->rules('required');
+            if (User::isVerifierRole() || User::isApproverRole()){
+                $form->text('rm_name', __('RM Name'))->rules('required');
+            } else{
+                $form->text('rm_name', __('RM Name'))->disable();
+            }
             $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 999 9999']); // add number
             $form->select('information_type',__('Information Type'))->rules('required')->options(function(){
                 return InformationType::all()->pluck('information_type_name','id');
