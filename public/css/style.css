@@ -81,3 +81,7 @@ label {
         width: 30% !important;
     }
 }
+
+.control-label {
+    text-align: left !important;
+}
