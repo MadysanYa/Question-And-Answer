@@ -390,6 +390,7 @@ class PropertyAppraisalController extends AdminController
             return  $propertytype->property_type_name;
         });
         $show->field('no_of_floor', __('No Of Floor'))->sortable();
+        $show->field('appraisal_certificate_fee',__('Appraisal Certificate Fee'))->sortbale();
         $show->field('land_size', __('Land_size'))->sortable();
         $show->field('building_value_per_sqm', __('Building Value per Sqm'))->sortable();
         $show->field('collateral_owner', __('Owner'))->sortable();
@@ -527,6 +528,7 @@ class PropertyAppraisalController extends AdminController
             };
 
             $form->text('cif_no', __('CIF No'))->inputmask(['mask' => '9999999999']);
+            $form->currency('appraisal_certificate_fee',__('Appraisal Certificate Fee'))->attribute(['style' => 'width: 100%;']);
             if (User::isVerifierRole() || User::isApproverRole()){
                 $form->text('rm_name', __('RM Name'))->rules('required');
             } else{
