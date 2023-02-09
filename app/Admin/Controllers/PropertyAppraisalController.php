@@ -381,7 +381,7 @@ class PropertyAppraisalController extends AdminController
         $show->field('longtitude', __('longtitude'))->sortable();
         $show->field('remark', __('Remark'))->sortable();
         $show->field('client_contact_no',__('Client Contact No'));
-        $show->field('reported_date', __('Report Date'))->sortable();
+        $show->field('reported_date',__('Reported Date'));
         $show->field('requested_date',__('Requested Date'));
         $show->field('location_type', __('Location Type'))->sortable();
         $show->field('property_type',__('Property Type'))->as(function($id){
@@ -390,6 +390,7 @@ class PropertyAppraisalController extends AdminController
             return  $propertytype->property_type_name;
         });
         $show->field('no_of_floor', __('No Of Floor'))->sortable();
+        $show->field('appraisal_certificate_fee',__('Appraisal Certificate Fee'))->sortbale();
         $show->field('land_size', __('Land_size'))->sortable();
         $show->field('building_value_per_sqm', __('Building Value per Sqm'))->sortable();
         $show->field('collateral_owner', __('Owner'))->sortable();
@@ -455,29 +456,39 @@ class PropertyAppraisalController extends AdminController
                             </h4>
                         </div>
                         <div class="modal-body">
-                            <div class="form-group">
-                                <label for="strength">
-                                    <span class="glyphicon glyphicon">Strength</span>
-                                </label>
-                                <textarea type="text" class="form-control" id="input_strength"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="weakness">
-                                    <span class="glyphicon glyphicon">Weakness</span>
-                                </label>
-                                <textarea type="text" class="form-control" id="input_weakness"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="opportunity">
-                                    <span class="glyphicon glyphicon">Opportunity</span>
-                                </label>
-                                <textarea type="text" class="form-control" id="input_opportunity"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="threat">
-                                    <span class="glyphicon glyphicon">Threat</span>
-                                </label>
-                                <textarea type="text" class="form-control" id="input_threat"></textarea>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="strength">
+                                            <span class="glyphicon glyphicon">Strength</span>
+                                        </label>
+                                        <textarea type="text" class="form-control" id="input_strength"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="weakness">
+                                            <span class="glyphicon glyphicon">Weakness</span>
+                                        </label>
+                                        <textarea type="text" class="form-control" id="input_weakness"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="opportunity">
+                                            <span class="glyphicon glyphicon">Opportunity</span>
+                                        </label>
+                                        <textarea type="text" class="form-control" id="input_opportunity"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="threat">
+                                            <span class="glyphicon glyphicon">Threat</span>
+                                        </label>
+                                        <textarea type="text" class="form-control" id="input_threat"></textarea>
+                                    </div>
+                                </div>
                             </div>
                             <button id="btnInputSWOT" class="btn btn-default btn-success btn-block">
                                 <span class="glyphicon glyphicon-off">Submit</span>
@@ -519,10 +530,21 @@ class PropertyAppraisalController extends AdminController
             $form->select('branch_code',__('Branch'))->rules('required')->options(function(){
                  return Branch::all()->pluck('branch_name','branch_code');
             });
-            $form->date('requested_date', __('Requested Date'))->rules('required');
+            $form->date('requested_date', __('Requested Date'))->rules('required')->attribute(['style' => 'width: 100%;']);
+            if (User::isVerifierRole() || User::isApproverRole()){
+                $form->date('reported_date',__('Reported Date'))->rules('required')->attribute(['style' => 'width: 100%;']);
+            } else {
+                $form->date('reported_date',__('Reported Date'))->disable()->attribute(['style' => 'width: 100%;']);
+            };
+
             $form->text('cif_no', __('CIF No'))->inputmask(['mask' => '9999999999']);
-            $form->text('rm_name', __('RM Name'))->rules('required');
-            $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 999 9999']); // add number
+            $form->currency('appraisal_certificate_fee',__('Appraisal Certificate Fee'))->attribute(['style' => 'width: 100%;']);
+            if (User::isVerifierRole() || User::isApproverRole()){
+                $form->text('rm_name', __('RM Name'))->rules('required');
+            } else{
+                $form->text('rm_name', __('RM Name'))->disable();
+            }
+            $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 999 9999'])->attribute(['style' => 'width: 100%;']); // add number
             $form->select('information_type',__('Information Type'))->rules('required')->options(function(){
                 return InformationType::all()->pluck('information_type_name','id');
             });
@@ -537,31 +559,32 @@ class PropertyAppraisalController extends AdminController
             $form->select('property_type', __('Property Type'))->rules('required')->options(function(){
                 return PropertyType::all()->pluck('property_type_name','id');
             });
+            $form->text('customer_name', __('Customer Name'))->rules('required');
+            $form->mobile('client_contact_no', __('Client Contact No'))->rules('required')->options(['mask' => '099 999 9999'])->attribute(['style' => 'width: 100%;']);
         });
 
         $form->column(1/3,function($form){
             $form->html('<div style="height:105px"></div>');
-            $form->number('building_status', __('Building Status (%) '))->min(0)->max(100);//->rules('required');
+            $form->text('building_status', __('Building Status (%)'))->rules('required')->attribute('maxlength', '3');
             $form->select('borey', __('Borey'))->rules('required')->options(function(){
                 return Borey::all()->pluck('borey_name', 'id');
             });
-            // $form->date('reported_date', __('Report Date'))->rules('required');
-            $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1);
+            $form->text('no_of_floor', __('No. of Floor'))->rules('required')->attribute('maxlength', '3');
             $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title','Soft Title'=>'Soft Title']);
             $form->text('land_title_no', __('Land Title No'))->rules('required')->inputmask(['mask' => '999999999-9999']);
             $form->text('land_size', __('Land Size(Sqm)'))->rules('required');
             $form->text('land_size_by_measurement', __('Land Size by Measurement'))->inputmask(['mask' => '9999999.99'])->rules('required');
-            $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
+            $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->text('building_size_by_measurement', __('Building Size by measurement'))->inputmask(['mask' => '9999999.99'])->rules('required');
             $form->text('building_value_per_sqm', __('Building Value per Sqm'))->inputmask(['mask' => '9999999.99'])->rules('required');
-            $form->currency('property_value', __('Property Value '))->rules('required');
+            $form->currency('property_value', __('Property Value '))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
+            $form->text('remark', __('Remark'));
+            $form->button('swot_analyze', __('Swot Analyze'))->attribute('id', 'show-swot-modal')->on('click', '$("#myModal").modal();');
         });
 
         $form->column(1/3,function($form){
             $form->html('<div style="height:105px"></div>');
-            $form->text('customer_name', __('Customer Name'))->rules('required');
-            $form->mobile('client_contact_no', __('Client Contact No'))->rules('required')->options(['mask' => '099 999 9999']);
             $form->select('province_id', __('Province'))->rules('required')->options(function(){
                 return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
 
@@ -575,17 +598,167 @@ class PropertyAppraisalController extends AdminController
                 return Village::all()->pluck('village_name','id');});
 
             $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.9999999'])->rules('required');
-            $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.9999999'])->rules('required');
-            $form->text('remark', __('Remark'));
-            $form->image('front_photo', __('Front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
-            $form->multipleImage('photos', __('Photos'))->removable()->uniqueName();//->rules('required');
+            $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.999999'])->rules('required');
+
+            $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
+            $form->image('right_photo',__('Access Road Photo Right'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
+            $form->image('left_photo',__('Access Road Photo Left'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
+            $form->image('front_photo',__('Title Photo Front'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
+            $form->image('back_photo',__('Title Photo Back'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
+            $form->image('id_front_photo',__('ID Photo Front'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
+            $form->image('id_back_photo',__('ID Photo Back'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
+            // $form->multipleImage('photos', __('Gallery'))->removable()->uniqueName();
+
             $form->text('strength',__('Strength'));
             $form->text('weakness',__('Weakness'));
             $form->text('opportunity',__('Opportunity'));
             $form->text('threat',__('Threat'));
-            $form->button('swot_analyze', __('Swot Analyze'))->attribute('id', 'show-swot-modal')->on('click', '$("#myModal").modal();');
+            $form->text('comparable_cif_no',__('CIF No./ Name'));
+            $form->text('geo_code',__('Geo Code'));
+            $form->text('distance',__('Distance'));
+            $form->text('size',__('Size'));
+            $form->text('value_per_sqm',__('Value per_sq. m'));
+            $form->text('total_value',__('Total Value'));
+            $form->button('comparable_reference', __('Comparable Reference'))->attribute('id', 'show-comparable-reference-modal')->on('click', '$("#modal-comparable-reference").modal();');
             $form->html(view('admin.propertyAppraisal.property_appraisal_script'));
         });
+
+        // Modal Comparable Reference
+        Admin::html('
+            <div class="modal fade" id="modal-comparable-reference" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 style="color:red;">
+                                <span class="glyphicon glyphicon"></span>Comparable Reference
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row" style="display: flex;align-items: center;">
+                                            <label for="com_ref_cif_no_name" class="col-sm-2  control-label">CIF No. / Name</label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-pencil fa-fw"></i>
+                                                    </span>
+                                                    <input type="text" id="com_ref_cif_no_name" class="form-control com_ref_cif_no_name" placeholder="Input CIF No. / Name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row" style="display: flex;align-items: center;">
+                                            <label for="com_ref_geo_code" class="col-sm-2  control-label">Geo Code</label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-pencil fa-fw"></i>
+                                                    </span>
+                                                    <input type="text" id="com_ref_geo_code" class="form-control com_ref_geo_code" placeholder="Input Geo Code">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row" style="display: flex;align-items: center;">
+                                            <label for="com_ref_distance" class="col-sm-2  control-label">Distance</label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-pencil fa-fw"></i>
+                                                    </span>
+                                                    <input type="text" id="com_ref_distance" class="form-control com_ref_distance" placeholder="Input Distance">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row" style="display: flex;align-items: center;">
+                                            <label for="com_ref_size" class="col-sm-2  control-label">Size</label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-pencil fa-fw"></i>
+                                                    </span>
+                                                    <input type="text" id="com_ref_size" class="form-control com_ref_size" placeholder="Input Size">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="">
+                                        <div class="row" style="display: flex;align-items: center;">
+                                            <label for="com_ref_value_per_sqm" class="col-sm-2  control-label">Value per Sq. m</label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-pencil fa-fw"></i>
+                                                    </span>
+                                                    <input type="text" id="com_ref_value_per_sqm" class="form-control com_ref_value_per_sqm" placeholder="Input Value per Sq. m">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="">
+                                        <div class="row" style="display: flex;align-items: center;">
+                                            <label for="com_ref_total_value" class="col-sm-2  control-label">Total Value</label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-pencil fa-fw"></i>
+                                                    </span>
+                                                    <input type="text" id="com_ref_total_value" class="form-control com_ref_total_value" placeholder="Input Total Value">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" id="btn-input-comparable" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                $("#btn-input-comparable").click(function() {
+                    $("#comparable_cif_no").val($("#com_ref_cif_no_name").val());
+                    $("#geo_code").val($("#com_ref_geo_code").val());
+                    $("#distance").val($("#com_ref_distance").val());
+                    $("#size").val($("#com_ref_size").val());
+                    $("#value_per_sqm").val($("#com_ref_value_per_sqm").val());
+                    $("#total_value").val($("#com_ref_total_value").val());
+
+                    // Close Modal When User Click Submit
+                    $("#modal-comparable-reference").modal("hide");
+                });
+
+                $("#show-comparable-reference-modal").click(function() {
+                    $("#com_ref_cif_no_name").val($("#comparable_cif_no").val());
+                    $("#com_ref_geo_code").val($("#geo_code").val());
+                    $("#com_ref_distance").val($("#distance").val());
+                    $("#com_ref_size").val($("#size").val());
+                    $("#com_ref_total_value").val($("#total_value").val());
+                });
+
+                $("#comparable_cif_no, #geo_code, #distance, #size, #value_per_sqm, #total_value").closest(".form-group").css("display","none");
+            </script>
+        ');
 
         $form->footer(function ($footer) {
             // disable reset btn

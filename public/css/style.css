@@ -71,9 +71,6 @@ label {
 
 .box-header>.fa, .box-header>.glyphicon, .box-header>.ion, .box-header .box-title {
     font-size: 23px !important;
-
-
-
 }
 
 @media (min-width: 768px) {

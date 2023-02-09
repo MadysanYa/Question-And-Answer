@@ -128,16 +128,6 @@ class PropertyResearchConteroller extends AdminController
         });
 		$grid->column('property_reference', __('Reference'))->sortable();
         $grid->column('information_date',__('Information Date'))->filter('range', 'date');
-        $grid->column('branch_code',__('Branch'))->filter($this->convertToArrayBranch(Branch::all(['branch_code', 'branch_name'])))->Display(function($branch_code){// add filter
-            $branch = Branch::where('branch_code', $branch_code)->first();
-            // return $branch->branch_name;
-            if($branch == null)
-                return '';
-            else
-                return $branch->branch_name;
-
-            });
-
         //$grid->column('requested_date',__('Requested Date'))->sortable();
         $grid->column('contact_no',__('Contact No'))->sortable();
         $grid->column('location_type',__('Location Type'))->sortable();
@@ -159,24 +149,24 @@ class PropertyResearchConteroller extends AdminController
         $grid->column('building_value_per_sqm',__('Building Value per Sqm ($)'))->sortable();
         $grid->column('property_market_value',__('Property Market Value ($)'))->sortable();
         $grid->column('province_id',__('Province'))->filter($this->convertToArray(Province::all(['id', 'province_name'])))->Display(function($province_id){
-           $province = Province::where('id', $province_id)->first();
-            return $province->province_name;
-        });
-        $grid->column('district_id',__('District/Khan'))->filter($this->convertToArrayDistrict(District::whereIn('province_id', $filterProvinceId)->get(['id', 'district_name'])))->Display(function($district_id){ //Add filter when click ex:province->distict..
-            $district = District::where('id', $district_id)->first();
-            return $district->district_name;
-        });
-        $grid->column('commune_id',__('Commune/Sangkat'))->filter($this->convertToArrayCommune(Commune::whereIn('district_id', $filterDistrictId)->get(['id','commune_name'])))->Display(function($comune_id){
-            $commune = Commune::where('id', $comune_id)->first();
-            return $commune->commune_name;
-        });
-        $grid->column('village_id',__('Village'))->sortable()->Display(function($village_id){
-            $village = Village::where('id', $village_id)->first();
-            return $village->village_name ;
-        });
+            $province = Province::where('id', $province_id)->first();
+             return $province->province_name ?? '';
+         });
+         $grid->column('district_id',__('District/Khan'))->filter($this->convertToArrayDistrict(District::whereIn('province_id', $filterProvinceId)->get(['id', 'district_name'])))->Display(function($district_id){ //Add filter when click ex:province->distict..
+             $district = District::where('id', $district_id)->first();
+             return $district->district_name ?? '';
+         });
+         $grid->column('commune_id',__('Commune/Sangkat'))->filter($this->convertToArrayCommune(Commune::whereIn('district_id', $filterDistrictId)->get(['id','commune_name'])))->Display(function($comune_id){
+             $commune = Commune::where('id', $comune_id)->first();
+             return $commune->commune_name ?? '';
+         });
+         $grid->column('village_id',__('Village'))->sortable()->Display(function($village_id){
+             $village = Village::where('id', $village_id)->first();
+             return $village->village_name ?? '';
+         });
         $grid->column('latitude',__('Latitude'))->sortable();
         $grid->column('longtitude',__('Longtitude'))->sortable();
-      //$grid->column('remark',__('Remark'))->sortable();
+        $grid->column('remark',__('Remark'))->sortable();
 
         $grid->column('user_id',__('Created By'))->sortable()->display(function($id){
             $userName = UserAdmin::where('id', $id)->first();
@@ -401,72 +391,49 @@ class PropertyResearchConteroller extends AdminController
             $form->text('property_reference', __('Property Reference '))->disable()->value(function(){
                 return null;
             })->placeholder('Property Reference');
-            //3
             $form->text('access_road_name', __('Access Road Name'))->rules('required');
-            //4
-            $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1);
-            //5
+            $form->text('no_of_floor', __('No. of Floor'))->rules('required')->attribute('maxlength', '3');
             $form->text('land_size', __('Land Size (sqm)'))->rules('required');
-            //6
-            $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->rules('required');
-            //7
+            $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->select('district_id', __('District / Khan'))->rules('required')->options(function(){
                 return District::all()->pluck('district_name','id');})->load('commune_id', env('APP_URL') . '/public/api/commune');
-            //8
-            $form->mobile('contact_no', __('Contact No'))->rules('required')->options(['mask' => '099 999 9999']);
-            //9
+            $form->mobile('contact_no', __('Contact No'))->rules('required')->options(['mask' => '099 999 9999'])->attribute(['style' => 'width: 100%;']);
             $form->text('remark', __('Remark'));
 
         });
-        //max 7 part 2
+
         $form->column(1/3, function ($form){
             $form->html('<div style="height:52px"></div>');
-            //10
             $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area','Agricultural Area'=>'Agricultural Area']);
-            //11
             $form->select('property_type', __('Property Type'))->rules('required')->options(function(){
                 return PropertyType::all()->pluck('property_type_name','id');
-                return 'PL-'. sprintf('%010d',$id == null? 1 : $id->id + 1);
+
             });
-            //12
             $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
-            //13
-            $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
-            //14
-            $form->currency('property_market_value', __('Property Market Value '))->rules('required');
-            //15
+            $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required')->attribute(['style' => 'width: 100%;']);
+            $form->currency('property_market_value', __('Property Market Value '))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->select('commune_id', __('Commune / Sangkat'))->rules('required')->options(function(){
                 return Commune::all()->pluck('commune_name','id');})->load('village_id', env('APP_URL') . '/public/api/village');
-            //16
             $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.9999999'])->rules('required');
 
 
         });
-        //max 7 part 3
+
         $form->column(1/3, function ($form){
             $form->html('<div style="height:52px"></div>');
-            //17
             $form->select('type_of_access_road', __('Type of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road', 'Paved Road'=>'Paved Road','Upaved Road'=>'Upaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road']);
-            //18
             $form->select('borey', __('Borey'))->rules('required')->options(function(){
                 return Borey::all()->pluck('borey_name', 'id');
             });
-            //19
-            $form->date('information_date', __('Information Date'))->rules('required');
-            //20
-            $form->currency('building_size', __('Building Size'))->rules('required');
-            //21
+             $form->date('information_date', __('Information Date'))->rules('required')->attribute(['style' => 'width: 100%;']);
+            $form->currency('building_size', __('Building Size'))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->select('province_id', __('Province'))->rules('required')->options(function(){
                 return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
-
-            //22
             $form->select('village_id', __('Village'))->rules('required')->options(function(){
                 return Village::all()->pluck('village_name','id');});
-            //23
             $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.9999999'])->rules('required');
-
-          });
-
+            $form->html(view('admin.propertyAppraisal.property_appraisal_script'));
+        });
 
         $form->footer(function ($footer) {
 
