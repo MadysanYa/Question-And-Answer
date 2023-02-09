@@ -456,29 +456,39 @@ class PropertyAppraisalController extends AdminController
                             </h4>
                         </div>
                         <div class="modal-body">
-                            <div class="form-group">
-                                <label for="strength">
-                                    <span class="glyphicon glyphicon">Strength</span>
-                                </label>
-                                <textarea type="text" class="form-control" id="input_strength"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="weakness">
-                                    <span class="glyphicon glyphicon">Weakness</span>
-                                </label>
-                                <textarea type="text" class="form-control" id="input_weakness"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="opportunity">
-                                    <span class="glyphicon glyphicon">Opportunity</span>
-                                </label>
-                                <textarea type="text" class="form-control" id="input_opportunity"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="threat">
-                                    <span class="glyphicon glyphicon">Threat</span>
-                                </label>
-                                <textarea type="text" class="form-control" id="input_threat"></textarea>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="strength">
+                                            <span class="glyphicon glyphicon">Strength</span>
+                                        </label>
+                                        <textarea type="text" class="form-control" id="input_strength"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="strength">
+                                            <span class="glyphicon glyphicon">Strength</span>
+                                        </label>
+                                        <textarea type="text" class="form-control" id="input_strength"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="opportunity">
+                                            <span class="glyphicon glyphicon">Opportunity</span>
+                                        </label>
+                                        <textarea type="text" class="form-control" id="input_opportunity"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="threat">
+                                            <span class="glyphicon glyphicon">Threat</span>
+                                        </label>
+                                        <textarea type="text" class="form-control" id="input_threat"></textarea>
+                                    </div>
+                                </div>
                             </div>
                             <button id="btnInputSWOT" class="btn btn-default btn-success btn-block">
                                 <span class="glyphicon glyphicon-off">Submit</span>
