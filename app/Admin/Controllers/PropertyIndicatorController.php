@@ -447,6 +447,7 @@ class PropertyIndicatorController extends AdminController
             $form->currency('property_value', __('Property Value '))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
             $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 999 9999'])->rules('required')->attribute(['style' => 'width: 100%;']);
+            $form->text('remark', __('Remark'));
         });
 
         $form->column(1/3, function ($form){
@@ -464,14 +465,15 @@ class PropertyIndicatorController extends AdminController
                 return Village::all()->pluck('village_name','id');});
             $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.999999'])->rules('required');
             $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.999999'])->rules('required');
-            $form->image('front_photo',__('Front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
-            $form->image('back_photo',__('Back Photo'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
-            $form->image('left_photo',__('Left Photo'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
-            $form->image('right_photo',__('Right Photo'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
-            $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
-            $form->multipleImage('photos', __('Gallery'))->removable()->uniqueName();
-            $form->text('remark', __('Remark'));
-            $form->html(view('admin.propertyAppraisal.property_appraisal_script')); // From view 
+            $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
+            $form->image('right_photo',__('Access Road Photo Right'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
+            $form->image('left_photo',__('Access Road Photo Left'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
+            $form->image('front_photo',__('Title Photo Front'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
+            $form->image('back_photo',__('Title Photo Back'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
+            $form->image('id_front_photo',__('ID Photo Front'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
+            $form->image('id_back_photo',__('ID Photo Back'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
+            // $form->multipleImage('photos', __('Gallery'))->removable()->uniqueName();
+            $form->html(view('admin.propertyAppraisal.property_appraisal_script'));
         });
 
         $form->footer(function ($footer) {
