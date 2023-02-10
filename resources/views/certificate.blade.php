@@ -150,6 +150,7 @@
 
 </head>
 <body style="height: 100%; width: 100%;">
+
 <div class="WordSection1" style=" height: 850px;">
     <!-- width: 50%; margin-left: 25%; -->
     <!-- <span style='position:relative;z-index:251660288'>
@@ -294,15 +295,18 @@
         <table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 style='width:527.25pt;border-collapse:collapse;border:none'>
             <tr style='height:200pt'>
                 <td position: absolute;>
-                    <!-- <img width=296 height=72 src="Internal%20Indication%20Report%20test2_files/image001.png"> -->
+                    <!-- <img width=296 height=72 src="test2_files/image001.png"> -->
                     <img src="{{ storage_path('app/public/images/cambodia.png') }}" style="height: 260px; width: 200pt;">
                     <!-- <img src="{{ storage_path('app/public/images/cambodia.png') }}" style="height: 300px; width: 250px;"> -->
                 </td>
 
-                <td id="map_img">   
+                <td id="map_img">
+                    <!-- <img id="map_id" src="http://localhost/pms/property-management/resources/views/generate.blade.php" /> -->
+                
+                    <!-- <img id="map_img" alt="" style="display: none" /> -->
                     <!-- <h1>{{$name}}</h1>  -->
                     <!-- <img src="{{$imagePath}}" style="width:200px;"> -->
-                    <img src="{{'data:image/png;base64,'.base64_encode(file_get_contents(storage_path('app/public/images/cambodia.png')))}}" style="width:200px;">
+                    <!-- <img src="{{'data:image/png;base64,'.base64_encode(file_get_contents(storage_path('app/public/images/cambodia.png')))}}" style="width:200px;"> -->
 
                 <!-- style="height: 266px; width: 435px;"
                 height: 261px; width: 435px; -->
@@ -319,7 +323,7 @@
         <table  class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=690 style='width:527.25pt; border-collapse:collapse;border:none'>
             <!-- Head 2 -->
             <tr style='height:13.35pt'>
-                <td colspan=8 style='width:527.25pt; border:solid windowtext 1.0pt; background:#0070C0;padding:0in 5.4pt 0in 5.4pt;height:18.45pt'>
+                <td colspan=7 style='width:527.25pt; border:solid windowtext 1.0pt; background:#0070C0;padding:0in 5.4pt 0in 5.4pt;height:18.45pt'>
                     <p class=MsoNormal align=center style='margin-top:0in;margin-right:-5.65pt; margin-bottom:0in;margin-left:0in;text-align:center;line-height:normal'>
                         <span style='font-size:10.0pt;font-family:"OneShinhan Bold",sans-serif;color:white'>PROPERTY ADJUSTMENT</span></p>
                 </td>
@@ -402,7 +406,8 @@
                 </td>
             </tr>
             
-            <tr style='height:13.35pt'>
+            <!-- Wrong -->
+            <!-- <tr style='height:13.35pt'>
                 <td valign=top style='width:10pt; border:solid windowtext 1.0pt; border-top:none; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
                         <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>1</span>
@@ -438,7 +443,7 @@
                         <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 30,000.00</span>
                     </p>
                 </td>
-            </tr>
+            </tr> -->
 
             <!-- Row 2 -->
             <tr style='height:13.05pt'>
@@ -482,7 +487,8 @@
                 </td>
             </tr>
 
-            <tr style='height:13.35pt'>
+            <!-- Wrong -->
+            <!-- <tr style='height:13.35pt'>
                 <td valign=top style='width:10pt; border:solid windowtext 1.0pt; border-top:none; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
                         <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>1</span>
@@ -518,9 +524,10 @@
                         <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 40,000.00</span>
                     </p>
                 </td>
-            </tr>
+            </tr> -->
 
-            <tr style='height:13.35pt'>
+            <!-- Wrong -->
+            <!-- <tr style='height:13.35pt'>
                 <td valign=top style='width:10pt; border:solid windowtext 1.0pt; border-top:none; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
                         <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'></span>
@@ -556,7 +563,7 @@
                         <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'></span>
                     </p>
                 </td>
-            </tr>
+            </tr> -->
 
             <!-- Row 2 -->
             <tr style='height:13.05pt'>
@@ -611,6 +618,7 @@
                 </td>
 
             </tr>
+            <!-- End  -->
 
 
 
@@ -651,7 +659,6 @@
                     </p>
                 </td>
             </tr> -->
-
 
             <!-- Row 3 -->
             <!-- <tr style='height:13.35pt'>
@@ -992,16 +999,68 @@
     </div>
 </div>
 
-    <div id="capture" style="padding: 10px; background: #f5da55; margin-top: 10px; width: 200px;">
-      <h4 style="color: #000; ">Hello world!</h4>
-    </div>  
+<div id="capture" style="padding: 10px; background: #f5da55; margin-top: 10px; width: 200px;">
+    <h4 style="color: #000; ">Hello world!</h4>
+</div>  
+
+<!-- <div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="400" id="gmap_canvas" src="https://maps.google.com/maps?q=cambodia&t=&z=10&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://2yu.co">2yu</a><br><style>.mapouter{position:relative;text-align:right;height:400px;width:600px;}</style><a href="https://embedgooglemap.2yu.co">html embed google map</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:400px;width:600px;}</style></div></div> -->
 
 <div id="map" style="height: 231px; width: 386px;"></div>
-<button onclick="myCanvas()">Try it</button>
+
+<button onclick="myCanvas()">Generate!</button>
+<!-- <button id="genmap">Map Generate</button> -->
 <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdf">Export to PDF</a>
 
 <script type="text/javascript">
+
+// html2canvas(document.getElementById("map"),
+//        {useCORS: true,})
+//           .then(function(canvas) {
+//             var img = canvas.toDataURL("image/png");
+//             var image = new Image();
+//             image.src = img;
+//           document.getElementById("map_id").appendChild(image);
+//           $('#map_id').attr('src', img);
+//       });
+
+
+// $('#genmap').on('click', function(){
+
+//     html2canvas(document.getElementById("map"),
+//        {useCORS: true,})
+//           .then(function(canvas) {
+//             var img = canvas.toDataURL("image/png");
+//             var image = new Image();
+//             image.src = img;
+//           document.getElementById("map_img").appendChild(image);
+//       });
+
+// 	var map_image = document.getElementById('map_img');
+//     // var map_image = image;
+// 	map_image.onload = function(){
+// 		var url = 'savemap.php';
+//         var data = {
+//                     'img':document.getElementById('map_img').src
+//                 }; 
+// 		$.ajax({
+//                 url: url, 
+//                 type:'post',
+//                 data: data,
+//                 success: function(result){
+//                     if(result == 'success'){
+//                         alert("Successfull!");
+//                         // swal("KHQR has been generated successfully", "Please inform your customer to touch on tablet to reload QR Payment", "success");
+//                     }
+//                     else {
+//                         alert("Fail!");
+//                         // swal("KHQR generated failed. \n Please retry", "", "error");
+//                     }
+                    
+//             }});
+//         }
+// });
     
+
     // $('#download').on('click', () => {
     //     html2canvas(document.querySelector("#gen1")).then(canvas => {
     //         canvas.toBlob(function(blob) {
@@ -1010,24 +1069,8 @@
     //     });
     // });
 
-      function myCanvas() {
 
-    //     const domElement = document.getElementById('map')
-    //         html2canvas(domElement, { onclone: (document) => {
-    //         document.getElementById('map_img').style.visibility = 'hidden'
-    //     }})
-    //     .then((canvas) => {
-    //         const img = canvas.toDataURL('image/png')
-    //         const pdf = new jsPdf()
-    //         pdf.addImage(imgData, 'JPEG', 0, 0, width, height)
-    //         pdf.save('map.pdf')
-    // })
-
-        // html2canvas(document.querySelector("#capture")).then(canvas => {
-        //     canvas.toBlob(function(blob) {
-        //         window.saveAs(blob, "map_indication.png");
-        //     });
-        // });
+    function myCanvas() {
 
       html2canvas(document.getElementById("map"),
        {useCORS: true,})
@@ -1045,48 +1088,26 @@
 
             image.src = img;
           document.getElementById("map_img").appendChild(image);
+        //   $('#map_id').attr('src', img);
       });
 
 
-        // var map_image = document.getElementById('map_img');
-        // map_image.onload = function(){
-            
-        //     // popup.document.getElementById('image').src = document.getElementById('image').src;
+        // var element = document.getElementById('map');
+        //   html2canvas(element).then((canvas) => {
+        //     console.log(canvas)
 
-        //     var url = 'savemap.blade.php';
-        //     // var service = $('input[name="service"]:checked').val();
-            
-        //     var data = {
-        //         'img':document.getElementById('map_img').src,
-        //         // 'amount': $('#amount').val(), 
-        //         // 'billnumber' : $('#billNumber').val().toUpperCase(), 
-        //         // Add terminalLabel
-        //         // 'terminalLabel' : $('#terminalLabel').val(),
+        //     var imgData = canvas.toDataURL('image/png');
+        //     var doc = new jspdf.jsPDF;
+        //     var imgHeight = canvas.height*208/canvas.width;
+        //     doc.addImage(imgData, 0, 0, 208, imgHeight);
+        //     doc.save("result.pdf"); 
+        // });
 
-        //         // 'service': service
-        //     };
-            
-        //     $.ajax({
-        //         url: url, 
-        //         type:'post',
-        //         data: data,
-        //         success: function(result){
-        //             if(result == 'success'){
-        //                 // alert("KHQR have been generated successfully");
-        //                 swal("KHQR has been generated successfully", "Please inform your customer to touch on tablet to reload QR Payment", "success");
-        //             }
-        //             else {
-        //                 swal("KHQR generated failed. \n Please retry", "", "error");
-        //             }
-                    
-        //     }});
-        // }
 
-    //   html2canvas(document.querySelector("#capture"),{useCORS: true,}).then(canvas => {
-    //     // document.body.appendChild(canvas)
-    //     document.getElementById("map_img").appendChild(canvas);
-    // });
-    
+        //   html2canvas(document.querySelector("#capture"),{useCORS: true,}).then(canvas => {
+        //     // document.body.appendChild(canvas)
+        //     document.getElementById("map_img").appendChild(canvas);
+        // });
     }
     </script>
 

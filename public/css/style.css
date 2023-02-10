@@ -71,13 +71,14 @@ label {
 
 .box-header>.fa, .box-header>.glyphicon, .box-header>.ion, .box-header .box-title {
     font-size: 23px !important;
-
-
-
 }
 
 @media (min-width: 768px) {
     .col-sm-2 {
         width: 30% !important;
     }
+}
+
+.control-label {
+    text-align: left !important;
 }

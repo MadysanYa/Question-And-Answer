@@ -46,7 +46,7 @@
 </div>
 
 <script src="{{ asset('/vendor/chartjs/dist/chart.min.js') }}"></script>
-<!-- <script src="{{ asset('/vendor/chartjs/dist/chartjs-datalabels.min.js') }}"></script> -->
+<script src="{{ asset('/vendor/chartjs/dist/chartjs-datalabels.min.js') }}"></script>
 <script>
     const khanSenSok = <?php echo json_encode($khanSenSok); ?>;
     const Khan7Makara = <?php echo json_encode($Khan7Makara); ?>;
@@ -95,20 +95,20 @@
 
     function generateNewChart(chartBarID, khan) 
     {
-        // const legendLabelMargin = {
-        //     id: 'legendLabelMargin',
-        //     beforeInit(chart, legend, options) {
-        //         const fitValue = chart.legend.fit;
-        //         chart.legend.fit = function fit() {
-        //             fitValue.bind(chart.legend)();
-        //             return this.height += 15;
-        //         }
-        //     }
-        // };
+        const legendLabelMargin = {
+            id: 'legendLabelMargin',
+            beforeInit(chart, legend, options) {
+                const fitValue = chart.legend.fit;
+                chart.legend.fit = function fit() {
+                    fitValue.bind(chart.legend)();
+                    return this.height += 20;
+                }
+            }
+        };
 
-        // Chart.register(ChartDataLabels);
+        Chart.register(ChartDataLabels);
         new Chart(chartBarID, {
-            // plugins: [ChartDataLabels],
+            plugins: [ChartDataLabels, legendLabelMargin],
             type: 'bar',
             data: {
                 labels: khan['communes'],
@@ -142,17 +142,17 @@
                             boxWidth: 0,
                         }
                     },
-                    // datalabels: {
-                    //     anchor: 'end',
-                    //     align: 'top',
-                    //     font: {
-                    //         weight: 'bold',
-                    //         size: 12
-                    //     },
-                    //     formatter: function(value, context) {
-                    //         return value.toLocaleString()
-                    //     }
-                    // },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        // font: {
+                        //     weight: 'bold',
+                        //     size: 12
+                        // },
+                        formatter: function(value, context) {
+                            return value.toLocaleString()
+                        }
+                    },
                 }
             }
         });

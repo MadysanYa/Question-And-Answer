@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Request;
 use Encore\Admin\Controllers\AdminController;
 
 
-class MapPriceIndicatorController extends AdminController 
+class MapPriceIndicatorController extends AdminController
 {
     /**
      * Title for current resource.
@@ -45,7 +45,7 @@ class MapPriceIndicatorController extends AdminController
             'latitude As lat',
             'longtitude As lng',
         ];
-        // Property Indication 
+        // Property Indication
         $fieldProIndication = [
             'id',
             'latitude',
@@ -76,7 +76,7 @@ class MapPriceIndicatorController extends AdminController
             'client_contact_no',
             'customer_name',
         ];
-        // Property Research 
+        // Property Research
         $fieldProResearch = [
             'id',
             'latitude',
@@ -135,7 +135,7 @@ class MapPriceIndicatorController extends AdminController
 
         //LatLong Property Indication
         $arryProperty = PropertyIndicator::select($latLong)->get()->toArray() ?? null;
-        
+
         //Labels on marker
         foreach($propertys as $value){
             $label = "$".$value->land_value_per_sqm;
@@ -289,7 +289,7 @@ class MapPriceIndicatorController extends AdminController
                 $value->type_of_access_road.','.
                 $value->access_road_name.','.
                 $value->land_title_type.','.
-                $value->property_type.','.
+                optional($value->propertyType)->property_type_name.','.
                 $value->building_status.','.
                 optional($value->boreyType)->borey_name.','.
                 $value->no_of_floor.','.

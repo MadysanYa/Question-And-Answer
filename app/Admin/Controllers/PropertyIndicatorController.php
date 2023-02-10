@@ -141,19 +141,19 @@ class PropertyIndicatorController extends AdminController
         $grid->column('client_contact_no',__('Cliend Contact No.'))->sortable();
         $grid->column('province_id',__('Province'))->filter($this->convertToArray(Province::all(['id', 'province_name'])))->Display(function($province_id){
            $province = Province::where('id', $province_id)->first();
-            return $province->province_name;
+            return $province->province_name ?? '';
         });
         $grid->column('district_id',__('District/Khan'))->filter($this->convertToArrayDistrict(District::whereIn('province_id', $filterProvinceId)->get(['id', 'district_name'])))->Display(function($district_id){ //Add filter when click ex:province->distict..
             $district = District::where('id', $district_id)->first();
-            return $district->district_name;
+            return $district->district_name ?? '';
         });
         $grid->column('commune_id',__('Commune/Sangkat'))->filter($this->convertToArrayCommune(Commune::whereIn('district_id', $filterDistrictId)->get(['id','commune_name'])))->Display(function($comune_id){
             $commune = Commune::where('id', $comune_id)->first();
-            return $commune->commune_name;
+            return $commune->commune_name ?? '';
         });
         $grid->column('village_id',__('Village'))->sortable()->Display(function($village_id){
             $village = Village::where('id', $village_id)->first();
-            return $village->village_name ;
+            return $village->village_name ?? '';
         });
         $grid->column('latitude',__('Latitude'))->sortable();
         $grid->column('longtitude',__('Longtitude'))->sortable();
@@ -326,7 +326,7 @@ class PropertyIndicatorController extends AdminController
 
         $show->field('requested_date',__('Requested Date'));
         if (User::isVerifierRole() || User::isApproverRole()){
-        $show->field('reported_date',__('Reported Date'));
+            $show->field('reported_date',__('Reported Date'));
         }
         $show->field('cif_no',__('CIF No.'));
         $show->field('rm_name',__('RM Name'));
@@ -359,19 +359,19 @@ class PropertyIndicatorController extends AdminController
         $show->field('client_contact_no',__('Cliend Contact No'));
         $show->field('province_id',__('Province'))->as(function($province_id){
             $province = Province::where('id', $province_id)->first();
-            return $province->province_name;
+            return $province->province_name ?? '';
         });
         $show->field('district_id',__('District/ Khan'))->as(function($district_id){
             $district = District::where('id', $district_id)->first();
-            return $district->district_name;
+            return $district->district_name ?? '';
         });
         $show->field('commune_id',__('Commune / Sangkat'))->as(function($comune_id){
             $commune = Commune::where('id', $comune_id)->first();
-            return $commune->commune_name;
+            return $commune->commune_name ?? '';
         });
         $show->field('village_id',__('Village'))->as(function($village_id){
             $village = Village::where('id', $village_id)->first();
-            return $village->village_name   ;
+            return $village->village_name ?? '';
         });
         $show->field('longtitude',__('Longtitude'));
         $show->field('latitude',__('Latitude'));
@@ -400,13 +400,21 @@ class PropertyIndicatorController extends AdminController
 
             $form->select('branch_code',__('Branch'))->rules('required')->options(function(){
                  return Branch::all()->pluck('branch_name','branch_code');});
-            $form->date('requested_date', __('Requested Date'))->rules('required');
+            $form->date('requested_date', __('Requested Date'))->rules('required')->attribute(['style' => 'width: 100%;']);
+
             if (User::isVerifierRole() || User::isApproverRole()){
-            $form->date('reported_date',__('Reported Date'))->rules('required');
-            }
+                $form->date('reported_date',__('Reported Date'))->rules('required')->attribute(['style' => 'width: 100%;']);
+            } else {
+                $form->date('reported_date',__('Reported Date'))->disable()->attribute(['style' => 'width: 100%;']);
+            };
+
             $form->text('cif_no', __('CIF No.'))->inputmask(['mask' => '9999999999']);
-            $form->text('rm_name', __('RM Name'))->rules('required');
-            $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 999 9999']); // add number
+            if (User::isVerifierRole() || User::isApproverRole()){
+                $form->text('rm_name', __('RM Name'))->rules('required');
+            } else{
+                $form->text('rm_name', __('RM Name'))->disable();
+            }
+            $form->mobile('telephone', __('Telephone'))->rules('required')->options(['mask' => '099 999 9999'])->attribute(['style' => 'width: 100%;']);
             $form->select('information_type',__('Information Type'))->rules('required')->options(function(){
                 return InformationType::all()->pluck('information_type_name','id');
                });
@@ -420,31 +428,30 @@ class PropertyIndicatorController extends AdminController
             $form->select('property_type', __('Property Type'))->rules('required')->options(function(){
                 return PropertyType::all()->pluck('property_type_name','id');
             });
+            $form->text('customer_name', __('Customer Name '))->rules('required');
         });
 
         $form->column(1/3, function ($form){
             $form->html('<div style="height:105px"></div>');
-
-            $form->number('building_status', __('Building Status (%) '))->default(0)->min(0)->max(100)->rules('required');
+            $form->text('building_status', __('Building Status (%)'))->rules('required')->attribute('maxlength', '3');
             $form->select('borey', __('Borey'))->rules('required')->options(function(){
                 return Borey::all()->pluck('borey_name', 'id');
             });
-            $form->number('no_of_floor', __('No. of Floor'))->rules('required')->min(1)->max(50); // all number
+            $form->text('no_of_floor', __('No. of Floor'))->rules('required')->attribute('maxlength', '3');
             $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
             $form->text('land_title_no', __('Land title No.'))->rules('required');
             $form->text('land_size', __('Land Size (sqm)'))->default(0)->rules('required');
-            $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required');
-            $form->currency('building_size', __('Building Size'))->rules('required');
-            $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->rules('required');
-            $form->currency('property_value', __('Property Value '))->rules('required');
+            $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required')->attribute(['style' => 'width: 100%;']);
+            $form->currency('building_size', __('Building Size'))->rules('required')->attribute(['style' => 'width: 100%;']);
+            $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->rules('required')->attribute(['style' => 'width: 100%;']);
+            $form->currency('property_value', __('Property Value '))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
+            $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 999 9999'])->rules('required')->attribute(['style' => 'width: 100%;']);
+            $form->text('remark', __('Remark'));
         });
 
         $form->column(1/3, function ($form){
             $form->html('<div style="height:105px"></div>');
-            $form->text('customer_name', __('Customer Name '))->rules('required');
-            $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 999 9999'])->rules('required');
-            // api
             $form->select('province_id', __('Province'))->rules('required')->options(function(){
                 return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
 
@@ -458,9 +465,15 @@ class PropertyIndicatorController extends AdminController
                 return Village::all()->pluck('village_name','id');});
             $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.999999'])->rules('required');
             $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.999999'])->rules('required');
-            $form->multipleImage('photos', __('Photos'))->removable()->uniqueName();//->rules('required');
-            $form->image('front_photo',__('Front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
-            $form->text('remark', __('Remark'));
+            $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
+            $form->image('right_photo',__('Access Road Photo Right'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
+            $form->image('left_photo',__('Access Road Photo Left'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
+            $form->image('front_photo',__('Title Photo Front'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
+            $form->image('back_photo',__('Title Photo Back'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
+            $form->image('id_front_photo',__('ID Photo Front'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
+            $form->image('id_back_photo',__('ID Photo Back'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
+            // $form->multipleImage('photos', __('Gallery'))->removable()->uniqueName();
+            $form->html(view('admin.propertyAppraisal.property_appraisal_script'));
         });
 
         $form->footer(function ($footer) {

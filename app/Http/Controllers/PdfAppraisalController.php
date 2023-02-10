@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use PDF;
 use Illuminate\Http\Request;
 
-class PdfController extends Controller
+class PdfAppraisalController extends Controller
 {
     public function index()
     {
@@ -18,7 +18,7 @@ class PdfController extends Controller
         //     'email'        => 'john.doe@email.com'
         // ];
 		//PDF::setOption([ 'isRemoteEnabled' => true]);
-    	$pdf = PDF::loadView('certificate',
+    	$pdf = PDF::loadView('pdf/appraisal',
 		[
     		// 'title' => 'CodeAndDeploy.com Laravel Pdf Tutorial',
     		// 'description' => 'This is an example Laravel pdf tutorial.',
@@ -31,7 +31,7 @@ class PdfController extends Controller
     	]
 	);
 		// $pdf.addImage(imgData, 'JPEG', 0, 0, width, height)
-        return $pdf->download('certificate.pdf');
+        return $pdf->download('appraisal.pdf');
 
 		// $pdf = PDF::loadView('certificate', $data);
         // return $pdf->download('certificate.pdf');
