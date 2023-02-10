@@ -492,8 +492,8 @@ class PropertyAppraisalController extends AdminController
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button id="btnInputSWOT" class="btn btn-default btn-success btn-block">
-                                <span class="glyphicon glyphicon-off">Submit</span>
+                            <button id="btnInputSWOT" class="btn btn-primary">
+                                Submit
                             </button>
                         </div>
                     </div>
