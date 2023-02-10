@@ -490,11 +490,12 @@ class PropertyAppraisalController extends AdminController
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="modal-footer">
                             <button id="btnInputSWOT" class="btn btn-default btn-success btn-block">
                                 <span class="glyphicon glyphicon-off">Submit</span>
                             </button>
                         </div>
-                        <div class="modal-footer"></div>
                     </div>
                 </div>
             </div>
@@ -619,8 +620,8 @@ class PropertyAppraisalController extends AdminController
             $form->text('size',__('Size'));
             $form->text('value_per_sqm',__('Value per_sq. m'));
             $form->text('total_value',__('Total Value'));
-            $form->button('swot_analyze', __('Swot Analyze'))->attribute('id', 'show-swot-modal')->on('click', '$("#myModal").modal();');
             $form->button('comparable_reference', __('Comparable Reference'))->attribute('id', 'show-comparable-reference-modal')->on('click', '$("#modal-comparable-reference").modal();');
+            $form->button('swot_analyze', __('Swot Analyze'))->attribute('id', 'show-swot-modal')->on('click', '$("#myModal").modal();');
             $form->html(view('admin.propertyAppraisal.property_appraisal_script'));
         });
 
