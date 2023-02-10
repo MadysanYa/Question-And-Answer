@@ -9,7 +9,7 @@
     <script src="../../resources/js/markerclusterer.min.js"></script>
     <style type="text/css">
         #map {
-          height: 550px;
+          height: 650px;
         }
     </style>
 </head>
