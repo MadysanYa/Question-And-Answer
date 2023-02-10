@@ -17,7 +17,7 @@ class RegionController extends AdminController
      *
      * @var string
      */
-    protected $title = 'Region Information Management';
+    protected $title = 'Region';
 
     /**
      * Make a grid builder.
@@ -30,7 +30,7 @@ class RegionController extends AdminController
         $grid->column('id', __('ID'));
       //  $grid->column('region_code', __('Region code'))->editable()->sortable();
         $grid->column('region_name', __('Region Name'))->editable()->sortable();
-		
+
         $grid->disableExport();
         $grid->disableFilter();
         $grid->quickSearch('emp_id' , 'employee_name','pickup_number', 'remark','ext');
@@ -64,24 +64,24 @@ class RegionController extends AdminController
      *
      * @return Form
      */
-	 
+
     protected function form()
     {
         $form = new Form(new Region());
     //    $form->text('region_code', __('Region Code'))->rules('required');
-        $form->text('region_name', __('Region Name'));
-       
-        
+        $form->text('region_name', __('Region Name'))->rules('required');
+
+
         $form->footer(function ($footer) {
             // disable reset btn
-            $footer->disableReset();
+            // $footer->disableReset();
             // disable `View` checkbox
             $footer->disableViewCheck();
             // disable `Continue editing` checkbox
             $footer->disableEditingCheck();
             // disable `Continue Creating` checkbox
             $footer->disableCreatingCheck();
-        
+
         });
 
 

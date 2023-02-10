@@ -18,7 +18,7 @@ class DistrictController extends AdminController
      *
      * @var string
      */
-    protected $title = 'District Information Management';
+    protected $title = 'District ';
 
     /**
      * Make a grid builder.
@@ -31,7 +31,7 @@ class DistrictController extends AdminController
         $grid->column('id', __('ID'));
         $grid->column('district_name', __('District Name'))->editable()->sortable();
 
-		
+
         $grid->disableExport();
         $grid->disableFilter();
         $grid->quickSearch('emp_id' , 'employee_name','pickup_number', 'remark','ext');
@@ -65,16 +65,16 @@ class DistrictController extends AdminController
      *
      * @return Form
      */
-	 
+
     protected function form()
     {
         $form = new Form(new District());
         $form->select('province_id', __('Province'))->rules('required')->options(function(){
             return Province::all()->pluck('province_name','id');
         });
-        $form->text('district_name', __('District Name'));
-       
-        
+        $form->text('district_name', __('District Name'))->rules('required');
+
+
         $form->footer(function ($footer) {
             // disable reset btn
             $footer->disableReset();
@@ -84,7 +84,7 @@ class DistrictController extends AdminController
             $footer->disableEditingCheck();
             // disable `Continue Creating` checkbox
             $footer->disableCreatingCheck();
-        
+
         });
 
 

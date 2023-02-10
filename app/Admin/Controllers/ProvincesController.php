@@ -17,7 +17,7 @@ class ProvincesController extends AdminController
      *
      * @var string
      */
-    protected $title = 'Province Information Management';
+    protected $title = 'Province ';
 
     /**
      * Make a grid builder.
@@ -29,7 +29,7 @@ class ProvincesController extends AdminController
         $grid = new Grid(new Province);
         $grid->column('id', __('ID'));
         $grid->column('province_name', __('Province Name'))->editable()->sortable();
-		
+
         $grid->disableExport();
         $grid->disableFilter();
         $grid->quickSearch('emp_id' , 'employee_name','pickup_number', 'remark','ext');
@@ -63,22 +63,22 @@ class ProvincesController extends AdminController
      *
      * @return Form
      */
-	 
+
     protected function form()
     {
         $form = new Form(new Province());
-        $form->text('province_name', __('Province Name'));
-        
+        $form->text('province_name', __('Province Name'))->rules('required');
+
         $form->footer(function ($footer) {
             // disable reset btn
-            $footer->disableReset();
+            // $footer->disableReset();
             // disable `View` checkbox
             $footer->disableViewCheck();
             // disable `Continue editing` checkbox
             $footer->disableEditingCheck();
             // disable `Continue Creating` checkbox
             $footer->disableCreatingCheck();
-        
+
         });
 
 
