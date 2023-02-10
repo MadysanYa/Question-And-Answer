@@ -197,6 +197,10 @@ class PropertyAppraisalController extends AdminController
         $grid->column('longtitude',__('Longtitude'))->sortable();
         //$grid->column('property_address', __('Property Address'));
         $grid->column('remark',__('Remark'))->sortable();
+        $grid->column('strength',__('Strength'))->sortable();
+        $grid->column('weakness',__('Weakness'))->sortable();
+        $grid->column('opportunity',__('Opportunity'))->sortable();
+        $grid->column('threat',__('Threat'))->sortable();
         $grid->column('comparable_id',__('ID'))->sortable();
         $grid->column('comparable_cif_no',__('CIF No./ Name'))->sortable();
         $grid->column('distance',__('Distance'))->sortable();
