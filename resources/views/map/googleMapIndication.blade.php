@@ -9,7 +9,7 @@
     <script src="../../resources/js/markerclusterer.min.js"></script>
     <style type="text/css">
         #map {
-          height: 550px;
+          height: 650px;
         }
     </style>
 </head>
@@ -34,7 +34,7 @@
             const labels = {{ Js::from($arrayLabel) }};
             const propertyIndicator = {{ Js::from($infoProperty)}};
 
-            var icons = '../imges/properties_indication.png'
+            var icons = '../imges/marker_icon/properties_indication.png';
 
             const markers = locations.map((position, i) => {
 				const label = {text: labels[i % labels.length], color: "white", fontSize: "13px"};
