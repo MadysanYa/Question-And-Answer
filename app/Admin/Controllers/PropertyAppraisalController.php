@@ -580,7 +580,7 @@ class PropertyAppraisalController extends AdminController
             $form->currency('property_value', __('Property Value '))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
             $form->text('remark', __('Remark'));
-            $form->button('swot_analyze', __('Swot Analyze'))->attribute('id', 'show-swot-modal')->on('click', '$("#myModal").modal();');
+
         });
 
         $form->column(1/3,function($form){
@@ -619,6 +619,7 @@ class PropertyAppraisalController extends AdminController
             $form->text('size',__('Size'));
             $form->text('value_per_sqm',__('Value per_sq. m'));
             $form->text('total_value',__('Total Value'));
+            $form->button('swot_analyze', __('Swot Analyze'))->attribute('id', 'show-swot-modal')->on('click', '$("#myModal").modal();');
             $form->button('comparable_reference', __('Comparable Reference'))->attribute('id', 'show-comparable-reference-modal')->on('click', '$("#modal-comparable-reference").modal();');
             $form->html(view('admin.propertyAppraisal.property_appraisal_script'));
         });
