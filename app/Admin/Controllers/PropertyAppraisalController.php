@@ -197,6 +197,17 @@ class PropertyAppraisalController extends AdminController
         $grid->column('longtitude',__('Longtitude'))->sortable();
         //$grid->column('property_address', __('Property Address'));
         $grid->column('remark',__('Remark'))->sortable();
+        $grid->column('strength',__('Strength'))->sortable();
+        $grid->column('weakness',__('Weakness'))->sortable();
+        $grid->column('opportunity',__('Opportunity'))->sortable();
+        $grid->column('threat',__('Threat'))->sortable();
+        $grid->column('comparable_id',__('ID'))->sortable();
+        $grid->column('comparable_cif_no',__('CIF No./ Name'))->sortable();
+        $grid->column('distance',__('Distance'))->sortable();
+        $grid->column('geo_code',__('Geo Code'))->sortable();
+        $grid->column('size',__('Size'))->sortable();
+        $grid->column('value_per_sqm',__('Value per_sq. m'))->sortable();
+        $grid->column('total_value',__('Total Value'))->sortable();
         $grid->column('user_id',__('Created By'))->sortable()->display(function($id){
             $userName = UserAdmin::where('id', $id)->first();
             return $userName->name ?? null;
@@ -614,6 +625,7 @@ class PropertyAppraisalController extends AdminController
             $form->text('weakness',__('Weakness'));
             $form->text('opportunity',__('Opportunity'));
             $form->text('threat',__('Threat'));
+            $form->text('comparable_id',__('Comparable ID'));
             $form->text('comparable_cif_no',__('CIF No./ Name'));
             $form->text('geo_code',__('Geo Code'));
             $form->text('distance',__('Distance'));
@@ -638,6 +650,21 @@ class PropertyAppraisalController extends AdminController
                         </div>
                         <div class="modal-body">
                             <div class="row">
+                            <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row" style="display: flex;align-items: center;">
+                                            <label for="com_id" class="col-sm-2  control-label"> ID</label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-pencil fa-fw"></i>
+                                                    </span>
+                                                    <input type="text" id="com_id" class="form-control com_id" placeholder="Input ID">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="row" style="display: flex;align-items: center;">
@@ -713,7 +740,7 @@ class PropertyAppraisalController extends AdminController
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6" style="margin-top: 15px;">
                                     <div class="">
                                         <div class="row" style="display: flex;align-items: center;">
                                             <label for="com_ref_total_value" class="col-sm-2  control-label">Total Value</label>
@@ -739,6 +766,8 @@ class PropertyAppraisalController extends AdminController
 
             <script>
                 $("#btn-input-comparable").click(function() {
+                    $("#comparable_id").val($("#com_id").val());
+                    $("#comparable_id").val($("#com_ref_cif_no_name").val());
                     $("#comparable_cif_no").val($("#com_ref_cif_no_name").val());
                     $("#geo_code").val($("#com_ref_geo_code").val());
                     $("#distance").val($("#com_ref_distance").val());
@@ -751,14 +780,16 @@ class PropertyAppraisalController extends AdminController
                 });
 
                 $("#show-comparable-reference-modal").click(function() {
+                    $("#com_id").val($("#comparable_id").val());
                     $("#com_ref_cif_no_name").val($("#comparable_cif_no").val());
                     $("#com_ref_geo_code").val($("#geo_code").val());
                     $("#com_ref_distance").val($("#distance").val());
+                    $("#com_ref_value_per_sqm").val($("#value_per_sqm").val());
                     $("#com_ref_size").val($("#size").val());
                     $("#com_ref_total_value").val($("#total_value").val());
                 });
 
-                $("#comparable_cif_no, #geo_code, #distance, #size, #value_per_sqm, #total_value").closest(".form-group").css("display","none");
+                $(" #comparable_id,#comparable_cif_no, #geo_code, #distance, #size, #value_per_sqm, #total_value").closest(".form-group").css("display","none");
             </script>
         ');
 
