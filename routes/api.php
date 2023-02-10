@@ -14,6 +14,8 @@ use App\Http\Controllers\PropertyIndicatorController;
 use App\Http\Controllers\PropertyAppraisalController;
 use App\Http\Controllers\PropertyResearchController;
 
+use App\Http\Controllers\PdfAppraisalController;
+
 
 
 /*
@@ -57,3 +59,5 @@ Route::get('/approve_appraisal/{id}/{value}', [PropertyAppraisalController::clas
 // API for PDF Generation
 Route::get('pdf', [PdfController::class, 'index']);
 Route::get('google-autocomplete', [GoogleController::class, 'index']);
+
+Route::get('pdfappraisal', [PdfAppraisalController::class, 'index']);

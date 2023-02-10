@@ -28,22 +28,6 @@
 
     <p id="here"></p>
 
-    <?php  
-  
-      // create cURL resource  
-      $ch = curl_init() ;  
-        
-      //set cURL options  
-      curl_setopt($ch, CURLOPT_URL, 'http://localhost/pms/property-management/resources/views/generate.blade.php') ;  
-        
-      //Run cURL (execute http request)   
-      $res = curl_exec($ch) ;  
-        
-      // close cURL resource  
-      curl_close($ch);  
-      // print_r($result);  
-  ?>  
-
 
     <!-- <button onclick="myCanvas()">Try it</button> -->
     <!-- <button id="genmap">Map Generate</button> -->
