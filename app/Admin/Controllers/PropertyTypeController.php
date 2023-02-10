@@ -17,7 +17,7 @@ class PropertyTypeController extends AdminController
      *
      * @var string
      */
-    protected $title = 'Property Type Management';
+    protected $title = 'Property Type';
 
     /**
      * Make a grid builder.
@@ -30,7 +30,7 @@ class PropertyTypeController extends AdminController
         $grid->column('id', __('ID'));
       //  $grid->column('region_code', __('Region code'))->editable()->sortable();
         $grid->column('property_type_name', __('Property Type Name'))->editable()->sortable();
-		
+
         $grid->disableExport();
         $grid->disableFilter();
         $grid->quickSearch('emp_id' , 'employee_name','pickup_number', 'remark','ext');
@@ -64,23 +64,23 @@ class PropertyTypeController extends AdminController
      *
      * @return Form
      */
-	 
+
     protected function form()
     {
         $form = new Form(new PropertyType());
     //    $form->text('region_code', __('Region Code'))->rules('required');
-        $form->text('property_type_name', __('Property Type Name'));
-        
+        $form->text('property_type_name', __('Property Type Name'))->rules('required');
+
         $form->footer(function ($footer) {
             // disable reset btn
-            $footer->disableReset();
+            // $footer->disableReset();
             // disable `View` checkbox
             $footer->disableViewCheck();
             // disable `Continue editing` checkbox
             $footer->disableEditingCheck();
             // disable `Continue Creating` checkbox
             $footer->disableCreatingCheck();
-        
+
         });
         return $form;
     }

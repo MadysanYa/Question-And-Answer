@@ -18,7 +18,7 @@ class CommuneController extends AdminController
      *
      * @var string
      */
-    protected $title = 'Communce Information Management';
+    protected $title = 'Communce';
 
     /**
      * Make a grid builder.
@@ -30,7 +30,7 @@ class CommuneController extends AdminController
         $grid = new Grid(new Commune);
         $grid->column('id', __('ID'));
         $grid->column('commune_name', __('Commune Name'))->editable()->sortable();
-		
+
         $grid->disableExport();
         $grid->disableFilter();
         $grid->quickSearch('emp_id' , 'employee_name','pickup_number', 'remark','ext');
@@ -64,25 +64,25 @@ class CommuneController extends AdminController
      *
      * @return Form
      */
-	 
+
     protected function form()
     {
         $form = new Form(new Commune());
         $form->select('district_id', __('District'))->rules('required')->options(function(){
             return District::all()->pluck('district_name','id');
         });
-        $form->text('commune_name', __('Commune Name'));
+        $form->text('commune_name', __('Commune Name'))->rules('required');
 
         $form->footer(function ($footer) {
             // disable reset btn
-            $footer->disableReset();
+            // $footer->disableReset();
             // disable `View` checkbox
             $footer->disableViewCheck();
             // disable `Continue editing` checkbox
             $footer->disableEditingCheck();
             // disable `Continue Creating` checkbox
             $footer->disableCreatingCheck();
-        
+
         });
 
 

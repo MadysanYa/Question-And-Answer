@@ -17,7 +17,7 @@ class BranchController extends AdminController
      *
      * @var string
      */
-    protected $title = 'Branches Information Management';
+    protected $title = 'Branches';
 
     /**
      * Make a grid builder.
@@ -30,7 +30,7 @@ class BranchController extends AdminController
         $grid->column('id', __('ID'));
         $grid->column('branch_code', __('Branch code'))->editable()->sortable();
         $grid->column('branch_name', __('Branch Name'))->editable()->sortable();
-		
+
         $grid->disableExport();
         $grid->disableFilter();
         $grid->quickSearch('emp_id' , 'employee_name','pickup_number', 'remark','ext');
@@ -64,23 +64,23 @@ class BranchController extends AdminController
      *
      * @return Form
      */
-	 
+
     protected function form()
     {
         $form = new Form(new Branch());
         $form->text('branch_code', __('Branch Code'))->rules('required');
-        $form->text('branch_name', __('Branch Name'));
-        
+        $form->text('branch_name', __('Branch Name'))->rules('required');
+
         $form->footer(function ($footer) {
             // disable reset btn
-            $footer->disableReset();
+            // $footer->disableReset();
             // disable `View` checkbox
             $footer->disableViewCheck();
             // disable `Continue editing` checkbox
             $footer->disableEditingCheck();
             // disable `Continue Creating` checkbox
             $footer->disableCreatingCheck();
-        
+
         });
 
 
