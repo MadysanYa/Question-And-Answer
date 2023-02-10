@@ -17,7 +17,7 @@ class InformationTypeController extends AdminController
      *
      * @var string
      */
-    protected $title = 'Information Type Management';
+    protected $title = 'Information Type';
 
     /**
      * Make a grid builder.
@@ -30,7 +30,7 @@ class InformationTypeController extends AdminController
         $grid->column('id', __('ID'));
       //  $grid->column('region_code', __('Region code'))->editable()->sortable();
         $grid->column('information_type_name', __('Information Type Name'))->editable()->sortable();
-		
+
         $grid->disableExport();
         $grid->disableFilter();
         $grid->quickSearch('emp_id' , 'employee_name','pickup_number', 'remark','ext');
@@ -64,23 +64,23 @@ class InformationTypeController extends AdminController
      *
      * @return Form
      */
-	 
+
     protected function form()
     {
         $form = new Form(new InformationType());
     //    $form->text('region_code', __('Region Code'))->rules('required');
-        $form->text('information_type_name', __('Information Type Name'));
-        
+        $form->text('information_type_name', __('Information Type Name'))->rules('required');
+
         $form->footer(function ($footer) {
             // disable reset btn
-            $footer->disableReset();
+            // $footer->disableReset();
             // disable `View` checkbox
             $footer->disableViewCheck();
             // disable `Continue editing` checkbox
             $footer->disableEditingCheck();
             // disable `Continue Creating` checkbox
             $footer->disableCreatingCheck();
-        
+
         });
 
 

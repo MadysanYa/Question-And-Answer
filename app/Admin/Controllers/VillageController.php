@@ -18,7 +18,7 @@ class VillageController extends AdminController
      *
      * @var string
      */
-    protected $title = 'Village Information Management';
+    protected $title = 'Village  ';
 
     /**
      * Make a grid builder.
@@ -30,7 +30,7 @@ class VillageController extends AdminController
         $grid = new Grid(new Village);
         $grid->column('id', __('ID'));
         $grid->column('village_name', __('Village Name'))->editable()->sortable();
-		
+
         $grid->disableExport();
         $grid->disableFilter();
         $grid->quickSearch('emp_id' , 'employee_name','pickup_number', 'remark','ext');
@@ -64,25 +64,25 @@ class VillageController extends AdminController
      *
      * @return Form
      */
-	 
+
     protected function form()
     {
         $form = new Form(new Village());
         $form->select('commune_id', __('Commune / Sangkat'))->rules('required')->options(function(){
             return Commune::all()->pluck('commune_name','id');
         });
-        $form->text('village_name', __('Village Name'));
-        
+        $form->text('village_name', __('Village Name'))->rules('required');
+
         $form->footer(function ($footer) {
             // disable reset btn
-            $footer->disableReset();
+            // $footer->disableReset();
             // disable `View` checkbox
             $footer->disableViewCheck();
             // disable `Continue editing` checkbox
             $footer->disableEditingCheck();
             // disable `Continue Creating` checkbox
             $footer->disableCreatingCheck();
-        
+
         });
 
 
