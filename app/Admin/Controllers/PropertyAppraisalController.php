@@ -545,7 +545,7 @@ class PropertyAppraisalController extends AdminController
                  return Branch::all()->pluck('branch_name','branch_code');
             });
             $form->date('requested_date', __('Requested Date'))->rules('required')->attribute(['style' => 'width: 100%;']);
-            if (User::isVerifierRole() || User::isApproverRole()){
+            if (User::isVerifierRole() || User::isApproverRole() || User::isAdminRole()){
                 $form->date('reported_date',__('Reported Date'))->rules('required')->attribute(['style' => 'width: 100%;']);
             } else {
                 $form->date('reported_date',__('Reported Date'))->disable()->attribute(['style' => 'width: 100%;']);
@@ -553,7 +553,7 @@ class PropertyAppraisalController extends AdminController
 
             $form->text('cif_no', __('CIF No'))->inputmask(['mask' => '9999999999']);
             $form->currency('appraisal_certificate_fee',__('Appraisal Certificate Fee'))->attribute(['style' => 'width: 100%;']);
-            if (User::isVerifierRole() || User::isApproverRole()){
+            if (User::isVerifierRole() || User::isApproverRole() || User::isAdminRole()){
                 $form->text('rm_name', __('RM Name'))->rules('required');
             } else{
                 $form->text('rm_name', __('RM Name'))->disable();
@@ -621,7 +621,6 @@ class PropertyAppraisalController extends AdminController
             $form->image('back_photo',__('Title Photo Back'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
             $form->image('id_front_photo',__('ID Photo Front'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
             $form->image('id_back_photo',__('ID Photo Back'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
-            // $form->multipleImage('photos', __('Gallery'))->removable()->uniqueName();
 
             $form->text('strength',__('Strength'));
             $form->text('weakness',__('Weakness'));

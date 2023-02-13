@@ -45,8 +45,8 @@ class User extends Authenticatable
 
     static function isVerifierRole(){
         $roles = Auth()->user()->roles()->get();
-        
-        foreach($roles as $role){ 
+
+        foreach($roles as $role){
             if(strtoupper($role['name']) == 'VERIFIER') return true;
         }
 
@@ -55,8 +55,8 @@ class User extends Authenticatable
 
     static function isApproverRole(){
         $roles = Auth()->user()->roles()->get();
-        
-        foreach($roles as $role){ 
+
+        foreach($roles as $role){
             if(strtoupper($role['name']) == 'APPROVER') return true;
         }
 
@@ -65,9 +65,19 @@ class User extends Authenticatable
 
     static function isRmRole(){
         $roles = Auth()->user()->roles()->get();
-        
-        foreach($roles as $role){ 
+
+        foreach($roles as $role){
             if(strtoupper($role['name']) == 'RM') return true;
+        }
+
+        return false;
+    }
+
+    static function isAdminRole(){
+        $roles = Auth()->user()->roles()->get();
+
+        foreach($roles as $role){
+            if(strtoupper($role['name']) == 'ADMINISTRATOR') return true;
         }
 
         return false;

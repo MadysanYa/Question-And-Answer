@@ -31,7 +31,7 @@ class BoreyController extends AdminController
         $grid->column('id', __('ID'));
       //  $grid->column('region_code', __('Region code'))->editable()->sortable();
         $grid->column('borey_name', __('Borey Name'))->editable()->sortable();
-		
+
         $grid->disableExport();
         $grid->disableFilter();
         $grid->quickSearch('id','borey_name');
@@ -65,13 +65,13 @@ class BoreyController extends AdminController
      *
      * @return Form
      */
-	 
+
     protected function form()
     {
         $form = new Form(new Borey());
-   
-        $form->text('borey_name', __('Borey Name'));
-        
+
+        $form->text('borey_name', __('Borey Name'))->rules('required');
+
         $form->footer(function ($footer) {
             // disable reset btn
             //$footer->disableReset();
@@ -81,7 +81,7 @@ class BoreyController extends AdminController
             $footer->disableEditingCheck();
             // disable `Continue Creating` checkbox
             $footer->disableCreatingCheck();
-        
+
         });
 
 
