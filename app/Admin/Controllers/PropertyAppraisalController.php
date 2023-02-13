@@ -273,6 +273,8 @@ class PropertyAppraisalController extends AdminController
             $model->where('id', $query);
             $model->orWhere('collateral_owner', $query);
             $model->orWhere('telephone', 'like', "%{$query}%");
+            $model->orWhere('property_reference', 'like', "%{$query}%");
+            // IF YOU NEED MORE SEARCH FIELDS BELOW THIS COMMAND
             $model->orWhereHas('user', function($q) use($query) {
                 $q->where('name', 'like', "%{$query}%")
                 ->orWhere('id', 'like', "%{$query}%");

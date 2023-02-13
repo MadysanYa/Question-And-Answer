@@ -232,6 +232,9 @@ class PropertyResearchConteroller extends AdminController
 
         $grid->quickSearch(function ($model, $query) {
             $model->where('id', $query);
+            $model->orWhere('contact_no', 'like', "%{$query}%");
+            $model->orWhere('property_reference', 'like', "%{$query}%");
+            // IF YOU NEED MORE SEARCH FIELDS BELOW THIS COMMAND
             $model->orWhereHas('user', function($q) use($query) {
                 $q->where('name', 'like', "%{$query}%")
                 ->orWhere('id', 'like', "%{$query}%");
