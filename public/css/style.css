@@ -81,5 +81,5 @@ label {
 
 .control-label {
     text-align: left !important;
-    flex-basis: fit-content !important;
+    /* flex-basis: fit-content !important; */
 }
