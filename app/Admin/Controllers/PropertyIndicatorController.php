@@ -411,14 +411,15 @@ class PropertyIndicatorController extends AdminController
                  return Branch::all()->pluck('branch_name','branch_code');});
             $form->date('requested_date', __('Requested Date'))->rules('required')->attribute(['style' => 'width: 100%;']);
 
-            if (User::isVerifierRole() || User::isApproverRole()){
+            if (User::isVerifierRole() || User::isApproverRole() || User::isAdminRole()){
                 $form->date('reported_date',__('Reported Date'))->rules('required')->attribute(['style' => 'width: 100%;']);
             } else {
                 $form->date('reported_date',__('Reported Date'))->disable()->attribute(['style' => 'width: 100%;']);
             };
 
             $form->text('cif_no', __('CIF No.'))->inputmask(['mask' => '9999999999']);
-            if (User::isVerifierRole() || User::isApproverRole()){
+
+            if (User::isVerifierRole() || User::isApproverRole() || User::isAdminRole()){
                 $form->text('rm_name', __('RM Name'))->rules('required');
             } else{
                 $form->text('rm_name', __('RM Name'))->disable();

@@ -13,22 +13,22 @@ use Illuminate\Support\Facades\DB;
 
 class PropertyIndicatorController extends Controller
 {
-   
-	 
-    public function verified(Request $request)
+
+
+    public function verified(Request $request) 
     {
-        
-      
+
+
         $propertyIndicator = PropertyIndicator::findOrFail($request->id);
         $propertyIndicator->is_verified = $request->value;
         $propertyIndicator->save();
         return Redirect::to(url()->previous());
-        
+
     }
-    
+
     public function approved(Request $request)
     {
-        
+
         //echo $request->id;
         $propertyIndicator = PropertyIndicator::findOrFail($request->id);
         $propertyIndicator->is_approved = $request->value;
