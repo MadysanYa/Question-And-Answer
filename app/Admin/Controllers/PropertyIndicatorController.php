@@ -228,6 +228,8 @@ class PropertyIndicatorController extends AdminController
             $model->where('id', $query);
             $model->orWhere('collateral_owner', $query);
             $model->orWhere('telephone', 'like', "%{$query}%");
+            $model->orWhere('property_reference', 'like', "%{$query}%");
+            // IF YOU NEED MORE SEARCH FIELDS BELOW THIS COMMAND
             $model->orWhereHas('user', function($q) use($query) {
                 $q->where('name', 'like', "%{$query}%")
                 ->orWhere('id', 'like', "%{$query}%");
@@ -411,14 +413,15 @@ class PropertyIndicatorController extends AdminController
                  return Branch::all()->pluck('branch_name','branch_code');});
             $form->date('requested_date', __('Requested Date'))->rules('required')->attribute(['style' => 'width: 100%;']);
 
-            if (User::isVerifierRole() || User::isApproverRole()){
+            if (User::isVerifierRole() || User::isApproverRole() || User::isAdminRole()){
                 $form->date('reported_date',__('Reported Date'))->rules('required')->attribute(['style' => 'width: 100%;']);
             } else {
                 $form->date('reported_date',__('Reported Date'))->disable()->attribute(['style' => 'width: 100%;']);
             };
 
             $form->text('cif_no', __('CIF No.'))->inputmask(['mask' => '9999999999']);
-            if (User::isVerifierRole() || User::isApproverRole()){
+
+            if (User::isVerifierRole() || User::isApproverRole() || User::isAdminRole()){
                 $form->text('rm_name', __('RM Name'))->rules('required');
             } else{
                 $form->text('rm_name', __('RM Name'))->disable();
