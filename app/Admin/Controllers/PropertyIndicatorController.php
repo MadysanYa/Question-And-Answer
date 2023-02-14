@@ -475,8 +475,8 @@ class PropertyIndicatorController extends AdminController
 
             $form->select('village_id', __('Village'))->rules('required')->options(function(){
                 return Village::all()->pluck('village_name','id');});
-            $form->text('latitude', __('Latitude'))->rules('required');
-            $form->text('longtitude', __('Longtitude'))->rules('required');
+            $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.999999'])->rules('required');
+            $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.999999'])->rules('required');
             $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
             $form->image('right_photo',__('Access Road Photo Right'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
             $form->image('left_photo',__('Access Road Photo Left'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
@@ -493,7 +493,6 @@ class PropertyIndicatorController extends AdminController
             $form->text('total_value',__('Total Value'));
             $form->button('comparable_reference', __('Comparable Reference'))->attribute('id', 'show-comparable-reference-modal')->on('click', '$("#modal-comparable-reference").modal();');
             $form->html(view('admin.property.property_appraisal_script'));
-            $form->html(view('admin.property.property_latitude_longtitude_script'));
         });
         // Modal Comparable Reference
         Admin::html('
