@@ -417,7 +417,7 @@ class PropertyResearchConteroller extends AdminController
             $form->currency('property_market_value', __('Property Market Value '))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->select('commune_id', __('Commune / Sangkat'))->rules('required')->options(function(){
                 return Commune::all()->pluck('commune_name','id');})->load('village_id', env('APP_URL') . '/public/api/village');
-            $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.9999999'])->rules('required');
+            $form->text('latitude', __('Latitude'))->rules('required');
 
 
         });
@@ -434,8 +434,9 @@ class PropertyResearchConteroller extends AdminController
                 return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
             $form->select('village_id', __('Village'))->rules('required')->options(function(){
                 return Village::all()->pluck('village_name','id');});
-            $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.9999999'])->rules('required');
-            $form->html(view('admin.propertyAppraisal.property_appraisal_script'));
+            $form->text('longtitude', __('Longtitude'))->rules('required');
+            $form->html(view('admin.property.property_appraisal_script'));
+            $form->html(view('admin.property.property_latitude_longtitude_script'));
         });
 
         $form->footer(function ($footer) {
