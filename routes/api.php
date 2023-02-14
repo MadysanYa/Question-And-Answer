@@ -61,5 +61,5 @@ Route::get('/approve_appraisal/{id}/{value}', [PropertyAppraisalController::clas
 Route::get('pdf', [PdfController::class, 'index']);
 Route::get('google-autocomplete', [GoogleController::class, 'index']);
 
-Route::get('pdfappraisal', [PdfAppraisalController::class, 'index']);
+Route::get('pdfappraisal/{id}', [PdfAppraisalController::class, 'index']);
 Route::get('pdfindicator/{id}', [PdfIndicatorController::class, 'index']);
