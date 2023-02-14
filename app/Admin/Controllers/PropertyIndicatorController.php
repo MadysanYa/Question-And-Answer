@@ -165,7 +165,7 @@ class PropertyIndicatorController extends AdminController
         $grid->column('comparable_cif_no',__('CIF No./ Name'))->sortable();
         $grid->column('geo_code',__('Geo Code'))->sortable();
         $grid->column('size',__('Size'))->sortable();
-        $grid->column('value_per_sqm',__('Value per_sq. m'))->sortable();
+        $grid->column('value_per_sqm',__('Value Per Sq. m'))->sortable();
         $grid->column('total_value',__('Total Value'))->sortable();
         $grid->column('user_id',__('Created By'))->sortable()->display(function($id){
             $userName = UserAdmin::where('id', $id)->first();
@@ -222,9 +222,9 @@ class PropertyIndicatorController extends AdminController
             }
         });
 
-        $grid->column('testing',__('Tester'))->display(function(){
+        $grid->column(__('To PDF'))->display(function(){
             $id = $this->id;
-            return '<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdfindicator/' . $id . '">To PDF</a>';
+            return '<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdfindicator/' . $id . '">Download</a>';
         });
 
         // $grid->column('is_verified',__('Verified'))->display(function($is_verified){
@@ -236,7 +236,7 @@ class PropertyIndicatorController extends AdminController
         //                         <span>&nbsp;&nbsp;Verify</span>
         //                     </a>
 
-        $grid->fixColumns(0, -3);
+        $grid->fixColumns(0, -4);
 
         $grid->quickSearch(function ($model, $query) {
             $model->where('id', $query);
@@ -505,7 +505,7 @@ class PropertyIndicatorController extends AdminController
             $form->text('comparable_cif_no',__('CIF No./ Name'));
             $form->text('geo_code',__('Geo Code'));
             $form->text('size',__('Size'));
-            $form->text('value_per_sqm',__('Value per_sq. m'));
+            $form->text('value_per_sqm',__('Value Per Sq. m'));
             $form->text('total_value',__('Total Value'));
             $form->button('comparable_reference', __('Comparable Reference'))->attribute('id', 'show-comparable-reference-modal')->on('click', '$("#modal-comparable-reference").modal();');
             $form->html(view('admin.property.property_appraisal_script'));
