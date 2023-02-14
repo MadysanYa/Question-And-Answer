@@ -302,7 +302,7 @@
                         <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
                             Tittle No.
                         </span>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
+                        <span style='margin-top: 2px; float: right; font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
                             :
                         </span>
                     </p>
@@ -317,7 +317,7 @@
                         <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
                             Customer Name
                         </span>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
+                        <span style='margin-top: 2px; float: right; font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
                             :
                         </span>
                     </p>
@@ -335,7 +335,7 @@
                         <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
                             Property Type
                         </span>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
+                        <span style='margin-top: 2px; float: right; font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
                             :
                         </span>
                     </p>
@@ -350,7 +350,7 @@
                         <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
                             Collateral Owner
                         </span>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
+                        <span style='margin-top: 2px; float: right; font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
                             :
                         </span>
                     </p>
@@ -368,7 +368,7 @@
                         <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
                             Land Area
                         </span>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
+                        <span style='margin-top: 2px; float: right; font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
                             :
                         </span>
                     </p>
@@ -383,7 +383,7 @@
                         <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
                             Building Status
                         </span>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
+                        <span style='margin-top: 2px; float: right; font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
                             :
                         </span>
                     </p>
@@ -401,7 +401,7 @@
                         <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
                             Estimate Build Up Area
                         </span>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
+                        <span style='margin-top: 2px; float: right; font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
                             :
                         </span>
                     </p>
@@ -418,7 +418,7 @@
                         <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
                             Geo Code
                         </span>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
+                        <span style='margin-top: 2px; float: right; font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
                             :
                         </span>
                     </p>
@@ -437,8 +437,8 @@
             <tr style='height:200pt'>
                 <td position: absolute;>
                     <!-- <img src="{{ storage_path('app/public/images/cambodia.png') }}" style="height: 260px; width: 160pt;"> -->
-                    <img src="$image = asset('upload/'.$indicator->front_photo);" style="height: 260px; width: 160pt;">
-                    <!-- <img src="{{$indicator->front_photo}}" style="height: 260px; width: 160pt;"> -->
+                    <!-- <img src="$image = asset('upload/'.$indicator->front_photo);" style="height: 260px; width: 160pt;"> -->
+                    <img src="{{asset('upload/'.$indicator->front_photo)}}" style="height: 260px; width: 160pt;">
                     <!-- $image = asset('upload/'.$propertyIndicator->front_photo); -->
                 </td>
                 <td position: absolute;>
@@ -975,7 +975,7 @@
                 </tr>
             </table>
 
-            <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdfindicator/116">Export to PDF</a>
+            <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdfindicator/138">Export to PDF</a>
 
         <!-- <p class=MsoNormal style='line-height:normal; margin-top: 10px;'>
                 <span style='font-size:8.0pt; font-family:"OneShinhan Light",sans-serif; float: left;'>Prepared By:</span>
