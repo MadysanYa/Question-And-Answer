@@ -222,9 +222,9 @@ class PropertyIndicatorController extends AdminController
             }
         });
 
-        $grid->column('testing',__('Tester'))->display(function(){
+        $grid->column(__('To PDF'))->display(function(){
             $id = $this->id;
-            return '<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdfindicator/' . $id . '">To PDF</a>';
+            return '<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdfindicator/' . $id . '">Download</a>';
         });
 
         // $grid->column('is_verified',__('Verified'))->display(function($is_verified){
@@ -236,7 +236,7 @@ class PropertyIndicatorController extends AdminController
         //                         <span>&nbsp;&nbsp;Verify</span>
         //                     </a>
 
-        $grid->fixColumns(0, -3);
+        $grid->fixColumns(0, -4);
 
         $grid->quickSearch(function ($model, $query) {
             $model->where('id', $query);
