@@ -36,6 +36,19 @@ class PropertyResearch extends Model
         return $query->get()->count();
     }
 
+    /**
+     * Mutator
+     */
+    public function setLatitudeAttribute($value)
+    {
+        $this->attributes['latitude'] = trim($value,"_");
+    }
+
+    public function setLongtitudeAttribute($value)
+    {
+        $this->attributes['longtitude'] = trim($value,"_");
+    }
+
     // public function setPhotosAttribute($photos)
     // {
     //     if (is_array($photos)) {
