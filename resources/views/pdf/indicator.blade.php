@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Internal Indication Report</title>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.js"></script> -->
     <script src="../../resources/js/html2canvas.js"></script>
     <script src="../../resources/js/html2canvas.min.js"></script>
     <script src="../../resources/js/jspdf.js"></script>
@@ -180,7 +180,7 @@
                     <td style="border:none; padding-left: 25px; width:90pt; text-align:left;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                             <span style='font-size:11px;font-family:   "OneShinhan Light",sans-serif;'>
-                                    IAI-23-{{ $indicator->id }}
+                                {{ $indicator->property_reference }}
                             </span>
                         </p>
                     </td>
@@ -197,7 +197,7 @@
                     <td style="border:none; width:50pt; padding:0in 5.4pt 0in 5.4pt;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:left;'>
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;color:black;'>
-                                TK
+                                {{ $indicator->branch_code }}
                             </span>
                         </p>
                     </td>
@@ -216,7 +216,7 @@
                     <td style="border:none; padding-left: 25px; width:50pt; text-align:left;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                             <span style='font-size:11px;font-family:   "OneShinhan Light",sans-serif;'>
-                                8-Feb-23
+                                {{ $indicator->requested_date }}
                             </span>
                         </p>
                     </td>
@@ -233,7 +233,7 @@
                     <td style="border:none; width:50pt; padding:0in 5.4pt 0in 5.4pt;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:left;'>
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;color:black;'>
-                                Rothana
+                                {{ $indicator->rm_name }}
                             </span>
                         </p>
                     </td>
@@ -252,7 +252,7 @@
                     <td style="border:none; padding-left: 25px; width:50pt;text-align:left;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                             <span style='font-size:11px;font-family:   "OneShinhan Light",sans-serif;'>
-                                8-Feb-23	
+                                {{ $indicator->reported_date }}
                             </span>
                         </p>
                     </td>
@@ -269,7 +269,7 @@
                     <td style="border:none; width:50pt; padding:0in 5.4pt 0in 5.4pt;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:left;'>
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;color:black;'>
-                                070 726 644
+                                {{ $indicator->telephone }}
                             </span>
                         </p>
                     </td>
@@ -277,21 +277,6 @@
             </table>
             <br>
 
-    <!-- <div>
-        <p class=MsoListParagraphCxSpFirst style='margin-top:0in; margin-bottom:8.0pt; margin-left:0in'>
-            <span style='font-size:8.0pt; line-height:107%; font-family:"OneShinhan Light",sans-serif'>Reference No. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IAI-23-000086</span>
-            <span style='margin-left: 240px; font-size:8.0pt; line-height:107%; font-family:"OneShinhan Light",sans-serif;'>Branch Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CCV</span>
-
-        </p>
-        <p class=MsoListParagraphCxSpMiddle style='margin-top:0in; margin-bottom:8.0pt; margin-left:0in'>
-            <span style='font-size:8.0pt; line-height: 107%; font-family:"OneShinhan Light",sans-serif'>Requested Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 19-Jan-23</span>
-            <span style='margin-left: 260px; font-size:8.0pt;line-height:107%;font-family:"OneShinhan Light",sans-serif;'>Loan Officer &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Kim Sron</span>
-        </p>
-        <p class=MsoListParagraphCxSpMiddle style='margin-top:0in; margin-bottom:8.0pt; margin-left:0in'>
-            <span style='font-size:8.0pt;line-height: 107%; font-family:"OneShinhan Light",sans-serif'>Telephone  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 086 88 10 88</span>
-            <span style='margin-left: 246px; font-size:8.0pt;line-height:107%; font-family:"OneShinhan Light",sans-serif;'>Reported Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 19-Jan-23</span>
-        </p>    
-    </div> -->
     <div align = center>
         <table  class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 style='width:527.25pt;border-collapse:collapse;border:none'>
             <!-- Head 1 -->
@@ -306,7 +291,7 @@
             <tr style='height:13.35pt'>
                 <td colspan=6 style='width:527.25pt; border:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;' >
                     <p class=MsoListParagraphCxSpFirst style='margin-left:0in'>
-                        <span style='font-size:8.0pt;line-height:107%;font-family:"OneShinhan Light",sans-serif'>Address: At Borey Tsa, Svay Odum Village, Sangkat Ponsang, Khan Preak Pnov, Phnom Penh City</span>
+                        <span style='font-size:8.0pt;line-height:107%;font-family:"OneShinhan Light",sans-serif'>Address: {{ $indicator->property_address }}</span>
                     </p>
                 </td>
             </tr>
@@ -314,22 +299,32 @@
             <tr style='height:13.35pt'>
                 <td valign=top style='width:100pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Tittle No.:</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
+                            Tittle No.
+                        </span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
+                            :
+                        </span>
                     </p>
                 </td>
                 <td valign=top style='width:140pt; border:solid windowtext 1.0pt; border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>12120403-0010</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->land_title_no }}</span>
                     </p>
                 </td>
                 <td valign=top style='width:100pt; border:solid windowtext 1.0pt; border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Customer Name :</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
+                            Customer Name
+                        </span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
+                            :
+                        </span>
                     </p>
                 </td>
                 <td colspan=6 style='width:140pt; border:solid windowtext 1.0pt; border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpLast style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'></span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->customer_name }}</span>
                     </p>
                 </td>
             </tr>
@@ -337,22 +332,32 @@
             <tr style='height:13.35pt'>
                 <td valign=top style='width:100pt;border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Property Type :</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
+                            Property Type
+                        </span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
+                            :
+                        </span>
                     </p>
                 </td>
                 <td valign=top style='width:100pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2-Stories Villa</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->property_type }}</span>
                     </p>
                 </td>
                 <td valign=top style='width:100pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Collateral Owner :</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
+                            Collateral Owner
+                        </span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
+                            :
+                        </span>
                     </p>
                 </td>
                 <td colspan=6 style='width:180pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpLast style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'></span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->collateral_owner }}</span>
                     </p>
                 </td>
             </tr>
@@ -360,22 +365,32 @@
             <tr style='height:13.35pt'>
                 <td valign=top style='width:100pt;border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Land Area :</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
+                            Land Area
+                        </span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
+                            :
+                        </span>
                     </p>
                 </td>
                 <td valign=top style='width:100pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>120 sq.m</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->land_size }}</span>
                     </p>
                 </td>
                 <td valign=top style='width:100pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Building Status :</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
+                            Building Status
+                        </span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
+                            :
+                        </span>
                     </p>
                 </td>
                 <td colspan=6 style='width:180pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpLast style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>100% Completed</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->building_status }}</span>
                     </p>
                 </td>
             </tr>
@@ -383,22 +398,36 @@
             <tr style='height:13.35pt'>
                 <td valign=top style='width:100pt;border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Estimate Build Up Area :</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
+                            Estimate Build Up Area
+                        </span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
+                            :
+                        </span>
                     </p>
                 </td>
                 <td valign=top style='width:100pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>8m x 10m x 2F = 160 sq.m</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
+                            <!-- No Data -->
+                        </span>
                     </p>
                 </td>
                 <td valign=top style='width:100pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Geo Code :</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
+                            Geo Code
+                        </span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif; text-align: right;'>
+                            :
+                        </span>
                     </p>
                 </td>
                 <td colspan=6 style='width:180pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt'>
                     <p class=MsoListParagraphCxSpLast style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>11.6447715,104.7594764</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
+                            {{ $indicator->geo_code }}
+                        </span>
                     </p>
                 </td>
             </tr>
@@ -407,7 +436,10 @@
         <table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 style='width:527.25pt;border-collapse:collapse;border:none'>
             <tr style='height:200pt'>
                 <td position: absolute;>
-                    <img src="{{ storage_path('app/public/images/cambodia.png') }}" style="height: 260px; width: 160pt;">
+                    <!-- <img src="{{ storage_path('app/public/images/cambodia.png') }}" style="height: 260px; width: 160pt;"> -->
+                    <img src="$image = asset('upload/'.$indicator->front_photo);" style="height: 260px; width: 160pt;">
+                    <!-- <img src="{{$indicator->front_photo}}" style="height: 260px; width: 160pt;"> -->
+                    <!-- $image = asset('upload/'.$propertyIndicator->front_photo); -->
                 </td>
                 <td position: absolute;>
                     <img src="{{ storage_path('app/public/images/cambodia.png') }}" style="height: 260px; width: 365pt;">
@@ -517,45 +549,50 @@
                     </p>
                 </td>
             </tr>
-            
-            <!-- Wrong -->
-            <!-- <tr style='height:13.35pt'>
-                <td valign=top style='width:10pt; border:solid windowtext 1.0pt; border-top:none; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>1</span>
+
+            <!--  -->
+            <tr style='height:13.05pt'>
+                <td valign=top style='width:5pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpFirst align=center style='margin:0in;text-align: center;line-height:normal'>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->id }}</span>
                     </p>
                 </td>
-                <td valign=top style='width:70pt; border-top:none; border-left:none; border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Land</span>
+                <td valign=top style='width:60pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpFirst align=center style='margin:0in;text-align: center;line-height:normal'>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->property_type }}</span>
                     </p>
                 </td>
-                <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>12120403-0010</span>
+                <!-- Merge Two Row -->
+                <td rowspan="2" valign=top style='background-color: #ff98002e; width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
+                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif;'>{{ $indicator->land_title_no }}</span>
                     </p>
                 </td>
-                <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'></span>
+                <!-- Merge Two Row -->
+                <td rowspan="2" valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
+                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>
+                            <!-- No Data  -->
+                        </span>
                     </p>
                 </td>
-                <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>120.00</span>
+                <td valign=top style='background-color: #ff98002e; width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
+                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->size }}</span>
                     </p>
                 </td>
-                <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 250.00</span>
+                <td valign=top style='background-color: #ff98002e; width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center;line-height:normal'>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->value_per_sqm }}</span>
                     </p>
                 </td>
-                <td colspan=6 style='width:81pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 30,000.00</span>
+                <td colspan=6 style='width:70pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center;line-height:normal'>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->total_value }}</span>
                     </p>
                 </td>
-            </tr> -->
+            </tr>
+            <!--  -->
 
             <!-- Row 2 -->
             <tr style='height:13.05pt'>
@@ -564,28 +601,29 @@
                         <span style='color: red; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>Sub-total</span>
                     </p>
                 </td>
-                <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                <!-- <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:left; line-height:normal'>
-                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>12120403-0010</span></p>
+                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'></span>
+                    </p>
                 </td>
                 <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
                         <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'></span>
                     </p>
-                </td>
+                </td> -->
                 <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:right; line-height:normal'>
-                        <span style='color: red; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>120.00</span>
+                        <span style='color: red; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->size }}</span>
                     </p>
                 </td>
                 <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: right; line-height:normal'>
-                        <span style='color: red; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>$ 250.00</span>
+                        <span style='color: red; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->value_per_sqm }}</span>
                     </p>
                 </td>
                 <td colspan=6 style='width:70pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: right; line-height:normal'>
-                        <span style='color: red; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>$ 30,000.00</span>
+                        <span style='color: red; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->total_value }}</span>
                     </p>
                 </td>
             </tr>
@@ -599,83 +637,90 @@
                 </td>
             </tr>
 
-            <!-- Wrong -->
-            <!-- <tr style='height:13.35pt'>
-                <td valign=top style='width:10pt; border:solid windowtext 1.0pt; border-top:none; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>1</span>
+            <!--  -->
+            <tr style='height:13.05pt'>
+                <td valign=top style='width:5pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpFirst align=center style='margin:0in;text-align: center;line-height:normal'>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->id }}</span>
                     </p>
                 </td>
-                <td valign=top style='width:70pt; border-top:none; border-left:none; border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Villa (L)</span>
+                <td valign=top style='width:60pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpFirst align=center style='margin:0in;text-align: center;line-height:normal'>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->property_type }}</span>
                     </p>
                 </td>
-                <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>Year(s)</span>
-                    </p>
-                </td>
-                <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>250</span>
-                    </p>
-                </td>
-                <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>160.00</span>
-                    </p>
-                </td>
-                <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 250.00</span>
-                    </p>
-                </td>
-                <td colspan=6 style='width:81pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 40,000.00</span>
-                    </p>
-                </td>
-            </tr> -->
 
-            <!-- Wrong -->
-            <!-- <tr style='height:13.35pt'>
-                <td valign=top style='width:10pt; border:solid windowtext 1.0pt; border-top:none; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'></span>
+                <td valign=top style='background-color: #ff98002e; width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
+                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->land_title_no }}</span>
                     </p>
                 </td>
-                <td valign=top style='width:70pt; border-top:none; border-left:none; border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'></span>
+
+                <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
+                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>
+                            <!-- No Data -->
+                        </span>
                     </p>
                 </td>
-                <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'></span>
+                <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
+                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->size }}</span>
                     </p>
                 </td>
-                <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'></span>
+                <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center;line-height:normal'>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->value_per_sqm }}</span>
                     </p>
                 </td>
-                <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'></span>
+                <td colspan=6 style='width:70pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center;line-height:normal'>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->total_value }}</span>
                     </p>
                 </td>
-                <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'></span>
+            </tr>
+            <tr style='height:13.05pt'>
+                <td valign=top style='width:5pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpFirst align=center style='margin:0in;text-align: center;line-height:normal'>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->id }}</span>
                     </p>
                 </td>
-                <td colspan=6 style='width:81pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'></span>
+                <td valign=top style='width:60pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpFirst align=center style='margin:0in;text-align: center;line-height:normal'>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->property_type }}</span>
                     </p>
                 </td>
-            </tr> -->
+
+                <td valign=top style='background-color: #ff98002e; width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
+                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->land_title_no }}</span>
+                    </p>
+                </td>
+                
+                <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
+                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>
+                            <!-- No Data -->
+                        </span>
+                    </p>
+                </td>
+                <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
+                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->size }}</span>
+                    </p>
+                </td>
+                <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center;line-height:normal'>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->value_per_sqm }}</span>
+                    </p>
+                </td>
+                <td colspan=6 style='width:70pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center;line-height:normal'>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->total_value }}</span>
+                    </p>
+                </td>
+            </tr>
+            <!--  -->
 
             <!-- Row 2 -->
             <tr style='height:13.05pt'>
@@ -686,27 +731,29 @@
                 </td>
                 <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'></span>
+                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->land_title_no }}</span>
                     </p>
                 </td>
                 <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'></span>
+                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>
+                            <!-- No Data -->
+                        </span>
                     </p>
                 </td>
                 <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <span style='color: red; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>160.00</span>
+                        <span style='color: red; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->size }}</span>
                     </p>
                 </td>
                 <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: right; line-height:normal'>
-                        <span style='color: red; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>$ 250.00</span>
+                        <span style='color: red; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->value_per_sqm }}</span>
                     </p>
                 </td>
                 <td colspan=6 style='width:70pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: right; line-height:normal'>
-                        <span style='color: red; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>$ 40,000.00</span>
+                        <span style='color: red; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->total_value }}</span>
                     </p>
                 </td>
             </tr>
@@ -720,263 +767,20 @@
                 </td>
                 <td valign=top style='width:50pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'></span>
+                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>
+                            <!-- No Data -->
+                        </span>
                     </p>
                 </td>
                 <td colspan=6 style='width:200pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                     <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align: right; line-height:normal'>
-                        <span style='color: red; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>$ 70,000.00</span>
+                        <span style='color: red; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->total_value }}</span>
                     </p>
                 </td>
 
             </tr>
             <!-- End  -->
 
-
-
-            <!-- <tr style='height:13.35pt'>
-                <td valign=top style='width:20pt; border:solid windowtext 1.0pt; border-top:none; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2</span>
-                    </p>
-                </td>
-                <td valign=top style='width:70pt; border-top:none; border-left:none; border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2010543335</span>
-                    </p>
-                </td>
-                <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>11.6448, 104.76</span>
-                    </p>
-                </td>
-                <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>137.00</span>
-                    </p>
-                </td>
-                <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$260.00</span>
-                    </p>
-                </td>
-                <td valign=top style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 72,420.00</span>
-                    </p>
-                </td>
-                <td colspan=6 style='width:71pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 72,420.00</span>
-                    </p>
-                </td>
-            </tr> -->
-
-            <!-- Row 3 -->
-            <!-- <tr style='height:13.35pt'>
-                <td width=26 valign=top style='width:19.6pt;border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2</span>
-                    </p>
-                </td>
-                <td width=87 valign=top style='width:65.2pt;border-top:none;border-left:none; border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2010543335</span>
-                    </p>
-                </td>
-                <td width=161 valign=top style='width:120.5pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>11.6448, 104.76</span>
-                    </p>
-                </td>
-                <td width=104 valign=top style='width:77.95pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>137.00</span>
-                    </p>
-                </td>
-                <td width=151 valign=top style='width:113.4pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$260.00</span>
-                    </p>
-                </td>
-                <td width=160 valign=top style='width:120.15pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 72,420.00</span>
-                    </p>
-                </td>
-                <td width=160 valign=top style='width:120.15pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 72,420.00</span>
-                    </p>
-                </td>
-            </tr> -->
-            <!-- Row 4 -->
-            <!-- <tr style='height:13.05pt'>
-                <td width=113 colspan=2 valign=top style='width:84.8pt;border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpFirst align=center style='margin:0in;text-align: center;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>CIF No./Name</span>
-                    </p>
-                </td>
-                <td width=161 valign=top style='width:120.5pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>Geo Code</span></p>
-                </td>
-                <td width=104 valign=top style='width:77.95pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>Size</span>
-                    </p>
-                </td>
-                <td width=151 valign=top style='width:113.4pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>Value per Sqm</span>
-                    </p>
-                </td>
-                <td width=160 valign=top style='width:120.15pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>Total Value</span>
-                    </p>
-                </td>
-                                <td width=160 valign=top style='width:120.15pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>Total Value</span>
-                    </p>
-                </td>
-            </tr> -->
-            <!-- Title 2 -->
-            <!-- <tr style='height:13.35pt'>
-                <td width=689 colspan=8 style='width:113.15pt;border:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt; background:#2196f3a1' >
-                    <p class=MsoListParagraphCxSpFirst style='margin-left:0in' align=center>
-                        <span style='font-size:8.0pt;line-height:107%;font-family:"OneShinhan Light",sans-serif'>Building</span>
-                    </p>
-                </td>
-            </tr> -->
-            <!-- Row 5 -->
-            <!-- <tr style='height:13.35pt'>
-                <td width=26 valign=top style='width:19.6pt;border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2</span>
-                    </p>
-                </td>
-                <td width=87 valign=top style='width:65.2pt;border-top:none;border-left:none; border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2010543335</span>
-                    </p>
-                </td>
-                <td width=161 valign=top style='width:120.5pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>11.6448, 104.76</span>
-                    </p>
-                </td>
-                <td width=104 valign=top style='width:77.95pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>137.00</span>
-                    </p>
-                </td>
-                <td width=151 valign=top style='width:113.4pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$260.00</span>
-                    </p>
-                </td>
-                <td width=160 valign=top style='width:120.15pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 72,420.00</span>
-                    </p>
-                </td>
-                <td width=160 valign=top style='width:120.15pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 72,420.00</span>
-                    </p>
-                </td>
-            </tr> -->
-            <!-- Row 6 -->
-            <!-- <tr style='height:13.35pt'>
-                <td width=26 valign=top style='width:19.6pt;border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2</span>
-                    </p>
-                </td>
-                <td width=87 valign=top style='width:65.2pt;border-top:none;border-left:none; border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2010543335</span>
-                    </p>
-                </td>
-                <td width=161 valign=top style='width:120.5pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>11.6448, 104.76</span>
-                    </p>
-                </td>
-                <td width=104 valign=top style='width:77.95pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>137.00</span>
-                    </p>
-                </td>
-                <td width=151 valign=top style='width:113.4pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$260.00</span>
-                    </p>
-                </td>
-                <td width=160 valign=top style='width:120.15pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 72,420.00</span>
-                    </p>
-                </td>
-                <td width=160 valign=top style='width:120.15pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                    <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$ 72,420.00</span>
-                    </p>
-                </td>
-            </tr> -->
-            <!-- Row 7 -->
-            <!-- <tr style='height:13.05pt'>
-                <td width=113 colspan=2 valign=top style='width:84.8pt;border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpFirst align=center style='margin:0in;text-align: center;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>CIF No./Name</span>
-                    </p>
-                </td>
-                <td width=161 valign=top style='width:120.5pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>Geo Code</span></p>
-                </td>
-                <td width=104 valign=top style='width:77.95pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>Size</span>
-                    </p>
-                </td>
-                <td width=151 valign=top style='width:113.4pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>Value per Sqm</span>
-                    </p>
-                </td>
-                <td width=160 valign=top style='width:120.15pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>Total Value</span>
-                    </p>
-                </td>
-                                <td width=160 valign=top style='width:120.15pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>Total Value</span>
-                    </p>
-                </td>
-            </tr> -->
-            <!-- Row 2 -->
-            <!-- <tr style='height:13.05pt'>
-                <td width=113 colspan=3 valign=top style='width:84.8pt;border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpFirst align=center style='margin:0in;text-align: center;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>CIF No./Name</span>
-                    </p>
-                </td>
-                <td width=104 valign=top style='width:77.95pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>Size</span>
-                    </p>
-                </td>
-                <td width=151 colspan=4 style='width:113.4pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
-                    <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:center;line-height:normal'>
-                        <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>Value per Sqm</span>
-                    </p>
-                </td>
-
-            </tr> -->
         </table>
         <br>
         <!-- REFERENCE -->
@@ -1020,64 +824,64 @@
             <tr style='height:13.35pt'>
                 <td valign=top style='width:10pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>1</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->property_reference }}</span>
                     </p>
                 </td>
                 <td valign=top style='width:40pt; border-top:none;border-left:none; border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2010486885</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->property_reference }}</span>
                     </p>
                 </td>
                 <td valign=top style='width:40pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>11.6447, 104.759</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->property_reference }}</span>
                     </p>
                 </td>
                 <td valign=top style='width:40pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>120.00</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->property_reference }}</span>
                     </p>
                 </td>
                 <td valign=top style='width:40pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$300.00</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->property_reference }}</span>
                     </p>
                 </td>
                 <td valign=top style='width:40pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$70,000.00</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->property_reference }}</span>
                     </p>
                 </td>
             </tr>
             <tr style='height:13.35pt'>
                 <td valign=top style='width:10pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->property_reference }}</span>
                     </p>
                 </td>
                 <td valign=top style='width:40pt; border-top:none;border-left:none; border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>2010543335</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->property_reference }}</span>
                     </p>
                 </td>
                 <td valign=top style='width:40pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>11.6448, 104.76</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->property_reference }}</span>
                     </p>
                 </td>
                 <td valign=top style='width:40pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>137.00</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->property_reference }}</span>
                     </p>
                 </td>
                 <td valign=top style='width:40pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$260.00</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->property_reference }}</span>
                     </p>
                 </td>
                 <td valign=top style='width:40pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                     <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>$72,420.00</span>
+                        <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->property_reference }}</span>
                     </p>
                 </td>
             </tr>
@@ -1087,7 +891,7 @@
             <table  class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=690 style='width:527.25pt; border-collapse:collapse;border:none'>
                 <tr>
                     <td style="width:50pt; border:0; padding:0in 5.4pt 0in 5.4pt;">
-                        <p style='margin-top:0in; margin-right:0in; margin-bottom:0in; margin-left:0in; line-height:normal; font-size:15px; font-family:"Calibri",sans-serif;text-align:left;'>
+                        <p style='margin-top:0in; margin-right:0in; margin-bottom:0in; margin-left:0in; line-height:normal; font-size:15px; font-family:"Calibri",sans-serif;text-align:left; height: 25pt;'>
                             <strong>
                                 <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;color:black;'>
                                     Prepared By:
@@ -1096,9 +900,9 @@
                         </p>
                     </td>
                     <td style="width:50pt;border:0;padding:0in 5.4pt 0in 5.4pt;text-align:center;">
-                        <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
+                        <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif; height: 25pt;'>
                             <strong>
-                                <span style='font-size:11px;font-family:   "OneShinhan Light",sans-serif;'>
+                                <span style='font-size:11px; font-family: "OneShinhan Light",sans-serif;'>
                                     Fee Charge:
                                 </span>
                                 <span style='font-size: 10.0pt;font-family:"OneShinhan Light",sans-serif;color:red'>$ 100</span>
@@ -1106,7 +910,7 @@
                         </p>
                     </td>
                     <td style="width:50pt;border:0; padding:0in 5.4pt 0in 5.4pt;">
-                        <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:right;'>
+                        <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:right; height: 25pt;'>
                             <strong>
                                 <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;color:black;'>
                                     Approved By:
@@ -1116,10 +920,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width:50pt; border:0; padding:0in 5.4pt 0in 5.4pt; height:50pt;">
+                    <td style="width:50pt; border:0; padding:0in 5.4pt 0in 5.4pt; ">
                         <p style='margin-top:0in; margin-right:0in; margin-bottom:0in; margin-left:0in; line-height:normal; font-size:15px; font-family:"Calibri",sans-serif;text-align:left;'>
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;color:black;'>
-                                Ms. Nhor Sreynet
+                                {{ $indicator->property_reference }}
                             </span>
                             <!-- <br>
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;color:black;'>
@@ -1127,22 +931,51 @@
                             </span> -->
                         </p>
                     </td>
-                    <td style="width:50pt;border:0;padding:0in 5.4pt 0in 5.4pt;height:50pt;text-align:center;">
+                    <td style="width:50pt;border:0;padding:0in 5.4pt 0in 5.4pt; text-align:center;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                             <span style='font-size:11px;font-family:   "OneShinhan Light",sans-serif;'>
                                 <!-- Mr. Kheng Nith Testing -->
                             </span>
                         </p>
                     </td>
-                    <td style="width:50pt;border:0;padding:0in 5.4pt 0in 5.4pt;height:50pt;">
+                    <td style="width:50pt;border:0;padding:0in 5.4pt 0in 5.4pt;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:right;'>
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;color:black;'>
-                                Mr. Suong Reaksmey
+                                {{ $indicator->property_reference }}
+                            </span>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:50pt; border:0; padding:0in 5.4pt 0in 5.4pt;">
+                        <p style='margin-top:0in; margin-right:0in; margin-bottom:0in; margin-left:0in; line-height:normal; font-size:15px; font-family:"Calibri",sans-serif;text-align:left;'>
+                            <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;color:black;'>
+                                {{ $indicator->property_reference }}
+                            </span>
+                            <!-- <br>
+                            <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;color:black;'>
+                                Ms. Nhor Sreynet
+                            </span> -->
+                        </p>
+                    </td>
+                    <td style="width:50pt;border:0;padding:0in 5.4pt 0in 5.4pt; text-align:center;">
+                        <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
+                            <span style='font-size:11px;font-family:   "OneShinhan Light",sans-serif;'>
+                                <!-- Mr. Kheng Nith Testing -->
+                            </span>
+                        </p>
+                    </td>
+                    <td style="width:50pt;border:0;padding:0in 5.4pt 0in 5.4pt;">
+                        <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:right;'>
+                            <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;color:black;'>
+                                {{ $indicator->property_reference }}
                             </span>
                         </p>
                     </td>
                 </tr>
             </table>
+
+            <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdfindicator/116">Export to PDF</a>
 
         <!-- <p class=MsoNormal style='line-height:normal; margin-top: 10px;'>
                 <span style='font-size:8.0pt; font-family:"OneShinhan Light",sans-serif; float: left;'>Prepared By:</span>
@@ -1181,7 +1014,7 @@
 
 <button onclick="myCanvas()">Generate!</button> -->
 <!-- <button id="genmap">Map Generate</button> -->
-<a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdfindicator/110">Export to PDF</a>
+<!-- <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdfindicator/110">Export to PDF</a> -->
 
 <!--script type="text/javascript">
 
@@ -1281,9 +1114,9 @@
     //     //     document.getElementById("map_img").appendChild(canvas);
     //     // });
     // }
-    // <!--/script-->
+    </script>
 
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 
     function initMap() {
 
