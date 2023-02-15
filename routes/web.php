@@ -22,4 +22,4 @@ Route::get('/', function () {
     return redirect('/admin');
 });
 
-Route::get('google-autocomplete', [GoogleController::class, 'index']);
+// Route::get('google-autocomplete', [GoogleController::class, 'index']);

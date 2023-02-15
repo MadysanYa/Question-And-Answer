@@ -34,7 +34,7 @@
     <div align = center>
         <p class=MsoListParagraphCxSpFirst style='margin-top:0in; margin-bottom:8.0pt; margin-left:0in'>
             <span style='font-size:8.0pt; line-height:107%; font-family:"OneShinhan Light",sans-serif'>
-                {{ $appraisal->property_reference }}
+                Held Under Certificate of Real Estate Ownership No. {{ $appraisal->property_reference }}
             </span> 
     </div>
     <div align = center>
@@ -155,18 +155,16 @@
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
                                 : {{ $appraisal->property_reference }}
                             </span>
-                            <br>
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
                                 : {{ $appraisal->property_reference }}
                             </span>
                         </p>
                     </td>
-                    <td style="width: 50pt; border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
+                    <td style="width: 52.6pt; border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
                                 : {{ $appraisal->property_reference }}
                             </span>
-                            <br>
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
                                 : {{ $appraisal->property_reference }}
                             </span>
@@ -724,6 +722,8 @@
                     </td>
                 </tr>
             </table>
+        
+            <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdfappraisal/98">Export to PDF</a>
 
         <!-- <p style='margin-top:0in;margin-right:0in;margin-bottom:8.0pt;margin-left:0in;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'>
             <span style='font-size:11px;line-height:107%;font-family:"OneShinhan Light",sans-serif;'>
@@ -742,6 +742,6 @@
     </div>
 </div>
 
-    <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdfappraisal">Export to PDF</a>
+    <!-- <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdfappraisal/98">Export to PDF</a> -->
 </body>
 </html>

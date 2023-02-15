@@ -222,19 +222,11 @@ class PropertyIndicatorController extends AdminController
             }
         });
 
+        // Export to PDF
         $grid->column(__('To PDF'))->display(function(){
             $id = $this->id;
             return '<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdfindicator/' . $id . '">Download</a>';
         });
-
-        // $grid->column('is_verified',__('Verified'))->display(function($is_verified){
-        //     if($is_verified == null) {
-        //         if(User::isVerifierRole()){ // user login
-        //             $id = $this->id;
-        //             return '<a href="'. env('APP_URL') . '/public/api/verify_indicator/' . $id . '/1" class="btn btn-sm btn-success">
-        //                         <i class="fa fa-check"></i>
-        //                         <span>&nbsp;&nbsp;Verify</span>
-        //                     </a>
 
         $grid->fixColumns(0, -4);
 

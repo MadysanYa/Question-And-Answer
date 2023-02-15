@@ -4,6 +4,7 @@ use App\Admin\Controllers\CommuneController as ControllersCommuneController;
 use App\Http\Controllers\CommuneController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\QRCodeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransferController;
@@ -63,3 +64,5 @@ Route::get('google-autocomplete', [GoogleController::class, 'index']);
 
 Route::get('pdfappraisal/{id}', [PdfAppraisalController::class, 'index']);
 Route::get('pdfindicator/{id}', [PdfIndicatorController::class, 'index']);
+
+Route::get('qrcode', [QRCodeController::class, 'index']);
