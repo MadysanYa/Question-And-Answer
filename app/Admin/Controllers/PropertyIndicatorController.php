@@ -161,12 +161,12 @@ class PropertyIndicatorController extends AdminController
         $grid->column('latitude',__('Latitude'))->sortable();
         $grid->column('longtitude',__('Longtitude'))->sortable();
         $grid->column('remark',__('Remark'))->sortable();
-        $grid->column('comparable_id',__('ID'))->sortable();
-        $grid->column('comparable_cif_no',__('CIF No./ Name'))->sortable();
-        $grid->column('geo_code',__('Geo Code'))->sortable();
-        $grid->column('size',__('Size'))->sortable();
-        $grid->column('value_per_sqm',__('Value Per Sq. m'))->sortable();
-        $grid->column('total_value',__('Total Value'))->sortable();
+        $grid->column('comparable_id1',__('ID'))->sortable();
+        $grid->column('comparable_cif_no1',__('CIF No./ Name'))->sortable();
+        $grid->column('comparable_geo_code1',__('Geo Code'))->sortable();
+        $grid->column('comparable_size',__('Size'))->sortable();
+        $grid->column('comparable_value_per_sqm1',__('Value Per Sq. m'))->sortable();
+        $grid->column('comparable_total_value1',__('Total Value'))->sortable();
         $grid->column('user_id',__('Created By'))->sortable()->display(function($id){
             $userName = UserAdmin::where('id', $id)->first();
             return $userName->name ?? null;
@@ -439,7 +439,7 @@ class PropertyIndicatorController extends AdminController
             //zero loading
             $form->text('property_reference', __('Property Reference'))->disable()->value(function(){
                 return null;
-            })->placeholder('Property Reference');
+            })->placeholder('Reference No.');
             $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area','Agricultural Area'=>'Agricultural Area']);
             $form->select('type_of_access_road', __('Type of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road', 'Paved Road'=>'Paved Road','Upaved Road'=>'Upaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road']);
             $form->text('access_road_name', __('Access Road Name'))->rules('required');
@@ -458,10 +458,10 @@ class PropertyIndicatorController extends AdminController
             $form->text('no_of_floor', __('No. of Floor'))->rules('required')->attribute('maxlength', '3');
             $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
             $form->text('land_title_no', __('Land title No.'))->rules('required');
-            $form->text('land_size', __('Land Size (sqm)'))->default(0)->rules('required');
+            $form->text('land_size', __('Land Size (sqm)'))->rules('required');
             $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->currency('building_size', __('Building Size'))->rules('required')->attribute(['style' => 'width: 100%;']);
-            $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->rules('required')->attribute(['style' => 'width: 100%;']);
+            $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->placeholder('Value per Sqm (Part Building)')->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->currency('property_value', __('Property Value '))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
             $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 999 9999'])->rules('required')->attribute(['style' => 'width: 100%;']);
@@ -481,25 +481,36 @@ class PropertyIndicatorController extends AdminController
 
             $form->select('village_id', __('Village'))->rules('required')->options(function(){
                 return Village::all()->pluck('village_name','id');});
-            $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.999999'])->rules('required');
-            $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.999999'])->rules('required');
+            $form->text('latitude', __('Latitude'))->placeholder('Geo Code')->inputmask(['mask' => '99.999999'])->rules('required');
+            $form->text('longtitude', __('Longtitude'))->placeholder('Geo Code')->inputmask(['mask' => '999.999999'])->rules('required');
             $form->image('front_photo',__('front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
             $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
             $form->image('right_photo',__('Access Road Photo Right'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
             $form->image('left_photo',__('Access Road Photo Left'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
-            $form->image('title_front_photo',__('Title Photo Front'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
+            $form->image('title_front_photo',__('Title Photo Front'))->removable()->uniqueName()->placeholder('Title Photo')->rules('mimes:jpg,png,jpeg|max:5000');
             $form->image('title_back_photo',__('Title Photo Back'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
             $form->image('id_front_photo',__('ID Photo Front'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
             $form->image('id_back_photo',__('ID Photo Back'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
             $form->multipleFile('photos',__('Photos'))->removable()->uniqueName();//- >rules('required|mimes:jpg,png,jpeg|max:5000');
             //
-            $form->text('comparable_id',__('ID'));
-            $form->text('comparable_cif_no',__('CIF No./ Name'));
-            $form->text('geo_code',__('Geo Code'));
-            $form->text('size',__('Size'));
-            $form->text('value_per_sqm',__('Value Per Sq. m'));
-            $form->text('total_value',__('Total Value'));
-            $form->button('comparable_reference', __('Comparable Reference'))->attribute('id', 'show-comparable-reference-modal')->on('click', '$("#modal-comparable-reference").modal();');
+            $form->text('comparable_id1',__('ID'));
+            $form->text('comparable_cif_no1',__('CIF No./ Name'));
+            $form->text('comparable_geo_code1',__('Geo Code'));
+            $form->text('comparable_size1',__('Size'));
+            $form->text('comparable_value_per_sqm1',__('Value Per Sq. m'));
+            $form->text('comparable_total_value1',__('Total Value'));
+            $form->text('comparable_id2',__('ID'));
+            $form->text('comparable_cif_no2',__('CIF No./ Name'));
+            $form->text('comparable_geo_code2',__('Geo Code'));
+            $form->text('comparable_size2',__('Size'));
+            $form->text('comparable_value_per_sqm2',__('Value Per Sq. m'));
+            $form->text('comparable_total_value2',__('Total Value'));
+            if (User::isVerifierRole() || User::isApproverRole() || User::isAdminRole()){
+                $form->button('comparable_reference', __('Comparable Reference'))->attribute('id', 'show-comparable-reference-modal')->on('click', '$("#modal-comparable-reference").modal();');
+            }
+            else{
+                $form->button('comparable_reference', __('Comparable Reference'))->disable()->attribute('id', 'show-comparable-reference-modal')->on('click', '$("#modal-comparable-reference").modal();');
+            }
             $form->html(view('admin.property.property_appraisal_script'));
         });
         // Modal Comparable Reference
@@ -518,13 +529,13 @@ class PropertyIndicatorController extends AdminController
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="row" style="display: flex;align-items: center;">
-                                            <label for="com_id" class="col-sm-2  control-label">ID</label>
+                                            <label for="com_id1" class="col-sm-2  control-label">ID 1</label>
                                             <div class="col-sm-8">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-pencil fa-fw"></i>
                                                     </span>
-                                                    <input type="text" id="com_id" class="form-control com_id" placeholder="Input ID">
+                                                    <input type="text" id="com_id1" class="form-control com_id1" placeholder="Input ID">
                                                 </div>
                                             </div>
                                         </div>
@@ -533,13 +544,13 @@ class PropertyIndicatorController extends AdminController
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="row" style="display: flex;align-items: center;">
-                                            <label for="com_ref_cif_no_name" class="col-sm-2  control-label">CIF No. / Name</label>
+                                            <label for="com_ref_cif_no_name1" class="col-sm-2  control-label">CIF No. / Name 1</label>
                                             <div class="col-sm-8">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-pencil fa-fw"></i>
                                                     </span>
-                                                    <input type="text" id="com_ref_cif_no_name" class="form-control com_ref_cif_no_name" placeholder="Input CIF No. / Name">
+                                                    <input type="text" id="com_ref_cif_no_name1" class="form-control com_ref_cif_no_name1" placeholder="Input CIF No. / Name">
                                                 </div>
                                             </div>
                                         </div>
@@ -548,13 +559,13 @@ class PropertyIndicatorController extends AdminController
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="row" style="display: flex;align-items: center;">
-                                            <label for="com_ref_geo_code" class="col-sm-2  control-label">Geo Code</label>
+                                            <label for="com_ref_geo_code1" class="col-sm-2  control-label">Geo Code 1</label>
                                             <div class="col-sm-8">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-pencil fa-fw"></i>
                                                     </span>
-                                                    <input type="text" id="com_ref_geo_code" class="form-control com_ref_geo_code" placeholder="Input Geo Code">
+                                                    <input type="text" id="com_ref_geo_code1" class="form-control com_ref_geo_code1" placeholder="Input Geo Code">
                                                 </div>
                                             </div>
                                         </div>
@@ -564,13 +575,13 @@ class PropertyIndicatorController extends AdminController
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="row" style="display: flex;align-items: center;">
-                                            <label for="com_ref_size" class="col-sm-2  control-label">Size</label>
+                                            <label for="com_ref_size1" class="col-sm-2  control-label">Size 1</label>
                                             <div class="col-sm-8">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-pencil fa-fw"></i>
                                                     </span>
-                                                    <input type="text" id="com_ref_size" class="form-control com_ref_size" placeholder="Input Size">
+                                                    <input type="text" id="com_ref_size1" class="form-control com_ref_size1" placeholder="Input Size">
                                                 </div>
                                             </div>
                                         </div>
@@ -579,13 +590,13 @@ class PropertyIndicatorController extends AdminController
                                 <div class="col-md-6">
                                     <div class="">
                                         <div class="row" style="display: flex;align-items: center;">
-                                            <label for="com_ref_value_per_sqm" class="col-sm-2  control-label">Value per Sq. m</label>
+                                            <label for="com_ref_value_per_sqm1" class="col-sm-2  control-label">Value per Sq. m 1</label>
                                             <div class="col-sm-8">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-pencil fa-fw"></i>
                                                     </span>
-                                                    <input type="text" id="com_ref_value_per_sqm" class="form-control com_ref_value_per_sqm" placeholder="Input Value per Sq. m">
+                                                    <input type="text" id="com_ref_value_per_sqm1" class="form-control com_ref_value_per_sqm1" placeholder="Input Value per Sq. m">
                                                 </div>
                                             </div>
                                         </div>
@@ -594,13 +605,111 @@ class PropertyIndicatorController extends AdminController
                                 <div class="col-md-6">
                                     <div class="">
                                         <div class="row" style="display: flex;align-items: center;">
-                                            <label for="com_ref_total_value" class="col-sm-2  control-label">Total Value</label>
+                                            <label for="com_ref_total_value1" class="col-sm-2  control-label">Total Value 1</label>
                                             <div class="col-sm-8">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-pencil fa-fw"></i>
                                                     </span>
-                                                    <input type="text" id="com_ref_total_value" class="form-control com_ref_total_value" placeholder="Input Total Value">
+                                                    <input type="text" id="com_ref_total_value1" class="form-control com_ref_total_value1" placeholder="Input Total Value">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row" style="display: flex;align-items: center;">
+                                            <label for="com_id" class="col-sm-2  control-label">ID 2</label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-pencil fa-fw"></i>
+                                                    </span>
+                                                    <input type="text" id="com_id2" class="form-control com_id2" placeholder="Input ID">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row" style="display: flex;align-items: center;">
+                                            <label for="com_ref_cif_no_name2" class="col-sm-2  control-label">CIF No. / Name 2</label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-pencil fa-fw"></i>
+                                                    </span>
+                                                    <input type="text" id="com_ref_cif_no_name2" class="form-control com_ref_cif_no_name2" placeholder="Input CIF No. / Name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row" style="display: flex;align-items: center;">
+                                            <label for="com_ref_geo_code2" class="col-sm-2  control-label">Geo Code 2</label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-pencil fa-fw"></i>
+                                                    </span>
+                                                    <input type="text" id="com_ref_geo_code2" class="form-control com_ref_geo_code2" placeholder="Input Geo Code">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row" style="display: flex;align-items: center;">
+                                            <label for="com_ref_size2" class="col-sm-2  control-label">Size 2</label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-pencil fa-fw"></i>
+                                                    </span>
+                                                    <input type="text" id="com_ref_size2" class="form-control com_ref_size2" placeholder="Input Size">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="">
+                                        <div class="row" style="display: flex;align-items: center;">
+                                            <label for="com_ref_value_per_sqm2" class="col-sm-2  control-label">Value per Sq. m 2</label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-pencil fa-fw"></i>
+                                                    </span>
+                                                    <input type="text" id="com_ref_value_per_sqm2" class="form-control com_ref_value_per_sqm2" placeholder="Input Value per Sq. m">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="">
+                                        <div class="row" style="display: flex;align-items: center;">
+                                            <label for="com_ref_total_value2" class="col-sm-2  control-label">Total Value 2</label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-pencil fa-fw"></i>
+                                                    </span>
+                                                    <input type="text" id="com_ref_total_value2" class="form-control com_ref_total_value2" placeholder="Input Total Value">
                                                 </div>
                                             </div>
                                         </div>
@@ -617,29 +726,44 @@ class PropertyIndicatorController extends AdminController
 
             <script>
                 $("#btn-input-comparable").click(function() {
-                    $("#comparable_cif_no").val($("#com_ref_cif_no_name").val());
-                    $("#geo_code").val($("#com_ref_geo_code").val());
-                    $("#comparable_id").val($("#com_id").val());
-                    $("#size").val($("#com_ref_size").val());
-                    $("#value_per_sqm").val($("#com_ref_value_per_sqm").val());
-                    $("#total_value").val($("#com_ref_total_value").val());
+                    $("#comparable_cif_no1").val($("#com_ref_cif_no_name1").val());
+                    $("#comparable_geo_code1").val($("#com_ref_geo_code1").val());
+                    $("#comparable_id1").val($("#com_id1").val());
+                    $("#comparable_size1").val($("#com_ref_size1").val());
+                    $("#comparable_value_per_sqm1").val($("#com_ref_value_per_sqm1").val());
+                    $("#comparable_total_value1").val($("#com_ref_total_value1").val());
 
+                    $("#comparable_cif_no2").val($("#com_ref_cif_no_name2").val());
+                    $("#comparable_geo_code2").val($("#com_ref_geo_code2").val());
+                    $("#comparable_id2").val($("#com_id2").val());
+                    $("#comparable_size2").val($("#com_ref_size2").val());
+                    $("#comparable_value_per_sqm2").val($("#com_ref_value_per_sqm2").val());
+                    $("#comparable_total_value2").val($("#com_ref_total_value2").val());
                     // Close Modal When User Click Submit
                     $("#modal-comparable-reference").modal("hide");
                 });
 
                 $("#show-comparable-reference-modal").click(function() {
-                    $("#com_ref_cif_no_name").val($("#comparable_cif_no").val());
-                    $("#com_ref_geo_code").val($("#geo_code").val());
-                    $("#com_id").val($("#comparable_id").val());
-                    $("#com_ref_value_per_sqm").val($("#value_per_sqm").val());
-                    $("#com_ref_size").val($("#size").val());
-                    $("#com_ref_total_value").val($("#total_value").val());
+                    $("#com_ref_cif_no_name1").val($("#comparable_cif_no1").val());
+                    $("#com_ref_geo_code1").val($("#comparable_geo_code1").val());
+                    $("#com_id1").val($("#comparable_id1").val());
+                    $("#com_ref_value_per_sqm1").val($("#comparable_value_per_sqm1").val());
+                    $("#com_ref_size1").val($("#comparable_size1").val());
+                    $("#com_ref_total_value1").val($("#comparable_total_value").val());
+
+                    $("#com_ref_cif_no_name2").val($("#comparable_cif_no2").val());
+                    $("#com_ref_geo_code2").val($("#comparable_geo_code2").val());
+                    $("#com_id2").val($("#comparable_id2").val());
+                    $("#com_ref_value_per_sqm2").val($("#comparable_value_per_sqm2").val());
+                    $("#com_ref_size2").val($("#comparable_size2").val());
+                    $("#com_ref_total_value2").val($("#comparable_total_value2").val());
                 });
 
-                $("#comparable_cif_no, #geo_code, #comparable_id, #size, #value_per_sqm, #total_value").closest(".form-group").css("display","none");
+                $("#comparable_cif_no1, #comparable_geo_code1, #comparable_id1, #comparable_size1, #comparable_value_per_sqm1, #comparable_total_value1,#comparable_cif_no2, #comparable_geo_code2, #comparable_id2, #comparable_size2, #comparable_value_per_sqm2, #comparable_total_value2").closest(".form-group").css("display","none");
             </script>
+
         ');
+
 
         $form->footer(function ($footer) {
             // disable reset btn
