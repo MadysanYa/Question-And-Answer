@@ -165,7 +165,7 @@ class PropertyIndicatorController extends AdminController
         $grid->column('comparable_cif_no',__('CIF No./ Name'))->sortable();
         $grid->column('geo_code',__('Geo Code'))->sortable();
         $grid->column('size',__('Size'))->sortable();
-        $grid->column('value_per_sqm',__('Value per_sq. m'))->sortable();
+        $grid->column('value_per_sqm',__('Value Per Sq. m'))->sortable();
         $grid->column('total_value',__('Total Value'))->sortable();
         $grid->column('user_id',__('Created By'))->sortable()->display(function($id){
             $userName = UserAdmin::where('id', $id)->first();
@@ -505,7 +505,7 @@ class PropertyIndicatorController extends AdminController
             $form->text('comparable_cif_no',__('CIF No./ Name'));
             $form->text('geo_code',__('Geo Code'));
             $form->text('size',__('Size'));
-            $form->text('value_per_sqm',__('Value per_sq. m'));
+            $form->text('value_per_sqm',__('Value Per Sq. m'));
             $form->text('total_value',__('Total Value'));
             $form->button('comparable_reference', __('Comparable Reference'))->attribute('id', 'show-comparable-reference-modal')->on('click', '$("#modal-comparable-reference").modal();');
             $form->html(view('admin.property.property_appraisal_script'));
