@@ -513,7 +513,12 @@ class PropertyIndicatorController extends AdminController
             $form->text('comparable_size2',__('Size'));
             $form->text('comparable_value_per_sqm2',__('Value Per Sq. m'));
             $form->text('comparable_total_value2',__('Total Value'));
-            $form->button('comparable_reference', __('Comparable Reference'))->attribute('id', 'show-comparable-reference-modal')->on('click', '$("#modal-comparable-reference").modal();');
+            if (User::isVerifierRole() || User::isApproverRole() || User::isAdminRole()){
+                $form->button('comparable_reference', __('Comparable Reference'))->attribute('id', 'show-comparable-reference-modal')->on('click', '$("#modal-comparable-reference").modal();');
+            }
+            else{
+                $form->button('comparable_reference', __('Comparable Reference'))->disable()->attribute('id', 'show-comparable-reference-modal')->on('click', '$("#modal-comparable-reference").modal();');
+            }
             $form->html(view('admin.property.property_appraisal_script'));
         });
         // Modal Comparable Reference

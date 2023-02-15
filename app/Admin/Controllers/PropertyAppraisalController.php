@@ -641,8 +641,14 @@ class PropertyAppraisalController extends AdminController
             $form->text('comparable_size2',__('Size'));
             $form->text('comparable_value_per_sqm2',__('Value per_sq. m'));
             $form->text('comparable_total_value2',__('Total Value'));
-            $form->button('comparable_reference', __('Comparable Reference'))->attribute('id', 'show-comparable-reference-modal')->on('click', '$("#modal-comparable-reference").modal();');
-            $form->button('swot_analyze', __('Swot Analyze'))->attribute('id', 'show-swot-modal')->on('click', '$("#myModal").modal();');
+            if (User::isVerifierRole() || User::isApproverRole() || User::isAdminRole()){
+                $form->button('comparable_reference', __('Comparable Reference'))->attribute('id', 'show-comparable-reference-modal')->on('click', '$("#modal-comparable-reference").modal();');
+                $form->button('swot_analyze', __('Swot Analyze'))->attribute('id', 'show-swot-modal')->on('click', '$("#myModal").modal();');
+            }
+            else{
+                $form->button('comparable_reference', __('Comparable Reference'))->disable()->attribute('id', 'show-comparable-reference-modal')->on('click', '$("#modal-comparable-reference").modal();');
+                $form->button('swot_analyze', __('Swot Analyze'))->disable()->attribute('id', 'show-swot-modal')->on('click', '$("#myModal").modal();');
+            }
             $form->html(view('admin.property.property_appraisal_script'));
         });
 
