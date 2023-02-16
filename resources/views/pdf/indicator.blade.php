@@ -6,9 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Internal Indication Report</title>
-    <script src="../../resources/js/html2canvas.js"></script>
+    <!-- <script src="../../resources/js/html2canvas.js"></script>
     <script src="../../resources/js/html2canvas.min.js"></script>
-    <script src="../../resources/js/jspdf.js"></script>
+    <script src="../../resources/js/jspdf.js"></script> -->
     <script src="../../js/QrCode.js"></script>
 
     <style>
@@ -199,7 +199,7 @@
                 <td style="border:none; width:50pt; padding:0in 5.4pt 0in 5.4pt;">
                     <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:left;'>
                         <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;color:black;'>
-                            {{ $indicator->branch_code }}
+                            {{ $indicator->BranchName }}
                         </span>
                     </p>
                 </td>
@@ -292,7 +292,7 @@
                 <tr style='height:13.35pt'>
                     <td colspan=6 style='width:527.25pt; border:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;'>
                         <p class=MsoListParagraphCxSpFirst style='margin-left:0in'>
-                            <span style='font-size:8.0pt;line-height:107%;font-family:"OneShinhan Light",sans-serif'>Address: {{ $indicator->borey }}, {{ $indicator->access_road_name }}, {{ $indicator->village_id }}, {{ $indicator->commune_id }}, {{ $indicator->district_id }}, {{ $indicator->province_id }}</span>
+                            <span style='font-size:8.0pt;line-height:107%;font-family:"OneShinhan Light",sans-serif'>Address: {{ $indicator->FullAddress }}</span>
                         </p>
                     </td>
                 </tr>
@@ -982,7 +982,6 @@
                 <!-- <img src="{{asset('upload/'.$indicator->front_photo)}}" style="height: 70px; width: 70px;"> -->
             </div>
             
-
             <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdfindicator/145">Export to PDF</a>
         </div>
     </div>

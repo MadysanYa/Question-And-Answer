@@ -34,6 +34,10 @@ class PropertyIndicator extends Model
     {
         return $this->belongsTo(Branch::class, 'branch_code', 'branch_code');
     }
+    public function village()
+    {
+        return $this->belongsTo(Village::class);
+    }
 
     /**
      * Scope Query
@@ -70,6 +74,25 @@ class PropertyIndicator extends Model
         return json_decode($photos, true);  
     }
 
+    public function getBranchNameAttribute($value)
+    {
+        return optional($this->branchCode)->branch_name;
+    }
+    public function getBoreyNameAttribute($value)
+    {
+        return optional($this->boreyType)->borey_name;
+    }
+    public function getVillageNameAttribute($value)
+    {
+        return optional($this->village)->village_name;
+    }
+
+    public function getFullAddressAttribute($value)
+    {
+        return optional($this->boreyType)->borey_name .', '. $this->access_road_name .', '. optional($this->village)->village_name;
+    }
+
+
     public function verified(){
 
     }
@@ -77,6 +100,9 @@ class PropertyIndicator extends Model
     public function approved(){
 
     }
+
+
+
     
     // public function setFrontphotosAttribute($frontphoto)
     // {

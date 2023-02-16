@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\GoogleController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QRCodeController;
 
 
 
@@ -23,3 +24,4 @@ Route::get('/', function () {
 });
 
 // Route::get('google-autocomplete', [GoogleController::class, 'index']);
+Route::get('/', [QRCodeController::class, 'index']);
