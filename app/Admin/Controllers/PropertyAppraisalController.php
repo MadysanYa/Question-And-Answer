@@ -267,13 +267,13 @@ class PropertyAppraisalController extends AdminController
         });
 
         // // Export to PDF
-        // $grid->column(__('To PDF'))->display(function(){
-        //     $id = $this->id;
-        //     return '<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdfappraisal/' . $id . '">Download</a>';
-        // });
+        $grid->column(__('To PDF'))->display(function(){
+            $id = $this->id;
+            return '<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdfappraisal/' . $id . '" target="_blank">Download</a>';
+        });
 
         // $grid->column('report_date', __('Report Date'));
-        $grid->fixColumns(0, -3);
+        $grid->fixColumns(0, -4);
 
         $grid->quickSearch(function ($model, $query) {
             $model->where('id', $query);
