@@ -34,7 +34,7 @@
     <div align = center>
         <p class=MsoListParagraphCxSpFirst style='margin-top:0in; margin-bottom:8.0pt; margin-left:0in'>
             <span style='font-size:8.0pt; line-height:107%; font-family:"OneShinhan Light",sans-serif'>
-                Held Under Certificate of Real Estate Ownership No. {{ $appraisal->property_reference }}
+                Held Under Certificate of Real Estate Ownership No. {{ $appraisal->land_title_no }}
             </span> 
     </div>
     <div align = center>
@@ -51,7 +51,7 @@
                     <td  colspan="2" style="width: 112.6pt;border-top: 1pt solid windowtext;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-image: initial;border-left: none;padding: 0in 5.4pt;vertical-align: top;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
-                                : {{ $appraisal->property_reference }}
+                                : {{ $appraisal->collateral_owner }}
                             </span>
                         </p>
                     </td>
@@ -59,7 +59,8 @@
                     <td rowspan="11" style="width: 155.5pt; border: solid windowtext 1pt; padding: 0in 0in 0in 0in;">
                         <!-- <p style='margin-top:0in;margin-right:0in;margin-bottom:8.0pt;margin-left:0in;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'>&nbsp;
                         </p> -->
-                        <img src="{{ storage_path('app/public/images/Borey_Infront_of.jpg') }}" style="width: 100%;">
+                        <!-- <img src="{{ storage_path('app/public/images/Borey_Infront_of.jpg') }}" style="width: 100%;"> -->
+                        <img src="{{asset('upload/'.$appraisal->front_photo)}}" style="width: 100%;">
                     </td>
                 </tr>
                 <tr>
@@ -73,7 +74,7 @@
                     <td colspan="2" style="width: 212.6pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
-                                : {{ $appraisal->property_reference }} &nbsp;
+                                : {{ $appraisal->customer_name }} &nbsp;
                             </span>
                         </p>
                     </td>
@@ -93,7 +94,7 @@
                     <td colspan="2" style="width: 212.6pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
-                                : <strong>{{ $appraisal->property_reference }}</strong>
+                                : <strong>{{ $appraisal->cif_no }}</strong>
                             </span>
                         </p>
                     </td>
@@ -113,7 +114,7 @@
                     <td colspan="2" style="width: 212.6pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
-                                : {{ $appraisal->property_reference }}
+                                : {{ $appraisal->branch_code }}
                             </span>
                         </p>
                     </td>
@@ -133,7 +134,7 @@
                     <td colspan="2" style="width: 212.6pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
-                                : {{ $appraisal->property_reference }} / {{ $appraisal->property_reference }} &nbsp;
+                                : {{ $appraisal->rm_name }} / {{ $appraisal->telephone }} &nbsp;
                             </span>
                         </p>
                     </td>
@@ -153,20 +154,20 @@
                     <td style="width: 52.6pt; border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
-                                : {{ $appraisal->property_reference }}
+                                : {{ $appraisal->appraisal_certificate_fee }}
                             </span>
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
-                                : {{ $appraisal->property_reference }}
+                                : {{ $appraisal->appraisal_certificate_fee }} x 4100
                             </span>
                         </p>
                     </td>
                     <td style="width: 52.6pt; border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
-                                : {{ $appraisal->property_reference }}
+                                700-000-376898 (USD)
                             </span>
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
-                                : {{ $appraisal->property_reference }}
+                                700-000-378380 (KHR)
                             </span>
                         </p>
                     </td>
@@ -182,7 +183,7 @@
                     <td colspan="2" style="width: 212.6pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
-                                : {{ $appraisal->property_reference }}
+                                : {{ $appraisal->requested_date }}
                             </span>
                         </p>
                     </td>
@@ -202,7 +203,7 @@
                     <td colspan="2" style="width: 212.6pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
-                                : {{ $appraisal->property_reference }}
+                                : {{ $appraisal->reported_date }}
                             </span>
                         </p>
                     </td>
@@ -222,7 +223,7 @@
                     <td colspan="2" style="width: 212.6pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
-                                : {{ $appraisal->property_reference }} &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; {{ $appraisal->property_reference }}
+                                : {{ $appraisal->land_size }} &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; {{ $appraisal->property_reference }}
                             </span>
                         </p>
                     </td>
@@ -235,14 +236,14 @@
                     <td style="width: 134.45pt;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-left: 1pt solid windowtext;border-image: initial;border-top: none;background: rgb(156, 194, 229);padding: 0in 5.4pt;vertical-align: top;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                             <span style='font-size:12px;font-family:"OneShinhan Light",sans-serif;color:black;'>
-                            Land Area by Measurement
+                                Land Area by Measurement
                             </span>
                         </p>
                     </td>
                     <td colspan="2" style="width: 212.6pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
-                                : {{ $appraisal->property_reference }} &nbsp; &nbsp; &nbsp; &nbsp; {{ $appraisal->property_reference }}
+                                : {{ $appraisal->land_size_by_measurement }} &nbsp; &nbsp; &nbsp; &nbsp; {{ $appraisal->property_reference }}
                             </span>
                         </p>
                     </td>

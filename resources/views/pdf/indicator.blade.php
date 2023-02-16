@@ -9,6 +9,7 @@
     <script src="../../resources/js/html2canvas.js"></script>
     <script src="../../resources/js/html2canvas.min.js"></script>
     <script src="../../resources/js/jspdf.js"></script>
+    <script src="../../js/QrCode.js"></script>
 
     <style>
         /* Font Definitions */
@@ -976,9 +977,9 @@
             </table>
 
             <!-- QR Code Map Place -->
-            <div style=" float: right; margin-top: 40px;">
+            <div id="qrcode-2" style=" float: right; margin-top: 40px;">
                 <p>QR Code Map</p>    
-                <img src="{{asset('upload/'.$indicator->front_photo)}}" style="height: 70px; width: 70px;">
+                <!-- <img src="{{asset('upload/'.$indicator->front_photo)}}" style="height: 70px; width: 70px;"> -->
             </div>
             
 
@@ -986,5 +987,16 @@
         </div>
     </div>
 </body>
+
+<script type="text/javascript">
+    var qrcode = new QRCode(document.getElementById("qrcode-2"), {
+        text: "https://www.google.com/maps/@11.5762173,104.9262577,15z",
+        width: 128,
+        height: 128,
+        colorDark : "#5868bf",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+</script>
 
 </html>
