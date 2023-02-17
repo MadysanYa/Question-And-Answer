@@ -444,21 +444,26 @@
                 </tr>
             </table>
 
-            <table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 style='width:527.25pt;border-collapse:collapse;border:none'>
-                <tr style='height:200pt'>
-                    <td>
-                        <img src="{{asset('upload/'.$indicator->front_photo)}}" style="height: 260px; width: 350px;">
-                    </td>
-                    <td>
-                        @if($indicator->title_front_photo) 
-                            <img src="{{asset('upload/'.$indicator->title_front_photo)}}" style="height: 260px; width: 350px;">
-                        @else
-                            <img src="{{asset('upload/'.$indicator->inside_photo)}}" style="height: 260px; width: 350px;">
-                        @endif
-                    </td>
-                </tr>
-            </table>
-
+            <!-- <div style="position: relative;"> -->
+            <div style="position: relative;">
+                <div style="position: relative; left: 0px; top: 0px;">
+                    <table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 style='width: 700px !important; border-collapse:collapse;border:none'>
+                        <tr>
+                            <td style="text-align: center">
+                                <img src="{{asset('upload/'.$indicator->front_photo)}}" style="height: 260px; max-width: 350px;">
+                            </td>
+                            <td style="text-align: center">
+                                <img src="{{asset('upload/'.$indicator->title_front_photo)}}" style="height: 260px; max-width: 350px;">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- qrcode -->
+                <div style="position: absolute ; right: 0px; top: 190px;">
+                    <img src="{{ $qrImage }}" style="height: 60px; width: 60px; border: 1px solid #0070C0; padding: 5px; background-color: white;"/>
+                </div>
+            </div>
+            <!-- </div> -->
             <br>
             <!-- PROPERTY ADJUSTMENT -->
             <table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=690 style='width:527.25pt; border-collapse:collapse;border:none'>
@@ -957,7 +962,13 @@
                     </td>
                 </tr>
             </table>
-            <!-- <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdfindicator/145">Export to PDF</a> -->
+
+            <!-- QR Code Map Place -->
+            <!-- <div id="qrcode-2" style="position: absolute; right: 0; top: 310;">
+                <img src="{{ $qrImage }}" style="height: 60px; width: 60px; border: 1px solid #0070C0; padding: 5px; background-color: white;"/>
+            </div> -->
+            
+            <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdfindicator/145">Export to PDF</a>
         </div>
     </div>
 </body>
