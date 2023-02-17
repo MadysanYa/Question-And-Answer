@@ -167,7 +167,6 @@
                 <span style='font-size:14.0pt;line-height:107%;font-family:"OneShinhan Bold",sans-serif'>INTERNAL INDICATION REPORT</span>
             </u>
         </p>
-        <img src="{{ $qrImage }}" />
 
         <div class="card-body">
         </div>
@@ -986,9 +985,8 @@
             </table>
 
             <!-- QR Code Map Place -->
-            <div id="qrcode-2" style="position: absolute; right: 0; top: 318;">
-                <!-- <p>QR Code Map</p>     -->
-                <img src="{{asset('upload/'.$indicator->id_front_photo)}}" style="height: 60px; width: 60px; border: 1px solid #0070C0;">
+            <div id="qrcode-2" style="position: absolute; right: 0; top: 310;">
+                <img src="{{ $qrImage }}" style="height: 60px; width: 60px; border: 1px solid #0070C0; padding: 5px; background-color: white;"/>
             </div>
             
             <!-- <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdfindicator/145">Export to PDF</a> -->
