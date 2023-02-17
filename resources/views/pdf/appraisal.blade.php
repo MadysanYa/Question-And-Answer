@@ -670,6 +670,11 @@
                         </td>
                     </tr>
                 </table>
+
+                <!-- QR Code Map Place -->
+                <div id="qrcode-2" style="position: absolute; right: 0; top: 228;">
+                    <img src="{{ $qrImage }}" style="height: 60px; width: 60px; border: 1px solid #0070C0; padding: 5px; background-color: white;"/>
+                </div>
                 <!-- <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdfappraisal/98">Export to PDF</a> -->
             </div>
         </div>

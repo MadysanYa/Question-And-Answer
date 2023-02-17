@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use PDF;
 use Illuminate\Http\Request;
 use App\Models\PropertyAppraisal;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PdfAppraisalController extends Controller
 {
