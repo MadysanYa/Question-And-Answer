@@ -167,6 +167,11 @@
                 <span style='font-size:14.0pt;line-height:107%;font-family:"OneShinhan Bold",sans-serif'>INTERNAL INDICATION REPORT</span>
             </u>
         </p>
+        <img src="{{ $qrImage }}" />
+
+        <div class="card-body">
+        </div>
+
         <table align=center class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=690 style='width:527.25pt; border-collapse:collapse;border:none;'>
             <tr>
                 <td style="border:none; width:50pt;">

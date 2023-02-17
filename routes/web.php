@@ -24,4 +24,7 @@ Route::get('/', function () {
 });
 
 // Route::get('google-autocomplete', [GoogleController::class, 'index']);
-Route::get('/', [QRCodeController::class, 'index']);
+// Route::get('/qrprint', [QRCodeController::class, 'index']);
+
+Route::get('/pdfindicator', [PdfIndicatorController::class, 'index']);
+Route::get('/qrcode', [QRCodeController::class, 'index']);

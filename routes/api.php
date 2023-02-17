@@ -65,4 +65,4 @@ Route::get('google-autocomplete', [GoogleController::class, 'index']);
 Route::get('pdfappraisal/{id}', [PdfAppraisalController::class, 'index']);
 Route::get('pdfindicator/{id}', [PdfIndicatorController::class, 'index']);
 
-Route::get('/', [QRCodeController::class, 'index']);
+Route::get('/qrcode', [QRCodeController::class, 'index']);

@@ -2,76 +2,36 @@
 <html>
 
 <head>
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <title>How to Generate QR Code Using Simple QRcode In Laravel 8</title>
-
+    <meta charset="utf-8">
+    <title>How to Generate QR Code in Laravel 9</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
+
 <body>
 
-    <table style="border: 1px; border-collapse: collapse;">
-       <tr>
-          <td>
-             QR with text <br>
-             Generated from controller
-          </td>
-          <td>
-             {!! $qrcode !!}
-          </td>
-       </tr>
+    <div class="container mt-4">
 
-       <tr>
-          <td>
-             QR with text        
-          </td>
-          <td>
-             {!! QrCode::generate('Welcome to Makitweb'); !!}
-          </td>
-       </tr>
+        <div class="card">
+            <div class="card-header">
+                <h2>Simple QR Code</h2>
+            </div>
+            <div class="card-body">
+                {!! QrCode::size(300)->generate('https://techvblogs.com/blog/generate-qr-code-laravel-9') !!}
+            </div>
+        </div>
 
-       <tr>
-          <td>
-             QR with URL
-          </td>
-          <td>
-             {!! QrCode::generate('https://makitweb.com'); !!}
-          </td>
-       </tr>
+        <div class="card">
+            <div class="card-header">
+                <h2>Color QR Code</h2>
+            </div>
+            <div class="card-body">
+                {!! QrCode::size(300)->backgroundColor(255,90,0)->generate('https://techvblogs.com/blog/generate-qr-code-laravel-9') !!}
+            </div>
+        </div>
 
-       <tr>
-          <td>
-             Change QR color
-          </td>
-          <td>
-             {!! QrCode::color(224, 224, 224)->backgroundColor(102, 0, 204)->generate('Welcome to Makitweb'); !!}
-          </td>
-       </tr>
+        <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/qrcode">Export to PDF</a>
 
-       <tr>
-          <td>
-             Change default size to 200px
-          </td>
-          <td>
-             {!! QrCode::size(200)->generate('Welcome to Makitweb'); !!}
-          </td>
-       </tr>
-
-       <tr>
-          <td>
-             PNG format
-          </td>
-          <td>
-             {!! QrCode::format('png')->generate('Welcome to Makitweb'); !!}
-          </td>
-       </tr>
-
-       <tr>
-          <td>Download QR code</td>
-          <td>
-             <a href="{{ asset('images/qrcode.svg') }}" download>Download</a>
-          </td>
-        </tr>
-
-    </table>
+    </div>
 </body>
 </html>
