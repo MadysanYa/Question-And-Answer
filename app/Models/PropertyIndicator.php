@@ -38,6 +38,18 @@ class PropertyIndicator extends Model
     {
         return $this->belongsTo(Village::class);
     }
+    public function commune()
+    {
+        return $this->belongsTo(Commune::class);
+    }
+    public function district()
+    {
+        return $this->belongsTo(District::class);
+    }
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
+    }
 
     /**
      * Scope Query
@@ -87,11 +99,40 @@ class PropertyIndicator extends Model
         return optional($this->village)->village_name;
     }
 
-    public function getFullAddressAttribute($value)
+    public function getFullAddressAttribute()
     {
-        return optional($this->boreyType)->borey_name .', '. $this->access_road_name .', '. optional($this->village)->village_name;
+        return optional($this->boreyType)->borey_name.', '
+              .$this->access_road_name.', '
+              .optional($this->village)->village_name.', '
+              .optional($this->commune)->commune_name.', '
+              .optional($this->district)->district_name.', '
+              .optional($this->province)->province_name.'.';
     }
 
+    public function getGeoCodeAttribute()
+    {
+        return $this->latitude.', '.$this->longtitude;
+    }
+
+    public function getLandTotalValuePerSqmAttribute()
+    {
+        return $this->land_size * $this->land_value_per_sqm;
+    }
+
+    public function getBuildingTotalValuePerSqmAttribute()
+    {
+        return $this->building_size * $this->building_value_per_sqm;
+    }
+
+    public function getLandBuildingGrandTotalAttribute()
+    {
+        return $this->LandTotalValuePerSqm + $this->BuildingTotalValuePerSqm;
+    }
+
+    public function getPropertyTypeNameAttribute()
+    {
+        return optional($this->propertyType)->property_type_name;
+    }
 
     public function verified(){
 
