@@ -749,13 +749,11 @@ class PropertyAppraisalController extends AdminController
                                 <div class="col-md-6">
                                     <div class="">
                                         <div class="row" style="display: flex;align-items: center;">
-                                            <label for="com_ref_value_per_sqm1" class="col-sm-2  control-label">Value per Sq. m 1</label>
+                                            <label for="com_ref_value_per_sqm1" class="col-sm-2  control-label">Value per Sqm 1</label>
                                             <div class="col-sm-8">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-pencil fa-fw"></i>
-                                                    </span>
-                                                    <input type="text" id="com_ref_value_per_sqm1" class="form-control com_ref_value_per_sqm1" placeholder="Input Value per Sq. m">
+                                                    <span class="input-group-addon">$</span>
+                                                    <input type="text" id="com_ref_value_per_sqm1" class="form-control com_ref_value_per_sqm1" placeholder="Input Value per Sqm">
                                                 </div>
                                             </div>
                                         </div>
@@ -858,13 +856,11 @@ class PropertyAppraisalController extends AdminController
                                 <div class="col-md-6">
                                     <div class="">
                                         <div class="row" style="display: flex;align-items: center;">
-                                            <label for="com_ref_value_per_sqm2" class="col-sm-2  control-label">Value per Sq. m 2</label>
+                                            <label for="com_ref_value_per_sqm2" class="col-sm-2  control-label">Value per Sqm 2</label>
                                             <div class="col-sm-8">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-pencil fa-fw"></i>
-                                                    </span>
-                                                    <input type="text" id="com_ref_value_per_sqm2" class="form-control com_ref_value_per_sqm2" placeholder="Input Value per Sq. m">
+                                                    <span class="input-group-addon">$</span>
+                                                    <input type="text" id="com_ref_value_per_sqm2" class="form-control com_ref_value_per_sqm2" placeholder="Input Value per Sqm">
                                                 </div>
                                             </div>
                                         </div>
