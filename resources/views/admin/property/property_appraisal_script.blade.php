@@ -8,7 +8,7 @@
     });
     
     // ALL NUMBER AND DOT
-    $('#land_size_by_measurement, #building_size_by_measurement').on('input', function() {
+    $('#land_size_by_measurement, #building_size_by_measurement, #land_size').on('input', function() {
         this.value = this.value.replace(/[^0-9\.]/g,'');
     });
 </script>
