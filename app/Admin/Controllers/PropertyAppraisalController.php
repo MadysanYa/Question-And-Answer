@@ -593,10 +593,10 @@ class PropertyAppraisalController extends AdminController
             $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title','Soft Title'=>'Soft Title']);
             $form->text('land_title_no', __('Land Title No'))->rules('required')->inputmask(['mask' => '999999999-9999']);
             $form->text('land_size', __('Land Size(Sqm)'))->rules('required');
-            $form->text('land_size_by_measurement', __('Land Size by Measurement'))->inputmask(['mask' => '9999999.99'])->rules('required');
+            $form->text('land_size_by_measurement', __('Land Size by Measurement'))->rules('required')->attribute('maxlength', '9');
             $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required')->attribute(['style' => 'width: 100%;']);
-            $form->text('building_size_by_measurement', __('Building Size by measurement'))->inputmask(['mask' => '9999999.99'])->rules('required');
-            $form->text('building_value_per_sqm', __('Building Value per Sqm'))->inputmask(['mask' => '9999999.99'])->rules('required');
+            $form->text('building_size_by_measurement', __('Building Size by measurement'))->rules('required')->attribute('maxlength', '9');
+            $form->currency('building_value_per_sqm', __('Building Value per Sqm'))->rules('required')->attribute(['style' => 'width: 100%;'])->placeholder('Value per Sqm (Part Building)');
             $form->currency('property_value', __('Property Value '))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
             $form->text('remark', __('Remark'));
