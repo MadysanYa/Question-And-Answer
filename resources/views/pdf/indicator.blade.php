@@ -284,7 +284,6 @@
         <br>
         <div align=center>
             <table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 style='width:527.25pt;border-collapse:collapse;border:none'>
-                <!-- Head 1 -->
                 <tr style='height:13.35pt'>
                     <td colspan=6 style='width:527.25pt; border:solid windowtext 1.0pt; background:#0070C0; padding:0in 5.4pt 0in 5.4pt; height:18.45pt'>
                         <p class=MsoNormal align=center style='margin-top:0in;margin-right:-5.75pt; margin-bottom:0in;margin-left:0in;text-align:center;line-height:normal'>
@@ -292,7 +291,6 @@
                         </p>
                     </td>
                 </tr>
-                <!-- Row 1 -->
                 <tr style='height:13.35pt'>
                     <td colspan=6 style='width:527.25pt; border:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;'>
                         <p class=MsoListParagraphCxSpFirst style='margin-left:0in'>
@@ -300,7 +298,6 @@
                         </p>
                     </td>
                 </tr>
-                <!-- Row 2 -->
                 <tr style='height:13.35pt'>
                     <td valign=top style='width:100pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                         <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
@@ -337,7 +334,6 @@
                         </p>
                     </td>
                 </tr>
-                <!-- Row 3 -->
                 <tr style='height:13.35pt'>
                     <td valign=top style='width:100pt;border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt'>
                         <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
@@ -374,7 +370,6 @@
                         </p>
                     </td>
                 </tr>
-                <!-- Row 4 -->
                 <tr style='height:13.35pt'>
                     <td valign=top style='width:100pt;border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt'>
                         <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
@@ -411,7 +406,6 @@
                         </p>
                     </td>
                 </tr>
-                <!-- Row 5 -->
                 <tr style='height:13.35pt'>
                     <td valign=top style='width:100pt;border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt'>
                         <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
@@ -468,7 +462,6 @@
             <br>
             <!-- PROPERTY ADJUSTMENT -->
             <table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=690 style='width:527.25pt; border-collapse:collapse;border:none'>
-                <!-- Head 2 -->
                 <tr style='height:13.35pt'>
                     <td colspan=7 style='width:527.25pt; border:solid windowtext 1.0pt; background:#0070C0;padding:0in 5.4pt 0in 5.4pt;height:18.45pt'>
                         <p class=MsoNormal align=center style='margin-top:0in;margin-right:-5.65pt; margin-bottom:0in;margin-left:0in;text-align:center;line-height:normal'>
@@ -476,7 +469,6 @@
                         </p>
                     </td>
                 </tr>
-                <!-- Row 1 -->
                 <tr style='height:13.35pt'>
                     <td valign=top style='width:10pt; border:solid windowtext 1.0pt; border-top:none; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                         <p class=MsoListParagraphCxSpFirst style='margin:0in; text-align: center; line-height:normal'>
@@ -514,7 +506,6 @@
                         </p>
                     </td>
                 </tr>
-                <!-- Title 1 -->
                 <tr style='height:13.35pt'>
                     <td colspan=8 style='width:527.25pt; padding:0in 5.4pt 0in 5.4pt; background:#2196f3a1'>
                         <p class=MsoListParagraphCxSpFirst style='margin-left:0in' align=center>
@@ -522,7 +513,6 @@
                         </p>
                     </td>
                 </tr>
-                <!-- Row 2 -->
                 <tr style='height:13.05pt'>
                     <td colspan=2 valign=top style='width:60pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpFirst align=center style='margin:0in;text-align: center;line-height:normal'>
@@ -556,7 +546,6 @@
                     </td>
                 </tr>
 
-                <!--  -->
                 <tr style='height:13.05pt'>
                     <td valign=top style='width:5pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpFirst align=center style='margin:0in;text-align: center;line-height:normal'>
@@ -598,9 +587,7 @@
                         </p>
                     </td>
                 </tr>
-                <!--  -->
 
-                <!-- Row 2 -->
                 <tr style='height:13.05pt'>
                     <td colspan=2 valign=top style='width:60pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpFirst align=center style='margin:0in;text-align: center;line-height:normal'>
@@ -624,7 +611,6 @@
                     </td>
                 </tr>
 
-                <!-- Title 1 -->
                 <tr style='height:13.35pt'>
                     <td colspan=8 style='width:527.25pt; border:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt; background:#2196f3a1'>
                         <p class=MsoListParagraphCxSpFirst style='margin-left:0in' align=center>
@@ -633,7 +619,6 @@
                     </td>
                 </tr>
 
-                <!--  -->
                 <tr style='height:13.05pt'>
                     <td valign=top style='width:5pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpFirst align=center style='margin:0in;text-align: center;line-height:normal'>
@@ -730,9 +715,7 @@
                         </p>
                     </td>
                 </tr>
-                <!--  -->
 
-                <!-- Row 2 -->
                 <tr style='height:13.05pt'>
                     <td colspan=2 valign=top style='width:60pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpFirst align=center style='margin:0in;text-align: center;line-height:normal'>
@@ -770,7 +753,6 @@
                     </td>
                 </tr>
 
-                <!-- Row 2 -->
                 <tr style='height:13.05pt'>
                     <td colspan=3 valign=top style='width:150pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpFirst align=center style='margin:0in;text-align: center;line-height:normal'>
@@ -790,12 +772,11 @@
                         </p>
                     </td>
                 </tr>
-                <!-- End  -->
             </table>
             <br>
+
             <!-- REFERENCE -->
             <table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=690 style='width:527.25pt;border-collapse:collapse;border:none'>
-                <!-- Title 1 -->
                 <tr style='height:18.45pt'>
                     <td width=689 colspan=6 style='width:527.25pt;border:solid windowtext 1.0pt; background:#0070C0;padding:0in 5.4pt 0in 5.4pt;height:18.45pt'>
                         <p class=MsoNormal align=center style='margin-top:0in;margin-right:-5.65pt; margin-bottom:0in;margin-left:0in;text-align:center;line-height:normal'>
@@ -803,7 +784,6 @@
                         </p>
                     </td>
                 </tr>
-                <!-- Row 1 -->
                 <tr style='height:13.05pt'>
                     <td colspan=2 valign=top style='width:100pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpFirst align=center style='margin:0in;text-align: center;line-height:normal'>
@@ -831,7 +811,6 @@
                         </p>
                     </td>
                 </tr>
-                <!-- Row 2 -->
                 <tr style='height:13.35pt'>
                     <td valign=top style='width:10pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                         <p class=MsoListParagraphCxSpFirst style='margin:0in;line-height:normal'>
@@ -913,9 +892,8 @@
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif; height: 25pt;'>
                             <strong>
                                 <span style='font-size:11px; font-family: "OneShinhan Light",sans-serif;'>
-                                    <!-- Fee Charge: -->
+                                    <!-- No Data -->
                                 </span>
-                                <!-- <span style='font-size: 10.0pt;font-family:"OneShinhan Light",sans-serif;color:red'>$ 100</span> -->
                             </strong>
                         </p>
                     </td>
@@ -938,16 +916,12 @@
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;color:black;'>
                                 Ms. Nhor Sreynet
                             </span>
-                            <!-- <br>
-                                <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;color:black;'>
-                                    Ms. Nhor Sreynet
-                                </span> -->
                         </p>
                     </td>
                     <td style="width:50pt;border:0;padding:0in 5.4pt 0in 5.4pt; text-align:center;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                             <span style='font-size:11px;font-family:   "OneShinhan Light",sans-serif;'>
-                                <!-- Mr. Kheng Nith Testing -->
+                                <!-- No Data -->
                             </span>
                         </p>
                     </td>
@@ -965,16 +939,12 @@
                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;color:black;'>
                                 Tel: 097 338 0278
                             </span>
-                            <!-- <br>
-                                <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;color:black;'>
-                                    Ms. Nhor Sreynet
-                                </span> -->
                         </p>
                     </td>
                     <td style="width:50pt;border:0;padding:0in 5.4pt 0in 5.4pt; text-align:center;">
                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                             <span style='font-size:11px;font-family:   "OneShinhan Light",sans-serif;'>
-                                <!-- Mr. Kheng Nith Testing -->
+                                <!-- No Data -->
                             </span>
                         </p>
                     </td>
@@ -987,26 +957,8 @@
                     </td>
                 </tr>
             </table>
-
-            <!-- QR Code Map Place -->
-            <div id="qrcode-2" style="position: absolute; right: 0; top: 310;">
-                <img src="{{ $qrImage }}" style="height: 60px; width: 60px; border: 1px solid #0070C0; padding: 5px; background-color: white;"/>
-            </div>
-            
             <!-- <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdfindicator/145">Export to PDF</a> -->
         </div>
     </div>
 </body>
-
-<script type="text/javascript">
-    var qrcode = new QRCode(document.getElementById("qrcode-2"), {
-        text: "https://www.google.com/maps/@11.5762173,104.9262577,15z",
-        width: 128,
-        height: 128,
-        colorDark : "#5868bf",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
-    });
-</script>
-
 </html>
