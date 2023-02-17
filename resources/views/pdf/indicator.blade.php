@@ -456,7 +456,11 @@
                         <img src="{{asset('upload/'.$indicator->front_photo)}}" style="height: 260px; width: 350px;">
                     </td>
                     <td>
-                        <img src="{{asset('upload/'.$indicator->title_front_photo)}}" style="height: 260px; width: 350px;">
+                        @if($indicator->title_front_photo) 
+                            <img src="{{asset('upload/'.$indicator->title_front_photo)}}" style="height: 260px; width: 350px;">
+                        @else
+                            <img src="{{asset('upload/'.$indicator->inside_photo)}}" style="height: 260px; width: 350px;">
+                        @endif
                     </td>
                 </tr>
             </table>

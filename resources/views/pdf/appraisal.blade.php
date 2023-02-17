@@ -18,6 +18,11 @@
                 </p>
             </div>
 
+            <!-- QR Code Map Place -->
+            <div id="qrcode-2" style="position: absolute; right: 0; top: 288;">
+                <img src="{{ $qrImage }}" style="height: 60px; width: 60px; border: 1px solid #0070C0; padding: 5px; background-color: white;"/>
+            </div>
+
             <p class=MsoNormal align = center style='text-align:center'>
                 <u>
                     <span style='font-size:14.0pt;line-height:107%;font-family:"OneShinhan Bold",sans-serif'>Internal Appraisal Certificate</span>
@@ -51,6 +56,9 @@
                                 </p>
                             </td>
                             <td rowspan="11" style="width: 155.5pt; border: solid windowtext 1pt; padding: 0in 0in 0in 0in;">
+                                <!-- <p style='margin-top:0in;margin-right:0in;margin-bottom:8.0pt;margin-left:0in;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;'>&nbsp;
+                                </p> -->
+                                <!-- <img src="{{ storage_path('app/public/images/Borey_Infront_of.jpg') }}" style="width: 100%;"> -->
                                 <img src="{{asset('upload/'.$appraisal->front_photo)}}" style="width: 100%;">
                             </td>
                         </tr>
@@ -632,6 +640,7 @@
                         </td>
                     </tr>
                 </table>
+
                 <!-- <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdfappraisal/98">Export to PDF</a> -->
             </div>
         </div>
