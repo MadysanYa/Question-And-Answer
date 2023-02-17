@@ -6,10 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Internal Indication Report</title>
-    <!-- <script src="../../resources/js/html2canvas.js"></script>
-    <script src="../../resources/js/html2canvas.min.js"></script>
-    <script src="../../resources/js/jspdf.js"></script> -->
-    <script src="../../js/QrCode.js"></script>
+    <!-- <script src="../../js/html2canvas.js"></script>
+    <script src="../../js/html2canvas.min.js"></script>
+    <script src="../../js/jspdf.js"></script> -->
+    <!-- <script src="../../js/QrCode.js"></script> -->
 
     <style>
         /* Font Definitions */
