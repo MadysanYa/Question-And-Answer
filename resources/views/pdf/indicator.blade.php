@@ -444,7 +444,6 @@
                 </tr>
             </table>
 
-            <!-- <div style="position: relative;"> -->
             <div style="position: relative;">
                 <div style="position: relative; left: 0px; top: 0px;">
                     <table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 style='width: 700px !important; border-collapse:collapse;border:none'>
@@ -458,7 +457,6 @@
                         </tr>
                     </table>
                 </div>
-                <!-- qrcode -->
                 <div style="position: absolute ; right: 0px; top: 190px;">
                     <img src="{{ $qrImage }}" style="height: 60px; width: 60px; border: 1px solid #0070C0; padding: 5px; background-color: white;"/>
                 </div>
