@@ -165,7 +165,7 @@
 
         <!-- Logo Shinhan -->
         <div>
-            <img src="{{asset('upload/images/Logo.png')}}" style="height: 60px; "/>
+            <img src="{{asset('upload/images/Logo.png')}}" style="height: 70px; "/>
         </div>
 
         <p class=MsoNormal align=center style='text-align:center'>
@@ -173,7 +173,6 @@
                 <span style='font-size:14.0pt;line-height:107%;font-family:"OneShinhan Bold",sans-serif'>INTERNAL INDICATION REPORT</span>
             </u>
         </p>
-
         <div class="card-body">
         </div>
 

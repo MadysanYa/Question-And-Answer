@@ -591,7 +591,7 @@ class PropertyAppraisalController extends AdminController
             });
             $form->text('no_of_floor', __('No. of Floor'))->rules('required')->attribute('maxlength', '3');
             $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title','Soft Title'=>'Soft Title']);
-            $form->text('land_title_no', __('Land Title No'))->rules('required')->inputmask(['mask' => '999999999-9999']);
+            $form->text('land_title_no', __('Land Title No'))->rules('required');
             $form->text('land_size', __('Land Size(Sqm)'))->rules('required');
             $form->text('land_size_by_measurement', __('Land Size by Measurement'))->rules('required')->attribute('maxlength', '9');
             $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required')->attribute(['style' => 'width: 100%;']);
@@ -766,7 +766,7 @@ class PropertyAppraisalController extends AdminController
                                             <div class="col-sm-8">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
-                                                        <i class="fa fa-pencil fa-fw"></i>
+                                                        $
                                                     </span>
                                                     <input type="text" id="com_ref_total_value1" class="form-control com_ref_total_value1" placeholder="Input Total Value">
                                                 </div>
@@ -873,7 +873,7 @@ class PropertyAppraisalController extends AdminController
                                             <div class="col-sm-8">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
-                                                        <i class="fa fa-pencil fa-fw"></i>
+                                                    $
                                                     </span>
                                                     <input type="text" id="com_ref_total_value2" class="form-control com_ref_total_value2" placeholder="Input Total Value">
                                                 </div>
@@ -918,7 +918,7 @@ class PropertyAppraisalController extends AdminController
                     $("#com_ref_cif_no_name1").val($("#comparable_cif_no1").val());
                     $("#com_ref_geo_code1").val($("#comparable_geo_code1").val());
                     $("#com_ref_distance1").val($("#comparable_distance1").val());
-                    $("#com_ref_value_per_sqm1").val($("#value_per_sqm").val());
+                    $("#com_ref_value_per_sqm1").val($("#comparable_value_per_sqm1").val());
                     $("#com_ref_size1").val($("#comparable_size1").val());
                     $("#com_ref_total_value1").val($("#comparable_total_value1").val());
 
@@ -926,7 +926,7 @@ class PropertyAppraisalController extends AdminController
                     $("#com_ref_cif_no_name2").val($("#comparable_cif_no2").val());
                     $("#com_ref_geo_code2").val($("#comparable_geo_code2").val());
                     $("#com_ref_distance2").val($("#comparable_distance2").val());
-                    $("#com_ref_value_per_sqm2").val($("#value_per_sqm").val());
+                    $("#com_ref_value_per_sqm2").val($("#comparable_value_per_sqm2").val());
                     $("#com_ref_size2").val($("#comparable_size2").val());
                     $("#com_ref_total_value2").val($("#comparable_total_value2").val());
                 });
