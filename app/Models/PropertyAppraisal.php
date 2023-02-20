@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PropertyAppraisal extends Model
 { 
+    protected $dates = ['requested_date','reported_date'];
     /**
      * Relationship
      */
@@ -191,6 +192,31 @@ class PropertyAppraisal extends Model
     public function getAppraisalCertificateFeeFormatAttribute()
     {
         return number_format($this->appraisal_certificate_fee * 4100, 2);
+    }
+
+    public function getLandAreaWithStringAttribute()
+    {
+        return number_format($this->land_size, 2).' sq. m';
+    }
+
+    public function getLandSizeByMeasurementStringAttribute()
+    {
+        return number_format($this->land_size_by_measurement, 2).' sq. m';
+    }
+
+    public function getBuildingSizeByMeasurementStringAttribute()
+    {
+        return number_format($this->building_size_by_measurement, 2).' sq. m';
+    }
+
+    public function getRequestedDateFormatAttribute()
+    {
+        return $this->requested_date->format('d-M-y');
+    }
+
+    public function getReportedDateFormatAttribute()
+    {
+        return $this->reported_date->format('d-M-y');
     }
 
     /**

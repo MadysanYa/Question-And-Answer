@@ -147,11 +147,11 @@
                                     <td style="width: 52.6pt; border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
                                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
-                                                : {{ $appraisal->appraisal_certificate_fee }}
+                                                : USD {{ $appraisal->appraisal_certificate_fee }}
                                             </span>
                                             <br>
                                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
-                                                : {{ $appraisal->AppraisalCertificateFeeFormat }}
+                                                : KHR {{ $appraisal->AppraisalCertificateFeeFormat }}
                                             </span>
                                         </p>
                                     </td>
@@ -178,7 +178,7 @@
                                     <td colspan="2" style="width: 212.6pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
                                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
-                                                : {{ $appraisal->requested_date }}
+                                                : {{ $appraisal->RequestedDateFormat }}
                                             </span>
                                         </p>
                                     </td>
@@ -198,7 +198,7 @@
                                     <td colspan="2" style="width: 212.6pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
                                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
-                                                : {{ $appraisal->reported_date }}
+                                                : {{ $appraisal->ReportedDateFormat }}
                                             </span>
                                         </p>
                                     </td>
@@ -218,7 +218,7 @@
                                     <td colspan="2" style="width: 212.6pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
                                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
-                                                : {{ $appraisal->land_size }} (By Title Deed)
+                                                : {{ $appraisal->LandAreaWithString }} (By Title Deed)
                                             </span>
                                         </p>
                                     </td>
@@ -238,7 +238,7 @@
                                     <td colspan="2" style="width: 212.6pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
                                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
-                                                : {{ $appraisal->land_size_by_measurement }} (Actual Site Measure...)
+                                                : {{ $appraisal->LandSizeByMeasurementString }} (Actual Site Measure...)
                                             </span>
                                         </p>
                                     </td>
@@ -258,7 +258,7 @@
                                     <td colspan="2" style="width: 212.6pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt;vertical-align: top;">
                                         <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
-                                                : {{ $appraisal->building_size_by_measurement }} (Actual Site Measure...)
+                                                : {{ $appraisal->BuildingSizeByMeasurementString }} (Actual Site Measure...)
                                             </span>
                                         </p>
                                     </td>
