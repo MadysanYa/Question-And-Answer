@@ -308,7 +308,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div id="qrcode-2" style="position: absolute; right: 0px; buttom: 0px;">
+                    <div id="qrcode-2" style="position: absolute; right: 0px; top: 233.5px;">
                         <img src="{{ $qrImage }}" style="height: 60px; width: 60px; border: 1px solid #0070C0; padding: 5px; background-color: white;"/>
                     </div>
                 </div>
