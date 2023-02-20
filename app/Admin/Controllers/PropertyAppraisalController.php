@@ -766,7 +766,7 @@ class PropertyAppraisalController extends AdminController
                                             <div class="col-sm-8">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
-                                                        <i class="fa fa-pencil fa-fw"></i>
+                                                        $
                                                     </span>
                                                     <input type="text" id="com_ref_total_value1" class="form-control com_ref_total_value1" placeholder="Input Total Value">
                                                 </div>
@@ -873,7 +873,7 @@ class PropertyAppraisalController extends AdminController
                                             <div class="col-sm-8">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
-                                                        <i class="fa fa-pencil fa-fw"></i>
+                                                    $
                                                     </span>
                                                     <input type="text" id="com_ref_total_value2" class="form-control com_ref_total_value2" placeholder="Input Total Value">
                                                 </div>
@@ -918,7 +918,7 @@ class PropertyAppraisalController extends AdminController
                     $("#com_ref_cif_no_name1").val($("#comparable_cif_no1").val());
                     $("#com_ref_geo_code1").val($("#comparable_geo_code1").val());
                     $("#com_ref_distance1").val($("#comparable_distance1").val());
-                    $("#com_ref_value_per_sqm1").val($("#value_per_sqm").val());
+                    $("#com_ref_value_per_sqm1").val($("#comparable_value_per_sqm1").val());
                     $("#com_ref_size1").val($("#comparable_size1").val());
                     $("#com_ref_total_value1").val($("#comparable_total_value1").val());
 
@@ -926,7 +926,7 @@ class PropertyAppraisalController extends AdminController
                     $("#com_ref_cif_no_name2").val($("#comparable_cif_no2").val());
                     $("#com_ref_geo_code2").val($("#comparable_geo_code2").val());
                     $("#com_ref_distance2").val($("#comparable_distance2").val());
-                    $("#com_ref_value_per_sqm2").val($("#value_per_sqm").val());
+                    $("#com_ref_value_per_sqm2").val($("#comparable_value_per_sqm2").val());
                     $("#com_ref_size2").val($("#comparable_size2").val());
                     $("#com_ref_total_value2").val($("#comparable_total_value2").val());
                 });
