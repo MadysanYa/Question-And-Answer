@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PropertyIndicator extends Model
 {
+    protected $dates = ['requested_date','reported_date'];
     /**
      * Relationship
      */
@@ -192,6 +193,31 @@ class PropertyIndicator extends Model
     public function getComparableTotalValueTwoFormatAttribute()
     {
         return number_format($this->comparable_total_value2, 2); 
+    }
+
+    public function getBuildingStatusWithStringAttribute()
+    {
+        return $this->building_status.' %' ?? '';
+    }
+
+    public function getBuildingAreaWithStringAttribute()
+    {
+        return number_format($this->building_size, 2).' sq. m';
+    }
+
+    public function getLandAreaWithStringAttribute()
+    {
+        return number_format($this->land_size, 2).' sq. m';
+    }
+
+    public function getRequestedDateFormatAttribute()
+    {
+        return $this->requested_date->format('d-M-y');
+    }
+
+    public function getReportedDateFormatAttribute()
+    {
+        return $this->reported_date->format('d-M-y');
     }
 
     public function verified(){

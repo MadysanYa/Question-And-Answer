@@ -606,8 +606,7 @@ class PropertyIndicatorController extends AdminController
                                             <label for="com_ref_total_value1" class="col-sm-2  control-label">Total Value 1</label>
                                             <div class="col-sm-8">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-pencil fa-fw"></i>
+                                                    <span class="input-group-addon">$
                                                     </span>
                                                     <input type="text" id="com_ref_total_value1" class="form-control com_ref_total_value1" placeholder="Input Total Value">
                                                 </div>
@@ -702,8 +701,7 @@ class PropertyIndicatorController extends AdminController
                                             <label for="com_ref_total_value2" class="col-sm-2  control-label">Total Value 2</label>
                                             <div class="col-sm-8">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-pencil fa-fw"></i>
+                                                    <span class="input-group-addon">$
                                                     </span>
                                                     <input type="text" id="com_ref_total_value2" class="form-control com_ref_total_value2" placeholder="Input Total Value">
                                                 </div>
@@ -745,7 +743,7 @@ class PropertyIndicatorController extends AdminController
                     $("#com_id1").val($("#comparable_id1").val());
                     $("#com_ref_value_per_sqm1").val($("#comparable_value_per_sqm1").val());
                     $("#com_ref_size1").val($("#comparable_size1").val());
-                    $("#com_ref_total_value1").val($("#comparable_total_value").val());
+                    $("#com_ref_total_value1").val($("#comparable_total_value1").val());
 
                     $("#com_ref_cif_no_name2").val($("#comparable_cif_no2").val());
                     $("#com_ref_geo_code2").val($("#comparable_geo_code2").val());
