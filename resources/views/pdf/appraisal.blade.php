@@ -53,7 +53,7 @@
                                         </p>
                                     </td>
                                     <td rowspan="11" style="position: absolute; height: 321px; width: 155.5pt; border: solid windowtext 1pt; padding: 0in 0in 0in 0in;">
-                                        <img src="{{asset('upload/'.$appraisal->front_photo)}}" style="width: 100%;">
+                                        <img src="{{asset('upload/'.$appraisal->front_photo)}}" style="width: 100%; height: 321px;">
                                         <!-- <div id="qrcode-2" style="position: absolute; right: 0px; buttom: 0px;">
                                             <img src="{{ $qrImage }}" style="height: 60px; width: 60px; border: 1px solid #0070C0; padding: 5px; background-color: white;"/>
                                         </div> -->
