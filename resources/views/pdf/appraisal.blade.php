@@ -644,7 +644,7 @@
                     </tr>
                 </table>
 
-                <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdfappraisal/98">Export to PDF</a>
+                <!-- <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdfappraisal/98">Export to PDF</a> -->
             </div>
         </div>
     </body>
