@@ -53,7 +53,7 @@
                                         </p>
                                     </td>
                                     <td rowspan="11" style="position: absolute; height: 321px; width: 155.5pt; border: solid windowtext 1pt; padding: 0in 0in 0in 0in;">
-                                        <img src="{{asset('upload/'.$appraisal->front_photo)}}" style="width: 100%;">
+                                        <img src="{{asset('upload/'.$appraisal->front_photo)}}" style="width: 100%; height: 321px;">
                                         <!-- <div id="qrcode-2" style="position: absolute; right: 0px; buttom: 0px;">
                                             <img src="{{ $qrImage }}" style="height: 60px; width: 60px; border: 1px solid #0070C0; padding: 5px; background-color: white;"/>
                                         </div> -->
@@ -151,7 +151,7 @@
                                             </span>
                                             <br>
                                             <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>
-                                                : {{ $appraisal->appraisal_certificate_fee }} x 4100
+                                                : {{ $appraisal->AppraisalCertificateFeeFormat }}
                                             </span>
                                         </p>
                                     </td>
@@ -404,19 +404,19 @@
                             <td style='color:black;font-size:12px;font-weight:400;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:left;vertical-align:bottom;border:.5pt solid windowtext;height:14.4pt;border-top:none;width:20pt;'>1</td>
                             <td style='color:black;font-size:12px;font-weight:400;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:left;vertical-align:bottom;border:.5pt solid windowtext;border-top:none;border-left:none;width:80pt;'>Land</td>
                             <td style='color:black;font-size:12px;font-weight:400;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:left;vertical-align:bottom;border:.5pt solid windowtext;border-top:none;border-left:none;width:70pt;'></td>
-                            <td style='color:black;font-size:12px;font-weight:400;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:general;vertical-align:bottom;border:.5pt solid windowtext;text-align:left;border-top:none;border-left:none;width:80pt;'>{{ $appraisal->land_size }}</td>
+                            <td style='color:black;font-size:12px;font-weight:400;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:general;vertical-align:bottom;border:.5pt solid windowtext;text-align:left;border-top:none;border-left:none;width:80pt;'>{{ $appraisal->LandSizeFormat }}</td>
                             <td style='color:black;font-size:12px;font-weight:400;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:general;vertical-align:bottom;border:.5pt solid windowtext;text-align:left;border-top:none;border-left:none;width:90pt;'></td>
-                            <td style='color:black;font-size:12px;font-weight:400;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:general;vertical-align:bottom;border:.5pt solid windowtext;text-align:left;border-top:none;border-left:none;width:80pt;'>$ {{ $appraisal->land_value_per_sqm }}</td>
-                            <td style='color:black;font-size:12px;font-weight:400;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:general;vertical-align:bottom;border:.5pt solid windowtext;text-align:left;border-top:none;border-left:none;width:90pt;'>$ {{ $appraisal->LandTotalValuePerSqm }}</td>
+                            <td style='color:black;font-size:12px;font-weight:400;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:general;vertical-align:bottom;border:.5pt solid windowtext;text-align:left;border-top:none;border-left:none;width:80pt;'>$ {{ $appraisal->LandValuePerSqmFormat }}</td>
+                            <td style='color:black;font-size:12px;font-weight:400;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:general;vertical-align:bottom;border:.5pt solid windowtext;text-align:left;border-top:none;border-left:none;width:90pt;'>$ {{ $appraisal->LandTotalValuePerSqmFormat }}</td>
                         </tr>
                         <tr>
                             <td style='color:black;font-size:12px;font-weight:400;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:left;vertical-align:bottom;border:.5pt solid windowtext;height:14.4pt;border-top:none;width:20pt;'>2</td>
                             <td style='color:black;font-size:12px;font-weight:400;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:left;vertical-align:bottom;border:.5pt solid windowtext;border-top:none;border-left:none;width:80pt;'>{{ $appraisal->PropertyTypeName }}</td>
                             <td style='color:black;font-size:12px;font-weight:400;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:left;vertical-align:bottom;border:.5pt solid windowtext;border-top:none;border-left:none;width:70pt;'></td>
-                            <td style='color:black;font-size:12px;font-weight:400;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:general;vertical-align:bottom;border:.5pt solid windowtext;text-align:left;border-top:none;border-left:none;width:80pt;'>{{ $appraisal->building_size_by_measurement }}</td>
+                            <td style='color:black;font-size:12px;font-weight:400;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:general;vertical-align:bottom;border:.5pt solid windowtext;text-align:left;border-top:none;border-left:none;width:80pt;'>{{ $appraisal->BuildingSizeByMeasurementFormat }}</td>
                             <td style='color:black;font-size:12px;font-weight:400;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:general;vertical-align:bottom;border:.5pt solid windowtext;text-align:left;border-top:none;border-left:none;width:90pt;'></td>
-                            <td style='color:black;font-size:12px;font-weight:400;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:general;vertical-align:bottom;border:.5pt solid windowtext;text-align:left;border-top:none;border-left:none;width:80pt;'>$ {{ $appraisal->building_value_per_sqm }}</td>
-                            <td style='color:black;font-size:12px;font-weight:400;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:general;vertical-align:bottom;border:.5pt solid windowtext;text-align:left;border-top:none;border-left:none;width:90pt;'>$ {{ $appraisal->BuildingTotalValuePerSqm }}</td>
+                            <td style='color:black;font-size:12px;font-weight:400;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:general;vertical-align:bottom;border:.5pt solid windowtext;text-align:left;border-top:none;border-left:none;width:80pt;'>$ {{ $appraisal->BuildingValuePerSqmFormat }}</td>
+                            <td style='color:black;font-size:12px;font-weight:400;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:general;vertical-align:bottom;border:.5pt solid windowtext;text-align:left;border-top:none;border-left:none;width:90pt;'>$ {{ $appraisal->BuildingTotalValuePerSqmFormat }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -429,7 +429,7 @@
                             </td>
                             <td style='color: red; font-size:12px;font-weight:50;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:left;vertical-align:bottom;border:.5pt solid windowtext;height:14.4pt;border-left:none;'>
                                 <span style="margin-left: 5px;">$</span>
-                                <span style="float: right; margin-right: 5px;">{{ $appraisal->FairMarketValue }}</span>
+                                <span style="float: right; margin-right: 5px;">{{ $appraisal->FairMarketValueFormat }}</span>
                             </td>
                         </tr>
                         <tr>
@@ -438,7 +438,7 @@
                             </td>
                             <td style='color: red; font-size:12px;font-weight:50;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:left;vertical-align:bottom;border:.5pt solid windowtext;height:14.4pt;border-left:none;'>
                                 <span style="margin-left: 5px;">$</span>
-                                <span style="float: right; margin-right: 5px;">{{ $appraisal->ForcedSaleValue }}</span>
+                                <span style="float: right; margin-right: 5px;">{{ $appraisal->ForcedSaleValueFormat }}</span>
                             </td>
                         </tr>
                         <tr>
@@ -447,7 +447,7 @@
                             </td>
                             <td style='color: red; font-size:12px;font-weight:50;font-style:normal;text-decoration:none;font-family:"OneShinhan Light", sans-serif;text-align:left;vertical-align:bottom;border:.5pt solid windowtext;height:14.4pt;border-left:none;'>
                                 <span style="margin-left: 5px;">$</span>
-                                <span style="float: right; margin-right: 5px;">{{ $appraisal->BuildingTotalValuePerSqm }}</span>
+                                <span style="float: right; margin-right: 5px;">{{ $appraisal->BuildingTotalValuePerSqmFormat }}</span>
                             </td>
                         </tr>
                     </tbody>
@@ -533,17 +533,17 @@
                             </td>
                             <td style="width: 40pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
                                 <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:right;'>
-                                    <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>{{ $appraisal->comparable_size1 }}</span>
+                                    <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>{{ $appraisal->ComparableSizeOneFormat }}</span>
                                 </p>
                             </td>
                             <td style="width: 50pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
                                 <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:right;'>
-                                    <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>$ {{ $appraisal->comparable_value_per_sqm1 }}</span>
+                                    <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>$ {{ $appraisal->ComparaleValuePerSqmOneFormat }}</span>
                                 </p>
                             </td>
                             <td style="width: 50pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
                                 <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:right;'>
-                                    <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>$ {{ $appraisal->comparable_total_value1 }}</span>
+                                    <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>$ {{ $appraisal->ComparableTotalValueOneFormat }}</span>
                                 </p>
                             </td>
                         </tr>
@@ -570,17 +570,17 @@
                             </td>
                             <td style="width: 40pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
                                 <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:right;'>
-                                    <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>{{ $appraisal->comparable_size2 }}</span>
+                                    <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>{{ $appraisal->ComparableSizeTwoFormat }}</span>
                                 </p>
                             </td>
                             <td style="width: 50pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
                                 <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:right;'>
-                                    <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>$ {{ $appraisal->comparable_value_per_sqm2 }}</span>
+                                    <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>$ {{ $appraisal->ComparaleValuePerSqmTwoFormat }}</span>
                                 </p>
                             </td>
                             <td style="width: 50pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
                                 <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:right;'>
-                                    <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>$ {{ $appraisal->comparable_total_value2 }}</span>
+                                    <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>$ {{ $appraisal->ComparableTotalValueTwoFormat }}</span>
                                 </p>
                             </td>
                         </tr>

@@ -103,9 +103,19 @@ class PropertyAppraisal extends Model
         return $this->land_size * $this->land_value_per_sqm;
     }
 
+    public function getLandTotalValuePerSqmFormatAttribute()
+    {
+        return number_format($this->land_size * $this->land_value_per_sqm, 2);
+    }
+
     public function getBuildingTotalValuePerSqmAttribute()
     {
         return $this->building_size_by_measurement * $this->building_value_per_sqm;
+    }
+
+    public function getBuildingTotalValuePerSqmFormatAttribute()
+    {
+        return number_format($this->building_size_by_measurement * $this->building_value_per_sqm, 2);
     }
 
     public function getFairMarketValueAttribute()
@@ -113,14 +123,74 @@ class PropertyAppraisal extends Model
         return $this->LandTotalValuePerSqm + $this->BuildingTotalValuePerSqm;
     }
 
-    public function getForcedSaleValueAttribute()
+    public function getFairMarketValueFormatAttribute()
     {
-        return $this->FairMarketValue * 80;
+        return number_format($this->LandTotalValuePerSqm + $this->BuildingTotalValuePerSqm, 2);
+    }
+
+    public function getForcedSaleValueFormatAttribute()
+    {
+        return number_format(($this->FairMarketValue * 80) / 100, 2);
     }
 
     public function getPropertyTypeNameAttribute()
     {
         return optional($this->proType)->property_type_name;
+    }
+
+    public function getLandSizeFormatAttribute()
+    {
+        return number_format($this->land_size, 2);
+    }
+
+    public function getBuildingSizeByMeasurementFormatAttribute()
+    {
+        return number_format($this->building_size_by_measurement, 2);
+    }
+
+    public function getLandValuePerSqmFormatAttribute()
+    {
+        return number_format($this->land_value_per_sqm, 2);
+    }
+
+    public function getBuildingValuePerSqmFormatAttribute()
+    {
+        return number_format($this->building_value_per_sqm, 2);
+    }
+
+    public function getComparableSizeOneFormatAttribute()
+    {
+        return number_format($this->comparable_size1, 2);
+    }
+
+    public function getComparableSizeTwoFormatAttribute()
+    {
+        return number_format($this->comparable_id2, 2);
+    }
+
+    public function getComparaleValuePerSqmOneFormatAttribute()
+    {
+        return number_format($this->comparable_value_per_sqm1, 2);
+    }
+
+    public function getComparaleValuePerSqmTwoFormatAttribute()
+    {
+        return number_format($this->comparable_value_per_sqm2, 2);
+    }
+
+    public function getComparableTotalValueOneFormatAttribute()
+    {
+        return number_format($this->comparable_total_value1, 2); 
+    }
+
+    public function getComparableTotalValueTwoFormatAttribute()
+    {
+        return number_format($this->comparable_total_value2, 2); 
+    }
+
+    public function getAppraisalCertificateFeeFormatAttribute()
+    {
+        return number_format($this->appraisal_certificate_fee * 4100, 2);
     }
 
     /**
