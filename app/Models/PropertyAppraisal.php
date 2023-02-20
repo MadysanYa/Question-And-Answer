@@ -20,7 +20,7 @@ class PropertyAppraisal extends Model
     {
         return $this->belongsTo(UserAdmin::class);
     }
-    public function propertyType()
+    public function proType()
     {
         return $this->belongsTo(PropertyType::class, 'property_type', 'id');
     }
@@ -120,7 +120,7 @@ class PropertyAppraisal extends Model
 
     public function getPropertyTypeNameAttribute()
     {
-        return optional($this->propertyType)->property_type_name;
+        return optional($this->proType)->property_type_name;
     }
 
     /**
