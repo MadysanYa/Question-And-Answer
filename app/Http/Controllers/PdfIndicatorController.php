@@ -20,6 +20,6 @@ class PdfIndicatorController extends Controller
             'qrImage' => $qrImage
     	]
 	);
-        return $pdf->download('indicator.pdf');
+        return $pdf->download($indicator->property_reference . '.pdf');
     }
 }
