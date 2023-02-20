@@ -162,6 +162,12 @@
 
 <body style="height: 100%; width: 100%;">
     <div class="WordSection1" style=" height: 850px;">
+
+        <!-- Logo Shinhan -->
+        <div>
+            <img src="{{asset('upload/images/Logo.png')}}" style="height: 60px; "/>
+        </div>
+
         <p class=MsoNormal align=center style='text-align:center'>
             <u>
                 <span style='font-size:14.0pt;line-height:107%;font-family:"OneShinhan Bold",sans-serif'>INTERNAL INDICATION REPORT</span>
