@@ -28,6 +28,7 @@ use Encore\Admin\Widgets\Collapse;
 use Encore\Admin\Form\Field\Button;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
+use Encore\Admin\Grid\Displayers\Actions;
 use Encore\Admin\Controllers\AdminController;
 
 class PropertyAppraisalController extends AdminController
@@ -54,7 +55,9 @@ class PropertyAppraisalController extends AdminController
 
         $grid = new Grid(new PropertyAppraisal());
 
+        $grid->model()->queryPropertyAppraisalGrid();
         $grid->model()->orderBy('id','desc');
+
         $grid->column('id', __('No.'))->asc()->sortable();
         $grid->column('property_reference', __('Reference'))->sortable();
         $grid->column('collateral_owner', __('Owner'))->sortable();
@@ -215,12 +218,16 @@ class PropertyAppraisalController extends AdminController
         // // Export to PDF
         $grid->column(__('To PDF'))->display(function(){
             $id = $this->id;
-            return '<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdfappraisal/' . $id . '" target="_blank">Download</a>';
+
+            if (!User::isRmRole()) {
+                return '<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdfappraisal/' . $id . '" target="_blank">Download</a>';
+                
+            } elseif (User::isRmRole() && $this->IsPropertyApproved) {
+                return '<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdfappraisal/' . $id . '" target="_blank">Download</a>';
+            } 
         });
 
         // $grid->column('report_date', __('Report Date'));
-        $grid->fixColumns(0, -4);
-
         $grid->quickSearch(function ($model, $query) {
             $model->where('id', $query);
             $model->orWhere('collateral_owner', $query);
@@ -233,7 +240,14 @@ class PropertyAppraisalController extends AdminController
             });
         });
 
+        if (User::isBmRole()) {
+            $grid->actions(function (Actions $actions) {
+                $actions->disableEdit();
+            });
+        }
+
         $grid->disableFilter();
+        $grid->fixColumns(0, -4);
         $grid->filter(function($filter){
             $filter->disableIdFilter();
             $filter->where(function ($query) {
