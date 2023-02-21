@@ -37,7 +37,7 @@ class PropertyResearchConteroller extends AdminController
      */
 
     //  Title to view
-    protected $title = 'Property Research Management';
+    protected $title = 'Property Research';
 
     /**
      * Make a grid builder.
