@@ -306,7 +306,7 @@
                             <td style="width:150pt;border-top:solid windowtext 1.0pt;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:50pt;">
                                 <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                                     <span style='font-size:11px;font-family:   "OneShinhan Light",sans-serif;'>
-                                        - {{ $appraisal->strength }}
+                                        {!! $appraisal->strength !!}
                                     </span>
                                     <!-- <br>
                                     <span style='font-size:11px;font-family:   "OneShinhan Light",sans-serif;'>
@@ -317,7 +317,7 @@
                             <td style="width:150pt;border-top:solid windowtext 1.0pt;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:50pt;">
                                 <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                                     <span style='font-size:11px;font-family:   "OneShinhan Light",sans-serif;'>
-                                        - {{ $appraisal->opportunity }}
+                                        {!! $appraisal->opportunity !!}
                                     </span>
                                 </p>
                             </td>
@@ -344,14 +344,14 @@
                             <td style="width:150pt;border-top:none;border-left:none;border-bottom:1pt solid windowtext ;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:50pt;">
                                 <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                                     <span style='font-size:11px;font-family:   "OneShinhan Light",sans-serif;'>
-                                        - {{ $appraisal->weakness }}
+                                        {!! $appraisal->weakness !!}
                                     </span>
                                 </p>
                             </td>
                             <td style="width:150pt;border-top:none;border-left:none;border-bottom:1pt solid windowtext;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt;height:50pt;">
                                 <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                                     <span style='font-size:11px;font-family:   "OneShinhan Light",sans-serif;'>
-                                        - {{ $appraisal->threat }}
+                                        {!! $appraisal->threat !!}
                                     </span>
                                 </p>
                             </td>

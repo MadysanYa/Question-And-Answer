@@ -466,7 +466,7 @@ class PropertyAppraisalController extends AdminController
         // Add dialog form
         Admin::html('
             <div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -481,7 +481,7 @@ class PropertyAppraisalController extends AdminController
                                         <label for="strength">
                                             <span class="glyphicon glyphicon">Strength</span>
                                         </label>
-                                        <textarea type="text" class="form-control" id="input_strength"></textarea>
+                                        <textarea rows="5" type="text" class="form-control" id="input_strength"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -489,7 +489,7 @@ class PropertyAppraisalController extends AdminController
                                         <label for="weakness">
                                             <span class="glyphicon glyphicon">Weakness</span>
                                         </label>
-                                        <textarea type="text" class="form-control" id="input_weakness"></textarea>
+                                        <textarea rows="5" type="text" class="form-control" id="input_weakness"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -497,7 +497,7 @@ class PropertyAppraisalController extends AdminController
                                         <label for="opportunity">
                                             <span class="glyphicon glyphicon">Opportunity</span>
                                         </label>
-                                        <textarea type="text" class="form-control" id="input_opportunity"></textarea>
+                                        <textarea rows="5" type="text" class="form-control" id="input_opportunity"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -505,7 +505,7 @@ class PropertyAppraisalController extends AdminController
                                         <label for="threat">
                                             <span class="glyphicon glyphicon">Threat</span>
                                         </label>
-                                        <textarea type="text" class="form-control" id="input_threat"></textarea>
+                                        <textarea rows="5" type="text" class="form-control" id="input_threat"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -522,10 +522,15 @@ class PropertyAppraisalController extends AdminController
             <script>
                 $("#btnInputSWOT").click(function() {
                     // Push Value From Modal To Input
-                    $("#strength").val($("#input_strength").val());
-                    $("#weakness").val($("#input_weakness").val());
-                    $("#opportunity").val($("#input_opportunity").val());
-                    $("#threat").val($("#input_threat").val());
+                    var dataStrength = $("#input_strength").val();
+                    var dataWeakness = $("#input_weakness").val();
+                    var dataOpportunity = $("#input_opportunity").val();
+                    var dataThreat = $("#input_threat").val();
+
+                    $("#strength").val(dataStrength.replace(/\n/g,"<br>"));
+                    $("#weakness").val(dataWeakness.replace(/\n/g,"<br>"));
+                    $("#opportunity").val(dataOpportunity.replace(/\n/g,"<br>"));
+                    $("#threat").val(dataThreat.replace(/\n/g,"<br>"));
 
                     // Close Modal When User Click Submit
                     $("#myModal").modal("hide");
@@ -533,10 +538,10 @@ class PropertyAppraisalController extends AdminController
 
                 // Push Value From Input To Modal
                 $("#show-swot-modal").click(function() {
-                    $("#input_strength").val($("#strength").val());
-                    $("#input_weakness").val($("#weakness").val());
-                    $("#input_opportunity").val($("#opportunity").val());
-                    $("#input_threat").val($("#threat").val());
+                    $("#input_strength").val($("#strength").val().replace(/<br\s*\/?>/mg,"\n"));
+                    $("#input_weakness").val($("#weakness").val().replace(/<br\s*\/?>/mg,"\n"));
+                    $("#input_opportunity").val($("#opportunity").val().replace(/<br\s*\/?>/mg,"\n"));
+                    $("#input_threat").val($("#threat").val().replace(/<br\s*\/?>/mg,"\n"));
                 });
             </script>
         ');

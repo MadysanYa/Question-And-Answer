@@ -211,12 +211,16 @@ class PropertyAppraisal extends Model
 
     public function getRequestedDateFormatAttribute()
     {
-        return $this->requested_date->format('d-M-y');
+        if ($this->requested_date) {
+            return $this->requested_date->format('d-M-y');
+        }
     }
 
     public function getReportedDateFormatAttribute()
     {
-        return $this->reported_date->format('d-M-y');
+        if ($this->reported_date) {
+            return $this->reported_date->format('d-M-y');
+        }
     }
 
     /**
