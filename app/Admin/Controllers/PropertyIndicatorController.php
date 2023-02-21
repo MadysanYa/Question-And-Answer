@@ -30,9 +30,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Encore\Admin\Controllers\AdminController;
 
-
-
-
 class PropertyIndicatorController extends AdminController
 {
     /**
@@ -63,32 +60,6 @@ class PropertyIndicatorController extends AdminController
 		$grid->column('property_reference', __('Reference'))->sortable();
         $grid->column('collateral_owner',__('Owner'))->sortable();
         $grid->column('information_type',__('Type'))->sortable();
-
-        // $grid->column('property_address',__('Property Address '))->display(function(){
-        //     $province_id = $this->province_id;
-        //     $province = Province::where('id', $province_id)->first();
-        //     $distict_id = $this->district_id;
-        //     $district = District::where('id', $distict_id)->first();
-        //     $commune_id = $this->commune_id;
-        //     $commune = Commune::where('id', $commune_id)->first();
-
-        //     $village_id = $this->village_id;
-        //     $village = Village::where('id', $village_id)->first();
-        //      if($village == null) $villageName = '';
-        //     else
-        //     $villageName = $village->village_name ;
-        //     if($commune == null) $communeName = '';
-        //     else
-        //     $communeName = $commune->commune_name ;
-        //     if($district == null) $districtName = '';
-        //     else
-        //     $districtName = $district->district_name ;
-        //     if($province == null) $provinceName = '';
-        //     else
-        //     $provinceName= $province->province_name ;
-        //     return $villageName . ' , ' . $communeName . ' , ' . $districtName . ' , ' .  $provinceName ;
-
-        // });
         $grid->column('longtitude',__('Geo Code'))->sortable();// longtitude just example for show Geo Code on grid!
         $grid->column('region_id',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){// add filter
             $region = Region::where('id', $id)->first();
@@ -104,14 +75,18 @@ class PropertyIndicatorController extends AdminController
                 return $branch->branch_name;
 
             });
-        // $grid->column('branch_code',__('Branch'))->filter($this->convertToArrayBranch(Branch::whereIn('region_id', $filterRegionID)->get(['id', 'branch_name'])))->Display(function($branch_code){
-        //      $branch = Branch::where('branch_code', $branch_code)->first();
-        //     if($branch == null) return '';
-        //     return $branch->branch_name;
-        //    });
-        $grid->column('requested_date',__('Requested Date'))->filter('range', 'date');
+
+        $grid->column('requested_date',__('Requested Date'))->filter('range', 'date')->display(function(){
+            if ($this->requested_date) {
+                return date('d-M-Y', strtotime($this->requested_date));
+            }
+        });
         if (User::isVerifierRole() || User::isApproverRole()){
-            $grid->column('reported_date',__('Reported Date'))->filter('range', 'date');
+            $grid->column('reported_date',__('Reported Date'))->filter('range', 'date')->display(function(){
+                if ($this->reported_date) {
+                    return date('d-M-Y', strtotime($this->reported_date));
+                }
+            });
         }
         $grid->column('cif_no',__('CIF No.'))->sortable();
         $grid->column('rm_name',__('RM Name'))->sortable();

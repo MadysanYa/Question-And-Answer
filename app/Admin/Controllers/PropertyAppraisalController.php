@@ -30,12 +30,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Encore\Admin\Controllers\AdminController;
 
-
-
-
-
-
-
 class PropertyAppraisalController extends AdminController
 {
     /**
@@ -62,34 +56,6 @@ class PropertyAppraisalController extends AdminController
 
         $grid->model()->orderBy('id','desc');
         $grid->column('id', __('No.'))->asc()->sortable();
-
-            /* $grid->column('swot_analyze', __("swot_analyze"))->display(function(){ return 'Swot Analyze';})->modal('Swot Analyze', function($model){
-
-            $form = new Form(new PropertyAppraisal());
-
-            $form->column(1/2,function($form){
-            $form->text('strength', __('Strength'))->rules('required');
-            $form->text('weakness', __('Weakness'))->rules('required');
-        });
-            $form->column(1/2,function($form){
-            $form->text('opportunity', __('Opportunity'))->rules('required');
-            $form->text('threat', __('Threat'))->rules('required');
-
-            // $form->text('	updated_at',__ ('	updated_at'));
-            // $form->text('	created_at',__ ('	created_at'));
-
-        });
-
-            //  $form->select('return', __('Return'))->options(['Yes'=>'Yes']);
-            // $form->radio('return', __('Return'))->options([''=>'No','Return'=>'Yes'])->default('No');
-            //   $form->textarea('remark', __('Remark'));
-
-            $form->setAction('../../api/PropertyAppraisal');
-
-            return $form;
-
-        });  */
-
         $grid->column('property_reference', __('Reference'))->sortable();
         $grid->column('collateral_owner', __('Owner'))->sortable();
         $grid->column('information_type',__(' Type'))->sortable()->Display(function($id){
@@ -98,34 +64,6 @@ class PropertyAppraisalController extends AdminController
             return $informationtype->information_type_name;
         });
 
-
-
-            /*   $grid->column('property_address',__('Property Address '))->display(function(){
-            $province_id = $this->province_id;
-            $province = Province::where('id', $province_id)->first();
-            $distict_id = $this->district_id;
-            $district = District::where('id', $distict_id)->first();
-            $commune_id = $this->commune_id;
-            $commune = Commune::where('id', $commune_id)->first();
-            $village_id = $this->village_id;
-            $village = Village::where('id', $village_id)->first();
-
-            // $distict = District::where('id', $distict_id)->first();
-            if($village == null) $villageName = '';
-            else
-            $villageName = $village->village_name ;
-            if($commune == null) $communeName = '';
-            else
-            $communeName = $commune->commune_name ;
-            if($district == null) $districtName = '';
-            else
-            $districtName = $district->district_name ;
-            if($province == null) $provinceName = '';
-            else
-            $provinceName= $province->province_name ;
-            return  $villageName . ' , ' . $communeName . ' , ' . $districtName . ' , ' .  $provinceName  ;
-
-        });  */
         $grid->column('longtitude',__('Geo Code'))->sortable();
         $grid->column('region_id',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){// add filter
             $region = Region::where('id', $id)->first();
@@ -144,8 +82,16 @@ class PropertyAppraisalController extends AdminController
                 return $branch->branch_name;
 
             });
-        $grid->column('requested_date',__('Requested Date'))->filter('range', 'date');
-        $grid->column('reported_date',__('Reported Date'))->filter('range', 'date');
+        $grid->column('requested_date',__('Requested Date'))->filter('range', 'date')->display(function(){
+            if ($this->requested_date) {
+                return date('d-M-Y', strtotime($this->requested_date));
+            }
+        });
+        $grid->column('reported_date',__('Reported Date'))->filter('range', 'date')->display(function(){
+            if ($this->reported_date) {
+                return date('d-M-Y', strtotime($this->reported_date));
+            }
+        });
         $grid->column('cif_no',__('CIF No.'))->sortable();
         $grid->column('rm_name',__('RM Name'))->sortable();
         $grid->column('telephone',__('Telephone'))->sortable();
@@ -486,18 +432,18 @@ class PropertyAppraisalController extends AdminController
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="weakness">
-                                            <span class="glyphicon glyphicon">Weakness</span>
-                                        </label>
-                                        <textarea rows="5" type="text" class="form-control" id="input_weakness"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
                                         <label for="opportunity">
                                             <span class="glyphicon glyphicon">Opportunity</span>
                                         </label>
                                         <textarea rows="5" type="text" class="form-control" id="input_opportunity"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="weakness">
+                                            <span class="glyphicon glyphicon">Weakness</span>
+                                        </label>
+                                        <textarea rows="5" type="text" class="form-control" id="input_weakness"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

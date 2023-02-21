@@ -213,14 +213,14 @@ class PropertyIndicator extends Model
     public function getRequestedDateFormatAttribute()
     {
         if ($this->requested_date) {
-            return $this->requested_date->format('d-M-y');
+            return $this->requested_date->format('d-M-Y');
         }
     }
 
     public function getReportedDateFormatAttribute()
     {
         if ($this->reported_date) {
-            return $this->reported_date->format('d-M-y');
+            return $this->reported_date->format('d-M-Y');
         }
     }
 
