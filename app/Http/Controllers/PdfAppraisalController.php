@@ -21,6 +21,6 @@ class PdfAppraisalController extends Controller
             'qrImage' => $qrImage,
     	]
 	);
-        return $pdf->download($appraisal->property_reference . '.pdf');
+        return $pdf->stream($appraisal->property_reference . '.pdf');
     }
 }
