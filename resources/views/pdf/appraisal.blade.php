@@ -510,7 +510,7 @@
                                 </p>
                             </td>
                             <td style="width: 40pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
-                                <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:right;'>
+                                <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                                     <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>{{ $appraisal->ComparableSizeOneFormat }}</span>
                                 </p>
                             </td>
@@ -547,7 +547,7 @@
                                 </p>
                             </td>
                             <td style="width: 40pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0in 5.4pt;vertical-align: top;">
-                                <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:right;'>
+                                <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                                     <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;'>{{ $appraisal->ComparableSizeTwoFormat }}</span>
                                 </p>
                             </td>

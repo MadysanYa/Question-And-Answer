@@ -570,14 +570,14 @@ class PropertyAppraisalController extends AdminController
 
             $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.999999'])->rules('required');
             $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.999999'])->rules('required');
-            $form->image('front_photo',__('front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
-            $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
-            $form->image('right_photo',__('Access Road Photo Right'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
-            $form->image('left_photo',__('Access Road Photo Left'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
-            $form->image('title_front_photo',__('Title Photo Front'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
-            $form->image('title_back_photo',__('Title Photo Back'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
-            $form->image('id_front_photo',__('ID Photo Front'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
-            $form->image('id_back_photo',__('ID Photo Back'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
+            $form->image('front_photo',__('front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+            $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+            $form->image('right_photo',__('Access Road Photo Right'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+            $form->image('left_photo',__('Access Road Photo Left'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+            $form->image('title_front_photo',__('Title Photo Front'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+            $form->image('title_back_photo',__('Title Photo Back'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+            $form->image('id_front_photo',__('ID Photo Front'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+            $form->image('id_back_photo',__('ID Photo Back'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
             $form->multipleFile('photos',__('Photos'))->removable()->uniqueName();
             $form->text('strength',__('Strength'));
             $form->text('weakness',__('Weakness'));
