@@ -31,5 +31,6 @@ Admin::routes();
         $router->resource('property_types', PropertyTypeController::class);
         $router->resource('boreys', BoreyController::class);
         $router->resource('dashboard', DashboardController::class);
+        $router->resource('users', UserAdminController::class);
     });
 
