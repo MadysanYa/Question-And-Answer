@@ -466,7 +466,7 @@ class PropertyAppraisalController extends AdminController
         // Add dialog form
         Admin::html('
             <div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -481,7 +481,7 @@ class PropertyAppraisalController extends AdminController
                                         <label for="strength">
                                             <span class="glyphicon glyphicon">Strength</span>
                                         </label>
-                                        <textarea type="text" class="form-control" id="input_strength"></textarea>
+                                        <textarea rows="5" type="text" class="form-control" id="input_strength"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -489,7 +489,7 @@ class PropertyAppraisalController extends AdminController
                                         <label for="weakness">
                                             <span class="glyphicon glyphicon">Weakness</span>
                                         </label>
-                                        <textarea type="text" class="form-control" id="input_weakness"></textarea>
+                                        <textarea rows="5" type="text" class="form-control" id="input_weakness"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -497,7 +497,7 @@ class PropertyAppraisalController extends AdminController
                                         <label for="opportunity">
                                             <span class="glyphicon glyphicon">Opportunity</span>
                                         </label>
-                                        <textarea type="text" class="form-control" id="input_opportunity"></textarea>
+                                        <textarea rows="5" type="text" class="form-control" id="input_opportunity"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -505,7 +505,7 @@ class PropertyAppraisalController extends AdminController
                                         <label for="threat">
                                             <span class="glyphicon glyphicon">Threat</span>
                                         </label>
-                                        <textarea type="text" class="form-control" id="input_threat"></textarea>
+                                        <textarea rows="5" type="text" class="form-control" id="input_threat"></textarea>
                                     </div>
                                 </div>
                             </div>
