@@ -297,7 +297,7 @@
                     </td>
                 </tr>
                 <tr style='height:13.35pt'>
-                    <td colspan=6 style='width:527.25pt; border:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;'>
+                    <td colspan=6 style='width:527.25pt; border: 1pt solid windowtext; padding:0in 5.4pt 0in 5.4pt;'>
                         <p class=MsoListParagraphCxSpFirst style='margin-left:0in'>
                             <span style='font-size:8.0pt;line-height:107%;font-family:"OneShinhan Light",sans-serif'>Address: {{ $indicator->FullAddress }}</span>
                         </p>
@@ -970,7 +970,7 @@
                 <img src="{{ $qrImage }}" style="height: 60px; width: 60px; border: 1px solid #0070C0; padding: 5px; background-color: white;"/>
             </div> -->
             
-            <!-- <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdfindicator/145">Export to PDF</a> -->
+            <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdfindicator/145">Export to PDF</a>
         </div>
     </div>
 </body>

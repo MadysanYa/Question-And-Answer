@@ -14,7 +14,7 @@
         });
 
         // MODAL COMPARABLE REFERENCE ALL NUMBER AND DOT
-        $('#com_ref_size1, #com_ref_size2, #com_ref_distance1, #com_ref_distance2, #com_ref_total_value1, #com_ref_total_value2, #com_ref_value_per_sqm1, #com_ref_value_per_sqm2').on('input', function() {
+        $('#com_ref_size1, #com_ref_size2, #com_ref_total_value1, #com_ref_total_value2, #com_ref_value_per_sqm1, #com_ref_value_per_sqm2').on('input', function() {
             this.value = this.value.replace(/[^0-9\.]/g,'');
         });
 
