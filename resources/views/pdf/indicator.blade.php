@@ -288,7 +288,7 @@
         </table>
         <br>
         <div align=center>
-            <table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 style='width:527.25pt;border-collapse:collapse;border:none'>
+            <table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 style='width:527.25pt;border-collapse:collapse;'>
                 <tr style='height:13.35pt'>
                     <td colspan=6 style='width:527.25pt; border:solid windowtext 1.0pt; background:#0070C0; padding:0in 5.4pt 0in 5.4pt; height:18.45pt'>
                         <p class=MsoNormal align=center style='margin-top:0in;margin-right:-5.75pt; margin-bottom:0in;margin-left:0in;text-align:center;line-height:normal'>
@@ -917,7 +917,6 @@
                 </tr>
                 <br>
                 <br>
-                <br>
                 <tr>
                     <td style="width:50pt; border:0; padding:0in 5.4pt 0in 5.4pt; ">
                         <p style='margin-top:0in; margin-right:0in; margin-bottom:0in; margin-left:0in; line-height:normal; font-size:15px; font-family:"Calibri",sans-serif;text-align:left;'>
@@ -971,7 +970,7 @@
                 <img src="{{ $qrImage }}" style="height: 60px; width: 60px; border: 1px solid #0070C0; padding: 5px; background-color: white;"/>
             </div> -->
             
-            <!-- <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdfindicator/145">Export to PDF</a> -->
+            <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdfindicator/145">Export to PDF</a>
         </div>
     </div>
 </body>
