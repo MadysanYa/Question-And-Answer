@@ -571,7 +571,6 @@ class PropertyIndicatorController extends AdminController
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="row" style="display: flex;align-items: center;">
@@ -666,7 +665,6 @@ class PropertyIndicatorController extends AdminController
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="row" style="display: flex;align-items: center;">
