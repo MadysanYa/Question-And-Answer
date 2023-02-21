@@ -9,6 +9,7 @@ use App\Models\District;
 use App\Models\Province;
 use App\Models\PropertyType;
 use App\Models\InformationType;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class PropertyAppraisal extends Model
@@ -60,6 +61,21 @@ class PropertyAppraisal extends Model
     public function scopeGetWithCount($query){
         return $query->get()->count();
     }
+
+    public function scopeQueryPropertyAppraisalGrid($query) 
+    {
+        $userLogin = Auth::user();
+
+        if (User::isRmRole()) {
+            return $query->where('user_id', $userLogin->id);
+
+        } elseif (User::isBmRole()) {
+            return $query->where('branch_code', $userLogin->branch_code);
+        }
+
+        return $query;
+    }
+
 
     /**
      * Accessor
@@ -221,6 +237,15 @@ class PropertyAppraisal extends Model
         if ($this->reported_date) {
             return $this->reported_date->format('d-M-Y');
         }
+    }
+
+    public function getIsPropertyApprovedAttribute()
+    {
+        if ($this->is_approved) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

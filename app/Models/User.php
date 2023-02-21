@@ -73,6 +73,16 @@ class User extends Authenticatable
         return false;
     }
 
+    static function isBmRole(){
+        $roles = Auth()->user()->roles()->get();
+
+        foreach($roles as $role){
+            if(strtoupper($role['name']) == 'BM') return true;
+        }
+
+        return false;
+    }
+
     static function isAdminRole(){
         $roles = Auth()->user()->roles()->get();
 

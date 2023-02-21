@@ -10,12 +10,11 @@ use App\Models\Region;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
-use Encore\Admin\Admin;
-Use Encore\Admin\Widgets\Table;
-use Encore\Admin\Widgets\Collapse;
-use Encore\Admin\index;
 use App\Models\Commune;
+Use Encore\Admin\Widgets\Table;
 use App\Models\Village;
+use Encore\Admin\Admin;
+use Encore\Admin\index;
 use App\Models\District;
 use App\Models\Province;
 use App\Models\UserAdmin;
@@ -24,10 +23,12 @@ use App\Models\InformationType;
 use Encore\Admin\Form\Field\Id;
 use Encore\Admin\Layout\Content;
 use App\Models\PropertyIndicator;
+use Encore\Admin\Widgets\Collapse;
 use Illuminate\Support\Facades\DB;
 use Encore\Admin\Form\Field\Button;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
+use Encore\Admin\Grid\Displayers\Actions;
 use Encore\Admin\Controllers\AdminController;
 
 class PropertyIndicatorController extends AdminController
@@ -55,7 +56,9 @@ class PropertyIndicatorController extends AdminController
 
         $grid = new Grid(new PropertyIndicator);
 
+        $grid->model()->queryPropertyIndicatorGrid();
 		$grid->model()->orderBy('id','desc');
+
         $grid->column('id', __('No.'))->asc()->sortable();
 		$grid->column('property_reference', __('Reference'))->sortable();
         $grid->column('collateral_owner',__('Owner'))->sortable();
@@ -200,10 +203,11 @@ class PropertyIndicatorController extends AdminController
         // Export to PDF
         $grid->column(__('To PDF'))->display(function(){
             $id = $this->id;
-            return '<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdfindicator/' . $id . '">Download</a>';
-        });
 
-        $grid->fixColumns(0, -4);
+            if (!User::isRmRole() || User::isRmRole() && $this->IsPropertyApproved) {
+                return '<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdfindicator/' . $id . '">Download</a>';
+            } 
+        });
 
         $grid->quickSearch(function ($model, $query) {
             $model->where('id', $query);
@@ -217,7 +221,14 @@ class PropertyIndicatorController extends AdminController
             });
         });
 
+        if (User::isBmRole()) {
+            $grid->actions(function (Actions $actions) {
+                $actions->disableEdit();
+            });
+        }
+
         $grid->disableFilter();
+        $grid->fixColumns(0, -4);
 		$grid->filter(function($filter){
 			$filter->disableIdFilter();
             $filter->where(function ($query) {
@@ -458,14 +469,14 @@ class PropertyIndicatorController extends AdminController
                 return Village::all()->pluck('village_name','id');});
             $form->text('latitude', __('Latitude'))->placeholder('Geo Code')->inputmask(['mask' => '99.999999'])->rules('required');
             $form->text('longtitude', __('Longtitude'))->placeholder('Geo Code')->inputmask(['mask' => '999.999999'])->rules('required');
-            $form->image('front_photo',__('front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
-            $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
-            $form->image('right_photo',__('Access Road Photo Right'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
-            $form->image('left_photo',__('Access Road Photo Left'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:5000');
-            $form->image('title_front_photo',__('Title Photo Front'))->removable()->uniqueName()->placeholder('Title Photo')->rules('mimes:jpg,png,jpeg|max:5000');
-            $form->image('title_back_photo',__('Title Photo Back'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
-            $form->image('id_front_photo',__('ID Photo Front'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
-            $form->image('id_back_photo',__('ID Photo Back'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:5000');
+            $form->image('front_photo',__('front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+            $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+            $form->image('right_photo',__('Access Road Photo Right'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+            $form->image('left_photo',__('Access Road Photo Left'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+            $form->image('title_front_photo',__('Title Photo Front'))->removable()->uniqueName()->placeholder('Title Photo')->rules('mimes:jpg,png,jpeg|max:2048');
+            $form->image('title_back_photo',__('Title Photo Back'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:2048');
+            $form->image('id_front_photo',__('ID Photo Front'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:2048');
+            $form->image('id_back_photo',__('ID Photo Back'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:2048');
             $form->multipleFile('photos',__('Photos'))->removable()->uniqueName();//- >rules('required|mimes:jpg,png,jpeg|max:5000');
             //
             $form->text('comparable_id1',__('ID'));

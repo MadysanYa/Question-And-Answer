@@ -6,6 +6,7 @@ use App\Models\Branch;
 use App\Models\UserAdmin;
 use App\Models\PropertyType;
 use App\Models\InformationType;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class PropertyIndicator extends Model
@@ -55,8 +56,22 @@ class PropertyIndicator extends Model
     /**
      * Scope Query
      */
-    public function scopeGetWithCount($query){
+    public function scopeGetWithCount($query) {
         return $query->get()->count();
+    }
+
+    public function scopeQueryPropertyIndicatorGrid($query) 
+    {
+        $userLogin = Auth::user();
+
+        if (User::isRmRole()) {
+            return $query->where('user_id', $userLogin->id);
+
+        } elseif (User::isBmRole()) {
+            return $query->where('branch_code', $userLogin->branch_code);
+        }
+
+        return $query;
     }
 
     /**
@@ -222,6 +237,15 @@ class PropertyIndicator extends Model
         if ($this->reported_date) {
             return $this->reported_date->format('d-M-Y');
         }
+    }
+
+    public function getIsPropertyApprovedAttribute()
+    {
+        if ($this->is_approved) {
+            return true;
+        }
+
+        return false;
     }
 
     public function verified(){
