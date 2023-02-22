@@ -17,7 +17,7 @@ class PropertyAppraisalObserver
         $lastAppraisalId = PropertyAppraisal::select('id')->get()->last();
         $proReference =  $lastAppraisalId ? $lastAppraisalId->id + 1 : 1;
 
-        $propertyAppraisal->property_reference = 'PL-'. sprintf('%010d', $proReference);
+        $propertyAppraisal->property_reference = 'IAC-'. sprintf('%010d', $proReference);
     }
 
     public function created(PropertyAppraisal $propertyAppraisal)

@@ -212,6 +212,8 @@ class PropertyAppraisalController extends AdminController
                 else{
                     return '<p style="color: #dd4b39;border: 1px solid #dd4b39;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Rejected</p>';
                 }
+            } elseif ($this->is_verified == 2) {
+                return '<p style="color: #dd4b39;border: 1px solid #dd4b39;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Rejected</p>';
             }
         });
 
