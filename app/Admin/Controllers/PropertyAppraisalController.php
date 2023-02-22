@@ -63,28 +63,19 @@ class PropertyAppraisalController extends AdminController
         $grid->column('collateral_owner', __('Owner'))->sortable();
         $grid->column('information_type',__(' Type'))->sortable()->Display(function($id){
             $informationtype = InformationType::where('id',$id)->first();
-            if ($informationtype == null ) return '';
-            return $informationtype->information_type_name;
+            return $informationtype->information_type_name ?? '';
         });
 
         $grid->column('longtitude',__('Geo Code'))->sortable();
         $grid->column('region_id',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){// add filter
             $region = Region::where('id', $id)->first();
-            if ($region == null)
-            return '';
-            else
-            return $region->region_name;
+            return $region->region_name ?? '';
         });
 
         $grid->column('branch_code',__('Branch'))->filter($this->convertToArrayBranch(Branch::all(['branch_code', 'branch_name'])))->Display(function($branch_code){// add filter
             $branch = Branch::where('branch_code', $branch_code)->first();
-            // return $branch->branch_name;
-            if($branch == null)
-                return '';
-            else
-                return $branch->branch_name;
-
-            });
+            return $branch->branch_name ?? '';
+        });
         $grid->column('requested_date',__('Requested Date'))->filter('range', 'date')->display(function(){
             if ($this->requested_date) {
                 return date('d-M-Y', strtotime($this->requested_date));
@@ -103,14 +94,12 @@ class PropertyAppraisalController extends AdminController
         $grid->column('access_road_name',__('Access Road Name'))->sortable();
         $grid->column('property_type',__('Property Type'))->sortable()->Display(function($id){
             $propertytype = PropertyType::where('id',$id)->first();
-            if ($propertytype == null ) return '';
-            return $propertytype->property_type_name;
+            return $propertytype->property_type_name ?? '';
         });
         $grid->column('building_status',__('Building Status (%)'))->sortable();
         $grid->column('borey',__('Borey'))->display(function($id){
             $borey = Borey::where('id',$id)->first();
-            if($borey == null) return '';
-            return $borey->borey_name;
+            return $borey->borey_name ?? '';
         });
         $grid->column('no_of_floor',__('No. of floor'))->sortable();
         $grid->column('land_title_type',__('Land Titil Type'))->sortable();
@@ -124,23 +113,19 @@ class PropertyAppraisalController extends AdminController
         $grid->column('client_contact_no',__('Client Contact No.'))->sortable();
         $grid->column('province_id',__('Province'))->filter($this->convertToArray(Province::all(['id', 'province_name'])))->Display(function($province_id){
             $province = Province::where('id', $province_id)->first();
-            if ($province == null) return '';
-            return $province->province_name;
+            return $province->province_name ?? '';
         });
         $grid->column('district_id',__('District/Khan'))->filter($this->convertToArrayDistrict(District::whereIn('province_id', $filterProvinceId)->get(['id', 'district_name'])))->Display(function($district_id){ //Add filter when click ex:province->distict..
             $district = District::where('id', $district_id)->first();
-            if ($district == null)  return '';
-            return $district->district_name;
+            return $district->district_name ?? '';
         });
         $grid->column('commune_id',__('Commune/Sangkat'))->filter($this->convertToArrayCommune(Commune::whereIn('district_id', $filterDistrictId)->get(['id','commune_name'])))->Display(function($comune_id){
             $commune = Commune::where('id', $comune_id)->first();
-            if ($commune == null) return '';
-            return $commune->commune_name;
+            return $commune->commune_name ?? '';
         });
         $grid->column('village_id',__('Village'))->Display(function($village_id){
             $village = Village::where('id', $village_id)->first();
-            if ($village == null) return '';
-            return $village->village_name ;
+            return $village->village_name ?? '';
         });
         $grid->column('latitude',__('Latitude'))->sortable();
         $grid->column('longtitude',__('Longtitude'))->sortable();
