@@ -197,8 +197,6 @@ class PropertyIndicatorController extends AdminController
                 else{
                     return '<p style="color: #dd4b39;border: 1px solid #dd4b39;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Rejected</p>';
                 }
-            } elseif ($this->is_verified == 2) {
-                return '<p style="color: #dd4b39;border: 1px solid #dd4b39;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Rejected</p>';
             }
         });
 
@@ -400,11 +398,16 @@ class PropertyIndicatorController extends AdminController
         $form = new Form(new PropertyIndicator());
         $form->column(1/3, function ($form){
             $form->hidden('user_id')->value(Auth::user()->id);
-            $form->select('region_id', __('Region'))->rules('required')->options(function(){
-                return Region::all()->pluck('region_name', 'id');})->load('branch_code', env('APP_URL') . '/public/api/branch');
+            $form->hidden('branch_code')->value(Auth::user()->branch_code);
 
-            $form->select('branch_code',__('Branch'))->rules('required')->options(function(){
-                 return Branch::all()->pluck('branch_name','branch_code');});
+            $form->select('region_id', __('Region'))->rules('required')->options(function(){
+                return Region::all()->pluck('region_name', 'id');
+            });
+
+            $form->text(__('Branch'))->rules('required')->value(function(){
+                return Branch::where('branch_code', Auth::user()->branch_code)->get()->value('branch_name');
+            })->disable();
+;
             $form->date('requested_date', __('Requested Date'))->rules('required')->attribute(['style' => 'width: 100%;']);
 
             if (User::isVerifierRole() || User::isApproverRole() || User::isAdminRole()){
