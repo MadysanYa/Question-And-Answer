@@ -454,10 +454,10 @@
                     <table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 style='width: 700px !important; border-collapse:collapse;border:none'>
                         <tr>
                             <td style="text-align: center">
-                                <img src="{{asset('upload/'.$indicator->front_photo)}}" style="height: 260px; max-width: 350px;">
+                                <img src="{{asset('upload/'.$indicator->front_photo)}}" style="height: 260px; width: 100%">
                             </td>
                             <td style="text-align: center">
-                                <img src="{{asset('upload/'.$indicator->title_front_photo)}}" style="height: 260px; max-width: 350px;">
+                                <img src="{{asset('upload/'.$indicator->title_front_photo)}}" style="height: 260px; width: 100%;">
                             </td>
                         </tr>
                     </table>
