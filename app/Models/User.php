@@ -92,4 +92,14 @@ class User extends Authenticatable
 
         return false;
     }
+
+    static function isManagerRole(){
+        $roles = Auth()->user()->roles()->get();
+
+        foreach($roles as $role){
+            if(strtoupper($role['name']) == 'MANAGER') return true;
+        }
+
+        return false;
+    }
 }

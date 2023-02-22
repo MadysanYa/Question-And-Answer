@@ -669,10 +669,10 @@
                             <span style='margin-top: 3px; float: right; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->BuildingValuePerSqmFormat }}</span>
                         </p>
                     </td>
-                    <td valign=top style='width:40pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                        <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                            <span style='float: left; font-size:8.0pt; margin-top: 2px;'>$</span>
-                            <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->BuildingTotalValuePerSqmFormat }}</span>
+                    <td valign=top style='width:70pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                        <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center; line-height:normal'>
+                            <span style='float: left; font-size:8.0pt; margin-top: 3px; margin-left: -6px !important'>$</span>
+                            <span style='margin-right: -30px; margin-top: 3px; float: right; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->BuildingTotalValuePerSqmFormat }}</span>
                         </p>
                     </td>
                 </tr>
@@ -761,10 +761,10 @@
                             <span style='margin-top: 3px; float: right; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->BuildingValuePerSqmFormat }}</span>
                         </p>
                     </td>
-                    <td valign=top style='width:40pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
-                        <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
-                            <span style='float: left; font-size:8.0pt; margin-top: 2px;'>$</span>
-                            <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->BuildingTotalValuePerSqmFormat }}</span>
+                    <td valign=top style='width:70pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                        <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center; line-height:normal'>
+                            <span style='float: left; font-size:8.0pt; margin-top: 3px; margin-left: -6px !important'>$</span>
+                            <span style='margin-right: -30px; margin-top: 3px; float: right; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->BuildingTotalValuePerSqmFormat }}</span>
                         </p>
                     </td>
                 </tr>
@@ -782,10 +782,10 @@
                             </span>
                         </p>
                     </td>
-                    <td colspan=3 valign=top style='width:200pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
+                    <td colspan=3 valign=top style='border-style: solid; width:200pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align: center; line-height:normal'>
                             <span style='float: left; font-size:8.0pt; margin-top: 2px;'>$</span>
-                            <span style=' margin-top: 2px; float: right; color: red; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->LandBuildingGrandTotalFormat }}</span>
+                            <span style='margin-right: 2px; margin-top: 2px; float: right; color: red; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->LandBuildingGrandTotalFormat }}</span>
                         </p>
                     </td>
                 </tr>
