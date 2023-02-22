@@ -21,6 +21,11 @@ class PropertyResearchController extends Controller
       
         $Propertyresearch = PropertyResearch::findOrFail($request->id);
         $Propertyresearch->is_verified = $request->value;
+
+        if ($request->value == 1) {
+            $Propertyresearch->is_approved = null;
+        }
+        
         $Propertyresearch->save();
         return Redirect::to(url()->previous());
         
@@ -32,6 +37,11 @@ class PropertyResearchController extends Controller
         //echo $request->id;
         $Propertyresearch = PropertyResearch::findOrFail($request->id);
         $Propertyresearch->is_approved = $request->value;
+
+        if ($request->value == 2) {
+            $Propertyresearch->is_verified = null;
+        }
+
         $Propertyresearch->save();
         return Redirect::to(url()->previous());
         // $verifieds = $request->get('q');

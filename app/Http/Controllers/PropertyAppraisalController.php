@@ -21,6 +21,11 @@ class PropertyAppraisalController extends Controller
       
         $Propertyappraisal = PropertyAppraisal::findOrFail($request->id);
         $Propertyappraisal->is_verified = $request->value;
+
+        if ($request->value == 1) {
+            $Propertyappraisal->is_approved = null;
+        }
+
         $Propertyappraisal->save();
         return Redirect::to(url()->previous());
         
@@ -32,6 +37,11 @@ class PropertyAppraisalController extends Controller
         //echo $request->id;
         $Propertyappraisal = PropertyAppraisal::findOrFail($request->id);
         $Propertyappraisal->is_approved = $request->value;
+
+        if ($request->value == 2) {
+            $Propertyappraisal->is_verified = null;
+        }
+
         $Propertyappraisal->save();
         return Redirect::to(url()->previous());
         // $verifieds = $request->get('q');

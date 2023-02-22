@@ -21,6 +21,11 @@ class PropertyIndicatorController extends Controller
 
         $propertyIndicator = PropertyIndicator::findOrFail($request->id);
         $propertyIndicator->is_verified = $request->value;
+
+        if ($request->value == 1) {
+            $propertyIndicator->is_approved = null;
+        }
+
         $propertyIndicator->save();
         return Redirect::to(url()->previous());
 
@@ -32,6 +37,11 @@ class PropertyIndicatorController extends Controller
         //echo $request->id;
         $propertyIndicator = PropertyIndicator::findOrFail($request->id);
         $propertyIndicator->is_approved = $request->value;
+
+        if ($request->value == 2) {
+            $propertyIndicator->is_verified = null;
+        }
+
         $propertyIndicator->save();
         return Redirect::to(url()->previous());
         // $verifieds = $request->get('q');
