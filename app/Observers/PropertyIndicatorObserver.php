@@ -17,9 +17,9 @@ class PropertyIndicatorObserver
         $lastIndicatorId = PropertyIndicator::select('id')->get()->last();
         $proReference =  $lastIndicatorId ? $lastIndicatorId->id + 1 : 1;
 
-        $propertyIndicator->property_reference = 'PL-'. sprintf('%010d', $proReference);
+        $propertyIndicator->property_reference = 'IIR-'. sprintf('%010d', $proReference);
     }
-    
+
     public function created(PropertyIndicator $propertyIndicator)
     {
         //

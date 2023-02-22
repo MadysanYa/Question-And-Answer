@@ -17,7 +17,7 @@ class PropertyResearchObserver
         $lastResearchId = PropertyResearch::select('id')->get()->last();
         $proReference =  $lastResearchId ? $lastResearchId->id + 1 : 1;
 
-        $propertyResearch->property_reference = 'PL-'. sprintf('%010d', $proReference);
+        $propertyResearch->property_reference = 'PR-'. sprintf('%010d', $proReference);
     }
 
     public function created(PropertyResearch $propertyResearch)
