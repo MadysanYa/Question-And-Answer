@@ -82,11 +82,11 @@ class PropertyResearchConteroller extends AdminController
         $grid->column('access_road_name',__('Access Road Name'))->sortable();
         $grid->column('property_type',__('Property Type'))->sortable()->Display(function($id){
             $propertytype = PropertyType::where('id',$id)->first();
-            return $propertytype->property_type_name;
+            return $propertytype->property_type_name ?? '';
         });
         $grid->column('borey',__('Borey'))->sortable()->display(function($id){
             $borey = Borey::where('id',$id)->first();
-            return $borey->borey_name;
+            return $borey->borey_name ?? '';
         });
         $grid->column('no_of_floor',__('No. of floor'))->sortable();
         $grid->column('land_title_type',__('Land Titil Type'))->sortable();

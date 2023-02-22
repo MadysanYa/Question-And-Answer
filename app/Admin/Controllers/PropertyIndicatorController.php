@@ -66,18 +66,13 @@ class PropertyIndicatorController extends AdminController
         $grid->column('longtitude',__('Geo Code'))->sortable();// longtitude just example for show Geo Code on grid!
         $grid->column('region_id',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){// add filter
             $region = Region::where('id', $id)->first();
-            return $region->region_name;
+            return $region->region_name ?? '';
         });
 
         $grid->column('branch_code',__('Branch'))->filter($this->convertToArrayBranch(Branch::all(['branch_code', 'branch_name'])))->Display(function($branch_code){// add filter
             $branch = Branch::where('branch_code', $branch_code)->first();
-            // return $branch->branch_name;
-            if($branch == null)
-                return '';
-            else
-                return $branch->branch_name;
-
-            });
+            return $branch->branch_name ?? '';
+        });
 
         $grid->column('requested_date',__('Requested Date'))->filter('range', 'date')->display(function(){
             if ($this->requested_date) {
@@ -96,19 +91,19 @@ class PropertyIndicatorController extends AdminController
         $grid->column('telephone',__('Telephone'))->sortable();
         $grid->column('information_type',__('Information Type'))->sortable()->Display(function($id){
             $informationtype = InformationType::where('id',$id)->first();
-            return $informationtype->information_type_name;
+            return $informationtype->information_type_name ?? '';
         });
         $grid->column('location_type',__('Location Type'))->sortable();
         $grid->column('type_of_access_road',__('Type of Access Road'))->sortable();
         $grid->column('access_road_name',__('Access Road Name'))->sortable();
         $grid->column('property_type',__('Property Type'))->sortable()->Display(function($id){
             $propertytype = PropertyType::where('id',$id)->first();
-            return $propertytype->property_type_name;
+            return $propertytype->property_type_name ?? '';
         });
         $grid->column('building_status',__('Building Status (%)'))->sortable();
         $grid->column('borey',__('Borey'))->sortable()->display(function($id){
             $borey = Borey::where('id',$id)->first();
-            return $borey->borey_name;
+            return $borey->borey_name ?? '';
         });
         $grid->column('no_of_floor',__('No. of floor'))->sortable();
         $grid->column('land_title_type',__('Land Titil Type'))->sortable();
