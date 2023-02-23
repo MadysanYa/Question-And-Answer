@@ -451,7 +451,7 @@ class PropertyIndicatorController extends AdminController
             })->placeholder('Reference No.');
             $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area','Agricultural Area'=>'Agricultural Area']);
             $form->select('type_of_access_road', __('Type of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road', 'Paved Road'=>'Paved Road','Upaved Road'=>'Upaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road']);
-            $form->image('front_photo',__('front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+            $form->image('front_photo',__('Front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
             $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
             $form->image('right_photo',__('Access Road Photo Right'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
 
