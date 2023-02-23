@@ -206,7 +206,7 @@ class PropertyAppraisalController extends AdminController
         $grid->column(__('To PDF'))->display(function(){
             $id = $this->id;
 
-            if (!User::isRmRole() || User::isRmRole() && $this->IsPropertyApproved) {
+            if ($this->IsPropertyApproved || User::isAdminRole()) {
                 return '<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdfappraisal/' . $id . '" target="_blank">Download</a>';
             } 
         });
@@ -228,6 +228,7 @@ class PropertyAppraisalController extends AdminController
             $grid->disableCreateButton();
             $grid->actions(function (Actions $actions) {
                 $actions->disableEdit();
+                $actions->disableDelete();
             });
         }
 
