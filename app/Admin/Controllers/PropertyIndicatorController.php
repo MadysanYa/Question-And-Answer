@@ -66,18 +66,13 @@ class PropertyIndicatorController extends AdminController
         $grid->column('longtitude',__('Geo Code'))->sortable();// longtitude just example for show Geo Code on grid!
         $grid->column('region_id',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){// add filter
             $region = Region::where('id', $id)->first();
-            return $region->region_name;
+            return $region->region_name ?? '';
         });
 
         $grid->column('branch_code',__('Branch'))->filter($this->convertToArrayBranch(Branch::all(['branch_code', 'branch_name'])))->Display(function($branch_code){// add filter
             $branch = Branch::where('branch_code', $branch_code)->first();
-            // return $branch->branch_name;
-            if($branch == null)
-                return '';
-            else
-                return $branch->branch_name;
-
-            });
+            return $branch->branch_name ?? '';
+        });
 
         $grid->column('requested_date',__('Requested Date'))->filter('range', 'date')->display(function(){
             if ($this->requested_date) {
@@ -96,19 +91,19 @@ class PropertyIndicatorController extends AdminController
         $grid->column('telephone',__('Telephone'))->sortable();
         $grid->column('information_type',__('Information Type'))->sortable()->Display(function($id){
             $informationtype = InformationType::where('id',$id)->first();
-            return $informationtype->information_type_name;
+            return $informationtype->information_type_name ?? '';
         });
         $grid->column('location_type',__('Location Type'))->sortable();
         $grid->column('type_of_access_road',__('Type of Access Road'))->sortable();
         $grid->column('access_road_name',__('Access Road Name'))->sortable();
         $grid->column('property_type',__('Property Type'))->sortable()->Display(function($id){
             $propertytype = PropertyType::where('id',$id)->first();
-            return $propertytype->property_type_name;
+            return $propertytype->property_type_name ?? '';
         });
         $grid->column('building_status',__('Building Status (%)'))->sortable();
         $grid->column('borey',__('Borey'))->sortable()->display(function($id){
             $borey = Borey::where('id',$id)->first();
-            return $borey->borey_name;
+            return $borey->borey_name ?? '';
         });
         $grid->column('no_of_floor',__('No. of floor'))->sortable();
         $grid->column('land_title_type',__('Land Titil Type'))->sortable();
@@ -197,8 +192,6 @@ class PropertyIndicatorController extends AdminController
                 else{
                     return '<p style="color: #dd4b39;border: 1px solid #dd4b39;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Rejected</p>';
                 }
-            } elseif ($this->is_verified == 2) {
-                return '<p style="color: #dd4b39;border: 1px solid #dd4b39;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Rejected</p>';
             }
         });
 
@@ -224,6 +217,7 @@ class PropertyIndicatorController extends AdminController
         });
 
         if (User::isBmRole()) {
+            $grid->disableCreateButton();
             $grid->actions(function (Actions $actions) {
                 $actions->disableEdit();
             });
@@ -399,12 +393,24 @@ class PropertyIndicatorController extends AdminController
     {
         $form = new Form(new PropertyIndicator());
         $form->column(1/3, function ($form){
-            $form->hidden('user_id')->value(Auth::user()->id);
-            $form->select('region_id', __('Region'))->rules('required')->options(function(){
-                return Region::all()->pluck('region_name', 'id');})->load('branch_code', env('APP_URL') . '/public/api/branch');
+            if (User::isRmRole()) {
+                $form->select('region_id', __('Region'))->rules('required')->options(function(){
+                    return Region::all()->pluck('region_name', 'id');
+                });
+                $form->text(__('Branch'))->rules('required')->value(function(){
+                    return Branch::where('branch_code', Auth::user()->branch_code)->get()->value('branch_name');
+                })->disable();
+                $form->hidden('branch_code')->value(Auth::user()->branch_code);
+            } else {
+                $form->select('region_id', __('Region'))->rules('required')->options(function(){
+                    return Region::all()->pluck('region_name', 'id');
+                })->load('branch_code', env('APP_URL') . '/public/api/branch');
+                $form->select('branch_code',__('Branch'))->rules('required')->options(function(){
+                    return Branch::all()->pluck('branch_name','branch_code');
+                });
+            }
 
-            $form->select('branch_code',__('Branch'))->rules('required')->options(function(){
-                 return Branch::all()->pluck('branch_name','branch_code');});
+            $form->hidden('user_id')->value(Auth::user()->id);
             $form->date('requested_date', __('Requested Date'))->rules('required')->attribute(['style' => 'width: 100%;']);
 
             if (User::isVerifierRole() || User::isApproverRole() || User::isAdminRole()){
@@ -475,7 +481,7 @@ class PropertyIndicatorController extends AdminController
             $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
             $form->image('right_photo',__('Access Road Photo Right'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
             $form->image('left_photo',__('Access Road Photo Left'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
-            $form->image('title_front_photo',__('Title Photo Front'))->removable()->uniqueName()->placeholder('Title Photo')->rules('mimes:jpg,png,jpeg|max:2048');
+            $form->image('title_front_photo',__('Title Photo Front'))->removable()->uniqueName()->placeholder('Title Photo')->rules('required|mimes:jpg,png,jpeg|max:2048');
             $form->image('title_back_photo',__('Title Photo Back'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:2048');
             $form->image('id_front_photo',__('ID Photo Front'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:2048');
             $form->image('id_back_photo',__('ID Photo Back'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:2048');
