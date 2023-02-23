@@ -140,7 +140,7 @@ class PropertyAppraisalController extends AdminController
         $grid->column('comparable_distance1',__('Distance'))->sortable();
         $grid->column('comparable_geo_code1',__('Geo Code'))->sortable();
         $grid->column('comparable_size1',__('Size'))->sortable();
-        $grid->column('comparable_value_per_sqm1',__('Value per_sq. m'))->sortable();
+        $grid->column('comparable_value_per_sqm1',__('Value per_sqm'))->sortable();
         $grid->column('comparable_total_value1',__('Total Value'))->sortable();
         $grid->column('user_id',__('Created By'))->sortable()->display(function($id){
             $userName = UserAdmin::where('id', $id)->first();
@@ -208,7 +208,7 @@ class PropertyAppraisalController extends AdminController
 
             if ($this->IsPropertyApproved || User::isAdminRole()) {
                 return '<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdfappraisal/' . $id . '" target="_blank">Download</a>';
-            } 
+            }
         });
 
         // $grid->column('report_date', __('Report Date'));
@@ -601,14 +601,14 @@ class PropertyAppraisalController extends AdminController
             $form->text('comparable_geo_code1',__('Geo Code'));
             $form->text('comparable_distance1',__('Distance'));
             $form->text('comparable_size1',__('Size'));
-            $form->text('comparable_value_per_sqm1',__('Value per_sq. m'));
+            $form->text('comparable_value_per_sqm1',__('Value per_sqm'));
             $form->text('comparable_total_value1',__('Total Value'));
             $form->text('comparable_id2',__('ID'));
             $form->text('comparable_cif_no2',__('CIF No./ Name'));
             $form->text('comparable_geo_code2',__('Geo Code'));
             $form->text('comparable_distance2',__('Distance'));
             $form->text('comparable_size2',__('Size'));
-            $form->text('comparable_value_per_sqm2',__('Value per_sq. m'));
+            $form->text('comparable_value_per_sqm2',__('Value per_sqm'));
             $form->text('comparable_total_value2',__('Total Value'));
             if (User::isVerifierRole() || User::isApproverRole() || User::isAdminRole()){
                 $form->button('comparable_reference', __('Comparable Reference'))->attribute('id', 'show-comparable-reference-modal')->on('click', '$("#modal-comparable-reference").modal();');

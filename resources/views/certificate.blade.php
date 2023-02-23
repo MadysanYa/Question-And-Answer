@@ -191,7 +191,7 @@
                 <td style="border:none; padding-left: 25px; width:90pt; text-align:left;">
                     <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                         <span style='font-size:11px;font-family:   "OneShinhan Light",sans-serif;'>
-                            {{ $indicator->property_reference }}
+                            property_reference }}
                         </span>
                     </p>
                 </td>
@@ -208,7 +208,7 @@
                 <td style="border:none; width:50pt; padding:0in 5.4pt 0in 5.4pt;">
                     <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:left;'>
                         <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;color:black;'>
-                            {{ $indicator->BranchName }}
+                            _Value
                         </span>
                     </p>
                 </td>
@@ -227,7 +227,7 @@
                 <td style="border:none; padding-left: 25px; width:50pt; text-align:left;">
                     <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                         <span style='font-size:11px;font-family:   "OneShinhan Light",sans-serif;'>
-                            {{ $indicator->RequestedDateFormat }}
+                            _Value
                         </span>
                     </p>
                 </td>
@@ -244,7 +244,7 @@
                 <td style="border:none; width:50pt; padding:0in 5.4pt 0in 5.4pt;">
                     <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:left;'>
                         <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;color:black;'>
-                            {{ $indicator->rm_name }}
+                            _Value
                         </span>
                     </p>
                 </td>
@@ -263,7 +263,7 @@
                 <td style="border:none; padding-left: 25px; width:50pt;text-align:left;">
                     <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;'>
                         <span style='font-size:11px;font-family:   "OneShinhan Light",sans-serif;'>
-                            {{ $indicator->ReportedDateFormat }}
+                            _Value
                         </span>
                     </p>
                 </td>
@@ -280,7 +280,7 @@
                 <td style="border:none; width:50pt; padding:0in 5.4pt 0in 5.4pt;">
                     <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:normal;font-size:15px;font-family:"Calibri",sans-serif;text-align:left;'>
                         <span style='font-size:11px;font-family:"OneShinhan Light",sans-serif;color:black;'>
-                            {{ $indicator->telephone }}
+                            _Value
                         </span>
                     </p>
                 </td>
@@ -299,7 +299,7 @@
                 <tr style='height:13.35pt'>
                     <td colspan=9 style='width:527.25pt; border: 1pt solid windowtext; padding:0in 5.4pt 0in 5.4pt;'>
                         <p class=MsoListParagraphCxSpFirst style='margin-left:0in'>
-                            <span style='font-size:8.0pt;line-height:107%;font-family:"OneShinhan Light",sans-serif'>Address: {{ $indicator->FullAddress }}</span>
+                            <span style='font-size:8.0pt;line-height:107%;font-family:"OneShinhan Light",sans-serif'>Address: _Value</span>
                         </p>
                     </td>
                 </tr>
@@ -317,7 +317,7 @@
                     <td valign=top style='width:140pt; border:solid windowtext 1.0pt; border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                         <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
                             <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
-                                {{ $indicator->land_title_no }}
+                                _Value
                             </span>
                         </p>
                     </td>
@@ -334,7 +334,7 @@
                     <td colspan=6 style='width:140pt; border:solid windowtext 1.0pt; border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                         <p class=MsoListParagraphCxSpLast style='margin:0in;line-height:normal'>
                             <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
-                                {{ $indicator->customer_name }}
+                                _Value
                             </span>
                         </p>
                     </td>
@@ -353,7 +353,7 @@
                     <td valign=top style='width:100pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt'>
                         <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
                             <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
-                                {{ $indicator->PropertyTypeName }}
+                                _Value
                             </span>
                         </p>
                     </td>
@@ -370,7 +370,7 @@
                     <td colspan=6 style='width:180pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt'>
                         <p class=MsoListParagraphCxSpLast style='margin:0in;line-height:normal'>
                             <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
-                                {{ $indicator->collateral_owner }}
+                                _Value
                             </span>
                         </p>
                     </td>
@@ -389,7 +389,7 @@
                     <td valign=top style='width:100pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt'>
                         <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
                             <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
-                                {{ $indicator->LandAreaWithString }}
+                                _Value
                             </span>
                         </p>
                     </td>
@@ -406,7 +406,7 @@
                     <td colspan=6 style='width:180pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt'>
                         <p class=MsoListParagraphCxSpLast style='margin:0in;line-height:normal'>
                             <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
-                                {{ $indicator->BuildingStatusWithString }}
+                                _Value
                             </span>
                         </p>
                     </td>
@@ -425,7 +425,7 @@
                     <td valign=top style='width:100pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt'>
                         <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal'>
                             <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
-                                {{ $indicator->BuildingAreaWithString }}
+                                _Value
                             </span>
                         </p>
                     </td>
@@ -442,7 +442,7 @@
                     <td colspan=6 style='width:180pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt'>
                         <p class=MsoListParagraphCxSpLast style='margin:0in;line-height:normal'>
                             <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>
-                                {{ $indicator->GeoCode }}
+                                _Value
                             </span>
                         </p>
                     </td>
@@ -451,19 +451,19 @@
 
             <div style="position: relative;">
                 <div style="position: relative; left: 0px; top: 0px;">
-                    <table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 style='width: 702.5px !important; border-collapse:collapse;border:none'>
+                    <table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 style='width: 700px !important; border-collapse:collapse;border:none'>
                         <tr>
-                            <td style="text-align: center; width: 349px">
-                                <img src="{{asset('upload/'.$indicator->front_photo)}}" style="height: 260px; width: 100%">
+                            <td style="text-align: center">
+                                <img src="" style="height: 260px; width: 100%">
                             </td>
-                            <td style="text-align: center;  width: 349px">
-                                <img src="{{asset('upload/'.$indicator->title_front_photo)}}" style="height: 260px; width: 100%;">
+                            <td style="text-align: center">
+                                <img src="" style="height: 260px; width: 100%;">
                             </td>
                         </tr>
                     </table>
                 </div>
                 <div style="position: absolute ; right: 0px; top: 190px;">
-                    <img src="{{ $qrImage }}" style="height: 60px; width: 60px; border: 1px solid #0070C0; padding: 5px; background-color: white;"/>
+                    <img src="" style="height: 60px; width: 60px; border: 1px solid #0070C0; padding: 5px; background-color: white;"/>
                 </div>
             </div>
             <!-- </div> -->
@@ -471,7 +471,7 @@
             <!-- PROPERTY ADJUSTMENT -->
             <table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=690 style='width:527.25pt; border-collapse:collapse;border:none'>
                 <tr style='height:13.35pt'>
-                    <td colspan=12 style='width:527.25pt; border:.5pt solid windowtext; background:#0070C0;padding:0in 5.4pt 0in 5.4pt;height:18.45pt'>
+                    <td colspan=12 style='width:527.25pt; border:.5pt solid windowtext; background:#0070C0; padding:0in 5.4pt 0in 5.4pt;height:18.45pt'>
                         <p class=MsoNormal align=center style='margin-top:0in;margin-right:-5.65pt; margin-bottom:0in;margin-left:0in;text-align:center;line-height:normal'>
                             <span style='font-size:10.0pt;font-family:"OneShinhan Bold",sans-serif;color:white'>PROPERTY ADJUSTMENT</span>
                         </p>
@@ -568,7 +568,7 @@
                     <!-- Merge Two Row -->
                     <td rowspan="2" valign=top style='background-color: #ff98002e; width:60pt; border-top:none;border-left: none; border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding: 7px 8px 0px 0px; height:13.05pt'>
                         <p class=MsoListParagraphCxSpMiddle align=center style='margin-top: 0px !important; margin-right: 0px !important; margin-bottom: 0px !important; margin-left: 0px !important; text-align: right; line-height:normal'>
-                            <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif;'>{{ $indicator->land_title_no }}</span>
+                            <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif;'>_Value</span>
                         </p>
                     </td>
                     <!-- Merge Two Row -->
@@ -581,19 +581,19 @@
                     </td>
                     <td valign=top style='background-color: #ff98002e; width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align: right; line-height:normal'>
-                            <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->LandSizeFormat }}</span>
+                            <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>_Value</span>
                         </p>
                     </td>
                     <td valign=top style='background-color: #ff98002e; width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpLast style='margin:0in;line-height:normal'>
                             <span style='float: left; font-size:8.0pt; margin-top: 3px;'>$</span>
-                            <span style='margin-top: 3px; float: right; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->LandValuePerSqmFormat }}</span>
+                            <span style='margin-top: 3px; float: right; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>_Value</span>
                         </p>
                     </td>
                     <td valign=top colspan=6 style='width:70pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpLast style='margin:0in; line-height:normal'>
                             <span style='float: left; font-size:8.0pt; margin-top: 3px; margin-left: -6px !important'>$</span>
-                            <span style='margin-right: -38px; margin-top: 3px; float: right; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->LandTotalValuePerSqmFormat }}</span>
+                            <span style='margin-right: -30px; margin-top: 3px; float: right; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>_Value</span>
                         </p>
                     </td>
                 </tr>
@@ -606,19 +606,19 @@
                     </td>
                     <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align:right; line-height:normal'>
-                            <span style='color: red; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->LandSizeFormat }}</span>
+                            <span style='color: red; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>_Value</span>
                         </p>
                     </td>
                     <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center; line-height:normal'>
                             <span style='float: left; font-size:8.0pt; margin-top: 3px;'>$</span>
-                            <span style='margin-top: 3px; float: right; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->LandValuePerSqmFormat }}</span>
+                            <span style='margin-top: 3px; float: right; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>_Value</span>
                         </p>
                     </td>
                     <td valign=top colspan=6 style='width:70pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center; line-height:normal'>
                             <span style='float: left; font-size:8.0pt; margin-top: 3px; margin-left: -6px !important'>$</span>
-                            <span style='margin-right: -38px; margin-top: 3px; float: right; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->LandTotalValuePerSqmFormat }}</span>
+                            <span style='margin-right: -30px; margin-top: 3px; float: right; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>_Value</span>
                         </p>
                     </td>
                 </tr>
@@ -639,7 +639,7 @@
                     </td>
                     <td valign=top style='width:60pt; border:solid windowtext 1.0pt; border-top:none;padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpFirst align=center style='margin:0in;text-align: left;line-height:normal'>
-                            <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->PropertyTypeName }}</span>
+                            <span style='font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>_Value</span>
                         </p>
                     </td>
 
@@ -660,19 +660,19 @@
                     </td>
                     <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align: right; line-height:normal'>
-                            <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->BuildingSizeFormat }}</span>
+                            <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>_Value</span>
                         </p>
                     </td>
                     <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center; line-height:normal'>
                             <span style='float: left; font-size:8.0pt; margin-top: 3px;'>$</span>
-                            <span style='margin-top: 3px; float: right; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->BuildingValuePerSqmFormat }}</span>
+                            <span style='margin-top: 3px; float: right; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>_Value</span>
                         </p>
                     </td>
                     <td valign=top colspan=6 style='width:70pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center; line-height:normal'>
                             <span style='float: left; font-size:8.0pt; margin-top: 3px; margin-left: -6px !important'>$</span>
-                            <span style='margin-right: -45px; margin-top: 3px; float: right; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->BuildingTotalValuePerSqmFormat }}</span>
+                            <span style='margin-right: -30px; margin-top: 3px; float: right; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>_Value</span>
                         </p>
                     </td>
                 </tr>
@@ -752,19 +752,19 @@
                     </td>
                     <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align: right; line-height:normal'>
-                            <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->BuildingSizeFormat }}</span>
+                            <span style='font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>_Value</span>
                         </p>
                     </td>
                     <td valign=top style='width:60pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center; line-height:normal'>
                             <span style='float: left; font-size:8.0pt; margin-top: 3px;'>$</span>
-                            <span style='margin-top: 3px; float: right; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->BuildingValuePerSqmFormat }}</span>
+                            <span style='margin-top: 3px; float: right; font-size:8.0pt;font-family:"OneShinhan Bold",sans-serif'>_Value</span>
                         </p>
                     </td>
                     <td valign=top colspan=6 style='width:70pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center; line-height:normal'>
                             <span style='float: left; font-size:8.0pt; margin-top: 3px; margin-left: -6px !important'>$</span>
-                            <span style='margin-right: -45px; margin-top: 3px; float: right; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->BuildingTotalValuePerSqmFormat }}</span>
+                            <span style='margin-right: -30px; margin-top: 3px; float: right; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>_Value</span>
                         </p>
                     </td>
                 </tr>
@@ -785,7 +785,7 @@
                     <td colspan=8 valign=top style='border-style: solid; width:200pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpMiddle align=center style='margin:0in; text-align: center; line-height:normal'>
                             <span style='float: left; font-size:8.0pt; margin-top: 2px;'>$</span>
-                            <span style='margin-right: 2px; margin-top: 2px; float: right; color: red; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->LandBuildingGrandTotalFormat }}</span>
+                            <span style='margin-right: 2px; margin-top: 2px; float: right; color: red; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>_Value</span>
                         </p>
                     </td>
                 </tr>
@@ -836,29 +836,29 @@
                     </td>
                     <td valign=top style='width:40pt; border-top:none;border-left:none; border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                         <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal; text-align: right;'>
-                            <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif;'>{{ $indicator->comparable_cif_no1 }}</span>
+                            <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif;'>_Value</span>
                         </p>
                     </td>
                     <td valign=top style='width:40pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                         <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal; text-align: right;'>
-                            <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->comparable_geo_code1 }}</span>
+                            <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>_Value</span>
                         </p>
                     </td>
                     <td valign=top style='width:40pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                         <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                            <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->ComparableSizeOne }}</span>
+                            <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>_Value</span>
                         </p>
                     </td>
                     <td valign=top style='width:40pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                         <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
                             <span style='float: left; font-size:8.0pt; margin-top: 2px;'>$</span>
-                            <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->ComparaleValuePerSqmOneFormat }}</span>
+                            <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>_Value</span>
                         </p>
                     </td>
                     <td valign=top style='width:40pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                         <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
                             <span style='float: left; font-size:8.0pt; margin-top: 2px;'>$</span>
-                            <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->ComparableTotalValueOneFormat }}</span>
+                            <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>_Value</span>
                         </p>
                     </td>
                 </tr>
@@ -870,29 +870,29 @@
                     </td>
                     <td valign=top style='width:40pt; border-top:none;border-left:none; border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                         <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal; text-align: right;'>
-                            <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif;'>{{ $indicator->comparable_cif_no2 }}</span>
+                            <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif;'>_Value</span>
                         </p>
                     </td>
                     <td valign=top style='width:40pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                         <p class=MsoListParagraphCxSpMiddle style='margin:0in;line-height:normal; text-align: right;'>
-                            <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->comparable_geo_code2 }}</span>
+                            <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>_Value</span>
                         </p>
                     </td>
                     <td valign=top style='width:40pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                         <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
-                            <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->ComparableSizeTwo }}</span>
+                            <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>_Value</span>
                         </p>
                     </td>
                     <td valign=top style='width:40pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                         <p class=MsoListParagraphCxSpMiddle align=right style='margin:0in;text-align: right;line-height:normal'>
                             <span style='float: left; font-size:8.0pt; margin-top: 2px;'>$</span>
-                            <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->ComparaleValuePerSqmTwoFormat }}</span>
+                            <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>_Value</span>
                         </p>
                     </td>
                     <td valign=top style='width:40pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.35pt'>
                         <p class=MsoListParagraphCxSpLast align=right style='margin:0in;text-align: right;line-height:normal'>
                             <span style='float: left; font-size:8.0pt; margin-top: 2px;'>$</span>
-                            <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>{{ $indicator->ComparableTotalValueTwoFormat }}</span>
+                            <span style='font-size:8.0pt;font-family:"OneShinhan Light",sans-serif'>_Value</span>
                         </p>
                     </td>
                 </tr>
@@ -977,12 +977,8 @@
                     </td>
                 </tr>
             </table>
-
-            <!-- QR Code Map Place -->
-            <!-- <div id="qrcode-2" style="position: absolute; right: 0; top: 310;">
-                <img src="{{ $qrImage }}" style="height: 60px; width: 60px; border: 1px solid #0070C0; padding: 5px; background-color: white;"/>
-            </div> -->
             
+            <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdf">Export to PDF</a>
             <!-- <a target="_blank" class="btn btn-primary" href="http://localhost/pms/property-management/public/api/pdfindicator/145">Export to PDF</a> -->
         </div>
     </div>
