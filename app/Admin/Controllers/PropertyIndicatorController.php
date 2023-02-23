@@ -160,24 +160,25 @@ class PropertyIndicatorController extends AdminController
         });
         // create btn with api
         $grid->column('is_verified',__('Verified'))->display(function($is_verified){
-            if($is_verified == null) {
-                if(User::isVerifierRole()){ // user login
-                    $id = $this->id;
-                    return '<a href="'. env('APP_URL') . '/public/api/verify_indicator/' . $id . '/1" class="btn btn-sm btn-success">
-                                <i class="fa fa-check"></i>
-                                <span>&nbsp;&nbsp;Verify</span>
-                            </a>
-                            <a href="'. env('APP_URL') . '/public/api/verify_indicator/' . $id . '/2" class="btn btn-sm btn-danger">
-                                <i class="fa fa-times"></i>
-                                <span>&nbsp;&nbsp;Reject</span>
-                            </a>';
-                }
-                else {
+            if ($is_verified == null) {
+                if (User::isVerifierRole()) {
+                    // if (!empty($this->reported_date)) {
+                        $id = $this->id;
+                        return '<a href="'. env('APP_URL') . '/public/api/verify_indicator/' . $id . '/1" class="btn btn-sm btn-success">
+                                    <i class="fa fa-check"></i>
+                                    <span>&nbsp;&nbsp;Verify</span>
+                                </a>
+                                <a href="'. env('APP_URL') . '/public/api/verify_indicator/' . $id . '/2" class="btn btn-sm btn-danger">
+                                    <i class="fa fa-times"></i>
+                                    <span>&nbsp;&nbsp;Reject</span>
+                                </a>';
+                    // }
+                } else {
                     return '<p style="color: #172191;border: 1px solid #172191;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Processing</p>';
                 }
-            } else if($is_verified == 1){
+            } elseif ($is_verified == 1) {
                 return '<p style="color: #00a65a;border: 1px solid #00a65a;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Verified</p>';
-            } else{
+            } else {
                 return '<p style="color: #dd4b39;border: 1px solid #dd4b39;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Rejected</p>';
             }
         });
@@ -386,6 +387,13 @@ class PropertyIndicatorController extends AdminController
             $userName = UserAdmin::where('id', $userId)->first();
             return $userName->name ?? null;
         });
+
+        if (User::isBmRole()) {
+            $show->panel()->tools(function ($tools) {
+                $tools->disableEdit();
+                $tools->disableDelete();
+            });
+        }
 
         return $show;
     }

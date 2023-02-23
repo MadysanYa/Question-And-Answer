@@ -404,6 +404,12 @@ class PropertyAppraisalController extends AdminController
             return $userName->name ?? null;
         });
 
+        if (User::isBmRole()) {
+            $show->panel()->tools(function ($tools) {
+                $tools->disableEdit();
+                $tools->disableDelete();
+            });
+        }
 
         return $show;
     }
