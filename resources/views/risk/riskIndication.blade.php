@@ -28,7 +28,7 @@
                         </div>
                     @endif
                 </div>
-                
+
                 <div style="padding: 10px;">
                     <div class="row">
                         <div class="col-md-12">
@@ -56,14 +56,16 @@
             const labels = {{ Js::from($arrayLabel) }};
             const riskProperty = {{ Js::from($infoProperty)}};
             const userIsRmRole = {{ Js::from($userIsRmRole)}};
+            var icons = '../imges/marker_icon/properties_risk.png';
 
-            for (i = 0; i < locations.length; i++) {  
+            for (i = 0; i < locations.length; i++) {
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(locations[i][1], locations[i][2]),
                     label:{text: labels[i], color: "white"},
-                    map: map, 
+                    map: map,
+                    icon:icons,
                 });
-                if(userIsRmRole){  
+                if(userIsRmRole){
                     google.maps.event.addListener(marker, 'click', (function(marker, i) {
                         return function() {
                         infowindow.setContent(
