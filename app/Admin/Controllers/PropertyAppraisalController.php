@@ -163,7 +163,7 @@ class PropertyAppraisalController extends AdminController
         // create btn with api
         $grid->column('is_verified',__('Verified'))->display(function($is_verified){
             if($is_verified == null) {
-                if(User::isVerifierRole()){ // user login
+                if (User::isVerifierRole() && !empty($this->reported_date)) {
                     $id = $this->id;
                     return '<a href="'. env('APP_URL') . '/public/api/verify_appraisal/' . $id . '/1" class="btn btn-sm btn-success">
                                 <i class="fa fa-check"></i>
