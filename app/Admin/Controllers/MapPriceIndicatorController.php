@@ -215,10 +215,10 @@ class MapPriceIndicatorController extends AdminController
             ]));
         }
         else{
-            $MapPriceIndicator->body(view('map.googleMapIndication', [
-                'arryProperty' => $arryProperty,
-                'arrayLabel' => $arrayLabel,
-                'infoProperty' => $infoProperty,
+            $MapPriceIndicator->body(view('map.googleMapPropertyResearch', [
+                'latLongProResearch' => $latLongProResearch,
+                'labelProResearch' => $labelProResearch,
+                'infoProResearch' => $infoProResearch
             ]));
         }
 
