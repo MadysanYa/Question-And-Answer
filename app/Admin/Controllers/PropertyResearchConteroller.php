@@ -212,6 +212,12 @@ class PropertyResearchConteroller extends AdminController
 			$filter->disableIdFilter();
 		});
 
+        // Remove action from trash
+        if(request()->_scope_ == "trashed"){
+            $grid->disableActions();
+            $grid->disableCreateButton();
+         }
+
         // $grid->setActionClass(ContextMenuActions::class);
 
         return $grid;
