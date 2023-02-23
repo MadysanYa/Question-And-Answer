@@ -359,7 +359,6 @@ class PropertyAppraisalController extends AdminController
         $show->field('appraisal_certificate_fee',__('Appraisal Certificate Fee'))->sortbale();
         $show->field('land_size', __('Land_size'))->sortable();
         $show->field('building_value_per_sqm', __('Building Value per Sqm'))->sortable();
-        $show->field('collateral_owner', __('Owner'))->sortable();
         $show->field('information_type',__('Information Type'))->as(function($id){
             $informationtype = InformationType::where('id', $id)->first();
             if ($informationtype == null ) return '';
