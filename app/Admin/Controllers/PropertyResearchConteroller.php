@@ -2,29 +2,30 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Borey;
-use App\Models\Province;
-use App\Models\Branch;
-use App\Models\Commune;
-use App\Models\District;
-use App\Models\Region;
-use App\Models\Village;
-use App\Models\File;
-use App\Models\InformationType;
-use App\Models\PropertyResearch;
-use App\Models\PropertyType;
 use App\Models\Pdf;
-use Encore\Admin\Controllers\AdminController;
+use App\Models\File;
+use App\Models\User;
+use App\Models\Borey;
+use App\Models\Branch;
+use App\Models\Region;
 use Encore\Admin\Form;
-use Encore\Admin\Form\Field\Button;
-use Encore\Admin\Form\Field\Id;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Auth;
-use Encore\Admin\Layout\Content;
-use App\Models\User;
+use App\Models\Commune;
+use App\Models\Village;
+use App\Models\District;
+use App\Models\Province;
 use App\Models\UserAdmin;
+use App\Models\PropertyType;
+use App\Models\InformationType;
+use Encore\Admin\Form\Field\Id;
+use App\Models\PropertyResearch;
+use Encore\Admin\Layout\Content;
+use Encore\Admin\Form\Field\Button;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
+use Encore\Admin\Grid\Displayers\Actions;
+use Encore\Admin\Controllers\AdminController;
 
 Use Encore\Admin\Grid\Displayers\ContextMenuActions;
 
@@ -114,12 +115,24 @@ class PropertyResearchConteroller extends AdminController
         $grid->column('latitude',__('Latitude'))->sortable();
         $grid->column('longtitude',__('Longtitude'))->sortable();
         $grid->column('remark',__('Remark'))->sortable();
-
         $grid->column('user_id',__('Created By'))->sortable()->display(function($id){
             $userName = UserAdmin::where('id', $id)->first();
             return $userName->name ?? null;
         });
-
+        $grid->column('created_at',__('Created Date'))->filter('range', 'date')->display(function(){
+            if ($this->created_at) {
+                return date('d-M-Y', strtotime($this->created_at));
+            }
+        });
+        $grid->column('deleted_by',__('Deleted By'))->sortable()->display(function($id){
+            $userName = UserAdmin::where('id', $id)->first();
+            return $userName->name ?? null;
+        });
+        $grid->column('deleted_at',__('Deleted Date'))->filter('range', 'date')->display(function(){
+            if ($this->deleted_at) {
+                return date('d-M-Y', strtotime($this->deleted_at));
+            }
+        });
         $grid->column('is_verified',__('Verified'))->display(function($is_verified){
             if($is_verified == null) {
                 if(User::isVerifierRole()){ // user login
@@ -173,12 +186,6 @@ class PropertyResearchConteroller extends AdminController
             }
         });
 
-        // $grid->html('<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdf">Export to PDF</a>');
-        // $grid->disableExport();
-        // $grid->disableFilter();
-
-        $grid->fixColumns(0, -3);
-
         $grid->quickSearch(function ($model, $query) {
             $model->where('id', $query);
             $model->orWhere('contact_no', 'like', "%{$query}%");
@@ -190,15 +197,19 @@ class PropertyResearchConteroller extends AdminController
             });
         });
 
-        $grid->disableFilter();
+        if (User::isBmRole()) {
+            $grid->disableCreateButton();
+            $grid->actions(function (Actions $actions) {
+                $actions->disableEdit();
+                $actions->disableDelete();
+            });
+        }
+
+        // $grid->disableFilter();
+        $grid->fixColumns(0, -3);
 		$grid->filter(function($filter){
+            $filter->scope('trashed', 'Trash Bin')->onlyTrashed();
 			$filter->disableIdFilter();
-            $filter->where(function ($query) {
-                $query->whereHas('user', function($q) {
-                    $q->where('name', 'like', "%{$this->input}%");
-                    $q->orWhere('id', 'like', "%{$this->input}%");
-                });
-            }, 'Created By');
 		});
 
         // $grid->setActionClass(ContextMenuActions::class);
@@ -273,56 +284,64 @@ class PropertyResearchConteroller extends AdminController
     protected function detail($id)
     {
         $show = new Show( PropertyResearch::findOrFail($id));
-            $show->field('information_type',__('Information Type'))->as(function($id){
-                $informationtype = InformationType::where('id', $id)->first();
-                return  $informationtype->information_type_name;
-            });
-            $show->field('property_reference',__('Reference'));
-            $show->field('access_road_name',__('Access Road Name'));
-            $show->field('no_of_floor',__('No. of floor'));
-            $show->field('land_size',__('Land Size'));
-            $show->field('building_value_per_sqm',__('Building Value per Sqm ($)'));
-            $show->field('district_id',__('District/ Khan'))->as(function($district_id){
-                $district = District::where('id', $district_id)->first();
-                return $district->district_name;
-            });
-            $show->field('contact_no',__('Contact No'));
-            $show->field('remark',__('Remark'));
-            $show->field('location_type',__('Location Type'));
-            $show->field('property_type',__('Property Type'))->as(function($id){
-                $propertytype = PropertyType::where('id', $id)->first();
-                return  $propertytype->property_type_name;
-            });
-            $show->field('land_title_type',__('Land Titil'));
-            $show->field('land_value_per_sqm',__('Land Value per Sqm ($)'));
-            $show->field('property_market_value',__('Property Market Value ($)'));
-            $show->field('commune_id',__('Commune / Sangkat'))->as(function($comune_id){
-                $commune = Commune::where('id', $comune_id)->first();
-                return $commune->commune_name;
-            });
-            $show->field('longtitude',__('Longtitude'));
-            $show->field('type_of_access_road',__('Type of Access Road'));
-            $show->field('borey',__('Borey'))->as(function($id){
-                $borey = Borey::where('id', $id)->first();
-                return $borey->borey_name;
-            });
-            $show->field('information_date',__('Information Date'));
-            $show->field('building_size',__('Building Size ($)'));
-            $show->field('province_id',__('Province'))->as(function($province_id){
-                $province = Province::where('id', $province_id)->first();
-                return $province->province_name;
-            });
-            $show->field('village_id',__('Village'))->as(function($village_id){
-                $village = Village::where('id', $village_id)->first();
-                return $village->village_name   ;
-            });
-            $show->field('latitude',__('Latitude'));
-            $show->field('longtitude',__('Longtitude'));
+        $show->field('information_type',__('Information Type'))->as(function($id){
+            $informationtype = InformationType::where('id', $id)->first();
+            return  $informationtype->information_type_name;
+        });
+        $show->field('property_reference',__('Reference'));
+        $show->field('access_road_name',__('Access Road Name'));
+        $show->field('no_of_floor',__('No. of floor'));
+        $show->field('land_size',__('Land Size'));
+        $show->field('building_value_per_sqm',__('Building Value per Sqm ($)'));
+        $show->field('district_id',__('District/ Khan'))->as(function($district_id){
+            $district = District::where('id', $district_id)->first();
+            return $district->district_name;
+        });
+        $show->field('contact_no',__('Contact No'));
+        $show->field('remark',__('Remark'));
+        $show->field('location_type',__('Location Type'));
+        $show->field('property_type',__('Property Type'))->as(function($id){
+            $propertytype = PropertyType::where('id', $id)->first();
+            return  $propertytype->property_type_name;
+        });
+        $show->field('land_title_type',__('Land Titil'));
+        $show->field('land_value_per_sqm',__('Land Value per Sqm ($)'));
+        $show->field('property_market_value',__('Property Market Value ($)'));
+        $show->field('commune_id',__('Commune / Sangkat'))->as(function($comune_id){
+            $commune = Commune::where('id', $comune_id)->first();
+            return $commune->commune_name;
+        });
+        $show->field('longtitude',__('Longtitude'));
+        $show->field('type_of_access_road',__('Type of Access Road'));
+        $show->field('borey',__('Borey'))->as(function($id){
+            $borey = Borey::where('id', $id)->first();
+            return $borey->borey_name;
+        });
+        $show->field('information_date',__('Information Date'));
+        $show->field('building_size',__('Building Size ($)'));
+        $show->field('province_id',__('Province'))->as(function($province_id){
+            $province = Province::where('id', $province_id)->first();
+            return $province->province_name;
+        });
+        $show->field('village_id',__('Village'))->as(function($village_id){
+            $village = Village::where('id', $village_id)->first();
+            return $village->village_name   ;
+        });
+        $show->field('latitude',__('Latitude'));
+        $show->field('longtitude',__('Longtitude'));
 
-            $show->field('user_id', __('Created By'))->as(function ($userId){
-                $userName = UserAdmin::where('id', $userId)->first();
-                return $userName->name ?? null;
+        $show->field('user_id', __('Created By'))->as(function ($userId){
+            $userName = UserAdmin::where('id', $userId)->first();
+            return $userName->name ?? null;
+        });
+
+        if (User::isBmRole()) {
+            $show->panel()->tools(function ($tools) {
+                $tools->disableEdit();
+                $tools->disableDelete();
             });
+        }
+
         return $show;
     }
 

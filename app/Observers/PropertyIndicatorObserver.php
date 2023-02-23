@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\PropertyIndicator;
+use Illuminate\Support\Facades\Auth;
 
 class PropertyIndicatorObserver
 {
@@ -44,7 +45,9 @@ class PropertyIndicatorObserver
      */
     public function deleted(PropertyIndicator $propertyIndicator)
     {
-        //
+        // AUTO LOG USER DELETED RECORD
+        $propertyIndicator->deleted_by = Auth::user()->id;
+        $propertyIndicator->save();
     }
 
     /**

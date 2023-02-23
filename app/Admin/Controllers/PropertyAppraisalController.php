@@ -140,13 +140,26 @@ class PropertyAppraisalController extends AdminController
         $grid->column('comparable_distance1',__('Distance'))->sortable();
         $grid->column('comparable_geo_code1',__('Geo Code'))->sortable();
         $grid->column('comparable_size1',__('Size'))->sortable();
-        $grid->column('comparable_value_per_sqm1',__('Value per_sqm'))->sortable();
+        $grid->column('comparable_value_per_sqm1',__('Value per sqm'))->sortable();
         $grid->column('comparable_total_value1',__('Total Value'))->sortable();
         $grid->column('user_id',__('Created By'))->sortable()->display(function($id){
             $userName = UserAdmin::where('id', $id)->first();
             return $userName->name ?? null;
         });
-
+        $grid->column('created_at',__('Created Date'))->filter('range', 'date')->display(function(){
+            if ($this->created_at) {
+                return date('d-M-Y', strtotime($this->created_at));
+            }
+        });
+        $grid->column('deleted_by',__('Deleted By'))->sortable()->display(function($id){
+            $userName = UserAdmin::where('id', $id)->first();
+            return $userName->name ?? null;
+        });
+        $grid->column('deleted_at',__('Deleted Date'))->filter('range', 'date')->display(function(){
+            if ($this->deleted_at) {
+                return date('d-M-Y', strtotime($this->deleted_at));
+            }
+        });
         // create btn with api
         $grid->column('is_verified',__('Verified'))->display(function($is_verified){
             if($is_verified == null) {
@@ -232,16 +245,11 @@ class PropertyAppraisalController extends AdminController
             });
         }
 
-        $grid->disableFilter();
+        // $grid->disableFilter();
         $grid->fixColumns(0, -4);
         $grid->filter(function($filter){
+            $filter->scope('trashed', 'Trash Bin')->onlyTrashed();
             $filter->disableIdFilter();
-            $filter->where(function ($query) {
-                $query->whereHas('user', function($q) {
-                    $q->where('name', 'like', "%{$this->input}%");
-                    $q->orWhere('id', 'like', "%{$this->input}%");
-                });
-            }, 'Created By');
         });
 
         return $grid;
@@ -396,6 +404,12 @@ class PropertyAppraisalController extends AdminController
             return $userName->name ?? null;
         });
 
+        if (User::isBmRole()) {
+            $show->panel()->tools(function ($tools) {
+                $tools->disableEdit();
+                $tools->disableDelete();
+            });
+        }
 
         return $show;
     }
@@ -537,7 +551,7 @@ class PropertyAppraisalController extends AdminController
             })->placeholder('Property Reference');
             $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area','Commercial Area'=>'Commercial Area', 'Industrial Area'=>'Industrial Area', 'Agricultural Area'=>'Agricultural Area']);
             $form->select('type_of_access_road', __('Type of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road', 'Paved Road'=>'Paved Road','Upaved Road'=>'Upaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road']);
-            $form->image('front_photo',__('front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+            $form->image('front_photo',__('Front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
             $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
             $form->image('right_photo',__('Access Road Photo Right'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
         });
@@ -568,7 +582,7 @@ class PropertyAppraisalController extends AdminController
 
         $form->column(1/3,function($form){
             // $form->html('<div style="height:105px"></div>');
-            $form->text('building_size_by_measurement', __('Building Size by measurement'))->rules('required')->attribute('maxlength', '9');
+            $form->text('building_size_by_measurement', __('Building Size by Measurement'))->rules('required')->attribute('maxlength', '9');
             $form->currency('building_value_per_sqm', __('Building Value per Sqm'))->rules('required')->attribute(['style' => 'width: 100%;'])->placeholder('Value per Sqm (Part Building)');
             $form->currency('property_value', __('Property Value '))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
@@ -600,14 +614,14 @@ class PropertyAppraisalController extends AdminController
             $form->text('comparable_geo_code1',__('Geo Code'));
             $form->text('comparable_distance1',__('Distance'));
             $form->text('comparable_size1',__('Size'));
-            $form->text('comparable_value_per_sqm1',__('Value per_sqm'));
+            $form->text('comparable_value_per_sqm1',__('Value per sqm'));
             $form->text('comparable_total_value1',__('Total Value'));
             $form->text('comparable_id2',__('ID'));
             $form->text('comparable_cif_no2',__('CIF No./ Name'));
             $form->text('comparable_geo_code2',__('Geo Code'));
             $form->text('comparable_distance2',__('Distance'));
             $form->text('comparable_size2',__('Size'));
-            $form->text('comparable_value_per_sqm2',__('Value per_sqm'));
+            $form->text('comparable_value_per_sqm2',__('Value per sqm'));
             $form->text('comparable_total_value2',__('Total Value'));
             if (User::isVerifierRole() || User::isApproverRole() || User::isAdminRole()){
                 $form->button('comparable_reference', __('Comparable Reference'))->attribute('id', 'show-comparable-reference-modal')->on('click', '$("#modal-comparable-reference").modal();');
@@ -619,6 +633,15 @@ class PropertyAppraisalController extends AdminController
             }
             $form->html(view('admin.property.property_appraisal_script'));
         });
+
+        if (User::isBmRole()) {
+            $form->disableCreateButton();
+            $form->actions(function (Actions $actions) {
+                $actions->disableEdit();
+                $actions->disableDelete();
+            });
+        }
+
 
         // Modal Comparable Reference
         Admin::html('

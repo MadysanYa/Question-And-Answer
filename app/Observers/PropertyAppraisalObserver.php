@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\PropertyAppraisal;
+use Illuminate\Support\Facades\Auth;
 
 class PropertyAppraisalObserver
 {
@@ -44,7 +45,9 @@ class PropertyAppraisalObserver
      */
     public function deleted(PropertyAppraisal $propertyAppraisal)
     {
-        //
+        // AUTO LOG USER DELETED RECORD
+        $propertyAppraisal->deleted_by = Auth::user()->id;
+        $propertyAppraisal->save();
     }
 
     /**

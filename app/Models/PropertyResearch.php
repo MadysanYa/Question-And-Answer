@@ -6,9 +6,12 @@ use App\Models\UserAdmin;
 use App\Models\PropertyType;
 use App\Models\InformationType;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PropertyResearch extends Model
 {
+    use SoftDeletes;
+    
     /**
      * Relationship
      */

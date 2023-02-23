@@ -8,9 +8,12 @@ use App\Models\PropertyType;
 use App\Models\InformationType;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PropertyIndicator extends Model
 {
+    use SoftDeletes;
+    
     protected $dates = ['requested_date','reported_date'];
     /**
      * Relationship

@@ -144,26 +144,41 @@ class PropertyIndicatorController extends AdminController
             $userName = UserAdmin::where('id', $id)->first();
             return $userName->name ?? null;
         });
+        $grid->column('created_at',__('Created Date'))->filter('range', 'date')->display(function(){
+            if ($this->created_at) {
+                return date('d-M-Y', strtotime($this->created_at));
+            }
+        });
+        $grid->column('deleted_by',__('Deleted By'))->sortable()->display(function($id){
+            $userName = UserAdmin::where('id', $id)->first();
+            return $userName->name ?? null;
+        });
+        $grid->column('deleted_at',__('Deleted Date'))->filter('range', 'date')->display(function(){
+            if ($this->deleted_at) {
+                return date('d-M-Y', strtotime($this->deleted_at));
+            }
+        });
         // create btn with api
         $grid->column('is_verified',__('Verified'))->display(function($is_verified){
-            if($is_verified == null) {
-                if(User::isVerifierRole()){ // user login
-                    $id = $this->id;
-                    return '<a href="'. env('APP_URL') . '/public/api/verify_indicator/' . $id . '/1" class="btn btn-sm btn-success">
-                                <i class="fa fa-check"></i>
-                                <span>&nbsp;&nbsp;Verify</span>
-                            </a>
-                            <a href="'. env('APP_URL') . '/public/api/verify_indicator/' . $id . '/2" class="btn btn-sm btn-danger">
-                                <i class="fa fa-times"></i>
-                                <span>&nbsp;&nbsp;Reject</span>
-                            </a>';
-                }
-                else {
+            if ($is_verified == null) {
+                if (User::isVerifierRole()) {
+                    // if (!empty($this->reported_date)) {
+                        $id = $this->id;
+                        return '<a href="'. env('APP_URL') . '/public/api/verify_indicator/' . $id . '/1" class="btn btn-sm btn-success">
+                                    <i class="fa fa-check"></i>
+                                    <span>&nbsp;&nbsp;Verify</span>
+                                </a>
+                                <a href="'. env('APP_URL') . '/public/api/verify_indicator/' . $id . '/2" class="btn btn-sm btn-danger">
+                                    <i class="fa fa-times"></i>
+                                    <span>&nbsp;&nbsp;Reject</span>
+                                </a>';
+                    // }
+                } else {
                     return '<p style="color: #172191;border: 1px solid #172191;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Processing</p>';
                 }
-            } else if($is_verified == 1){
+            } elseif ($is_verified == 1) {
                 return '<p style="color: #00a65a;border: 1px solid #00a65a;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Verified</p>';
-            } else{
+            } else {
                 return '<p style="color: #dd4b39;border: 1px solid #dd4b39;padding: 12px;text-align:center;margin-bottom: 0px;border-radius: 3px;height: 45px;">Rejected</p>';
             }
         });
@@ -220,19 +235,15 @@ class PropertyIndicatorController extends AdminController
             $grid->disableCreateButton();
             $grid->actions(function (Actions $actions) {
                 $actions->disableEdit();
+                $actions->disableDelete();
             });
         }
 
-        $grid->disableFilter();
+        // $grid->disableFilter();
         $grid->fixColumns(0, -4);
 		$grid->filter(function($filter){
+            $filter->scope('trashed', 'Trash Bin')->onlyTrashed();
 			$filter->disableIdFilter();
-            $filter->where(function ($query) {
-                $query->whereHas('user', function($q) {
-                    $q->where('name', 'like', "%{$this->input}%");
-                    $q->orWhere('id', 'like', "%{$this->input}%");
-                });
-            }, 'Created By');
 		});
 
         return $grid;
@@ -377,6 +388,13 @@ class PropertyIndicatorController extends AdminController
             return $userName->name ?? null;
         });
 
+        if (User::isBmRole()) {
+            $show->panel()->tools(function ($tools) {
+                $tools->disableEdit();
+                $tools->disableDelete();
+            });
+        }
+
         return $show;
     }
 
@@ -433,7 +451,7 @@ class PropertyIndicatorController extends AdminController
             })->placeholder('Reference No.');
             $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area','Agricultural Area'=>'Agricultural Area']);
             $form->select('type_of_access_road', __('Type of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road', 'Paved Road'=>'Paved Road','Upaved Road'=>'Upaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road']);
-            $form->image('front_photo',__('front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+            $form->image('front_photo',__('Front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
             $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
             $form->image('right_photo',__('Access Road Photo Right'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
 
