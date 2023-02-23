@@ -198,8 +198,8 @@ class PropertyIndicatorController extends AdminController
         // Export to PDF
         $grid->column(__('To PDF'))->display(function(){
             $id = $this->id;
-
-            if (!User::isRmRole() || User::isRmRole() && $this->IsPropertyApproved) {
+            
+            if ($this->IsPropertyApproved || User::isAdminRole()) {
                 return '<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdfindicator/' . $id . '">Download</a>';
             }
         });
