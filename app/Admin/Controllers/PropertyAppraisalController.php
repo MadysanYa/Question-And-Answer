@@ -317,9 +317,6 @@ class PropertyAppraisalController extends AdminController
 
         $show->field('property_reference',__('Reference'));
         $show->field('collateral_owner',__('Collateral Owner '));
-        $show->field('property_address',__('Property_address '));
-
-
         $show->field('region_id', __('Region'))->as(function($region){
             $region = Region::where('id', $region)->first();
             if($region == null) return '';
@@ -332,11 +329,15 @@ class PropertyAppraisalController extends AdminController
         });
 
         $show->field('cif_no', __('CIF No'))->sortable();
-        $show->field('swot_analyze', __('swot_analyze'))->sortable();
+        // $show->field('swot_analyze', __('swot_analyze'))->sortable();
         $show->field('rm_name', __('Loan Officer'))->sortable();
         $show->field('requested_date', __('Request Date'))->sortable();
+        $show->field('reported_date',__('Reported Date'));
         $show->field('access_road_name', __('Access Road Name'))->sortable();
-        $show->field('borey', __('Borey'))->sortable();
+        $show->field('borey',__('Borey'))->as(function($id){
+            $borey = Borey::where('id', $id)->first();
+            return $borey->borey_name;
+        }) ;
         $show->field('land_title_no', __('Land title no'))->sortable();
         $show->field('land_value_per_sqm', __('Land Value Persqm'))->sortable();
         $show->field('property_value', __('Property Value'))->sortable();
@@ -346,8 +347,8 @@ class PropertyAppraisalController extends AdminController
         $show->field('longtitude', __('longtitude'))->sortable();
         $show->field('remark', __('Remark'))->sortable();
         $show->field('client_contact_no',__('Client Contact No'));
-        $show->field('reported_date',__('Reported Date'));
         $show->field('requested_date',__('Requested Date'));
+        $show->field('reported_date',__('Reported Date'));
         $show->field('location_type', __('Location Type'))->sortable();
         $show->field('property_type',__('Property Type'))->as(function($id){
             $propertytype = PropertyType::where('id', $id)->first();
@@ -359,11 +360,6 @@ class PropertyAppraisalController extends AdminController
         $show->field('land_size', __('Land_size'))->sortable();
         $show->field('building_value_per_sqm', __('Building Value per Sqm'))->sortable();
         $show->field('collateral_owner', __('Owner'))->sortable();
-
-       // $show->field('photos',__('Photo'))->sortable();
-       // $show->field('front_photo',__('Front Photo'))->sortable();
-
-
         $show->field('information_type',__('Information Type'))->as(function($id){
             $informationtype = InformationType::where('id', $id)->first();
             if ($informationtype == null ) return '';
@@ -396,6 +392,10 @@ class PropertyAppraisalController extends AdminController
         $show->field('weakness',__('Weakness'));
         $show->field('opportunity',__('Opportunity'));
         $show->field('threat',__('Threat'));
+        $show->field('user_id', __('Created By'))->as(function ($userId){
+            $userName = UserAdmin::where('id', $userId)->first();
+            return $userName->name ?? null;
+        });
 
 
         return $show;

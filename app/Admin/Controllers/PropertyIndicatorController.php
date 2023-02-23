@@ -198,7 +198,7 @@ class PropertyIndicatorController extends AdminController
         // Export to PDF
         $grid->column(__('To PDF'))->display(function(){
             $id = $this->id;
-            
+
             if ($this->IsPropertyApproved || User::isAdminRole()) {
                 return '<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdfindicator/' . $id . '">Download</a>';
             }
@@ -322,11 +322,8 @@ class PropertyIndicatorController extends AdminController
             if($branch == null) return '';
             return '(' . $branch->branch_code . ')' . $branch->branch_name;
         });
-
-        $show->field('requested_date',__('Requested Date'));
-        if (User::isVerifierRole() || User::isApproverRole()){
-            $show->field('reported_date',__('Reported Date'));
-        }
+       $show->field('requested_date',__('Requested Date'));
+        $show->field('reported_date',__('Reported Date'));
         $show->field('cif_no',__('CIF No.'));
         $show->field('rm_name',__('RM Name'));
         $show->field('telephone',__('Telephone'));
@@ -372,8 +369,8 @@ class PropertyIndicatorController extends AdminController
             $village = Village::where('id', $village_id)->first();
             return $village->village_name ?? '';
         });
-        $show->field('longtitude',__('Longtitude'));
         $show->field('latitude',__('Latitude'));
+        $show->field('longtitude',__('Longtitude'));
         $show->field('remark',__('Remark'));
         $show->field('user_id', __('Created By'))->as(function ($userId){
             $userName = UserAdmin::where('id', $userId)->first();
