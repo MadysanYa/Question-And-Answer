@@ -140,7 +140,7 @@ class PropertyAppraisalController extends AdminController
         $grid->column('comparable_distance1',__('Distance'))->sortable();
         $grid->column('comparable_geo_code1',__('Geo Code'))->sortable();
         $grid->column('comparable_size1',__('Size'))->sortable();
-        $grid->column('comparable_value_per_sqm1',__('Value per_sq. m'))->sortable();
+        $grid->column('comparable_value_per_sqm1',__('Value per_sqm'))->sortable();
         $grid->column('comparable_total_value1',__('Total Value'))->sortable();
         $grid->column('user_id',__('Created By'))->sortable()->display(function($id){
             $userName = UserAdmin::where('id', $id)->first();
@@ -206,9 +206,9 @@ class PropertyAppraisalController extends AdminController
         $grid->column(__('To PDF'))->display(function(){
             $id = $this->id;
 
-            if (!User::isRmRole() || User::isRmRole() && $this->IsPropertyApproved) {
+            if ($this->IsPropertyApproved || User::isAdminRole()) {
                 return '<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdfappraisal/' . $id . '" target="_blank">Download</a>';
-            } 
+            }
         });
 
         // $grid->column('report_date', __('Report Date'));
@@ -228,6 +228,7 @@ class PropertyAppraisalController extends AdminController
             $grid->disableCreateButton();
             $grid->actions(function (Actions $actions) {
                 $actions->disableEdit();
+                $actions->disableDelete();
             });
         }
 
@@ -316,9 +317,6 @@ class PropertyAppraisalController extends AdminController
 
         $show->field('property_reference',__('Reference'));
         $show->field('collateral_owner',__('Collateral Owner '));
-        $show->field('property_address',__('Property_address '));
-
-
         $show->field('region_id', __('Region'))->as(function($region){
             $region = Region::where('id', $region)->first();
             if($region == null) return '';
@@ -331,11 +329,15 @@ class PropertyAppraisalController extends AdminController
         });
 
         $show->field('cif_no', __('CIF No'))->sortable();
-        $show->field('swot_analyze', __('swot_analyze'))->sortable();
+        // $show->field('swot_analyze', __('swot_analyze'))->sortable();
         $show->field('rm_name', __('Loan Officer'))->sortable();
         $show->field('requested_date', __('Request Date'))->sortable();
+        $show->field('reported_date',__('Reported Date'));
         $show->field('access_road_name', __('Access Road Name'))->sortable();
-        $show->field('borey', __('Borey'))->sortable();
+        $show->field('borey',__('Borey'))->as(function($id){
+            $borey = Borey::where('id', $id)->first();
+            return $borey->borey_name;
+        }) ;
         $show->field('land_title_no', __('Land title no'))->sortable();
         $show->field('land_value_per_sqm', __('Land Value Persqm'))->sortable();
         $show->field('property_value', __('Property Value'))->sortable();
@@ -345,8 +347,8 @@ class PropertyAppraisalController extends AdminController
         $show->field('longtitude', __('longtitude'))->sortable();
         $show->field('remark', __('Remark'))->sortable();
         $show->field('client_contact_no',__('Client Contact No'));
-        $show->field('reported_date',__('Reported Date'));
         $show->field('requested_date',__('Requested Date'));
+        $show->field('reported_date',__('Reported Date'));
         $show->field('location_type', __('Location Type'))->sortable();
         $show->field('property_type',__('Property Type'))->as(function($id){
             $propertytype = PropertyType::where('id', $id)->first();
@@ -357,12 +359,6 @@ class PropertyAppraisalController extends AdminController
         $show->field('appraisal_certificate_fee',__('Appraisal Certificate Fee'))->sortbale();
         $show->field('land_size', __('Land_size'))->sortable();
         $show->field('building_value_per_sqm', __('Building Value per Sqm'))->sortable();
-        $show->field('collateral_owner', __('Owner'))->sortable();
-
-       // $show->field('photos',__('Photo'))->sortable();
-       // $show->field('front_photo',__('Front Photo'))->sortable();
-
-
         $show->field('information_type',__('Information Type'))->as(function($id){
             $informationtype = InformationType::where('id', $id)->first();
             if ($informationtype == null ) return '';
@@ -395,6 +391,10 @@ class PropertyAppraisalController extends AdminController
         $show->field('weakness',__('Weakness'));
         $show->field('opportunity',__('Opportunity'));
         $show->field('threat',__('Threat'));
+        $show->field('user_id', __('Created By'))->as(function ($userId){
+            $userName = UserAdmin::where('id', $userId)->first();
+            return $userName->name ?? null;
+        });
 
 
         return $show;
@@ -537,16 +537,19 @@ class PropertyAppraisalController extends AdminController
             })->placeholder('Property Reference');
             $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area','Commercial Area'=>'Commercial Area', 'Industrial Area'=>'Industrial Area', 'Agricultural Area'=>'Agricultural Area']);
             $form->select('type_of_access_road', __('Type of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road', 'Paved Road'=>'Paved Road','Upaved Road'=>'Upaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road']);
+            $form->image('front_photo',__('front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+            $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+            $form->image('right_photo',__('Access Road Photo Right'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+        });
+
+        $form->column(1/3,function($form){
+            // $form->html('<div style="height:105px"></div>');
             $form->text('access_road_name', __('Access Road Name'))->rules('required');
             $form->select('property_type', __('Property Type'))->rules('required')->options(function(){
                 return PropertyType::all()->pluck('property_type_name','id');
             });
             $form->text('customer_name', __('Customer Name'))->rules('required');
             $form->mobile('client_contact_no', __('Client Contact No'))->rules('required')->options(['mask' => '099 999 9999'])->attribute(['style' => 'width: 100%;']);
-        });
-
-        $form->column(1/3,function($form){
-            $form->html('<div style="height:105px"></div>');
             $form->text('building_status', __('Building Status (%)'))->rules('required')->attribute('maxlength', '3');
             $form->select('borey', __('Borey'))->rules('required')->options(function(){
                 return Borey::all()->pluck('borey_name', 'id');
@@ -557,16 +560,19 @@ class PropertyAppraisalController extends AdminController
             $form->text('land_size', __('Land Size(Sqm)'))->rules('required');
             $form->text('land_size_by_measurement', __('Land Size by Measurement'))->rules('required')->attribute('maxlength', '9');
             $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required')->attribute(['style' => 'width: 100%;']);
+            $form->image('left_photo',__('Access Road Photo Left'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+            $form->image('title_front_photo',__('Title Photo Front'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+            $form->image('title_back_photo',__('Title Photo Back'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+
+        });
+
+        $form->column(1/3,function($form){
+            // $form->html('<div style="height:105px"></div>');
             $form->text('building_size_by_measurement', __('Building Size by measurement'))->rules('required')->attribute('maxlength', '9');
             $form->currency('building_value_per_sqm', __('Building Value per Sqm'))->rules('required')->attribute(['style' => 'width: 100%;'])->placeholder('Value per Sqm (Part Building)');
             $form->currency('property_value', __('Property Value '))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
             $form->text('remark', __('Remark'));
-
-        });
-
-        $form->column(1/3,function($form){
-            $form->html('<div style="height:105px"></div>');
             $form->select('province_id', __('Province'))->rules('required')->options(function(){
                 return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
 
@@ -581,12 +587,6 @@ class PropertyAppraisalController extends AdminController
 
             $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.999999'])->rules('required');
             $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.999999'])->rules('required');
-            $form->image('front_photo',__('front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
-            $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
-            $form->image('right_photo',__('Access Road Photo Right'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
-            $form->image('left_photo',__('Access Road Photo Left'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
-            $form->image('title_front_photo',__('Title Photo Front'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
-            $form->image('title_back_photo',__('Title Photo Back'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
             $form->image('id_front_photo',__('ID Photo Front'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
             $form->image('id_back_photo',__('ID Photo Back'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
             $form->multipleFile('photos',__('Photos'))->removable()->uniqueName();
@@ -600,14 +600,14 @@ class PropertyAppraisalController extends AdminController
             $form->text('comparable_geo_code1',__('Geo Code'));
             $form->text('comparable_distance1',__('Distance'));
             $form->text('comparable_size1',__('Size'));
-            $form->text('comparable_value_per_sqm1',__('Value per_sq. m'));
+            $form->text('comparable_value_per_sqm1',__('Value per_sqm'));
             $form->text('comparable_total_value1',__('Total Value'));
             $form->text('comparable_id2',__('ID'));
             $form->text('comparable_cif_no2',__('CIF No./ Name'));
             $form->text('comparable_geo_code2',__('Geo Code'));
             $form->text('comparable_distance2',__('Distance'));
             $form->text('comparable_size2',__('Size'));
-            $form->text('comparable_value_per_sqm2',__('Value per_sq. m'));
+            $form->text('comparable_value_per_sqm2',__('Value per_sqm'));
             $form->text('comparable_total_value2',__('Total Value'));
             if (User::isVerifierRole() || User::isApproverRole() || User::isAdminRole()){
                 $form->button('comparable_reference', __('Comparable Reference'))->attribute('id', 'show-comparable-reference-modal')->on('click', '$("#modal-comparable-reference").modal();');

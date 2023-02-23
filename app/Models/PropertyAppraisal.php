@@ -241,7 +241,7 @@ class PropertyAppraisal extends Model
 
     public function getIsPropertyApprovedAttribute()
     {
-        if ($this->is_approved) {
+        if ($this->is_approved == 1) {
             return true;
         }
 
