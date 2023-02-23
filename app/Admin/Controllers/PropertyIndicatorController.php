@@ -506,6 +506,7 @@ class PropertyIndicatorController extends AdminController
                 $form->button('comparable_reference', __('Comparable Reference'))->disable()->attribute('id', 'show-comparable-reference-modal')->on('click', '$("#modal-comparable-reference").modal();');
             }
             $form->html(view('admin.property.property_appraisal_script'));
+
         });
         // Modal Comparable Reference
         Admin::html('
