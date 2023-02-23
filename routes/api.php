@@ -66,3 +66,6 @@ Route::get('pdfappraisal/{id}', [PdfAppraisalController::class, 'index']);
 Route::get('pdfindicator/{id}', [PdfIndicatorController::class, 'index']);
 
 Route::get('/qrcode', [QRCodeController::class, 'index']);
+
+// test
+Route::get('pdf', [PdfController::class, 'index']);
