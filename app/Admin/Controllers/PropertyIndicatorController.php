@@ -143,7 +143,7 @@ class PropertyIndicatorController extends AdminController
         $grid->column('comparable_cif_no1',__('CIF No./ Name'))->sortable();
         $grid->column('comparable_geo_code1',__('Geo Code'))->sortable();
         $grid->column('comparable_size',__('Size'))->sortable();
-        $grid->column('comparable_value_per_sqm1',__('Value Per Sq. m'))->sortable();
+        $grid->column('comparable_value_per_sqm1',__('Value Per Sqm'))->sortable();
         $grid->column('comparable_total_value1',__('Total Value'))->sortable();
         $grid->column('user_id',__('Created By'))->sortable()->display(function($id){
             $userName = UserAdmin::where('id', $id)->first();
@@ -208,7 +208,7 @@ class PropertyIndicatorController extends AdminController
 
             if (!User::isRmRole() || User::isRmRole() && $this->IsPropertyApproved) {
                 return '<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdfindicator/' . $id . '">Download</a>';
-            } 
+            }
         });
 
         $grid->quickSearch(function ($model, $query) {
@@ -485,13 +485,13 @@ class PropertyIndicatorController extends AdminController
             $form->text('comparable_cif_no1',__('CIF No./ Name'));
             $form->text('comparable_geo_code1',__('Geo Code'));
             $form->text('comparable_size1',__('Size'));
-            $form->text('comparable_value_per_sqm1',__('Value Per Sq. m'));
+            $form->text('comparable_value_per_sqm1',__('Value Per Sqm'));
             $form->text('comparable_total_value1',__('Total Value'));
             $form->text('comparable_id2',__('ID'));
             $form->text('comparable_cif_no2',__('CIF No./ Name'));
             $form->text('comparable_geo_code2',__('Geo Code'));
             $form->text('comparable_size2',__('Size'));
-            $form->text('comparable_value_per_sqm2',__('Value Per Sq. m'));
+            $form->text('comparable_value_per_sqm2',__('Value Per Sqm'));
             $form->text('comparable_total_value2',__('Total Value'));
             if (User::isVerifierRole() || User::isApproverRole() || User::isAdminRole()){
                 $form->button('comparable_reference', __('Comparable Reference'))->attribute('id', 'show-comparable-reference-modal')->on('click', '$("#modal-comparable-reference").modal();');
