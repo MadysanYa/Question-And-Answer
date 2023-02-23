@@ -146,7 +146,20 @@ class PropertyAppraisalController extends AdminController
             $userName = UserAdmin::where('id', $id)->first();
             return $userName->name ?? null;
         });
-
+        $grid->column('created_at',__('Created Date'))->filter('range', 'date')->display(function(){
+            if ($this->created_at) {
+                return date('d-M-Y', strtotime($this->created_at));
+            }
+        });
+        $grid->column('deleted_by',__('Deleted By'))->sortable()->display(function($id){
+            $userName = UserAdmin::where('id', $id)->first();
+            return $userName->name ?? null;
+        });
+        $grid->column('deleted_at',__('Deleted Date'))->filter('range', 'date')->display(function(){
+            if ($this->deleted_at) {
+                return date('d-M-Y', strtotime($this->deleted_at));
+            }
+        });
         // create btn with api
         $grid->column('is_verified',__('Verified'))->display(function($is_verified){
             if($is_verified == null) {
@@ -232,16 +245,11 @@ class PropertyAppraisalController extends AdminController
             });
         }
 
-        $grid->disableFilter();
+        // $grid->disableFilter();
         $grid->fixColumns(0, -4);
         $grid->filter(function($filter){
+            $filter->scope('trashed', 'Trash Bin')->onlyTrashed();
             $filter->disableIdFilter();
-            $filter->where(function ($query) {
-                $query->whereHas('user', function($q) {
-                    $q->where('name', 'like', "%{$this->input}%");
-                    $q->orWhere('id', 'like', "%{$this->input}%");
-                });
-            }, 'Created By');
         });
 
         return $grid;
