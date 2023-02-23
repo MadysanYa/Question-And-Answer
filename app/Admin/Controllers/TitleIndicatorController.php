@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Request;
 use Encore\Admin\Controllers\AdminController;
 
 
-class TitleIndicatorController extends AdminController 
+class TitleIndicatorController extends AdminController
 {
     /**
      * Title for current resource.
@@ -44,7 +44,7 @@ class TitleIndicatorController extends AdminController
             'latitude As lat',
             'longtitude As lng',
         ];
-        // Property Indication 
+        // Property Indication
         $fieldProIndication = [
             'id',
             'latitude',
@@ -75,7 +75,7 @@ class TitleIndicatorController extends AdminController
             'client_contact_no',
             'customer_name',
         ];
-        // Property Research 
+        // Property Research
         $fieldProResearch = [
             'id',
             'latitude',
@@ -134,7 +134,7 @@ class TitleIndicatorController extends AdminController
 
         //LatLong Property Indication
         $arryProperty = PropertyIndicator::select($latLong)->get()->toArray() ?? null;
-        
+
         //Labels on marker
         foreach($propertys as $value){
             $label = $value->land_title_type;
@@ -214,10 +214,10 @@ class TitleIndicatorController extends AdminController
             ]));
         }
         else{
-            $TitleIndicator->body(view('map.googleMapIndication', [
-                'arryProperty' => $arryProperty,
-                'arrayLabel' => $arrayLabel,
-                'infoProperty' => $infoProperty,
+            $TitleIndicator->body(view('map.googleMapPropertyResearch', [
+                'latLongProResearch' => $latLongProResearch,
+                'labelProResearch' => $labelProResearch,
+                'infoProResearch' => $infoProResearch
             ]));
         }
 
