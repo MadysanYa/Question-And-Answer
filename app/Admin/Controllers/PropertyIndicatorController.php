@@ -436,15 +436,18 @@ class PropertyIndicatorController extends AdminController
             })->placeholder('Reference No.');
             $form->select('location_type', __('Location Type'))->rules('required')->options(['Residential Area'=>'Residential Area', 'Commercial Area'=>'Commercial Area','Industrial Area'=>'Industrial Area','Agricultural Area'=>'Agricultural Area']);
             $form->select('type_of_access_road', __('Type of Access Road'))->rules('required')->options(['Boulevard'=>'Boulevard','National Road'=>'National Road', 'Paved Road'=>'Paved Road','Upaved Road'=>'Upaved Road','Alley Road'=>'Alley Road','No Road'=>'No Road']);
+            $form->image('front_photo',__('front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+            $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+            $form->image('right_photo',__('Access Road Photo Right'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+
+        });
+
+        $form->column(1/3, function ($form){
             $form->text('access_road_name', __('Access Road Name'))->rules('required');
             $form->select('property_type', __('Property Type'))->rules('required')->options(function(){
                 return PropertyType::all()->pluck('property_type_name','id');
             });
             $form->text('customer_name', __('Customer Name '))->rules('required');
-        });
-
-        $form->column(1/3, function ($form){
-            $form->html('<div style="height:105px"></div>');
             $form->text('building_status', __('Building Status (%)'))->rules('required')->attribute('maxlength', '3');
             $form->select('borey', __('Borey'))->rules('required')->options(function(){
                 return Borey::all()->pluck('borey_name', 'id');
@@ -455,15 +458,17 @@ class PropertyIndicatorController extends AdminController
             $form->text('land_size', __('Land Size (sqm)'))->rules('required');
             $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->currency('building_size', __('Building Size'))->rules('required')->attribute(['style' => 'width: 100%;']);
-            $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->placeholder('Value per Sqm (Part Building)')->rules('required')->attribute(['style' => 'width: 100%;']);
-            $form->currency('property_value', __('Property Value '))->rules('required')->attribute(['style' => 'width: 100%;']);
-            $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
-            $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 999 9999'])->rules('required')->attribute(['style' => 'width: 100%;']);
-            $form->text('remark', __('Remark'));
+            $form->image('left_photo',__('Access Road Photo Left'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
+            $form->image('title_front_photo',__('Title Photo Front'))->removable()->uniqueName()->placeholder('Title Photo')->rules('required|mimes:jpg,png,jpeg|max:2048');
+            $form->image('title_back_photo',__('Title Photo Back'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:2048');
+
         });
 
         $form->column(1/3, function ($form){
-            $form->html('<div style="height:105px"></div>');
+            $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->placeholder('Value per Sqm (Part Building)')->rules('required')->attribute(['style' => 'width: 100%;']);
+            $form->currency('property_value', __('Property Value '))->rules('required')->attribute(['style' => 'width: 100%;']);
+             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
+            $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 999 9999'])->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->select('province_id', __('Province'))->rules('required')->options(function(){
                 return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
 
@@ -477,16 +482,11 @@ class PropertyIndicatorController extends AdminController
                 return Village::all()->pluck('village_name','id');});
             $form->text('latitude', __('Latitude'))->placeholder('Geo Code')->inputmask(['mask' => '99.999999'])->rules('required');
             $form->text('longtitude', __('Longtitude'))->placeholder('Geo Code')->inputmask(['mask' => '999.999999'])->rules('required');
-            $form->image('front_photo',__('front Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
-            $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
-            $form->image('right_photo',__('Access Road Photo Right'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
-            $form->image('left_photo',__('Access Road Photo Left'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
-            $form->image('title_front_photo',__('Title Photo Front'))->removable()->uniqueName()->placeholder('Title Photo')->rules('required|mimes:jpg,png,jpeg|max:2048');
-            $form->image('title_back_photo',__('Title Photo Back'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:2048');
+            $form->text('remark', __('Remark'));
             $form->image('id_front_photo',__('ID Photo Front'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:2048');
             $form->image('id_back_photo',__('ID Photo Back'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:2048');
             $form->multipleFile('photos',__('Photos'))->removable()->uniqueName();//- >rules('required|mimes:jpg,png,jpeg|max:5000');
-            //
+
             $form->text('comparable_id1',__('ID'));
             $form->text('comparable_cif_no1',__('CIF No./ Name'));
             $form->text('comparable_geo_code1',__('Geo Code'));
