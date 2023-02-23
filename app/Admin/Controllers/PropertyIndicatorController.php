@@ -237,6 +237,15 @@ class PropertyIndicatorController extends AdminController
             });
         }
 
+        $grid->actions(function (Actions $actions) {
+            $userId = Auth::user()->id;
+            if (!User::isAdminRole()) {
+                if ($actions->row->IsPropertyApproved) {
+                    $actions->disableEdit();
+                }
+            } 
+        });
+
         // $grid->disableFilter();
         $grid->fixColumns(0, -4);
 		$grid->filter(function($filter){
@@ -385,6 +394,12 @@ class PropertyIndicatorController extends AdminController
             $userName = UserAdmin::where('id', $userId)->first();
             return $userName->name ?? null;
         });
+        
+        if (!User::isAdminRole() && $propertyIndicator->IsPropertyApproved) {
+            $show->panel()->tools(function ($tools) {
+                $tools->disableEdit();
+            });
+        }
 
         if (User::isBmRole()) {
             $show->panel()->tools(function ($tools) {
