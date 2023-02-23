@@ -253,6 +253,11 @@ class PropertyIndicatorController extends AdminController
 			$filter->disableIdFilter();
 		});
 
+        // Remove action from trash
+        if(request()->_scope_ == "trashed"){
+            $grid->disableActions();
+         }
+
         return $grid;
     }
 
