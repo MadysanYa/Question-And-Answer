@@ -225,6 +225,7 @@ class PropertyAppraisalController extends AdminController
         });
 
         if (User::isBmRole()) {
+            $grid->disableCreateButton();
             $grid->actions(function (Actions $actions) {
                 $actions->disableEdit();
             });
@@ -493,20 +494,24 @@ class PropertyAppraisalController extends AdminController
         $form = new Form(new PropertyAppraisal());
 
         $form->column(1/3,function($form){
+            if (User::isRmRole()) {
+                $form->select('region_id', __('Region'))->rules('required')->options(function(){
+                    return Region::all()->pluck('region_name', 'id');
+                });
+                $form->text(__('Branch'))->rules('required')->value(function(){
+                    return Branch::where('branch_code', Auth::user()->branch_code)->get()->value('branch_name');
+                })->disable();
+                $form->hidden('branch_code')->value(Auth::user()->branch_code);
+            } else {
+                $form->select('region_id', __('Region'))->rules('required')->options(function(){
+                    return Region::all()->pluck('region_name', 'id');
+                })->load('branch_code', env('APP_URL') . '/public/api/branch');
+                $form->select('branch_code',__('Branch'))->rules('required')->options(function(){
+                    return Branch::all()->pluck('branch_name','branch_code');
+                });
+            }
+
             $form->hidden('user_id')->value(Auth::user()->id);
-            $form->hidden('branch_code')->value(Auth::user()->branch_code);
-
-            $form->select('region_id', __('Region'))->rules('required')->options(function(){
-                return Region::all()->pluck('region_name', 'id');});
-
-            $form->text(__('Branch'))->rules('required')->value(function(){
-                return Branch::where('branch_code', Auth::user()->branch_code)->get()->value('branch_name');
-            })->disable();
-            
-            // $form->select('branch_code',__('Branch'))->rules('required')->options(function(){
-            //      return Branch::all()->pluck('branch_name','branch_code');
-            // });
-
             $form->date('requested_date', __('Requested Date'))->rules('required')->attribute(['style' => 'width: 100%;']);
             if (User::isVerifierRole() || User::isApproverRole() || User::isAdminRole()){
                 $form->date('reported_date',__('Reported Date'))->rules('required')->attribute(['style' => 'width: 100%;']);

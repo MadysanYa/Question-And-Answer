@@ -32,13 +32,17 @@ class UserAdminController extends AdminController
         $grid->model()->orderBy('id','desc');
 
         $grid->column('id', 'ID')->sortable();
-        $grid->column('username', 'Username');
-        $grid->column('name', 'Name');
-        $grid->column('roles', 'Roles')->pluck('name')->label();
-        $grid->column('created_at', 'Created At')->display(function(){
+        $grid->column('username', 'Username')->sortable();
+        $grid->column('name', 'Name')->sortable();
+        $grid->column('roles', 'Roles')->pluck('name')->label()->sortable();
+        $grid->column('branch_code',__('Branch'))->sortable()->Display(function($branch_code){
+            $branch = Branch::where('branch_code', $branch_code)->first();
+            return $branch->branch_name ?? '';
+        });
+        $grid->column('created_at', 'Created At')->sortable()->display(function(){
             return date('d-M-Y', strtotime($this->created_at));
         });
-        $grid->column('updated_at', 'Updated At')->display(function(){
+        $grid->column('updated_at', 'Updated At')->sortable()->display(function(){
             return date('d-M-Y', strtotime($this->updated_at));
         });
 
