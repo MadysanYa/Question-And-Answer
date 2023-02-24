@@ -63,13 +63,7 @@ class PropertyIndicatorController extends AdminController
 		$grid->column('property_reference', __('Reference'))->sortable();
         $grid->column('collateral_owner',__('Owner'))->sortable();
         $grid->column('information_type',__('Type'))->sortable();
-<<<<<<< HEAD
         $grid->column('longtitude',__('Geo Code'))->sortable();// longtitude just example for show Geo Code on grid!
-=======
-        $grid->column('Geo_Code')->sortable()->Display(function(){
-            return $this->latitude .' , '. $this->longtitude;
-        });// longtitude just example for show Geo Code on grid!
->>>>>>> 81f393ab15345aec4e9a62aa856942df85880e9d
         $grid->column('region_id',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){// add filter
             $region = Region::where('id', $id)->first();
             return $region->region_name ?? '';
@@ -249,15 +243,11 @@ class PropertyIndicatorController extends AdminController
                 if ($actions->row->IsPropertyApproved) {
                     $actions->disableEdit();
                 }
-<<<<<<< HEAD
                 // USER LOGIN NOT PROPERTY CREATOR OR USER LOGIN IS PROPERTY CREATOR BUT PROPERTY NOT REJECTED USER CAN'T DELETE
                 if ($actions->row->user_id != $userId || $actions->row->user_id == $userId && !$actions->row->IsPropertyRejected) {
                     $actions->disableDelete();
                 }
             } 
-=======
-            }
->>>>>>> 81f393ab15345aec4e9a62aa856942df85880e9d
         });
 
         // $grid->disableFilter();
@@ -420,7 +410,6 @@ class PropertyIndicatorController extends AdminController
             $userName = UserAdmin::where('id', $userId)->first();
             return $userName->name ?? null;
         });
-<<<<<<< HEAD
         
         if (!User::isAdminRole()) {
             $show->panel()->tools(function ($tools) use($propertyIndicator) {
@@ -435,12 +424,6 @@ class PropertyIndicatorController extends AdminController
                 if ($propertyIndicator->user_id != $userId || $propertyIndicator->user_id == $userId && !$propertyIndicator->IsPropertyRejected) {
                     $tools->disableDelete();
                 }
-=======
-
-        if (!User::isAdminRole() && $propertyIndicator->IsPropertyApproved) {
-            $show->panel()->tools(function ($tools) {
-                $tools->disableEdit();
->>>>>>> 81f393ab15345aec4e9a62aa856942df85880e9d
             });
         }
 
