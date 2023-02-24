@@ -55,17 +55,11 @@ Route::get('/approve_indicator/{id}/{value}', [PropertyIndicatorController::clas
 
 Route::get('/verify_appraisal/{id}/{value}', [PropertyAppraisalController::class,'verified']);
 Route::get('/approve_appraisal/{id}/{value}', [PropertyAppraisalController::class,'approved']);
-// Route::get('/print', [PdfController::class, 'print']);
-
-
-// API for PDF Generation
-Route::get('pdf', [PdfController::class, 'index']);
-Route::get('google-autocomplete', [GoogleController::class, 'index']);
-
 Route::get('pdfappraisal/{id}', [PdfAppraisalController::class, 'index']);
 Route::get('pdfindicator/{id}', [PdfIndicatorController::class, 'index']);
-
 Route::get('/qrcode', [QRCodeController::class, 'index']);
 
-// test
-Route::get('pdf', [PdfController::class, 'index']);
+// Route::get('/print', [PdfController::class, 'print']);
+// API for PDF Generation
+// Route::get('pdf', [PdfController::class, 'index']);
+// Route::get('google-autocomplete', [GoogleController::class, 'index']);
