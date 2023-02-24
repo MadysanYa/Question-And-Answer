@@ -261,7 +261,7 @@ class PropertyAppraisalController extends AdminController
                 if ($actions->row->user_id != $userId || $actions->row->user_id == $userId && !$actions->row->IsPropertyRejected) {
                     $actions->disableDelete();
                 }
-            } 
+            }
         });
 
         // $grid->disableFilter();
