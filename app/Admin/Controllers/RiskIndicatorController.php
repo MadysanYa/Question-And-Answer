@@ -108,6 +108,10 @@ class RiskIndicatorController extends AdminController
 
         });
 
+        $form->tools(function (Form\Tools $tools) {
+            $tools->disableView();
+        });
+
         $form->footer(function ($footer) {
 
             // disable reset btn
