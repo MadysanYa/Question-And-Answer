@@ -261,6 +261,18 @@ class PropertyIndicatorController extends AdminController
 			$filter->disableIdFilter();
 		});
 
+        // Remove action from trash
+        if(request()->_scope_ == "trashed"){
+            $grid->disableActions();
+            $grid->disableCreateButton();
+            $grid->column(__('To PDF'))->hide()->display(function(){
+                $id = $this->id;
+                if ($this->IsPropertyApproved || User::isAdminRole()) {
+                    return '<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdfindicator/' . $id . '">Download</a>';
+                }
+            });
+         }
+
         return $grid;
     }
 
@@ -553,6 +565,7 @@ class PropertyIndicatorController extends AdminController
                 $form->button('comparable_reference', __('Comparable Reference'))->disable()->attribute('id', 'show-comparable-reference-modal')->on('click', '$("#modal-comparable-reference").modal();');
             }
             $form->html(view('admin.property.property_appraisal_script'));
+
         });
         // Modal Comparable Reference
         Admin::html('
