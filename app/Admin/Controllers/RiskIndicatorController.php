@@ -31,6 +31,7 @@ class RiskIndicatorController extends AdminController
     public function index(Content $RiskIndicator)
     {
         $userIsRmRole = User::isRmRole();
+        $userIsBmRole = User::isBmRole();
 
         $RiskIndicator->header($this->title);
         // $RiskIndicator->body($this->dashboard());
@@ -73,7 +74,8 @@ class RiskIndicatorController extends AdminController
             'arryRiskProperty' => $arryRiskProperty,
             'arrayLabel' => $arrayLabel,
             'infoProperty' => $infoProperty,
-            'userIsRmRole' => $userIsRmRole
+            'userIsRmRole' => $userIsRmRole,
+            'userIsBmRole' => $userIsBmRole,
         ]));
 
         return $RiskIndicator;

@@ -16,7 +16,7 @@
         <div class="col-md-12">
             <div class="box grid-box">
                 <div class="box-header with-border">
-                    @if(!$userIsRmRole)
+                    @if(!($userIsRmRole && $userIsBmRole))
                         <div class="pull-right">
                             <div class="" style="display: flex;align-items: center;">
                                 <div class="btn-group pull-right grid-create-btn">
