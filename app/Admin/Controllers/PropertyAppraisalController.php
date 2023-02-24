@@ -66,7 +66,9 @@ class PropertyAppraisalController extends AdminController
             return $informationtype->information_type_name ?? '';
         });
 
-        $grid->column('longtitude',__('Geo Code'))->sortable();
+        $grid->column('Geo_Code')->sortable()->Display(function(){
+            return $this->latitude .' , '. $this->longtitude;
+        });
         $grid->column('region_id',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){// add filter
             $region = Region::where('id', $id)->first();
             return $region->region_name ?? '';
@@ -101,7 +103,7 @@ class PropertyAppraisalController extends AdminController
             $borey = Borey::where('id',$id)->first();
             return $borey->borey_name ?? '';
         });
-        $grid->column('no_of_floor',__('No. of floor'))->sortable();
+        $grid->column('no_of_floor',__('No. Of Floor'))->sortable();
         $grid->column('land_title_type',__('Land Titil Type'))->sortable();
         $grid->column('land_title_no',__('Lang Title No'))->sortable();
         $grid->column('land_size',__('Land Size'))->sortable();

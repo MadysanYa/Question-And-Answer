@@ -63,7 +63,9 @@ class PropertyIndicatorController extends AdminController
 		$grid->column('property_reference', __('Reference'))->sortable();
         $grid->column('collateral_owner',__('Owner'))->sortable();
         $grid->column('information_type',__('Type'))->sortable();
-        $grid->column('longtitude',__('Geo Code'))->sortable();// longtitude just example for show Geo Code on grid!
+        $grid->column('Geo_Code')->sortable()->Display(function(){
+            return $this->latitude .' , '. $this->longtitude;
+        });
         $grid->column('region_id',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){// add filter
             $region = Region::where('id', $id)->first();
             return $region->region_name ?? '';
@@ -105,7 +107,7 @@ class PropertyIndicatorController extends AdminController
             $borey = Borey::where('id',$id)->first();
             return $borey->borey_name ?? '';
         });
-        $grid->column('no_of_floor',__('No. of floor'))->sortable();
+        $grid->column('no_of_floor',__('No. Of Floor'))->sortable();
         $grid->column('land_title_type',__('Land Titil Type'))->sortable();
         $grid->column('land_title_no',__('Lang Title No'))->sortable();
         $grid->column('land_size',__('Land Size'))->sortable();
@@ -243,7 +245,7 @@ class PropertyIndicatorController extends AdminController
                 if ($actions->row->IsPropertyApproved) {
                     $actions->disableEdit();
                 }
-            } 
+            }
         });
 
         // $grid->disableFilter();
@@ -406,7 +408,7 @@ class PropertyIndicatorController extends AdminController
             $userName = UserAdmin::where('id', $userId)->first();
             return $userName->name ?? null;
         });
-        
+
         if (!User::isAdminRole() && $propertyIndicator->IsPropertyApproved) {
             $show->panel()->tools(function ($tools) {
                 $tools->disableEdit();

@@ -33,7 +33,7 @@ class CommuneController extends AdminController
 
         $grid->disableExport();
         $grid->disableFilter();
-        $grid->quickSearch('emp_id' , 'employee_name','pickup_number', 'remark','ext');
+        $grid->quickSearch('id' ,'commune_name');
 
         return $grid;
     }
