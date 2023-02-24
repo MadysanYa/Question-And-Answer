@@ -34,7 +34,7 @@ class DistrictController extends AdminController
 
         $grid->disableExport();
         $grid->disableFilter();
-        $grid->quickSearch('emp_id' , 'employee_name','pickup_number', 'remark','ext');
+        $grid->quickSearch('id' , 'district_name');
 
         return $grid;
     }

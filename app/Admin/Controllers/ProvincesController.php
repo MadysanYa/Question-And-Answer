@@ -32,7 +32,7 @@ class ProvincesController extends AdminController
 
         $grid->disableExport();
         $grid->disableFilter();
-        $grid->quickSearch('emp_id' , 'employee_name','pickup_number', 'remark','ext');
+        $grid->quickSearch('id','province_name');
 
         return $grid;
     }

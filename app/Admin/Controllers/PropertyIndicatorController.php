@@ -63,7 +63,9 @@ class PropertyIndicatorController extends AdminController
 		$grid->column('property_reference', __('Reference'))->sortable();
         $grid->column('collateral_owner',__('Owner'))->sortable();
         $grid->column('information_type',__('Type'))->sortable();
-        $grid->column('longtitude',__('Geo Code'))->sortable();// longtitude just example for show Geo Code on grid!
+        $grid->column('Geo_Code')->sortable()->Display(function(){
+            return $this->latitude .' , '. $this->longtitude;
+        });// longtitude just example for show Geo Code on grid!
         $grid->column('region_id',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){// add filter
             $region = Region::where('id', $id)->first();
             return $region->region_name ?? '';
@@ -229,7 +231,6 @@ class PropertyIndicatorController extends AdminController
             });
         });
 
-        // DISABLE BUTTON CREATE NEW, EDIT AND DELETE FOR USER HAS ROLE BM
         if (User::isBmRole()) {
             $grid->disableCreateButton();
             $grid->actions(function (Actions $actions) {
@@ -239,19 +240,12 @@ class PropertyIndicatorController extends AdminController
         }
 
         $grid->actions(function (Actions $actions) {
+            $userId = Auth::user()->id;
             if (!User::isAdminRole()) {
-                // USER LOGIN
-                $userId = Auth::user()->id;
-
-                // PROPERTY WAS APPROVED OR REJECTED USER CAN'T EDIT
-                if ($actions->row->IsPropertyApproved || $actions->row->IsPropertyRejected) {
+                if ($actions->row->IsPropertyApproved) {
                     $actions->disableEdit();
                 }
-                // USER LOGIN NOT PROPERTY CREATOR OR USER LOGIN IS PROPERTY CREATOR BUT PROPERTY NOT REJECTED USER CAN'T DELETE
-                if ($actions->row->user_id != $userId || $actions->row->user_id == $userId && !$actions->row->IsPropertyRejected) {
-                    $actions->disableDelete();
-                }
-            } 
+            }
         });
 
         // $grid->disableFilter();
@@ -414,24 +408,13 @@ class PropertyIndicatorController extends AdminController
             $userName = UserAdmin::where('id', $userId)->first();
             return $userName->name ?? null;
         });
-        
-        if (!User::isAdminRole()) {
-            $show->panel()->tools(function ($tools) use($propertyIndicator) {
-                // USER LOGIN
-                $userId = Auth::user()->id;
 
-                // PROPERTY WAS APPROVED OR REJECTED USER CAN'T EDIT
-                if ($propertyIndicator->IsPropertyApproved || $propertyIndicator->IsPropertyRejected) {
-                    $tools->disableEdit();
-                }
-                // USER LOGIN NOT PROPERTY CREATOR OR USER LOGIN IS PROPERTY CREATOR BUT PROPERTY NOT REJECTED USER CAN'T DELETE
-                if ($propertyIndicator->user_id != $userId || $propertyIndicator->user_id == $userId && !$propertyIndicator->IsPropertyRejected) {
-                    $tools->disableDelete();
-                }
+        if (!User::isAdminRole() && $propertyIndicator->IsPropertyApproved) {
+            $show->panel()->tools(function ($tools) {
+                $tools->disableEdit();
             });
         }
 
-        // DISABLE BUTTON CREATE NEW, EDIT AND DELETE FOR USER HAS ROLE BM
         if (User::isBmRole()) {
             $show->panel()->tools(function ($tools) {
                 $tools->disableEdit();
