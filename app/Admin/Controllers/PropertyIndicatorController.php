@@ -66,6 +66,7 @@ class PropertyIndicatorController extends AdminController
         $grid->column('Geo_Code')->sortable()->Display(function(){
             return $this->latitude .' , '. $this->longtitude;
         });// longtitude just example for show Geo Code on grid!
+
         $grid->column('region_id',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){// add filter
             $region = Region::where('id', $id)->first();
             return $region->region_name ?? '';
