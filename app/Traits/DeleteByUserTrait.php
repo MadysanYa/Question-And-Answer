@@ -10,13 +10,14 @@ trait DeleteByUserTrait
     {
         parent::boot();
 
-        // static::creating(function ($model) {
-        //     $model->created_by = Auth::User()->id;
-        // });
+        static::creating(function ($model) {
+            $model->created_by = Auth::User()->id;
+            // $model->save();
+        });
 
-        // static::updating(function ($model) {
-        //     $model->updated_by = Auth::User()->id;
-        // });
+        static::updating(function ($model) {
+            $model->updated_by = Auth::User()->id;
+        });
 
         // AUTO LOG USER DELETED RECORD
         static::deleting(function ($model) {

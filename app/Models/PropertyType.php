@@ -2,10 +2,14 @@
 
 namespace App\Models;
 use App\Models\PropertyIndicator;
+use App\Traits\DeleteByUserTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PropertyType extends Model
 {
+    use SoftDeletes;
+    use DeleteByUserTrait;
     /**
      * The table associated with the model.
      *
