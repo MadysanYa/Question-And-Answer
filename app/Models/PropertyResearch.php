@@ -5,12 +5,14 @@ use App\Models\Borey;
 use App\Models\UserAdmin;
 use App\Models\PropertyType;
 use App\Models\InformationType;
+use App\Traits\DeleteByUserTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PropertyResearch extends Model
 {
     use SoftDeletes;
+    use DeleteByUserTrait;
     
     /**
      * Relationship

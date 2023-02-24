@@ -46,8 +46,8 @@ class PropertyIndicatorObserver
     public function deleted(PropertyIndicator $propertyIndicator)
     {
         // AUTO LOG USER DELETED RECORD
-        $propertyIndicator->deleted_by = Auth::user()->id;
-        $propertyIndicator->save();
+        // $propertyIndicator->deleted_by = Auth::user()->id;
+        // $propertyIndicator->save();
     }
 
     /**

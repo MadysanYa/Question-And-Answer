@@ -46,8 +46,8 @@ class PropertyResearchObserver
     public function deleted(PropertyResearch $propertyResearch)
     {
         // AUTO LOG USER DELETED RECORD
-        $propertyResearch->deleted_by = Auth::user()->id;
-        $propertyResearch->save();
+        // $propertyResearch->deleted_by = Auth::user()->id;
+        // $propertyResearch->save();
     }
 
     /**

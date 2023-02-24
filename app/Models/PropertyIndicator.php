@@ -6,6 +6,7 @@ use App\Models\Branch;
 use App\Models\UserAdmin;
 use App\Models\PropertyType;
 use App\Models\InformationType;
+use App\Traits\DeleteByUserTrait;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class PropertyIndicator extends Model
 {
     use SoftDeletes;
+    use DeleteByUserTrait;
     
     protected $dates = ['requested_date','reported_date'];
     /**
