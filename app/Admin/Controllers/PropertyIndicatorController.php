@@ -229,14 +229,6 @@ class PropertyIndicatorController extends AdminController
             });
         });
 
-        if (User::isBmRole()) {
-            $grid->disableCreateButton();
-            $grid->actions(function (Actions $actions) {
-                $actions->disableEdit();
-                $actions->disableDelete();
-            });
-        }
-
         $grid->actions(function (Actions $actions) {
             $userId = Auth::user()->id;
             if (!User::isAdminRole()) {
@@ -250,6 +242,15 @@ class PropertyIndicatorController extends AdminController
             }
         });
 
+        // DISABLE BUTTON CREATE NEW, EDIT AND DELETE FOR USER HAS ROLE BM
+        if (User::isBmRole()) {
+            $grid->disableCreateButton();
+            $grid->actions(function (Actions $actions) {
+                $actions->disableEdit();
+                $actions->disableDelete();
+            });
+        }
+        
         // $grid->disableFilter();
         $grid->fixColumns(0, -4);
 		$grid->filter(function($filter){

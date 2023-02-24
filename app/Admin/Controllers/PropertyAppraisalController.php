@@ -239,15 +239,6 @@ class PropertyAppraisalController extends AdminController
             });
         });
 
-        // DISABLE BUTTON CREATE NEW, EDIT AND DELETE FOR USER HAS ROLE BM
-        if (User::isBmRole()) {
-            $grid->disableCreateButton();
-            $grid->actions(function (Actions $actions) {
-                $actions->disableEdit();
-                $actions->disableDelete();
-            });
-        }
-
         $grid->actions(function (Actions $actions) {
             if (!User::isAdminRole()) {
                 // USER LOGIN
@@ -263,6 +254,15 @@ class PropertyAppraisalController extends AdminController
                 }
             }
         });
+
+        // DISABLE BUTTON CREATE NEW, EDIT AND DELETE FOR USER HAS ROLE BM
+        if (User::isBmRole()) {
+            $grid->disableCreateButton();
+            $grid->actions(function (Actions $actions) {
+                $actions->disableEdit();
+                $actions->disableDelete();
+            });
+        }
 
         // $grid->disableFilter();
         $grid->fixColumns(0, -4);
