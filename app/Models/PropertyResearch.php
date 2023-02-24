@@ -52,17 +52,26 @@ class PropertyResearch extends Model
         $this->attributes['longtitude'] = trim($value,"_");
     }
 
-    // public function setPhotosAttribute($photos)
-    // {
-    //     if (is_array($photos)) {
-    //         $this->attributes['photos'] = json_encode($photos);
-    //     }
-    // }
+    /**
+     * Accessor
+     */
+    public function getIsPropertyApprovedAttribute()
+    {
+        if ($this->is_approved == 1) {
+            return true;
+        }
 
-    // public function getPhotosAttribute($photos)
-    // {
-    //     return json_decode($photos, true);  
-    // }
+        return false;
+    }
+
+    public function getIsPropertyRejectedAttribute($key)
+    {
+        if ($this->is_verified == 2 || $this->is_approved == 2) {
+            return true;
+        }
+
+        return false;
+    }
 
     public function verified(){
 

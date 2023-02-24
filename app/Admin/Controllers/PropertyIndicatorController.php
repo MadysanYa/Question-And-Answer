@@ -229,6 +229,7 @@ class PropertyIndicatorController extends AdminController
             });
         });
 
+        // DISABLE BUTTON CREATE NEW, EDIT AND DELETE FOR USER HAS ROLE BM
         if (User::isBmRole()) {
             $grid->disableCreateButton();
             $grid->actions(function (Actions $actions) {
@@ -238,10 +239,17 @@ class PropertyIndicatorController extends AdminController
         }
 
         $grid->actions(function (Actions $actions) {
-            $userId = Auth::user()->id;
             if (!User::isAdminRole()) {
-                if ($actions->row->IsPropertyApproved) {
+                // USER LOGIN
+                $userId = Auth::user()->id;
+
+                // PROPERTY WAS APPROVED OR REJECTED USER CAN'T EDIT
+                if ($actions->row->IsPropertyApproved || $actions->row->IsPropertyRejected) {
                     $actions->disableEdit();
+                }
+                // USER LOGIN NOT PROPERTY CREATOR OR USER LOGIN IS PROPERTY CREATOR BUT PROPERTY NOT REJECTED USER CAN'T DELETE
+                if ($actions->row->user_id != $userId || $actions->row->user_id == $userId && !$actions->row->IsPropertyRejected) {
+                    $actions->disableDelete();
                 }
             } 
         });
@@ -407,12 +415,23 @@ class PropertyIndicatorController extends AdminController
             return $userName->name ?? null;
         });
         
-        if (!User::isAdminRole() && $propertyIndicator->IsPropertyApproved) {
-            $show->panel()->tools(function ($tools) {
-                $tools->disableEdit();
+        if (!User::isAdminRole()) {
+            $show->panel()->tools(function ($tools) use($propertyIndicator) {
+                // USER LOGIN
+                $userId = Auth::user()->id;
+
+                // PROPERTY WAS APPROVED OR REJECTED USER CAN'T EDIT
+                if ($propertyIndicator->IsPropertyApproved || $propertyIndicator->IsPropertyRejected) {
+                    $tools->disableEdit();
+                }
+                // USER LOGIN NOT PROPERTY CREATOR OR USER LOGIN IS PROPERTY CREATOR BUT PROPERTY NOT REJECTED USER CAN'T DELETE
+                if ($propertyIndicator->user_id != $userId || $propertyIndicator->user_id == $userId && !$propertyIndicator->IsPropertyRejected) {
+                    $tools->disableDelete();
+                }
             });
         }
 
+        // DISABLE BUTTON CREATE NEW, EDIT AND DELETE FOR USER HAS ROLE BM
         if (User::isBmRole()) {
             $show->panel()->tools(function ($tools) {
                 $tools->disableEdit();
