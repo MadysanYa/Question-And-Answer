@@ -672,7 +672,7 @@
                     <td valign=top colspan=6 style='width:70pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center; line-height:normal'>
                             <span style='float: left; font-size:8.0pt; margin-top: 3px; margin-left: -6px !important'>$</span>
-                            <span style='margin-right: -45px; margin-top: 3px; float: right; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->BuildingTotalValuePerSqmFormat }}</span>
+                            <span style='margin-right: -30px; margin-top: 3px; float: right; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->BuildingTotalValuePerSqmFormat }}</span>
                         </p>
                     </td>
                 </tr>
@@ -764,7 +764,7 @@
                     <td valign=top colspan=6 style='width:70pt; border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0in 5.4pt 0in 5.4pt;height:13.05pt'>
                         <p class=MsoListParagraphCxSpLast align=center style='margin:0in;text-align: center; line-height:normal'>
                             <span style='float: left; font-size:8.0pt; margin-top: 3px; margin-left: -6px !important'>$</span>
-                            <span style='margin-right: -45px; margin-top: 3px; float: right; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->BuildingTotalValuePerSqmFormat }}</span>
+                            <span style='margin-right: -30px; margin-top: 3px; float: right; font-size:8.0pt; font-family:"OneShinhan Bold",sans-serif'>{{ $indicator->BuildingTotalValuePerSqmFormat }}</span>
                         </p>
                     </td>
                 </tr>
