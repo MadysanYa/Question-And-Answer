@@ -16,7 +16,7 @@
         <div class="col-md-12">
             <div class="box grid-box">
                 <div class="box-header with-border">
-                    @if(!$userIsRmRole)
+                    @if(!($userIsRmRole || $userIsBmRole))
                         <div class="pull-right">
                             <div class="" style="display: flex;align-items: center;">
                                 <div class="btn-group pull-right grid-create-btn">
@@ -56,6 +56,7 @@
             const labels = {{ Js::from($arrayLabel) }};
             const riskProperty = {{ Js::from($infoProperty)}};
             const userIsRmRole = {{ Js::from($userIsRmRole)}};
+            const userIsBmRole = {{ Js::from($userIsBmRole)}};
             var icons = '../imges/marker_icon/properties_risk.png';
 
             for (i = 0; i < locations.length; i++) {
@@ -65,7 +66,7 @@
                     map: map,
                     icon:icons,
                 });
-                if(userIsRmRole){
+                if(userIsRmRole || userIsBmRole){
                     google.maps.event.addListener(marker, 'click', (function(marker, i) {
                         return function() {
                         infowindow.setContent(
