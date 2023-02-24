@@ -237,6 +237,7 @@ class PropertyAppraisalController extends AdminController
             });
         });
 
+        // DISABLE BUTTON CREATE NEW, EDIT AND DELETE FOR USER HAS ROLE BM
         if (User::isBmRole()) {
             $grid->disableCreateButton();
             $grid->actions(function (Actions $actions) {
@@ -244,6 +245,22 @@ class PropertyAppraisalController extends AdminController
                 $actions->disableDelete();
             });
         }
+
+        $grid->actions(function (Actions $actions) {
+            if (!User::isAdminRole()) {
+                // USER LOGIN
+                $userId = Auth::user()->id;
+
+                // PROPERTY WAS APPROVED OR REJECTED USER CAN'T EDIT
+                if ($actions->row->IsPropertyApproved || $actions->row->IsPropertyRejected) {
+                    $actions->disableEdit();
+                }
+                // USER LOGIN NOT PROPERTY CREATOR OR USER LOGIN IS PROPERTY CREATOR BUT PROPERTY NOT REJECTED USER CAN'T DELETE
+                if ($actions->row->user_id != $userId || $actions->row->user_id == $userId && !$actions->row->IsPropertyRejected) {
+                    $actions->disableDelete();
+                }
+            } 
+        });
 
         // $grid->disableFilter();
         $grid->fixColumns(0, -4);
@@ -333,7 +350,8 @@ class PropertyAppraisalController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(PropertyAppraisal::findOrFail($id));
+        $propertyAppraisal = PropertyAppraisal::findOrFail($id);
+        $show = new Show($propertyAppraisal);
 
         $show->field('property_reference',__('Reference'));
         $show->field('collateral_owner',__('Collateral Owner '));
@@ -416,6 +434,23 @@ class PropertyAppraisalController extends AdminController
             return $userName->name ?? null;
         });
 
+        if (!User::isAdminRole()) {
+            $show->panel()->tools(function ($tools) use($propertyAppraisal) {
+                // USER LOGIN
+                $userId = Auth::user()->id;
+
+                // PROPERTY WAS APPROVED OR REJECTED USER CAN'T EDIT
+                if ($propertyAppraisal->IsPropertyApproved || $propertyAppraisal->IsPropertyRejected) {
+                    $tools->disableEdit();
+                }
+                // USER LOGIN NOT PROPERTY CREATOR OR USER LOGIN IS PROPERTY CREATOR BUT PROPERTY NOT REJECTED USER CAN'T DELETE
+                if ($propertyAppraisal->user_id != $userId || $propertyAppraisal->user_id == $userId && !$propertyAppraisal->IsPropertyRejected) {
+                    $tools->disableDelete();
+                }
+            });
+        }
+
+        // DISABLE BUTTON CREATE NEW, EDIT AND DELETE FOR USER HAS ROLE BM
         if (User::isBmRole()) {
             $show->panel()->tools(function ($tools) {
                 $tools->disableEdit();
