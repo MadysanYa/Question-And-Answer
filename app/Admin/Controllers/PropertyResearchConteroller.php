@@ -197,6 +197,7 @@ class PropertyResearchConteroller extends AdminController
             });
         });
 
+        // DISABLE BUTTON CREATE NEW, EDIT AND DELETE FOR USER HAS ROLE BM
         if (User::isBmRole()) {
             $grid->disableCreateButton();
             $grid->actions(function (Actions $actions) {
@@ -204,6 +205,22 @@ class PropertyResearchConteroller extends AdminController
                 $actions->disableDelete();
             });
         }
+
+        $grid->actions(function (Actions $actions) {
+            if (!User::isAdminRole()) {
+                // USER LOGIN
+                $userId = Auth::user()->id;
+
+                // PROPERTY WAS APPROVED OR REJECTED USER CAN'T EDIT
+                if ($actions->row->IsPropertyApproved || $actions->row->IsPropertyRejected) {
+                    $actions->disableEdit();
+                }
+                // USER LOGIN NOT PROPERTY CREATOR OR USER LOGIN IS PROPERTY CREATOR BUT PROPERTY NOT REJECTED USER CAN'T DELETE
+                if ($actions->row->user_id != $userId || $actions->row->user_id == $userId && !$actions->row->IsPropertyRejected) {
+                    $actions->disableDelete();
+                }
+            } 
+        });
 
         // $grid->disableFilter();
         $grid->fixColumns(0, -3);
@@ -283,7 +300,9 @@ class PropertyResearchConteroller extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show( PropertyResearch::findOrFail($id));
+        $propertyResearch = PropertyResearch::findOrFail($id);
+        $show = new Show($propertyResearch);
+
         $show->field('information_type',__('Information Type'))->as(function($id){
             $informationtype = InformationType::where('id', $id)->first();
             return  $informationtype->information_type_name;
@@ -335,6 +354,23 @@ class PropertyResearchConteroller extends AdminController
             return $userName->name ?? null;
         });
 
+        if (!User::isAdminRole()) {
+            $show->panel()->tools(function ($tools) use($propertyResearch) {
+                // USER LOGIN
+                $userId = Auth::user()->id;
+
+                // PROPERTY WAS APPROVED OR REJECTED USER CAN'T EDIT
+                if ($propertyResearch->IsPropertyApproved || $propertyResearch->IsPropertyRejected) {
+                    $tools->disableEdit();
+                }
+                // USER LOGIN NOT PROPERTY CREATOR OR USER LOGIN IS PROPERTY CREATOR BUT PROPERTY NOT REJECTED USER CAN'T DELETE
+                if ($propertyResearch->user_id != $userId || $propertyResearch->user_id == $userId && !$propertyResearch->IsPropertyRejected) {
+                    $tools->disableDelete();
+                }
+            });
+        }
+
+        // DISABLE BUTTON CREATE NEW, EDIT AND DELETE FOR USER HAS ROLE BM
         if (User::isBmRole()) {
             $show->panel()->tools(function ($tools) {
                 $tools->disableEdit();
