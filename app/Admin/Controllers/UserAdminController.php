@@ -33,10 +33,15 @@ class UserAdminController extends AdminController
         $grid->model()->orderBy('id','desc');
 
         $grid->column('id', 'ID')->sortable();
-        $grid->column('avatar', 'Avatar')->sortable()->image(Env('APP_URL').'/public/upload/',60, 60);
+        $grid->column('avatar', 'Avatar')->sortable()->image(Env('APP_URL').'/public/upload/', 60, 60);
         $grid->column('username', 'Username')->sortable();
         $grid->column('name', 'Name')->sortable();
-        $grid->column('roles', 'Roles')->pluck('name')->label()->sortable();
+        $grid->column('roles', 'Roles')->display(function () {
+            $roleModel = config('admin.database.roles_model');
+            return $roleModel::join('admin_role_users', 'admin_roles.id', '=', 'admin_role_users.role_id')
+                            ->where('admin_role_users.user_id', $this->id)
+                            ->pluck('name');
+        })->label('primary');
         $grid->column('branch_code',__('Branch'))->sortable()->Display(function($branch_code){
             $branch = Branch::where('branch_code', $branch_code)->first();
             return $branch->branch_name ?? '';
