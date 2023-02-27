@@ -139,15 +139,20 @@ class PropertyAppraisalController extends AdminController
                 return date('d-M-Y', strtotime($this->created_at));
             }
         });
-        $grid->column('deleted_by',__('Deleted By'))->sortable()->display(function($id){
-            $userName = UserAdmin::where('id', $id)->first();
-            return $userName->name ?? null;
-        });
-        $grid->column('deleted_at',__('Deleted Date'))->filter('range', 'date')->display(function(){
-            if ($this->deleted_at) {
-                return date('d-M-Y', strtotime($this->deleted_at));
-            }
-        });
+
+        // Show in trash only
+        if(request()->_scope_ == "trashed"){
+            $grid->column('deleted_by',__('Deleted By'))->sortable()->display(function($id){
+                $userName = UserAdmin::where('id', $id)->first();
+                return $userName->name ?? null;
+            });
+            $grid->column('deleted_at',__('Deleted Date'))->filter('range', 'date')->display(function(){
+                if ($this->deleted_at) {
+                    return date('d-M-Y', strtotime($this->deleted_at));
+                }
+            });
+        }
+        
         // create btn with api
         $grid->column('is_verified',__('Verified'))->display(function($is_verified){
             if($is_verified == null) {
