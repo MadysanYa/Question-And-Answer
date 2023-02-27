@@ -62,6 +62,10 @@ class PropertyIndicatorController extends AdminController
         $grid->column('id', __('No.'))->asc()->sortable();
 		$grid->column('property_reference', __('Reference'))->sortable();
         $grid->column('collateral_owner',__('Collateral Owner'))->sortable();
+        $grid->column('information_type',__('Information Type'))->sortable()->Display(function($id){
+            $informationtype = InformationType::where('id',$id)->first();
+            return $informationtype->information_type_name ?? '';
+        });
         $grid->column('region_id',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){// add filter
             $region = Region::where('id', $id)->first();
             return $region->region_name ?? '';
@@ -77,20 +81,16 @@ class PropertyIndicatorController extends AdminController
                 return date('d-M-Y', strtotime($this->requested_date));
             }
         });
-        if (User::isVerifierRole() || User::isApproverRole()){
-            $grid->column('reported_date',__('Reported Date'))->filter('range', 'date')->display(function(){
-                if ($this->reported_date) {
-                    return date('d-M-Y', strtotime($this->reported_date));
-                }
-            });
-        }
+
+        $grid->column('reported_date',__('Reported Date'))->filter('range', 'date')->display(function(){
+            if ($this->reported_date) {
+                 return date('d-M-Y', strtotime($this->reported_date));
+            }
+        });
+
         $grid->column('cif_no',__('CIF No.'))->sortable();
         $grid->column('rm_name',__('RM Name'))->sortable();
         $grid->column('telephone',__('Telephone'))->sortable();
-        $grid->column('information_type',__('Information Type'))->sortable()->Display(function($id){
-            $informationtype = InformationType::where('id',$id)->first();
-            return $informationtype->information_type_name ?? '';
-        });
         $grid->column('location_type',__('Location Type'))->sortable();
         $grid->column('type_of_access_road',__('Type of Access Road'))->sortable();
         $grid->column('access_road_name',__('Access Road Name'))->sortable();
