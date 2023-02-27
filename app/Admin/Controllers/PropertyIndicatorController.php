@@ -61,9 +61,7 @@ class PropertyIndicatorController extends AdminController
 
         $grid->column('id', __('No.'))->asc()->sortable();
 		$grid->column('property_reference', __('Reference'))->sortable();
-        $grid->column('collateral_owner',__('Owner'))->sortable();
-        $grid->column('information_type',__('Type'))->sortable();
-        $grid->column('longtitude',__('Geo Code'))->sortable();// longtitude just example for show Geo Code on grid!
+        $grid->column('collateral_owner',__('Collateral Owner'))->sortable();
         $grid->column('region_id',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){// add filter
             $region = Region::where('id', $id)->first();
             return $region->region_name ?? '';
@@ -134,7 +132,7 @@ class PropertyIndicatorController extends AdminController
         $grid->column('latitude',__('Latitude'))->sortable();
         $grid->column('longtitude',__('Longtitude'))->sortable();
         $grid->column('remark',__('Remark'))->sortable();
-        
+
         $grid->column('user_id',__('Created By'))->sortable()->display(function($id){
             $userName = UserAdmin::where('id', $id)->first();
             return $userName->name ?? null;
@@ -519,7 +517,7 @@ class PropertyIndicatorController extends AdminController
         $form->column(1/3, function ($form){
             $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->placeholder('Value per Sqm (Part Building)')->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->currency('property_value', __('Property Value '))->rules('required')->attribute(['style' => 'width: 100%;']);
-             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
+            $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
             $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 999 9999'])->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->select('province_id', __('Province'))->rules('required')->options(function(){
                 return Province::all()->pluck('province_name','id');})->load('district_id', env('APP_URL') . '/public/api/district');
