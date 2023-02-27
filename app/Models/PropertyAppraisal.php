@@ -15,10 +15,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PropertyAppraisal extends Model
-{ 
+{
     use SoftDeletes;
     use DeleteByUserTrait;
-    
+
     protected $dates = ['requested_date','reported_date'];
     /**
      * Relationship
@@ -67,7 +67,7 @@ class PropertyAppraisal extends Model
         return $query->get()->count();
     }
 
-    public function scopeQueryPropertyAppraisalGrid($query) 
+    public function scopeQueryPropertyAppraisalGrid($query)
     {
         $userLogin = Auth::user();
 
@@ -94,13 +94,13 @@ class PropertyAppraisal extends Model
     {
         return json_decode($frontphoto, true);
     }
-    
-    public function getBranchNameAttribute() 
+
+    public function getBranchNameAttribute()
     {
         return optional($this->branchCode)->branch_name;
     }
 
-    public function getRmNamePhoneAttribute() 
+    public function getRmNamePhoneAttribute()
     {
         return $this->rm_name.' / '.$this->telephone;
     }
@@ -202,12 +202,12 @@ class PropertyAppraisal extends Model
 
     public function getComparableTotalValueOneFormatAttribute()
     {
-        return number_format($this->comparable_total_value1, 2); 
+        return number_format($this->comparable_total_value1, 2);
     }
 
     public function getComparableTotalValueTwoFormatAttribute()
     {
-        return number_format($this->comparable_total_value2, 2); 
+        return number_format($this->comparable_total_value2, 2);
     }
 
     public function getAppraisalCertificateFeeFormatAttribute()
@@ -253,6 +253,15 @@ class PropertyAppraisal extends Model
         return false;
     }
 
+    public function getIsPropertyVerifiedOrApprovedAttribute()
+    {
+        if ($this->is_verified == 1 || $this->is_approved == 1) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function getIsPropertyRejectedAttribute($key)
     {
         if ($this->is_verified == 2 || $this->is_approved == 2) {
@@ -287,6 +296,21 @@ class PropertyAppraisal extends Model
     public function setLongtitudeAttribute($value)
     {
         $this->attributes['longtitude'] = trim($value,"_");
+    }
+
+    public function setCifNoAttribute($value)
+    {
+        $this->attributes['cif_no'] = trim($value,"_");
+    }
+
+    public function setTelephoneAttribute($value)
+    {
+        $this->attributes['telephone'] = trim($value,"_");
+    }
+
+    public function setClientContactNoAttribute($value)
+    {
+        $this->attributes['client_contact_no'] = trim($value,"_");
     }
 
     public function verified(){

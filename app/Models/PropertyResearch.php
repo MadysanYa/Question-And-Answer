@@ -13,7 +13,7 @@ class PropertyResearch extends Model
 {
     use SoftDeletes;
     use DeleteByUserTrait;
-    
+
     /**
      * Relationship
      */
@@ -54,12 +54,26 @@ class PropertyResearch extends Model
         $this->attributes['longtitude'] = trim($value,"_");
     }
 
+    public function setContactNoAttribute($value)
+    {
+        $this->attributes['contact_no'] = trim($value,"_");
+    }
+
     /**
      * Accessor
      */
     public function getIsPropertyApprovedAttribute()
     {
         if ($this->is_approved == 1) {
+            return true;
+        }
+
+        return false;
+    }
+    
+    public function getIsPropertyVerifiedOrApprovedAttribute()
+    {
+        if ($this->is_verified == 1 || $this->is_approved == 1) {
             return true;
         }
 
@@ -78,7 +92,7 @@ class PropertyResearch extends Model
     public function verified(){
 
     }
-    
+
     public function approved(){
 
     }
