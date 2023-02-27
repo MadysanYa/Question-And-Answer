@@ -133,17 +133,7 @@ class PropertyAppraisalController extends AdminController
         $grid->column('longtitude',__('Longtitude'))->sortable();
         //$grid->column('property_address', __('Property Address'));
         $grid->column('remark',__('Remark'))->sortable();
-        $grid->column('strength',__('Strength'))->sortable();
-        $grid->column('weakness',__('Weakness'))->sortable();
-        $grid->column('opportunity',__('Opportunity'))->sortable();
-        $grid->column('threat',__('Threat'))->sortable();
-        $grid->column('comparable_id1',__('ID'))->sortable();
-        $grid->column('comparable_cif_no1',__('CIF No./ Name'))->sortable();
-        $grid->column('comparable_distance1',__('Distance'))->sortable();
-        $grid->column('comparable_geo_code1',__('Geo Code'))->sortable();
-        $grid->column('comparable_size1',__('Size'))->sortable();
-        $grid->column('comparable_value_per_sqm1',__('Value per sqm'))->sortable();
-        $grid->column('comparable_total_value1',__('Total Value'))->sortable();
+
         $grid->column('user_id',__('Created By'))->sortable()->display(function($id){
             $userName = UserAdmin::where('id', $id)->first();
             return $userName->name ?? null;

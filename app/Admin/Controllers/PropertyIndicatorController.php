@@ -134,12 +134,7 @@ class PropertyIndicatorController extends AdminController
         $grid->column('latitude',__('Latitude'))->sortable();
         $grid->column('longtitude',__('Longtitude'))->sortable();
         $grid->column('remark',__('Remark'))->sortable();
-        $grid->column('comparable_id1',__('ID'))->sortable();
-        $grid->column('comparable_cif_no1',__('CIF No./ Name'))->sortable();
-        $grid->column('comparable_geo_code1',__('Geo Code'))->sortable();
-        $grid->column('comparable_size',__('Size'))->sortable();
-        $grid->column('comparable_value_per_sqm1',__('Value Per Sqm'))->sortable();
-        $grid->column('comparable_total_value1',__('Total Value'))->sortable();
+        
         $grid->column('user_id',__('Created By'))->sortable()->display(function($id){
             $userName = UserAdmin::where('id', $id)->first();
             return $userName->name ?? null;
@@ -250,7 +245,7 @@ class PropertyIndicatorController extends AdminController
                 $actions->disableDelete();
             });
         }
-        
+
         // $grid->disableFilter();
         $grid->fixColumns(0, -4);
 		$grid->filter(function($filter){
