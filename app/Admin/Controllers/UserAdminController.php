@@ -11,6 +11,7 @@ use App\Models\UserAdmin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Encore\Admin\Controllers\AdminController;
+use Illuminate\Support\Env;
 
 class UserAdminController extends AdminController
 {
@@ -32,6 +33,7 @@ class UserAdminController extends AdminController
         $grid->model()->orderBy('id','desc');
 
         $grid->column('id', 'ID')->sortable();
+        $grid->column('avatar', 'Avatar')->sortable()->image(Env('APP_URL').'/public/upload/',60, 60);
         $grid->column('username', 'Username')->sortable();
         $grid->column('name', 'Name')->sortable();
         $grid->column('roles', 'Roles')->pluck('name')->label()->sortable();
