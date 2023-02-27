@@ -209,13 +209,15 @@ class PropertyAppraisalController extends AdminController
         });
 
         // // Export to PDF
-        $grid->column(__('To PDF'))->display(function(){
-            $id = $this->id;
+        if(request()->_scope_ != "trashed"){
+            $grid->column(__('To PDF'))->display(function(){
+                $id = $this->id;
 
-            if ($this->IsPropertyApproved || User::isAdminRole()) {
-                return '<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdfappraisal/' . $id . '" target="_blank">Download</a>';
-            }
-        });
+                if ($this->IsPropertyApproved || User::isAdminRole()) {
+                    return '<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdfappraisal/' . $id . '" target="_blank">Download</a>';
+                }
+            });
+        }
 
         // $grid->column('report_date', __('Report Date'));
         $grid->quickSearch(function ($model, $query) {
@@ -256,6 +258,7 @@ class PropertyAppraisalController extends AdminController
         }
 
         // $grid->disableFilter();
+        $grid->paginate(10);
         $grid->fixColumns(0, -4);
         $grid->filter(function($filter){
             $filter->scope('trashed', 'Trash Bin')->onlyTrashed();
@@ -266,12 +269,6 @@ class PropertyAppraisalController extends AdminController
         if(request()->_scope_ == "trashed"){
             $grid->disableActions();
             $grid->disableCreateButton();
-            $grid->column(__('To PDF'))->hide()->display(function(){
-                $id = $this->id;
-                if ($this->IsPropertyApproved || User::isAdminRole()) {
-                    return '<a target="_blank" class="btn btn-primary" href="' .env('APP_URL') . '/public/api/pdfappraisal/' . $id . '" target="_blank">Download</a>';
-                }
-            });
          }
 
         return $grid;

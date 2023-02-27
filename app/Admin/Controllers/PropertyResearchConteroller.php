@@ -229,7 +229,8 @@ class PropertyResearchConteroller extends AdminController
         }
 
         // $grid->disableFilter();
-        $grid->fixColumns(0, -3);
+        $grid->paginate(10);
+        $grid->fixColumns(0, -4);
 		$grid->filter(function($filter){
             $filter->scope('trashed', 'Trash Bin')->onlyTrashed();
 			$filter->disableIdFilter();
@@ -240,8 +241,6 @@ class PropertyResearchConteroller extends AdminController
             $grid->disableActions();
             $grid->disableCreateButton();
          }
-
-        // $grid->setActionClass(ContextMenuActions::class);
 
         return $grid;
     }
