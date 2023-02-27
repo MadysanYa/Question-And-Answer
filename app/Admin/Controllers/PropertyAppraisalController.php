@@ -154,7 +154,7 @@ class PropertyAppraisalController extends AdminController
                 }
             });
         }
-        
+
         // create btn with api
         $grid->column('is_verified',__('Verified'))->display(function($is_verified){
             if($is_verified == null) {
@@ -381,7 +381,7 @@ class PropertyAppraisalController extends AdminController
             return $borey->borey_name;
         }) ;
         $show->field('no_of_floor', __('No Of Floor'))->sortable();
-        $show->field('appraisal_certificate_fee',__('Appraisal Certificate Fee'))->sortbale();
+        $show->field('appraisal_certificate_fee',__('Appraisal Certificate Fee'))->sortable();
         $show->field('land_title_type', __('Land Title Type'))->sortable();
         $show->field('land_title_no', __('Land title no'))->sortable();
         $show->field('land_size', __('Land_size'))->sortable();
