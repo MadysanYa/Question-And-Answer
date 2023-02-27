@@ -60,7 +60,7 @@ class PropertyAppraisalController extends AdminController
 
         $grid->column('id', __('No.'))->asc()->sortable();
         $grid->column('property_reference', __('Property Reference'))->sortable();
-        $grid->column('collateral_owner', __('Collateral Owner'))->sortable();
+        $grid->column('collateral_owner', __('Collateral Owner'))->sortable()->limit(15);
         $grid->column('information_type',__('Information Type'))->sortable()->Display(function($id){
             $informationtype = InformationType::where('id',$id)->first();
             return $informationtype->information_type_name ?? '';
@@ -85,11 +85,11 @@ class PropertyAppraisalController extends AdminController
             }
         });
         $grid->column('cif_no',__('CIF No.'))->sortable();
-        $grid->column('rm_name',__('RM Name'))->sortable();
+        $grid->column('rm_name',__('RM Name'))->sortable()->limit(15);
         $grid->column('telephone',__('Telephone'))->sortable();
         $grid->column('location_type',__('Location Type'));
         $grid->column('type_of_access_road',__('Type of Access Road'))->sortable();
-        $grid->column('access_road_name',__('Access Road Name'))->sortable();
+        $grid->column('access_road_name',__('Access Road Name'))->sortable()->limit(15);
         $grid->column('property_type',__('Property Type'))->sortable()->Display(function($id){
             $propertytype = PropertyType::where('id',$id)->first();
             return $propertytype->property_type_name ?? '';
@@ -128,7 +128,7 @@ class PropertyAppraisalController extends AdminController
         $grid->column('latitude',__('Latitude'))->sortable();
         $grid->column('longtitude',__('Longtitude'))->sortable();
         //$grid->column('property_address', __('Property Address'));
-        $grid->column('remark',__('Remark'))->sortable();
+        $grid->column('remark',__('Remark'))->sortable()->limit(15);
 
         $grid->column('user_id',__('Created By'))->sortable()->display(function($id){
             $userName = UserAdmin::where('id', $id)->first();
