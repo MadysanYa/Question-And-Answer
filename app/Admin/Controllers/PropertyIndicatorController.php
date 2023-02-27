@@ -340,6 +340,10 @@ class PropertyIndicatorController extends AdminController
 
         $show->field('property_reference',__('Property Reference'));
         $show->field('collateral_owner',__('Collateral Owner '));
+        $show->field('information_type',__('Information Type'))->as(function($id){
+            $informationtype = InformationType::where('id', $id)->first();
+            return  $informationtype->information_type_name;
+        });
         $show->field('region_id', __('Region'))->as(function($region){
             $region = Region::where('id', $region)->first();
             if($region == null) return '';
@@ -355,10 +359,6 @@ class PropertyIndicatorController extends AdminController
         $show->field('cif_no',__('CIF No.'));
         $show->field('rm_name',__('RM Name'));
         $show->field('telephone',__('Telephone'));
-        $show->field('information_type',__('Information Type'))->as(function($id){
-            $informationtype = InformationType::where('id', $id)->first();
-            return  $informationtype->information_type_name;
-        });
         $show->field('location_type',__('Location Type'));
         $show->field('type_of_access_road',__('Type of Access Road'));
         $show->field('access_road_name',__('Access Road Name'));
