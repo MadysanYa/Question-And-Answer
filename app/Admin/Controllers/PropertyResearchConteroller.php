@@ -202,8 +202,8 @@ class PropertyResearchConteroller extends AdminController
                 // USER LOGIN
                 $userId = Auth::user()->id;
 
-                // PROPERTY WAS APPROVED OR REJECTED USER CAN'T EDIT
-                if ($actions->row->IsPropertyApproved || $actions->row->IsPropertyRejected) {
+                // PROPERTY WAS VERIFIED OR APPROVED OR REJECTED USER CAN'T EDIT
+                if ($actions->row->IsPropertyVerifiedOrApproved || $actions->row->IsPropertyRejected) {
                     $actions->disableEdit();
                 }
                 // USER LOGIN NOT PROPERTY CREATOR OR USER LOGIN IS PROPERTY CREATOR BUT PROPERTY NOT REJECTED USER CAN'T DELETE
@@ -365,8 +365,8 @@ class PropertyResearchConteroller extends AdminController
                 // USER LOGIN
                 $userId = Auth::user()->id;
 
-                // PROPERTY WAS APPROVED OR REJECTED USER CAN'T EDIT
-                if ($propertyResearch->IsPropertyApproved || $propertyResearch->IsPropertyRejected) {
+                // PROPERTY WAS VERIFIED OR APPROVED OR REJECTED USER CAN'T EDIT
+                if ($propertyResearch->IsPropertyVerifiedOrApproved || $propertyResearch->IsPropertyRejected) {
                     $tools->disableEdit();
                 }
                 // USER LOGIN NOT PROPERTY CREATOR OR USER LOGIN IS PROPERTY CREATOR BUT PROPERTY NOT REJECTED USER CAN'T DELETE
