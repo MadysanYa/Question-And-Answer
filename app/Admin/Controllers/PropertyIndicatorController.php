@@ -60,7 +60,7 @@ class PropertyIndicatorController extends AdminController
 		$grid->model()->orderBy('id','desc');
 
         $grid->column('id', __('No.'))->asc()->sortable();
-		$grid->column('property_reference', __('Reference'))->sortable();
+		$grid->column('property_reference', __('Property Reference'))->sortable();
         $grid->column('collateral_owner',__('Collateral Owner'))->sortable();
         $grid->column('information_type',__('Information Type'))->sortable()->Display(function($id){
             $informationtype = InformationType::where('id',$id)->first();
@@ -338,7 +338,7 @@ class PropertyIndicatorController extends AdminController
         $propertyIndicator = PropertyIndicator::findOrFail($id);
         $show = new Show($propertyIndicator);
 
-        $show->field('property_reference',__('Reference'));
+        $show->field('property_reference',__('Property Reference'));
         $show->field('collateral_owner',__('Collateral Owner '));
         $show->field('region_id', __('Region'))->as(function($region){
             $region = Region::where('id', $region)->first();
