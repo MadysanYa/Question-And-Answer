@@ -60,9 +60,15 @@ class PropertyIndicatorController extends AdminController
 		$grid->model()->orderBy('id','desc');
 
         $grid->column('id', __('No.'))->asc()->sortable();
+<<<<<<< HEAD
 		$grid->column('property_reference', __('Reference'))->sortable()->style('max-width: 150px; content-visibility: auto;');
         $grid->column('collateral_owner',__('Collateral Owner'))->sortable()->style('max-width: 150px; content-visibility: auto;');
         $grid->column('information_type',__('Information Type'))->sortable()->style('max-width: 150px; content-visibility: auto;')->Display(function($id){
+=======
+		$grid->column('property_reference', __('Property Reference'))->sortable();
+        $grid->column('collateral_owner',__('Collateral Owner'))->sortable();
+        $grid->column('information_type',__('Information Type'))->sortable()->Display(function($id){
+>>>>>>> acb323f932ca3642a5e0be7c423a13d6a2d26038
             $informationtype = InformationType::where('id',$id)->first();
             return $informationtype->information_type_name ?? '';
         });
@@ -343,7 +349,7 @@ class PropertyIndicatorController extends AdminController
         $propertyIndicator = PropertyIndicator::findOrFail($id);
         $show = new Show($propertyIndicator);
 
-        $show->field('property_reference',__('Reference'));
+        $show->field('property_reference',__('Property Reference'));
         $show->field('collateral_owner',__('Collateral Owner '));
         $show->field('region_id', __('Region'))->as(function($region){
             $region = Region::where('id', $region)->first();

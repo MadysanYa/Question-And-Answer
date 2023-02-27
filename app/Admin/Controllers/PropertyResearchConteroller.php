@@ -70,11 +70,12 @@ class PropertyResearchConteroller extends AdminController
 
 		$grid->model()->orderBy('id','desc');
         $grid->column('id', __('No.'))->asc()->sortable();
+        $grid->column('property_reference', __('Property Reference'))->sortable();
         $grid->column('information_type',__('Information Type'))->sortable()->Display(function($id){
             $informationtype = InformationType::where('id',$id)->first();
             return $informationtype->information_type_name;
         });
-		$grid->column('property_reference', __('Reference'))->sortable();
+
         $grid->column('information_date',__('Information Date'))->filter('range', 'date');
         //$grid->column('requested_date',__('Requested Date'))->sortable();
         $grid->column('contact_no',__('Contact No'))->sortable();
@@ -210,7 +211,7 @@ class PropertyResearchConteroller extends AdminController
                 if ($actions->row->user_id != $userId || $actions->row->user_id == $userId && !$actions->row->IsPropertyRejected) {
                     $actions->disableDelete();
                 }
-            } 
+            }
         });
 
         // DISABLE BUTTON CREATE NEW, EDIT AND DELETE FOR USER HAS ROLE BM
@@ -308,45 +309,43 @@ class PropertyResearchConteroller extends AdminController
     {
         $propertyResearch = PropertyResearch::findOrFail($id);
         $show = new Show($propertyResearch);
-
+        $show->field('property_reference',__('Property Reference'));
         $show->field('information_type',__('Information Type'))->as(function($id){
             $informationtype = InformationType::where('id', $id)->first();
             return  $informationtype->information_type_name;
         });
-        $show->field('property_reference',__('Reference'));
-        $show->field('access_road_name',__('Access Road Name'));
-        $show->field('no_of_floor',__('No. of floor'));
-        $show->field('land_size',__('Land Size'));
-        $show->field('building_value_per_sqm',__('Building Value per Sqm ($)'));
-        $show->field('district_id',__('District/ Khan'))->as(function($district_id){
-            $district = District::where('id', $district_id)->first();
-            return $district->district_name;
-        });
+        $show->field('information_date',__('Information Date'));
         $show->field('contact_no',__('Contact No'));
-        $show->field('remark',__('Remark'));
         $show->field('location_type',__('Location Type'));
+        $show->field('type_of_access_road',__('Type of Access Road'));
+        $show->field('access_road_name',__('Access Road Name'));
         $show->field('property_type',__('Property Type'))->as(function($id){
             $propertytype = PropertyType::where('id', $id)->first();
             return  $propertytype->property_type_name;
         });
-        $show->field('land_title_type',__('Land Titil'));
-        $show->field('land_value_per_sqm',__('Land Value per Sqm ($)'));
-        $show->field('property_market_value',__('Property Market Value ($)'));
-        $show->field('commune_id',__('Commune / Sangkat'))->as(function($comune_id){
-            $commune = Commune::where('id', $comune_id)->first();
-            return $commune->commune_name;
-        });
-        $show->field('longtitude',__('Longtitude'));
-        $show->field('type_of_access_road',__('Type of Access Road'));
         $show->field('borey',__('Borey'))->as(function($id){
             $borey = Borey::where('id', $id)->first();
             return $borey->borey_name;
         });
-        $show->field('information_date',__('Information Date'));
+
+        $show->field('no_of_floor',__('No. of floor'));
+        $show->field('land_title_type',__('Land Titil'));
+        $show->field('land_size',__('Land Size'));
+        $show->field('land_value_per_sqm',__('Land Value per Sqm ($)'));
         $show->field('building_size',__('Building Size ($)'));
+        $show->field('building_value_per_sqm',__('Building Value per Sqm ($)'));
+        $show->field('property_market_value',__('Property Market Value ($)'));
         $show->field('province_id',__('Province'))->as(function($province_id){
             $province = Province::where('id', $province_id)->first();
             return $province->province_name;
+        });
+        $show->field('district_id',__('District/ Khan'))->as(function($district_id){
+            $district = District::where('id', $district_id)->first();
+            return $district->district_name;
+        });
+        $show->field('commune_id',__('Commune / Sangkat'))->as(function($comune_id){
+            $commune = Commune::where('id', $comune_id)->first();
+            return $commune->commune_name;
         });
         $show->field('village_id',__('Village'))->as(function($village_id){
             $village = Village::where('id', $village_id)->first();
@@ -354,7 +353,7 @@ class PropertyResearchConteroller extends AdminController
         });
         $show->field('latitude',__('Latitude'));
         $show->field('longtitude',__('Longtitude'));
-
+        $show->field('remark',__('Remark'));
         $show->field('user_id', __('Created By'))->as(function ($userId){
             $userName = UserAdmin::where('id', $userId)->first();
             return $userName->name ?? null;
@@ -397,13 +396,13 @@ class PropertyResearchConteroller extends AdminController
         $form = new Form(new PropertyResearch());
         $form->column(1/3, function ($form){
             $form->hidden('user_id')->value(Auth::user()->id);
-            $form->select('information_type',__('Information Type'))->rules('required')->options(function(){
-                return InformationType::all()->pluck('information_type_name','id');
-               });
             //zero loading
             $form->text('property_reference', __('Property Reference '))->disable()->value(function(){
                 return null;
             })->placeholder('Property Reference');
+            $form->select('information_type',__('Information Type'))->rules('required')->options(function(){
+                return InformationType::all()->pluck('information_type_name','id');
+            });
             $form->text('access_road_name', __('Access Road Name'))->rules('required');
             $form->text('no_of_floor', __('No. of Floor'))->rules('required')->attribute('maxlength', '3');
             $form->text('land_size', __('Land Size (sqm)'))->rules('required');
