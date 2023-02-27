@@ -14,6 +14,9 @@ class UserAdmin extends Model
      */
     protected $table = 'admin_users';
 
+    /**
+     * Relationship
+     */
     public function propertyIndicator()
     {
         return $this->hasMany(PropertyIndicator::class);
