@@ -81,7 +81,7 @@ class PropertyResearchConteroller extends AdminController
         $grid->column('contact_no',__('Contact No'))->sortable();
         $grid->column('location_type',__('Location Type'))->sortable();
         $grid->column('type_of_access_road',__('Type of Access Road'))->sortable();
-        $grid->column('access_road_name',__('Access Road Name'))->sortable();
+        $grid->column('access_road_name',__('Access Road Name'))->sortable()->limit(15);
         $grid->column('property_type',__('Property Type'))->sortable()->Display(function($id){
             $propertytype = PropertyType::where('id',$id)->first();
             return $propertytype->property_type_name ?? '';
@@ -115,7 +115,7 @@ class PropertyResearchConteroller extends AdminController
          });
         $grid->column('latitude',__('Latitude'))->sortable();
         $grid->column('longtitude',__('Longtitude'))->sortable();
-        $grid->column('remark',__('Remark'))->sortable();
+        $grid->column('remark',__('Remark'))->sortable()->limit(15);
         $grid->column('user_id',__('Created By'))->sortable()->display(function($id){
             $userName = UserAdmin::where('id', $id)->first();
             return $userName->name ?? null;
@@ -125,15 +125,20 @@ class PropertyResearchConteroller extends AdminController
                 return date('d-M-Y', strtotime($this->created_at));
             }
         });
-        $grid->column('deleted_by',__('Deleted By'))->sortable()->display(function($id){
-            $userName = UserAdmin::where('id', $id)->first();
-            return $userName->name ?? null;
-        });
-        $grid->column('deleted_at',__('Deleted Date'))->filter('range', 'date')->display(function(){
-            if ($this->deleted_at) {
-                return date('d-M-Y', strtotime($this->deleted_at));
-            }
-        });
+
+        // Show in trash only
+        if(request()->_scope_ == "trashed"){
+            $grid->column('deleted_by',__('Deleted By'))->sortable()->display(function($id){
+                $userName = UserAdmin::where('id', $id)->first();
+                return $userName->name ?? null;
+            });
+            $grid->column('deleted_at',__('Deleted Date'))->filter('range', 'date')->display(function(){
+                if ($this->deleted_at) {
+                    return date('d-M-Y', strtotime($this->deleted_at));
+                }
+            });
+        }
+        
         $grid->column('is_verified',__('Verified'))->display(function($is_verified){
             if($is_verified == null) {
                 if(User::isVerifierRole()){ // user login
