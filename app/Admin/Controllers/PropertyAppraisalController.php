@@ -102,7 +102,7 @@ class PropertyAppraisalController extends AdminController
         });
         $grid->column('no_of_floor',__('No. Of Floor'))->sortable();
         $grid->column('land_title_type',__('Land Titil Type'))->sortable();
-        $grid->column('land_title_no',__('Lang Title No'))->sortable();
+        $grid->column('land_title_no',__('Lang Title No'))->sortable()->limit(15);
         $grid->column('land_size',__('Land Size'))->sortable();
         $grid->column('land_size_by_measurement',__('Land Size By Meansurement'))->sortable();
         $grid->column('land_value_per_sqm',__('Land Value per Sqm ($)'))->sortable();
