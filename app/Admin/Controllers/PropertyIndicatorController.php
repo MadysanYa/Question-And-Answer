@@ -232,7 +232,7 @@ class PropertyIndicatorController extends AdminController
         $grid->actions(function (Actions $actions) {
             $userId = Auth::user()->id;
             if (!User::isAdminRole()) {
-                if ($actions->row->IsPropertyApproved) {
+                if ($actions->row->IsPropertyVerifiedOrApproved) {
                     $actions->disableEdit();
                 }
                 // USER LOGIN NOT PROPERTY CREATOR OR USER LOGIN IS PROPERTY CREATOR BUT PROPERTY NOT REJECTED USER CAN'T DELETE
@@ -417,8 +417,8 @@ class PropertyIndicatorController extends AdminController
                 // USER LOGIN
                 $userId = Auth::user()->id;
 
-                // PROPERTY WAS APPROVED OR REJECTED USER CAN'T EDIT
-                if ($propertyIndicator->IsPropertyApproved || $propertyIndicator->IsPropertyRejected) {
+                // PROPERTY WAS VERIFIED OR APPROVED OR REJECTED USER CAN'T EDIT
+                if ($propertyIndicator->IsPropertyVerifiedOrApproved || $propertyIndicator->IsPropertyRejected) {
                     $tools->disableEdit();
                 }
                 // USER LOGIN NOT PROPERTY CREATOR OR USER LOGIN IS PROPERTY CREATOR BUT PROPERTY NOT REJECTED USER CAN'T DELETE

@@ -253,6 +253,15 @@ class PropertyAppraisal extends Model
         return false;
     }
 
+    public function getIsPropertyVerifiedOrApprovedAttribute()
+    {
+        if ($this->is_verified == 1 || $this->is_approved == 1) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function getIsPropertyRejectedAttribute($key)
     {
         if ($this->is_verified == 2 || $this->is_approved == 2) {
