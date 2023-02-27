@@ -60,84 +60,84 @@ class PropertyIndicatorController extends AdminController
 		$grid->model()->orderBy('id','desc');
 
         $grid->column('id', __('No.'))->asc()->sortable();
-		$grid->column('property_reference', __('Reference'))->sortable();
-        $grid->column('collateral_owner',__('Collateral Owner'))->sortable()->limit(15);
+		$grid->column('property_reference', __('Property Reference'))->sortable();
+        $grid->column('collateral_owner',__('Collateral Owner'))->sortable();
         $grid->column('information_type',__('Information Type'))->sortable()->Display(function($id){
             $informationtype = InformationType::where('id',$id)->first();
             return $informationtype->information_type_name ?? '';
         });
-        $grid->column('region_id',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->Display(function($id){// add filter
+        $grid->column('region_id',__('Region'))->filter($this->convertToArrayRegion(Region::all(['id', 'region_name'])))->style('max-width: 150px; content-visibility: auto;')->Display(function($id){// add filter
             $region = Region::where('id', $id)->first();
             return $region->region_name ?? '';
         });
 
-        $grid->column('branch_code',__('Branch'))->filter($this->convertToArrayBranch(Branch::all(['branch_code', 'branch_name'])))->Display(function($branch_code){// add filter
+        $grid->column('branch_code',__('Branch'))->filter($this->convertToArrayBranch(Branch::all(['branch_code', 'branch_name'])))->style('max-width: 150px; content-visibility: auto;')->Display(function($branch_code){// add filter
             $branch = Branch::where('branch_code', $branch_code)->first();
             return $branch->branch_name ?? '';
         });
 
-        $grid->column('requested_date',__('Requested Date'))->filter('range', 'date')->display(function(){
+        $grid->column('requested_date',__('Requested Date'))->filter('range', 'date')->style('max-width: 150px; content-visibility: auto;')->display(function(){
             if ($this->requested_date) {
                 return date('d-M-Y', strtotime($this->requested_date));
             }
         });
 
-        $grid->column('reported_date',__('Reported Date'))->filter('range', 'date')->display(function(){
+        $grid->column('reported_date',__('Reported Date'))->filter('range', 'date')->style('max-width: 150px; content-visibility: auto;')->display(function(){
             if ($this->reported_date) {
                  return date('d-M-Y', strtotime($this->reported_date));
             }
         });
 
-        $grid->column('cif_no',__('CIF No.'))->sortable();
-        $grid->column('rm_name',__('RM Name'))->sortable()->limit(15);
-        $grid->column('telephone',__('Telephone'))->sortable();
-        $grid->column('location_type',__('Location Type'))->sortable();
-        $grid->column('type_of_access_road',__('Type of Access Road'))->sortable();
-        $grid->column('access_road_name',__('Access Road Name'))->sortable()->limit(15);
-        $grid->column('property_type',__('Property Type'))->sortable()->Display(function($id){
+        $grid->column('cif_no',__('CIF No.'))->sortable()->style('max-width: 150px; content-visibility: auto;');
+        $grid->column('rm_name',__('RM Name'))->sortable()->style('max-width: 150px; content-visibility: auto;');
+        $grid->column('telephone',__('Telephone'))->sortable()->style('max-width: 150px; content-visibility: auto;');
+        $grid->column('location_type',__('Location Type'))->sortable()->style('max-width: 150px; content-visibility: auto;');
+        $grid->column('type_of_access_road',__('Type of Access Road'))->sortable()->style('max-width: 150px; content-visibility: auto;');
+        $grid->column('access_road_name',__('Access Road Name'))->sortable()->style('max-width: 150px; content-visibility: auto;');
+        $grid->column('property_type',__('Property Type'))->sortable()->style('max-width: 150px; content-visibility: auto;')->Display(function($id){
             $propertytype = PropertyType::where('id',$id)->first();
             return $propertytype->property_type_name ?? '';
         });
-        $grid->column('building_status',__('Building Status (%)'))->sortable();
-        $grid->column('borey',__('Borey'))->sortable()->display(function($id){
+        $grid->column('building_status',__('Building Status (%)'))->style('max-width: 150px; content-visibility: auto;')->sortable();
+        $grid->column('borey',__('Borey'))->sortable()->style('max-width: 150px; content-visibility: auto;')->display(function($id){
             $borey = Borey::where('id',$id)->first();
             return $borey->borey_name ?? '';
         });
-        $grid->column('no_of_floor',__('No. of floor'))->sortable();
-        $grid->column('land_title_type',__('Land Titil Type'))->sortable();
-        $grid->column('land_title_no',__('Lang Title No'))->sortable()->limit(15);
-        $grid->column('land_size',__('Land Size'))->sortable();
-        $grid->column('land_value_per_sqm',__('Land Value per Sqm ($)'))->sortable();
-        $grid->column('building_size',__('Building Size ($)'))->sortable();
-        $grid->column('building_value_per_sqm',__('Building Value per Sqm ($)'))->sortable();
-        $grid->column('property_value',__('Property Value ($)'))->sortable();
-        $grid->column('customer_name',__('Customer Name'))->sortable()->limit(15);
-        $grid->column('client_contact_no',__('Cliend Contact No.'))->sortable();
-        $grid->column('province_id',__('Province'))->filter($this->convertToArray(Province::all(['id', 'province_name'])))->Display(function($province_id){
+        $grid->column('no_of_floor',__('No. of floor'))->style('max-width: 150px; content-visibility: auto;')->sortable();
+        $grid->column('land_title_type',__('Land Titil Type'))->style('max-width: 150px; content-visibility: auto;')->sortable();
+        $grid->column('land_title_no',__('Lang Title No'))->style('max-width: 150px; content-visibility: auto;')->sortable();
+        $grid->column('land_size',__('Land Size'))->style('max-width: 150px; content-visibility: auto;')->sortable();
+        $grid->column('land_value_per_sqm',__('Land Value per Sqm ($)'))->style('max-width: 150px; content-visibility: auto;')->sortable();
+        $grid->column('building_size',__('Building Size ($)'))->style('max-width: 150px; content-visibility: auto;')->sortable();
+        $grid->column('building_value_per_sqm',__('Building Value per Sqm ($)'))->style('max-width: 150px; content-visibility: auto;')->sortable();
+        $grid->column('property_value',__('Property Value ($)'))->style('max-width: 150px; content-visibility: auto;')->sortable();
+        $grid->column('customer_name',__('Customer Name'))->style('max-width: 150px; content-visibility: auto;')->sortable();
+        $grid->column('client_contact_no',__('Cliend Contact No.'))->style('max-width: 150px; content-visibility: auto;')->sortable();
+        $grid->column('province_id',__('Province'))->filter($this->convertToArray(Province::all(['id', 'province_name'])))->style('max-width: 150px; content-visibility: auto;')->Display(function($province_id){
            $province = Province::where('id', $province_id)->first();
             return $province->province_name ?? '';
         });
-        $grid->column('district_id',__('District/Khan'))->filter($this->convertToArrayDistrict(District::whereIn('province_id', $filterProvinceId)->get(['id', 'district_name'])))->Display(function($district_id){ //Add filter when click ex:province->distict..
+        $grid->column('district_id',__('District/Khan'))->filter($this->convertToArrayDistrict(District::whereIn('province_id', $filterProvinceId)->get(['id', 'district_name'])))->style('max-width: 150px; content-visibility: auto;')->Display(function($district_id){ //Add filter when click ex:province->distict..
             $district = District::where('id', $district_id)->first();
             return $district->district_name ?? '';
         });
-        $grid->column('commune_id',__('Commune/Sangkat'))->filter($this->convertToArrayCommune(Commune::whereIn('district_id', $filterDistrictId)->get(['id','commune_name'])))->Display(function($comune_id){
+        $grid->column('commune_id',__('Commune/Sangkat'))->filter($this->convertToArrayCommune(Commune::whereIn('district_id', $filterDistrictId)->get(['id','commune_name'])))->style('max-width: 150px; content-visibility: auto;')->Display(function($comune_id){
             $commune = Commune::where('id', $comune_id)->first();
             return $commune->commune_name ?? '';
         });
-        $grid->column('village_id',__('Village'))->sortable()->Display(function($village_id){
+        $grid->column('village_id',__('Village'))->sortable()->style('max-width: 150px; content-visibility: auto;')->Display(function($village_id){
             $village = Village::where('id', $village_id)->first();
             return $village->village_name ?? '';
         });
-        $grid->column('latitude',__('Latitude'))->sortable();
-        $grid->column('longtitude',__('Longtitude'))->sortable();
-        $grid->column('remark',__('Remark'))->sortable()->limit(15);
+        $grid->column('latitude',__('Latitude'))->sortable()->style('max-width: 150px; content-visibility: auto;');
+        $grid->column('longtitude',__('Longtitude'))->sortable()->style('max-width: 150px; content-visibility: auto;');
+        $grid->column('remark',__('Remark'))->sortable()->style('max-width: 150px; content-visibility: auto;');
 
-        $grid->column('user_id',__('Created By'))->sortable()->display(function($id){
+        $grid->column('user_id',__('Created By'))->sortable()->style('max-width: 150px; content-visibility: auto;')->display(function($id){
             $userName = UserAdmin::where('id', $id)->first();
             return $userName->name ?? null;
         });
-        $grid->column('created_at',__('Created Date'))->filter('range', 'date')->display(function(){
+        $grid->column('created_at',__('Created Date'))->filter('range', 'date')->style('max-width: 150px; content-visibility: auto;')->display(function(){
             if ($this->created_at) {
                 return date('d-M-Y', strtotime($this->created_at));
             }
@@ -342,6 +342,10 @@ class PropertyIndicatorController extends AdminController
 
         $show->field('property_reference',__('Property Reference'));
         $show->field('collateral_owner',__('Collateral Owner '));
+        $show->field('information_type',__('Information Type'))->as(function($id){
+            $informationtype = InformationType::where('id', $id)->first();
+            return  $informationtype->information_type_name;
+        });
         $show->field('region_id', __('Region'))->as(function($region){
             $region = Region::where('id', $region)->first();
             if($region == null) return '';
@@ -357,10 +361,6 @@ class PropertyIndicatorController extends AdminController
         $show->field('cif_no',__('CIF No.'));
         $show->field('rm_name',__('RM Name'));
         $show->field('telephone',__('Telephone'));
-        $show->field('information_type',__('Information Type'))->as(function($id){
-            $informationtype = InformationType::where('id', $id)->first();
-            return  $informationtype->information_type_name;
-        });
         $show->field('location_type',__('Location Type'));
         $show->field('type_of_access_road',__('Type of Access Road'));
         $show->field('access_road_name',__('Access Road Name'));

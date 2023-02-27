@@ -60,7 +60,7 @@ class PropertyAppraisalController extends AdminController
 
         $grid->column('id', __('No.'))->asc()->sortable();
         $grid->column('property_reference', __('Property Reference'))->sortable();
-        $grid->column('collateral_owner', __('Collateral Owner'))->sortable()->limit(15);
+        $grid->column('collateral_owner', __('Collateral Owner'))->sortable();
         $grid->column('information_type',__('Information Type'))->sortable()->Display(function($id){
             $informationtype = InformationType::where('id',$id)->first();
             return $informationtype->information_type_name ?? '';
@@ -85,11 +85,12 @@ class PropertyAppraisalController extends AdminController
             }
         });
         $grid->column('cif_no',__('CIF No.'))->sortable();
-        $grid->column('rm_name',__('RM Name'))->sortable()->limit(15);
+        $grid->column('appraisal_certificate_fee',__('Appraisal Certificate Fee'))->sortable();
+        $grid->column('rm_name',__('RM Name'))->sortable();
         $grid->column('telephone',__('Telephone'))->sortable();
         $grid->column('location_type',__('Location Type'));
         $grid->column('type_of_access_road',__('Type of Access Road'))->sortable();
-        $grid->column('access_road_name',__('Access Road Name'))->sortable()->limit(15);
+        $grid->column('access_road_name',__('Access Road Name'))->sortable();
         $grid->column('property_type',__('Property Type'))->sortable()->Display(function($id){
             $propertytype = PropertyType::where('id',$id)->first();
             return $propertytype->property_type_name ?? '';
@@ -103,6 +104,7 @@ class PropertyAppraisalController extends AdminController
         $grid->column('land_title_type',__('Land Titil Type'))->sortable();
         $grid->column('land_title_no',__('Lang Title No'))->sortable();
         $grid->column('land_size',__('Land Size'))->sortable();
+        $grid->column('land_size_by_measurement',__('Land Size By Meansurement'))->sortable();
         $grid->column('land_value_per_sqm',__('Land Value per Sqm ($)'))->sortable();
         $grid->column('building_value_per_sqm',__('Building Value per sqm '))->sortable();
         $grid->column('building_size_by_measurement', __('Building Size by measurement'))->sortable();
@@ -128,7 +130,7 @@ class PropertyAppraisalController extends AdminController
         $grid->column('latitude',__('Latitude'))->sortable();
         $grid->column('longtitude',__('Longtitude'))->sortable();
         //$grid->column('property_address', __('Property Address'));
-        $grid->column('remark',__('Remark'))->sortable()->limit(15);
+        $grid->column('remark',__('Remark'))->sortable();
 
         $grid->column('user_id',__('Created By'))->sortable()->display(function($id){
             $userName = UserAdmin::where('id', $id)->first();
@@ -345,6 +347,11 @@ class PropertyAppraisalController extends AdminController
 
         $show->field('property_reference',__('Property Reference'));
         $show->field('collateral_owner',__('Collateral Owner '));
+        $show->field('information_type',__('Information Type'))->as(function($id){
+            $informationtype = InformationType::where('id', $id)->first();
+            if ($informationtype == null ) return '';
+            return  $informationtype->information_type_name;
+        });
         $show->field('region_id', __('Region'))->as(function($region){
             $region = Region::where('id', $region)->first();
             if($region == null) return '';
@@ -355,49 +362,37 @@ class PropertyAppraisalController extends AdminController
             if($branch == null) return '';
             return '(' . $branch->branch_code . ')' . $branch->branch_name;
         });
-
-        $show->field('cif_no', __('CIF No'))->sortable();
-        // $show->field('swot_analyze', __('swot_analyze'))->sortable();
-        $show->field('rm_name', __('Loan Officer'))->sortable();
         $show->field('requested_date', __('Request Date'))->sortable();
         $show->field('reported_date',__('Reported Date'));
-        $show->field('access_road_name', __('Access Road Name'))->sortable();
-        $show->field('borey',__('Borey'))->as(function($id){
-            $borey = Borey::where('id', $id)->first();
-            return $borey->borey_name;
-        }) ;
-        $show->field('land_title_no', __('Land title no'))->sortable();
-        $show->field('land_value_per_sqm', __('Land Value Persqm'))->sortable();
-        $show->field('property_value', __('Property Value'))->sortable();
-        $show->field('client_contact_no', __('Client Contact No'))->sortable();
-        $show->field('commune_id', __('Commune Sangkat'))->sortable();
-        $show->field('latitude', __('Latitude'))->sortable();
-        $show->field('longtitude', __('longtitude'))->sortable();
-        $show->field('remark', __('Remark'))->sortable();
-        $show->field('client_contact_no',__('Client Contact No'));
-        $show->field('requested_date',__('Requested Date'));
-        $show->field('reported_date',__('Reported Date'));
+        $show->field('cif_no', __('CIF No'))->sortable();
+        $show->field('rm_name', __('RM Name'))->sortable();
+        $show->field('telephone', __('Telephone'))->sortable();
         $show->field('location_type', __('Location Type'))->sortable();
+        $show->field('type_of_access_road', __('Type Of Access Road'))->sortable();
+        $show->field('access_road_name', __('Access Road Name'))->sortable();
         $show->field('property_type',__('Property Type'))->as(function($id){
             $propertytype = PropertyType::where('id', $id)->first();
             if ($propertytype == null ) return '';
             return  $propertytype->property_type_name;
         });
+        $show->field('building_status',__('Building Status (%)'));
+        $show->field('borey',__('Borey'))->as(function($id){
+            $borey = Borey::where('id', $id)->first();
+            return $borey->borey_name;
+        }) ;
         $show->field('no_of_floor', __('No Of Floor'))->sortable();
         $show->field('appraisal_certificate_fee',__('Appraisal Certificate Fee'))->sortbale();
-        $show->field('land_size', __('Land_size'))->sortable();
-        $show->field('building_value_per_sqm', __('Building Value per Sqm'))->sortable();
-        $show->field('information_type',__('Information Type'))->as(function($id){
-            $informationtype = InformationType::where('id', $id)->first();
-            if ($informationtype == null ) return '';
-            return  $informationtype->information_type_name;
-        });
-        $show->field('type_of_access_road', __('Type Of Access Road'))->sortable();
-        $show->field('building_status',__('Building Status (%)'));
         $show->field('land_title_type', __('Land Title Type'))->sortable();
+        $show->field('land_title_no', __('Land title no'))->sortable();
+        $show->field('land_size', __('Land_size'))->sortable();
         $show->field('land_size_by_measurement', __('Land Size By Measurement'))->sortable();
-        $show->field('customer_name', __('Customer_Name'))->sortable();
+        $show->field('land_value_per_sqm', __('Land Value Persqm'))->sortable();
+        $show->field('building_value_per_sqm', __('Building Value per Sqm'))->sortable();
         $show->field('building_size_by_measurement', __('Building Size by measurement '))->sortable();
+        $show->field('property_value', __('Property Value'))->sortable();
+        $show->field('customer_name', __('Customer Name'))->sortable();
+        $show->field('client_contact_no', __('Client Contact No'))->sortable();
+
 
         $show->field('province_id',__('Province'))->as(function($province_id){
             $province = Province::where('id', $province_id)->first();
@@ -415,6 +410,9 @@ class PropertyAppraisalController extends AdminController
             $village = Village::where('id', $village_id)->first();
             return $village->village_name   ;
         });
+        $show->field('latitude', __('Latitude'))->sortable();
+        $show->field('longtitude', __('longtitude'))->sortable();
+        $show->field('remark', __('Remark'))->sortable();
         $show->field('strength',__('Strength'));
         $show->field('weakness',__('Weakness'));
         $show->field('opportunity',__('Opportunity'));
