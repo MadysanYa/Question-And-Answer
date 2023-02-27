@@ -10,10 +10,10 @@ trait DeleteByUserTrait
     {
         parent::boot();
 
-        static::creating(function ($model) {
-            $model->created_by = Auth::User()->id;
-            // $model->save();
-        });
+        // static::creating(function ($model) {
+        //     $model->created_by = Auth::User()->id;
+        //     // $model->save();
+        // });
 
         // static::updating(function ($model) {
         //     $model->updated_by = Auth::User()->id;
