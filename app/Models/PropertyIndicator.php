@@ -15,7 +15,7 @@ class PropertyIndicator extends Model
 {
     use SoftDeletes;
     use DeleteByUserTrait;
-    
+
     protected $dates = ['requested_date','reported_date'];
     /**
      * Relationship
@@ -65,7 +65,7 @@ class PropertyIndicator extends Model
         return $query->get()->count();
     }
 
-    public function scopeQueryPropertyIndicatorGrid($query) 
+    public function scopeQueryPropertyIndicatorGrid($query)
     {
         $userLogin = Auth::user();
 
@@ -99,12 +99,27 @@ class PropertyIndicator extends Model
         $this->attributes['longtitude'] = trim($value,"_");
     }
 
+    public function setCifNoAttribute($value)
+    {
+        $this->attributes['cif_no'] = trim($value,"_");
+    }
+
+    public function setTelephoneAttribute($value)
+    {
+        $this->attributes['telephone'] = trim($value,"_");
+    }
+
+    public function setClientContactNoAttribute($value)
+    {
+        $this->attributes['client_contact_no'] = trim($value,"_");
+    }
+
     /**
      * Accessor
      */
     public function getPhotosAttribute($photos)
     {
-        return json_decode($photos, true);  
+        return json_decode($photos, true);
     }
 
     public function getBranchNameAttribute($value)
@@ -207,12 +222,12 @@ class PropertyIndicator extends Model
 
     public function getComparableTotalValueOneFormatAttribute()
     {
-        return number_format($this->comparable_total_value1, 2); 
+        return number_format($this->comparable_total_value1, 2);
     }
 
     public function getComparableTotalValueTwoFormatAttribute()
     {
-        return number_format($this->comparable_total_value2, 2); 
+        return number_format($this->comparable_total_value2, 2);
     }
 
     public function getBuildingStatusWithStringAttribute()
@@ -274,14 +289,14 @@ class PropertyIndicator extends Model
     public function verified(){
 
     }
-    
+
     public function approved(){
 
     }
 
 
 
-    
+
     // public function setFrontphotosAttribute($frontphoto)
     // {
     //     if (is_array($frontphoto)) {
