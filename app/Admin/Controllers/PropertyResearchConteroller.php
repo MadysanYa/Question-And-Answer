@@ -408,7 +408,7 @@ class PropertyResearchConteroller extends AdminController
                 return InformationType::all()->pluck('information_type_name','id');
             });
             $form->text('access_road_name', __('Access Road Name'))->rules('required');
-            $form->text('no_of_floor', __('No. of Floor'))->rules('required')->attribute('maxlength', '3');
+            $form->text('no_of_floor', __('No. of Floor'))->rules('required')->attribute('maxlength', '4');
             $form->text('land_size', __('Land Size (sqm)'))->rules('required');
             $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->select('district_id', __('District / Khan'))->rules('required')->options(function(){

@@ -603,7 +603,7 @@ class PropertyAppraisalController extends AdminController
             $form->select('borey', __('Borey'))->rules('required')->options(function(){
                 return Borey::all()->pluck('borey_name', 'id');
             });
-            $form->text('no_of_floor', __('No. of Floor'))->rules('required')->attribute('maxlength', '3');
+            $form->text('no_of_floor', __('No. of Floor'))->rules('required')->attribute('maxlength', '4');
             $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title','Soft Title'=>'Soft Title']);
             $form->text('land_title_no', __('Land Title No'))->rules('required');
             $form->text('land_size', __('Land Size(Sqm)'))->rules('required');
