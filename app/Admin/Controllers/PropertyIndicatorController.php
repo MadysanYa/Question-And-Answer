@@ -103,7 +103,7 @@ class PropertyIndicatorController extends AdminController
             $borey = Borey::where('id',$id)->first();
             return $borey->borey_name ?? '';
         });
-        $grid->column('no_of_floor',__('No. of floor'))->sortable();
+        $grid->column('no_of_floor',__('No. of Floor'))->sortable();
         $grid->column('land_title_type',__('Land Titil Type'))->sortable();
         $grid->column('land_title_no',__('Lang Title No'))->sortable()->limit(15);
         $grid->column('land_size',__('Land Size'))->sortable();
