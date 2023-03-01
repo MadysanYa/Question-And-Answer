@@ -15,4 +15,15 @@ class RiskIndicator extends Model
      * @var string
      */
     protected $table = 'risk_indicators';
+    
+    public function setLatitudeAttribute($value)
+    {
+        $this->attributes['latitude'] = trim($value,"_");
+    }
+
+    public function setLongtitudeAttribute($value)
+    {
+        $this->attributes['longtitude'] = trim($value,"_");
+    }
+
 }

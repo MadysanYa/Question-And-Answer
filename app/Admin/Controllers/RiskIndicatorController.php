@@ -2,19 +2,22 @@
 
 namespace App\Admin\Controllers;
 
-
-
+use Auth;
 use App\Models\User;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Encore\Admin\Admin;
 use App\Models\RiskIndicator;
+use Encore\Admin\Widgets\Table;
 use Encore\Admin\Layout\Content;
+use Illuminate\Support\Facades\DB;
+use Encore\Admin\Form\Field\Button;
 use Illuminate\Support\Facades\Request;
 use Encore\Admin\Controllers\AdminController;
 
 
-class RiskIndicatorController extends AdminController 
+class RiskIndicatorController extends AdminController
 {
     /**
      * Title for current resource.
@@ -27,38 +30,44 @@ class RiskIndicatorController extends AdminController
      *
      * @return Grid
      */
+    public function index(Content $RiskIndicator){
 
-    public function index(Content $RiskIndicator)
-    {
+        $RiskIndicator->header($this->title);
+        $RiskIndicator->body($this->grid());
+
         $userIsRmRole = User::isRmRole();
         $userIsBmRole = User::isBmRole();
 
-        $RiskIndicator->header($this->title);
-        // $RiskIndicator->body($this->dashboard());
-        $RiskIndicator->body($this->grid());
+        //LatLong
+        $latLong = [
+            'latitude As lat',
+            'longtitude As lng',
+        ];
+        // Property Indication
+        $fieldRiskIndicator = [
+            'id',
+           'title',
+           'latitude',
+           'longtitude',
+           'description',
+        ];
 
-        //Map 
         //Property Indication
-        $riskPropertys = RiskIndicator::get();
+        $propertys = RiskIndicator::select($fieldRiskIndicator)->get();
         $locationArray = [];
 
-        // Latitude, Longtitude
-        foreach($riskPropertys as $risk){
-            $raskLocation = [$risk->title.','.$risk->latitude.','.$risk->longtitude];
-            $arr = explode(",", implode(" ", $raskLocation));
-            $locationArray[] = $arr;
-        }
-        $arryRiskProperty = $locationArray;
-        
-        // Labels on marker
-        foreach($riskPropertys as $value){
+        //LatLong Property Indication
+        $arryRiskProperty = RiskIndicator::select($latLong)->get()->toArray() ?? null;
+
+        //Labels on marker
+        foreach($propertys as $value){
             $label = $value->title;
             $labelArray[] = $label;
         }
-        $arrayLabel = $labelArray;
+        $arrayLabel = $labelArray ?? null;
 
         //Information property indicator
-        foreach($riskPropertys as $value){
+        foreach($propertys as $value){
             $info = [
                 $value->latitude.','.
                 $value->longtitude.','.
@@ -68,7 +77,7 @@ class RiskIndicatorController extends AdminController
             $arrInfo = explode(",", implode(" ", $info));
             $infoArray[] = $arrInfo;
         }
-        $infoProperty = $infoArray;
+        $infoProperty = $infoArray ?? null;
 
         $RiskIndicator->body(view('risk.riskIndication', [
             'arryRiskProperty' => $arryRiskProperty,
@@ -80,29 +89,17 @@ class RiskIndicatorController extends AdminController
 
         return $RiskIndicator;
     }
-
-    protected function dashboard(){
-    
-   
-        return $html;
-    }	
-   
-    
     protected function grid()
     {
 
     }
-  
-
-
-
     protected function form()
     {
         $form = new Form(new RiskIndicator());
         $form->column(1/2, function ($form){
             $form->text('title', __('Title'))->rules('required');
-            $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.999999'])->rules('required');
-            $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.999999'])->rules('required');
+            $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.9999999'])->rules('required');
+            $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.9999999'])->rules('required');
             // $form->textarea('description', __('Description'));
             $form->textarea('description', __('Description'))->rows(10);
 
@@ -126,25 +123,9 @@ class RiskIndicatorController extends AdminController
             //$footer->disableCreatingCheck();
             $footer->disableCreatingCheck();
 
-        
-            
-        
         });
-
 
         return $form;
     }
-
-    
-       
-            
-        
-       
-        
-       
-
-
-        
-   
 
 }
