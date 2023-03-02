@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Internal Indication Report</title>
+        <title>Internal Appraisal Report</title>
         <!-- <script src="../../js/html2canvas.js"></script>
         <script src="../../js/html2canvas.min.js"></script>
         <script src="../../js/jspdf.js"></script> -->
