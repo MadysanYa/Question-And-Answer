@@ -129,15 +129,11 @@ class MapPriceIndicatorController extends AdminController
         ];
 
         //Property Indication
-        $propertys = PropertyIndicator::select($fieldProIndication)->offset(1000)
-        ->limit(1000)
-        ->get();
+        $propertys = PropertyIndicator::select($fieldProIndication)->get();
         $locationArray = [];
 
         //LatLong Property Indication
-        $arryProperty = PropertyIndicator::select($latLong)->offset(1000)
-        ->limit(1000)
-        ->get()->toArray() ?? null;
+        $arryProperty = PropertyIndicator::select($latLong)->get()->toArray() ?? null;
 
         //Labels on marker
         foreach($propertys as $value){
@@ -167,8 +163,7 @@ class MapPriceIndicatorController extends AdminController
                 optional($value->boreyType)->borey_name.','.
                 $value->no_of_floor.','.
                 $value->land_title_type.','.
-                // $value->created_at->format('d-m-Y').','.
-                date('d-m-Y', strtotime($value->created_at)).','.
+                $value->created_at->format('d-m-Y').','.
                 $value->land_size.','.
                 $value->land_value_per_sqm.','.
                 $value->building_size.','.
@@ -182,26 +177,18 @@ class MapPriceIndicatorController extends AdminController
         $infoProperty = $infoArray ?? null;
 
         //Property Research
-        $propertyResearch = PropertyResearch::select($fieldProResearch)->offset(1000)
-        ->limit(1000)
-        ->get();
+        $propertyResearch = PropertyResearch::select($fieldProResearch)->get();
         $proResearch = [];
 
-        $latLongProResearch = PropertyResearch::select($latLong)->offset(1000)
-        ->limit(1000)
-        ->get()->toArray() ?? null;
+        $latLongProResearch = PropertyResearch::select($latLong)->get()->toArray() ?? null;
         $labelProResearch = $this->labelProResearch($propertyResearch);
         $infoProResearch = $this->infoProResearch($propertyResearch);
 
         //Property Appraisal
-        $propertyAppraisal = PropertyAppraisal::select($fieldProAppraisal)->offset(1000)
-        ->limit(1000)
-        ->get();
+        $propertyAppraisal = PropertyAppraisal::select($fieldProAppraisal)->get();
         $proResearch = [];
 
-        $latLongProAppraisal = PropertyAppraisal::select($latLong)->offset(1000)
-        ->limit(1000)
-        ->get()->toArray() ?? null;
+        $latLongProAppraisal = PropertyAppraisal::select($latLong)->get()->toArray() ?? null;
         $labelProAppraisal = $this->labelProAppraisal($propertyAppraisal);
         $infoProAppraisal = $this->infoProAppraisal($propertyAppraisal);
 
@@ -261,8 +248,7 @@ class MapPriceIndicatorController extends AdminController
                 optional($value->boreyType)->borey_name.','.
                 $value->no_of_floor.','.
                 $value->land_title_type.','.
-                // $value->created_at->format('d-m-Y').','.
-                date('d-m-Y', strtotime($value->created_at)).','.
+                $value->created_at->format('d-m-Y').','.
                 $value->land_size.','.
                 $value->land_value_per_sqm.','.
                 $value->building_size.','.
@@ -306,8 +292,7 @@ class MapPriceIndicatorController extends AdminController
                 $value->building_status.','.
                 optional($value->boreyType)->borey_name.','.
                 $value->no_of_floor.','.
-                // $value->created_at->format('d-m-Y').','.
-                date('d-m-Y', strtotime($value->created_at)).','.
+                $value->created_at->format('d-m-Y').','.
                 $value->land_size.','.
                 $value->land_value_per_sqm.','.
                 $value->land_size_by_measurement.','.
