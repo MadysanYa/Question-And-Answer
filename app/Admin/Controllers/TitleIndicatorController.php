@@ -29,7 +29,7 @@ class TitleIndicatorController extends AdminController
      *
      * @var string
      */
-    protected $title = 'Map Price Indicator';
+    protected $title = 'Title Indicator';
      /**
      * Make a grid builder.
      *
