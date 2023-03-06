@@ -128,14 +128,11 @@ class MapPriceIndicatorController extends AdminController
             'client_contact_no',
         ];
 
-        //Property Indication
-        $propertys = PropertyIndicator::select($fieldProIndication)->get();
-        $locationArray = [];
-
         //LatLong Property Indication
         $arryProperty = PropertyIndicator::select($latLong)->get()->toArray() ?? null;
 
         //Labels on marker
+        $propertys = PropertyIndicator::select($fieldProIndication)->get();
         foreach($propertys as $value){
             $label = "$".$value->land_value_per_sqm;
             $labelArray[] = $label;
@@ -143,55 +140,21 @@ class MapPriceIndicatorController extends AdminController
         $arrayLabel = $labelArray ?? null;
 
         //Information property indicator
-        foreach($propertys as $value){
-            $info = [
-                $value->latitude.','.
-                $value->longtitude.','.
-                optional($value->branchCode)->branch_name.','.
-                $value->property_reference.','.
-                $value->cif_no.','.
-                $value->rm_name.','.
-                $value->telephone.','.
-                $value->requested_date.','.
-                $value->reported_date.','.
-                optional($value->infoType)->information_type_name.','.
-                $value->location_type.','.
-                $value->type_of_access_road.','.
-                $value->access_road_name.','.
-                optional($value->propertyType)->property_type_name.','.
-                $value->building_status.','.
-                optional($value->boreyType)->borey_name.','.
-                $value->no_of_floor.','.
-                $value->land_title_type.','.
-                $value->created_at->format('d-m-Y').','.
-                $value->land_size.','.
-                $value->land_value_per_sqm.','.
-                $value->building_size.','.
-                $value->building_value_per_sqm.','.
-                $value->property_value.','.
-                $value->client_contact_no
-            ];
-            $arrInfo = explode(",", implode(" ", $info));
-            $infoArray[] = $arrInfo;
-        }
-        $infoProperty = $infoArray ?? null;
+        $infoProperty = PropertyIndicator::select($fieldProIndication)->get()->toArray() ?? null​​;
 
         //Property Research
         $propertyResearch = PropertyResearch::select($fieldProResearch)->get();
-        $proResearch = [];
-
         $latLongProResearch = PropertyResearch::select($latLong)->get()->toArray() ?? null;
         $labelProResearch = $this->labelProResearch($propertyResearch);
-        $infoProResearch = $this->infoProResearch($propertyResearch);
+        // $infoProResearch = $this->infoProResearch($propertyResearch);
+        $infoProResearch = PropertyResearch::select($fieldProResearch)->get()->toArray() ?? null;
 
         //Property Appraisal
         $propertyAppraisal = PropertyAppraisal::select($fieldProAppraisal)->get();
-        $proResearch = [];
-
         $latLongProAppraisal = PropertyAppraisal::select($latLong)->get()->toArray() ?? null;
         $labelProAppraisal = $this->labelProAppraisal($propertyAppraisal);
-        $infoProAppraisal = $this->infoProAppraisal($propertyAppraisal);
-
+        // $infoProAppraisal = $this->infoProAppraisal($propertyAppraisal);
+        $infoProAppraisal = PropertyAppraisal::select($fieldProAppraisal)->get()->toArray() ?? null;
 
         if(request()->check_list == 'indication'){
             $MapPriceIndicator->body(view('map.googleMapIndication', [
@@ -233,33 +196,33 @@ class MapPriceIndicatorController extends AdminController
         return $arrayLabelProResearch = $arrayLabelProResearch ?? null;
     }
 
-    private function infoProResearch($propertyResearch)
-    {
-        foreach($propertyResearch as $value){
-            $info = [
-                $value->latitude.','.
-                $value->longtitude.','.
-                optional($value->infoType)->information_type_name.','.
-                $value->property_reference.','.
-                $value->location_type.','.
-                optional($value->propertyType)->property_type_name.','.
-                $value->type_of_access_road.','.
-                $value->access_road_name.','.
-                optional($value->boreyType)->borey_name.','.
-                $value->no_of_floor.','.
-                $value->land_title_type.','.
-                $value->created_at->format('d-m-Y').','.
-                $value->land_size.','.
-                $value->land_value_per_sqm.','.
-                $value->building_size.','.
-                $value->building_value_per_sqm.','.
-                $value->property_market_value
-            ];
-            $arrInfoProResearch = explode(",", implode(" ", $info));
-            $arrayInfor[] = $arrInfoProResearch;
-        }
-        return $infoPropertyResearch = $arrayInfor ?? null;
-    }
+    // private function infoProResearch($propertyResearch)
+    // {
+    //     foreach($propertyResearch as $value){
+    //         $info = [
+    //             $value->latitude.','.
+    //             $value->longtitude.','.
+    //             optional($value->infoType)->information_type_name.','.
+    //             $value->property_reference.','.
+    //             $value->location_type.','.
+    //             optional($value->propertyType)->property_type_name.','.
+    //             $value->type_of_access_road.','.
+    //             $value->access_road_name.','.
+    //             optional($value->boreyType)->borey_name.','.
+    //             $value->no_of_floor.','.
+    //             $value->land_title_type.','.
+    //             $value->created_at->format('d-m-Y').','.
+    //             $value->land_size.','.
+    //             $value->land_value_per_sqm.','.
+    //             $value->building_size.','.
+    //             $value->building_value_per_sqm.','.
+    //             $value->property_market_value
+    //         ];
+    //         $arrInfoProResearch = explode(",", implode(" ", $info));
+    //         $arrayInfor[] = $arrInfoProResearch;
+    //     }
+    //     return $infoPropertyResearch = $arrayInfor ?? null;
+    // }
 
     private function labelProAppraisal($propertyAppraisal)
     {
@@ -270,42 +233,42 @@ class MapPriceIndicatorController extends AdminController
         return $arrayLabelProAppraisal = $arrayLabelProAppraisal ?? null;
     }
 
-    private function infoProAppraisal($propertyAppraisal)
-    {
-        foreach($propertyAppraisal as $value){
-            $info = [
-                $value->latitude.','.
-                $value->longtitude.','.
-                optional($value->branchCode)->branch_name.','.
-                $value->property_reference.','.
-                $value->cif_no.','.
-                $value->rm_name.','.
-                $value->telephone.','.
-                $value->requested_date.','.
-                $value->reported_date.','.
-                optional($value->infoType)->information_type_name.','.
-                $value->location_type.','.
-                $value->type_of_access_road.','.
-                $value->access_road_name.','.
-                $value->land_title_type.','.
-                optional($value->propertyType)->property_type_name.','.
-                $value->building_status.','.
-                optional($value->boreyType)->borey_name.','.
-                $value->no_of_floor.','.
-                $value->created_at->format('d-m-Y').','.
-                $value->land_size.','.
-                $value->land_value_per_sqm.','.
-                $value->land_size_by_measurement.','.
-                $value->building_value_per_sqm.','.
-                $value->property_value.','.
-                $value->customer_name.','.
-                $value->client_contact_no
-            ];
-            $arrInfoProAppraisal = explode(",", implode(" ", $info));
-            $arrayInfor[] = $arrInfoProAppraisal;
-        }
-        return $infoPropertyAppraisal = $arrayInfor ?? null;
-    }
+    // private function infoProAppraisal($propertyAppraisal)
+    // {
+    //     foreach($propertyAppraisal as $value){
+    //         $info = [
+    //             $value->latitude.','.
+    //             $value->longtitude.','.
+    //             optional($value->branchCode)->branch_name.','.
+    //             $value->property_reference.','.
+    //             $value->cif_no.','.
+    //             $value->rm_name.','.
+    //             $value->telephone.','.
+    //             $value->requested_date.','.
+    //             $value->reported_date.','.
+    //             optional($value->infoType)->information_type_name.','.
+    //             $value->location_type.','.
+    //             $value->type_of_access_road.','.
+    //             $value->access_road_name.','.
+    //             $value->land_title_type.','.
+    //             optional($value->propertyType)->property_type_name.','.
+    //             $value->building_status.','.
+    //             optional($value->boreyType)->borey_name.','.
+    //             $value->no_of_floor.','.
+    //             $value->created_at->format('d-m-Y').','.
+    //             $value->land_size.','.
+    //             $value->land_value_per_sqm.','.
+    //             $value->land_size_by_measurement.','.
+    //             $value->building_value_per_sqm.','.
+    //             $value->property_value.','.
+    //             $value->customer_name.','.
+    //             $value->client_contact_no
+    //         ];
+    //         $arrInfoProAppraisal = explode(",", implode(" ", $info));
+    //         $arrayInfor[] = $arrInfoProAppraisal;
+    //     }
+    //     return $infoPropertyAppraisal = $arrayInfor ?? null;
+    // }
 
     protected function grid()
     {
