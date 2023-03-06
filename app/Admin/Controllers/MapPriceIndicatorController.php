@@ -182,18 +182,26 @@ class MapPriceIndicatorController extends AdminController
         $infoProperty = $infoArray ?? null;
 
         //Property Research
-        $propertyResearch = PropertyResearch::select($fieldProResearch)->get();
+        $propertyResearch = PropertyResearch::select($fieldProResearch)->offset(1000)
+        ->limit(1000)
+        ->get();
         $proResearch = [];
 
-        $latLongProResearch = PropertyResearch::select($latLong)->get()->toArray() ?? null;
+        $latLongProResearch = PropertyResearch::select($latLong)->offset(1000)
+        ->limit(1000)
+        ->get()->toArray() ?? null;
         $labelProResearch = $this->labelProResearch($propertyResearch);
         $infoProResearch = $this->infoProResearch($propertyResearch);
 
         //Property Appraisal
-        $propertyAppraisal = PropertyAppraisal::select($fieldProAppraisal)->get();;
+        $propertyAppraisal = PropertyAppraisal::select($fieldProAppraisal)->offset(1000)
+        ->limit(1000)
+        ->get();
         $proResearch = [];
 
-        $latLongProAppraisal = PropertyAppraisal::select($latLong)->get()->toArray() ?? null;
+        $latLongProAppraisal = PropertyAppraisal::select($latLong)->offset(1000)
+        ->limit(1000)
+        ->get()->toArray() ?? null;
         $labelProAppraisal = $this->labelProAppraisal($propertyAppraisal);
         $infoProAppraisal = $this->infoProAppraisal($propertyAppraisal);
 
