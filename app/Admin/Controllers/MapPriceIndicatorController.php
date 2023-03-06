@@ -129,15 +129,14 @@ class MapPriceIndicatorController extends AdminController
         ];
 
         //Property Indication
-        $propertys = PropertyIndicator::select($fieldProIndication)->offset(2000)
-        ->limit(2000)
+        $propertys = PropertyIndicator::select($fieldProIndication)->offset(1000)
+        ->limit(1000)
         ->get();
-        // dd($propertys->type);
         $locationArray = [];
 
         //LatLong Property Indication
-        $arryProperty = PropertyIndicator::select($latLong)->offset(2000)
-        ->limit(2000)
+        $arryProperty = PropertyIndicator::select($latLong)->offset(1000)
+        ->limit(1000)
         ->get()->toArray() ?? null;
 
         //Labels on marker
