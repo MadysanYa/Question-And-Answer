@@ -129,12 +129,16 @@ class MapPriceIndicatorController extends AdminController
         ];
 
         //Property Indication
-        $propertys = PropertyIndicator::select($fieldProIndication)->get();
+        $propertys = PropertyIndicator::select($fieldProIndication)->offset(2000)
+        ->limit(2000)
+        ->get();
         // dd($propertys->type);
         $locationArray = [];
 
         //LatLong Property Indication
-        $arryProperty = PropertyIndicator::select($latLong)->get()->toArray() ?? null;
+        $arryProperty = PropertyIndicator::select($latLong)->offset(2000)
+        ->limit(2000)
+        ->get()->toArray() ?? null;
 
         //Labels on marker
         foreach($propertys as $value){
@@ -164,7 +168,8 @@ class MapPriceIndicatorController extends AdminController
                 optional($value->boreyType)->borey_name.','.
                 $value->no_of_floor.','.
                 $value->land_title_type.','.
-                $value->created_at->format('d-m-Y').','.
+                // $value->created_at->format('d-m-Y').','.
+                date('d-m-Y', strtotime($value->created_at)).','.
                 $value->land_size.','.
                 $value->land_value_per_sqm.','.
                 $value->building_size.','.
@@ -249,7 +254,8 @@ class MapPriceIndicatorController extends AdminController
                 optional($value->boreyType)->borey_name.','.
                 $value->no_of_floor.','.
                 $value->land_title_type.','.
-                $value->created_at->format('d-m-Y').','.
+                // $value->created_at->format('d-m-Y').','.
+                date('d-m-Y', strtotime($value->created_at)).','.
                 $value->land_size.','.
                 $value->land_value_per_sqm.','.
                 $value->building_size.','.
@@ -293,7 +299,8 @@ class MapPriceIndicatorController extends AdminController
                 $value->building_status.','.
                 optional($value->boreyType)->borey_name.','.
                 $value->no_of_floor.','.
-                $value->created_at->format('d-m-Y').','.
+                // $value->created_at->format('d-m-Y').','.
+                date('d-m-Y', strtotime($value->created_at)).','.
                 $value->land_size.','.
                 $value->land_value_per_sqm.','.
                 $value->land_size_by_measurement.','.
