@@ -46,35 +46,9 @@ class MapPriceIndicatorController extends AdminController
             'longtitude As lng',
         ];
         // Property Indication
-        $fieldProIndication = [
+        $fieldProIndicationLabel = [
             'id',
-            'latitude',
-            'longtitude',
             'land_value_per_sqm',
-            'branch_code',
-            'property_reference',
-            'cif_no',
-            'rm_name',
-            'telephone',
-            'requested_date',
-            'reported_date',
-            'information_type',
-            'location_type',
-            'type_of_access_road',
-            'access_road_name',
-            'property_type',
-            'building_status',
-            'borey',
-            'no_of_floor',
-            'land_title_type',
-            'created_at',
-            'land_size',
-            'land_value_per_sqm',
-            'building_size',
-            'building_value_per_sqm',
-            'property_value',
-            'client_contact_no',
-            'customer_name',
         ];
         // Property Research
         $fieldProResearch = [
@@ -129,12 +103,10 @@ class MapPriceIndicatorController extends AdminController
         ];
 
         //LatLong Property Indication
-        $arryProperty = PropertyIndicator::select($latLong)->get()->toArray() ?? null;
-        // $arryProperty = DB::table('property_indication_mat_view_summary')->get()->toArray();
-        // dd($arryProperty);
+        $arryProperty =  DB::table('property_indication_mat_view_summary')->select($latLong)->get()->toArray() ?? null;
 
         //Labels on marker
-        $propertys = PropertyIndicator::select($fieldProIndication)->get();
+        $propertys = DB::table('property_indication_mat_view_summary')->select($fieldProIndicationLabel)->get();
         foreach($propertys as $value){
             $label = "$".$value->land_value_per_sqm;
             $labelArray[] = $label;

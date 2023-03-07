@@ -60,9 +60,9 @@
                         "<p style='margin-bottom: 3px;'>Location Type: " + propertyIndicator[i]['location_type'] + "</p>" +
                         "<p style='margin-bottom: 3px;'>Type Access Road Name " + propertyIndicator[i]['type_of_access_road'] + "</p>" +
                         "<p style='margin-bottom: 3px;'>Access Road Name: " + propertyIndicator[i]['access_road_name'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Property Type: " + propertyIndicator[i][13] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Property Type: " + propertyIndicator[i]['property_type_name'] + "</p>" +
                         "<p style='margin-bottom: 3px;'>Building Status: " + propertyIndicator[i]['building_status'] + "%</p>" +
-                        "<p style='margin-bottom: 3px;'>Borey: " + propertyIndicator[i][15] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Borey: " + propertyIndicator[i]['borey_name'] + "</p>" +
                         "<p style='margin-bottom: 3px;'>No. of Floor: " + propertyIndicator[i]['no_of_floor'] + "</p>" +
                         "<p style='margin-bottom: 3px;'>Land Title Type: " + propertyIndicator[i]['land_title_type'] + "</p>" +
                         "<p style='margin-bottom: 3px;'>Information Date: " + propertyIndicator[i]['created_at'] + "</p>" +
