@@ -130,6 +130,8 @@ class MapPriceIndicatorController extends AdminController
 
         //LatLong Property Indication
         $arryProperty = PropertyIndicator::select($latLong)->get()->toArray() ?? null;
+        // $arryProperty = DB::table('property_indication_mat_view_summary')->get()->toArray();
+        // dd($arryProperty);
 
         //Labels on marker
         $propertys = PropertyIndicator::select($fieldProIndication)->get();
@@ -140,7 +142,7 @@ class MapPriceIndicatorController extends AdminController
         $arrayLabel = $labelArray ?? null;
 
         //Information property indicator
-        $infoProperty = PropertyIndicator::select($fieldProIndication)->get()->toArray() ?? null​​;
+        $infoProperty = DB::table('property_indication_mat_view_summary')->get()->toArray() ?? null​​;
 
         //Property Research
         $propertyResearch = PropertyResearch::select($fieldProResearch)->get();

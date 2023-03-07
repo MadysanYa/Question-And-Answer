@@ -47,31 +47,31 @@
 				//Content
 				marker.addListener("click", () => {
                     infoWindow.setContent(
-                        "<p style='margin-bottom: 3px;'>Latitude: " + propertyIndicator[i][0] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Longitude: " + propertyIndicator[i][1] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Branch: " + propertyIndicator[i][2] + "</p>" + 
-                        "<p style='margin-bottom: 3px;'>Property Reference: " + propertyIndicator[i][3] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>CIF No.: " + propertyIndicator[i][4] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>RM Name: " + propertyIndicator[i][5] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Telephone: " + propertyIndicator[i][6] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Request Date: " + propertyIndicator[i][7] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Report Date: " + propertyIndicator[i][8] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Information Type: " + propertyIndicator[i][9] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Location Type: " + propertyIndicator[i][10] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Type Access Road Name " + propertyIndicator[i][11] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Access Road Name: " + propertyIndicator[i][12] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Latitude: " + propertyIndicator[i]['latitude'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Longitude: " + propertyIndicator[i]['longtitude'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Branch: " + propertyIndicator[i]['branch_name'] + "</p>" + 
+                        "<p style='margin-bottom: 3px;'>Property Reference: " + propertyIndicator[i]['property_reference'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>CIF No.: " + propertyIndicator[i]['cif_no'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>RM Name: " + propertyIndicator[i]['rm_name'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Telephone: " + propertyIndicator[i]['telephone'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Request Date: " + propertyIndicator[i]['requested_date'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Report Date: " + propertyIndicator[i]['reported_date'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Information Type: " + propertyIndicator[i]['information_type_name'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Location Type: " + propertyIndicator[i]['location_type'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Type Access Road Name " + propertyIndicator[i]['type_of_access_road'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Access Road Name: " + propertyIndicator[i]['access_road_name'] + "</p>" +
                         "<p style='margin-bottom: 3px;'>Property Type: " + propertyIndicator[i][13] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Building Status: " + propertyIndicator[i][14] + "%</p>" +
+                        "<p style='margin-bottom: 3px;'>Building Status: " + propertyIndicator[i]['building_status'] + "%</p>" +
                         "<p style='margin-bottom: 3px;'>Borey: " + propertyIndicator[i][15] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>No. of Floor: " + propertyIndicator[i][16] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Land Title Type: " + propertyIndicator[i][17] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Information Date: " + propertyIndicator[i][18] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Land Size: " + propertyIndicator[i][19] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Land Value per Sqm: $" + propertyIndicator[i][20] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Building Size: " + propertyIndicator[i][21] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Building Value per Sqm: $" + propertyIndicator[i][22] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Property Value: $" + propertyIndicator[i][23] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Contact No. : " + propertyIndicator[i][24] + "</p>"
+                        "<p style='margin-bottom: 3px;'>No. of Floor: " + propertyIndicator[i]['no_of_floor'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Land Title Type: " + propertyIndicator[i]['land_title_type'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Information Date: " + propertyIndicator[i]['created_at'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Land Size: " + propertyIndicator[i]['land_size'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Land Value per Sqm: $" + propertyIndicator[i]['land_value_per_sqm'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Building Size: " + propertyIndicator[i]['building_size'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Building Value per Sqm: $" + propertyIndicator[i]['building_value_per_sqm'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Property Value: $" + propertyIndicator[i]['property_value'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Contact No. : " + propertyIndicator[i]['client_contact_no'] + "</p>"
                     );
                     infoWindow.open(map, marker);
 				});
