@@ -48,23 +48,23 @@
 				//Content
                 marker.addListener("click", () => {
                     infoWindow.setContent(
-                        "<p style='margin-bottom: 3px;'>Latitude: " + propertyResearch[i][0] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Longitude: " + propertyResearch[i][1] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Information Type: " + propertyResearch[i][2] + "</p>" + 
-                        "<p style='margin-bottom: 3px;'>Property Reference: " + propertyResearch[i][3] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Location Type: " + propertyResearch[i][4] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Property Type: " + propertyResearch[i][5] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Type Access Road: " + propertyResearch[i][6] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Access Road Name: " + propertyResearch[i][7] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Borey: " + propertyResearch[i][8] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>No. of Floor: " + propertyResearch[i][9] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Land Title Type: " + propertyResearch[i][10] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Information Date: " + propertyResearch[i][11] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Land Size: " + propertyResearch[i][12] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Land Value per Sqm: $" + propertyResearch[i][13] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Building Size: " + propertyResearch[i][14] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Building Value per Sqm: $" + propertyResearch[i][15] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Property Market Value: $" + propertyResearch[i][16] + "</p>"
+                        "<p style='margin-bottom: 3px;'>Latitude: " + propertyResearch[i]['latitude'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Longitude: " + propertyResearch[i]['longtitude'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Information Type: " + propertyResearch[i]['information_type_name'] + "</p>" + 
+                        "<p style='margin-bottom: 3px;'>Property Reference: " + propertyResearch[i]['property_reference'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Location Type: " + propertyResearch[i]['location_type'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Property Type: " + propertyResearch[i]['property_type_name'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Type Access Road: " + propertyResearch[i]['type_of_access_road'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Access Road Name: " + propertyResearch[i]['access_road_name'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Borey: " + propertyResearch[i]['borey_name'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>No. of Floor: " + propertyResearch[i]['no_of_floor'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Land Title Type: " + propertyResearch[i]['land_title_type'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Information Date: " + propertyResearch[i]['created_at'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Land Size: " + propertyResearch[i]['land_size'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Land Value per Sqm: $" + propertyResearch[i]['land_value_per_sqm'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Building Size: " + propertyResearch[i]['building_size'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Building Value per Sqm: $" + propertyResearch[i]['building_value_per_sqm'] + "</p>" +
+                        "<p style='margin-bottom: 3px;'>Property Market Value: $" + propertyResearch[i]['property_market_value'] + "</p>"
                     );
                     infoWindow.open(map, marker);
                 });

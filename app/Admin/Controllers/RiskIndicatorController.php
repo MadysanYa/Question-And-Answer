@@ -46,10 +46,10 @@ class RiskIndicatorController extends AdminController
         // Property Indication
         $fieldRiskIndicator = [
             'id',
-           'title',
-           'latitude',
-           'longtitude',
-           'description',
+            'title',
+            'latitude',
+            'longtitude',
+            'description',
         ];
 
         //Property Indication
@@ -66,18 +66,8 @@ class RiskIndicatorController extends AdminController
         }
         $arrayLabel = $labelArray ?? null;
 
-        //Information property indicator
-        foreach($propertys as $value){
-            $info = [
-                $value->latitude.','.
-                $value->longtitude.','.
-                $value->description.','.
-                $value->id
-            ];
-            $arrInfo = explode(",", implode(" ", $info));
-            $infoArray[] = $arrInfo;
-        }
-        $infoProperty = $infoArray ?? null;
+        //Information property risk
+        $infoProperty = RiskIndicator::select($fieldRiskIndicator)->get()->toArray() ?? null;
 
         $RiskIndicator->body(view('risk.riskIndication', [
             'arryRiskProperty' => $arryRiskProperty,
@@ -100,7 +90,6 @@ class RiskIndicatorController extends AdminController
             $form->text('title', __('Title'))->rules('required');
             $form->text('latitude', __('Latitude'))->inputmask(['mask' => '99.9999999'])->rules('required');
             $form->text('longtitude', __('Longtitude'))->inputmask(['mask' => '999.9999999'])->rules('required');
-            // $form->textarea('description', __('Description'));
             $form->textarea('description', __('Description'))->rows(10);
 
         });
@@ -118,8 +107,6 @@ class RiskIndicatorController extends AdminController
             // disable `Continue editing` checkbox
             $footer->disableEditingCheck();
             // disable `Continue Creating` checkbox
-
-            
             //$footer->disableCreatingCheck();
             $footer->disableCreatingCheck();
 
