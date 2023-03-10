@@ -75,19 +75,19 @@
                 if(userIsRmRole || userIsBmRole){
                     marker.addListener("click", () => {
                         infoWindow.setContent(
-                            "<p style='margin-bottom: 3px;'>Latitude: " + riskProperty[i][0] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Longitude: " + riskProperty[i][1] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Risk Description: " + riskProperty[i][2]
+                            "<p style='margin-bottom: 3px;'>Latitude: " + riskProperty[i]['latitude'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Longitude: " + riskProperty[i]['longtitude'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Risk Description: " + riskProperty[i]['description']
                         );
                         infoWindow.open(map, marker);
                     });
                 }else{
                     marker.addListener("click", () => {
                         infoWindow.setContent(
-                            "<p style='margin-bottom: 3px;'>Latitude: " + riskProperty[i][0] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Longitude: " + riskProperty[i][1] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Risk Description: " + riskProperty[i][2]+ "</p>" +
-                            "<b>"+"<a href="+"../../public/admin/risk_indicators/"+riskProperty[i][3]+"/edit>"+"Edit"+"</a>"
+                            "<p style='margin-bottom: 3px;'>Latitude: " + riskProperty[i]['latitude'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Longitude: " + riskProperty[i]['longtitude'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Risk Description: " + riskProperty[i]['description']+ "</p>" +
+                            "<b>"+"<a href="+"../../public/admin/risk_indicators/"+riskProperty[i]['id']+"/edit>"+"Edit"+"</a>"
                         );
                         infoWindow.open(map, marker);
                     });
