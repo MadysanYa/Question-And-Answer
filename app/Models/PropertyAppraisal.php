@@ -3,6 +3,7 @@
 namespace App\Models;
 use App\Models\Borey;
 use App\Models\Branch;
+use App\Models\Region;
 use App\Models\Commune;
 use App\Models\Village;
 use App\Models\District;
@@ -42,6 +43,10 @@ class PropertyAppraisal extends Model
     public function branchCode()
     {
         return $this->belongsTo(Branch::class, 'branch_code', 'branch_code');
+    }
+    public function region()
+    {
+        return $this->belongsTo(Region::class);
     }
     public function village()
     {
@@ -113,6 +118,36 @@ class PropertyAppraisal extends Model
               .optional($this->commune)->commune_name.', '
               .optional($this->district)->district_name.', '
               .optional($this->province)->province_name.'.';
+    }
+
+    public function getProvinceNameAttribute()
+    {
+        return optional($this->province)->province_name;
+    }
+
+    public function getDistrictNameAttribute()
+    {
+        return optional($this->district)->district_name;
+    }
+
+    public function getCommuneNameAttribute()
+    {
+        return optional($this->commune)->commune_name;
+    }
+
+    public function getVillagNameAttribute()
+    {
+        return optional($this->village)->village_name;
+    }
+
+    public function getBoreyNameAttribute()
+    {
+        return optional($this->boreyType)->borey_name;
+    }
+
+    public function getRegionNameAttribute()
+    {
+        return optional($this->region)->region_name;
     }
 
     public function getGeoCodeAttribute()

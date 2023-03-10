@@ -345,8 +345,8 @@ class PropertyAppraisalController extends AdminController
         $propertyAppraisal = PropertyAppraisal::findOrFail($id);
         $show = new Show($propertyAppraisal);
 
-        $show->panel()->view('admin.property-appraisal.show', [
-            'propertyAppraisal' =>  $propertyAppraisal
+        return view('admin.property-appraisal.show', [
+            'proAppraisal' => $propertyAppraisal
         ]);
 
         $show->field('property_reference',__('Property Reference'));
@@ -615,7 +615,7 @@ class PropertyAppraisalController extends AdminController
             $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
             $form->image('right_photo',__('Access Road Photo Right'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
-            $form->image('title_back_photo',__('Title Photo Back'))->removable()->uniqueName()->rules('mimes:jpg,png,jpeg|max:2048');
+            $form->image('title_back_photo',__('Title Photo Back'))->removable()->uniqueName()->rules('mimes:Collateral Ownerpg,png,jpeg|max:2048');
 
         });
 
