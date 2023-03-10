@@ -314,7 +314,7 @@ class PropertyResearchConteroller extends AdminController
         $propertyResearch = PropertyResearch::findOrFail($id);
         $show = new Show($propertyResearch);
 
-        $show->panel()->view('admin.property-research.show', [
+        return view('admin.property-research.show', [
             'propertyResearch' =>  $propertyResearch
         ]);
 

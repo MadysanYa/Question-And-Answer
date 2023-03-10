@@ -2,6 +2,10 @@
 
 namespace App\Models;
 use App\Models\Borey;
+use App\Models\Commune;
+use App\Models\Village;
+use App\Models\District;
+use App\Models\Province;
 use App\Models\UserAdmin;
 use App\Models\PropertyType;
 use App\Models\InformationType;
@@ -34,6 +38,23 @@ class PropertyResearch extends Model
         return $this->belongsTo(Borey::class, 'borey', 'id');
     }
 
+    public function village()
+    {
+        return $this->belongsTo(Village::class);
+    }
+    public function commune()
+    {
+        return $this->belongsTo(Commune::class);
+    }
+    public function district()
+    {
+        return $this->belongsTo(District::class);
+    }
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
+    }
+
     /**
      * Scope Query
      */
@@ -57,6 +78,26 @@ class PropertyResearch extends Model
     public function setContactNoAttribute($value)
     {
         $this->attributes['contact_no'] = trim($value,"_");
+    }
+
+    public function getProvinceNameAttribute()
+    {
+        return optional($this->province)->province_name;
+    }
+
+    public function getDistrictNameAttribute()
+    {
+        return optional($this->district)->district_name;
+    }
+
+    public function getCommuneNameAttribute()
+    {
+        return optional($this->commune)->commune_name;
+    }
+
+    public function getVillagNameAttribute()
+    {
+        return optional($this->village)->village_name;
     }
 
     /**
