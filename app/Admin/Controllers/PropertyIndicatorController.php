@@ -340,7 +340,7 @@ class PropertyIndicatorController extends AdminController
         $propertyIndicator = PropertyIndicator::findOrFail($id);
         $show = new Show($propertyIndicator);
 
-        $show->panel()->view('admin.property-indicator.show', [
+        return view('admin.property-indicator.show', [
             'propertyIndicator' =>  $propertyIndicator
         ]);
 
