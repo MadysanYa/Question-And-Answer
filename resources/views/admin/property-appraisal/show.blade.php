@@ -362,7 +362,9 @@
                                 @foreach ($proAppraisal->photos as $value)
                                     <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
                                         <div class="kv-file-content image-height">
-                                            <img src="{{ asset('upload/'.$value) }}" class="file-preview-image kv-preview-data image-size">
+                                            @if ($value)
+                                                <img src="{{ asset('upload/'.$value) }}" class="file-preview-image kv-preview-data image-size">
+                                            @endif
                                         </div>
                                     </div>
                                 @endforeach
