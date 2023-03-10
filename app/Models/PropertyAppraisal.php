@@ -195,6 +195,11 @@ class PropertyAppraisal extends Model
         return optional($this->proType)->property_type_name;
     }
 
+    public function getPropertyInformationTypeAttribute()
+    {
+        return optional($this->infoType)->information_type_name;
+    }
+
     public function getLandSizeFormatAttribute()
     {
         return number_format($this->land_size, 2);

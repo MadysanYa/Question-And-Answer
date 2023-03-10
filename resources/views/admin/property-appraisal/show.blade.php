@@ -87,7 +87,7 @@
                     <div class="row mb-10">
                         <div class="col-sm-4"><strong>Information Type</strong></div>
                         <div class="col-sm-8">
-                            <div>Phnom Penh</div>
+                            <div>{{ $proAppraisal->PropertyInformationType }}</div>
                         </div>
                     </div>
                     <div class="row mb-10">
