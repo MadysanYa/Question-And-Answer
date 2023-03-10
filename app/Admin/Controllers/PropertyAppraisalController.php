@@ -345,6 +345,10 @@ class PropertyAppraisalController extends AdminController
         $propertyAppraisal = PropertyAppraisal::findOrFail($id);
         $show = new Show($propertyAppraisal);
 
+        $show->panel()->view('admin.property-appraisal.show', [
+            'propertyAppraisal' =>  $propertyAppraisal
+        ]);
+
         $show->field('property_reference',__('Property Reference'));
         $show->field('collateral_owner',__('Collateral Owner '));
         $show->field('information_type',__('Information Type'))->as(function($id){

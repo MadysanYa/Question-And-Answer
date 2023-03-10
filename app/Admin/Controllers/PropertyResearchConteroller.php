@@ -313,6 +313,11 @@ class PropertyResearchConteroller extends AdminController
     {
         $propertyResearch = PropertyResearch::findOrFail($id);
         $show = new Show($propertyResearch);
+
+        $show->panel()->view('admin.property-research.show', [
+            'propertyResearch' =>  $propertyResearch
+        ]);
+
         $show->field('property_reference',__('Property Reference'));
         $show->field('information_type',__('Information Type'))->as(function($id){
             $informationtype = InformationType::where('id', $id)->first();
