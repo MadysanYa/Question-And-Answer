@@ -2,17 +2,20 @@
     .mb-10 {
         margin-bottom: 15px;
     }
-    .m-0{
+
+    .m-0 {
         margin: 0px !important;
     }
-    .image-height{
+
+    .image-height {
         height: 142px !important;
     }
-    .image-size{
-        width:auto;
-        height:auto;
-        max-width:100%;
-        max-height:100%;
+
+    .image-size {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
     }
 </style>
 <div class="box box-info">
@@ -34,6 +37,7 @@
 
     <div class="form-horizontal">
         <div class="box-body">
+            <!-- Property Information -->
             <div class="row">
                 <div class="col-md-4">
                     <div class="row mb-10">
@@ -252,7 +256,146 @@
                     </div>
                 </div>
             </div>
-            
+
+            <!-- Comparable Reference One -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>ID 1</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $proAppraisal->comparable_id1 }}</div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Distancec1</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $proAppraisal->comparable_distance1 }}</div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Total Value 1</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $proAppraisal->comparable_total_value1 }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>CIF No. / Name 1</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $proAppraisal->comparable_cif_no1 }}</div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Size 1</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $proAppraisal->comparable_size1 }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Geo Code 1</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $proAppraisal->comparable_geo_code1 }}</div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Value per Sqm 1</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $proAppraisal->comparable_value_per_sqm1 }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comparable Reference Two -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>ID 2</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $proAppraisal->comparable_id2 }}</div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Distancec2</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $proAppraisal->comparable_distance2 }}</div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Total Value 2</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $proAppraisal->comparable_total_value2 }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>CIF No. / Name 2</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $proAppraisal->comparable_cif_no2 }}</div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Size 2</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $proAppraisal->comparable_size2 }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Geo Code 2</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $proAppraisal->comparable_geo_code2 }}</div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Value per Sqm 2</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $proAppraisal->comparable_value_per_sqm2 }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Swot Analyze -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Strength</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $proAppraisal->strength }}</div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Threat</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $proAppraisal->threat }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Opportunity</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $proAppraisal->opportunity }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Weakness</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $proAppraisal->weakness }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property Photos -->
             <div class="row">
                 <div class="col-md-4">
                     <div class="row mb-10">
@@ -261,7 +404,7 @@
                             <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
                                 <div class="kv-file-content image-height">
                                     @if ($proAppraisal->front_photo)
-                                        <img src="{{ asset('upload/'.$proAppraisal->front_photo) }}" class="file-preview-image kv-preview-data image-size">
+                                    <img src="{{ asset('upload/'.$proAppraisal->front_photo) }}" class="file-preview-image kv-preview-data image-size">
                                     @endif
                                 </div>
                             </div>
@@ -273,7 +416,7 @@
                             <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
                                 <div class="kv-file-content image-height">
                                     @if ($proAppraisal->left_photo)
-                                        <img src="{{ asset('upload/'.$proAppraisal->left_photo) }}" class="file-preview-image kv-preview-data image-size">
+                                    <img src="{{ asset('upload/'.$proAppraisal->left_photo) }}" class="file-preview-image kv-preview-data image-size">
                                     @endif
                                 </div>
                             </div>
@@ -285,7 +428,7 @@
                             <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
                                 <div class="kv-file-content image-height">
                                     @if ($proAppraisal->title_front_photo)
-                                        <img src="{{ asset('upload/'.$proAppraisal->title_front_photo) }}" class="file-preview-image kv-preview-data image-size">
+                                    <img src="{{ asset('upload/'.$proAppraisal->title_front_photo) }}" class="file-preview-image kv-preview-data image-size">
                                     @endif
                                 </div>
                             </div>
@@ -299,7 +442,7 @@
                             <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
                                 <div class="kv-file-content image-height">
                                     @if ($proAppraisal->inside_photo)
-                                        <img src="{{ asset('upload/'.$proAppraisal->inside_photo) }}" class="file-preview-image kv-preview-data image-size">
+                                    <img src="{{ asset('upload/'.$proAppraisal->inside_photo) }}" class="file-preview-image kv-preview-data image-size">
                                     @endif
                                 </div>
                             </div>
@@ -311,7 +454,7 @@
                             <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
                                 <div class="kv-file-content image-height">
                                     @if ($proAppraisal->right_photo)
-                                        <img src="{{ asset('upload/'.$proAppraisal->right_photo) }}" class="file-preview-image kv-preview-data image-size">
+                                    <img src="{{ asset('upload/'.$proAppraisal->right_photo) }}" class="file-preview-image kv-preview-data image-size">
                                     @endif
                                 </div>
                             </div>
@@ -323,7 +466,7 @@
                             <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
                                 <div class="kv-file-content image-height">
                                     @if ($proAppraisal->title_back_photo)
-                                        <img src="{{ asset('upload/'.$proAppraisal->title_back_photo) }}" class="file-preview-image kv-preview-data image-size">
+                                    <img src="{{ asset('upload/'.$proAppraisal->title_back_photo) }}" class="file-preview-image kv-preview-data image-size">
                                     @endif
                                 </div>
                             </div>
@@ -337,7 +480,7 @@
                             <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
                                 <div class="kv-file-content image-height">
                                     @if ($proAppraisal->id_front_photo)
-                                        <img src="{{ asset('upload/'.$proAppraisal->id_front_photo) }}" class="file-preview-image kv-preview-data image-size">
+                                    <img src="{{ asset('upload/'.$proAppraisal->id_front_photo) }}" class="file-preview-image kv-preview-data image-size">
                                     @endif
                                 </div>
                             </div>
@@ -349,7 +492,7 @@
                             <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
                                 <div class="kv-file-content image-height">
                                     @if ($proAppraisal->id_back_photo)
-                                        <img src="{{ asset('upload/'.$proAppraisal->id_back_photo) }}" class="file-preview-image kv-preview-data image-size">
+                                    <img src="{{ asset('upload/'.$proAppraisal->id_back_photo) }}" class="file-preview-image kv-preview-data image-size">
                                     @endif
                                 </div>
                             </div>
@@ -358,16 +501,16 @@
                     <div class="row mb-10">
                         <div class="col-sm-4"><strong>Photos</strong></div>
                         <div class="col-sm-8">
-                            @if (is_array($proAppraisal->photos) && count($proAppraisal->photos)) 
-                                @foreach ($proAppraisal->photos as $value)
-                                    <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
-                                        <div class="kv-file-content image-height">
-                                            @if ($value)
-                                                <img src="{{ asset('upload/'.$value) }}" class="file-preview-image kv-preview-data image-size">
-                                            @endif
-                                        </div>
-                                    </div>
-                                @endforeach
+                            @if (is_array($proAppraisal->photos) && count($proAppraisal->photos))
+                            @foreach ($proAppraisal->photos as $value)
+                            <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
+                                <div class="kv-file-content image-height">
+                                    @if ($value)
+                                    <img src="{{ asset('upload/'.$value) }}" class="file-preview-image kv-preview-data image-size">
+                                    @endif
+                                </div>
+                            </div>
+                            @endforeach
                             @endif
                         </div>
                     </div>
