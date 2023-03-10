@@ -20,12 +20,12 @@
         <h3 class="box-title">Detail</h3>
         <div class="box-tools">
             <div class="btn-group pull-right" style="margin-right: 5px">
-                <a href="http://localhost/pms/property-management/public/admin/property_appraisals/{{ $proAppraisal->id }}/edit" class="btn btn-sm btn-primary" title="Edit">
+                <a href="{{ env('APP_URL') }}/public/admin/property_appraisals/{{ $proAppraisal->id }}/edit" class="btn btn-sm btn-primary" title="Edit">
                     <i class="fa fa-edit"></i><span class="hidden-xs"> Edit</span>
                 </a>
             </div>
             <div class="btn-group pull-right" style="margin-right: 5px">
-                <a href="http://localhost/pms/property-management/public/admin/property_appraisals" class="btn btn-sm btn-default" title="List">
+                <a href="{{ env('APP_URL') }}/public/admin/property_appraisals" class="btn btn-sm btn-default" title="List">
                     <i class="fa fa-list"></i><span class="hidden-xs"> List</span>
                 </a>
             </div>
@@ -108,42 +108,6 @@
                             <div>{{ $proAppraisal->type_of_access_road }}</div>
                         </div>
                     </div>
-                    <div class="row mb-10">
-                        <div class="col-sm-4"><strong>Front Photo</strong></div>
-                        <div class="col-sm-8">
-                            <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
-                                <div class="kv-file-content image-height">
-                                    @if ($proAppraisal->front_photo)
-                                        <img src="{{ asset('upload/'.$proAppraisal->front_photo) }}" class="file-preview-image kv-preview-data image-size">
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-10">
-                        <div class="col-sm-4"><strong>Access Road Photo Left</strong></div>
-                        <div class="col-sm-8">
-                            <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
-                                <div class="kv-file-content image-height">
-                                    @if ($proAppraisal->left_photo)
-                                        <img src="{{ asset('upload/'.$proAppraisal->left_photo) }}" class="file-preview-image kv-preview-data image-size">
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-10">
-                        <div class="col-sm-4"><strong>Title Photo Front</strong></div>
-                        <div class="col-sm-8">
-                            <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
-                                <div class="kv-file-content image-height">
-                                    @if ($proAppraisal->title_front_photo)
-                                        <img src="{{ asset('upload/'.$proAppraisal->title_front_photo) }}" class="file-preview-image kv-preview-data image-size">
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-md-4">
                     <div class="row mb-10">
@@ -218,42 +182,6 @@
                             <div>{{ $proAppraisal->land_value_per_sqm }}</div>
                         </div>
                     </div>
-                    <div class="row mb-10">
-                        <div class="col-sm-4"><strong>Inside Photo</strong></div>
-                        <div class="col-sm-8">
-                            <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
-                                <div class="kv-file-content image-height">
-                                    @if ($proAppraisal->inside_photo)
-                                        <img src="{{ asset('upload/'.$proAppraisal->inside_photo) }}" class="file-preview-image kv-preview-data image-size">
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-10">
-                        <div class="col-sm-4"><strong>Access Road Photo Right</strong></div>
-                        <div class="col-sm-8">
-                            <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
-                                <div class="kv-file-content image-height">
-                                    @if ($proAppraisal->right_photo)
-                                        <img src="{{ asset('upload/'.$proAppraisal->right_photo) }}" class="file-preview-image kv-preview-data image-size">
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-10">
-                        <div class="col-sm-4"><strong>Title Photo Back</strong></div>
-                        <div class="col-sm-8">
-                            <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
-                                <div class="kv-file-content image-height">
-                                    @if ($proAppraisal->title_back_photo)
-                                        <img src="{{ asset('upload/'.$proAppraisal->title_back_photo) }}" class="file-preview-image kv-preview-data image-size">
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-md-4">
                     <div class="row mb-10">
@@ -322,6 +250,87 @@
                             <div>{{ $proAppraisal->remark }}</div>
                         </div>
                     </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Front Photo</strong></div>
+                        <div class="col-sm-8">
+                            <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
+                                <div class="kv-file-content image-height">
+                                    @if ($proAppraisal->front_photo)
+                                        <img src="{{ asset('upload/'.$proAppraisal->front_photo) }}" class="file-preview-image kv-preview-data image-size">
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Access Road Photo Left</strong></div>
+                        <div class="col-sm-8">
+                            <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
+                                <div class="kv-file-content image-height">
+                                    @if ($proAppraisal->left_photo)
+                                        <img src="{{ asset('upload/'.$proAppraisal->left_photo) }}" class="file-preview-image kv-preview-data image-size">
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Title Photo Front</strong></div>
+                        <div class="col-sm-8">
+                            <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
+                                <div class="kv-file-content image-height">
+                                    @if ($proAppraisal->title_front_photo)
+                                        <img src="{{ asset('upload/'.$proAppraisal->title_front_photo) }}" class="file-preview-image kv-preview-data image-size">
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Inside Photo</strong></div>
+                        <div class="col-sm-8">
+                            <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
+                                <div class="kv-file-content image-height">
+                                    @if ($proAppraisal->inside_photo)
+                                        <img src="{{ asset('upload/'.$proAppraisal->inside_photo) }}" class="file-preview-image kv-preview-data image-size">
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Access Road Photo Right</strong></div>
+                        <div class="col-sm-8">
+                            <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
+                                <div class="kv-file-content image-height">
+                                    @if ($proAppraisal->right_photo)
+                                        <img src="{{ asset('upload/'.$proAppraisal->right_photo) }}" class="file-preview-image kv-preview-data image-size">
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Title Photo Back</strong></div>
+                        <div class="col-sm-8">
+                            <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
+                                <div class="kv-file-content image-height">
+                                    @if ($proAppraisal->title_back_photo)
+                                        <img src="{{ asset('upload/'.$proAppraisal->title_back_photo) }}" class="file-preview-image kv-preview-data image-size">
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
                     <div class="row mb-10">
                         <div class="col-sm-4"><strong>ID Photo Front</strong></div>
                         <div class="col-sm-8">
@@ -353,7 +362,9 @@
                                 @foreach ($proAppraisal->photos as $value)
                                     <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
                                         <div class="kv-file-content image-height">
-                                            <img src="{{ asset('upload/'.$value) }}" class="file-preview-image kv-preview-data image-size">
+                                            @if ($value)
+                                                <img src="{{ asset('upload/'.$value) }}" class="file-preview-image kv-preview-data image-size">
+                                            @endif
                                         </div>
                                     </div>
                                 @endforeach
