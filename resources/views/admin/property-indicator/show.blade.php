@@ -1,6 +1,21 @@
 <style>
-    .mb-10{
-        margin-bottom: 10px;
+    .mb-10 {
+        margin-bottom: 15px;
+    }
+
+    .m-0 {
+        margin: 0px !important;
+    }
+
+    .image-height {
+        height: 142px !important;
+    }
+
+    .image-size {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
     }
 </style>
 <div class="box box-info">
@@ -31,208 +46,422 @@
                 <div class="col-md-4">
                     <div class="row mb-10">
                         <div class="col-sm-2">
-                            <p>Region</p>
+                            <strong>Region</strong>
                         </div>
-                        <div class="col-sm-8"><strong>1</strong></div>
+                        <div class="col-sm-8">{{$propertyIndicator->RegionName}}</div>
                     </div>
                     <div class="row mb-10">
                         <div class="col-sm-2">
-                            <p>Branch</p>
+                            <strong>Branch</strong>
                         </div>
-                        <div class="col-sm-8"><strong>1</strong></div>
+                        <div class="col-sm-8">{{$propertyIndicator->BranchName}}</div>
                     </div>
                     <div class="row mb-10">
                         <div class="col-sm-2">
-                            <p>Requested Date</p>
+                            <strong>Requested Date</strong>
                         </div>
-                        <div class="col-sm-8"><strong>{{$propertyIndicator->requested_date}}</strong></div>
+                        <div class="col-sm-8">{{$propertyIndicator->RequestedDateFormat}}</div>
                     </div>
                     <div class="row mb-10">
                         <div class="col-sm-2">
-                            <p>Reported Date</p>
+                            <strong>Reported Date</strong>
                         </div>
-                        <div class="col-sm-8"><strong>{{$propertyIndicator->reported_date}}</strong></div>
+                        <div class="col-sm-8">{{$propertyIndicator->ReportedDateFormat}}</div>
                     </div>
                     <div class="row mb-10">
                         <div class="col-sm-2">
-                            <p>CIF No</p>
+                            <strong>CIF No</strong>
                         </div>
-                        <div class="col-sm-8"><strong>{{$propertyIndicator->cif_no}}</strong></div>
+                        <div class="col-sm-8">{{$propertyIndicator->cif_no}}</div>
                     </div>
                     <div class="row mb-10">
                         <div class="col-sm-2">
-                            <p>RM Name</p>
+                            <strong>RM Name</strong>
                         </div>
-                        <div class="col-sm-8"><strong>{{$propertyIndicator->rm_name}}</strong></div>
+                        <div class="col-sm-8">{{$propertyIndicator->rm_name}}</div>
                     </div>
                     <div class="row mb-10">
                         <div class="col-sm-2">
-                            <p>Telephone</p>
+                            <strong>Telephone</strong>
                         </div>
-                        <div class="col-sm-8"><strong>{{$propertyIndicator->telephone}}</strong></div>
+                        <div class="col-sm-8">{{$propertyIndicator->telephone}}</div>
                     </div>
                     <div class="row mb-10">
                         <div class="col-sm-2">
-                            <p>Information Type</p>
+                            <strong>Information Type</strong>
                         </div>
-                        <div class="col-sm-8"><strong>1</strong></div>
+                        <div class="col-sm-8">{{$propertyIndicator->PropertyInformationType}}</div>
                     </div>
                     <div class="row mb-10">
                         <div class="col-sm-2">
-                            <p>Property Reference</p>
+                            <strong>Property Reference</strong>
                         </div>
-                        <div class="col-sm-8"><strong>{{$propertyIndicator->property_reference}}</strong></div>
+                        <div class="col-sm-8">{{$propertyIndicator->property_reference}}</div>
                     </div>
                     <div class="row mb-10">
                         <div class="col-sm-2">
-                            <p>Location Type</p>
+                            <strong>Location Type</strong>
                         </div>
-                        <div class="col-sm-8"><strong>1</strong></div>
+                        <div class="col-sm-8">{{ $propertyIndicator->location_type }}</div>
                     </div>
                     <div class="row mb-10">
                         <div class="col-sm-2">
-                            <p>Type of Access Road</p>
+                            <strong>Type of Access Road</strong>
                         </div>
-                        <div class="col-sm-8"><strong>1</strong></div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="row mb-10">
-                        <div class="col-sm-2">
-                            <p>Access Road Name</p>
-                        </div>
-                        <div class="col-sm-8"><strong>{{$propertyIndicator->access_road_name}}</strong></div>
-                    </div>
-                    <div class="row mb-10">
-                        <div class="col-sm-2">
-                            <p>Property Type</p>
-                        </div>
-                        <div class="col-sm-8"><strong>1</strong></div>
-                    </div>
-                    <div class="row mb-10">
-                        <div class="col-sm-2">
-                            <p>Customer Name</p>
-                        </div>
-                        <div class="col-sm-8"><strong>{{$propertyIndicator->customer_name}}</strong></div>
-                    </div>
-                    <div class="row mb-10">
-                        <div class="col-sm-2">
-                            <p>Building Status (%)</p>
-                        </div>
-                        <div class="col-sm-8"><strong>{{$propertyIndicator->building_status}}</strong></div>
-                    </div>
-                    <div class="row mb-10">
-                        <div class="col-sm-2">
-                            <p>Borey</p>
-                        </div>
-                        <div class="col-sm-8"><strong>1</strong></div>
-                    </div>
-                    <div class="row mb-10">
-                        <div class="col-sm-2">
-                            <p>No of Floor</p>
-                        </div>
-                        <div class="col-sm-8"><strong>{{$propertyIndicator->no_of_floor}}</strong></div>
-                    </div>
-                    <div class="row mb-10">
-                        <div class="col-sm-2">
-                            <p>Land Title Type</p>
-                        </div>
-                        <div class="col-sm-8"><strong>1</strong></div>
-                    </div>
-                    <div class="row mb-10">
-                        <div class="col-sm-2">
-                            <p>Land title No</p>
-                        </div>
-                        <div class="col-sm-8"><strong>{{$propertyIndicator->land_title_no}}</strong></div>
-                    </div>
-                    <div class="row mb-10">
-                        <div class="col-sm-2">
-                            <p>Land Size (sqm)</p>
-                        </div>
-                        <div class="col-sm-8"><strong>{{$propertyIndicator->land_size}}</strong></div>
-                    </div>
-                    <div class="row mb-10">
-                        <div class="col-sm-2">
-                            <p>Land Value per Sqm</p>
-                        </div>
-                        <div class="col-sm-8"><strong>{{$propertyIndicator->land_value_per_sqm}}</strong></div>
-                    </div>
-                    <div class="row mb-10">
-                        <div class="col-sm-2">
-                            <p>Building Size</p>
-                        </div>
-                        <div class="col-sm-8"><strong>{{$propertyIndicator->building_size}}</strong></div>
+                        <div class="col-sm-8">{{ $propertyIndicator->type_of_access_road}}</div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="row mb-10">
                         <div class="col-sm-2">
-                            <p>Building Value per Sqm</p>
+                            <strong>Access Road Name</strong>
                         </div>
-                        <div class="col-sm-8"><strong>{{$propertyIndicator->building_value_per_sqm}}</strong></div>
+                        <div class="col-sm-8">{{$propertyIndicator->access_road_name}}</div>
                     </div>
                     <div class="row mb-10">
                         <div class="col-sm-2">
-                            <p>Property Value</p>
+                            <strong>Property Type</strong>
                         </div>
-                        <div class="col-sm-8"><strong>{{$propertyIndicator->property_value}}</strong></div>
+                        <div class="col-sm-8">{{ $propertyIndicator->PropertyTypeName}}</div>
                     </div>
                     <div class="row mb-10">
                         <div class="col-sm-2">
-                            <p>Collateral Owner</p>
+                            <strong>Customer Name</strong>
                         </div>
-                        <div class="col-sm-8"><strong>{{$propertyIndicator->collateral_owner}}</strong></div>
+                        <div class="col-sm-8">{{$propertyIndicator->customer_name}}</div>
                     </div>
                     <div class="row mb-10">
                         <div class="col-sm-2">
-                            <p>Client Contact No</p>
+                            <strong>Building Status (%)</strong>
                         </div>
-                        <div class="col-sm-8"><strong>{{$propertyIndicator->client_contact_no}}</strong></div>
+                        <div class="col-sm-8">{{$propertyIndicator->building_status}}</div>
                     </div>
                     <div class="row mb-10">
                         <div class="col-sm-2">
-                            <p>Province</p>
+                            <strong>Borey</strong>
                         </div>
-                        <div class="col-sm-8"><strong>1</strong></div>
+                        <div class="col-sm-8">{{ $propertyIndicator->BoreyName }}</div>
                     </div>
                     <div class="row mb-10">
                         <div class="col-sm-2">
-                            <p>District</p>
+                            <strong>No of Floor</strong>
                         </div>
-                        <div class="col-sm-8"><strong>1</strong></div>
+                        <div class="col-sm-8">{{ $propertyIndicator->no_of_floor}}</div>
                     </div>
                     <div class="row mb-10">
                         <div class="col-sm-2">
-                            <p>Commune / Sangkat</p>
+                            <strong>Land Title Type</strong>
                         </div>
-                        <div class="col-sm-8"><strong>1</strong></div>
+                        <div class="col-sm-8">{{  $propertyIndicator->land_title_type }}</div>
                     </div>
                     <div class="row mb-10">
                         <div class="col-sm-2">
-                            <p>Village</p>
+                            <strong>Land title No</strong>
                         </div>
-                        <div class="col-sm-8"><strong>1</strong></div>
+                        <div class="col-sm-8">{{$propertyIndicator->land_title_no}}</div>
                     </div>
                     <div class="row mb-10">
                         <div class="col-sm-2">
-                            <p>Latitude</p>
+                            <strong>Land Size (sqm)</strong>
                         </div>
-                        <div class="col-sm-8"><strong>{{$propertyIndicator->latitude}}</strong></div>
+                        <div class="col-sm-8">{{$propertyIndicator->land_size}}</div>
                     </div>
                     <div class="row mb-10">
                         <div class="col-sm-2">
-                            <p>Longtitude</p>
+                            <strong>Land Value per Sqm</strong>
                         </div>
-                        <div class="col-sm-8"><strong>{{$propertyIndicator->longtitude}}</strong></div>
+                        <div class="col-sm-8">{{$propertyIndicator->land_value_per_sqm}}</div>
                     </div>
                     <div class="row mb-10">
                         <div class="col-sm-2">
-                            <p>Remark</p>
+                            <strong>Building Size</strong>
                         </div>
-                        <div class="col-sm-8"><strong>{{$propertyIndicator->remark}}</strong></div>
+                        <div class="col-sm-8">{{$propertyIndicator->building_size}}</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row mb-10">
+                        <div class="col-sm-2">
+                            <strong>Building Value per Sqm</strong>
+                        </div>
+                        <div class="col-sm-8">{{$propertyIndicator->building_value_per_sqm}}</div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-2">
+                            <strong>Property Value</strong>
+                        </div>
+                        <div class="col-sm-8">{{$propertyIndicator->property_value}}</div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-2">
+                            <strong>Collateral Owner</strong>
+                        </div>
+                        <div class="col-sm-8">{{$propertyIndicator->collateral_owner}}</div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-2">
+                            <strong>Client Contact No</strong>
+                        </div>
+                        <div class="col-sm-8">{{$propertyIndicator->client_contact_no}}</div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-2">
+                            <strong>Province</strong>
+                        </div>
+                        <div class="col-sm-8">{{  $propertyIndicator->ProvinceName }}</div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-2">
+                            <strong>District</strong>
+                        </div>
+                        <div class="col-sm-8">{{  $propertyIndicator->DistrictName }}</div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-2">
+                            <strong>Commune / Sangkat</strong>
+                        </div>
+                        <div class="col-sm-8">{{  $propertyIndicator->CommuneName }}</div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-2">
+                            <strong>Village</strong>
+                        </div>
+                        <div class="col-sm-8">{{  $propertyIndicator->VillagName }}</div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-2">
+                            <strong>Latitude</strong>
+                        </div>
+                        <div class="col-sm-8">{{$propertyIndicator->latitude}}</div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-2">
+                            <strong>Longtitude</strong>
+                        </div>
+                        <div class="col-sm-8">{{$propertyIndicator->longtitude}}</div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-2">
+                            <strong>Remark</strong>
+                        </div>
+                        <div class="col-sm-8">{{$propertyIndicator->remark}}</div>
                     </div>
                 </div>
             </div>
+
+            <!-- Comparable Reference One -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>ID 1</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $propertyIndicator->comparable_id1 }}</div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Total Value 1</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $propertyIndicator->comparable_total_value1 }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>CIF No. / Name 1</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $propertyIndicator->comparable_cif_no1 }}</div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Size 1</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $propertyIndicator->comparable_size1 }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Geo Code 1</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $propertyIndicator->comparable_geo_code1 }}</div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Value per Sqm 1</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $propertyIndicator->comparable_value_per_sqm1 }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comparable Reference Two -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>ID 2</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $propertyIndicator->comparable_id2 }}</div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Total Value 2</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $propertyIndicator->comparable_total_value2 }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>CIF No. / Name 2</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $propertyIndicator->comparable_cif_no2 }}</div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Size 2</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $propertyIndicator->comparable_size2 }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Geo Code 2</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $propertyIndicator->comparable_geo_code2 }}</div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Value per Sqm 2</strong></div>
+                        <div class="col-sm-8">
+                            <div>{{ $propertyIndicator->comparable_value_per_sqm2 }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- image  -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Front Photo</strong></div>
+                        <div class="col-sm-8">
+                            <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
+                                <div class="kv-file-content image-height">
+                                    @if ($propertyIndicator->front_photo)
+                                        <img src="{{ asset('upload/'.$propertyIndicator->front_photo) }}" class="file-preview-image kv-preview-data image-size">
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Access Road Photo Left</strong></div>
+                        <div class="col-sm-8">
+                            <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
+                                <div class="kv-file-content image-height">
+                                    @if ($propertyIndicator->left_photo)
+                                        <img src="{{ asset('upload/'.$propertyIndicator->left_photo) }}" class="file-preview-image kv-preview-data image-size">
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Title Photo Front</strong></div>
+                        <div class="col-sm-8">
+                            <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
+                                <div class="kv-file-content image-height">
+                                    @if ($propertyIndicator->title_front_photo)
+                                        <img src="{{ asset('upload/'.$propertyIndicator->title_front_photo) }}" class="file-preview-image kv-preview-data image-size">
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Inside Photo</strong></div>
+                        <div class="col-sm-8">
+                            <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
+                                <div class="kv-file-content image-height">
+                                    @if ($propertyIndicator->inside_photo)
+                                        <img src="{{ asset('upload/'.$propertyIndicator->inside_photo) }}" class="file-preview-image kv-preview-data image-size">
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Access Road Photo Right</strong></div>
+                        <div class="col-sm-8">
+                            <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
+                                <div class="kv-file-content image-height">
+                                    @if ($propertyIndicator->right_photo)
+                                        <img src="{{ asset('upload/'.$propertyIndicator->right_photo) }}" class="file-preview-image kv-preview-data image-size">
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Title Photo Back</strong></div>
+                        <div class="col-sm-8">
+                            <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
+                                <div class="kv-file-content image-height">
+                                    @if ($propertyIndicator->title_back_photo)
+                                        <img src="{{ asset('upload/'.$propertyIndicator->title_back_photo) }}" class="file-preview-image kv-preview-data image-size">
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>ID Photo Front</strong></div>
+                        <div class="col-sm-8">
+                            <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
+                                <div class="kv-file-content image-height">
+                                    @if ($propertyIndicator->id_front_photo)
+                                        <img src="{{ asset('upload/'.$propertyIndicator->id_front_photo) }}" class="file-preview-image kv-preview-data image-size">
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>ID Photo Back</strong></div>
+                        <div class="col-sm-8">
+                            <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
+                                <div class="kv-file-content image-height">
+                                    @if ($propertyIndicator->id_back_photo)
+                                        <img src="{{ asset('upload/'.$propertyIndicator->id_back_photo) }}" class="file-preview-image kv-preview-data image-size">
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-10">
+                        <div class="col-sm-4"><strong>Photos</strong></div>
+                        <div class="col-sm-8">
+                            @if (is_array($propertyIndicator->photos) && count($propertyIndicator->photos))
+                                @foreach ($propertyIndicator->photos as $value)
+                                    <div class="file-preview-frame krajee-default file-preview-initial file-sortable kv-preview-thumb m-0">
+                                        <div class="kv-file-content image-height">
+                                            @if ($value)
+                                                <img src="{{ asset('upload/'.$value) }}" class="file-preview-image kv-preview-data image-size">
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
