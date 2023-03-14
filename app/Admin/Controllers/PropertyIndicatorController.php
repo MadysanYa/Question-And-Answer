@@ -512,7 +512,13 @@ class PropertyIndicatorController extends AdminController
             $form->select('land_title_type', __('Land Title Type'))->rules('required')->options(['Hard Title'=>'Hard Title', 'Soft Title'=>'Soft Title']);
             $form->text('land_title_no', __('Land title No.'))->rules('required');
             $form->text('land_size', __('Land Size (sqm)'))->rules('required');
-            $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required')->attribute(['style' => 'width: 100%;']);
+            if (User::isRmRole()) {
+                $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required')->attribute(['style' => 'width: 100%;'])->disable();
+            }
+            else
+            {
+                $form->currency('land_value_per_sqm', __('Land Value per Sqm '))->rules('required')->attribute(['style' => 'width: 100%;']);
+            }
             $form->currency('building_size', __('Building Size'))->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->image('inside_photo',__('Inside Photo'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
             $form->image('right_photo',__('Access Road Photo Right'))->removable()->uniqueName()->rules('required|mimes:jpg,png,jpeg|max:2048');
@@ -521,8 +527,15 @@ class PropertyIndicatorController extends AdminController
         });
 
         $form->column(1/3, function ($form){
-            $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->placeholder('Value per Sqm (Part Building)')->rules('required')->attribute(['style' => 'width: 100%;']);
-            $form->currency('property_value', __('Property Value '))->rules('required')->attribute(['style' => 'width: 100%;']);
+            if (User::isRmRole()) {
+                $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->placeholder('Value per Sqm (Part Building)')->rules('required')->attribute(['style' => 'width: 100%;'])->disable();
+                $form->currency('property_value', __('Property Value '))->rules('required')->attribute(['style' => 'width: 100%;'])->disable();
+            }
+            else
+            {
+                $form->currency('building_value_per_sqm', __('Building Value per Sqm '))->placeholder('Value per Sqm (Part Building)')->rules('required')->attribute(['style' => 'width: 100%;']);
+                $form->currency('property_value', __('Property Value '))->rules('required')->attribute(['style' => 'width: 100%;']);
+            }
             $form->text('collateral_owner', __('Collateral Owner'))->rules('required');
             $form->mobile('client_contact_no', __('Client Contact No. '))->options(['mask' => '099 999 9999'])->rules('required')->attribute(['style' => 'width: 100%;']);
             $form->select('province_id', __('Province'))->rules('required')->options(function(){
