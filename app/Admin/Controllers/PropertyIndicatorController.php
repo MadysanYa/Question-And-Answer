@@ -338,10 +338,14 @@ class PropertyIndicatorController extends AdminController
     protected function detail($id)
     {
         $propertyIndicator = PropertyIndicator::findOrFail($id);
+        $userBmRole = User::isBmRole();
+        $userAdminRole = User::isAdminRole();
         $show = new Show($propertyIndicator);
 
-        return view('admin.property-indicator.show', [
-            'propertyIndicator' =>  $propertyIndicator
+        return view('admin.property-indicator.show-new', [
+            'propertyIndicator' =>  $propertyIndicator,
+            'userBmRole' => $userBmRole,
+            'userAdminRole' => $userAdminRole
         ]);
 
         $show->field('property_reference',__('Property Reference'));

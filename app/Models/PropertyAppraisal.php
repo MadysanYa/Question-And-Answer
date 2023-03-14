@@ -302,13 +302,85 @@ class PropertyAppraisal extends Model
         return false;
     }
 
-    public function getIsPropertyRejectedAttribute($key)
+    public function getIsPropertyRejectedAttribute()
     {
         if ($this->is_verified == 2 || $this->is_approved == 2) {
             return true;
         }
 
         return false;
+    }
+
+    public function getPropertyAllPhotosMergeAttribute()
+    {
+        $photos = [];
+
+        if ($this->front_photo) {
+            array_push($photos, [
+                'name' => 'Front Photo',
+                'url' => $this->front_photo
+            ]);
+        }
+
+        if ($this->inside_photo) {
+            array_push($photos, [
+                'name' => 'Inside Photo',
+                'url' => $this->inside_photo
+            ]);
+        }
+
+        if ($this->left_photo) {
+            array_push($photos, [
+                'name' => 'Access Road Photo Left',
+                'url' => $this->left_photo
+            ]);
+        }
+
+        if ($this->right_photo) {
+            array_push($photos, [
+                'name' => 'Access Road Photo Right',
+                'url' => $this->right_photo
+            ]);
+        }
+
+        if ($this->title_front_photo) {
+            array_push($photos, [
+                'name' => 'Title Photo Front',
+                'url' => $this->title_front_photo
+            ]);
+        }
+
+        if ($this->title_back_photo) {
+            array_push($photos, [
+                'name' => 'Title Photo Back',
+                'url' => $this->title_back_photo
+            ]);
+        }
+
+        if ($this->id_front_photo) {
+            array_push($photos, [
+                'name' => 'ID Photo Front',
+                'url' => $this->id_front_photo
+            ]);
+        }
+
+        if ($this->id_back_photo) {
+            array_push($photos, [
+                'name' => 'ID Photo Back',
+                'url' => $this->id_back_photo
+            ]);
+        }
+
+        if (is_array($this->photos) && count($this->photos)) {
+            foreach($this->photos as $key => $photo) {
+                array_push($photos, [
+                    'name' => 'Photos'.' '.$key + 1,
+                    'url' => $photo
+                ]);
+            }
+        }
+
+        return $photos;
     }
 
     /**

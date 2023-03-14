@@ -312,10 +312,14 @@ class PropertyResearchConteroller extends AdminController
     protected function detail($id)
     {
         $propertyResearch = PropertyResearch::findOrFail($id);
+        $userBmRole = User::isBmRole();
+        $userAdminRole = User::isAdminRole();
         $show = new Show($propertyResearch);
 
-        return view('admin.property-research.show', [
-            'propertyResearch' =>  $propertyResearch
+        return view('admin.property-research.show-new', [
+            'propertyResearch' =>  $propertyResearch,
+            'userBmRole' => $userBmRole,
+            'userAdminRole' => $userAdminRole
         ]);
 
         $show->field('property_reference',__('Property Reference'));

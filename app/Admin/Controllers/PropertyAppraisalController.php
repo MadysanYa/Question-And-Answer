@@ -343,10 +343,14 @@ class PropertyAppraisalController extends AdminController
     protected function detail($id)
     {
         $propertyAppraisal = PropertyAppraisal::findOrFail($id);
+        $userBmRole = User::isBmRole();
+        $userAdminRole = User::isAdminRole();
         $show = new Show($propertyAppraisal);
 
-        return view('admin.property-appraisal.show', [
-            'proAppraisal' => $propertyAppraisal
+        return view('admin.property-appraisal.show-new', [
+            'proAppraisal' => $propertyAppraisal,
+            'userBmRole' => $userBmRole,
+            'userAdminRole' => $userAdminRole
         ]);
 
         $show->field('property_reference',__('Property Reference'));
