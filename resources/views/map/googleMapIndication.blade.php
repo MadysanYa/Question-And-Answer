@@ -17,9 +17,9 @@
     @include('map.filterMap')
     <script type="text/javascript">
         function initMap() {
-            const myLatLng = { lat: 11.5764211, lng: 104.923754 };
+            const myLatLng = { lat: 11.5690444, lng: 104.9161949 };
             const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 12,
+                zoom: 16,
                 center: myLatLng,
             });
 
@@ -28,7 +28,7 @@
 				disableAutoPan: true,
 			});
 
-            var marker, i 
+            var marker, i , markers = [], markerCluster;
 
             const locations = {{ Js::from($arryProperty) }};
             const labels = {{ Js::from($arrayLabel) }};
@@ -36,48 +36,111 @@
 
             var icons = '../imges/marker_icon/properties_indication.png';
 
-            const markers = locations.map((position, i) => {
-				const label = {text: labels[i % labels.length], color: "white", fontSize: "13px"};
-				const marker = new google.maps.Marker({
-                    icon:icons,
-                    position,
-                    label,
-				});
+            var centerLat, centerLong;
 
-				//Content
-				marker.addListener("click", () => {
-                    infoWindow.setContent(
-                        "<p style='margin-bottom: 3px;'>Latitude: " + propertyIndicator[i]['latitude'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Longitude: " + propertyIndicator[i]['longtitude'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Branch: " + propertyIndicator[i]['branch_name'] + "</p>" + 
-                        "<p style='margin-bottom: 3px;'>Property Reference: " + propertyIndicator[i]['property_reference'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>CIF No.: " + propertyIndicator[i]['cif_no'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>RM Name: " + propertyIndicator[i]['rm_name'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Telephone: " + propertyIndicator[i]['telephone'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Request Date: " + propertyIndicator[i]['requested_date'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Report Date: " + propertyIndicator[i]['reported_date'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Information Type: " + propertyIndicator[i]['information_type_name'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Location Type: " + propertyIndicator[i]['location_type'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Type Access Road Name " + propertyIndicator[i]['type_of_access_road'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Access Road Name: " + propertyIndicator[i]['access_road_name'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Property Type: " + propertyIndicator[i]['property_type_name'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Building Status: " + propertyIndicator[i]['building_status'] + "%</p>" +
-                        "<p style='margin-bottom: 3px;'>Borey: " + propertyIndicator[i]['borey_name'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>No. of Floor: " + propertyIndicator[i]['no_of_floor'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Land Title Type: " + propertyIndicator[i]['land_title_type'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Information Date: " + propertyIndicator[i]['created_at'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Land Size: " + propertyIndicator[i]['land_size'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Land Value per Sqm: $" + propertyIndicator[i]['land_value_per_sqm'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Building Size: " + propertyIndicator[i]['building_size'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Building Value per Sqm: $" + propertyIndicator[i]['building_value_per_sqm'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Property Value: $" + propertyIndicator[i]['property_value'] + "</p>" +
-                        "<p style='margin-bottom: 3px;'>Contact No. : " + propertyIndicator[i]['client_contact_no'] + "</p>"
-                    );
-                    infoWindow.open(map, marker);
-				});
-				return marker;
-			});
-            new markerClusterer.MarkerClusterer({ markers, map });
+            google.maps.event.addListener(map, "dragend", function() {
+
+                var center = this.getCenter();
+                var latitude = center.lat();
+                var longitude = center.lng();
+                centerLat = center.lat();
+                centerLong= center.lng();
+
+                var filter_locations=[];
+
+                if(markerCluster != null) markerCluster.clearMarkers();
+                
+                locations.map((position, i) => {        
+                    if(distanceCalculator(centerLat,centerLong,position.lat,position.lng) <= 1) {
+                                    filter_locations.push(position);
+                    }
+                });
+                        
+                markers = filter_locations.map((position, i) => {
+                                
+               
+                    const label = {text: labels[i % labels.length], color: "white", fontSize: "13px"};
+                    const marker = new google.maps.Marker({
+                                    icon:icons,
+                                    position,
+                                    label,
+                                   });
+
+                    //Content
+                    marker.addListener("click", () => {
+                                    infoWindow.setContent(
+                                        "<p style='margin-bottom: 3px;'>Latitude: " + propertyIndicator[i]['latitude'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Longitude: " + propertyIndicator[i]['longtitude'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Branch: " + propertyIndicator[i]['branch_name'] + "</p>" + 
+                                        "<p style='margin-bottom: 3px;'>Property Reference: " + propertyIndicator[i]['property_reference'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>CIF No.: " + propertyIndicator[i]['cif_no'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>RM Name: " + propertyIndicator[i]['rm_name'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Telephone: " + propertyIndicator[i]['telephone'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Request Date: " + propertyIndicator[i]['requested_date'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Report Date: " + propertyIndicator[i]['reported_date'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Information Type: " + propertyIndicator[i]['information_type_name'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Location Type: " + propertyIndicator[i]['location_type'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Type Access Road Name " + propertyIndicator[i]['type_of_access_road'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Access Road Name: " + propertyIndicator[i]['access_road_name'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Property Type: " + propertyIndicator[i]['property_type_name'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Building Status: " + propertyIndicator[i]['building_status'] + "%</p>" +
+                                        "<p style='margin-bottom: 3px;'>Borey: " + propertyIndicator[i]['borey_name'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>No. of Floor: " + propertyIndicator[i]['no_of_floor'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Land Title Type: " + propertyIndicator[i]['land_title_type'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Information Date: " + propertyIndicator[i]['created_at'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Land Size: " + propertyIndicator[i]['land_size'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Land Value per Sqm: $" + propertyIndicator[i]['land_value_per_sqm'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Building Size: " + propertyIndicator[i]['building_size'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Building Value per Sqm: $" + propertyIndicator[i]['building_value_per_sqm'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Property Value: $" + propertyIndicator[i]['property_value'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Contact No. : " + propertyIndicator[i]['client_contact_no'] + "</p>"
+                                    );
+                                    infoWindow.open(map, marker);
+                    });
+
+                    return marker;
+                });
+                            
+                markerCluster = new markerClusterer.MarkerClusterer({ markers, map });
+                            
+            });
+
+
+            google.maps.event.trigger(map, 'dragend');
+
+
+            function distanceCalculator(lat1, lon1, lat2, lon2) 
+            {
+                var R = 6371; // km
+                var dLat = toRad(lat2-lat1);
+                var dLon = toRad(lon2-lon1);
+                var lat1 = toRad(lat1);
+                var lat2 = toRad(lat2);
+
+                var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                    Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+                var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+                var d = R * c;
+                return d;
+            }
+
+            // Converts numeric degrees to radians
+            function toRad(Value) 
+            {
+                    return Value * Math.PI / 180;
+            }
+
+            // Sets the map on all markers in the array.
+            function clearMapOnAll() {
+                for (let i = 0; i < markers.length; i++) {
+                    markers[i].setMap(null);
+                    
+                }
+                for (let i = 0; i < markerClusterer.length; i++) {
+                    markerClusterer[i].setMap(null);
+                    
+                }
+            } 
         }
         window.initMap = initMap;
     </script>
