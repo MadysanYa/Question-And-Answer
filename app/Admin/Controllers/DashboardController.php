@@ -71,6 +71,7 @@ class DashboardController extends AdminController
         $proKhan = DB::table('property_mat_view_summary')
                     ->select('commune_id', 'district_id', DB::raw('SUM(land_value_per_sqm) as total_price'))
                     ->where('district_id', $districtId)
+                    ->whereNotNull('commune_id')
                     ->groupBy('commune_id', 'district_id')
                     ->get()
                     ->toArray();

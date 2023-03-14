@@ -411,7 +411,7 @@
                     <div class="col-sm-4"><strong>Strength</strong></div>
                     <div class="col-sm-8">
                         @if ($proAppraisal->strength)
-                        <div class="bg-success p-10">{{ $proAppraisal->strength }}</div>
+                        <div class="bg-success p-10">{!! $proAppraisal->strength !!}</div>
                         @endif
                     </div>
                 </div>
@@ -419,7 +419,7 @@
                     <div class="col-sm-4"><strong>Opportunity</strong></div>
                     <div class="col-sm-8">
                         @if ($proAppraisal->opportunity)
-                        <div class="bg-info p-10">{{ $proAppraisal->opportunity }}</div>
+                        <div class="bg-info p-10">{!! $proAppraisal->opportunity !!}</div>
                         @endif
                     </div>
                 </div>
@@ -429,7 +429,7 @@
                     <div class="col-sm-4"><strong>Weakness</strong></div>
                     <div class="col-sm-8">
                         @if ($proAppraisal->weakness)
-                        <div class="bg-warning p-10">{{ $proAppraisal->weakness }}</div>
+                        <div class="bg-warning p-10">{!! $proAppraisal->weakness !!}</div>
                         @endif
                     </div>
                 </div>
@@ -437,7 +437,7 @@
                     <div class="col-sm-4"><strong>Threat</strong></div>
                     <div class="col-sm-8">
                         @if ($proAppraisal->threat)
-                        <div class="bg-danger p-10">{{ $proAppraisal->threat }}</div>
+                        <div class="bg-danger p-10">{!! $proAppraisal->threat !!}</div>
                         @endif
                     </div>
                 </div>

@@ -4,7 +4,7 @@
     <div class="box-header with-border border-bottom-0">
         <div class="box-tools">
             @if (!$userBmRole)
-                @if ($userAdminRole || !$proAppraisal->IsPropertyVerifiedOrApproved || !$proAppraisal->IsPropertyRejected)
+                @if ($userAdminRole || !$propertyIndicator->IsPropertyVerifiedOrApproved || !$propertyIndicator->IsPropertyRejected)
                     <div class="btn-group pull-right" style="margin-right: 5px">
                         <a href="{{  env('APP_URL') }}/public/admin/property_indicators/{{  $propertyIndicator->id }}/edit" class="btn btn-sm btn-primary" title="Edit">
                             <i class="fa fa-edit"></i><span class="hidden-xs"> Edit</span>
