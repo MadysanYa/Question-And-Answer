@@ -97,3 +97,29 @@ label {
 .select2-selection:focus {
     border: 2px solid rgb(96, 122, 216) !important;
 }
+
+.box.box-primary {
+    border: 3px solid #3c8dbc !important;
+    background: #d6f0ff !important;
+    color: #333 !important;
+    border-radius: 7px;
+}
+
+.box.box-warning {
+    border: 3px solid #f39c12 !important;
+    background: #fdf3e3 !important;
+    color: #333 !important;
+    border-radius: 7px;
+}
+
+.box.box-success {
+    border: 3px solid #00a65a !important;
+    background: #d7fbeb !important;
+    color: #333 !important;
+    border-radius: 7px;
+}
+
+h4.box-title {
+    font-size: 24px !important;
+    font-weight: bold;
+}

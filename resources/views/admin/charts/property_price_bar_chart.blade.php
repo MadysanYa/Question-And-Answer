@@ -2,6 +2,7 @@
     <div class="col-md-4">
         <div class="box box-primary" style="padding: 10px;background: #3c8dbc;color: #ffff;">
             <div class="text-center">
+                <i class="fa fa-search" style="font-weight: bold; font-size: 42px; float:left; padding-left: 30px;"></i>
                 <h3 class="box-title" style="font-weight: 600;">Properties Research</h3>
                 <h2 class="box-title text-white" style="margin-top: 0px;">{{ $countProReseach }}</h2>
             </div>
@@ -10,6 +11,7 @@
     <div class="col-md-4">
         <div class="box box-warning" style="padding: 10px;background: #f39c12;color: #ffff;">
             <div class="text-center">
+                <i class="fa fa-mouse-pointer" style="font-weight: bold; font-size: 42px; float:left; padding-left: 30px;"></i>
                 <h3 class="box-title" style="font-weight: 600;">Properties Indication</h3>
                 <h2 class="box-title text-white" style="margin-top: 0px;">{{ $countProIndicator }}</h2>
             </div>
@@ -18,6 +20,7 @@
     <div class="col-md-4">
         <div class="box box-success" style="padding: 10px;background: #00a65a;color: #ffff;">
             <div class="text-center">
+                <i class="fa fa-calculator" style="font-weight: bold; font-size: 42px; float:left; padding-left: 30px;"></i>
                 <h3 class="box-title" style="font-weight: 600;">Properties Appraisal</h3>
                 <h2 class="box-title text-white" style="margin-top: 0px;">{{ $countProAppraisal }}</h2>
             </div>
