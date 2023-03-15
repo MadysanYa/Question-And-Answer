@@ -84,3 +84,16 @@ label {
     /* flex-basis: fit-content !important; */
 }
 
+
+.form-control:focus {
+    border: 2px solid rgb(96, 122, 216) !important;
+    background: rgb(238, 247, 255);
+}
+
+.select2-selection:active {
+    border: 2px solid rgb(96, 122, 216) !important;
+}
+
+.select2-selection:focus {
+    border: 2px solid rgb(96, 122, 216) !important;
+}
