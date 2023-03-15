@@ -28,12 +28,12 @@
                 </a>
             </div>
             <div class="btn-group pull-right" style="margin-right: 5px">
-                <a href="http://localhost/pms/property-management/public/admin/property_indicators/2/edit" class="btn btn-sm btn-primary" title="Edit">
+                <a href="{{ env('APP_URL') }}/public/admin/property_indicators/2/edit" class="btn btn-sm btn-primary" title="Edit">
                     <i class="fa fa-edit"></i><span class="hidden-xs"> Edit</span>
                 </a>
             </div>
             <div class="btn-group pull-right" style="margin-right: 5px">
-                <a href="http://localhost/pms/property-management/public/admin/property_indicators" class="btn btn-sm btn-default" title="List">
+                <a href="{{ env('APP_URL') }}/public/admin/property_indicators" class="btn btn-sm btn-default" title="List">
                     <i class="fa fa-list"></i><span class="hidden-xs"> List</span>
                 </a>
             </div>
