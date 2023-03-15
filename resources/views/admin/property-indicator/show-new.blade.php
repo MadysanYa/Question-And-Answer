@@ -285,9 +285,9 @@
                     </div>
                 </div>
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Total Value 1</strong></div>
+                    <div class="col-sm-4"><strong>Size 1</strong></div>
                     <div class="col-sm-8">
-                        <div>{{ $propertyIndicator->comparable_total_value1  }}</div>
+                        <div>{{ $propertyIndicator->comparable_size1  }}</div>
                     </div>
                 </div>
             </div>
@@ -299,9 +299,9 @@
                     </div>
                 </div>
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Size 1</strong></div>
+                    <div class="col-sm-4"><strong>Value per Sqm 1</strong></div>
                     <div class="col-sm-8">
-                        <div>{{ $propertyIndicator->comparable_size1  }}</div>
+                        <div>{{ $propertyIndicator->comparable_value_per_sqm1  }}</div>
                     </div>
                 </div>
             </div>
@@ -313,9 +313,9 @@
                     </div>
                 </div>
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Value per Sqm 1</strong></div>
+                    <div class="col-sm-4"><strong>Total Value 1</strong></div>
                     <div class="col-sm-8">
-                        <div>{{ $propertyIndicator->comparable_value_per_sqm1  }}</div>
+                        <div>{{ $propertyIndicator->comparable_total_value1  }}</div>
                     </div>
                 </div>
             </div>
@@ -329,9 +329,9 @@
                     </div>
                 </div>
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Total Value 2</strong></div>
+                    <div class="col-sm-4"><strong>Size 2</strong></div>
                     <div class="col-sm-8">
-                        <div>{{ $propertyIndicator->comparable_total_value2  }}</div>
+                        <div>{{ $propertyIndicator->comparable_size2  }}</div>
                     </div>
                 </div>
             </div>
@@ -343,9 +343,9 @@
                     </div>
                 </div>
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Size 2</strong></div>
+                    <div class="col-sm-4"><strong>Value per Sqm 2</strong></div>
                     <div class="col-sm-8">
-                        <div>{{ $propertyIndicator->comparable_size2  }}</div>
+                        <div>{{ $propertyIndicator->comparable_value_per_sqm2  }}</div>
                     </div>
                 </div>
             </div>
@@ -357,9 +357,9 @@
                     </div>
                 </div>
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Value per Sqm 2</strong></div>
+                    <div class="col-sm-4"><strong>Total Value 2</strong></div>
                     <div class="col-sm-8">
-                        <div>{{ $propertyIndicator->comparable_value_per_sqm2  }}</div>
+                        <div>{{ $propertyIndicator->comparable_total_value2  }}</div>
                     </div>
                 </div>
             </div>
