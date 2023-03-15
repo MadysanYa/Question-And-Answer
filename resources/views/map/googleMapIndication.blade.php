@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -54,16 +54,16 @@
                 var filter_locations=[];
 
                 if(markerCluster != null) markerCluster.clearMarkers();
-                
-                locations.map((position, i) => {        
+
+                locations.map((position, i) => {
                     if(distanceCalculator(centerLat,centerLong,position.lat,position.lng) <= 1) {
                                     filter_locations.push(position);
                     }
                 });
-                        
+
                 markers = filter_locations.map((position, i) => {
-                                
-               
+
+
                     const label = {text: labels[i % labels.length], color: "white", fontSize: "13px"};
                     const marker = new google.maps.Marker({
                                     icon:icons,
@@ -76,7 +76,7 @@
                                     infoWindow.setContent(
                                         "<p style='margin-bottom: 3px;'>Latitude: " + propertyIndicator[i]['latitude'] + "</p>" +
                                         "<p style='margin-bottom: 3px;'>Longitude: " + propertyIndicator[i]['longtitude'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>Branch: " + propertyIndicator[i]['branch_name'] + "</p>" + 
+                                        "<p style='margin-bottom: 3px;'>Branch: " + propertyIndicator[i]['branch_name'] + "</p>" +
                                         "<p style='margin-bottom: 3px;'>Property Reference: " + propertyIndicator[i]['property_reference'] + "</p>" +
                                         "<p style='margin-bottom: 3px;'>CIF No.: " + propertyIndicator[i]['cif_no'] + "</p>" +
                                         "<p style='margin-bottom: 3px;'>RM Name: " + propertyIndicator[i]['rm_name'] + "</p>" +
@@ -105,16 +105,14 @@
 
                     return marker;
                 });
-                            
-                markerCluster = new markerClusterer.MarkerClusterer({ markers, map });
-                            
-            });
 
+                markerCluster = new markerClusterer.MarkerClusterer({ markers, map });
+
+            });
 
             google.maps.event.trigger(map, 'dragend');
 
-
-            function distanceCalculator(lat1, lon1, lat2, lon2) 
+            function distanceCalculator(lat1, lon1, lat2, lon2)
             {
                 var R = 6371; // km
                 var dLat = toRad(lat2-lat1);
@@ -123,14 +121,14 @@
                 var lat2 = toRad(lat2);
 
                 var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                    Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
-                var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+                    Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+                var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
                 var d = R * c;
                 return d;
             }
 
             // Converts numeric degrees to radians
-            function toRad(Value) 
+            function toRad(Value)
             {
                     return Value * Math.PI / 180;
             }
@@ -139,18 +137,18 @@
             function clearMapOnAll() {
                 for (let i = 0; i < markers.length; i++) {
                     markers[i].setMap(null);
-                    
+
                 }
                 for (let i = 0; i < markerClusterer.length; i++) {
                     markerClusterer[i].setMap(null);
-                    
+
                 }
-            } 
+            }
         }
         window.initMap = initMap;
     </script>
 
     <script type="text/javascript"src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initMap" ></script>
-   
+
 </body>
 </html>

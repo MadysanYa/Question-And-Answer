@@ -230,7 +230,7 @@ class PropertyResearchConteroller extends AdminController
 
         // $grid->disableFilter();
         $grid->paginate(10);
-        $grid->fixColumns(0, -4);
+        $grid->fixColumns(0, -3);
 		$grid->filter(function($filter){
             $filter->scope('trashed', 'Trash Bin')->onlyTrashed();
 			$filter->disableIdFilter();
