@@ -69,7 +69,7 @@ class DashboardController extends AdminController
         $districtName = District::where('id', $districtId)->limit(1)->value('district_name');
         $response = ['district' => 'Khan'.' '.$districtName, 'communes' => [], 'price' => []];
         $proKhan = DB::table('property_mat_view_summary')
-                    ->select('commune_id', 'district_id', DB::raw('SUM(land_value_per_sqm) as total_price'))
+                    ->select('commune_id', 'district_id', DB::raw('SUM(land_value_per_sqm)/3 as total_price'))
                     ->where('district_id', $districtId)
                     ->whereNotNull('commune_id')
                     ->groupBy('commune_id', 'district_id')

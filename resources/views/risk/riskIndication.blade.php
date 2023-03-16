@@ -110,7 +110,6 @@
             
             $.each(gimg, function(i,x){
                 var imgurl = $(x).attr("src");
-                console.log(imgurl);
                 var urlarray = imgurl.split('!');
                 var newurl = ""; var newc = 0;
                 for (i = 0; i < 1000; i++) {if (urlarray[i] == "2sen-US"){newc = i-3;break;}}
