@@ -144,6 +144,24 @@
             }
         }
         window.initMap = initMap;
+
+        setInterval(function () {googlemap_remap();}, 10);
+        
+        function googlemap_remap() {
+            
+            var gimg = $('img[src*="https://maps.google.com/maps/vt"]:not(.gmf)');
+            
+            $.each(gimg, function(i,x){
+                var imgurl = $(x).attr("src");
+                console.log(imgurl);
+                var urlarray = imgurl.split('!');
+                var newurl = ""; var newc = 0;
+                for (i = 0; i < 1000; i++) {if (urlarray[i] == "2sen-US"){newc = i-3;break;}}
+                for (i = 0; i < newc+1; i++) {newurl += urlarray[i] + "!";}
+                $(x).attr("src",newurl).addClass("gmf");
+            });
+        }
+
     </script>
 
     <script type="text/javascript"src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initMap" ></script>
