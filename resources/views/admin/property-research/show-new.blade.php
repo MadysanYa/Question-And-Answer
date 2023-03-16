@@ -5,7 +5,7 @@
         <!-- <h3 class="box-title">Processing</h3> -->
         <div class="box-tools">
             @if (!$userBmRole)
-                @if ($userAdminRole || !$propertyResearch->IsPropertyVerifiedOrApproved || !$propertyResearch->IsPropertyRejected)
+                @if ($userAdminRole || !$propertyResearch->IsPropertyVerifiedOrApproved && !$propertyResearch->IsPropertyRejected)
                     <div class="btn-group pull-right" style="margin-right: 5px">
                         <a href="{{ env('APP_URL') }}/public/admin/property_researchs/{{ $propertyResearch->id }}/edit" class="btn btn-sm btn-primary" title="Edit">
                             <i class="fa fa-edit"></i><span class="hidden-xs"> Edit</span>
