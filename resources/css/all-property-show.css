@@ -1,9 +1,15 @@
 .border-0 {
     border: 0px !important;
 }
+
 .border-bottom-0 {
     border-bottom: 0px !important;
 }
+
+.border-radius {
+    border-radius: 7px !important;
+}
+
 .p-0 {
     padding: 0px !important;
 }
@@ -28,6 +34,14 @@
     padding: 16px;
 }
 
+.mr-10 {
+    margin-right: 10px;
+}
+
+.ml-10 {
+    margin-left: 10px;
+}
+
 .mb-10 {
     margin-bottom: 15px;
 }
@@ -46,6 +60,10 @@
 
 .mb-7 {
     margin-bottom: 7px;
+}
+
+.mb-16 {
+    margin-bottom: 16px;
 }
 
 .mb-20 {
@@ -89,4 +107,25 @@
 
 .carousel-inner>.item>img {
     height: 525px !important;
+}
+
+.float-right {
+    float: right;
+}
+
+.direction-icon {
+    color: #00236e !important;
+}
+
+.map-address > i {
+    font-size: 18px;
+    color: #00236e;
+}
+
+/* Comparable Reference */
+.comparable-reference-card {
+    box-shadow: 0 0 4px rgba(0,0,0,.03);
+    border-radius: 12px;
+    border: 1px solid #e4e4e4 !important;
+    padding: 16px;
 }

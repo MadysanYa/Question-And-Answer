@@ -112,12 +112,70 @@ class PropertyAppraisal extends Model
 
     public function getFullAddressAttribute()
     {
-        return optional($this->boreyType)->borey_name.', '
-              .$this->access_road_name.', '
-              .optional($this->village)->village_name.', '
-              .optional($this->commune)->commune_name.', '
-              .optional($this->district)->district_name.', '
-              .optional($this->province)->province_name.'.';
+        $borey_blank = ', ';
+        if (optional($this->boreyType)->borey_name == null) {
+            $borey_blank = '';
+        }
+
+        $access_road_blank = ', ';
+        if ($this->access_road_name == null) {
+            $access_road_blank = '';
+        }
+
+        $village_blank = ', ';
+        if (optional($this->village)->village_name == null) {
+            $village_blank = '';
+        }
+
+        $commune_blank = ', ';
+        if (optional($this->commune)->commune_name == null) {
+            $commune_blank = '';
+        }
+
+        $district_blank = ', ';
+        if (optional($this->district)->district_name == null) {
+            $district_blank = '';
+        }
+
+        $province_blank = '.';
+        if (optional($this->province)->province_name == null) {
+            $province_blank = '';
+        }
+
+        return optional($this->boreyType)->borey_name.$borey_blank
+              .$this->access_road_name.$access_road_blank
+              .optional($this->village)->village_name.$village_blank
+              .optional($this->commune)->commune_name.$commune_blank
+              .optional($this->district)->district_name.$district_blank
+              .optional($this->province)->province_name.$province_blank;
+    }
+
+    public function getShortAddressAttribute()
+    {
+        $village_blank = ', ';
+        if (optional($this->village)->village_name == null) {
+            $village_blank = '';
+        }
+
+        $commune_blank = ', ';
+        if (optional($this->commune)->commune_name == null) {
+            $commune_blank = '';
+        }
+
+        $district_blank = ', ';
+        if (optional($this->district)->district_name == null) {
+            $district_blank = '';
+        }
+
+        $province_blank = '.';
+        if (optional($this->province)->province_name == null) {
+            $province_blank = '';
+        }
+
+        return optional($this->village)->village_name.$village_blank
+              .optional($this->commune)->commune_name.$commune_blank
+              .optional($this->district)->district_name.$district_blank
+              .optional($this->province)->province_name.$province_blank;
     }
 
     public function getProvinceNameAttribute()

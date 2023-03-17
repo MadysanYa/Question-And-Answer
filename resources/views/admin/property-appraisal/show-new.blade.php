@@ -60,155 +60,218 @@
     </div>
 @endif
 
+<!-- General Information -->
+<div class="box box-info border-0 p-16">
+    <div class="box-header with-border border-0 p-0 box-title-height">
+        <h3 class="box-title-font-18">General Information</h3>
+        <hr class="mt-7 mb-7">
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row mb-10">
+                <div class="col-sm-4"><strong>Requested Date</strong></div>
+                <div class="col-sm-8">
+                    <div>{{ $proAppraisal->RequestedDateFormat }}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4"><strong>Reported Date</strong></div>
+                <div class="col-sm-8">
+                    <div>{{ $proAppraisal->ReportedDateFormat }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row mb-10">
+                <div class="col-sm-4"><strong>CIF No</strong></div>
+                <div class="col-sm-8">
+                    <div>{{ $proAppraisal->cif_no }}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4"><strong>Appraisal Certificate Fee</strong></div>
+                <div class="col-sm-8">
+                    <div>{{ $proAppraisal->appraisal_certificate_fee }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row mb-10">
+                <div class="col-sm-4"><strong>Remark</strong></div>
+                <div class="col-sm-8">
+                    <div>{{ $proAppraisal->remark }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Client Information -->
+<div class="box box-info border-0 p-16">
+    <div class="box-header with-border border-0 p-0 box-title-height">
+        <h3 class="box-title-font-18">Client Information</h3>
+        <hr class="mt-7 mb-7">
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row mb-10">
+                <div class="col-sm-4"><strong>RM Name</strong></div>
+                <div class="col-sm-8">
+                    <div>{{ $proAppraisal->rm_name }}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4"><strong>Telephone</strong></div>
+                <div class="col-sm-8">
+                    <div>{{ $proAppraisal->telephone }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row mb-10">
+                <div class="col-sm-4"><strong>Customer Name</strong></div>
+                <div class="col-sm-8">
+                    <div>{{ $proAppraisal->customer_name }}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4"><strong>Client Contact No</strong></div>
+                <div class="col-sm-8">
+                    <div>{{ $proAppraisal->client_contact_no }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row mb-10">
+                <div class="col-sm-4"><strong>Collateral Owner</strong></div>
+                <div class="col-sm-8">
+                    <div>{{ $proAppraisal->collateral_owner }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Property Information -->
 <div class="box box-info border-0 p-16">
     <div class="box-header with-border border-0 p-0 box-title-height">
         <h3 class="box-title-font-18">Property Information</h3>
         <hr class="mt-7 mb-7">
     </div>
-    <div class="">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Region</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->RegionName }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Branch</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->BranchName }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Requested Date</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->RequestedDateFormat }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Reported Date</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->ReportedDateFormat }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>CIF No</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->cif_no }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Appraisal Certificate Fee</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->appraisal_certificate_fee }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>RM Name</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->rm_name }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Telephone</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->telephone }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Information Type</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->PropertyInformationType }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Property Reference</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->property_reference }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Location Type</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->location_type }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Type of Access Road</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->type_of_access_road }}</div>
-                    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row mb-10">
+                <div class="col-sm-5"><strong>Property Reference</strong></div>
+                <div class="col-sm-7">
+                    <div>{{ $proAppraisal->property_reference }}</div>
                 </div>
             </div>
+            <div class="row mb-10">
+                <div class="col-sm-5"><strong>Location Type</strong></div>
+                <div class="col-sm-7">
+                    <div>{{ $proAppraisal->location_type }}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5"><strong>Type of Access Road</strong></div>
+                <div class="col-sm-7">
+                    <div>{{ $proAppraisal->type_of_access_road }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row mb-10">
+                <div class="col-sm-5"><strong>Region</strong></div>
+                <div class="col-sm-7">
+                    <div>{{ $proAppraisal->RegionName }}</div>
+                </div>
+            </div>
+            <div class="row mb-10">
+                <div class="col-sm-5"><strong>Property Type</strong></div>
+                <div class="col-sm-7">
+                    <div>{{ $proAppraisal->PropertyTypeName }}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5"><strong>Access Road Name</strong></div>
+                <div class="col-sm-7">
+                    <div>{{ $proAppraisal->access_road_name }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row mb-10">
+                <div class="col-sm-5"><strong>Branch</strong></div>
+                <div class="col-sm-7">
+                    <div>{{ $proAppraisal->BranchName }}</div>
+                </div>
+            </div>
+            <div class="row mb-10">
+                <div class="col-sm-5"><strong>Information Type</strong></div>
+                <div class="col-sm-7">
+                    <div>{{ $proAppraisal->PropertyInformationType }}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5"><strong>Borey</strong></div>
+                <div class="col-sm-7">
+                    <div>{{ $proAppraisal->BoreyName }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Property Address -->
+<x-property-map-address 
+    :googlePoint="$proAppraisal->GeoCode"
+    :prolatitude="$proAppraisal->latitude"
+    :prolongtitude="$proAppraisal->longtitude"
+    :shortAddress="$proAppraisal->ShortAddress"
+/>
+
+<!-- Property Dimension -->
+<div class="box box-info border-0 p-16">
+    <div class="box-header with-border border-0 p-0 box-title-height">
+        <h3 class="box-title-font-18">Property Dimension</h3>
+        <hr class="mt-7 mb-7">
+    </div>
+    <!-- Land -->
+    <div class="comparable-reference-card mb-16">
+        <div>
+            <h3 class="box-title-font-18">Land Information</h3>
+            <hr class="mt-7 mb-7">
+        </div>
+        <div class="row">
             <div class="col-md-4">
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Access Road Name</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->access_road_name }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Property Type</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->PropertyTypeName }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Customer Name</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->customer_name }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Client Contact No</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->client_contact_no }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Building Status (%)</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->building_status }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Borey</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->BoreyName }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>No of Floor</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->no_of_floor }}</div>
-                    </div>
-                </div>
                 <div class="row mb-10">
                     <div class="col-sm-4"><strong>Land Title Type</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->land_title_type }}</div>
                     </div>
                 </div>
-                <div class="row mb-10">
+                <div class="row">
                     <div class="col-sm-4"><strong>Land Title No</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->land_title_no }}</div>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-4">
                 <div class="row mb-10">
                     <div class="col-sm-4"><strong>Land Size(Sqm)</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->land_size }}</div>
                     </div>
                 </div>
-                <div class="row mb-10">
+                <div class="row">
                     <div class="col-sm-4"><strong>Land Size by Measurement</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->land_size_by_measurement }}</div>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-4">
                 <div class="row mb-10">
                     <div class="col-sm-4"><strong>Land Value per Sqm</strong></div>
                     <div class="col-sm-8">
@@ -216,71 +279,48 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <!-- Building -->
+    <div class="comparable-reference-card">
+        <div>
+            <h3 class="box-title-font-18">Building Information</h3>
+            <hr class="mt-7 mb-7">
+        </div>
+        <div class="row">
             <div class="col-md-4">
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Building Size by Measurement</strong></div>
+                    <div class="col-sm-4"><strong>No of Floor</strong></div>
                     <div class="col-sm-8">
-                        <div>{{ $proAppraisal->building_size_by_measurement }}</div>
+                        <div>{{ $proAppraisal->no_of_floor }}</div>
                     </div>
                 </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Building Value per Sqm</strong></div>
+                <div class="row">
+                    <div class="col-sm-4"><strong>Building Status (%)</strong></div>
                     <div class="col-sm-8">
-                        <div>{{ $proAppraisal->building_value_per_sqm }}</div>
+                        <div>{{ $proAppraisal->building_status }}</div>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-4">
                 <div class="row mb-10">
                     <div class="col-sm-4"><strong>Property Value</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->property_value }}</div>
                     </div>
                 </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Collateral Owner</strong></div>
+                <div class="row">
+                    <div class="col-sm-4"><strong>Building Size by Measurement</strong></div>
                     <div class="col-sm-8">
-                        <div>{{ $proAppraisal->collateral_owner }}</div>
+                        <div>{{ $proAppraisal->building_size_by_measurement }}</div>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-4">
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Province</strong></div>
+                    <div class="col-sm-4"><strong>Building Value per Sqm</strong></div>
                     <div class="col-sm-8">
-                        <div>{{ $proAppraisal->ProvinceName }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>District</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->DistrictName }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Commune / Sangkat</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->CommuneName }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Village</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->VillagName }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Latitude</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->latitude }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Longtitude</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->longtitude }}</div>
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Remark</strong></div>
-                    <div class="col-sm-8">
-                        <div>{{ $proAppraisal->remark }}</div>
+                        <div>{{ $proAppraisal->building_value_per_sqm }}</div>
                     </div>
                 </div>
             </div>
@@ -294,23 +334,28 @@
         <h3 class="box-title-font-18">Comparable Reference</h3>
         <hr class="mt-7 mb-7">
     </div>
-    <div class="">
+    <!-- #1 -->
+    <div class="comparable-reference-card mb-16">
+        <div>
+            <h3 class="box-title-font-18">#1</h3>
+            <hr class="mt-7 mb-7">
+        </div>
         <div class="row">
             <div class="col-md-4">
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>ID 1</strong></div>
+                    <div class="col-sm-4"><strong>ID</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->comparable_id1 }}</div>
                     </div>
                 </div>
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Distancec1</strong></div>
+                    <div class="col-sm-4"><strong>Distance</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->comparable_distance1 }}</div>
                     </div>
                 </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Total Value 1</strong></div>
+                <div class="row">
+                    <div class="col-sm-4"><strong>Total Value</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->comparable_total_value1 }}</div>
                     </div>
@@ -318,13 +363,13 @@
             </div>
             <div class="col-md-4">
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>CIF No. / Name 1</strong></div>
+                    <div class="col-sm-4"><strong>CIF No. / Name</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->comparable_cif_no1 }}</div>
                     </div>
                 </div>
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Size 1</strong></div>
+                    <div class="col-sm-4"><strong>Size</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->comparable_size1 }}</div>
                     </div>
@@ -332,35 +377,42 @@
             </div>
             <div class="col-md-4">
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Geo Code 1</strong></div>
+                    <div class="col-sm-4"><strong>Geo Code</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->comparable_geo_code1 }}</div>
                     </div>
                 </div>
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Value per Sqm 1</strong></div>
+                    <div class="col-sm-4"><strong>Value per Sqm</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->comparable_value_per_sqm1 }}</div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <!-- #2 -->
+    <div class="comparable-reference-card">
+        <div>
+            <h3 class="box-title-font-18">#2</h3>
+            <hr class="mt-7 mb-7">
+        </div>
         <div class="row">
             <div class="col-md-4">
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>ID 2</strong></div>
+                    <div class="col-sm-4"><strong>ID</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->comparable_id2 }}</div>
                     </div>
                 </div>
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Distancec2</strong></div>
+                    <div class="col-sm-4"><strong>Distance</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->comparable_distance2 }}</div>
                     </div>
                 </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Total Value 2</strong></div>
+                <div class="row">
+                    <div class="col-sm-4"><strong>Total Value</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->comparable_total_value2 }}</div>
                     </div>
@@ -368,13 +420,13 @@
             </div>
             <div class="col-md-4">
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>CIF No. / Name 2</strong></div>
+                    <div class="col-sm-4"><strong>CIF No. / Name</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->comparable_cif_no2 }}</div>
                     </div>
                 </div>
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Size 2</strong></div>
+                    <div class="col-sm-4"><strong>Size</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->comparable_size2 }}</div>
                     </div>
@@ -382,13 +434,13 @@
             </div>
             <div class="col-md-4">
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Geo Code 2</strong></div>
+                    <div class="col-sm-4"><strong>Geo Code</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->comparable_geo_code2 }}</div>
                     </div>
                 </div>
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Value per Sqm 2</strong></div>
+                    <div class="col-sm-4"><strong>Value per Sqm</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->comparable_value_per_sqm2 }}</div>
                     </div>
@@ -404,42 +456,40 @@
         <h3 class="box-title-font-18">Swot Analyze</h3>
         <hr class="mt-7 mb-7">
     </div>
-    <div class="">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Strength</strong></div>
-                    <div class="col-sm-8">
-                        @if ($proAppraisal->strength)
-                        <div class="bg-success p-10">{!! $proAppraisal->strength !!}</div>
-                        @endif
-                    </div>
-                </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Opportunity</strong></div>
-                    <div class="col-sm-8">
-                        @if ($proAppraisal->opportunity)
-                        <div class="bg-info p-10">{!! $proAppraisal->opportunity !!}</div>
-                        @endif
-                    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row mb-10">
+                <div class="col-sm-4"><strong>Strength</strong></div>
+                <div class="col-sm-8">
+                    @if ($proAppraisal->strength)
+                    <div class="bg-success p-10 border-radius">{!! $proAppraisal->strength !!}</div>
+                    @endif
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Weakness</strong></div>
-                    <div class="col-sm-8">
-                        @if ($proAppraisal->weakness)
-                        <div class="bg-warning p-10">{!! $proAppraisal->weakness !!}</div>
-                        @endif
-                    </div>
+            <div class="row">
+                <div class="col-sm-4"><strong>Opportunity</strong></div>
+                <div class="col-sm-8">
+                    @if ($proAppraisal->opportunity)
+                    <div class="bg-info p-10 border-radius">{!! $proAppraisal->opportunity !!}</div>
+                    @endif
                 </div>
-                <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Threat</strong></div>
-                    <div class="col-sm-8">
-                        @if ($proAppraisal->threat)
-                        <div class="bg-danger p-10">{!! $proAppraisal->threat !!}</div>
-                        @endif
-                    </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row mb-10">
+                <div class="col-sm-4"><strong>Weakness</strong></div>
+                <div class="col-sm-8">
+                    @if ($proAppraisal->weakness)
+                    <div class="bg-warning p-10 border-radius">{!! $proAppraisal->weakness !!}</div>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4"><strong>Threat</strong></div>
+                <div class="col-sm-8">
+                    @if ($proAppraisal->threat)
+                    <div class="bg-danger p-10 border-radius">{!! $proAppraisal->threat !!}</div>
+                    @endif
                 </div>
             </div>
         </div>
