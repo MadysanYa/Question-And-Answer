@@ -70,6 +70,7 @@ class DashboardController extends AdminController
         $response = ['district' => 'Khan'.' '.$districtName, 'communes' => [], 'price' => []];
         $proKhan = DB::table('property_mat_view_summary')
                     ->select('commune_id', 'district_id', DB::raw('ROUND(SUM(land_value_per_sqm) / COUNT(*)) as total_price'))
+                    ->whereNotNull('land_value_per_sqm')
                     ->whereNotNull('district_id')
                     ->where('district_id', $districtId)
                     ->whereNotNull('commune_id')

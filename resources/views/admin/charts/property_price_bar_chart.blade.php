@@ -153,7 +153,11 @@
                         //     size: 12
                         // },
                         formatter: function(value, context) {
-                            return value.toLocaleString()
+                            if (value) {
+                                return value.toLocaleString();
+                            }
+
+                            return 0;
                         }
                     },
                 }
