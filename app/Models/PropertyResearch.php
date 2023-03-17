@@ -129,6 +129,18 @@ class PropertyResearch extends Model
 
         return false;
     }
+    public function getInfoTypeNameAttribute()
+    {
+        return optional($this->infoType)->information_type_name;
+    }
+    public function getPropertyTypeNameAttribute()
+    {
+        return optional($this->propertyType)->property_type_name;
+    }
+    public function getBoreyNameAttribute()
+    {
+        return optional($this->boreyType)->borey_name;
+    }
 
     public function getShortAddressAttribute()
     {

@@ -40,7 +40,7 @@
                 <div class="row mb-10">
                     <div class="col-sm-4"><strong>Information Type</strong></div>
                     <div class="col-sm-8">
-                        <div>{{ $propertyResearch->information_type }}</div>
+                        <div>{{ $propertyResearch->InfoTypeName }}</div>
                     </div>
                 </div>
                 <div class="row mb-10">
@@ -97,7 +97,7 @@
                 <div class="row mb-10">
                     <div class="col-sm-4"><strong>Property Type</strong></div>
                     <div class="col-sm-8">
-                        <div>{{ $propertyResearch->property_type }}</div>
+                        <div>{{ $propertyResearch->PropertyTypeName }}</div>
                     </div>
                 </div>
                 <div class="row mb-10">
@@ -142,7 +142,7 @@
                 <div class="row mb-10">
                     <div class="col-sm-4"><strong>Borey</strong></div>
                     <div class="col-sm-8">
-                        <div>{{ $propertyResearch->borey }}</div>
+                        <div>{{ $propertyResearch->BoreyName }}</div>
                     </div>
                 </div>
                 <div class="row mb-10">

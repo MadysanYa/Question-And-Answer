@@ -5,18 +5,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laravel Google Maps Multiple Markers Example - ItSolutionStuff.com</title>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="../../resources/js/markerclusterer.min.js"></script>
     <style type="text/css">
         #map {
           height: 650px;
         }
-
              
         div[style="background-color: white; font-weight: 500; font-family: Roboto, sans-serif; padding: 15px 25px; box-sizing: border-box; top: 5px; border: 1px solid rgba(0, 0, 0, 0.12); border-radius: 5px; left: 50%; max-width: 375px; position: absolute; transform: translateX(-50%); width: calc(100% - 10px); z-index: 1;"] {
             display: none !important;
         }
-        
+
+        img[src="https://maps.gstatic.com/mapfiles/transparent.png"]
+        { 
+            display: none !important;
+        }
     </style>
 </head>
 <body>
