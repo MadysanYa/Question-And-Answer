@@ -2,19 +2,22 @@
 
 <div class="box box-info">
     <div class="box-header with-border border-bottom-0">
-        <!-- <h3 class="box-title">Processing</h3> -->
+        <h3 class="box-title-font-18 mt-10">Status: {!! $proAppraisal->PropertyStatusColor !!}</h3>
         <div class="box-tools">
             <!-- PROPERTY WAS APPROVED OR REJECTED USER CAN'T EDIT -->
             @if (!$userBmRole)
                 @if ($userAdminRole || !$proAppraisal->IsPropertyVerifiedOrApproved && !$proAppraisal->IsPropertyRejected)
-                    <div class="btn-group pull-right" style="margin-right: 5px">
+                    <div class="btn-group pull-right">
                         <a href="{{ env('APP_URL') }}/public/admin/property_appraisals/{{ $proAppraisal->id }}/edit" class="btn btn-sm btn-primary" title="Edit">
                             <i class="fa fa-edit"></i><span class="hidden-xs"> Edit</span>
                         </a>
                     </div>
                 @endif
             @endif
-            <div class="btn-group pull-right" style="margin-right: 5px">
+            @if ($userAdminRole || $proAppraisal->IsPropertyApproved)
+                <a class="btn btn-primary pull-right mr-5" href="{{ env('APP_URL') }}/public/api/pdfappraisal/{{ $proAppraisal->id }}" target="_blank">Download</a>
+            @endif
+            <div class="btn-group pull-right mr-5">
                 <a href="{{ env('APP_URL') }}/public/admin/property_appraisals" class="btn btn-sm btn-default" title="List">
                     <i class="fa fa-list"></i><span class="hidden-xs"> List</span>
                 </a>

@@ -2,6 +2,7 @@
 
 <div class="box box-info">
     <div class="box-header with-border border-bottom-0">
+        <h3 class="box-title-font-18 mt-10">Status: {!! $propertyIndicator->PropertyStatusColor !!}</h3>
         <div class="box-tools">
             @if (!$userBmRole)
                 @if ($userAdminRole || !$propertyIndicator->IsPropertyVerifiedOrApproved && !$propertyIndicator->IsPropertyRejected)
@@ -11,6 +12,9 @@
                         </a>
                     </div>
                 @endif
+            @endif
+            @if ($userAdminRole || $propertyIndicator->IsPropertyApproved)
+                <a class="btn btn-primary pull-right mr-5" href="{{ env('APP_URL') }}/public/api/pdfindicator/{{ $propertyIndicator->id }}" target="_blank">Download</a>
             @endif
             <div class="btn-group pull-right" style="margin-right: 5px">
                 <a href="{{  env('APP_URL') }}/public/admin/property_indicators" class="btn btn-sm btn-default" title="List">

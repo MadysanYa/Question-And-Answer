@@ -377,6 +377,25 @@ class PropertyIndicator extends Model
         return false;
     }
 
+    public function getPropertyStatusColorAttribute()
+    {
+        $statusTitle = 'Processing';
+        $statusColor = 'status-processing';
+
+        if ($this->is_verified == 2) {
+            $statusTitle = 'Rejected';
+            $statusColor = 'status-rejected';
+        } elseif ($this->is_verified == 1 && $this->is_approved == null) {
+            $statusTitle = 'Verified';
+            $statusColor = 'status-approved';
+        } elseif ($this->is_verified == 1 && $this->is_approved == 1) {
+            $statusTitle = 'Approved';
+            $statusColor = 'status-approved';
+        } 
+
+        return '<span class="'.$statusColor.'">'.$statusTitle.'</span>';
+    }
+
     public function getPropertyAllPhotosMergeAttribute()
     {
         $photos = [];

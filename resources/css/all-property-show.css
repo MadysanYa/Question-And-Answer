@@ -34,6 +34,10 @@
     padding: 16px;
 }
 
+.mr-5 {
+    margin-right: 5px;
+}
+
 .mr-10 {
     margin-right: 10px;
 }
@@ -56,6 +60,14 @@
 
 .mt-7 {
     margin-top: 7px;
+}
+
+.mt-8 {
+    margin-top: 8px !important;
+}
+
+.mt-10 {
+    margin-top: 10px !important;
 }
 
 .mb-7 {
@@ -120,6 +132,30 @@
 .map-address > i {
     font-size: 18px;
     color: #00236e;
+}
+
+.status-processing {
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 15px;
+    color: #0071b4;
+    background-color: rgba(0,113,180,0.2);
+}
+
+.status-rejected {
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 15px;
+    color: #dd4b39;
+    background-color: rgba(184,95,0,0.2);
+}
+
+.status-approved {
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 15px;
+    color: #689400;
+    background-color: rgba(104,148,0,0.2);
 }
 
 /* Comparable Reference */

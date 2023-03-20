@@ -2,7 +2,7 @@
 
 <div class="box box-info">
     <div class="box-header with-border border-bottom-0">
-        <!-- <h3 class="box-title">Processing</h3> -->
+        <h3 class="box-title-font-18 mt-10">Status: {!! $propertyResearch->PropertyStatusColor !!}</h3>
         <div class="box-tools">
             @if (!$userBmRole)
                 @if ($userAdminRole || !$propertyResearch->IsPropertyVerifiedOrApproved && !$propertyResearch->IsPropertyRejected)
