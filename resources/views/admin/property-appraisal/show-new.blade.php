@@ -273,7 +273,7 @@
             </div>
             <div class="col-md-4">
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Land Value per Sqm</strong></div>
+                    <div class="col-sm-4"><strong>Land Value Per Sqm</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->land_value_per_sqm }}</div>
                     </div>
@@ -318,7 +318,7 @@
             </div>
             <div class="col-md-4">
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Building Value per Sqm</strong></div>
+                    <div class="col-sm-4"><strong>Building Value Per Sqm</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->building_value_per_sqm }}</div>
                     </div>
@@ -383,7 +383,7 @@
                     </div>
                 </div>
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Value per Sqm</strong></div>
+                    <div class="col-sm-4"><strong>Value Per Sqm</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->comparable_value_per_sqm1 }}</div>
                     </div>
@@ -440,7 +440,7 @@
                     </div>
                 </div>
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Value per Sqm</strong></div>
+                    <div class="col-sm-4"><strong>Value Per Sqm</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $proAppraisal->comparable_value_per_sqm2 }}</div>
                     </div>

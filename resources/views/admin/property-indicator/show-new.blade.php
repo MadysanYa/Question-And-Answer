@@ -254,7 +254,7 @@
             </div>
             <div class="col-md-4">
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Land Value per Sqm</strong></div>
+                    <div class="col-sm-4"><strong>Land Value Per Sqm</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $propertyIndicator->land_value_per_sqm }}</div>
                     </div>
@@ -293,7 +293,7 @@
             </div>
             <div class="col-md-4">
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Building Value per Sqm</strong></div>
+                    <div class="col-sm-4"><strong>Building Value Per Sqm</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $propertyIndicator->building_value_per_sqm }}</div>
                     </div>
@@ -318,13 +318,13 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>ID 1</strong></div>
+                    <div class="col-sm-4"><strong>ID</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $propertyIndicator->comparable_id1  }}</div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-4"><strong>Size 1</strong></div>
+                    <div class="col-sm-4"><strong>Size</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $propertyIndicator->comparable_size1  }}</div>
                     </div>
@@ -332,13 +332,13 @@
             </div>
             <div class="col-md-4">
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>CIF No. / Name 1</strong></div>
+                    <div class="col-sm-4"><strong>CIF No. / Name</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $propertyIndicator->comparable_cif_no1  }}</div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-4"><strong>Value per Sqm 1</strong></div>
+                    <div class="col-sm-4"><strong>Value Per Sqm</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $propertyIndicator->comparable_value_per_sqm1  }}</div>
                     </div>
@@ -346,13 +346,13 @@
             </div>
             <div class="col-md-4">
                 <div class="row mb-10">
-                    <div class="col-sm-4"><strong>Geo Code 1</strong></div>
+                    <div class="col-sm-4"><strong>Geo Code</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $propertyIndicator->comparable_geo_code1  }}</div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-4"><strong>Total Value 1</strong></div>
+                    <div class="col-sm-4"><strong>Total Value</strong></div>
                     <div class="col-sm-8">
                         <div>{{ $propertyIndicator->comparable_total_value1  }}</div>
                     </div>
@@ -369,13 +369,13 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="row mb-10">
-                        <div class="col-sm-4"><strong>ID 2</strong></div>
+                        <div class="col-sm-4"><strong>ID</strong></div>
                         <div class="col-sm-8">
                             <div>{{ $propertyIndicator->comparable_id2  }}</div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-4"><strong>Size 2</strong></div>
+                        <div class="col-sm-4"><strong>Size</strong></div>
                         <div class="col-sm-8">
                             <div>{{ $propertyIndicator->comparable_size2  }}</div>
                         </div>
@@ -383,13 +383,13 @@
                 </div>
                 <div class="col-md-4">
                     <div class="row mb-10">
-                        <div class="col-sm-4"><strong>CIF No. / Name 2</strong></div>
+                        <div class="col-sm-4"><strong>CIF No. / Name</strong></div>
                         <div class="col-sm-8">
                             <div>{{ $propertyIndicator->comparable_cif_no2  }}</div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-4"><strong>Value per Sqm 2</strong></div>
+                        <div class="col-sm-4"><strong>Value Per Sqm</strong></div>
                         <div class="col-sm-8">
                             <div>{{ $propertyIndicator->comparable_value_per_sqm2  }}</div>
                         </div>
@@ -397,13 +397,13 @@
                 </div>
                 <div class="col-md-4">
                     <div class="row mb-10">
-                        <div class="col-sm-4"><strong>Geo Code 2</strong></div>
+                        <div class="col-sm-4"><strong>Geo Code</strong></div>
                         <div class="col-sm-8">
                             <div>{{ $propertyIndicator->comparable_geo_code2  }}</div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-4"><strong>Total Value 2</strong></div>
+                        <div class="col-sm-4"><strong>Total Value</strong></div>
                         <div class="col-sm-8">
                             <div>{{ $propertyIndicator->comparable_total_value2  }}</div>
                         </div>
