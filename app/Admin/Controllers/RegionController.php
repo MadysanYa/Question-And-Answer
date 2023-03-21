@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Admin\Controllers;
-use App\Admin\Actions\Post\Replicate;
+use Auth;
 use App\Models\Region;
-use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
-use Auth;
+use Encore\Admin\Grid\Tools;
+use App\Admin\Actions\Post\Replicate;
+use App\Admin\Actions\Region\ImportRegion;
+use Encore\Admin\Controllers\AdminController;
 
 
 class RegionController extends AdminController
@@ -34,6 +36,10 @@ class RegionController extends AdminController
         $grid->disableExport();
         $grid->disableFilter();
         $grid->quickSearch('id','region_name');
+
+        // $grid->tools(function (Tools $tools) {
+        //     $tools->append(new ImportRegion());
+        // });
 
         return $grid;
     }

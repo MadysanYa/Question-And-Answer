@@ -1,22 +1,23 @@
 <?php
 
-use App\Admin\Controllers\CommuneController as ControllersCommuneController;
-use App\Http\Controllers\CommuneController;
-use App\Http\Controllers\DistrictController;
-use App\Http\Controllers\PdfController;
-use App\Http\Controllers\QRCodeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PdfController;
+use App\Http\Controllers\BranchController;
+use App\Http\Controllers\QRCodeController;
+use App\Http\Controllers\CommuneController;
+use App\Http\Controllers\VillageController;
+use App\Http\Controllers\DistrictController;
+use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\TransferController;
 use App\Http\Controllers\TaskdetailController;
-use App\Http\Controllers\VillageController;
-use App\Http\Controllers\BranchController;
-use App\Http\Controllers\PropertyIndicatorController;
-use App\Http\Controllers\PropertyAppraisalController;
-use App\Http\Controllers\PropertyResearchController;
-
 use App\Http\Controllers\PdfAppraisalController;
 use App\Http\Controllers\PdfIndicatorController;
+use App\Http\Controllers\PropertyResearchController;
+
+use App\Http\Controllers\PropertyAppraisalController;
+use App\Http\Controllers\PropertyIndicatorController;
+use App\Admin\Controllers\CommuneController as ControllersCommuneController;
 
 
 
@@ -34,7 +35,6 @@ use App\Http\Controllers\PdfIndicatorController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 
 Route::post('/transfer', [TransferController::class, 'store']);
 Route::post('/taskdetail', [TaskdetailController::class, 'store']);
@@ -58,6 +58,8 @@ Route::get('/approve_appraisal/{id}/{value}', [PropertyAppraisalController::clas
 Route::get('pdfappraisal/{id}', [PdfAppraisalController::class, 'index']);
 Route::get('pdfindicator/{id}', [PdfIndicatorController::class, 'index']);
 Route::get('/qrcode', [QRCodeController::class, 'index']);
+
+Route::get('download-sample-csv/{file}', [DownloadController::class, 'downloadSampleCSV'])->name('download.sample.csv');
 
 // Route::get('/print', [PdfController::class, 'print']);
 // API for PDF Generation
