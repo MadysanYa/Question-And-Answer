@@ -465,7 +465,7 @@
                 <div class="col-sm-4"><strong>Strength</strong></div>
                 <div class="col-sm-8">
                     @if ($proAppraisal->strength)
-                    <div class="bg-success p-10 border-radius">{!! $proAppraisal->strength !!}</div>
+                    <div class="bg-success p-10 border-radius min-height-120">{!! $proAppraisal->strength !!}</div>
                     @endif
                 </div>
             </div>
@@ -473,7 +473,7 @@
                 <div class="col-sm-4"><strong>Opportunity</strong></div>
                 <div class="col-sm-8">
                     @if ($proAppraisal->opportunity)
-                    <div class="bg-info p-10 border-radius">{!! $proAppraisal->opportunity !!}</div>
+                    <div class="bg-info p-10 border-radius min-height-120">{!! $proAppraisal->opportunity !!}</div>
                     @endif
                 </div>
             </div>
@@ -483,7 +483,7 @@
                 <div class="col-sm-4"><strong>Weakness</strong></div>
                 <div class="col-sm-8">
                     @if ($proAppraisal->weakness)
-                    <div class="bg-warning p-10 border-radius">{!! $proAppraisal->weakness !!}</div>
+                    <div class="bg-warning p-10 border-radius min-height-120">{!! $proAppraisal->weakness !!}</div>
                     @endif
                 </div>
             </div>
@@ -491,7 +491,7 @@
                 <div class="col-sm-4"><strong>Threat</strong></div>
                 <div class="col-sm-8">
                     @if ($proAppraisal->threat)
-                    <div class="bg-danger p-10 border-radius">{!! $proAppraisal->threat !!}</div>
+                    <div class="bg-danger p-10 border-radius min-height-120">{!! $proAppraisal->threat !!}</div>
                     @endif
                 </div>
             </div>

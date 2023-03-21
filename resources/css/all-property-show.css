@@ -86,6 +86,10 @@
     height: auto !important;
 }
 
+.min-height-120 {
+    min-height: 120px;
+}
+
 .image-height {
     height: 142px !important;
 }
