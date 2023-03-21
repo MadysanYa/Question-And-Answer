@@ -52,11 +52,13 @@
             zoom: 12,
         };
         var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        var icon = "{{ asset('imges/marker_icon/default.png') }}";
         var marker = new google.maps.Marker({
             position: {
                 lat: proLat,
                 lng: proLong
             },
+            icon: icon,
             map: map,
         });
     }
