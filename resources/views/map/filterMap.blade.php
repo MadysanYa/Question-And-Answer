@@ -9,6 +9,12 @@
                                 <i class="fa fa-filter"></i>
                                 Apply
                             </button>
+                            <div class="input-group input-group-sm" style="display: inline-block; margin-right: 10px;">
+                                <input type="text" name="search" class="form-control grid-quick-search" style="width: 200px;" value="" placeholder="">
+                                <div class="input-group-btn" style="display: inline-block;">
+                                    <button type="submit" class="btn btn-default" value="Filter"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
                             <div class="">
                                 <div class="input-group input-group-sm" style="display: flex; box-shadow: none;">
                                     <span class="icheck">

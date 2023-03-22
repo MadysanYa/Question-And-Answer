@@ -39,6 +39,7 @@
             var marker, i , markers = [], markerCluster;
 
             const locations = {{ Js::from($arryProperty) }};
+            console.log(locations);
             const labels = {{ Js::from($arrayLabel) }};
             const propertyIndicator = {{ Js::from($infoProperty)}};
 
