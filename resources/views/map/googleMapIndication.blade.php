@@ -24,8 +24,8 @@
 <body>
     @include('map.filterMap')
     <script type="text/javascript">
-        function initMap() {
-            const myLatLng = { lat: 11.5690444, lng: 104.9161949 };
+        function initMap() { 
+            const myLatLng = { lat: 11.546049, lng: 104.91958 };
             const map = new google.maps.Map(document.getElementById("map"), {
                 zoom: 16,
                 center: myLatLng,

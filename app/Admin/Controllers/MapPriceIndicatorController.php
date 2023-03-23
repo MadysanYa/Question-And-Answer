@@ -52,10 +52,10 @@ class MapPriceIndicatorController extends AdminController
         ];
 
         //LatLong Property Indication
-        $arryProperty =  DB::table('property_indication_mat_view_summary')->select($latLong)->get()->toArray() ?? null;
+        $arryProperty =  DB::table('property_indication_mat_view_summary')->select($latLong)->where('id', 2)->get()->toArray() ?? null;
 
         //Labels on marker
-        $propertys = DB::table('property_indication_mat_view_summary')->select($fieldPropreryLabel)->get();
+        $propertys = DB::table('property_indication_mat_view_summary')->select($fieldPropreryLabel)->where('id', 2)->get();
         foreach($propertys as $value){
             $label = "$".$value->land_value_per_sqm;
             $labelArray[] = $label;
@@ -63,7 +63,7 @@ class MapPriceIndicatorController extends AdminController
         $arrayLabel = $labelArray ?? null;
 
         //Information property indicator
-        $infoProperty = DB::table('property_indication_mat_view_summary')->get()->toArray() ?? null​​;
+        $infoProperty = DB::table('property_indication_mat_view_summary')->where('id', 2)->get()->toArray() ?? null​​;
 
         //Property Research
         $propertyResearch = DB::table('property_research_mat_view_summary')->select($fieldPropreryLabel)->get();
