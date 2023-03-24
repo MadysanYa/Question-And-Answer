@@ -20,10 +20,10 @@
         <span class="float-right">
             <span class="direction-icon">Google Point</span>
             <span class="direction-icon">({{ $googlePoint }})</span>
-            <span class="mr-10 ml-10">|</span>
+            <!-- <span class="mr-10 ml-10">|</span>
             <a class="direction-icon" href="https://www.google.com.kh/maps/?daddr={{ $googlePoint }}" target="_blank">
                 <i class="fa fa-paper-plane mr-10"></i>Get Direction
-            </a>
+            </a> -->
         </span>
         <hr class="mt-7 mb-7">
     </div>
