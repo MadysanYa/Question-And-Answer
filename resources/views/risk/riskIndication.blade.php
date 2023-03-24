@@ -22,33 +22,7 @@
     </style>
 </head>
 <body>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box grid-box">
-                @if(!($userIsRmRole || $userIsBmRole))
-                    <div class="box-header with-border">
-                        <div class="pull-right">
-                            <div class="" style="display: flex;align-items: center;">
-                                <div class="btn-group pull-right grid-create-btn">
-                                    <a href="../../public/admin/risk_indicators/create" class="btn btn-sm btn-success" title="New">
-                                        <i class="fa fa-plus"></i><span class="hidden-xs">&nbsp;&nbsp;New</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endif
-
-                <div style="padding: 10px;">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div id="map"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('risk.searchIndication')
     <script type="text/javascript">
         function initMap() {
             const myLatLng = { lat: 11.5764211, lng: 104.923754 };
@@ -58,7 +32,6 @@
             });
 
             const infoWindow = new google.maps.InfoWindow({
-				// content: "",
 				disableAutoPan: true,
 			});
 

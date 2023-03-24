@@ -10,11 +10,9 @@
         #map {
           height: 650px;
         }
-
         div[style="background-color: white; font-weight: 500; font-family: Roboto, sans-serif; padding: 15px 25px; box-sizing: border-box; top: 5px; border: 1px solid rgba(0, 0, 0, 0.12); border-radius: 5px; left: 50%; max-width: 375px; position: absolute; transform: translateX(-50%); width: calc(100% - 10px); z-index: 1;"] {
             display: none !important;
         }
-
         img[src="https://maps.gstatic.com/mapfiles/transparent.png"]
         { 
             display: none !important;
@@ -24,31 +22,31 @@
 <body>
     @include('map.filterMap')
     <script type="text/javascript">
-        function initMap() { 
-            const myLatLng = { lat: 11.546049, lng: 104.91958 };
+        function initMap() {
+
+            const locations = {{ Js::from($latLongProIndicator) }};
+            const labels = {{ Js::from($labelProIndication) }};
+            const propertyIndicator = {{ Js::from($infoProIndication)}};
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+
+            var myLatLng = { lat: 11.5690444, lng: 104.9161949 };
+            var marker, i , markers = [], markerCluster;
+            var icons = '../imges/marker_icon/properties_indication.png';
+            var centerLat, centerLong;
+
+            if (urlParams.has('search') && urlParams.get('search') && !jQuery.isEmptyObject(locations)) {
+                myLatLng = locations[0];
+            } 
             const map = new google.maps.Map(document.getElementById("map"), {
                 zoom: 16,
                 center: myLatLng,
             });
-
             const infoWindow = new google.maps.InfoWindow({
-				// content: "",
 				disableAutoPan: true,
 			});
 
-            var marker, i , markers = [], markerCluster;
-
-            const locations = {{ Js::from($arryProperty) }};
-            console.log(locations);
-            const labels = {{ Js::from($arrayLabel) }};
-            const propertyIndicator = {{ Js::from($infoProperty)}};
-
-            var icons = '../imges/marker_icon/properties_indication.png';
-
-            var centerLat, centerLong;
-
             google.maps.event.addListener(map, "dragend", function() {
-
                 var center = this.getCenter();
                 var latitude = center.lat();
                 var longitude = center.lng();
@@ -58,23 +56,18 @@
                 var filter_locations=[];
 
                 if(markerCluster != null) markerCluster.clearMarkers();
-
                 locations.map((position, i) => {
                     if(distanceCalculator(centerLat,centerLong,position.lat,position.lng) <= 1) {
                                     filter_locations.push(position);
                     }
                 });
-
                 markers = filter_locations.map((position, i) => {
-
-
                     const label = {text: labels[i % labels.length], color: "white", fontSize: "13px"};
                     const marker = new google.maps.Marker({
                                     icon:icons,
                                     position,
                                     label,
-                                   });
-
+                                });
                     //Content
                     marker.addListener("click", () => {
                                     infoWindow.setContent(
@@ -106,14 +99,10 @@
                                     );
                                     infoWindow.open(map, marker);
                     });
-
                     return marker;
                 });
-
                 markerCluster = new markerClusterer.MarkerClusterer({ markers, map });
-
             });
-
             google.maps.event.trigger(map, 'dragend');
 
             function distanceCalculator(lat1, lon1, lat2, lon2)
@@ -130,13 +119,11 @@
                 var d = R * c;
                 return d;
             }
-
             // Converts numeric degrees to radians
             function toRad(Value)
             {
                     return Value * Math.PI / 180;
             }
-
             // Sets the map on all markers in the array.
             function clearMapOnAll() {
                 for (let i = 0; i < markers.length; i++) {
@@ -154,7 +141,6 @@
         setInterval(function () {googlemap_remap();}, 10);
 
         function googlemap_remap() {
-            
             var gimg = $('img[src*="https://maps.google.com/maps/vt"]:not(.gmf)');
             
             $.each(gimg, function(i,x){

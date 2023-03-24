@@ -51,15 +51,20 @@ class RiskIndicatorController extends AdminController
             'longtitude',
             'description',
         ];
-
-        //Property Indication
-        $propertys = RiskIndicator::select($fieldRiskIndicator)->get();
-        $locationArray = [];
-
+        $reqSearch = request()->search;
         //LatLong Property Indication
-        $arryRiskProperty = RiskIndicator::select($latLong)->get()->toArray() ?? null;
+        $arryRiskProperty = RiskIndicator::select($latLong);
+        if ( request()->has('search') && $reqSearch ) {
+            $arryRiskProperty = $arryRiskProperty->where('id', $reqSearch)->orWhere('title','LIKE', '%'.$reqSearch.'%');
+        }
+        $arryRiskProperty = $arryRiskProperty->get()->toArray() ?? null;
 
         //Labels on marker
+        $propertys = RiskIndicator::select($fieldRiskIndicator);
+        if( request()->has('search') && $reqSearch ){
+            $propertys = $propertys->where('id', $reqSearch)->orWhere('title','LIKE', '%'.$reqSearch.'%');
+        }
+        $propertys = $propertys->get();
         foreach($propertys as $value){
             $label = $value->title;
             $labelArray[] = $label;
@@ -67,7 +72,11 @@ class RiskIndicatorController extends AdminController
         $arrayLabel = $labelArray ?? null;
 
         //Information property risk
-        $infoProperty = RiskIndicator::select($fieldRiskIndicator)->get()->toArray() ?? null;
+        $infoProperty = RiskIndicator::select($fieldRiskIndicator);
+        if( request()->has('search') && $reqSearch ){
+            $infoProperty = $infoProperty->where('id', $reqSearch)->orWhere('title','LIKE', '%'.$reqSearch.'%');
+        }
+        $infoProperty = $infoProperty->get()->toArray() ?? null;
 
         $RiskIndicator->body(view('risk.riskIndication', [
             'arryRiskProperty' => $arryRiskProperty,

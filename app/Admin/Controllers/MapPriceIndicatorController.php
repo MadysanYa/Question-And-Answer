@@ -36,8 +36,8 @@ class MapPriceIndicatorController extends AdminController
      *
      * @return Grid
      */
-    public function index(Content $MapPriceIndicator){
-
+    public function index(Content $MapPriceIndicator) 
+    {
         $MapPriceIndicator->header($this->title);
         $MapPriceIndicator->body($this->grid());
         //LatLong
@@ -50,39 +50,67 @@ class MapPriceIndicatorController extends AdminController
             'id',
             'land_value_per_sqm',
         ];
+        $reqSearch = request()->search;
 
-        //LatLong Property Indication
-        $arryProperty =  DB::table('property_indication_mat_view_summary')->select($latLong)->where('id', 2)->get()->toArray() ?? null;
-
-        //Labels on marker
-        $propertys = DB::table('property_indication_mat_view_summary')->select($fieldPropreryLabel)->where('id', 2)->get();
-        foreach($propertys as $value){
-            $label = "$".$value->land_value_per_sqm;
-            $labelArray[] = $label;
+        //Property Indication
+        $latLongProIndicator = DB::table('property_indication_mat_view_summary')->select($latLong);
+        if(request()->has('search') && $reqSearch) {
+            $latLongProIndicator = $latLongProIndicator->where('id', $reqSearch)->orWhere('property_reference',$reqSearch);
         }
-        $arrayLabel = $labelArray ?? null;
-
-        //Information property indicator
-        $infoProperty = DB::table('property_indication_mat_view_summary')->where('id', 2)->get()->toArray() ?? null​​;
+        $latLongProIndicator = $latLongProIndicator->get()->toArray() ?? null;
+        $propertyIndication = DB::table('property_indication_mat_view_summary')->select($fieldPropreryLabel);
+        if(request()->has('search') && $reqSearch) {
+            $propertyIndication = $propertyIndication->where('id', $reqSearch)->orWhere('property_reference',$reqSearch);
+        }
+        $propertyIndication = $propertyIndication->get();
+        $labelProIndication = $this->labelProIndication($propertyIndication);
+        $infoProIndication = DB::table('property_indication_mat_view_summary');
+        if(request()->has('search') && $reqSearch) {
+            $infoProIndication = $infoProIndication->where('id', $reqSearch)->orWhere('property_reference',$reqSearch);
+        }
+        $infoProIndication = $infoProIndication->get()->toArray() ?? null​​;
 
         //Property Research
-        $propertyResearch = DB::table('property_research_mat_view_summary')->select($fieldPropreryLabel)->get();
-        $latLongProResearch =  DB::table('property_research_mat_view_summary')->select($latLong)->get()->toArray() ?? null;
+        $latLongProResearch =  DB::table('property_research_mat_view_summary')->select($latLong);
+        if(request()->has('search') && $reqSearch) {
+            $latLongProResearch = $latLongProResearch->where('id', $reqSearch)->orWhere('property_reference',$reqSearch);
+        }
+        $latLongProResearch = $latLongProResearch->get()->toArray() ?? null;
+        $propertyResearch = DB::table('property_research_mat_view_summary')->select($fieldPropreryLabel);
+        if(request()->has('search') && $reqSearch) {
+            $propertyResearch = $propertyResearch->where('id', $reqSearch)->orWhere('property_reference',$reqSearch);
+        }
+        $propertyResearch = $propertyResearch->get();
         $labelProResearch = $this->labelProResearch($propertyResearch);
-        $infoProResearch = DB::table('property_research_mat_view_summary')->get()->toArray() ?? null​​;
+        $infoProResearch = DB::table('property_research_mat_view_summary');
+        if(request()->has('search') && $reqSearch) {
+            $infoProResearch = $infoProResearch->where('id', $reqSearch)->orWhere('property_reference',$reqSearch);
+        }
+        $infoProResearch = $infoProResearch->get()->toArray() ?? null​​;
 
         //Property Appraisal
-        $propertyAppraisal = DB::table('property_appraisal_mat_view_summary')->select($fieldPropreryLabel)->get();
-        $latLongProAppraisal =  DB::table('property_appraisal_mat_view_summary')->select($latLong)->get()->toArray() ?? null;
+        $latLongProAppraisal =  DB::table('property_appraisal_mat_view_summary')->select($latLong);
+        if(request()->has('search') && $reqSearch) {
+            $latLongProAppraisal = $latLongProAppraisal->where('id', $reqSearch)->orWhere('property_reference',$reqSearch);
+        }
+        $latLongProAppraisal =  $latLongProAppraisal->get()->toArray() ?? null;
+        $propertyAppraisal = DB::table('property_appraisal_mat_view_summary')->select($fieldPropreryLabel);
+        if(request()->has('search') && $reqSearch) {
+            $propertyAppraisal = $propertyAppraisal->where('id', $reqSearch)->orWhere('property_reference',$reqSearch);
+        }
+        $propertyAppraisal = $propertyAppraisal->get();
         $labelProAppraisal = $this->labelProAppraisal($propertyAppraisal);
-        $infoProAppraisal = DB::table('property_appraisal_mat_view_summary')->get()->toArray() ?? null​​;
+        $infoProAppraisal = DB::table('property_appraisal_mat_view_summary');
+        if(request()->has('search') && $reqSearch) {
+            $infoProAppraisal = $infoProAppraisal->where('id', $reqSearch)->orWhere('property_reference',$reqSearch);
+        }
+        $infoProAppraisal = $infoProAppraisal->get()->toArray() ?? null​​;
 
-        if(request()->check_list == 'indication'){
+        if(request()->check_list == 'indication') {
             $MapPriceIndicator->body(view('map.googleMapIndication', [
-                'arryProperty' => $arryProperty,
-                'arrayLabel' => $arrayLabel,
-                'infoProperty' => $infoProperty,
-                'propertys' => $propertys,
+                'latLongProIndicator' => $latLongProIndicator,
+                'labelProIndication' => $labelProIndication,
+                'infoProIndication' => $infoProIndication
             ]));
         }elseif (request()->check_list == 'research') {
             $MapPriceIndicator->body(view('map.googleMapPropertyResearch', [
@@ -96,30 +124,34 @@ class MapPriceIndicatorController extends AdminController
                 'labelProAppraisal' => $labelProAppraisal,
                 'infoProAppraisal' => $infoProAppraisal
             ]));
-        }
-        else{
+        } else { 
             $MapPriceIndicator->body(view('map.googleMapPropertyResearch', [
                 'latLongProResearch' => $latLongProResearch,
                 'labelProResearch' => $labelProResearch,
                 'infoProResearch' => $infoProResearch
             ]));
         }
-
         return $MapPriceIndicator;
     }
-
+    private function labelProIndication($propertyIndication)
+    {
+        foreach($propertyIndication as $value) {
+            $label = "$".$value->land_value_per_sqm;
+            $labelArray[] = $label;
+        }
+        return $labelProIndication = $labelArray ?? null;
+    }
     private function labelProResearch($propertyResearch)
     {
-        foreach($propertyResearch as $value){
+        foreach($propertyResearch as $value) {
             $labelProResearch = "$".$value->land_value_per_sqm;
             $arrayLabelProResearch[] = $labelProResearch;
         }
         return $arrayLabelProResearch = $arrayLabelProResearch ?? null;
     }
-
     private function labelProAppraisal($propertyAppraisal)
     {
-        foreach($propertyAppraisal as $value){
+        foreach($propertyAppraisal as $value) {
             $labelProAppraisal = "$".$value->land_value_per_sqm;
             $arrayLabelProAppraisal[] = $labelProAppraisal;
         }
