@@ -24,9 +24,7 @@
     <script type="text/javascript">
         function initMap() {
 
-            const locations = {{ Js::from($latLongProIndicator) }};
-            const labels = {{ Js::from($labelProIndication) }};
-            const propertyIndicator = {{ Js::from($infoProIndication)}};
+            const locations = {{ Js::from($proIndication) }};
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
 
@@ -54,15 +52,22 @@
                 centerLong= center.lng();
 
                 var filter_locations=[];
-
+                var filter_label=[];
+                var filter_infor=[];
                 if(markerCluster != null) markerCluster.clearMarkers();
                 locations.map((position, i) => {
                     if(distanceCalculator(centerLat,centerLong,position.lat,position.lng) <= 1) {
                                     filter_locations.push(position);
                     }
                 });
+                filter_locations.forEach(function(item){
+                    filter_label.push('$' + item.land_value_per_sqm);
+                });
+                filter_locations.map((position, i) => {
+                    filter_infor.push(position);
+                });
                 markers = filter_locations.map((position, i) => {
-                    const label = {text: labels[i % labels.length], color: "white", fontSize: "13px"};
+                    const label = {text: filter_label[i % filter_label.length], color: "white", fontSize: "13px"};
                     const marker = new google.maps.Marker({
                                     icon:icons,
                                     position,
@@ -71,31 +76,31 @@
                     //Content
                     marker.addListener("click", () => {
                                     infoWindow.setContent(
-                                        "<p style='margin-bottom: 3px;'>Latitude: " + propertyIndicator[i]['latitude'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>Longitude: " + propertyIndicator[i]['longtitude'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>Branch: " + propertyIndicator[i]['branch_name'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>Property Reference: " + propertyIndicator[i]['property_reference'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>CIF No.: " + propertyIndicator[i]['cif_no'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>RM Name: " + propertyIndicator[i]['rm_name'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>Telephone: " + propertyIndicator[i]['telephone'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>Request Date: " + propertyIndicator[i]['requested_date'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>Report Date: " + propertyIndicator[i]['reported_date'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>Information Type: " + propertyIndicator[i]['information_type_name'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>Location Type: " + propertyIndicator[i]['location_type'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>Type Access Road Name " + propertyIndicator[i]['type_of_access_road'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>Access Road Name: " + propertyIndicator[i]['access_road_name'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>Property Type: " + propertyIndicator[i]['property_type_name'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>Building Status: " + propertyIndicator[i]['building_status'] + "%</p>" +
-                                        "<p style='margin-bottom: 3px;'>Borey: " + propertyIndicator[i]['borey_name'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>No. of Floor: " + propertyIndicator[i]['no_of_floor'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>Land Title Type: " + propertyIndicator[i]['land_title_type'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>Information Date: " + propertyIndicator[i]['created_at'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>Land Size: " + propertyIndicator[i]['land_size'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>Land Value per Sqm: $" + propertyIndicator[i]['land_value_per_sqm'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>Building Size: " + propertyIndicator[i]['building_size'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>Building Value per Sqm: $" + propertyIndicator[i]['building_value_per_sqm'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>Property Value: $" + propertyIndicator[i]['property_value'] + "</p>" +
-                                        "<p style='margin-bottom: 3px;'>Contact No. : " + propertyIndicator[i]['client_contact_no'] + "</p>"
+                                        "<p style='margin-bottom: 3px;'>Latitude: " + filter_infor[i]['lat'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Longitude: " + filter_infor[i]['lng'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Branch: " + filter_infor[i]['branch_name'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Property Reference: " + filter_infor[i]['property_reference'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>CIF No.: " + filter_infor[i]['cif_no'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>RM Name: " + filter_infor[i]['rm_name'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Telephone: " + filter_infor[i]['telephone'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Request Date: " + filter_infor[i]['requested_date'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Report Date: " + filter_infor[i]['reported_date'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Information Type: " + filter_infor[i]['information_type_name'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Location Type: " + filter_infor[i]['location_type'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Type Access Road Name " + filter_infor[i]['type_of_access_road'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Access Road Name: " + filter_infor[i]['access_road_name'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Property Type: " + filter_infor[i]['property_type_name'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Building Status: " + filter_infor[i]['building_status'] + "%</p>" +
+                                        "<p style='margin-bottom: 3px;'>Borey: " + filter_infor[i]['borey_name'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>No. of Floor: " + filter_infor[i]['no_of_floor'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Land Title Type: " + filter_infor[i]['land_title_type'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Information Date: " + filter_infor[i]['created_at'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Land Size: " + filter_infor[i]['land_size'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Land Value per Sqm: $" + filter_infor[i]['land_value_per_sqm'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Building Size: " + filter_infor[i]['building_size'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Building Value per Sqm: $" + filter_infor[i]['building_value_per_sqm'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Property Value: $" + filter_infor[i]['property_value'] + "</p>" +
+                                        "<p style='margin-bottom: 3px;'>Contact No. : " + filter_infor[i]['client_contact_no'] + "</p>"
                                     );
                                     infoWindow.open(map, marker);
                     });

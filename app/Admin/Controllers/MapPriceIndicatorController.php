@@ -41,9 +41,38 @@ class MapPriceIndicatorController extends AdminController
         $MapPriceIndicator->header($this->title);
         $MapPriceIndicator->body($this->grid());
         //LatLong
+        $propertyIndication = [
+            'latitude As lat',
+            'longtitude As lng',
+            'id',
+            'branch_name',
+            'property_reference',
+            'cif_no',
+            'rm_name',
+            'telephone',
+            'requested_date',
+            'reported_date',
+            'information_type_name',
+            'location_type',
+            'type_of_access_road',
+            'access_road_name',
+            'property_type_name',
+            'building_status',
+            'borey_name',
+            'no_of_floor',
+            'land_title_type',
+            'created_at',
+            'land_size',
+            'land_value_per_sqm',
+            'building_size',
+            'building_value_per_sqm',
+            'property_value',
+            'client_contact_no',
+        ];
         $latLong = [
             'latitude As lat',
             'longtitude As lng',
+            'id',
         ];
         // Property Indication
         $fieldPropreryLabel = [
@@ -53,22 +82,11 @@ class MapPriceIndicatorController extends AdminController
         $reqSearch = request()->search;
 
         //Property Indication
-        $latLongProIndicator = DB::table('property_indication_mat_view_summary')->select($latLong);
+        $proIndication = DB::table('property_indication_mat_view_summary')->select($propertyIndication);
         if(request()->has('search') && $reqSearch) {
-            $latLongProIndicator = $latLongProIndicator->where('id', $reqSearch)->orWhere('property_reference',$reqSearch);
+            $proIndication = $proIndication->where('id', $reqSearch)->orWhere('property_reference',$reqSearch);
         }
-        $latLongProIndicator = $latLongProIndicator->get()->toArray() ?? null;
-        $propertyIndication = DB::table('property_indication_mat_view_summary')->select($fieldPropreryLabel);
-        if(request()->has('search') && $reqSearch) {
-            $propertyIndication = $propertyIndication->where('id', $reqSearch)->orWhere('property_reference',$reqSearch);
-        }
-        $propertyIndication = $propertyIndication->get();
-        $labelProIndication = $this->labelProIndication($propertyIndication);
-        $infoProIndication = DB::table('property_indication_mat_view_summary');
-        if(request()->has('search') && $reqSearch) {
-            $infoProIndication = $infoProIndication->where('id', $reqSearch)->orWhere('property_reference',$reqSearch);
-        }
-        $infoProIndication = $infoProIndication->get()->toArray() ?? null​​;
+        $proIndication = $proIndication->get()->toArray() ?? null;
 
         //Property Research
         $latLongProResearch =  DB::table('property_research_mat_view_summary')->select($latLong);
@@ -108,9 +126,7 @@ class MapPriceIndicatorController extends AdminController
 
         if(request()->check_list == 'indication') {
             $MapPriceIndicator->body(view('map.googleMapIndication', [
-                'latLongProIndicator' => $latLongProIndicator,
-                'labelProIndication' => $labelProIndication,
-                'infoProIndication' => $infoProIndication
+                'proIndication' => $proIndication,
             ]));
         }elseif (request()->check_list == 'research') {
             $MapPriceIndicator->body(view('map.googleMapPropertyResearch', [
