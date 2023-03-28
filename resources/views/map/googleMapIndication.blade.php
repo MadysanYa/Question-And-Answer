@@ -61,7 +61,11 @@
                     }
                 });
                 filter_locations.forEach(function(item){
-                    filter_label.push('$' + item.land_value_per_sqm);
+                    if (item.land_value_per_sqm) {
+                        filter_label.push('$' + item.land_value_per_sqm);
+                    }else{
+                        filter_label.push('$0');
+                    }
                 });
                 filter_locations.map((position, i) => {
                     filter_infor.push(position);

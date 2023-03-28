@@ -86,7 +86,7 @@ class MapPriceIndicatorController extends AdminController
         if(request()->has('search') && $reqSearch) {
             $proIndication = $proIndication->where('id', $reqSearch)->orWhere('property_reference',$reqSearch);
         }
-        $proIndication = $proIndication->get()->toArray() ?? null;
+        $proIndication = $proIndication->get()->toArray() ?? [];
 
         //Property Research
         $latLongProResearch =  DB::table('property_research_mat_view_summary')->select($latLong);
