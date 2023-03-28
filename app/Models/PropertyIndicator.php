@@ -18,6 +18,10 @@ class PropertyIndicator extends Model
     use DeleteByUserTrait;
 
     protected $dates = ['requested_date','reported_date'];
+    protected $casts = [
+        'photos' => 'json',
+    ];
+    
     /**
      * Relationship
      */
