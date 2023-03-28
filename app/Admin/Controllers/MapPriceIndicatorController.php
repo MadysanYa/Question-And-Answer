@@ -120,23 +120,29 @@ class MapPriceIndicatorController extends AdminController
         $reqSearch = request()->search;
 
         //Property Indication
-        $proIndication = DB::table('property_indication_mat_view_summary')->select($propertyIndication);
+        $proIndication = DB::table('property_indication_mat_view_summary')->select($propertyIndication)->where('land_value_per_sqm', "!=", null);
         if(request()->has('search') && $reqSearch) {
-            $proIndication = $proIndication->where('id', $reqSearch)->orWhere('property_reference',$reqSearch);
+            $proIndication = $proIndication->where('id', $reqSearch)
+                                        ->orWhere('property_reference',$reqSearch)
+                                        ->where('land_value_per_sqm', "!=", null);
         }
         $proIndication = $proIndication->get()->toArray() ?? [];
 
         //Property Research
-        $proResearch =  DB::table('property_research_mat_view_summary')->select($propertyResearch);
+        $proResearch =  DB::table('property_research_mat_view_summary')->select($propertyResearch)->where('land_value_per_sqm', "!=", null);
         if(request()->has('search') && $reqSearch) {
-            $proResearch = $proResearch->where('id', $reqSearch)->orWhere('property_reference',$reqSearch);
+            $proResearch = $proResearch->where('id', $reqSearch)
+                                    ->orWhere('property_reference',$reqSearch)
+                                    ->where('land_value_per_sqm', "!=", null);
         }
         $proResearch = $proResearch->get()->toArray() ?? [];
 
         //Property Appraisal
-        $proAppraisal =  DB::table('property_appraisal_mat_view_summary')->select($propertyAppraisal);
+        $proAppraisal =  DB::table('property_appraisal_mat_view_summary')->select($propertyAppraisal)->where('land_value_per_sqm', "!=", null);
         if(request()->has('search') && $reqSearch) {
-            $proAppraisal = $proAppraisal->where('id', $reqSearch)->orWhere('property_reference',$reqSearch);
+            $proAppraisal = $proAppraisal->where('id', $reqSearch)
+                                        ->orWhere('property_reference',$reqSearch)
+                                        ->where('land_value_per_sqm', "!=", null);
         }
         $proAppraisal =  $proAppraisal->get()->toArray() ?? [];
 
