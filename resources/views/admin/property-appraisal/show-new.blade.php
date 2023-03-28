@@ -226,7 +226,7 @@
 </div>
 
 <!-- Property Address -->
-<x-property-map-address 
+<x-property-map-address
     :googlePoint="$proAppraisal->GeoCode"
     :prolatitude="$proAppraisal->latitude"
     :prolongtitude="$proAppraisal->longtitude"
@@ -470,20 +470,20 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-4"><strong>Opportunity</strong></div>
+                <div class="col-sm-4"><strong>Weakness</strong></div>
                 <div class="col-sm-8">
-                    @if ($proAppraisal->opportunity)
-                    <div class="bg-info p-10 border-radius min-height-120">{!! $proAppraisal->opportunity !!}</div>
+                    @if ($proAppraisal->weakness)
+                    <div class="bg-warning p-10 border-radius min-height-120">{!! $proAppraisal->weakness !!}</div>
                     @endif
                 </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="row mb-10">
-                <div class="col-sm-4"><strong>Weakness</strong></div>
+                <div class="col-sm-4"><strong>Opportunity</strong></div>
                 <div class="col-sm-8">
-                    @if ($proAppraisal->weakness)
-                    <div class="bg-warning p-10 border-radius min-height-120">{!! $proAppraisal->weakness !!}</div>
+                    @if ($proAppraisal->opportunity)
+                    <div class="bg-info p-10 border-radius min-height-120">{!! $proAppraisal->opportunity !!}</div>
                     @endif
                 </div>
             </div>

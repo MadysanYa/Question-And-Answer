@@ -472,9 +472,9 @@ class PropertyAppraisalController extends AdminController
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 style="color:red;">
+                            <h1 style="color:red; font-weight:bold;">
                                 <span class="glyphicon glyphicon"></span> Swot Analyze
-                            </h4>
+                            </h1>
                         </div>
                         <div class="modal-body">
                             <div class="row">
@@ -483,7 +483,7 @@ class PropertyAppraisalController extends AdminController
                                         <label for="strength">
                                             <span class="glyphicon glyphicon">Strength</span>
                                         </label>
-                                        <textarea rows="5" type="text" class="form-control" id="input_strength"></textarea>
+                                        <textarea rows="5" type="text" class="form-control" id="input_strength" style="background-color:#dff0d8"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -491,15 +491,17 @@ class PropertyAppraisalController extends AdminController
                                         <label for="opportunity">
                                             <span class="glyphicon glyphicon">Opportunity</span>
                                         </label>
-                                        <textarea rows="5" type="text" class="form-control" id="input_opportunity"></textarea>
+                                        <textarea rows="5" type="text" class="form-control" id="input_opportunity" style="background-color:#d9edf7"></textarea>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="weakness">
                                             <span class="glyphicon glyphicon">Weakness</span>
                                         </label>
-                                        <textarea rows="5" type="text" class="form-control" id="input_weakness"></textarea>
+                                        <textarea rows="5" type="text" class="form-control" id="input_weakness" style="background-color:#fcf8e3"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -507,7 +509,7 @@ class PropertyAppraisalController extends AdminController
                                         <label for="threat">
                                             <span class="glyphicon glyphicon">Threat</span>
                                         </label>
-                                        <textarea rows="5" type="text" class="form-control" id="input_threat"></textarea>
+                                        <textarea rows="5" type="text" class="form-control" id="input_threat" style="background-color:#f2dede"></textarea>
                                     </div>
                                 </div>
                             </div>
