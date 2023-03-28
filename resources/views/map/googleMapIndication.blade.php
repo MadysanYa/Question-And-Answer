@@ -33,6 +33,11 @@
             var icons = '../imges/marker_icon/properties_indication.png';
             var centerLat, centerLong;
 
+            var url = $(location).attr('href');
+            var parts = url.split("/");
+            var last_part = parts[parts.length-1].split('?');
+            var last_url = last_part[0];
+
             if (urlParams.has('search') && urlParams.get('search') && !jQuery.isEmptyObject(locations)) {
                 myLatLng = locations[0];
             } 
@@ -54,6 +59,7 @@
                 var filter_locations=[];
                 var filter_label=[];
                 var filter_infor=[];
+
                 if(markerCluster != null) markerCluster.clearMarkers();
                 locations.map((position, i) => {
                     if(distanceCalculator(centerLat,centerLong,position.lat,position.lng) <= 1) {
@@ -61,10 +67,16 @@
                     }
                 });
                 filter_locations.forEach(function(item){
-                    if (item.land_value_per_sqm) {
-                        filter_label.push('$' + item.land_value_per_sqm);
-                    }else{
-                        filter_label.push('$0');
+                    if(last_url == 'map_price_indicators'){
+                        if (item.land_value_per_sqm) {
+                            filter_label.push('$' + item.land_value_per_sqm);
+                        }else{
+                            filter_label.push('$0');
+                        }
+                    } else if (last_url == 'title_indicators'){
+                        if (item.land_value_per_sqm) {
+                            filter_label.push(item.land_title_type);
+                        }
                     }
                 });
                 filter_locations.map((position, i) => {

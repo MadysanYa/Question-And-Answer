@@ -24,10 +24,7 @@
     <script type="text/javascript">
         function initMap() {
             
-            const locations = {{ Js::from($latLongProAppraisal) }};
-            console.log(locations);
-            const labels = {{ Js::from($labelProAppraisal) }};
-            const propertyAppraisal = {{ Js::from($infoProAppraisal)}};
+            const locations = {{ Js::from($proAppraisal) }};
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
 
@@ -35,6 +32,11 @@
             var marker, i , markers = [], markerCluster;
             var icons = '../imges/marker_icon/properties_appraisal.png';
             var centerLat, centerLong;
+
+            var url = $(location).attr('href');
+            var parts = url.split("/");
+            var last_part = parts[parts.length-1].split('?');
+            var last_url = last_part[0];
 
             if (urlParams.has('search') && urlParams.get('search') && !jQuery.isEmptyObject(locations)) {
                 myLatLng = locations[0];
@@ -56,16 +58,35 @@
                 centerLong= center.lng();
 
                 var filter_locations=[];
+                var filter_label=[];
+                var filter_infor=[];
+                
 
                 if(markerCluster != null) markerCluster.clearMarkers();
-
                 locations.map((position, i) => {
                     if(distanceCalculator(centerLat,centerLong,position.lat,position.lng) <= 1) {
                                     filter_locations.push(position);
                     }
                 });
+                filter_locations.forEach(function(item){
+                    if(last_url == 'map_price_indicators'){
+                        if (item.land_value_per_sqm) {
+                            filter_label.push('$' + item.land_value_per_sqm);
+                        }else{
+                            filter_label.push('$0');
+                        }
+                    } else if (last_url == 'title_indicators'){
+                        if (item.land_value_per_sqm) {
+                            filter_label.push(item.land_title_type);
+                        }
+                    }
+                });
+                filter_locations.map((position, i) => {
+                    filter_infor.push(position);
+                });
+
                 markers = filter_locations.map((position, i) => {
-                    const label = {text: labels[i % labels.length], color: "white", fontSize: "13px"};
+                    const label = {text: filter_label[i % filter_label.length], color: "white", fontSize: "13px"};
                     const marker = new google.maps.Marker({
                         icon:icons,
                         position,
@@ -74,32 +95,32 @@
                     //Content
                     marker.addListener("click", () => {
                         infoWindow.setContent(
-                            "<p style='margin-bottom: 3px;'>Latitude: " + propertyAppraisal[i]['latitude'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Longitude: " + propertyAppraisal[i]['longtitude'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Branch: " + propertyAppraisal[i]['branch_name'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Property Reference: " + propertyAppraisal[i]['property_reference'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>CIF No.: " + propertyAppraisal[i]['cif_no'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>RM Name: " + propertyAppraisal[i]['rm_name'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Telephone: " + propertyAppraisal[i]['telephone'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Request Date: " + propertyAppraisal[i]['requested_date'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Report Date: " + propertyAppraisal[i]['reported_date'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Information Type: " + propertyAppraisal[i]['information_type_name'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Location Type: " + propertyAppraisal[i]['location_type'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Type Access Road Name " + propertyAppraisal[i]['type_of_access_road'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Access Road Name: " + propertyAppraisal[i]['access_road_name'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Land Title Type: " + propertyAppraisal[i]['land_title_type'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Property Type: " + propertyAppraisal[i]['property_type_name'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Building Status: " + propertyAppraisal[i]['building_status'] + "%</p>" +
-                            "<p style='margin-bottom: 3px;'>Borey: " + propertyAppraisal[i]['borey_name'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>No. of Floor: " + propertyAppraisal[i]['no_of_floor'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Information Date: " + propertyAppraisal[i]['created_at'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Land Size: " + propertyAppraisal[i]['land_size'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Land Value per Sqm: $" + propertyAppraisal[i]['land_value_per_sqm'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Building Size by measure: " + propertyAppraisal[i]['land_size_by_measurement'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Building Value per Sqm: $" + propertyAppraisal[i]['building_value_per_sqm'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Property Value: $" + propertyAppraisal[i]['property_value'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Customer Name: " + propertyAppraisal[i]['customer_name'] + "</p>" +
-                            "<p style='margin-bottom: 3px;'>Contact No. : " + propertyAppraisal[i]['client_contact_no'] + "</p>"
+                            "<p style='margin-bottom: 3px;'>Latitude: " + filter_infor[i]['lat'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Longitude: " + filter_infor[i]['lng'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Branch: " + filter_infor[i]['branch_name'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Property Reference: " + filter_infor[i]['property_reference'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>CIF No.: " + filter_infor[i]['cif_no'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>RM Name: " + filter_infor[i]['rm_name'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Telephone: " + filter_infor[i]['telephone'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Request Date: " + filter_infor[i]['requested_date'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Report Date: " + filter_infor[i]['reported_date'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Information Type: " + filter_infor[i]['information_type_name'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Location Type: " + filter_infor[i]['location_type'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Type Access Road Name " + filter_infor[i]['type_of_access_road'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Access Road Name: " + filter_infor[i]['access_road_name'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Land Title Type: " + filter_infor[i]['land_title_type'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Property Type: " + filter_infor[i]['property_type_name'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Building Status: " + filter_infor[i]['building_status'] + "%</p>" +
+                            "<p style='margin-bottom: 3px;'>Borey: " + filter_infor[i]['borey_name'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>No. of Floor: " + filter_infor[i]['no_of_floor'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Information Date: " + filter_infor[i]['created_at'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Land Size: " + filter_infor[i]['land_size'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Land Value per Sqm: $" + filter_infor[i]['land_value_per_sqm'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Building Size by measure: " + filter_infor[i]['land_size_by_measurement'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Building Value per Sqm: $" + filter_infor[i]['building_value_per_sqm'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Property Value: $" + filter_infor[i]['property_value'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Customer Name: " + filter_infor[i]['customer_name'] + "</p>" +
+                            "<p style='margin-bottom: 3px;'>Contact No. : " + filter_infor[i]['client_contact_no'] + "</p>"
                         );
                         infoWindow.open(map, marker);
                     });
