@@ -47,14 +47,20 @@ class BranchController extends AdminController
     protected function detail($id)
     {
         $show = new Show(Branch::findOrFail($id));
-        // $show->field('id', __('Id'));
-        // $show->field('name', __('Name'));
-        // $show->field('username', __('Username'));
-        // $show->field('password', __('Password'));
-        // $show->field('remark', __('Remark'));
-        // $show->field('updated_at', __('Updated at'));
-        // $show->field('created_at', __('Created at'));
-
+        
+        $show->field('id', __('Id'));
+        $show->field('branch_code', __('Branch code'));
+        $show->field('branch_name', __('Branch Name'));
+        $show->field('created_at', __('Created at'))->as(function(){
+            if ($this->created_at) {
+                return date('Y-m-d', strtotime($this->created_at));
+            };
+        });
+        $show->field('updated_at', __('Updated at'))->as(function(){
+            if ($this->updated_at) {
+                return date('Y-m-d', strtotime($this->updated_at));
+            };
+        });
 
         return $show;
     }
