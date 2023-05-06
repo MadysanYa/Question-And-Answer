@@ -1,10 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PdfController;
-use App\Http\Controllers\GoogleController;
-use App\Http\Controllers\QRCodeController;
-
 
 
 /*
@@ -19,12 +15,5 @@ use App\Http\Controllers\QRCodeController;
 */
 
 Route::get('/', function () {
-    // return view('welcome');
     return redirect('/admin');
 });
-
-// Route::get('google-autocomplete', [GoogleController::class, 'index']);
-// Route::get('/qrprint', [QRCodeController::class, 'index']);
-
-// Route::get('/pdfindicator', [PdfIndicatorController::class, 'index']);
-// Route::get('/qrcode', [QRCodeController::class, 'index']);

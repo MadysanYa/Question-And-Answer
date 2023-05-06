@@ -2,10 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\PropertyResearch;
-use App\Models\PropertyAppraisal;
-use App\Models\PropertyIndicator;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use App\Observers\PropertyResearchObserver;
 use App\Observers\PropertyAppraisalObserver;
@@ -33,9 +29,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        PropertyIndicator::observe(PropertyIndicatorObserver::class);
-        PropertyAppraisal::observe(PropertyAppraisalObserver::class);
-        PropertyResearch::observe(PropertyResearchObserver::class);
+        //
     }
 
     /**

@@ -2,24 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PdfController;
-use App\Http\Controllers\BranchController;
-use App\Http\Controllers\QRCodeController;
-use App\Http\Controllers\CommuneController;
-use App\Http\Controllers\VillageController;
-use App\Http\Controllers\DistrictController;
-use App\Http\Controllers\DownloadController;
-use App\Http\Controllers\TransferController;
-use App\Http\Controllers\TaskdetailController;
-use App\Http\Controllers\PdfAppraisalController;
-use App\Http\Controllers\PdfIndicatorController;
-use App\Http\Controllers\PropertyResearchController;
-
-use App\Http\Controllers\PropertyAppraisalController;
-use App\Http\Controllers\PropertyIndicatorController;
-use App\Admin\Controllers\CommuneController as ControllersCommuneController;
-
-
+use App\Http\Controllers\API\AnswerController;
+use App\Http\Controllers\API\ResultController;
+use App\Http\Controllers\API\QuestionController;
+use App\Http\Controllers\API\UserAnswerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,32 +22,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/transfer', [TransferController::class, 'store']);
-Route::post('/taskdetail', [TaskdetailController::class, 'store']);
-Route::get('/taskdetail/{id}', [TaskdetailController::class, 'delete']);
+Route::GET('/question',[ QuestionController::class, 'index']);
+Route::GET('/result',[ ResultController::class, 'index']);
+Route::GET('/answer',[ AnswerController::class, 'index']);
 
-Route::get('/district', [DistrictController::class,'district']);
-Route::get('/commune', [CommuneController::class,'commune']);
-Route::get('/village', [VillageController::class,'village']);
-Route::get('/branch', [BranchController::class,'branch']);
-
-Route::get('/verify_research/{id}/{value}', [PropertyResearchController::class,'verified']);
-Route::get('/approve_research/{id}/{value}', [PropertyResearchController::class,'approved']);
-
-Route::get('/verify_indicator/{id}/{value}', [PropertyIndicatorController::class,'verified']);
-Route::get('/approve_indicator/{id}/{value}', [PropertyIndicatorController::class,'approved']);
-
-//Route::get('/transfer', [TransferController::class, 'store']);
-
-Route::get('/verify_appraisal/{id}/{value}', [PropertyAppraisalController::class,'verified']);
-Route::get('/approve_appraisal/{id}/{value}', [PropertyAppraisalController::class,'approved']);
-Route::get('pdfappraisal/{id}', [PdfAppraisalController::class, 'index']);
-Route::get('pdfindicator/{id}', [PdfIndicatorController::class, 'index']);
-Route::get('/qrcode', [QRCodeController::class, 'index']);
-
-Route::get('download-sample-csv/{file}', [DownloadController::class, 'downloadSampleCSV'])->name('download.sample.csv');
-
-// Route::get('/print', [PdfController::class, 'print']);
-// API for PDF Generation
-// Route::get('pdf', [PdfController::class, 'index']);
-// Route::get('google-autocomplete', [GoogleController::class, 'index']);
+Route::GET('/user-answer',[ UserAnswerController::class, 'index']);
+Route::POST('/user-answer',[ UserAnswerController::class, 'store']);
+Route::PUT('/user-answer/{id}',[ UserAnswerController::class, 'update']);
+Route::DELETE('/user-answer/{id}',[ UserAnswerController::class, 'destroy']);

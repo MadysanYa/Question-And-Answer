@@ -2,8 +2,6 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\User;
-use App\Models\Branch;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
@@ -11,14 +9,13 @@ use App\Models\UserAdmin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Encore\Admin\Controllers\AdminController;
-use Illuminate\Support\Env;
 
 class UserAdminController extends AdminController
 {
     /**
      * {@inheritdoc}
      */
-    protected $title = 'Users';
+    protected $title = 'Employees';
 
     /**
      * Make a grid builder.
@@ -29,7 +26,6 @@ class UserAdminController extends AdminController
     {
         $grid = new Grid(new UserAdmin);
 
-        $grid->model()->queryAdminUserGrid();
         $grid->model()->orderBy('id','desc');
 
         $grid->column('id', 'ID')->sortable();
@@ -42,10 +38,7 @@ class UserAdminController extends AdminController
                             ->where('admin_role_users.user_id', $this->id)
                             ->pluck('name');
         })->label('primary');
-        $grid->column('branch_code',__('Branch'))->sortable()->Display(function($branch_code){
-            $branch = Branch::where('branch_code', $branch_code)->first();
-            return $branch->branch_name ?? '';
-        });
+
         $grid->column('created_at', 'Created At')->sortable()->display(function(){
             return date('d-M-Y', strtotime($this->created_at));
         });
@@ -112,7 +105,6 @@ class UserAdminController extends AdminController
         $userTable = config('admin.database.users_table');
         $connection = config('admin.database.connection');
 
-        $form->hidden('user_id')->value(Auth::user()->id);
         $form->display('id', 'ID');
         $form->text('username', 'Username')
             ->creationRules(['required', "unique:{$connection}.{$userTable}"])
@@ -127,21 +119,8 @@ class UserAdminController extends AdminController
             });
 
         $form->ignore(['password_confirmation']);
-        
-        if(User::isManagerRole()){
-                    $form->multipleSelect('roles','Roles')->options($roleModel::whereIn('id', [6,8])->pluck('name', 'id'));
-                    $form->multipleSelect('permissions', 'Permissions')->options($permissionModel::whereIn('id', [13,18])->pluck('name', 'id'));
-                } else {
-                    $form->multipleSelect('roles','Roles')->options($roleModel::all()->pluck('name', 'id'));
-                    $form->multipleSelect('permissions', 'Permissions')->options($permissionModel::all()->pluck('name', 'id'));
-                }
-
-
-        
-
-        $form->select('branch_code', 'Branch')->rules('required')->options(function(){
-            return Branch::all()->pluck('branch_name','branch_code');
-        });
+        $form->multipleSelect('roles','Roles')->options($roleModel::all()->pluck('name', 'id'));
+        $form->multipleSelect('permissions', 'Permissions')->options($permissionModel::all()->pluck('name', 'id'));
         $form->display('created_at', 'Created At');
         $form->display('updated_at', 'Updated At');
 
