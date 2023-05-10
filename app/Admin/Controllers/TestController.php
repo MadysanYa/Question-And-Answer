@@ -28,17 +28,23 @@ class TestController extends AdminController
 
         $grid->column('id', __('ID'));
         $grid->column('name', __('Name'))->label();
-        $grid->column('description', __('Description'));
+        $grid->column('date', __('Date'))->display(function(){
+            if ($this->date) {
+                return date('l, jS F Y', strtotime($this->date));
+            }
+        });
+        $grid->column('duration', __('Duration'));
+        // $grid->column('description', __('Description'));
         $grid->column('created_at', __('Created at'))->display(function(){
             if ($this->created_at) {
                 return date('Y-m-d', strtotime($this->created_at));
             }
         });
-        $grid->column('updated_at', __('Updated at'))->display(function(){
-            if ($this->updated_at) {
-                return date('Y-m-d', strtotime($this->updated_at));
-            }
-        });
+        // $grid->column('updated_at', __('Updated at'))->display(function(){
+        //     if ($this->updated_at) {
+        //         return date('Y-m-d', strtotime($this->updated_at));
+        //     }
+        // });
 
         $grid->quickSearch('name');
         $grid->disableFilter();
@@ -78,7 +84,9 @@ class TestController extends AdminController
         $form = new Form(new Test());
 
         $form->text('name', __('Name'))->rules('required|string');
-        $form->textarea('description', __('Description'));
+        $form->date('date', __('Date'))->rules('required');
+        $form->time('duration', __('Duration'))->default(date('H:i:s'))->rules('required');
+        $form->ckeditor('description', __('Rule'))->rules('required');
 
         return $form;
     }

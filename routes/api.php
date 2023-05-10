@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\TestController;
 use App\Http\Controllers\API\AnswerController;
 use App\Http\Controllers\API\ResultController;
 use App\Http\Controllers\API\QuestionController;
@@ -30,3 +31,5 @@ Route::GET('/user-answer',[ UserAnswerController::class, 'index']);
 Route::POST('/user-answer',[ UserAnswerController::class, 'store']);
 Route::PUT('/user-answer/{id}',[ UserAnswerController::class, 'update']);
 Route::DELETE('/user-answer/{id}',[ UserAnswerController::class, 'destroy']);
+
+Route::GET('/test/{id}',[ TestController::class, 'show']);

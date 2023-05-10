@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
             $table->string("name")->nullable();
+            $table->dateTime("date")->nullable();
+            $table->time("duration")->nullable();
             $table->text("description")->nullable();
             $table->timestamps();
         });

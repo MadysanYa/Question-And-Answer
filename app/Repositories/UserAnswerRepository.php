@@ -42,13 +42,26 @@ class UserAnswerRepository extends BaseRepository
 
     public function createUserAnswer($request) 
     {
-        $userAnswer = UserAnswer::create([
-            "user_id" => $request->user_id,
-            "test_id" => $request->test_id,
-            "question_id" => $request->question_id,
-            "answer_id" => $request->answer_id
-        ]);
+        // CHECK EXISTING ANSWER
+        $checkUserAnswer = UserAnswer::whereUserId($request->user_id)
+                                    ->whereTestId($request->test_id)
+                                    ->whereQuestionId($request->question_id)
+                                    ->first();
 
+        // UPDATE ANSWER
+        if ($checkUserAnswer) {
+            $userAnswer = $this->updateUserAnswer($request, $checkUserAnswer);
+
+        // CREATE NEW ANSWER
+        } else {
+            $userAnswer = UserAnswer::create([
+                "user_id" => $request->user_id,
+                "test_id" => $request->test_id,
+                "question_id" => $request->question_id,
+                "answer_id" => $request->answer_id
+            ]);
+        }
+        
         return $userAnswer;
     }
 
