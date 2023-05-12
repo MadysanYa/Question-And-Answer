@@ -24,4 +24,10 @@ class TestRepository extends BaseRepository
     {
         return $this->model->find($id);
     }
+
+    public function allTest($request)
+    {
+        $query = $this->model->whereHas("questions")->get();
+        return $query;
+    }
 }

@@ -2,21 +2,31 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Resources\QuestionResource;
-use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use App\Http\Resources\QuestionResource;
+use App\Repositories\QuestionRepository;
 
 class QuestionController extends Controller
 {
+    public $questionRepository;
+
+    public function __construct(QuestionRepository $questionRepo)
+    {
+        $this->questionRepository = $questionRepo;
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $questions = Question::all();
+        $questions = $this->questionRepository->allQuestion($request);
+        if (!count($questions)) {
+            return response()->json(['message' => 'Sorry, Your question not found.'], 404);
+        }
+
         return QuestionResource::collection($questions);
     }
 

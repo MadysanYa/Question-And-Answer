@@ -38,4 +38,5 @@ Route::POST('/user-answer',[ UserAnswerController::class, 'store']);
 Route::PUT('/user-answer/{id}',[ UserAnswerController::class, 'update']);
 Route::DELETE('/user-answer/{id}',[ UserAnswerController::class, 'destroy']);
 
+Route::GET('/test',[ TestController::class, 'index']);
 Route::GET('/test/{id}',[ TestController::class, 'show']);

@@ -12,18 +12,19 @@ class TestController extends Controller
 {
     public $testRepository;
 
-    public function __construct(TestRepository $testRepository)
+    public function __construct(TestRepository $testRepo)
     {
-        $this->testRepository = $testRepository;
+        $this->testRepository = $testRepo;
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $tests = $this->testRepository->allTest($request);
+        return TestResource::collection($tests);
     }
 
     /**

@@ -10,6 +10,13 @@ class Test extends Model
 {
     use HasFactory;
 
+    // RELATIONSHIP
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+    }
+
+    // ACCESSOR
     public function getDateFormatAttribute()
     {
         if ($this->date) {
@@ -20,14 +27,14 @@ class Test extends Model
     public function getDurationFormatAttribute()
     {
         if ($this->duration) {
-            $format = date('H:i', strtotime($this->duration));
+            $format = date('H: i', strtotime($this->duration));
             $explode = explode(":", $format);
 
             if ($explode[0] >= 1) {
-                return $format." hour";
+                return $format." H";
             }
 
-            return $format." minute";
+            return $format." M";
         } 
     }
 }
