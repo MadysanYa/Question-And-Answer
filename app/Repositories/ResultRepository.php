@@ -32,4 +32,32 @@ class ResultRepository extends BaseRepository
         $query = $query->get();
         return $query;
     }
+
+    public function findByUserIdAndTestId($request) 
+    {
+        return  $this->model->whereUserId($request->user_id)
+                            ->whereTestId($request->test_id)
+                            ->first();
+    }
+
+    public function createResult($request, $score) 
+    {
+        $result = $this->model->create([
+            "user_id" => $request->user_id,
+            "test_id" => $request->test_id,
+            "score" => $score,
+            "time_taken" => $request->time_taken
+        ]);
+        
+        return $result;
+    }
+
+    public function updateResult($result, $score)
+    {
+        $result->update([
+            "score" => $score
+        ]);
+        
+        return $result;
+    }
 }

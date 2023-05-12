@@ -2,33 +2,23 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Result;
+use App\Models\User;
+use App\Models\UserAdmin;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\Http\Resources\ResultResource;
-use App\Repositories\ResultRepository;
-use App\Repositories\UserAnswerRepository;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
-class ResultController extends Controller
+class AuthController extends Controller
 {
-    public $resultRepository;
-    public $userAnswerRepository;
-
-    public function __construct(ResultRepository $resultRepo, UserAnswerRepository $userAnswerRepo)
-    {
-        $this->resultRepository = $resultRepo;
-        $this->userAnswerRepository = $userAnswerRepo;
-    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $results = $this->resultRepository->allResult($request);
-
-        return ResultResource::collection($results);
+        //
     }
 
     /**
@@ -42,14 +32,30 @@ class ResultController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Login a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function login(Request $request)
     {
-        //
+        // $credentials = $request->only('username', 'password');
+        $user = UserAdmin::where("username", $request->username)->first();
+        
+        if (!$user) {
+            return response()->json(['error' => 'Unauthenticated'], 401);
+        }
+
+        $comparePass = Hash::check($request->password, $user->password);
+        if (!$comparePass) {
+            return response()->json(['error' => 'password not match'], 401);
+        }
+
+        $token = $user->createToken('access_token')->accessToken;
+        return response()->json([
+            "user" => $user,
+            'access_token' => $token
+        ], 200);
     }
 
     /**
@@ -61,21 +67,6 @@ class ResultController extends Controller
     public function show($id)
     {
         //
-    }
-
-    public function showUser(Request $request)
-    {
-        $userAnswer = $this->userAnswerRepository->calculateResultByUserIdAndTestId($request);
-        if (!$userAnswer) {
-            return response()->json(['message' => 'Sorry, Your result not found.'], 404);
-        }
-
-        $result = $this->resultRepository->findByUserIdAndTestId($request);
-        if (!$result) {
-            return response()->json(['message' => 'Sorry, Your result not found.'], 404);
-        }
-
-        return new ResultResource($result);
     }
 
     /**

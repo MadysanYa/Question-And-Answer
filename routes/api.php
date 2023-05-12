@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\TestController;
 use App\Http\Controllers\API\AnswerController;
 use App\Http\Controllers\API\ResultController;
@@ -23,9 +24,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::POST('/login',[ AuthController::class, 'login']);
+Route::POST('/logout',[ AuthController::class, 'logout']);
+
 Route::GET('/question',[ QuestionController::class, 'index']);
-Route::GET('/result',[ ResultController::class, 'index']);
 Route::GET('/answer',[ AnswerController::class, 'index']);
+
+Route::GET('/result',[ ResultController::class, 'index']);
+Route::GET('result/user',[ ResultController::class, 'showUser']);
 
 Route::GET('/user-answer',[ UserAnswerController::class, 'index']);
 Route::POST('/user-answer',[ UserAnswerController::class, 'store']);
