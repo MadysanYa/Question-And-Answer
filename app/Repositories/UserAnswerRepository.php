@@ -87,6 +87,16 @@ class UserAnswerRepository extends BaseRepository
 
     public function createUserAnswer($request) 
     {
+        // CHECK EXISTING RESULT
+        $checkUserResult = Result::whereUserId($request->user_id)
+                                ->whereTestId($request->test_id)
+                                ->first();
+
+        // USER ALREADY HAS RESULT SO, USER CAN'T DO ANYTHING MORE                        
+        if ($checkUserResult) {
+            return false;
+        }
+        
         // CHECK EXISTING ANSWER
         $checkUserAnswer = $this->model->whereUserId($request->user_id)
                                     ->whereTestId($request->test_id)

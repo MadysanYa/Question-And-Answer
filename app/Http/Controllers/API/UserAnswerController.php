@@ -47,6 +47,11 @@ class UserAnswerController extends Controller
     public function store(Request $request)
     {
         $userAnswer = $this->userAnswerRepository->createUserAnswer($request);
+        if (!$userAnswer) {
+            return response()->json([
+                'message' => 'Sorry, Your page was expired.',
+            ], 404);
+        }
 
         return new UserAnswerResource($userAnswer);
     }
