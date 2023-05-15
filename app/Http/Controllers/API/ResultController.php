@@ -78,6 +78,16 @@ class ResultController extends Controller
         return new ResultResource($result);
     }
 
+    public function resultIsRead(Request $request)
+    {
+        $result = $this->resultRepository->findByUserIdAndTestId($request);
+        if (!$result) {
+            return response()->json(['message' => 'Sorry, Your result not found.'], 404);
+        }
+
+        return new ResultResource($result);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

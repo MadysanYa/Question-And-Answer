@@ -32,6 +32,7 @@ Route::GET('/answer',[ AnswerController::class, 'index']);
 
 Route::GET('/result',[ ResultController::class, 'index']);
 Route::GET('result/user',[ ResultController::class, 'showUser']);
+Route::GET('result/check',[ ResultController::class, 'resultIsRead']);
 
 Route::GET('/user-answer',[ UserAnswerController::class, 'index']);
 Route::POST('/user-answer',[ UserAnswerController::class, 'store']);
