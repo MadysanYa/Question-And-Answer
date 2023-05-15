@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\API\LoginRequest;
 
 class AuthController extends Controller
 {
@@ -37,9 +38,8 @@ class AuthController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        // $credentials = $request->only('username', 'password');
         $user = UserAdmin::where("username", $request->username)->first();
         
         if (!$user) {
@@ -51,7 +51,7 @@ class AuthController extends Controller
             return response()->json(['error' => 'password not match'], 401);
         }
 
-        $token = $user->createToken('access_token')->accessToken;
+        $token = $user->createToken('access_token')->accessToken->token;
         return response()->json([
             "user" => $user,
             'access_token' => $token
