@@ -79,14 +79,9 @@ class UserAnswerRepository extends BaseRepository
 
     public function allUserAnswer($request) 
     {
-        $query = $this->model;
-        
-        // FILTER
-        if ($request->user_id) {
-            $query = $query->whereUserId($request->user_id);
-        }
-
-        $query = $query->get();
+        $query = $this->model->whereUserId($request->user_id)
+                            ->whereTestId($request->test_id)
+                            ->get();
         return $query;
     }
 

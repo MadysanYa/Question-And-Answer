@@ -22,6 +22,8 @@ class QuestionRepository extends BaseRepository
 
     public function allQuestion($request) 
     {
-        return $this->model->whereTestId($request->test_id)->get();
+        return $this->model
+                ->whereTestId($request->test_id)
+                ->get();
     }
 }
