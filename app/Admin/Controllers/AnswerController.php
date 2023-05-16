@@ -39,11 +39,11 @@ class AnswerController extends AdminController
                 return date('Y-m-d', strtotime($this->created_at));
             }
         });
-        $grid->column('updated_at', __('Updated at'))->display(function(){
-            if ($this->updated_at) {
-                return date('Y-m-d', strtotime($this->updated_at));
-            }
-        });
+        // $grid->column('updated_at', __('Updated at'))->display(function(){
+        //     if ($this->updated_at) {
+        //         return date('Y-m-d', strtotime($this->updated_at));
+        //     }
+        // });
 
         $grid->quickSearch();
         $grid->disableFilter();
@@ -69,7 +69,7 @@ class AnswerController extends AdminController
         $show->field('answer_text', __('Answer text'));
         $show->field('is_correct', __('Is correct'));
         $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        // $show->field('updated_at', __('Updated at'));
 
         return $show;
     }

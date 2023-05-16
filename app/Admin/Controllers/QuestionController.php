@@ -38,11 +38,11 @@ class QuestionController extends AdminController
                 return date('Y-m-d', strtotime($this->created_at));
             }
         });
-        $grid->column('updated_at', __('Updated at'))->display(function(){
-            if ($this->updated_at) {
-                return date('Y-m-d', strtotime($this->updated_at));
-            }
-        });
+        // $grid->column('updated_at', __('Updated at'))->display(function(){
+        //     if ($this->updated_at) {
+        //         return date('Y-m-d', strtotime($this->updated_at));
+        //     }
+        // });
 
         $grid->quickSearch();
         $grid->disableFilter();
@@ -67,7 +67,7 @@ class QuestionController extends AdminController
         $show->field('test_id', __('Exam id'));
         $show->field('question_text', __('Question text'));
         $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        // $show->field('updated_at', __('Updated at'));
 
         return $show;
     }
