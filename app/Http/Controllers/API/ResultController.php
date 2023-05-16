@@ -64,7 +64,7 @@ class ResultController extends Controller
         //
     }
 
-    public function showUser(Request $request)
+    public function showResultByUser(Request $request)
     {
         $userAnswer = $this->userAnswerRepository->calculateResultByUserIdAndTestId($request);
         if (!$userAnswer) {

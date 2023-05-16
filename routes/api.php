@@ -30,10 +30,10 @@ Route::POST('/logout',[ AuthController::class, 'logout']);
 Route::GET('/question',[ QuestionController::class, 'index']);
 Route::GET('/answer',[ AnswerController::class, 'index']);
 
-Route::POST('result/create',[ ResultController::class, 'store']);
 Route::GET('/result',[ ResultController::class, 'index']);
-Route::GET('result/user',[ ResultController::class, 'showUser']);
+Route::GET('result/show-by-user',[ ResultController::class, 'showResultByUser']);
 Route::GET('result/check',[ ResultController::class, 'resultIsRead']);
+Route::POST('result/create',[ ResultController::class, 'store']);
 
 
 Route::GET('/user-answer',[ UserAnswerController::class, 'index']);
