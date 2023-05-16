@@ -15,7 +15,7 @@ class TestController extends AdminController
      *
      * @var string
      */
-    protected $title = 'Test Type';
+    protected $title = 'Exam Type';
 
     /**
      * Make a grid builder.

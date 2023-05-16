@@ -35,7 +35,7 @@ class UserAnswerController extends AdminController
             $user = UserAdmin::where('id', $userId)->first();
             return $user->username ?? null;
         });
-        $grid->column('test_id', __('Test Type'))->display(function($testId){
+        $grid->column('test_id', __('Exam Type'))->display(function($testId){
             $test = Test::where('id', $testId)->first();
             return $test->name ?? null;
         });
@@ -52,11 +52,11 @@ class UserAnswerController extends AdminController
                 return date('Y-m-d', strtotime($this->created_at));
             }
         });
-        $grid->column('updated_at', __('Updated at'))->display(function(){
-            if ($this->updated_at) {
-                return date('Y-m-d', strtotime($this->updated_at));
-            }
-        });
+        // $grid->column('updated_at', __('Updated at'))->display(function(){
+        //     if ($this->updated_at) {
+        //         return date('Y-m-d', strtotime($this->updated_at));
+        //     }
+        // });
 
         $grid->quickSearch();
         $grid->disableFilter();
@@ -78,12 +78,12 @@ class UserAnswerController extends AdminController
         $show = new Show(UserAnswer::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('user_id', __('User id'));
-        $show->field('test_id', __('Test id'));
-        $show->field('question_id', __('Question id'));
-        $show->field('answer_id', __('Answer id'));
+        $show->field('user_id', __('User Name'));
+        $show->field('test_id', __('Exam Type'));
+        $show->field('question_id', __('Question'));
+        $show->field('answer_id', __('Answer'));
         $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        // $show->field('updated_at', __('Updated at'));
 
         return $show;
     }
@@ -107,7 +107,7 @@ class UserAnswerController extends AdminController
         });
 
         $form->column(6,function($form){
-            $form->select('test_id', __('Test Type'))->rules('required')->options(function(){
+            $form->select('test_id', __('Exam Type'))->rules('required')->options(function(){
                 return Test::all()->pluck('name', 'id');
             });
             $form->select('answer_id', __('Answer'))->rules('required')->options(function(){

@@ -28,7 +28,7 @@ class QuestionController extends AdminController
         $grid = new Grid(new Question());
 
         $grid->column('id', __('ID'));
-        $grid->column('test_id', __('Test Type'))->display(function($testId){
+        $grid->column('test_id', __('Exam Type'))->display(function($testId){
             $text = Test::where('id', $testId)->first();
             return $text->name ?? null;
         });
@@ -64,7 +64,7 @@ class QuestionController extends AdminController
         $show = new Show(Question::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('test_id', __('Test id'));
+        $show->field('test_id', __('Exam id'));
         $show->field('question_text', __('Question text'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
@@ -81,7 +81,7 @@ class QuestionController extends AdminController
     {
         $form = new Form(new Question());
 
-        $form->select('test_id', __('Test Type'))->rules('required')->options(function(){
+        $form->select('test_id', __('Exam Type'))->rules('required')->options(function(){
             return Test::all()->pluck('name', 'id');
         });
         $form->text('question_text', __('Question'))->rules('required');

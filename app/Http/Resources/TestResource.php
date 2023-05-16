@@ -30,7 +30,7 @@ class TestResource extends JsonResource
             return ($total > 0) ? $total : 0;
         }
 
-        return 90;
+        return 60;
     }
 
     public function toArray($request)

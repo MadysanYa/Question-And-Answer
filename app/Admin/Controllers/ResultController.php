@@ -33,22 +33,33 @@ class ResultController extends AdminController
             $user = UserAdmin::where('id', $userId)->first();
             return $user->username ?? null;
         });
-        $grid->column('test_id', __('Test Type'))->display(function($testId){
+        $grid->column('test_id', __('Exam Type'))->display(function($testId){
             $test = Test::where('id', $testId)->first();
             return $test->name ?? null;
         });
         $grid->column('score', __('Score'))->label();
-        $grid->column('time_taken', __('Time taken'));
-        $grid->column('created_at', __('Created at'))->display(function(){
-            if ($this->created_at) {
-                return date('Y-m-d', strtotime($this->created_at));
+        $grid->column('started_at', __('Started At'))->display(function(){
+            if ($this->started_at) {
+                return date('Y-m-d', strtotime($this->started_at));
             }
         });
-        $grid->column('updated_at', __('Updated at'))->display(function(){
-            if ($this->updated_at) {
-                return date('Y-m-d', strtotime($this->updated_at));
+        $grid->column('ended_at', __('Ended At'))->display(function(){
+            if ($this->ended_at) {
+                return date('Y-m-d', strtotime($this->ended_at));
             }
         });
+        $grid->column('time_taken', __('Time Taken'));
+        
+        // $grid->column('created_at', __('Created At'))->display(function(){
+        //     if ($this->created_at) {
+        //         return date('Y-m-d', strtotime($this->created_at));
+        //     }
+        // });
+        // $grid->column('updated_at', __('Updated at'))->display(function(){
+        //     if ($this->updated_at) {
+        //         return date('Y-m-d', strtotime($this->updated_at));
+        //     }
+        // });
 
         $grid->quickSearch();
         $grid->disableFilter();
@@ -70,10 +81,10 @@ class ResultController extends AdminController
         $show = new Show(Result::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('user_id', __('User id'));
-        $show->field('test_id', __('Test id'));
+        $show->field('user_id', __('User ID'));
+        $show->field('test_id', __('Exam Type'));
         $show->field('score', __('Score'));
-        $show->field('time_taken', __('Time taken'));
+        $show->field('time_taken', __('Time Taken'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -93,14 +104,16 @@ class ResultController extends AdminController
             $form->select('user_id', __('User Name'))->rules('required')->options(function(){
                 return UserAdmin::all()->pluck('username', 'id');
             });
+            $form->date('started_at', __('Started At'))->rules('required');
             $form->decimal('score', __('Score'))->rules('required');
         });
 
         $form->column(6,function($form){
-            $form->select('test_id', __('Test Type'))->rules('required')->options(function(){
+            $form->select('test_id', __('Exam Type'))->rules('required')->options(function(){
                 return Test::all()->pluck('name', 'id');
             });
-            $form->time('time_taken', __('Time taken'))->default(date('H:i:s'));
+            $form->date('ended_at', __('Ended At'))->rules('required');
+            $form->time('time_taken', __('Time Taken'))->default(date('H:i:s'));
         });
 
         $form->footer(function ($footer) {
