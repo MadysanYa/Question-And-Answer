@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use Carbon\Carbon;
 use App\Models\Result;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 //use Your Model
@@ -41,15 +42,22 @@ class ResultRepository extends BaseRepository
                             ->first();
     }
 
-    public function createResult($request, $score) 
+    public function createResult($request) 
     {
-        $result = $this->model->create([
-            "user_id" => $request->user_id,
-            "test_id" => $request->test_id,
-            "score" => $score,
-            "time_taken" => $request->time_taken
-        ]);
-        
+        $userId = $request->user_id;
+        $testId = $request->test_id;
+        $startedAt = Carbon::now();
+
+        // FIND THE EXAM USER'S RESULT
+        $result = Result::UserId($userId)->TestId($testId)->first();
+        if (!$result) {
+            $result = $this->model->create([
+                "user_id" => $userId,
+                "test_id" => $testId,
+                "started_at" => $startedAt
+            ]);
+        }
+
         return $result;
     }
 

@@ -49,7 +49,8 @@ class ResultController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $result = $this->resultRepository->createResult($request);
+        return new ResultResource($result);
     }
 
     /**

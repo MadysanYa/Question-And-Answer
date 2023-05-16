@@ -18,11 +18,17 @@ class TestResource extends JsonResource
     {
         $result = Result::UserId($request->user_id)->TestId($this->id)->first();
 
-        // if ($result) {
-        //     $timeNow = Carbon::now();
-        //     $timeStarted = Carbon::parse($result->started_at); 
-        //     $examDuration = Carbon::parse($this->duration); 
-        // }
+        if ($result) {
+            $timeNow = Carbon::now();
+            $timeStarted = Carbon::parse($result->started_at); 
+            $diffInMinutes = $timeNow->diffInMinutes($timeStarted);
+
+            list($hours, $minutes) = explode(':', $this->duration);
+            $totalMinutes = ($hours * 60) + $minutes;
+            $total = $totalMinutes - $diffInMinutes;
+
+            return ($total > 0) ? $total : 0;
+        }
 
         return 90;
     }

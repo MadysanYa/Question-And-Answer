@@ -36,30 +36,34 @@ class UserAnswerRepository extends BaseRepository
         $userId = $request->user_id;
         $testId = $request->test_id;
         $timeTaken = $request->time_taken;
+        $isStarted = $request->is_started;
         $endedAt = Carbon::now();
         $startedAt = Carbon::now();
         
-        // FIND THE EXAM USER'S ANSWER
-        $userAnswer = $this->model->where("user_id", $userId)
-                            ->where("test_id", $testId)
-                            ->get();
+        if (!$isStarted) 
+        {
+            // FIND THE EXAM USER'S ANSWER
+            $userAnswer = $this->model->where("user_id", $userId)
+                                ->where("test_id", $testId)
+                                ->get();
 
-        // THE EXAMP USER'S ANSWER NOT FOUND 
-        if (!count($userAnswer)) {
-            return false;
+            // THE EXAMP USER'S ANSWER NOT FOUND 
+            if (!count($userAnswer)) {
+                return false;
+            }
+
+            // ARRAY ANSWER ID
+            $answerAnswerId = $userAnswer->pluck("answer_id");
+
+            // FIND ANSWER THAT CORRECT BY ARRAY ANSWER ID
+            $answer = Answer::whereIn("id", $answerAnswerId)->where("is_correct", true)->get();
+
+            // SET SCORE AS ANSWER FOUND
+            if (count($answer)) {
+                $score = count($answer);
+            }
         }
-
-        // ARRAY ANSWER ID
-        $answerAnswerId = $userAnswer->pluck("answer_id");
-
-        // FIND ANSWER THAT CORRECT BY ARRAY ANSWER ID
-        $answer = Answer::whereIn("id", $answerAnswerId)->where("is_correct", true)->get();
-
-        // SET SCORE AS ANSWER FOUND
-        if (count($answer)) {
-            $score = count($answer);
-        }
-
+        
         // FIND THE EXAM USER'S RESULT
         $result = Result::UserId($userId)->TestId($testId)->first();
 
