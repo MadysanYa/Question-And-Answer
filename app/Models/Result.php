@@ -11,7 +11,14 @@ class Result extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'test_id', 'score', 'time_taken'];
+    protected $fillable = [
+        "user_id", 
+        "test_id", 
+        "score", 
+        "time_taken",
+        "started_at",
+        "ended_at"
+    ];
 
     // RELATIONSHIP
     public function user() {

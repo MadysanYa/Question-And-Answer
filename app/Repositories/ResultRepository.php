@@ -37,6 +37,7 @@ class ResultRepository extends BaseRepository
     {
         return  $this->model->whereUserId($request->user_id)
                             ->whereTestId($request->test_id)
+                            ->whereNotNull("score")
                             ->first();
     }
 

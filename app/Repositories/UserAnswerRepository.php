@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use Carbon\Carbon;
 use App\Models\Answer;
 use App\Models\Result;
 use App\Models\UserAnswer;
@@ -31,10 +32,12 @@ class UserAnswerRepository extends BaseRepository
 
     public function calculateResultByUserIdAndTestId($request) 
     {
+        $score = 0;
         $userId = $request->user_id;
         $testId = $request->test_id;
         $timeTaken = $request->time_taken;
-        $score = 0;
+        $endedAt = Carbon::now();
+        $startedAt = Carbon::now();
         
         // FIND THE EXAM USER'S ANSWER
         $userAnswer = $this->model->where("user_id", $userId)
@@ -64,6 +67,8 @@ class UserAnswerRepository extends BaseRepository
         if ($result) {
             return $result->update([
                 "score" => $score,
+                "time_taken" => $timeTaken,
+                "ended_at" => $endedAt
             ]);
             
         // CTEAE THE USER'S RESULT 
@@ -71,8 +76,7 @@ class UserAnswerRepository extends BaseRepository
             return Result::create([
                 "user_id" => $userId,
                 "test_id" => $testId,
-                "score" => $score,
-                "time_taken" => $timeTaken
+                "started_at" => $startedAt
             ]); 
         }        
     }
@@ -90,6 +94,7 @@ class UserAnswerRepository extends BaseRepository
         // CHECK EXISTING RESULT
         $checkUserResult = Result::whereUserId($request->user_id)
                                 ->whereTestId($request->test_id)
+                                ->whereNotNull("score")
                                 ->first();
 
         // USER ALREADY HAS RESULT SO, USER CAN'T DO ANYTHING MORE                        
