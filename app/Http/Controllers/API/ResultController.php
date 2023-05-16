@@ -79,7 +79,7 @@ class ResultController extends Controller
         return new ResultResource($result);
     }
 
-    public function resultIsRead(Request $request)
+    public function checkResultExistOrNot(Request $request)
     {
         $result = $this->resultRepository->findByUserIdAndTestId($request);
         if (!$result) {

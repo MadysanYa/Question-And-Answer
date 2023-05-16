@@ -40,12 +40,12 @@ class ResultController extends AdminController
         $grid->column('score', __('Score'))->label();
         $grid->column('started_at', __('Started At'))->display(function(){
             if ($this->started_at) {
-                return date('Y-m-d', strtotime($this->started_at));
+                return date('Y-m-d h:i A', strtotime($this->started_at));
             }
         });
         $grid->column('ended_at', __('Ended At'))->display(function(){
             if ($this->ended_at) {
-                return date('Y-m-d', strtotime($this->ended_at));
+                return date('Y-m-d h:i A', strtotime($this->ended_at));
             }
         });
         $grid->column('time_taken', __('Time Taken'));

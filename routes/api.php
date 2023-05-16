@@ -32,7 +32,7 @@ Route::GET('/answer',[ AnswerController::class, 'index']);
 
 Route::GET('/result',[ ResultController::class, 'index']);
 Route::GET('result/show-by-user',[ ResultController::class, 'showResultByUser']);
-Route::GET('result/check',[ ResultController::class, 'resultIsRead']);
+Route::GET('result/exist-or-not',[ ResultController::class, 'checkResultExistOrNot']);
 Route::POST('result/create',[ ResultController::class, 'store']);
 
 
