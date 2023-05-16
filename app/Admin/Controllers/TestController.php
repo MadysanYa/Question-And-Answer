@@ -34,6 +34,8 @@ class TestController extends AdminController
             }
         });
         $grid->column('duration', __('Duration'));
+        $grid->column('is_active', __('Is Active'))->bool();
+        $grid->column('show_total', __('Show Total'));
         // $grid->column('description', __('Description'));
         $grid->column('created_at', __('Created at'))->display(function(){
             if ($this->created_at) {
@@ -87,6 +89,8 @@ class TestController extends AdminController
         $form->date('date', __('Date'))->rules('required');
         $form->time('duration', __('Duration'))->default(date('H:i:s'))->rules('required');
         $form->ckeditor('description', __('Rule'))->rules('required');
+        $form->switch('is_active', __('Is Active'))->default(false)->rules('required');
+        $form->number('show_total', __('SHow Total'))->rules('required');
 
         return $form;
     }

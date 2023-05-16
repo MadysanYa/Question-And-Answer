@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Test;
 use App\Models\Question;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 //use Your Model
@@ -21,9 +22,19 @@ class QuestionRepository extends BaseRepository
     }
 
     public function allQuestion($request) 
-    {
+    {   
+        $examId = $request->test_id;
+        $showTotal = 100;
+
+        $exam = Test::find($examId);
+        if ($exam) {
+            $showTotal = $exam->show_total;
+        }
+
         return $this->model
                 ->whereTestId($request->test_id)
+                ->inRandomOrder()
+                ->limit($showTotal)
                 ->get();
     }
 }

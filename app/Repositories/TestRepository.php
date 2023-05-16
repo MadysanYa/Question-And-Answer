@@ -27,7 +27,7 @@ class TestRepository extends BaseRepository
 
     public function allTest($request)
     {
-        $query = $this->model->whereHas("questions")->get();
+        $query = $this->model->where("is_active", true)->whereHas("questions")->get();
         return $query;
     }
 }
