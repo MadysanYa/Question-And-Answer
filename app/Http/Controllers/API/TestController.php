@@ -21,9 +21,9 @@ class TestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $tests = $this->testRepository->allTest($request);
+        $tests = $this->testRepository->allTest();
         return TestResource::collection($tests);
     }
 
