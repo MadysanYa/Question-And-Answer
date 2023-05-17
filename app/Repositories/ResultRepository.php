@@ -4,8 +4,7 @@ namespace App\Repositories;
 
 use Carbon\Carbon;
 use App\Models\Result;
-use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
-//use Your Model
+use App\Repositories\BaseRepository;
 
 /**
  * Class ResultRepository.

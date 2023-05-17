@@ -6,10 +6,7 @@ use Carbon\Carbon;
 use App\Models\Answer;
 use App\Models\Result;
 use App\Models\UserAnswer;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
-//use Your Model
+use App\Repositories\BaseRepository;
 
 /**
  * Class UserAnswerRepository.

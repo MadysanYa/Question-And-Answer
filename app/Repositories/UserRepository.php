@@ -3,8 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\UserAdmin;
-use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
-//use Your Model
+use App\Repositories\BaseRepository;
 
 /**
  * Class UserRepository.

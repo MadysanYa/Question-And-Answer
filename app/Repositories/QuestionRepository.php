@@ -4,8 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Test;
 use App\Models\Question;
-use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
-//use Your Model
+use App\Repositories\BaseRepository;
 
 /**
  * Class QuestionRepository.
