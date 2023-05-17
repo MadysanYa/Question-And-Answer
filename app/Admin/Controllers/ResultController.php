@@ -48,7 +48,9 @@ class ResultController extends AdminController
                 return date('Y-m-d h:i A', strtotime($this->ended_at));
             }
         });
-        $grid->column('time_taken', __('Time Taken'));
+        $grid->column('time_taken', __('Time Taken'))->display(function(){
+            return $this->time_taken." Minutes";
+        });
         
         // $grid->column('created_at', __('Created At'))->display(function(){
         //     if ($this->created_at) {
@@ -113,7 +115,7 @@ class ResultController extends AdminController
                 return Test::all()->pluck('name', 'id');
             });
             $form->date('ended_at', __('Ended At'))->rules('required');
-            $form->time('time_taken', __('Time Taken'))->default(date('H:i:s'));
+            $form->number('time_taken', __('Time Taken'))->rules('required'); // ->default(date('H:i:s'))
         });
 
         $form->footer(function ($footer) {

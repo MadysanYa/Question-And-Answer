@@ -69,10 +69,14 @@ class UserAnswerRepository extends BaseRepository
 
         // UPDATE THE USER'S RESULT EXIST
         if ($result) {
+            $timeStarted = Carbon::parse($result->started_at); 
+            $timeUserSpend = $endedAt->diffInMinutes($timeStarted);
+
             return $result->update([
                 "score" => $score,
                 "time_taken" => $timeTaken,
-                "ended_at" => $endedAt
+                "ended_at" => $endedAt,
+                "time_taken" => $timeUserSpend
             ]);
             
         // CTEAE THE USER'S RESULT 
