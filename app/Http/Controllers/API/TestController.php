@@ -24,6 +24,12 @@ class TestController extends Controller
     public function index()
     {
         $tests = $this->testRepository->allTest();
+        if (!count($tests)) {
+            return response()->json([
+                'message' => 'Sorry, Your test not found.',
+            ], 404);
+        }
+
         return TestResource::collection($tests);
     }
 
